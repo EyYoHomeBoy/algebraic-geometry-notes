@@ -1,0 +1,228 @@
+% !TEX root = ../main.tex
+\section{Set \& Category Theoretic Definitions}
+\subsection{Set theory}
+\subsubsection{ZF(C)-axioms}
+
+We introduce set theory first via the Zermelo-Frankel axioms with an added axiom of choice which will be necessary in some cases. We add to first order predicate logic a relational symbol $\in$. For a pair of objects $z,X$ we define $z\in X :=  \in(z,X)$.
+\begin{axioms}
+    \begin{enumerate}\addtocounter{enumi}{-1}
+        \item $\exists \emptyset\forall z(\neg(z\in \emptyset))$
+        \item $\forall X\forall Y(\forall z(\forall z\in X \iff z \in Y)\implies X=Y)$.
+        \item $\forall x\forall y\exists P \forall z\left(z\in P \iff \left(z = x \vee z = y\right)\right)$.
+        \item $\forall X\exists U \forall z ( z \in U \iff \exists w \in X(z\in w))$
+    \end{enumerate}
+\end{axioms}
+\begin{definition}
+    Let $X$ be a set. $P$ a predicate. We say that \textit{$P(x)$ is true for all but finitely many $x\in X$}, if there exists a $Y\subset X$, such that $P(x)$ is true for all $x\in X\setminus y$
+\end{definition}
+\subsubsection{Natural Numbers \& the Peano Axioms}
+\subsubsection{Von Neumann Ordinals: A Construction of $\N$ (the Natural Numbers)}
+\subsubsection{NGB Set Theory - Classes}
+\subsection{Relations}
+\subsubsection{Functions}
+\subsubsection{Ordering}
+\subsubsection{Equivalence Relations}
+\begin{definition}
+    Let $A$ be a non-empty set, we define an \textit{equivalence relation} on $A$ to be a subset $\sim$ of $A\times A$ satisfying 
+    \begin{enumerate}
+        \item reflexivity,
+        $$x\sim x \text{ for every } x \in X$$
+        \item symmetry,
+        $$x \sim y \implies y\sim x \text{ for every } x,y\in X$$
+        \item transitivity
+        $$x \sim y\ \wedge y\sim z \implies x\sim z \text{ for every } x,y,z\in X.$$
+    \end{enumerate}
+    Here we define $x\sim y$ to mean $(x,y)\in \sim$. For an $x\in X$ we define the \textit{equivalence class under $\sim$ represented by $x$} to be the set 
+    $$[x]_\sim:= \{y\in X : y\sim x\}.$$
+    We denote the set of equivalence classes under $\sim$ by $X/\sim$.
+\end{definition}
+\begin{lemma}\label{EquivalenceClassLemma}
+    Let $X$ be a non-empty set and $\sim$ an equivalence relation on $X$. Let $x,y\in X$. Then 
+    $$[x]_\sim = [y]_\sim \iff x\sim y$$
+\end{lemma}
+\begin{proof}
+    "$\limplies$": Let $z\in [x]_\sim$, then $z\sim x$ and $z\sim y$, since also $z\in [y]_\sim$. Then $x\sim z$ (by symmetry) and $z\sim y$, implying $x\sim y$ by transitivity.\\
+    "$\impliedby$": If $x\sim y$, then $x\in [y]_\sim$. By symmetry $y\sim x$, hence $y\in [x]_\sim$. 
+\end{proof}
+\begin{lemma}\label{CanonicalSurjection}
+    Let $X$ be a non-empty set and $\sim$ an equivalence relation on $X$. The function
+    \begin{gather*}
+        \pi : X\rightarrow X/\sim\\
+        x\mapsto [x]_\sim
+    \end{gather*}
+    is a well-defined surjective function.
+\end{lemma}
+\begin{proof}
+    Suppose $x=y$, then $x\sim y$, hence by Lemma~\ref{EquivalenceClassLemma} $p(x)=[x]_\sim=[y]_\sim=p(y)$. Let $[x]_\sim \in X/\sim$. Then $\pi(x) =[x]_\sim$, hence $\pi$ is surjective.
+\end{proof}
+\subsection{Category Theory}
+\subsubsection{Initial Definitions}
+\begin{definition}
+    A category $\pazocal{C}$ is a pair $(\Ob(\pazocal{C}),\Hom(\pazocal{C}))$ where 
+    \begin{enumerate} 
+    \item $\Ob(\pazocal{C})$ denotes a class of \textit{objects}. \item $\Hom(\pazocal{C})$ denotes a class of \textit{morphisms}. 
+    \item A morphism $f$ in $\Hom(\pazocal{C})$ is a relation between between elements $A,B$ in $\Ob(\pazocal{C})$. We denote it by $f : A \rightarrow B$. 
+    \item For objects $A,B$ in $\Ob(\pazocal{C})$ we denote the class of morphisms from $A$ to $B$ by $\Hom(A,B)$.
+    \item There is binary operation $\circ$ on the class of morphisms called \textit{composition} such that for morphisms $f: B\rightarrow C$ and $g : A \rightarrow B$ we have that
+    $$fg := f\circ g : A \rightarrow C$$
+    and 
+    $$(f\circ g)\circ h = f\circ(g\circ h)$$
+    where $f : C \rightarrow D$, $g: B \rightarrow C$ and $h: A \rightarrow B$ for objects $A,B,C,D$ in $\Ob(\pazocal{C})$. Furthermore for each object $X$ in $\Ob(\pazocal{C})$ there is a morphism $\mathbbm{1}_X : X \rightarrow X$ called the \textit{identity morphism} such that 
+    $$\mathbbm{1}_B f = f = f \mathbbm{1}_A,$$
+    for a morphism $f: A \rightarrow B$.
+    \end{enumerate}
+\end{definition}
+\begin{definition}
+    Let $\pazocal{C}$ be a category. An \textit{isomorphism} $f:A \rightarrow B$ is a morphism in $\Hom(\pazocal{C})$ such that there is another morphism $f^{-1} : B\rightarrow A$ satisfying,
+    $$ff^{-1} = \mathbbm{1}_B \ \mathrm{ and } \ f^{-1}f = \mathbbm{1}_A.$$
+\end{definition}
+\begin{definition}
+    A category $\pazocal{C}$ is called a \textit{groupoid} if every $f$ in $\Hom(\pazocal{C})$ is an isomorphism
+\end{definition}
+\begin{definition}
+    A \textit{subcategory} $\pazocal{D}$ of a category $\pazocal{C}$ is a subclass of $\Ob(\pazocal{C})$ together with a subclass of $\Hom(\pazocal{C})$ that constitutes a category
+\end{definition}
+\begin{remark}
+    equivalently a subcategory of $\pazocal{C}$ is a subclass $\Ob(\pazocal{D})$ of $\Ob(\pazocal{C})$ and a subclass $\Hom(\pazocal{D})$ of $\Hom(\pazocal{C})$ such that each domain $A$ and codomain $B$ for a morphism in $\Hom(\pazocal{D})$, $A,B$ are elements of $\Ob(\pazocal{D})$. In addition $\Hom(\pazocal{D})$ is closed under composition. 
+\end{remark}
+\begin{definition}
+    The \textit{maximal groupoid} of a category $\pazocal{C}$ is the subcategory of $\pazocal{C}$ whose objects are $\Ob(\pazocal{C})$ and whose morphisms are the isomorphisms of $\Hom(\pazocal{C})$
+\end{definition}
+\begin{remark}
+    The maximal groupoid is a subcategory. Indeed, The domain and codomain of a morphism is trivially contained in $\Ob(\pazocal{C})$. Suppose $f:A\rightarrow B$ and $g: B \rightarrow C$ are isomorphisms. Then 
+    $$f^{-1}g^{-1}gf=f^{-1}\fone_B f = f^{-1}f = \fone_A$$
+    and 
+    $$gff^{-1}g^{-1} = g\fone_B g^{-1} = gg^{-1} = \fone_C.$$
+    Hence $gf: A \rightarrow C$ is an isomorphism with inverse $f^{-1}g^{-1}$. 
+\end{remark}
+\begin{definition}
+    Let $\pazocal{C}$ be a category and $f\in \Hom(A,B)$, $g\in \Hom(B,A$.  $f$ is called a \textit{retraction} of $g$ and $g$ a section of $f$ if $fg = \fone_A$   
+\end{definition}
+\begin{lemma}
+    Let $\pazocal{C}$ be a category, $f\in \Hom(A,B)$. Suppose $g,h\in \Hom(B,A)$ are respectively a retraction and a section of $f$. Then $g=h$ and $f$ is an isomorphism. It follows that a morphism can have at most one inverse
+\end{lemma}
+\begin{proof}
+    Indeed 
+    $$g=g\fone_A = gfh=\fone_B h = h.$$
+    Hence $f$ is an isomorphism with $f^{-1} = g=h$. Let $f_1$ and $f_2$ be inverses of an isomorphism $f$. Note that both $f_1$ and $f_2$ is both a section and a retraction. Therefor, by the first statement, $f_1=f_2$.   
+\end{proof}
+\begin{example}\label{BasicExamplesOfCategories}
+    \begin{enumerate}
+        \item Let $\mathrm{Set}$ be defined by objects being sets and morphisms being functions. Indeed, letting $\circ$ be composition in the conventional way and letting $\mathbbm{1}_X = \mathrm{id}_X: X\rightarrow X, x\mapsto x$, we see that this indeed defines a category. 
+        \item Consider a pair $(X,R)$ of a set $X$ and a transitive, reflexive relation $R$ on $X$. Let $(a,b),(b,c)\in R$. We define 
+        $$(a,b)(b,c) := (a,c).$$
+        This is indeed well defined since $a R b$ and $bR c$ implies $a R c$, in other words $(a,c)\in R$. Let another pair $(c,d)\in R$. Then $((a,b)(b,c))(c,d)= (a,c)(c,d) = (a,d)$ and $(a,b)((b,c),(c,d))=(a,b)(b,d)=(a,d)$. We define $\mathbbm{1}_a = (a,a)$, which is indeed in $R$. Then $(a,a)(a,b)=(a,b)$ and $(a,b)(b,b)=(a,b)$. So $(X,R)$ indeed defines a morphism. 
+    \end{enumerate}
+\end{example}
+\begin{definition}
+    Let $\pazocal{C}$ be a category and $A$ an object in $\pazocal{C}$. \textit{The slice category of $\pazocal{C}$ under $A$} denoted $A/\pazocal{C}$ is the category whose objects are morphisms in $\Hom(\pazocal{C})$ with domain $A$ and where a morphism from $f: A \rightarrow X$ and $g : A \rightarrow Y $ is a map $h : X\rightarrow Y$ such that 
+    $$\begin{tikzcd}
+       & A \arrow[ld, "f"' ] \arrow[rd, "g"]\\
+        X \arrow{rr}{h} & & Y
+    \end{tikzcd}$$
+    commutes. \textit{The slice category of $\pazocal{C}$ over $A$} denoted $\pazocal{C}/A$ is $A/\pazocal{C}\op$, i.e. objects are morphisms with codomain $A$ and a morphism from $f : X \rightarrow A$ to $g : Y\rightarrow A$ is a morphism $h : X \rightarrow Y$ satisfying
+    $$\begin{tikzcd}
+        X \arrow[rd, "f"'] \arrow[rr, "h"] & & Y\arrow[ld, "g"]\\
+        & A 
+    \end{tikzcd}$$
+\end{definition}
+\begin{remark}
+    Both these constructions are indeed categories: Consider morphisms $h_{12}$ between $f_1: A\rightarrow X$ \& $f_2 : A\rightarrow Y$ and $h_{23}$ between $f_2 : A\rightarrow Y$ \& $f_3: A\rightarrow Z$. Then we have commutative diagrams
+    $$\begin{tikzcd}
+        & A \arrow[ld, "f_1"' ] \arrow[rd, "f_2"]\\
+        X \arrow{rr}{h_{12}} & & Y
+    \end{tikzcd} \quad \begin{tikzcd}  & A \arrow[ld, "f_2"' ] \arrow[rd, "f_3"]\\
+        Y \arrow{rr}{h_{23}} & & Z \end{tikzcd}$$
+    to obtain the commutative diagram
+    $$\begin{tikzcd}
+        & A \arrow[ld, "f_1"' ] \arrow[d, "f_2"] \arrow[rd, "f_3"]\\
+        X \arrow[r, "h_{12}"] & Y \arrow[r, "h_{23}"] & Z
+    \end{tikzcd}
+    $$
+    hence $h_{23}h_{12}$ is a morphism between $f_{1}$ and $f_3$. For an object $f: A \rightarrow X$ in $A/\pazocal{C}$ define the identity morphism to be $\fone_X$. We thus get that associativity of composition and the identity morphisms being neutral with respect to composition is inherited from this being true in $\pazocal{C}$. Reversing arrows we get that $\pazocal{C}/A$ is also a category.  
+\end{remark}
+\begin{definition}
+    Let $\pazocal{C}_1,\pazocal{C}_2$ be categories. A \textit{Covariant functor} from $\pazocal{C}_1$ to $\pazocal{C}_2$ is a mapping $\pazocal{F}$, denoted $\pazocal{F} : \pazocal{C}_1 \rightarrow \pazocal{C}_2$, which assigns to each object $A$ in $\Ob(\pazocal{C}_1)$ to an object $\pazocal{F}(A)$ in $\Ob(\pazocal{C}_2)$ and to each morphism in $\Hom(\pazocal{C}_1)$, $f : A \rightarrow B$ a morphism in $\Hom(\pazocal{C}_2)$, $\pazocal{F}(f) : \pazocal{F}(A)\rightarrow \pazocal{F}(B)$ such that 
+    \begin{enumerate}
+        \item for every object $X$ in $\Ob(\pazocal{C}_1)$, $\pazocal{F}(1_X) = 1_{\pazocal{F}(X)}$.
+        \item for every pair of morphisms $f: B \rightarrow C$ and $g: A\rightarrow B$ in $\Hom(\pazocal{C}_1)$, $\pazocal{F}(fg) =\pazocal{F}(f)\pazocal{F}(g).$
+    \end{enumerate}
+\end{definition}
+\begin{lemma}\label{FunctorsTransferIsomorphismBetweenCategories}
+    Consider two categories $\pazocal{C}_1$ and $\pazocal{C}_2$ with a functor $\pazocal{F}: \pazocal{C}_1 \rightarrow \pazocal{C}_2$. If $f:A \rightarrow B$ is an isomorphism in $\Hom(\pazocal{C}_1)$, then $\pazocal{F}(f): \pazocal{F}(A)\rightarrow\pazocal{F}(A)$ is an isomorphism in $\Hom(\pazocal{C}_2)$. 
+\end{lemma}
+\begin{proof}
+    Indeed, 
+    $$\pazocal{F}(f)\pazocal{F}\left(f^{-1}\right) = \pazocal{F}\left(ff^{-1}\right) = \pazocal{F}(\mathbbm{1}_B)= \mathbbm{1}_{\pazocal{F}(B)} \ \mathrm{and} \ \pazocal{F}\left(f^{-1}\right)\pazocal{F}(f) = \pazocal{F}\left(f^{-1}f\right) = \pazocal{F}(\mathbbm{1}_A)= \mathbbm{1}_{\pazocal{F}(A)}.$$
+\end{proof}
+\begin{definition}
+    Let $\pazocal{C}$ be a category. We define \textit{the opposite category of $\pazocal{C}$} denoted $\pazocal{C}\op$ to be the category with $\Ob(\pazocal{C}\op) := \Ob(\pazocal{C})$ and where a morphism $f : A \rightarrow B$ in $\Hom(\pazocal{C}\op)$ is a morphism $f : B\rightarrow A$ in $\Hom(\pazocal{C})$ 
+\end{definition}
+\begin{remark}
+    The above indeed does define a category. We define $\circ\op$ by 
+    $$f \circ\op g = g\circ f : C \rightarrow A$$
+    where $f: B\rightarrow C$ and $g: A \rightarrow B$ are morphisms in $\Hom(\pazocal{C}\op)$. Then for morphisms $f: C\rightarrow D$, $g: B \rightarrow C$ and $h: A \rightarrow B$
+    $$(f\circ\op g)\circ\op h = h(gf)=(hg)f = f\circ\op(g\circ\op h).$$
+    Furthermore, we define the identity morphism in $\Hom(\pazocal{C}\op)$ to be the identity morphism in $\Hom(\pazocal{C})$, hence 
+    $$f\circ\op \mathbbm{1}_A = \mathbbm{1}_Af = f \text{ and } \mathbbm{1}_B \circ\op f = f \mathbbm{1}_B = f.$$
+\end{remark}
+\begin{definition}
+    Consider categories $\pazocal{C}_1$ and $\pazocal{C}_2$. A \textit{covariant functor} $\pazocal{F}$ between  $\pazocal{C}_1 $ and $ \pazocal{C}_2$ is a covariant functor between $\pazocal{C}_1$ and $\pazocal{C}_2\op$.
+\end{definition}
+\begin{corollary}
+    Consider categories $\pazocal{C}_1$, $\pazocal{C}_2$ and a covariant functor $\pazocal{F}: \pazocal{C}_1 \rightarrow \pazocal{C}_2\op$. If $f: A \rightarrow B$ is an isomorphism in $\Hom(\pazocal{C}_1)$, then $\pazocal{F}(f): \pazocal{F}(B)\rightarrow \pazocal{F}(A)$ is an isomorphism in $\Hom(\pazocal{C}_2\op)$ 
+\end{corollary}
+\begin{proof}
+    This follows immediately from Lemma~\ref{FunctorsTransferIsomorphismBetweenCategories}.
+\end{proof}
+\begin{example}\label{IntegerInvariants}
+    Suppose that there, for a category $\pazocal{C}$, is a well-defined assignment $\pazocal{F}$ of objects in $\pazocal{C}$ to integers and of a morphism $A\rightarrow B$ to $\pazocal{F}(A)\leq \pazocal{F}(B)$. This will define a functor from $\pazocal{C}$ to $(\Z,\leq)$ called \textit{an integer invariant on $\pazocal{C}$}. Indeed, $\pazocal{F}(A) \leq \pazocal{F}(A)$, hence $\pazocal{F}(\mathbbm{1}_A)=\mathbbm{1}_{\pazocal{F}(A)}$. Given morphisms $g:A\rightarrow B$, $f:B\rightarrow C$ in $\Hom(\pazocal{C})$, 
+    $$\pazocal{F}(A)\leq\pazocal{F}(B) \text{ and } \pazocal{F}(B)\leq \pazocal{F}(C),$$
+    implying $\pazocal{F}(A)\leq \pazocal{F}(C)$, hence $\pazocal{F}(A\overset{fg}{\rightarrow} C) = \pazocal{F}(A\overset{f}{\rightarrow}B)\pazocal{F}(B\overset{g}{\rightarrow}C)$.
+    
+\end{example}
+\begin{definition}
+    A category $\pazocal{C}$ is \textit{locally small} if $\Hom(A,B)$ is a set for every object $A,B$ in $\Ob(\pazocal{C})$. It is \textit{small} if $\Ob(\pazocal{C})$ is a set.
+\end{definition}
+\begin{proposition}
+    Consider the class of small categories with morphisms being functors. This defines a category denoted $\Cat$. 
+\end{proposition}
+\begin{proof}
+    {\LARGE DO!}
+\end{proof}
+\begin{definition}
+    In a category $\pazocal{C}$ a morphism $f\in \Hom(A,B)$ is a \textit{monomorphism} if for every pair of morphisms $g_1,g_2 \in \Hom(C,A)$, 
+    $$fg_1=fg_2\implies g_1 = g_2.$$
+    It is called an \textit{epimorphism} if for every pair of morphisms $h_1,h_2\in \Hom(B,D)$,
+    $$h_1f=h_2f\implies h_1=h_2$$    
+\end{definition}
+
+\begin{lemma}
+    For a category $\pazocal{C}$ a 
+\end{lemma}
+\subsubsection{Products \& Co-products}
+\begin{definition}
+    Let $A$ be a set and $\{X_\alpha\}_{\alpha\in A}$ be a family of sets. We then define \textit{the direct product of $X_\alpha$ over $A$} to be the set
+    $$\prod_{\alpha\in A} X_\alpha := \left\{ f: A \rightarrow \bigcup_{\alpha \in A} X_\alpha : f(\alpha) \in X_\alpha \text{ for every } \alpha\in A\right\}.$$
+\end{definition}
+\begin{remark}
+    We can identify every function $f : A \rightarrow \bigcup_{\alpha\in A}$ can be identified with a set $\{r_\alpha : \alpha\in A\}$. In particular, every $f\in \prod_{\alpha\in A} X_\alpha$ can be identified with a symbol $(r_\alpha)$ where $r_\alpha\in X_\alpha$ for each $\alpha\in A$. Thus 
+    $$\prod_{\alpha\in A} X_\alpha = \left\{ (r_\alpha) : r_\alpha\in X_\alpha \text{ for every } \alpha\in A\right\}.$$
+    Assuming the axiom of choice every such product is non-empty whenever $\{X_\alpha\}_{\alpha\in A}$ is a family of non-empty sets. For a finite family of sets $\{X_1,\dots,X_n\}$ we can identify $\prod_1^n X_i := \prod_{i\in \{1,\dots,n\}} X_i$ with $X_1\times \cdots \times X_n$.  
+\end{remark}
+\begin{axioms}
+    Let $A$ be a non-empty set. When $\{X_\alpha\}$ is a family of non-empty sets $\prod_{\alpha \in A} X_\alpha \neq \emptyset$. 
+\end{axioms}
+\begin{proposition}\label{DirectProductIsADirectProductInTheCategoryOfSets}
+    Let $A$ be a set and $\{X_\alpha\}_{\alpha\in A}$ be a family of non-empty sets. For each $\alpha\in A$, define $\pi_\alpha : \prod_{\alpha\in A} X_\alpha \rightarrow X_\alpha, (x_\alpha)\mapsto x_\alpha$. For $\alpha\in A$, $\pi_\alpha$ is a surjective map such that for every set $Y$ with maps $\{f_\alpha : Y \rightarrow M_\alpha\}_{\alpha\in A} $ there is a unique map $f : Y \rightarrow \prod_{\alpha \in A} X_\alpha$ such that for every $\alpha \in A$, $\pi_\alpha \circ f = f_\alpha$   
+\end{proposition}
+\begin{proof}
+    \textbf{$\pi_\alpha$ is surjective:} Let $\alpha \in A$ and $x_\alpha \in X_\alpha$. Using the axiom of choice there is a function mapping $\beta \mapsto x_\beta$ for some $x_\beta \in X_\beta$ for each $\beta\in A\setminus \{\alpha\}$. Then $(x_\beta)\in \prod_{\beta\in A} X_\beta$. Then $\pi_\alpha((x_\beta))=x_\alpha$.\\  
+    \textbf{Existence of $f$:} We define $f(y) = (f_\alpha(y))\in \prod_{\alpha\in A} X_\alpha$, which is easily seen to be well defined. Then for each $y\in Y$, $\alpha \in A$,
+    $$\pi_\alpha\circ f(y) = \pi_\alpha(f(y))=\pi_\alpha((f_\beta(y)))=f_\alpha(y) \implies \pi_\alpha\circ f = f_\alpha$$
+    \textbf{Uniqueness of $f$:} Let $g : Y \rightarrow \prod_{\alpha\in A} X_\alpha$ be another map satisfying $\pi_\alpha \circ g = f_\alpha$ for each $\alpha \in A$. Let $y\in Y$. Then there is a $(x_\alpha)\in \prod_{\alpha\in A} X_\alpha$ such that $g(y) = (x_\alpha)$. Then for $\beta \in A$
+    $$x_\beta = \pi_\beta ((x_\alpha))= \pi_\beta(g(y))=\pi_\beta \circ g(y) = f_\beta(y),$$
+    which implies that 
+    $$f(y) = (f_\alpha(y))=(x_\alpha)=g(y).$$
+\end{proof}
+\subsubsection{Currying}

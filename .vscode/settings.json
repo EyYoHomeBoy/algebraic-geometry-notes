@@ -1,45 +1,52 @@
 {
-    "latex-workshop.latex.tools": [
-      {
-        "name": "xelatex",
-        "command": "xelatex",
-        "args": [
-          "-synctex=1",
-          "-interaction=nonstopmode",
-          "-output-directory=build",
-          "%DOC%"
-        ]
-      }
-    ],
-    "latex-workshop.latex.recipes": [
-      {
-        "name": "xelatex (build dir)",
-        "tools": ["xelatex"]
-      }
-    ],
-    "latex-workshop.latex.autoBuild.run": "onFileChange",
-    "latex-workshop.view.pdf.viewer": "tab",
-    "latex-workshop.latex.outDir": "build",
-    "latex-workshop.latex.clean.enabled": true,
-    "latex-workshop.latex.clean.fileTypes": [
-      "*.aux",
-      "*.bbl",
-      "*.blg",
-      "*.idx",
-      "*.ind",
-      "*.lof",
-      "*.lot",
-      "*.out",
-      "*.toc",
-      "*.acn",
-      "*.acr",
-      "*.alg",
-      "*.glg",
-      "*.glo",
-      "*.gls",
-      "*.ist",
-      "*.fls",
-      "*.log",
-      "*.synctex.gz"
-    ]
-  }
+  "latex-workshop.latex.tools": [
+    {
+      "name": "xelatex",
+      "command": "xelatex",
+      "args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-output-directory=build",
+        "%DOC%"
+      ]
+    },
+    {
+      "name": "move-pdf",
+      "command": "sh",
+      "args": [
+        "-c",
+        "cp build/$(basename %DOC%.pdf) ./"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "xelatex (build dir)",
+      "tools": ["xelatex", "move-pdf"]
+    }
+  ],
+  "latex-workshop.latex.autoBuild.run": "onFileChange",
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.clean.enabled": true,
+  "latex-workshop.latex.clean.fileTypes": [
+    "build/*.aux",
+    "build/*.bbl",
+    "build/*.blg",
+    "build/*.idx",
+    "build/*.ind",
+    "build/*.lof",
+    "build/*.lot",
+    "build/*.out",
+    "build/*.toc",
+    "build/*.acn",
+    "build/*.acr",
+    "build/*.alg",
+    "build/*.glg",
+    "build/*.glo",
+    "build/*.gls",
+    "build/*.ist",
+    "build/*.fls",
+    "build/*.log",
+    "build/*.synctex.gz"
+  ]
+}
