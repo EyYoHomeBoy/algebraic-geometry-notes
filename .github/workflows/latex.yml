@@ -1,33 +1,27 @@
-name: Build LaTeX document
+name: Build LaTeX PDF
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: danteev/latex:latest  # Use TeX Live with xelatex already installed
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-    - name: Set up TeX Live
-      uses: teatimeguest/setup-texlive-action@v2
+      - name: Compile with xelatex
+        run: |
+          mkdir -p build
+          xelatex -output-directory=build main.tex
+          xelatex -output-directory=build main.tex  # second pass for TOC/refs
 
-    - name: Install required LaTeX packages
-      run: |
-        tlmgr install xetex fontspec geometry hyperref amsmath amssymb \
-          stmaryrd tikz-cd fouriernc babel babel-english latexmk semantic \
-          bbm marvosym enumitem xcolor tgtermes tcolorbox
-
-    - name: Compile LaTeX document
-      run: |
-        latexmk -xelatex -interaction=nonstopmode -output-directory=build main.tex
-
-    - name: Upload PDF as artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: compiled-pdf
-        path: build/main.pdf
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: compiled-pdf
+          path: build/main.pdf
