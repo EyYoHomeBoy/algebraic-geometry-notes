@@ -1,0 +1,97 @@
+\usepackage[utf8]{inputenc}
+\usepackage{tgtermes}
+\usepackage{fouriernc}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage[margin=3cm]{geometry}
+\usepackage{graphicx}
+\usepackage{semantic}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{url}
+
+% switch to a monospace font supporting more Unicode characters
+
+
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+
+
+\usepackage{enumerate}
+\usepackage{verbatim}
+\usepackage{ marvosym }
+\renewcommand{\baselinestretch}{1.3}
+
+\DeclareMathAlphabet{\pazocal}{OMS}{zplm}{m}{n}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Pp}{\mathbb{P}}
+\newcommand{\Ker}{\mathrm{Ker }}
+\newcommand{\rad}{\mathrm{rad}}
+\newcommand{\limplies}{\Longleftarrow}
+\newcommand{\lcm}{\mathrm{lcm}}
+\newcommand{\inn}{\mathrm{in}_\leq}
+\newcommand{\trdeg}{\mathrm{trdeg }}
+\newcommand{\ev}{\mathrm{ev}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Ob}{\mathrm{Ob}}
+\newcommand{\Pol}{\mathrm{Pol}}
+\newcommand{\Fun}{\mathrm{Fun}}
+\newcommand{\lex}{\leq_{\text{lex}}}
+\newcommand{\gex}{\geq_\text{lex}}
+\newcommand{\op}{^\mathrm{op}}
+\newcommand{\Cat}{\mathrm{Cat}}
+\newcommand{\Spec}{\mathrm{Spec}}
+\newcommand{\ord}{\mathrm{ord}}
+\newcommand{\im}{\mathrm{im}}
+\newcommand{\fone}{\mathbbm{1}}
+\newcommand{\Char}{\mathrm{char}}
+\newcommand{\lc}{\mathrm{lc}}
+\newcommand{\Span}{\mathrm{Span}}
+\newcommand{\mulP}{{\mathrm{mul}\mathbb{P}}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\codim}{\mathrm{codim}}
+\newcommand{\ic}{\mathbin{\raisebox{-0.6ex}{\scalebox{2}{$\cdot$}}}}
+\newcommand{\cl}{\mathrm{cl}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\adj}{\mathrm{adj}}
+\newcommand{\dom}{\mathrm{dom}}
+\newcommand{\BE}{\sim_{\mathrm{bir}}}
+
+\newcommand{\dottedarrow}{%
+  \mathrel{\tikz[baseline=-0.5ex]\draw[dotted,->,thick] (0,0) -- (1.5em,0);}%
+}
+
+
+\newcommand{\squareplus}{
+  \tikz[baseline=(char.base)]{
+    \draw[line width=0.4pt] (0,0) rectangle (0.3,0.3);
+    \draw[line width=0.4pt] (0.15,0) -- (0.15,0.3); % vertical line
+    \draw[line width=0.4pt] (0,0.15) -- (0.3,0.15); % horizontal line
+  }
+}
+
+
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{theorem}
+\newtheorem*{axioms}{Axiom}
