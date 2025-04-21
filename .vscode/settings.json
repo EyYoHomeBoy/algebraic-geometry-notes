@@ -15,7 +15,7 @@
       "command": "sh",
       "args": [
         "-c",
-        "cp build/$(basename %DOC%.pdf) ./"
+         "cp build/$(basename %DOC%.pdf) ./ && cp build/$(basename %DOC%.synctex.gz) ./"
       ]
     }
   ],
@@ -24,7 +24,10 @@
       "name": "xelatex (build dir)",
       "tools": ["xelatex", "move-pdf"]
     }
-  ],
+  ], "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+  "latex-workshop.latex.build.forceRecipeUsage": false,
+  "latex-workshop.synctex.synctexjs.enabled": true,
+  "latex-workshop.synctex.afterBuild.enabled": true,
   "latex-workshop.latex.autoBuild.run": "onFileChange",
   "latex-workshop.view.pdf.viewer": "tab",
   "latex-workshop.latex.clean.enabled": true,
