@@ -1,0 +1,209 @@
+\section{The Real and Complex Numbers}
+\subsection{A Topological Aside: Completion - a construction of $\R$}
+    \begin{definition}
+        Let $X$ be a non-empty set, $K$ an ordered field. A map $d:X\times X\rightarrow K_{\geq 0}:=\{ a\in K: a\geq 0\}$ is called a \textit{metric over $K$} if for every $x,y,z\in X$
+        \begin{enumerate}
+            \item $d(x,y)=0 \iff x=y$.
+            \item $d(x,y)=d(y,x)$.
+            \item $d(x,y)+d(y,z)\geq d(x,z)$.
+        \end{enumerate}
+        A set $X$ with such a map $d$ is called a \textit{metric space over $K$}
+    \end{definition}
+    \begin{remark}
+        Consider a normed vector space $V$ over an ordered field $K$. Then $$V\times V\rightarrow K_{\geq0}, (v,w)\mapsto \Vert v-w\Vert$$ 
+        defines a metric on $V$.\\ 
+        1. $\Vert v-w\Vert =0 \iff v-w=0\iff v=w$.\\
+        2. $\Vert v-w\Vert = \vert -1\vert \Vert v-w \Vert = \Vert -(v-w)\Vert = \Vert w-v\Vert.$\\
+        3. $\Vert v-w\Vert = \Vert (v-u)+(u-w)\Vert\leq \Vert v-u\Vert +\Vert w-u\Vert.$
+    \end{remark}
+    \begin{definition}
+        Let $(X,K,d)$ be a metric space and $\xi \in K_{>0}:=\{ a\in K:a>0\}$, $x\in X$. We define \textit{the ball of radius $\xi$ with center $x$} to be
+        $$B_\xi(x):= \left\{ y\in X: d(x,y)<\xi\right\}.$$
+    \end{definition}
+    \begin{lemma}
+        Let $(X,K,d)$ be a metric space. Then
+        $$\tau := \left\{U\subset X : \forall x(x\in U \implies \exists \xi >0, B_\xi\right\},$$
+        defines a topology on $X$
+    \end{lemma}
+    \begin{proof}
+        Trivially $\emptyset\in \tau$, since $x\in \emptyset$ is false. It is also obvious that $X\in \tau$, since a ball of any radius is a subset of $X$. Consider a family of sets in $\tau$, $\{U_\alpha\}_{\alpha \in A}$. Then any point $x$ in the union of these subsets is in at least one of these subsets, $U_\beta$ say. Then there is an $\xi>0$ such that $B_\xi(x)\subset U_\beta \subset\bigcup_{\alpha\in A} U_\alpha$. Consider $U_1,\dots,U_n\in \tau$. Then for each point $x$ in the intersection of these sets there are $\xi_1,\dots,\xi_n>0$, such $B_{\xi_i}(x)\subset U_i$. picking $\xi=\min_{i\in\{1,\dots,n\}} \ \xi_i$, it follows that $B_\xi(x)\subset \bigcap_1^n U_i$.
+    \end{proof}
+    \begin{definition}
+        Let $(X,K,d)$ be a metric space. A sequence $(q_n)\in \prod_\N X$ is said \textit{to converge to $q$} if for all $\xi>0$ there exists a $N\geq 1$ such that for every $n\geq N$, $q_n\in B_\xi(q)$. We call $q$ \textit{the limit of $q_n$ as $n$ approaches infinity} and denote it $\lim_{n\to \infty} q_n$. We shall see that such a limit is unique.\\
+        A sequence is called \textit{Cauchy} if for every $\xi>0$ there exists an $N\geq 0$ such that for every $n,m\geq N$, $q_n-q_m\in B_\xi(0)$. We say that two Cauchy sequences $(a_n),(b_n)\in \prod_{\N} X$ are equivalent if $\lim_{n\to \infty} d(x_n,y_n)=0$. We write $(a_n)\equiv_d (b_n)$. We define \textit{the completion of $X$ with respect to $d$} to be the set $$\overline{X} := \left\{(q_n)\in \prod_{\N} X: (q_n) \text{ is Cauchy}\right\}{/ \equiv_d}.$$   
+    \end{definition}
+    \begin{remark}\label{sequentialCont}
+        Let $(x_n)$ be a convergent sequence with limit $x$. Let $y\in X\setminus \{x\}$. Set $\epsilon:= d(x,y)/2$. Then for every $n\geq N$ for some $N\geq 1$, $x_n\notin B_\epsilon(y)$, hence the limit of a convergent sequence is unique. If $V$ is a normed vector space, $\lim_{n\to \infty}$ defines a linear operator from the space of convergent sequences to $K$ which readily follows from the homogeneity of the norm and from the triangle inequality. One also easily checks that $\lim_{n\to \infty} \circ \Vert \cdot\Vert = \Vert \lim_{n\to\infty}\Vert$. On $K$ consider convergent sequences $(a_n),(b_n)\in \prod_\N K$. Then for any $\xi>0$ for sufficiently large $n$
+        $$\vert a_nb_n-ab\vert \leq \vert b_n\vert\vert a_n-a\vert+\vert a\vert \vert b_n-b\vert \overset{n\to \infty}{\to} 0.$$
+        On $K$ consider a sequence $(a_n)\in \prod_\N K\setminus 0$ that is convergent with limit $a\in K\setminus 0$. Let $\xi>0$. For large enough $N$ for $n\geq N$, $\vert a_n\vert \vert a_n-a\vert < \xi $. Pick $0<\delta< \vert a\vert$. For some $M$, for $n\geq M$, $\vert a_n\vert \in B_{\vert a\vert -\delta}(\vert a\vert)$, hence $\vert a\vert -\vert a_n\vert< \vert a\vert -\delta$. Then setting $\epsilon:= \min\ \{\vert a_1\vert,\dots,\vert a_{\max(N,M)}\vert,\delta\}$. Then for $n\geq\max(N,M)$, 
+        $$\left\vert \frac{1}{a_n}-\frac{1}{a}\right\vert =\left\vert \frac{a_n-a}{a_na}\right\vert <\frac{\xi}{\vert a\vert\epsilon}.$$
+    \end{remark}
+    \begin{lemma}\label{CauchySequencesAreBounded}
+        Let $(X,K,d)$ be a metric space. Let $(x_n)$ be a Cauchy sequence in $X$. Then $(x_n)$ is bounded.
+    \end{lemma}
+    \begin{proof}
+        Let $\xi>0$ be given, then for a sufficiently large $N$, $d(x_n,x_N)<\xi$ for every $n\geq N$. Pick $\delta = \max\{ d(x_1,x_N),\dots,d(x_{N-1},x_N),\xi)$. Then $x_n\in B_\delta(x_N)$ for every $n\geq 1$.
+    \end{proof}
+    \begin{definition}
+        A function between metric spaces over a fixed field $f:X\rightarrow Y$ is said to be \textit{sequentially continuous} if for every convergent sequence $(x_n)\in \prod_\N X$, $\lim_{n\to \infty} f(x_n)=f(\lim_{n\to \infty} x_n)$. 
+    \end{definition}
+    \begin{remark}
+        Being sequentially continuous is equivalent to being continuous with respect to the topology induced by the metric on $X$, respectively on $Y$.
+    \end{remark}
+    In general, it may be difficult to endow the completion of a metric space with a topology. If we are working over complete (i.e. every Cauchy sequence is convergent) ordered field, $([a_n],[b_n])\mapsto \lim_{n\to\infty} d(a_n,b_n)$ defines a metric on the completion of $X$. Any two complete ordered fields are isomorphic as topological fields. Moreover, the completion of an ordered field can be endowed with structure of a complete ordered field.
+    \begin{lemma}
+        Let $K$ be an ordered field. We define addition on $\overline{K}$ to be 
+        $$[(a_n)]+[(b_n)]:=[(a_n+b_n)] \quad ([(a_n)],[(b_n)]\in \overline{K}).$$
+        We also define multiplication by 
+        $$[(a_n)][(b_n)]:= [(a_nb_n)].$$
+        For $[(a_n)],[(b_n)]\in \overline{K}$ we say that $[(a_n)]\geq [(b_n)]$ if there is an $N\geq 0$ such that for $n\geq N$, $a_n\geq b_n$. With these definitions $\overline{K}$ becomes an ordered field. The subfield 
+        $$K':=\{[(a)]\in\overline{K} : a\in K\}$$
+        is isomorphic to $K$ as topological fields.
+    \end{lemma}
+    \begin{proof}
+        Suppose $([(a_n)],[(b_n)])=([(a_n')],[(b_n')])$. Then addition is well-defined by a single application of the triangle inequality. Multiplication is also well-defined since 
+        \begin{align*}
+            \vert a_nb_n - a_n'b_n'\vert &= \vert a_nb_n-a_nb_n'+a_nb_n' -a_n'b_n'\vert = \vert a_n(b_n-b_n')+ b_n'(a_n-a_n')\vert\\
+            &\leq \vert a_n\vert \vert b_n-b_n'\vert +\vert b_n'\vert \vert a_n-a_n'\vert \leq \epsilon\vert b_n-b_n'\vert + \delta \vert a_n-a_n'\vert \overset{n\to \infty}{\to } 0  
+        \end{align*}
+        where $\epsilon,\delta>0$ are obtained from Lemma~\ref{CauchySequencesAreBounded}. It is fairly easy to check that upon defining $0_{\overline{K}} := 0 := [(0)]$, $1_{\overline{K}} := 1:= [(1)]$, $-[(a_n)]:= [(-a_n)]$, for $[(a_n)]\in \overline{K}$, $\overline{K}$ becomes a commutative ring. Let $[(a_n)]\neq 0$. Then for $n$ greater than some $N$, $a_n\neq 0$. Indeed, suppose $(c_n)$ is Cauchy such that $c_n=0$ for infinitely many $n$. Then for any $\xi>0$ there is an $N\geq 0$ such that $\vert c_n-c_m\vert <\xi$ for $n,m\geq N$. In particular we may choose $m$ such that $c_m=0$, hence $\vert c_n-0\vert <\xi$, implying $\lim_{n\to \infty} c_n=0$, hence $[(c_n)]=0$. We then define $b_n=0$ for $n<N$ and $b_n=a_n^{-1}$ for $n\geq N$ and see that $[(a_n)][(b_n)]=[(1)]$, implying $\overline{K}$ is a field. It is fairly easy to check that $\leq$ defines a partial order on $\overline{K}$. We now check that $\leq$, defines a total order. Let $[(a_n)],[(b_n)]\in \overline{K}$. We prove first that the statement is true for $[(b_n)]=0=[(0)]$. The statement is obvious when $[(a_n)]=0$. Note that $a_n>0$ or $a_n<0$ for every sufficiently large $n$. Suppose now $(c_n)$ is Cauchy and $c_n>0$ for infinitely many $n$ and $c_n<0$ for infinitely many $n$. Let $(c_n')$ and $(c_n'')$ the sequences entries of $(c_n)$ being $>0$ resp. $<0$. Then for sufficiently large $n$, $$\vert c_n'\vert +\vert c_n''\vert =c_n'-c_n''=\vert c_n'-c_n''\vert <\xi$$
+        for every $\xi>0$, using the fact that $(c_n)$ is Cauchy, meaning $\lim_{n\to \infty} c_n = 0$. It thus follows that $a_n>0$ for every sufficiently large $n$ or $a_n<0$ for every sufficiently large $n$, hence $[(a_n)]>0$ or $[(a_n)]<0$. In the general setting, we thus have that $[(a_n-b_n)]\geq 0$ or $[(a_n-b_n)]\leq 0$. This is equivalent to $a_n-b_n\geq 0$ for every large $n$ or $a_n-b_n\leq 0$ for every large $n$. It follows that $[(a_n)]\geq [(b_n)]$ or $[(a_n)]\leq [(b_n)]$. It is easy to check that $\overline{K}$ becomes an ordered field with this total ordering. For instance if $[(a_n)]\leq [(b_n)]$ then $a_n+c_n\leq b_n+c_n$ for sufficiently large $n$, hence $[(a_n)]+[(c_n)]\leq [(b_n)]+[(c_n)]$. The map 
+        \begin{gather*}
+            K\rightarrow K'\\
+            a \mapsto [(a)]
+        \end{gather*}
+        is readily seen to be a ring isomorphism with mutual inverse $[(a)]\mapsto a$. Both of these maps are sequentially continuous, hence $K$ and $K'$ are isomorphic as topological fields.   
+    \end{proof}
+    \begin{remark}
+        From this point on we identify $K'$ with $K$.
+    \end{remark}
+    \begin{lemma}
+        Let $(K,\vert \cdot \vert)$ be an ordered field considered with structure of metric space in the natural way. Then $K$ is a topological field.
+    \end{lemma}
+    \begin{proof}
+        Using sequential continuity, the result follows from Remark~\ref{sequentialCont}.
+    \end{proof}
+    \begin{lemma}
+        An ordered field is characteristic $0$.
+    \end{lemma}
+    \begin{proof}
+        Indeed, $0<1$. Suppose $0<n$ for some $n\geq 1$. Then $1<n+1$, hence $0<1<n+1$.
+    \end{proof}
+    \begin{remark}
+        The utility of this lemma is that we may regard $\Z$ and $\Q$ as subrings in a canonical way.
+    \end{remark}
+    \begin{proposition}
+        For an ordered field $K$, we have that $\overline{K}$ is Dedekind complete, i.e. every non-empty bounded set has a least upper bound.
+    \end{proposition}
+    \begin{proof}
+        Let $\emptyset\neq B\subset \overline{K}$ be bounded from above. Let $[(b_n)]$ be an upper bound. $(b_n)$ is bounded, hence $[(b_n)]<[(u)]$ for some $u\in K$. Let $[(c_n)]\in B$ be arbitrary. Again, since $([c_n])$ is bounded, $([l])<([c_n])$ for some $l\in K$. Set $u_1 :=u$ and $l_1:=l$. For each $n\geq 1$, if $(u_n+l_n)/2$ is an upper bound, set $u_{n+1}:= (u_n+l_n)/2$ and $l_{n+1} := l_n$. Note that $\vert u_n-l_n\vert = \frac{1}{2^n}(u -l)$, which is easily verified by induction in $n$, hence $\lim_{n\to \infty} u_n-l_n = 0$. Then 
+        $$\vert u_n - u_m\vert = \vert u_n-l_n\vert + \vert l_n-u_m\vert < \epsilon$$
+        for every $\epsilon>0$ and sufficiently large $n,m$, hence $(u_n)$ is Cauchy. A similar argument shows that $(l_n)$ is Cauchy. We then have that $[(l_n)]=[(u_n)]$. By construction each $u_n$ is an upper bound and each $l_n$ is not an upper bound. We thus have that $[(u_n)]$ is an upper bound. Let $u':=[(a_n')]\leq [(u_n)]$ be another upper bound of $B$. Then for every $\epsilon>0$, for sufficiently large $n$
+        $$\vert a_n'-l_n\vert = a_n'-l_n \leq u_n-l_n= \vert u_n-l_n\vert <\epsilon,$$
+        hence $[(a_n')]=[(l_n)]=[(u_n)]$, proving that $[(u_n)]$ is the least upper bound.
+    \end{proof}
+    \begin{lemma}\label{MonotoneBoundedDedikindImpliesConv}
+        Let $K$ be a Dedekind complete ordered field. Then a monotone sequence bounded sequence is convergent.
+    \end{lemma}
+    \begin{proof}
+        Let $(a_n)$ be an increasing sequence in $K$. Since the image of $(a_n)$ is bounded, it has a least upper bound $a$. We claim that $(a_n)$ converges to $a$. Let $\epsilon >0$. For some $N\geq 0$, $a-\epsilon < a_N \leq a < a+\epsilon$, hence for every $n\geq N$, $-\epsilon < a_n - a < \epsilon$, hence $a_n\in B_\epsilon (a)$.
+    \end{proof}
+    \begin{definition}
+        We define \textit{the field of real numbers} as $\R:=\overline{Q}$.
+    \end{definition}
+     \begin{definition}
+        An ordered field $K$ is \textit{Archimedean} if $\Q\subset K$ is not bounded from above
+    \end{definition}
+    \begin{lemma}
+        Let $K$ be an Archimedean ordered field. Then $\Q$ is dense in $K$.
+    \end{lemma}
+    \begin{proof}
+        Let $0<c\leq d$. There is a least upper bound $u$ to the set $\{n\in \N: nc \leq d\}$. Since $K$ is Archimedean we may pick a natural number $N>u$, hence $Nc>d$. The cases $a\leq 0<b$ and $a<0\leq b$ are obvious. Suppose $0<a<b$. Claim: if $c<d$ are such that $d-c>1$, then $\{m\in \Z : c<m<d\}\neq \emptyset$. Let $m_0$ be the greatest integer smaller than $c$. Then $c< m_0+1$ and $d-m_0 > d-c>1$ hence $c<m_0+1<d$.
+        This proves that if $0<a<b$ such that $a-b>1$ then there is a rational number in between $a$ and $b$. Suppose $a-b<1$. Then there is a positive integer $n$ such that $n(a-b)>1$ and by the claim there is then an integer $m$ such that $na < m < nb$ hence $a<m/n <b$. 
+    \end{proof}
+    \begin{definition}
+        A metric space $(X,K,d)$ is called \textit{Cauchy complete} if every Cauchy sequence is convergent
+    \end{definition}
+      \begin{lemma}
+        An ordered field $K$ is Dedekind complete if and only if it is Archimedean and Cauchy complete.
+    \end{lemma}
+    \begin{proof}
+        "$\implies$": Suppose for a contradiction that $\Q$ is bounded from above. Set $s := \sup\ \Q$. We must have that $s$ is not rational, since if it were $s+1$ would be a rational greater than $s$.  Then $s-1\leq q < s$ for some $q\in\Q$, but then $q+1$ is a rational number greater than $s$, leading to a contradiction. Let $(a_n)$ be a Cauchy sequence in $K$. Set $(u_n):=(\sup_{k\geq n} \ a_n)$. This is a decreasing bounded sequence, hence $u_n$ converges to some $a$. Let $\epsilon >0$. Then there is some $N\geq 1$ such that $\vert a_n -a_m\vert < \epsilon/3 $ and $\vert u_n-l\vert< \epsilon/3$ for every $n,m\geq N$. We may also find an $M\geq N$ such $u_N-\epsilon/3 <a_M$. It thus follows that
+        \begin{align*}
+            \vert a_n-a\vert = \vert a_n -a_M +a_M- u_N+u_N-a\vert\leq \vert a_n-a_M\vert + \vert a_M-u_N\vert + \vert u_N-a\vert < \epsilon, 
+        \end{align*}
+        meaning $(a_n)$ converges to $a$.\\
+        "$\impliedby$": Let $S$ be a non-empty, bounded subset of $K$. Let $u$ be a rational upper bound of $S$ (we may pick this as $K$ is Archimedean) and $l$ be a rational number smaller than an $s\in S$ (we may pick such a rational number since $\Q$ is dense in $K$ which follows from $K$ being Archimedean). Define $(u_n)$ and $(l_n)$ as in the prior proposition. Then $(u_n)$ and $(l_n)$ are Cauchy sequences, which are convergent by the assumption that $K$ is Cauchy complete. It follows that since $\vert l_n-u_n\vert \to 0$, $\lim_{n\to \infty} u_n = \lim_{n\to \infty} l_n = u$. Since every $u_n$ is an upper bound of $S$ so is $u$. Let $v<u$. Then for large $n$, $u-l_n < u-v$, hence $l_n>v$. Since $l_n$ is never an upper bound of $S$, we may pick a $t\in S$ such that $t\geq l_n> v$, hence $u$ is the smallest upper bound of $S$. This shows that $K$ is Dedekind complete.
+    \end{proof}
+    \begin{definition}
+        We say that a function $f: X\rightarrow Y$ of metric space is \textit{uniformly continuous} if for every $\epsilon>0$ there is a $\delta >0$ such that for every $x,y\in X$, $d(x,y)<\delta \implies d(f(x),f(y))<\epsilon$
+    \end{definition}
+    \begin{lemma}
+        If $f : X\rightarrow Y$ is uniformly continuous and $(x_n)$ is Cauchy, then $(f(x_n))$ is Cauchy.
+    \end{lemma}
+    \begin{proof}
+        Let $\epsilon>0$. We can pick $\delta>0$ such that for $x,y\in X$, if $d(x,y)<\delta$, $d(f(x),f(y))<\epsilon$. Pick $N\geq 1$ such that $d(x_n,x_m)<\delta$ for every $n,m\geq N$. Then $d(f(x_n),f(x_m))<\epsilon$ for every $n,m\geq N$. 
+    \end{proof}
+    \begin{remark}
+        Every uniformly continuous function is clearly continuous.
+    \end{remark}
+    \begin{lemma}
+        Let $X,Y$ be metric spaces, where $Y$ is complete and $f:A\rightarrow B$ be uniformly continuous where $A\subset X$ and $B\subset Y$. Then $f$ can be uniquely extended to a uniformly continuous function $f : \cl(A)\rightarrow\cl(B)$.  
+    \end{lemma}
+    \begin{proof}
+        Let $(x_n)$ be a convergent sequence in $A$. Then $(f(x_n))$ in $Y$ is Cauchy and hence also convergent by completeness. We then define 
+        \begin{gather*}
+            f: \cl(A)\rightarrow \cl(B)\\
+            x \rightarrow \lim_{n\to \infty} f(x_n), 
+        \end{gather*}
+        where $(x_n)$ is a sequence in $A$ converging to $x$. We need to check that this is well-defined. Note first that $f(A)\subset B\implies  \cl(f(A))\subset \cl(B)$, hence $\lim_{n\to\infty} f(x_n)\in \cl(B) $. Let $(x_n),(y_n)$ be two sequences in $A$ converging to $x\in \cl(A)$. By uniform continuity (skipping a step) for large $n$, we get that $d(f(x_n),f(y_n))<\epsilon$ for every $\epsilon>0$, hence $\lim_{n\to \infty} f(x_n) = \lim_{n\to \infty} f(y_n)$. Let $\epsilon>0$ be given. Pick $\delta>0$ small enough such that for every $p,q\in A$ with $d(p,q)<2\delta \implies d(f(p),f(q))<\epsilon/3$. Pick $x,y\in \cl(A)$ such that $d(x,y)<\delta$. Pick sequences $(x_n),(y_n)$ in $A$ converging to $x$ respectively $y$. Then for large enough $n$, $d(x_n,y_n)\leq d(x_n,x)+d(y_n,y)< 2\delta$, hence, again for large $n$, 
+        $$d(f(x),f(y))\leq d(f(x_n),f(x))+d(f(x_n),f(y_n))+d(f(y_n),f(y))<\epsilon.$$
+        It follows that the constructed extension of $f$ is uniformly continuous. Let $g$ be another such extension. Let $x\in \cl(A)$ and $(x_n)$ a sequence in $A$ converging to $x$. Then since $g$ is continuous,  
+        $$g(x)=g(\lim_{n\to \infty} x_n)=\lim_{n\to \infty} g(x_n)=\lim_{n\to\infty} f(x_n)=f(x).$$
+    \end{proof}
+    \begin{proposition}
+        Any two Dedekind complete ordered fields are isomorphic as topological fields.
+    \end{proposition}
+    \begin{proof}
+        Let $K,L$ be two such fields. There is a canonical isomorphism between the rational numbers in $K$ and the rational numbers in $L$. each copy of $\Q$ is a dense subset of the respective fields. It is easy to show that any point in a metric space over a complete metric space can be approximated by a Cauchy sequence in a dense subset. The isomorphism $\sigma : \Q\subset K \rightarrow \Q\subset L, q \mapsto q$ is clearly uniformly continuous and can therefor by the prior lemma be extended to an isomorphism $\sigma : \cl(\Q)=K \rightarrow\cl(\Q)=L$.
+    \end{proof}
+\subsection{From $\R^2$ to $\C$}
+    Note that $(\R^2,+,\vert \cdot\vert)$ is a normed topological vector space. We seek to endow this vector space with a multiplication such that it becomes a topological field, containing $\R$ as a topological subfield. We will call this field \textit{the complex numbers} and denote it $\C$. 
+    \begin{definition}
+        We define
+        \begin{gather*}
+            \cdot : \R^2 \rightarrow \R^2 \\
+            ((a,b),(c,d))\mapsto (ac-bd,ad+cb)
+        \end{gather*}
+    \end{definition}
+    \begin{proposition}
+        With this operation $\C := (\R^2,+,\cdot)$ is a field. The multiplication is obviously continuous w.r.t. $\vert \cdot \vert$ making $\C$ a topological field. The set
+        $$R:= \{(a,0)\in\C : a\in\R\}$$
+        is a subfield of $\C$ isomorphic to $\R$.
+    \end{proposition}
+    \begin{proof}
+        Let $(a,b),(c,d),(e,f)\in \C$. We then have that 
+        \begin{align*}
+            ((a,b)(c,d))(e,f) &= (ac-bd,ad+cb)(e,f) = (ace-bde-adf-cbf,acf-bdf+ade+cbe)\\
+            &= (a(ce-df)-b(de+cf), a(cf+de)+b(ce-df))
+            = (a,b)(ce-df,cf+de)\\ 
+            &= (a,b)((c,d)(e,f)).
+        \end{align*}
+        We define $1_\C = (1,0)$. One easily checks that $(a,b)(c,d)=(c,d)(a,b)$. Then 
+        $$1_\C(a,b)=(1,0)(a,b)=(1a-0b,1b+0a)=(a,b),$$
+        shows that $1_\C$ is the neutral element with respect to the multiplication. We moreover have that 
+        \begin{align*}
+            (a,b)(c+e,d+f)&=(ac+ae-bd-bf,ad+bf+bc+be)\\ &=(ac-bd,ad+bc)+(ae-bf,bf+be) = (a,b)(c,d)+(a,b)(e,f).
+        \end{align*}
+        Suppose $(a,b)\neq 0$. Then 
+        $$(a,b)\left( \frac{1}{a^2+b^2}(a,-b)\right) = \left(\frac{a^2+b^2}{a^2+b^2},\frac{-ab+ab}{a^2+b^2}\right)= (1,0).$$
+        We have thus shown that $\C$ is a field. Note that $R$ is subspace of $\C$ and that for $(a,0),(b,0)\in R$,
+        $$(a,0)(b,0)=(ab-0,a0+0b)=(ab,0)\in R.$$
+        Moreover, we clearly have that $(1,0)\in R$ and that for $a\neq 0$ 
+        $(a,0)(1/a,0)=(1,0)$. We thus see that $R$ is a subfield of $\C$. The map 
+        $$\R \rightarrow R, a\mapsto (a,0),$$
+        clearly defines a bijective $\R$-algebra homomorphism, hence $R\simeq \R$.
+    \end{proof}
+    \begin{remark}
+        One further notices that $\C$ is an $\R$ vector space with basis $\{1,i\}$, where we define $i = (0,1)$. Note that $\pm i$ are the roots of the polynomial $x^2+1 \in\C[x]$. We therefor also write $i=\sqrt{-1}$.
+    \end{remark} 
