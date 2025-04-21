@@ -1,0 +1,30 @@
+
+\begin{tikzpicture}
+    % Define spacing factor
+    \def\spacing{2} % Change this value to adjust spacing
+
+    % Draw grid
+    \draw[very thin, gray] (-0.5*\spacing,-0.5*\spacing) grid (3*\spacing,3*\spacing);
+    
+    % Draw axes
+    \draw[thick,->] (-0.5*\spacing,0) -- (3*\spacing,0);
+    \draw[thick,->] (0,-0.5*\spacing) -- (0,3*\spacing);
+
+    % Place and label points
+    \foreach \x in {0,1,2}
+        \foreach \y in {0,1,2} {
+            \fill (\x*\spacing,\y*\spacing) circle (2pt);
+            \node[above right] at (\x*\spacing,\y*\spacing) {$[\x:\y:1]$};
+        }
+
+    % Additional grid lines for structure
+    \draw[thick] (0,0) -- (2*\spacing,0);
+    \draw[thick] (0,\spacing) -- (2*\spacing,\spacing);
+    \draw[thick] (0,2*\spacing) -- (2*\spacing,2*\spacing);
+    \draw[thick] (0,0) -- (0,2*\spacing);
+    \draw[thick] (\spacing,0) -- (\spacing,2*\spacing);
+    \draw[thick] (2*\spacing,0) -- (2*\spacing,2*\spacing);
+
+\end{tikzpicture}
+
+
