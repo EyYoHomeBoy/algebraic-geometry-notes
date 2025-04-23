@@ -3330,9 +3330,15 @@ We aim to prove that polynomials over unique factorization domains are unique fa
     $p\neq0$ and $p\notin R[x]^\ast = R^\ast$. Let $f=\sum_0^k a_ix^i,g=\sum_0^h b_ix^i\in R[x]$ such that $p\nmid f,g$. Set $s := \max\ \{i\in\{1,\dots,k\} : p\nmid a_i\}$ and $t:= \max\ \{i\in\{1,\dots,h\} : o\nmid b_i\}$. Note that if $i>s$ or $j>r$, then $p\mid a_i$ or $p\mid b_j$. This means that since $i+j = s+t$ implies $i\geq s$ or $j\geq t$, one finds that $p$ divides every term in $\sum_{i=1}^h\sum_{j=1}^k \sum_{i+j = s+t} a_ib_j$ other than $a_sb_t$, hence $$p\nmid \sum_{i=1,\dots,h,j=1,\dots,k i+j, = s+t} a_ib_j \implies p\nmid fg.$$  
 \end{proof}
 \begin{definition}
-    A polynomial $f=\sum_0^n a_ix^i\in R[x]$ is said to be \textit{primitive} if $\gcd(a_0,\dots,a_n)=1$.
+    A polynomial $f=\sum_0^n a_ix^i\in R[x]$ is said to be \textit{primitive} if $\gcd(a_0,\dots,a_n:a_i\neq 0)=1$.
 \end{definition}
-\begin{lemma}
+\begin{lemma}\label{CanConstructPrimitivePolynomialOverUFDFromMonicPolynomialOverQuotientField}
+    Let $R$ be a UFD, $K:=Q(R)$ and consider a monic $f=x^d+\sum_0^{d-1} \frac{a_i}{b_i}x^i$. Let $c$ be the least common multiple of the $b_i$'s. If $\gcd(a_i,b_i)=1$ whenever $a_i\neq 0$ then $g:=cf$ is primitive. 
+\end{lemma}
+\begin{proof}
+    Take any prime divisor $p$ of $c$. Pick $i$ where $p$ has maximal multiplicity among all $b_i$'s. Then $p\nmid \frac{c}{b_i}$ and $p\nmid a_i$, since $c= \prod_{p \in \mathcal{P}} p^{\max(\nu_{p}(b_0),\dots,\nu_p(b_0))}$. Then $p\nmid c\frac{a_i}{b_i}$. So for any divisor of $c$ there is some $i$ for which this is not a divisor of $c\frac{a_i}{b_i}$, implying $\gcd(c,ca_i/b_i: a_i\neq 0)=1$, hence $cf$ is primitive.
+\end{proof}
+\begin{lemma}\label{GaussLemma}(Gauss' Lemma)
     If $f,g\in R[x]$ is primitive, then $fg$ is primitive. This property extends to multivariable polynomials by induction.
 \end{lemma}
 \begin{proof}
