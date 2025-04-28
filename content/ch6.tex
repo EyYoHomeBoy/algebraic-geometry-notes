@@ -378,7 +378,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         \end{gather*}
         is surjective. Suppose $g(1/f)=0$, then $g\in \langle x-\frac{1}{f}\rangle\subset R[1/f]$. Since $f$ is a unit in $R[1/f]$, it follows that $g\in (R[1/f])[x](fx-1)$. Then $g=a/f^k(fx-1)$ implying $f^kg\in R[x]\langle fx-1\rangle$ which is a prime ideal, and since $\deg \ f =0$, $f\notin \langle fx-1\rangle$, hence $g\in \langle fx-1\rangle$. One sees that $\ker \ \alpha = \langle fx-1\rangle$, and therefor that $\alpha$ is an isomorphism.
     \end{proof}
-    \begin{proposition}
+    \begin{proposition}\label{ConstructionOfAffineNeighborhood}
         Let $V$ be an affine variety and $f\in \Gamma(V)\setminus 0$. Set 
         $$V_f:= \{P\in V: f(P)\neq 0\},$$
         which is an open subvariety of $V$. Then 
@@ -826,7 +826,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         Suppose $X,Y$ are varieties, $P\in X, Q\in Y$ with $\pazocal{O}_P(X)$ is $K$-algebra isomorphic to $\pazocal{O}_Q(Y)$. Then there are open neighborhoods $U\ni P$ and $V\ni Q$ such that $U\simeq V$.
     \end{proposition}
     \begin{proof}
-        
+        WLOG $X,Y$ are affine. First note that $\sigma:\pazocal{O}_Q(Y)\simeq \pazocal{O}_P(X)$ implies $\sigma: K(Y)\simeq K(X)$. Then there is a unique birational $\Phi : X\BE Y$ such that $\widetilde{\Phi}=\sigma$. Since $\pazocal{O}_P(X)$ dominates $\sigma(\pazocal{O}_Q(Y))$ it follows that $Q=\Phi(P)$ (cf. Proposition~\ref{InducedMapFromDominantRationalMaps} 2.). As in the proof of Proposition~\ref{InducedMapFromDominantRationalMaps} We may find $b\in \Gamma(X)$ and a $y\in \Gamma(Y)$ such that $\sigma(\Gamma(Y))\subset \Gamma(X_b)$ and $\sigma^{-1}(\Gamma(X))\subset \Gamma(Y_d)$. Then we also have that $\sigma(\Gamma(Y))\subset \Gamma((X_b)_{\sigma(d)})$ and that $\sigma^{-1}(\Gamma(X))\subset \Gamma((Y_d)_{\sigma^{-1}(b)})$. In general recall that $\Gamma(Z_\mu)=\Gamma(Z)[1/\mu]$ for $Z$ affine (cf. Proposition~\ref{ConstructionOfAffineNeighborhood}). Hence if $f=\frac{a}{d^n\sigma^{-1}(b)^m}\in \Gamma((Y_d)_{\sigma^{-1}(b)})$, then $\sigma(f)=\frac{\sigma(a)}{\sigma(d)^nb^m}\in \Gamma((X_b)_{\sigma(d)})$. Conversely, if $g=\frac{c}{\sigma(d)^nb^m}\in \Gamma((X_b)_{\sigma(d)})$, we get that $g=\sigma\left(\frac{\sigma^{-1}(c)}{d^n\sigma^{-1}(b)^m}\right).$ This means $\sigma : \Gamma((Y_d)_{sigma^{-1}(b)})\rightarrow \Gamma((X_b)_{\sigma(d)})$ is a $K$-algebra isomorphism, which is induced by a representative $\varphi: U:=(X_b)_{\sigma(d)}\overset{\sim}{\rightarrow} V:=(Y_d)_{\sigma^{-1}(b)}$ of $\Phi$. Note that by the construction of $b$, $b(P)\neq 0$ and $\sigma(d)(P)= \widetilde{\Phi}(d)(P)=d(\Phi(P))=d(Q)\neq 0$ by the construction of $d$, so $P\in U$. The fact that $Q=\Phi(P)=\varphi(Q)$ shows that $Q\in V$. 
     \end{proof}
     \begin{proposition}
         Let $C$ be a projective curve, $P\in C$. There is a birational map $\Phi: C \dottedarrow C'$ where $C'$ is projective plane curves such that $\Phi^{-1}(\Phi(P))=P$. 
