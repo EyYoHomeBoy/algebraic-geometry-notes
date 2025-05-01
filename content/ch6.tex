@@ -832,7 +832,14 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         Let $C$ be a projective curve, $P\in C$. There is a birational map $\Phi: C \dottedarrow C'$ where $C'$ is projective plane curves such that $\Phi^{-1}(\Phi(P))=P$. 
     \end{proposition}
     \begin{proof}
-    
+        We may assume $C\subset \Pp^{n+1}$ (in the case $n=0$, $\Pp^{1}\simeq L_\infty, [a,b]\mapsto [a,b,0]$). Denote the $n+2$ coordinate hyperplanes by $y,x_1,\dots,x_n,z$.  After a change of coordinates we may choose that $C\not\subset y$, meaning  $C\cap y$ is finite since it is closed in $C$ and every component is a point (cf. Lemma~\ref{SomeDimensionResults} 4.); we may choose that the $C$ do not intersect $y\cap z$ (again we can arrange that $C\not\subset y\cap z$ and then move potential points of intersection); we may choose that $P=[0,\dots,0,1]$. As a consequence $K(C)\supset K(\overline{y}/\overline{z})$ (by our choices $z$ does not vanish on $C$ and hence $\overline{z}\neq0$) is algebraic.\\ 
+        For $v=(v_1,\dots,v_n)\in \A^n$ define 
+        \begin{gather*}
+            \varphi_v : C \rightarrow \Pp^2\\
+            [\mu, w_1,\dots,w_n,\nu]\mapsto [\mu,\sum_1^n v_iw_i,\nu]
+        \end{gather*}
+        This is well-defined since for every $[\mu, w_1,\dots,w_n,\nu]\in C$, $\mu\neq0$ or $\nu\neq 0$, since $C\cap y\cap z$ is empty. It is a morphism
+        since it is covered by $U_1\cap C,U_{n+2}\cap C$, on which it restricts to a polynomial map to the first resp. third copy of the affine plane in $\Pp^2$. Observe that $\varphi_v(P)=[0,0,1]$. Set $C_v:= \cl(\varphi_v(C))$. We now just need to argue that we can choose $v$ such that $\varphi_v$ becomes a birational map onto $C_v'$. First of all, $C_v'$ is a closed subvariety of $\Pp^2$, since if $C_v'=A\cup B$ a decomposition into a union of closed sets, then we assume $C = \varphi_v^{-1}(A)$. Then $\varphi(C) = \varphi_v(\varphi_v^{-1}(A))$, hence $C'=\cl(\varphi_v(\varphi_v^{-1}(A)))\subset A$, implying $C'=A$. Note that $\varphi_v$ is a dominant rational map and therefor induces a well-defined (injective) field extension map over $K$, $\widetilde{\varphi_v}:K(C_v')\rightarrow K(C), \frac{\overline{f}}{\overline{g}}\mapsto \frac{\overline{f(y,\sum_1^nv_ix_i)}}{\overline{g(y,\sum_1^n v_ix_i)}}$. We now choose $v\in \A^{n+1}$ such that $K(C)=K(u,\sum_1^n v_i\frac{\overline{x_i}}{z})$. Then $K(C_v')\simeq K(C)$, so $\varphi_v$. Write $C\cap y=\{Q_1,\dots,Q_m,P\}$. Set $h:=\sum_1^n y_ix_i\in K[\mathbf{x},\mathbf{y}]$, $h_i:= h(\mathbf{y},Q_i)$ and $V:=\bigcup V(h_1,\dots,h_m)$. We may pick $v\in \A^n\setminus V$ so that $\varphi_v$ is birational. This means that if $Q=[t,w,s]\in C\cap y$, then $\sum_1^n v_iw_i\neq 0$ or $w=0$. In particular, if $\varphi_v([t,w_1,\dots,w_n,s])=[0,0,1]$, then $[t,w,s]\in C\cap y$ and $\sum_1^nv_iw_i=0$, hence $w=0$, and $[t,w,s]=P$.
     \end{proof}
 \subsection{The Study of Curves \& Resolution of Singularities}
     \subsubsection{Rational Maps of Curves}
