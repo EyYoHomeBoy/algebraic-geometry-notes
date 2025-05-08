@@ -792,6 +792,25 @@ HNS establishes a hands-on way of decomposing ANY hypersurface into its irreduci
     "2.$\implies$3.": In this case $\dim_K\ \Gamma(V) = \dim_K\ K = 1<\infty$.\\
     "3.$\implies$1.": Since $\dim_K\ \Gamma(V)<\infty$, $V$ is finite by Corollary~\ref{DimensionOfCoordinateRing}, and since $V$ it cannot consist of multiple points.  
 \end{proof}
+\begin{example}\label{OneToOneButNotIso}
+    Set $f:=x^2-y^3$,$g:=y^2-z^3$ and $I:=\langle f,g\rangle$. Consider the $K$-algebra homomorphism
+    \begin{gather*}
+        \alpha : K[x,y,z]\rightarrow K[t]\\
+        x\mapsto t^9, y\mapsto t^6, z\mapsto t^4
+    \end{gather*} 
+    Let $h=\sum_{v=(a,b,c)\in\N^3} \alpha_v x^ay^bz^c\in K[x,y,z]$. Note that for $a\geq 2$, $x^a+I=x^{2q_a+r_a}+I=x^{r_a}y^{3q_a}+I$ for some $q_a,r_a\geq 0$ with $r_a\in\{0,1\}$. For $b\geq 2$, $y^b=y^{2q_b+r_b}+I=y^{r_b}z^{3q_b}+I$ for some $q_b,r_b\geq 0$, $r_b\in \{0,1\}$. So for a monomial $x^ay^bz^c$ we get that 
+    \begin{align*}
+        x^ay^bz^c +I = x^{r_a}y^{r_b}z^{q_a+q_b+c}+ I =\begin{cases}
+            z^{q_a+q_b+c}+ I\\
+            xz^{q_a+q_b+c}+ I\\
+            yz^{q_a+q_b+c}+ I\\
+            xyz^{q_a+q_b+c}+ I
+        \end{cases}
+    \end{align*}. 
+    This means that 
+    $$ h +I = Ax+By+Cz+Dxy + I,$$
+    for some $A,B,C,D\in K[z]$. We aim to prove that $I=\ker \ \alpha$. Suppose $h$ is such that $h(t^9,t^6,t^4)=0$. Then $\alpha(Ax+By+Cy+Dxy)=0$, hence $A(t^4)t^9+B(t^4)t^6+C(t^4)t^4+D(t^4)t^{15}=0$. One notes that terms in $A(t^4)t^9$ have degree $4d_A+1$; in $B(t^4)t^6$, $4d_B+2$; in $C(t^4)t^4$, $4d_C$; in $D(t^4)t^{15}$, $4d_D+3$, so $A(t^4)=B(t^4)=C(t^4)=D(t^4)=0$, hence $A=B=C=D=0$. Then $h+I=0$, meaning $h\in I$. Then $I$ is prime hence $V(f,g)$ is irreducible  
+\end{example}
 \subsubsection{Introduction to Effective Nullstellensätze: Degree Bounds and a Gröbner Basis Method}
 We fix an algebraically closed field $K$.
 \begin{remark}
@@ -1105,7 +1124,7 @@ The above result can be used to determine wether an algebraic set is a variety.
     2. By HNS we can choose $I$ to be a prime ideal. Let $J=\langle g_1,\dots,g_l,y_1-f_1,\dots,y_m-f_m\rangle \subset K[\mathbf{x},\mathbf{y}]$. By Corollary~\ref{EliminationOfVoidVariablesInFinitelyGeneratedAlgebra} $$K[\mathbf{x}]/I\simeq K[\mathbf{x},\mathbf{y}]/J,$$ 
     hence $J$ is prime. It follows that $G_\varphi = V(J)\subset \A^{n+m}$ is a variety. We can see more from this isomorphism. By HNS $I = I(V)$ and $J = I(G_\varphi)$, thus $\Gamma(V)\simeq \Gamma(G_\varphi)$, hence by Corollary~\ref{FunctorialityOfInducedAlgebraHomomorphism} $V\simeq G_\varphi$. Another way to explicitly construct an isomorphism. Is to consider $\phi: V \rightarrow G_\varphi, v\mapsto (v,\varphi(v))$ and $\pi : G_\varphi \rightarrow V, (v,\varphi(v))\mapsto v$. These are clearly mutually inverse polynomial maps.  
 \end{proof}
-\begin{example}
+\begin{example}\label{ExamplesAndNonExamplePolynomialMapsAndIsomorphisms}
     Let us consider a couple of examples of a bijective polynomial map that is NOT isomorphisms of varieties and a central example of an elliptic curve "almost" being in bijection with the affine line. 
     \begin{enumerate}
         \item Consider the map 
@@ -1120,7 +1139,18 @@ The above result can be used to determine wether an algebraic set is a variety.
         \end{gather*}
         One notes that $\widetilde{\varphi}(\Gamma(V))= K[z^2,z^3]\subsetneq K[z]$, meaning that $\widetilde{\varphi}$ is not an isomorphism. By Corollary~\ref{FunctorialityOfInducedAlgebraHomomorphism} it follows that $\varphi$ cannot be an isomorphism. 
         \item 
-        {\Large This is exercise 2.13 in Fulton which is a continuation of exercise 1.40 both which are easy and I should get around to doing them at some point.}
+            This is a continuation of Example~\ref{OneToOneButNotIso}. In this example we considered $f=x^2-y^3$, $g=y^2-z^3$,$I=\langle f,g\rangle$ and saw that $V:=V(I)$ was irreducible by showing that $I$ is the kernel of $\alpha:= \ev_{T^9,T^6,T^4}: K[x,y,z]\rightarrow K[T]$. One recovers a polynomial map $\varphi: \A^1 \rightarrow V$ by applying the inverse functor to $\overline{\alpha}: \Gamma(V)=K[x,y,z]/I\rightarrow K[T]=\Gamma(\A^1).$ Then $\varphi(s) := (s^9,s^6,s^4)$, since $\widetilde{\varphi}(f+I)=f(T^9,T^6,T^4)=\overline{\alpha}$. Suppose $(\mu^9,\mu^6,\mu^4)=(\nu^9,\nu^6,\nu^4)$. $\mu^4=\nu^4$ implies $\mu^2=\pm \nu^2$. $(\pm\nu^2)^3=(\mu^2)^3=\mu^6=\nu^6=(\nu^2)^3$ implies $\mu^2=\nu^2$, hence $\mu=\pm \nu$. Then $(\pm \nu)^9=\mu^9=\nu^9$, hence $\mu=\nu$. Let $(\alpha,\beta,\gamma)\in V(I)$. Note that $$\alpha = \pm \beta^{3/2}= \pm( \pm \gamma^{3/2})^{3/2}=\pm \beta^{3/2}= (\pm( \pm \gamma^{1/2})^{1/2})^9.$$ 
+            Note also that 
+            $$\beta = \pm \gamma^{3/2} =(\pm \gamma^{1/2})^3=(\pm \gamma^{1/2})^{6/2}=(\pm( \pm \gamma^{1/2})^{1/2})^6.$$ 
+            So picking 
+            $$ t= \begin{cases}
+                (\gamma^{1/2})^{1/2} & \text{if } \beta = \gamma^{3/2}, \alpha = \beta^{3/2}\\
+                -(-\gamma^{1/2})^{1/2} & \text{if } \beta = -\gamma^{3/2}, \alpha = -\beta^{3/2}\\
+                -(\gamma^{1/2})^{1/2} & \text{if } \beta = \gamma^{3/2}, \alpha = -\beta^{3/2}\\
+                (-\gamma^{1/2})^{1/2}& \text{if } \beta = -\gamma^{3/2}, \alpha = \beta^{3/2}
+            \end{cases},
+            $$
+            we get that $\varphi(t)=(\alpha,\beta,\gamma).$ Then $\varphi$ is a bijection. However the image of $\widetilde{\varphi}=\overline{\alpha}$ is $K[T^9,T^6,T^4]\subsetneq K[T]$, hence $\varphi$ is not an isomorphism by the full faithfulness of $(\Gamma(\bullet),\widetilde{\bullet})$.
         \item Consider the polynomial map 
         \begin{gather*}
             \varphi: \A^1 \rightarrow V:= V(y^2-x^2(x+1))\\
@@ -1960,7 +1990,7 @@ One can furthermore show that $\mathfrak{m}_P(V)$ is the maximal ideal containin
             Hence if $a_2=0$, $\ord_P^f(\overline{y})\geq 3$; otherwise $\ord_P^f(\overline{y})=2$.
         \end{enumerate}         
     \end{example}
-    \begin{proposition}
+    \begin{proposition}\label{PlaneCurveDimensionOfMaximalIdealQuotientByMaximalIdealSquared}
         Let $P$ be a point on an irreducible curve $f$. Then 
         $$\dim\ \mathfrak{m}_P(f)^n/\mathfrak{m}_P(f)^{n+1} = n+1, \quad (0\leq n < m_P(f)),$$
         hence $P$ is simple if and only if $\dim\ \mathfrak{m}_P(f)/\mathfrak{m}_P(f)^2= 1$; otherwise $\dim\ \mathfrak{m}_P(f)/\mathfrak{m}_P(f)^2= 2$.
@@ -1972,8 +2002,10 @@ One can furthermore show that $\mathfrak{m}_P(V)$ is the maximal ideal containin
         \end{tikzcd}$$
         Hence, $$\dim \ \mathfrak{m}^n/\mathfrak{m}^{n+1} = \dim\ R/\mathfrak{m}^{n+1}-\dim \ R/\mathfrak{m}^n = \frac{(n+1)(n+2)}{2}-\frac{n(n+1)}{2} = \frac{(n+1)(n+2-n)}{2}= n+1.$$
     \end{proof}
-    \begin{example}
-        Set $f_1 := x^2 -y^3,f_2 := y^2-z^3\in K[x,y,z]$, $P=(0,0,0)$ and $V:=V(f_1,f_2)\subset \A^3$. {\LARGE Determine $\dim \ \mathfrak{m}_P(V)/\mathfrak{m}_P(V)^2$}.
+    \begin{example}\label{ExampleOfVarietyWhereMaximalIdealQuotientByMaximalIdealSquaredIsGreaterThan2}
+        Set $f_1 := x^2 -y^3,f_2 := y^2-z^3\in K[x,y,z]$, $P=(0,0,0)$ and $V:=V(f_1,f_2)\subset \A^3$. Furthermore set $\pazocal{O}:=\pazocal{O}_P(V)$ and $\mathfrak{m}:= \mathfrak{m}_P(V)$. We aim to compute $\mathfrak{m}/\mathfrak{m}^2$. Note that $\dim\ \pazocal{O}\mathfrak{m} = 1$. Elements of $\pazocal{O}/\mathfrak{m}^2$ are on the form $\frac{a\overline{x}+b\overline{y}+c\overline{z}+d}{\beta}$. An element of $\mathfrak{m}/\mathfrak{m}^2$ is of the form ${a\overline{x}+b\overline{y}+c\overline{z}+d}{\beta}$, since $\overline{t}\in \mathfrak{m}$ for any non-constant monomial, meaning $\overline{s}\in\mathfrak{m}^2$ for any monomial of degree $>2$. One readily verifies that if $\alpha+\mathfrak{m}$ is such that $\alpha(P)=0$, then  
+        $$\frac{\alpha}{\beta}+\mathfrak{m}^2= \frac{\alpha}{\beta(P)}+\mathfrak{m}^2,$$
+        by checking the statement for the image of a mononimal in $\mathfrak{m}$ modulo $\mathfrak{m}^2$. So $\mathfrak{m}/\mathfrak{m}^2 = K (\overline{x}+\mathfrak{m}^2)+K (\overline{y}+\mathfrak{m}^2)+K(\overline{z}+\mathfrak{m}^2)$. It remains to argue that these elements are linearly independent. Indeed if $a\overline{x}+b\overline{y}+c\overline{z}=\overline{\mu}\overline{\lambda}$ where $\mu$ and $\lambda$ are linear polynomials in $x,y,z$ vanishing at $P$, then $ax+by+cz-\mu\lambda \in \langle f,g\rangle$, which means $a=b=c=0$, since any term of a polynomial in $\langle f,g\rangle$ has $x$-degree $>2$ or $y$-degree $>2$ or $z$-degree $>3$ and there can be no cancellation of $ax,by,cz$ with terms in $\mu\lambda$, since these are all degree $2$ monomials.  We conclude that $\dim\ \mathfrak{m}/\mathfrak{m}^2 = 3$.
     \end{example}
     \subsubsection{Intersection Numbers}\label{IntersectionNumber}
     For this subsection, we begin by fixing curves $f$ and $g$ together with a point $P\in \A^2$. We allow that $f$ or $g$ be non-zero constants. We will see that allowing this will make definitions simpler and that it will inconsequential for counting intersections of curves.  
