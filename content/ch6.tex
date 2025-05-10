@@ -458,7 +458,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
     \begin{remark}
         By induction we find that there is an open affine neighborhood containing $k$ distinct points. 
     \end{remark}
-    \begin{lemma}
+    \begin{lemma}\label{WeCanConstructRationalFunctionVanishingAtOnePointAndNotAnoter}
         Let $X$ be a variety and $P,Q$ be two distinct points on $X$. There is an $f\in K(X)$ defined at both $P$ and $Q$ satisfying $f(P)=0$ and $f(Q)\neq 0$. It thus follows that $\pazocal{O}_P(X)$ and $\pazocal{O}_Q(X)$ are distinct subrings of $K(X)$.
     \end{lemma}
     \begin{proof}
@@ -491,8 +491,8 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         $$(\widetilde{\phi}(f))(P) = (\alpha\widetilde{\pi}\widetilde{\phi}(f))(P)= (\alpha\widetilde{\psi}(f))(P),$$
         and since $\alpha\widetilde{\psi}(f)\subset \Gamma\left(\phi^{-1}(U)\right)$, the result follows. 
     \end{proof}
-    \begin{lemma}
-        The map $\varphi: H_\infty \subset \Pp^n \rightarrow \Pp^{n-1}, [v_1,\dots,v_n,0]\mapsto [v_1,\dots,v_n]$ is an isomorphism. If $V$ is a variety in $\Pp^n$ contained in $H_\infty$, then $\left.\varphi\right|_{V}$ is an isomorphism to it image, which is a variety in $\Pp^{n-1}$. As a consequence, any projective variety is isomorphic to some closed subvariety $V\subset \Pp^n$. 
+    \begin{lemma}\label{WeMayAssumeProjectiveVarietyNotContainedInHyperPlane}
+        The map $\varphi^{(n)}:= \varphi: H_\infty \subset \Pp^n \rightarrow \Pp^{n-1}, [v_1,\dots,v_n,0]\mapsto [v_1,\dots,v_n]$ is an isomorphism. If $V$ is a variety in $\Pp^n$ contained in $H_\infty$, then $\left.\varphi\right|_{V}$ is an isomorphism to it image, which is a variety in $\Pp^{n-1}$. As a consequence, any projective variety is isomorphic to some closed subvariety $V\subset \Pp^n$ not contained in a hyperplane. 
     \end{lemma}
     \begin{proof}
         We have the following commutative diagram 
@@ -502,7 +502,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
                 H_\infty \arrow[r,"\varphi"] & \Pp^{n-1}
             \end{tikzcd}
         $$
-        where $\phi$ is the isomorphism $(v,0)\mapsto v$, and $\pi,\tau$ are the appropriate restrictions of the quotient maps, which we note are surjective, open morphisms. Checking that $\varphi$ is a bijection is easy. The prior lemma shows that $\varphi$ and $\varphi^{-1}$ are morphisms. We know that isomorphisms map varieties to varieties, hence the second statement follows. The third statement follows from any projective variety being isomorphic to some projective variety $V\subset\Pp^n$ for some $n$.
+        where $\phi$ is the isomorphism $(v,0)\mapsto v$, and $\pi,\tau$ are the appropriate restrictions of the quotient maps, which we note are surjective, open morphisms. Checking that $\varphi$ is a bijection is easy. The prior lemma shows that $\varphi$ and $\varphi^{-1}$ are morphisms. We know that isomorphisms map varieties to varieties, hence the second statement follows. The third statement follows from any projective variety being isomorphic to some projective variety $V\subset\Pp^n$ for some $n$. $V$ can be contained in at most $n$ hyperplanes (cf. Lemma~\ref{IntersectionOfSuffManyHyperplanesIsAPoint}) call these $H_1,\dots,H_m$. Alternately applying an appropriate change of coordinates and an appropriate choice $\varphi^{(i)}$, we get that the image of $V$ under this composition is a closed subvariety of $\Pp^{n-m}$ isomorphic to $V$.
     \end{proof}
     \subsection{Developing Theory}
     \subsubsection{Products \& Graphs}
@@ -844,6 +844,20 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         This is well-defined since for every $[\mu, w_1,\dots,w_n,\nu]\in C$, $\mu\neq0$ or $\nu\neq 0$, since $C\cap y\cap z$ is empty. It is a morphism
         since it is covered by $U_1\cap C,U_{n+2}\cap C$, on which it restricts to a polynomial map to the first resp. third copy of the affine plane in $\Pp^2$. Observe that $\varphi_v(P)=[0,0,1]$. Set $C_v:= \cl(\varphi_v(C))$. We now just need to argue that we can choose $v$ such that $\varphi_v$ becomes a birational map onto $C_v'$. First of all, $C_v'$ is a closed subvariety of $\Pp^2$, since if $C_v'=A\cup B$ a decomposition into a union of closed sets, then we assume $C = \varphi_v^{-1}(A)$. Then $\varphi(C) = \varphi_v(\varphi_v^{-1}(A))$, hence $C'=\cl(\varphi_v(\varphi_v^{-1}(A)))\subset A$, implying $C'=A$. Note that $\varphi_v$ is a dominant rational map and therefor induces a well-defined (injective) field extension map over $K$, $\widetilde{\varphi_v}:K(C_v')\rightarrow K(C), \frac{\overline{f}}{\overline{g}}\mapsto \frac{\overline{f(y,\sum_1^nv_ix_i)}}{\overline{g(y,\sum_1^n v_ix_i)}}$. We now choose $v\in \A^{n+1}$ such that $K(C)=K(u,\sum_1^n v_i\frac{\overline{x_i}}{z})$. Then $K(C_v')\simeq K(C)$, so $\varphi_v$. Write $C\cap y=\{Q_1,\dots,Q_m,P\}$. Set $h:=\sum_1^n y_ix_i\in K[\mathbf{x},\mathbf{y}]$, $h_i:= h(\mathbf{y},Q_i)$ and $V:=\bigcup V(h_1,\dots,h_m)$. We may pick $v\in \A^n\setminus V$ so that $\varphi_v$ is birational. This means that if $Q=[t,w,s]\in C\cap y$, then $\sum_1^n v_iw_i\neq 0$ or $w=0$. In particular, if $\varphi_v([t,w_1,\dots,w_n,s])=[0,0,1]$, then $[t,w,s]\in C\cap y$ and $\sum_1^nv_iw_i=0$, hence $w=0$, and $[t,w,s]=P$.
     \end{proof}
+    \begin{definition}
+        We say that a rational map is \textit{finite} if the induced $K$-algebra homomorphims between the algebraic function fields is finite.
+    \end{definition}
+    \begin{lemma}\label{RationalMapBetweenCurvesAreDominatingOrConstant}
+        Let $C$ and $C'$ be curves, $\Phi: C'\dottedarrow C$ some rational map. 
+        \begin{enumerate}
+            \item $\Phi$ is dominating or constant.
+            \item If $\Phi$ is dominating, then $\widetilde{\Phi}$ is finite.
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        1. Note that $\cl(\Phi(\dom \ \Phi))$ is a closed subvariety of $C$ and thus is either equal to $C$ or, due to Lemma~\ref{SomeDimensionResults}, a point.\\
+        2.  Since $K(C')\supset K$ is field finite, then so is $K(C')\supset \widetilde{\Phi}(K(C))$. Let $f\in K(C)\setminus K$, then $\widetilde{\Phi}(f)\in K(C)\setminus K$, hence $K(C')\supset K(\widetilde{\Phi}(f))$ is algebraic by Lemma~\ref{AlgebraicFuntionFieldsInOneVariable} 1. hence $K(C')\supset \widetilde{\Phi}(K(C)) = \widetilde{\Phi}(K(C))(\widetilde{\Phi}(f))$ is algebraic. It follows that $K(C')\supset \widetilde{\Phi}(K(C))$ is module-finite, hence $\Phi$ is finite.  
+    \end{proof}
 \subsection{The Study of Curves \& Resolution of Singularities}
     \subsubsection{Rational Maps of Curves}
         \begin{definition}
@@ -863,11 +877,50 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             Let $C$ be a projective curve, $L:=K(C)$. Suppose $M\supset L$ is some field and $R$ is a DVR of $M$. Suppose $R\not\supset K$. Then there is a unique $P\in C$ such that $R$ dominates $\pazocal{O}_P(C)$. 
         \end{theorem}
         \begin{proof}
-            
+            Denote the maximal ideal of $R$ by $\mathfrak{m}$.
+            \textbf{Uniqueness:} Suppose for a contradiction that there are two distinct points $P,Q$ on $C$ such that $R$ dominates $\pazocal{O}_P(C)$ and $\pazocal{O}_Q(C)$. We may construct a rational function $f\in K(C)$ such that $f\in \mathfrak{m}_P(V)\subset \mathfrak{m}$ and $\frac{1}{f}\in\pazocal{O}_Q(C)$ (cf. Lemma~\ref{WeCanConstructRationalFunctionVanishingAtOnePointAndNotAnoter}). Then $\ord(f)>0$, and since $f$ is a unit in the local ring of $C$ at $Q$ so therefor also a unit in $R$, meaning $\ord(f)\geq 0$; this is a contradiction.\\
+            \textbf{Existence:} WLOG $C\subset \Pp^n$ for some $n\geq 1$. We may also assume that $C$ is not contained in any coordinate hyperplane, hence that $C\cap U_i\neq \emptyset$ for every $i$ (cf. Lemma~\ref{WeMayAssumeProjectiveVarietyNotContainedInHyperPlane}). We have that $\Gamma^h(C)=K[x_1,\dots,x_{n+1}]/I^\Pp(C) = K[\overline{x_1},\dots,\overline{x_{n+1}}].$ Set $N= \max_{i,j}\ \ord(\overline{x_i}/\overline{x_j})$. WLOG $\ord(\overline{x_j}/\overline{x_{n+1}})=N$ for some $j$. Note that for each $i$
+            $$ \ord(\overline{x_i}/\overline{x_{n+1}}) = \ord((\overline{x_j}/\overline{x_{n+1}})(\overline{x_i}/\overline{x_j}))=N-\ord(\overline{x_j}/\overline{x_i}) \geq 0.$$
+            It then follows that $R\supset K\left[\frac{\overline{x_1}}{\overline{x_{n+1}}},\dots,\frac{\overline{x_{n}}}{\overline{x_{n+1}}}\right] \simeq \Gamma(C_\ast)$, where $C_\ast$ is the affine curve corresponding to $C\cap U_{n+1}$. Set $J:= \mathfrak{m}\cap \Gamma(C_\ast)$. Then $J$ is a prime ideal and hence corresponds to some subvariety of $C_\ast$, $W$ say. If $W=C_\ast$, then $J=0$, hence $\Gamma(C_\ast)\setminus 0$ are all units in $R$, which would imply that $R\supset L$. So $W$ is a proper subvariety of $C_\ast$ and thus is a point, $\{P\}$ say, by Lemma~\ref{SomeDimensionResults} 4. We may write elements of $\pazocal{O}_P(C)$ as a fraction $\frac{\alpha}{\beta}\in K(C)$, where $\alpha,\beta\in \Gamma(C_\ast)$, where $\beta(P)\neq 0$. Then $\beta\notin J$, hence $\beta\notin \mathfrak{m}$. It thus follows that $\beta$ is a unit in $R$, hence $\frac{\alpha}{\beta}\in R$. Moreover if $\frac{\alpha}{\beta}\in\mathfrak{m}_P(V)$, then $\alpha\in J$, hence $\alpha \in \mathfrak{m}$, so $\frac{\alpha}{\beta}\in \mathfrak{m}$. In conclusion, $P$ is a point in $C$ such that $R$ dominates $\pazocal{O}_P(C)$.   
+        \end{proof}
+        \begin{corollary}\label{SetOfSimplePointsIsContainedInDomainOfRationalMapBetweenCurves}
+            Let $C,C'$ be curves, $C$ projective, $\Phi: C' \dottedarrow C$ some rational map. Then the set of simple points in $C'$ is contained in $\dom\ \Phi$. Then immediately it follows that if $C'$ is nonsingular then $\Phi$ is a morphism, i.e $\dom\ \Phi = C'$. 
+        \end{corollary}
+        \begin{proof}
+            In the case of $\Phi$ not being dominant, it is constant (cf. Lemma~\ref{RationalMapBetweenCurvesAreDominatingOrConstant} 1.), hence $\dom\ \Phi = C'$. Suppose $\Phi$ is dominant. Then $\widetilde{\Phi}$ is injective, so we can identify $K(C)$ with a subfield of $K(C')$. Let $P$ be a simple point of $C'$ and set $R:=\pazocal{O}_P(C')$, which is then a $DVR$ of $K(C')$. If $R\not\supset K(C)$, then by the prior theorem there is a $Q\in C$ such that $\pazocal{O}_Q(C)$ (which we have identified with $\widetilde{\Phi}(\pazocal{O}_Q(C))$) is dominated by $R$, which means $P\in \dom \ \Phi$ by Lemma~\ref{InducedMapFromDominantRationalMaps} 2. Suppose for a contradition that $K(C)\subset R \supset K(C')$. Note that $K(C')\supset K(C)$ is module-finite by Lemma\ref{RationalMapBetweenCurvesAreDominatingOrConstant} 2. Then $R$ is a field by Proposition~\ref{CannotSqueezeNonFieldBetweenFiniteFieldExtension}, leading to a contradiction with the fact that $R$ is a DVR and therefor a non-field.
         \end{proof}
         \begin{corollary}
-            
+            Let $\pazocal{C}$ be the category nonsingular curves with dominant morphisms. Then the restriction $\pazocal{C}$ of the $\widetilde{\bullet}$-functor to the category of $1$ variable algebraic function fields over $K$ with $K$-algebra homomorphisms is a fully faithful functor.
         \end{corollary}
+        \begin{definition}
+            Let $C$ be a nonsingular curve. Define 
+            $$\mathrm{DVR}(C):= \{ R\subset K(C): R\text{  is a DVR of } K(C)\}.$$
+        \end{definition}
+        \begin{corollary}\label{SimplePointsInBijectionWithDVRsOfFunctionField}
+            Let $C$ be a nonsingular curve. The map 
+            \begin{gather*}
+                \pazocal{O}_\bullet(C): C \rightarrow \mathrm{DVR}(C)\\
+                P \mapsto \pazocal{O}_P(C) 
+            \end{gather*} 
+            is a bijection.
+        \end{corollary}
+        \begin{proof}
+            It is obviously well-defined. Let $R\in \mathrm{DVR}(C)$. By the prior theorem there is a unique $P_R\in C$ such that $R$ dominates $\pazocal{O}_{P_R}(C)$. Then $R=\pazocal{O}_{P_R}(C)$ by Proposition~\ref{UniquenessPropertyOfDVRs}. So the inverse of $\pazocal{O}_\bullet(C)$ is $R\mapsto P_R$.  
+        \end{proof}
+        \begin{proposition}
+            Let $C$ be a nonsingular curve. The family of subsets of $\mathrm{DVR}(C)$,
+            $$\{\emptyset\}\cup \{U\subset \mathrm{DVR}(C) : \mathrm{DVR}(C)\setminus U \text{ is finite }\}$$
+            defines a topology on $\mathrm{DVR}(C)$ which turns $\pazocal{O}_\bullet(C)$ into a homeomorphism.
+        \end{proposition}
+        \begin{proof}
+            Let $\{U_\alpha\}$ be a family non-empty subsets of $\mathrm{DVR}(C)$ such that the complement of $U_\alpha$ is finite. The Demorgan's law shows that the complement of $\bigcup U_\alpha$ is also finite. Let $U_1,U_2\subset \mathrm{DVR}(C)$ be non-empty subsets. Again by Demorgan's law the complement of $U_1\cap U_2$ is finite. So the family of subset is indeed a topology. Note that if $S$ is a closed subset of $\mathrm{DVR}(C)$ it is either all of $\mathrm{DVR}(C)$ or a finite set. In the first case $\pazocal{O}_\bullet^{-1}(S)=C$ and in the second $\pazocal{O}_\bullet^{-1}(S)$ is a finite union of points. In either case it is a closed subset of $C$. If $V\subset C$ is closed, it is either equal to $C$ or a finite subset. In either case $\pazocal{O}_\bullet$ maps it to a closed subset of $\mathrm{DVR}(C)$. We then conclude that $\pazocal{O}_\bullet$ is a homeomorphism. 
+        \end{proof}
+        \begin{proposition}
+            A curve $C$ has only finitely many multiple points.
+        \end{proposition}
+        \begin{proof}
+            $C$ is birationally equivalent to a plane curve which may be identified with an open subset of a projective plane curve $C'$. So there is a birational equivalence $\Phi : C \rightarrow C'$. $K(C)\subset K(C')$.
+        \end{proof}
         \begin{definition}
             Let $C$ be a projective curve. \textit{A resolution of the singularities of $C$} is a non-singular projective curve $X$ with a birational map $\Phi : X\dottedarrow C$. 
         \end{definition}
