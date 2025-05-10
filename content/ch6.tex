@@ -924,34 +924,17 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         \begin{definition}
             Let $C$ be a projective curve. \textit{A resolution of the singularities of $C$} is a non-singular projective curve $X$ with a birational map $\Phi : X\dottedarrow C$. 
         \end{definition}
-        \subsubsection{Rational Maps of Curves}
-        \begin{definition}
-            Let $P$ be a point on a curve $C$. $P$ is called \textit{simple} if $\pazocal{O}_P(C)$ is a DVR. 
-        \end{definition}
-        \begin{remark}
-            This agrees with the definition on plane curves by Theorem~\ref{SimplePointIffLocalRingDVR}. We denote the order function on $K(C)$ defined by $\pazocal{O}_P(C)$ by $\ord_P:=\ord_P^C$. 
-        \end{remark}
-        \begin{definition}
-            A curve is called \textit{non-singular} if every point on it is simple.
-        \end{definition}
-        {\Large Where goes this?}
-        \begin{definition}
-            Let $L\supset K$ be a field extension, and $A$ a local ring. We say that $A$ is \textit{a local ring of $L$} if it is contained in $L$, $Q(A)=K$ and $A\supset K$. Similarly, \textit{a DVR of $L$} is a DVR that is a local ring of $L$.  
-        \end{definition}
-        \begin{theorem}
-            Let $C$ be a projective curve, $L:=K(C)$. Suppose $M\supset L$ is some field and $R$ is a DVR of $M$. Suppose $R\not\supset K$. Then there is a unique $P\in C$ such that $R$ dominates $\pazocal{O}_P(C)$. 
-        \end{theorem}
-        \begin{proof}
-            
-        \end{proof}
-        \begin{corollary}
-            
-        \end{corollary}
-        \begin{definition}
-            Let $C$ be a projective curve. \textit{A resolution of the singularities of $C$} is a non-singular projective curve $X$ with a birational map $\Phi : X\dottedarrow C$. 
-        \end{definition}
+        In the next subsection we are going to work on how to "blow up" multiple points on a curve. The easy case is affine plane curves. 
     \subsubsection{Blowing up Points in $\A^2$}
-        
+        We start by working through an example
+        \begin{example}
+            Consider $P:=(0,0)\in \A^2$, $U:=\{(x,y)\in \A^2: x\neq 0\}$. Consider a morphism 
+            \begin{gather*}
+                \varphi: U \rightarrow \A^1\\
+                (a,b)\mapsto b/a
+            \end{gather*}
+            In the section introducing algebraic groups we saw that multiplication and taking multiplicative inverese are morphisms and $\varphi$ is just the composition, $(a,b)\mapsto (a^{-1},b)\mapsto a^{-1}b$. Set $G:=G_\varphi$ (the graph of $\varphi$). Then $G=\{(a,b,c)\in \A^3 : a\neq 0,b=ac\}$.
+        \end{example}
     \subsubsection{Blowing up Points in $\Pp^2$}
     \subsubsection{Quadratic Transformations}
     \subsubsection{Non-singular Models of Curves}
