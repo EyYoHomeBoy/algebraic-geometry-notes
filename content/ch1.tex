@@ -19,11 +19,29 @@ We introduce set theory first via the Zermelo-Frankel axioms with an added axiom
 \subsubsection{Von Neumann Ordinals: A Construction of $\N$ (the Natural Numbers)}
 \subsubsection{NGB Set Theory - Classes}
 \subsection{Relations}
+\begin{definition}
+    A \textit{relation} on a non-empty set $S$ is a subset $R\subset S\times S$. For an order pair $(x,y)\in S\times S$ we write $xRy$ if $(x,y)\in R$.     
+\end{definition}
+
 \subsubsection{Functions}
 \subsubsection{Ordering}
+\begin{definition}
+    Let $X$ be a non-empty set. A \textit{Partial order} on $X$ is a relation $\leq$ on $X$ satisfying,
+    \begin{enumerate}
+        \item reflexivity,
+        $$x\sim x \text{ for every } x \in X$$
+        \item antisymmetry, 
+        $$x\leq y \text{ and } y\leq x \implies x = y \text{ for every } x,y\in X$$
+        \item transitivity, 
+        $$x \leq y \text{ and } y \leq z \implies x \leq z \text{ for every } x,y,z\in X.$$
+    \end{enumerate}
+\end{definition}
+\begin{definition}
+    A partial order $\leq$ on a non-empty set $X$ is called \textit{total order} if for every $x,y\in X$, $x\leq y$ or $y\leq x$. 
+\end{definition}
 \subsubsection{Equivalence Relations}
 \begin{definition}
-    Let $A$ be a non-empty set, we define an \textit{equivalence relation} on $A$ to be a subset $\sim$ of $A\times A$ satisfying 
+    Let $X$ be a non-empty set. We define an \textit{equivalence relation} to be a relation $\sim$ on $X$ satisfying 
     \begin{enumerate}
         \item reflexivity,
         $$x\sim x \text{ for every } x \in X$$
