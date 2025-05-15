@@ -1,30 +1,93 @@
 % !TEX root = ../main.tex
-\section{Set \& Category Theoretic Definitions}
-\subsection{Set theory}
-\subsubsection{ZF(C)-axioms}
+\section{Set Theory}
+\subsection{ZF(C)-axioms}
 
-We introduce set theory first via the Zermelo-Frankel axioms with an added axiom of choice which will be necessary in some cases. We add to first order predicate logic a relational symbol $\in$. For a pair of objects $z,X$ we define $z\in X :=  \in(z,X)$.
+We introduce set theory first via the Zermelo-Frankel axioms with an added axiom of choice which will be necessary in some cases. We add to first order predicate logic a non-logical, relational symbol $\in$. For a pair of objects $z,X$ we define $z\in X :=  \in(z,X)$ to be read as "$z$ is an element of $X$" or "$z$ belongs to $X$". We now introduce the axioms of Zermelos set theory, starting with the first 4. 
 \begin{axioms}
     \begin{enumerate}\addtocounter{enumi}{-1}
-        \item $\exists \emptyset\forall z(\neg(z\in \emptyset))$
-        \item $\forall X\forall Y(\forall z(\forall z\in X \iff z \in Y)\implies X=Y)$.
-        \item $\forall x\forall y\exists P \forall z\left(z\in P \iff \left(z = x \vee z = y\right)\right)$.
-        \item $\forall X\exists U \forall z ( z \in U \iff \exists w \in X(z\in w))$
+        \item The axiom of empty set: $\exists \emptyset\forall z(\neg(z\in \emptyset))$
+        \item The axiom of extensionality: $\forall X\forall Y(\forall z(z\in X \iff z \in Y)\implies X=Y)$.
+        \item The axiom of pairing: $\forall x\forall y\exists P \forall z\left(z\in P \iff \left(z = x \vee z = y\right)\right)$.
+        \item The axiom of Union: $\forall X\exists U \forall z ( z \in U \iff \exists w \in X(z\in w))$.
     \end{enumerate}
 \end{axioms}
+To shorten notation we define $z\notin X :\iff \neg(z\in X)$. with the axioms above in mind we make some definitions. Before that we give a few remarks on the axioms given so far
+\begin{remark}
+    One should think about the set produced from the axiom of the empty set to be a set that contains no element.\\ \textbf{The converse statement in the axiom of extensionality is also true}, i.e. if $\forall X \forall Y(X=Y\implies \forall z(z\in X\iff z\in Y))$: If $z\in X$, using substitution rule for formulas, $z\in Y$. Conversely by the same argument, if $z\in Y$ we get that $z\in X$.\\
+    \textbf{The empty set is unique:} For if $\emptyset$ and $\emptyset'$ satisfy axiom 0, then $\forall z(z\notin \emptyset \wedge z\notin \emptyset')$, meaning $\forall z(z\in \emptyset \iff z\in \emptyset')$, hence by axiom 1, $\emptyset = \emptyset'$.\\
+    \textbf{The set $P$ obtained from the axiom of pairing is uniquely given by $X$ and $Y$}: Indeed if to elements $x$ and $y$, $P$ and $P'$ are sets satisfying $\forall z(z\in P \iff (z=x\vee z=y))$ and $\forall z(z\in P' \iff (z=x\vee z=y))$, then $z\in P\iff z=x \vee z=y \iff z\in P$, hence by axiom 1 $P=P'$.\\
+    Given sets $x,y$ we can therefor define $\{x,y\}$ to be the unique set satisfying the pairing axiom. We also define $\{x\}$ to be the unique set satisfying the pairing axiom and such a set is called \textit{the singleton containing $x$}.\\
+    \textbf{The set of pairs is unordered,} i.e. $\forall X\forall Y(\{X,Y\}=\{Y,X\})$. This is an immediate consequence of $\vee$ being commutative and the axiom of extensionality. We will return to the question of defining ordered pairs later on.\\
+    \textbf{On the axiom of union}: Loosely it states that given a set we may define the union over this set. The axiom of extensionality again implies that this is uniquely determined by the first set in the first universal quantifier presented in formula, i.e. there is a unique set, $\bigcup X$, satisfying $\forall z(z\in \bigcup X \iff \exists w\in X(z\in w))$. We may then form the \textit{the union of $X$ and $Y$}, defined to be the set 
+    $$ X\cup Y := \bigcup \{X,Y\}$$
+\end{remark}
+\begin{definition}
+    We introduce yet another binary relation $\subset$,
+    $$X \subset Y :\iff \forall z(z\in X \implies z\in Y),$$
+    i.e. if $X$ and $Y$ are sets we get that $X\subset Y$ to be read \textit{$X$ is a subset of $Y$} if every element of $X$ is also an element of $Y$.\\
+    We introduce a another binary relation $\subsetneq$,
+    $$ X\subsetneq Y :\iff X\subset Y \wedge \neg(X=Y)$$
+    We then say that \textit{$X$ is a proper subset of $Y$}
+\end{definition}
+\begin{remark}
+    Using the axiom of extensionality we get that if $X\subsetneq Y$ then $\neg(\forall z(z\in X\iff z\in Y))$, hence $\exists z((z\in X\wedge z\notin Y) \vee (z\in Y \wedge z\notin X))$, and since $X\subset Y$, we get $\exists z(z\in Y \wedge z\notin X)$. Note that $\emptyset \subset X$, since proving $\forall z(z\in \emptyset \implies z\in X)$ boils down to the fact that $z\in \emptyset$ definitionally is equal to $\mathrm{False}$.
+\end{remark}
+\begin{definition}
+    A set $X$ is called \textit{inductive} if 
+    $$\forall y(y\in X \implies (y\cup \{y\})\in X).$$
+    We define 
+    $$\ind(X) :\iff y(y\in X \implies (y\cup \{y\})\in X)$$
+\end{definition}
+\begin{example}
+    Note that $\ind(\emptyset)$ by ex falso.
+\end{example}
+To get more inductive sets we need the \textit{axiom of infinity}
+\begin{axioms}
+    $$\exists I(\emptyset \in I \wedge \ind(I))$$
+\end{axioms}
+\begin{remark}
+    One notes that for such an $I$, $\{\emptyset\}=\emptyset \cup \{\emptyset\}\in I$ and by the same argument $\{\emptyset,\{\emptyset\}\}\in I$ so it seems that we have postulated an inductive set which is significantly more interesting than $\emptyset$.  
+\end{remark}
+The following is an axiom schema called the axiom schema of seperation
+\begin{axioms}
+    For each formula $\varphi(z,p_1,\dots,p_n)$ where the free variables of $\varphi$ are among $z,p_1,\dots, p_n$ we postulate 
+    $$\forall X\forall p_1\dots \forall p_n\exists Y\forall z(z\in Y\iff (z\in X\wedge \varphi(z,p_1,\dots,p_n)))$$
+\end{axioms}
+The above axioms lets us form new sets by imposing some conditions on the elements of the set using a formula, i.e. we can in many instances construct sets of the form $\{z\in X: \varphi(z)\}$, i.e. given a set $X$ and the sufficient data to write a term of the formula $\varphi$ we can find a set $Y$ such that $z\in Y \iff  (z \in X \wedge \varphi(z,\_))$. By the usual argument, once the sufficient data is provided to this axiom schema, the set $Y$ which it produces is uniquely given by this data, so we may define 
+$$\{z\in X : \varphi(z,\_)\}$$
+as the unique set satisfying the axiom schema of seperation. Note that $\{z\in X : \varphi(z)\}\subset X$.
+\begin{example}
+    \begin{enumerate}
+        \item Consider sets $X,Y$ and consider the formula $\varphi(z,S) \equiv z\in S$. We then define 
+        $$X\cap Y := \{ z\in Y : \varphi(z,X)\}.$$
+        Note that $z\in X\cap Y\iff (z\in X\wedge z\in Y)$, which shows that given arbitrary sets $X$ and $Y$
+        $$\{z : z\in X\wedge z\in Y\}$$
+        can be uniquely defined. We call this set \textit{the intersection of $X$ and $Y$}.
+        \item A more general construction than the one above, is to consider $\varphi(z,S) \equiv \forall T\in S(z\in T)$. Than given a set $X$ and applying the axiom schema of seperation to $\bigcup X$ and the formula $\varphi(z,X)$ we get the set 
+        $$ \bigcap X := \left\{z \in \bigcup X : \forall Y \in X(z\in Y)\right\}$$
+        which is a subset of $\bigcup X$. Note that $X\cap Y = \bigcap\{X, Y\} = \bigcap X\cup Y$.
+        \item We can also define \textit{set difference}  from this axiom schema. Consider sets $X$ and $Y$ and a formula $\varphi(z,Y) \equiv z\notin Y$. Then we can form
+        $$ \{z\in X : z\notin Y\}.$$
+    \end{enumerate}
+\end{example}
+The next axiom lets us form the the set of all subsets of any set. 
+\begin{axioms}
+    $$\forall X\exists PS\forall z(z\in PS\iff z \subset X)$$
+\end{axioms}
+By the axiom of extensionality we get that for each $X$ there is a unique $PS$ satisfying $\forall z(z \in PS \iff z\subset X)$. We from now on denote this set $2^X$ or $\pazocal{P}(X)$. At this point we have enough axioms to build a lot of mathematics. We could at this point for diverge to construct a set of natural numbers and define cartesian products of sets. 
 \begin{definition}
     Let $X$ be a set. $P$ a predicate. We say that \textit{$P(x)$ is true for all but finitely many $x\in X$}, if there exists a $Y\subset X$, such that $P(x)$ is true for all $x\in X\setminus y$
 \end{definition}
-\subsubsection{Natural Numbers \& the Peano Axioms}
-\subsubsection{Von Neumann Ordinals: A Construction of $\N$ (the Natural Numbers)}
-\subsubsection{NGB Set Theory - Classes}
+\subsection{Natural Numbers \& the Peano Axioms}
+\subsection{Von Neumann Ordinals: A Construction of $\N$ (the Natural Numbers)}
+\subsection{NGB Set Theory - Classes}
 \subsection{Relations}
 \begin{definition}
     A \textit{relation} on a non-empty set $S$ is a subset $R\subset S\times S$. For an order pair $(x,y)\in S\times S$ we write $xRy$ if $(x,y)\in R$.     
 \end{definition}
 
 \subsubsection{Functions}
-\subsubsection{Ordering}
+\subsubsection{Orderings}
 \begin{definition}
     Let $X$ be a non-empty set. A \textit{Partial order} on $X$ is a relation $\leq$ on $X$ satisfying,
     \begin{enumerate}
@@ -36,9 +99,50 @@ We introduce set theory first via the Zermelo-Frankel axioms with an added axiom
         $$x \leq y \text{ and } y \leq z \implies x \leq z \text{ for every } x,y,z\in X.$$
     \end{enumerate}
 \end{definition}
+\begin{remark}
+    Given a partial order $\leq$, we have that $\geq$ is a partial order as well.
+\end{remark}
+\begin{example}
+    Let $X$ be a set and $\mathcal{X}\subset 2^X$. Then $\subset := \left\{(A,B)\in \mathcal{X}\times \mathcal{X} : \forall x(x\in A \implies x\in B) \right\}$ defines a partial order on $\mathcal{X}$.\\
+    Another example is that of $\leq$ on $\N$,$\Z$ or $\Q$. 
+\end{example}
+\begin{definition}
+    Let $X$ be a set with a partial order and $\{x_i\}_{i\in \N} \subset X$ be a sequence. We say that $\{x_i\}_{i\in\N}$ is \textit{descending with respect to $\leq$} if $x_i \geq x_{i+1}$ for every $i\geq 0$ and \textit{ascending with respect to $\leq$} if $x_i \leq x_{i+1}$ for every $i\geq 0$. A sequence $\{x_i\}_{i\in \N}$ is said to \textit{stabilize} if there is a non-negative integer $n$ such that $x_n = x_{n+d}$ for every $d\geq 0$. 
+\end{definition}
 \begin{definition}
     A partial order $\leq$ on a non-empty set $X$ is called \textit{total order} if for every $x,y\in X$, $x\leq y$ or $y\leq x$. 
 \end{definition}
+\begin{definition}
+    Let $X$ be a set with a partial order $\leq$. A subset $Y$ of $X$ is called a \textit{chain} if $\leq$ defines a total order on $Y$.  
+\end{definition}
+\begin{remark}
+    Any ascending/descending sequence $\{x_i\}_{i\in \N}$ is a chain and is denoted 
+    $$x_1\leq x_2\leq \dots \text{ respectively } x_1\geq x_2 \geq \dots,$$
+    these are called \textit{ascending/descending chains}
+\end{remark}
+We give the following axiom which one check is equivalent to the axiom of choice 
+\begin{axioms}\label{ZornsLemma}(Zorn's Lemma)
+    Let $X\neq \emptyset$ be a set with a partial order $\leq$ such that for every chain $C\subset X$ there exists an $x\in C$ such that $c\leq x$ for every $c\in C$, (i.e. there is an upper bound $x$ for $C$ in $C$). Then there is a maximal element in $m \in X$, i.e. for every $y \in X$ if $m\leq y$, then $m=y$.
+\end{axioms}
+\begin{example}
+    In certain situations we do not need to assume Zorn's Lemma. 
+    \begin{enumerate}
+        \item Suppose $X$ is a non-empty finite set with $n$ elements and a partial order $\leq$. Then $X$ has a maximal element. Indeed, this is easily proven by induction in $n$. If $X$ has one element this is trivially maximal. Consider for $n\geq1$ $X= \{x_1,\dots,x_{n+1}\}$. Then by induction $\{x_1,\dots,x_n\}$ has a maximal element $x_i$. Then $\max_\leq(x_i,x_{n+1})$ is a maximal element of $X$. 
+        \item A topology $\tau$ on some set $X$ has $X$ as a maximal element
+    \end{enumerate}
+     
+\end{example}
+We give a reformulation of every chain having a maximal/minimal element
+\begin{lemma}\label{MaximalMinimalIsEquivalentToAscendingDescendingChainCondition}
+    Let $X\neq \emptyset$ be a set with a partial ordering $\leq$. Every ascending/descending sequence in $X$ stabilizes if and only if every chain $C$ in $X$ has a upper/lower bound in $C$.
+\end{lemma}
+\begin{proof}
+    We only check the ascending case since a descending sequence is just an ascending sequence with respect to $>$ and a minimal element is just a maximal element with respect to $>$.\\
+    "$\implies$":We prove the contrapositive. Suppose $C\subset X$ is a chain that does not have an upper bound in $C$. Let $c_1\in C$. Then there exists $c_2 \in C$ such that $c_1 < c_2$. Continuing this process recursively we get a sequence $\{c_i\}_{i\in \N}$ such that $c_i<c_{i+1}$ for every $i\geq 0$, hence this is a sequence in $X$ that does not stabilize.\\
+    "$\impliedby$": Let $\{x_i\}_{i\in \N}$ be an ascending sequence in $X$. Then $\{x_i\}_{i\in \N}$ is a chain. Then there exists a $x_n\in \{x_i\}_{i\in \N}$ such that $x_j\leq x_n$ for every $j\geq 1$. Now since $x_n \leq x_{n+d}$ for every $d\geq 0$ it follows that $x_n=x_{n+d}$ for every $d\geq0$, hence $\{x_i\}_{i\in \N}$ stabilizes. 
+\end{proof}
+
+
 \subsubsection{Equivalence Relations}
 \begin{definition}
     Let $X$ be a non-empty set. We define an \textit{equivalence relation} to be a relation $\sim$ on $X$ satisfying 
@@ -73,174 +177,3 @@ We introduce set theory first via the Zermelo-Frankel axioms with an added axiom
 \begin{proof}
     Suppose $x=y$, then $x\sim y$, hence by Lemma~\ref{EquivalenceClassLemma} $p(x)=[x]_\sim=[y]_\sim=p(y)$. Let $[x]_\sim \in X/\sim$. Then $\pi(x) =[x]_\sim$, hence $\pi$ is surjective.
 \end{proof}
-\subsection{Category Theory}
-\subsubsection{Initial Definitions}
-\begin{definition}
-    A category $\pazocal{C}$ is a pair $(\Ob(\pazocal{C}),\Hom(\pazocal{C}))$ where 
-    \begin{enumerate} 
-    \item $\Ob(\pazocal{C})$ denotes a class of \textit{objects}. \item $\Hom(\pazocal{C})$ denotes a class of \textit{morphisms}. 
-    \item A morphism $f$ in $\Hom(\pazocal{C})$ is a relation between between elements $A,B$ in $\Ob(\pazocal{C})$. We denote it by $f : A \rightarrow B$. 
-    \item For objects $A,B$ in $\Ob(\pazocal{C})$ we denote the class of morphisms from $A$ to $B$ by $\Hom(A,B)$.
-    \item There is binary operation $\circ$ on the class of morphisms called \textit{composition} such that for morphisms $f: B\rightarrow C$ and $g : A \rightarrow B$ we have that
-    $$fg := f\circ g : A \rightarrow C$$
-    and 
-    $$(f\circ g)\circ h = f\circ(g\circ h)$$
-    where $f : C \rightarrow D$, $g: B \rightarrow C$ and $h: A \rightarrow B$ for objects $A,B,C,D$ in $\Ob(\pazocal{C})$. Furthermore for each object $X$ in $\Ob(\pazocal{C})$ there is a morphism $\mathbbm{1}_X : X \rightarrow X$ called the \textit{identity morphism} such that 
-    $$\mathbbm{1}_B f = f = f \mathbbm{1}_A,$$
-    for a morphism $f: A \rightarrow B$.
-    \end{enumerate}
-\end{definition}
-\begin{definition}
-    Let $\pazocal{C}$ be a category. An \textit{isomorphism} $f:A \rightarrow B$ is a morphism in $\Hom(\pazocal{C})$ such that there is another morphism $f^{-1} : B\rightarrow A$ satisfying,
-    $$ff^{-1} = \mathbbm{1}_B \ \mathrm{ and } \ f^{-1}f = \mathbbm{1}_A.$$
-\end{definition}
-\begin{definition}
-    A category $\pazocal{C}$ is called a \textit{groupoid} if every $f$ in $\Hom(\pazocal{C})$ is an isomorphism
-\end{definition}
-\begin{definition}
-    A \textit{subcategory} $\pazocal{D}$ of a category $\pazocal{C}$ is a subclass of $\Ob(\pazocal{C})$ together with a subclass of $\Hom(\pazocal{C})$ that constitutes a category
-\end{definition}
-\begin{remark}
-    equivalently a subcategory of $\pazocal{C}$ is a subclass $\Ob(\pazocal{D})$ of $\Ob(\pazocal{C})$ and a subclass $\Hom(\pazocal{D})$ of $\Hom(\pazocal{C})$ such that each domain $A$ and codomain $B$ for a morphism in $\Hom(\pazocal{D})$, $A,B$ are elements of $\Ob(\pazocal{D})$. In addition $\Hom(\pazocal{D})$ is closed under composition. 
-\end{remark}
-\begin{definition}
-    The \textit{maximal groupoid} of a category $\pazocal{C}$ is the subcategory of $\pazocal{C}$ whose objects are $\Ob(\pazocal{C})$ and whose morphisms are the isomorphisms of $\Hom(\pazocal{C})$
-\end{definition}
-\begin{remark}
-    The maximal groupoid is a subcategory. Indeed, The domain and codomain of a morphism is trivially contained in $\Ob(\pazocal{C})$. Suppose $f:A\rightarrow B$ and $g: B \rightarrow C$ are isomorphisms. Then 
-    $$f^{-1}g^{-1}gf=f^{-1}\fone_B f = f^{-1}f = \fone_A$$
-    and 
-    $$gff^{-1}g^{-1} = g\fone_B g^{-1} = gg^{-1} = \fone_C.$$
-    Hence $gf: A \rightarrow C$ is an isomorphism with inverse $f^{-1}g^{-1}$. 
-\end{remark}
-\begin{definition}
-    Let $\pazocal{C}$ be a category and $f\in \Hom(A,B)$, $g\in \Hom(B,A$.  $f$ is called a \textit{retraction} of $g$ and $g$ a section of $f$ if $fg = \fone_A$   
-\end{definition}
-\begin{lemma}
-    Let $\pazocal{C}$ be a category, $f\in \Hom(A,B)$. Suppose $g,h\in \Hom(B,A)$ are respectively a retraction and a section of $f$. Then $g=h$ and $f$ is an isomorphism. It follows that a morphism can have at most one inverse
-\end{lemma}
-\begin{proof}
-    Indeed 
-    $$g=g\fone_A = gfh=\fone_B h = h.$$
-    Hence $f$ is an isomorphism with $f^{-1} = g=h$. Let $f_1$ and $f_2$ be inverses of an isomorphism $f$. Note that both $f_1$ and $f_2$ is both a section and a retraction. Therefor, by the first statement, $f_1=f_2$.   
-\end{proof}
-\begin{example}\label{BasicExamplesOfCategories}
-    \begin{enumerate}
-        \item Let $\mathrm{Set}$ be defined by objects being sets and morphisms being functions. Indeed, letting $\circ$ be composition in the conventional way and letting $\mathbbm{1}_X = \mathrm{id}_X: X\rightarrow X, x\mapsto x$, we see that this indeed defines a category. 
-        \item Consider a pair $(X,R)$ of a set $X$ and a transitive, reflexive relation $R$ on $X$. Let $(a,b),(b,c)\in R$. We define 
-        $$(a,b)(b,c) := (a,c).$$
-        This is indeed well defined since $a R b$ and $bR c$ implies $a R c$, in other words $(a,c)\in R$. Let another pair $(c,d)\in R$. Then $((a,b)(b,c))(c,d)= (a,c)(c,d) = (a,d)$ and $(a,b)((b,c),(c,d))=(a,b)(b,d)=(a,d)$. We define $\mathbbm{1}_a = (a,a)$, which is indeed in $R$. Then $(a,a)(a,b)=(a,b)$ and $(a,b)(b,b)=(a,b)$. So $(X,R)$ indeed defines a morphism. 
-    \end{enumerate}
-\end{example}
-\begin{definition}
-    Let $\pazocal{C}$ be a category and $A$ an object in $\pazocal{C}$. \textit{The slice category of $\pazocal{C}$ under $A$} denoted $A/\pazocal{C}$ is the category whose objects are morphisms in $\Hom(\pazocal{C})$ with domain $A$ and where a morphism from $f: A \rightarrow X$ and $g : A \rightarrow Y $ is a map $h : X\rightarrow Y$ such that 
-    $$\begin{tikzcd}
-       & A \arrow[ld, "f"' ] \arrow[rd, "g"]\\
-        X \arrow{rr}{h} & & Y
-    \end{tikzcd}$$
-    commutes. \textit{The slice category of $\pazocal{C}$ over $A$} denoted $\pazocal{C}/A$ is $A/\pazocal{C}\op$, i.e. objects are morphisms with codomain $A$ and a morphism from $f : X \rightarrow A$ to $g : Y\rightarrow A$ is a morphism $h : X \rightarrow Y$ satisfying
-    $$\begin{tikzcd}
-        X \arrow[rd, "f"'] \arrow[rr, "h"] & & Y\arrow[ld, "g"]\\
-        & A 
-    \end{tikzcd}$$
-\end{definition}
-\begin{remark}
-    Both these constructions are indeed categories: Consider morphisms $h_{12}$ between $f_1: A\rightarrow X$ \& $f_2 : A\rightarrow Y$ and $h_{23}$ between $f_2 : A\rightarrow Y$ \& $f_3: A\rightarrow Z$. Then we have commutative diagrams
-    $$\begin{tikzcd}
-        & A \arrow[ld, "f_1"' ] \arrow[rd, "f_2"]\\
-        X \arrow{rr}{h_{12}} & & Y
-    \end{tikzcd} \quad \begin{tikzcd}  & A \arrow[ld, "f_2"' ] \arrow[rd, "f_3"]\\
-        Y \arrow{rr}{h_{23}} & & Z \end{tikzcd}$$
-    to obtain the commutative diagram
-    $$\begin{tikzcd}
-        & A \arrow[ld, "f_1"' ] \arrow[d, "f_2"] \arrow[rd, "f_3"]\\
-        X \arrow[r, "h_{12}"] & Y \arrow[r, "h_{23}"] & Z
-    \end{tikzcd}
-    $$
-    hence $h_{23}h_{12}$ is a morphism between $f_{1}$ and $f_3$. For an object $f: A \rightarrow X$ in $A/\pazocal{C}$ define the identity morphism to be $\fone_X$. We thus get that associativity of composition and the identity morphisms being neutral with respect to composition is inherited from this being true in $\pazocal{C}$. Reversing arrows we get that $\pazocal{C}/A$ is also a category.  
-\end{remark}
-\begin{definition}
-    Let $\pazocal{C}_1,\pazocal{C}_2$ be categories. A \textit{Covariant functor} from $\pazocal{C}_1$ to $\pazocal{C}_2$ is a mapping $\pazocal{F}$, denoted $\pazocal{F} : \pazocal{C}_1 \rightarrow \pazocal{C}_2$, which assigns to each object $A$ in $\Ob(\pazocal{C}_1)$ to an object $\pazocal{F}(A)$ in $\Ob(\pazocal{C}_2)$ and to each morphism in $\Hom(\pazocal{C}_1)$, $f : A \rightarrow B$ a morphism in $\Hom(\pazocal{C}_2)$, $\pazocal{F}(f) : \pazocal{F}(A)\rightarrow \pazocal{F}(B)$ such that 
-    \begin{enumerate}
-        \item for every object $X$ in $\Ob(\pazocal{C}_1)$, $\pazocal{F}(1_X) = 1_{\pazocal{F}(X)}$.
-        \item for every pair of morphisms $f: B \rightarrow C$ and $g: A\rightarrow B$ in $\Hom(\pazocal{C}_1)$, $\pazocal{F}(fg) =\pazocal{F}(f)\pazocal{F}(g).$
-    \end{enumerate}
-\end{definition}
-\begin{lemma}\label{FunctorsTransferIsomorphismBetweenCategories}
-    Consider two categories $\pazocal{C}_1$ and $\pazocal{C}_2$ with a functor $\pazocal{F}: \pazocal{C}_1 \rightarrow \pazocal{C}_2$. If $f:A \rightarrow B$ is an isomorphism in $\Hom(\pazocal{C}_1)$, then $\pazocal{F}(f): \pazocal{F}(A)\rightarrow\pazocal{F}(A)$ is an isomorphism in $\Hom(\pazocal{C}_2)$. 
-\end{lemma}
-\begin{proof}
-    Indeed, 
-    $$\pazocal{F}(f)\pazocal{F}\left(f^{-1}\right) = \pazocal{F}\left(ff^{-1}\right) = \pazocal{F}(\mathbbm{1}_B)= \mathbbm{1}_{\pazocal{F}(B)} \ \mathrm{and} \ \pazocal{F}\left(f^{-1}\right)\pazocal{F}(f) = \pazocal{F}\left(f^{-1}f\right) = \pazocal{F}(\mathbbm{1}_A)= \mathbbm{1}_{\pazocal{F}(A)}.$$
-\end{proof}
-\begin{definition}
-    Let $\pazocal{C}$ be a category. We define \textit{the opposite category of $\pazocal{C}$} denoted $\pazocal{C}\op$ to be the category with $\Ob(\pazocal{C}\op) := \Ob(\pazocal{C})$ and where a morphism $f : A \rightarrow B$ in $\Hom(\pazocal{C}\op)$ is a morphism $f : B\rightarrow A$ in $\Hom(\pazocal{C})$ 
-\end{definition}
-\begin{remark}
-    The above indeed does define a category. We define $\circ\op$ by 
-    $$f \circ\op g = g\circ f : C \rightarrow A$$
-    where $f: B\rightarrow C$ and $g: A \rightarrow B$ are morphisms in $\Hom(\pazocal{C}\op)$. Then for morphisms $f: C\rightarrow D$, $g: B \rightarrow C$ and $h: A \rightarrow B$
-    $$(f\circ\op g)\circ\op h = h(gf)=(hg)f = f\circ\op(g\circ\op h).$$
-    Furthermore, we define the identity morphism in $\Hom(\pazocal{C}\op)$ to be the identity morphism in $\Hom(\pazocal{C})$, hence 
-    $$f\circ\op \mathbbm{1}_A = \mathbbm{1}_Af = f \text{ and } \mathbbm{1}_B \circ\op f = f \mathbbm{1}_B = f.$$
-\end{remark}
-\begin{definition}
-    Consider categories $\pazocal{C}_1$ and $\pazocal{C}_2$. A \textit{covariant functor} $\pazocal{F}$ between  $\pazocal{C}_1 $ and $ \pazocal{C}_2$ is a covariant functor between $\pazocal{C}_1$ and $\pazocal{C}_2\op$.
-\end{definition}
-\begin{corollary}
-    Consider categories $\pazocal{C}_1$, $\pazocal{C}_2$ and a covariant functor $\pazocal{F}: \pazocal{C}_1 \rightarrow \pazocal{C}_2\op$. If $f: A \rightarrow B$ is an isomorphism in $\Hom(\pazocal{C}_1)$, then $\pazocal{F}(f): \pazocal{F}(B)\rightarrow \pazocal{F}(A)$ is an isomorphism in $\Hom(\pazocal{C}_2\op)$ 
-\end{corollary}
-\begin{proof}
-    This follows immediately from Lemma~\ref{FunctorsTransferIsomorphismBetweenCategories}.
-\end{proof}
-\begin{example}\label{IntegerInvariants}
-    Suppose that there, for a category $\pazocal{C}$, is a well-defined assignment $\pazocal{F}$ of objects in $\pazocal{C}$ to integers and of a morphism $A\rightarrow B$ to $\pazocal{F}(A)\leq \pazocal{F}(B)$. This will define a functor from $\pazocal{C}$ to $(\Z,\leq)$ called \textit{an integer invariant on $\pazocal{C}$}. Indeed, $\pazocal{F}(A) \leq \pazocal{F}(A)$, hence $\pazocal{F}(\mathbbm{1}_A)=\mathbbm{1}_{\pazocal{F}(A)}$. Given morphisms $g:A\rightarrow B$, $f:B\rightarrow C$ in $\Hom(\pazocal{C})$, 
-    $$\pazocal{F}(A)\leq\pazocal{F}(B) \text{ and } \pazocal{F}(B)\leq \pazocal{F}(C),$$
-    implying $\pazocal{F}(A)\leq \pazocal{F}(C)$, hence $\pazocal{F}(A\overset{fg}{\rightarrow} C) = \pazocal{F}(A\overset{f}{\rightarrow}B)\pazocal{F}(B\overset{g}{\rightarrow}C)$.
-    
-\end{example}
-\begin{definition}
-    A category $\pazocal{C}$ is \textit{locally small} if $\Hom(A,B)$ is a set for every object $A,B$ in $\Ob(\pazocal{C})$. It is \textit{small} if $\Ob(\pazocal{C})$ is a set.
-\end{definition}
-\begin{proposition}
-    Consider the class of small categories with morphisms being functors. This defines a category denoted $\Cat$. 
-\end{proposition}
-\begin{proof}
-    {\LARGE DO!}
-\end{proof}
-\begin{definition}
-    In a category $\pazocal{C}$ a morphism $f\in \Hom(A,B)$ is a \textit{monomorphism} if for every pair of morphisms $g_1,g_2 \in \Hom(C,A)$, 
-    $$fg_1=fg_2\implies g_1 = g_2.$$
-    It is called an \textit{epimorphism} if for every pair of morphisms $h_1,h_2\in \Hom(B,D)$,
-    $$h_1f=h_2f\implies h_1=h_2$$    
-\end{definition}
-
-\begin{lemma}
-    For a category $\pazocal{C}$ a 
-\end{lemma}
-\subsubsection{Products \& Co-products}
-\begin{definition}
-    Let $A$ be a set and $\{X_\alpha\}_{\alpha\in A}$ be a family of sets. We then define \textit{the direct product of $X_\alpha$ over $A$} to be the set
-    $$\prod_{\alpha\in A} X_\alpha := \left\{ f: A \rightarrow \bigcup_{\alpha \in A} X_\alpha : f(\alpha) \in X_\alpha \text{ for every } \alpha\in A\right\}.$$
-\end{definition}
-\begin{remark}
-    We can identify every function $f : A \rightarrow \bigcup_{\alpha\in A}$ can be identified with a set $\{r_\alpha : \alpha\in A\}$. In particular, every $f\in \prod_{\alpha\in A} X_\alpha$ can be identified with a symbol $(r_\alpha)$ where $r_\alpha\in X_\alpha$ for each $\alpha\in A$. Thus 
-    $$\prod_{\alpha\in A} X_\alpha = \left\{ (r_\alpha) : r_\alpha\in X_\alpha \text{ for every } \alpha\in A\right\}.$$
-    Assuming the axiom of choice every such product is non-empty whenever $\{X_\alpha\}_{\alpha\in A}$ is a family of non-empty sets. For a finite family of sets $\{X_1,\dots,X_n\}$ we can identify $\prod_1^n X_i := \prod_{i\in \{1,\dots,n\}} X_i$ with $X_1\times \cdots \times X_n$.  
-\end{remark}
-\begin{axioms}
-    Let $A$ be a non-empty set. When $\{X_\alpha\}$ is a family of non-empty sets $\prod_{\alpha \in A} X_\alpha \neq \emptyset$. 
-\end{axioms}
-\begin{proposition}\label{DirectProductIsADirectProductInTheCategoryOfSets}
-    Let $A$ be a set and $\{X_\alpha\}_{\alpha\in A}$ be a family of non-empty sets. For each $\alpha\in A$, define $\pi_\alpha : \prod_{\alpha\in A} X_\alpha \rightarrow X_\alpha, (x_\alpha)\mapsto x_\alpha$. For $\alpha\in A$, $\pi_\alpha$ is a surjective map such that for every set $Y$ with maps $\{f_\alpha : Y \rightarrow M_\alpha\}_{\alpha\in A} $ there is a unique map $f : Y \rightarrow \prod_{\alpha \in A} X_\alpha$ such that for every $\alpha \in A$, $\pi_\alpha \circ f = f_\alpha$   
-\end{proposition}
-\begin{proof}
-    \textbf{$\pi_\alpha$ is surjective:} Let $\alpha \in A$ and $x_\alpha \in X_\alpha$. Using the axiom of choice there is a function mapping $\beta \mapsto x_\beta$ for some $x_\beta \in X_\beta$ for each $\beta\in A\setminus \{\alpha\}$. Then $(x_\beta)\in \prod_{\beta\in A} X_\beta$. Then $\pi_\alpha((x_\beta))=x_\alpha$.\\  
-    \textbf{Existence of $f$:} We define $f(y) = (f_\alpha(y))\in \prod_{\alpha\in A} X_\alpha$, which is easily seen to be well defined. Then for each $y\in Y$, $\alpha \in A$,
-    $$\pi_\alpha\circ f(y) = \pi_\alpha(f(y))=\pi_\alpha((f_\beta(y)))=f_\alpha(y) \implies \pi_\alpha\circ f = f_\alpha$$
-    \textbf{Uniqueness of $f$:} Let $g : Y \rightarrow \prod_{\alpha\in A} X_\alpha$ be another map satisfying $\pi_\alpha \circ g = f_\alpha$ for each $\alpha \in A$. Let $y\in Y$. Then there is a $(x_\alpha)\in \prod_{\alpha\in A} X_\alpha$ such that $g(y) = (x_\alpha)$. Then for $\beta \in A$
-    $$x_\beta = \pi_\beta ((x_\alpha))= \pi_\beta(g(y))=\pi_\beta \circ g(y) = f_\beta(y),$$
-    which implies that 
-    $$f(y) = (f_\alpha(y))=(x_\alpha)=g(y).$$
-\end{proof}
-\subsubsection{Currying}
