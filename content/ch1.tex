@@ -1,8 +1,9 @@
 % !TEX root = ../main.tex
 \section{Set Theory}
-\subsection{ZF(C)-axioms}
+\subsection{An axiomatization of set theory}
+\subsubsection{Zermelos axioms}
 
-We introduce set theory first via the Zermelo-Frankel axioms with an added axiom of choice which will be necessary in some cases. We add to first order predicate logic a non-logical, relational symbol $\in$. For a pair of objects $z,X$ we define $z\in X :=  \in(z,X)$ to be read as "$z$ is an element of $X$" or "$z$ belongs to $X$". We now introduce the axioms of Zermelos set theory, starting with the first 4. 
+We introduce set theory first via the Zermelo-Frankel axioms with an added axiom of choice which will be necessary in some cases. We add to first order predicate logic a non-logical, relational symbol $\in$. For a pair of variables $z,X$ we define $z\in X :=  \in(z,X)$ to be read as "$z$ is an element of $X$" or "$z$ belongs to $X$". We now introduce the axioms of Zermelos set theory, starting with the first 4. 
 \begin{axioms}
     \begin{enumerate}\addtocounter{enumi}{-1}
         \item The axiom of empty set: $\exists \emptyset\forall z(\neg(z\in \emptyset))$
@@ -74,19 +75,150 @@ The next axiom lets us form the the set of all subsets of any set.
 \begin{axioms}
     $$\forall X\exists PS\forall z(z\in PS\iff z \subset X)$$
 \end{axioms}
-By the axiom of extensionality we get that for each $X$ there is a unique $PS$ satisfying $\forall z(z \in PS \iff z\subset X)$. We from now on denote this set $2^X$ or $\pazocal{P}(X)$. At this point we have enough axioms to build a lot of mathematics. We could at this point for diverge to construct a set of natural numbers and define cartesian products of sets. 
+By the axiom of extensionality we get that for each $X$ there is a unique $PS$ satisfying $\forall z(z \in PS \iff z\subset X)$. We from now on denote this set $2^X$ or $\pazocal{P}(X)$. At this point we have enough axioms to build a lot of mathematics. We could at this point for instant diverge to construct a set of natural numbers $\N$ and define cartesian products of a pair of sets from which we could define relations such as orders, equivalence relations and functions and from thereon, we could define functions on $\N$ satisfying the Peano Axioms. Before doing this, however, we will opt to introduce two more axioms.
+\subsubsection{ZF Set Theory}
+The axioms of Zermelo set theory with these two added axioms is called Zermelo-Fraenkel set theory. The first added axiom is in fact an axiom schema called \textit{the axiom schema of replacement}. Before stating the axiom we introduce the notion of class function
 \begin{definition}
-    Let $X$ be a set. $P$ a predicate. We say that \textit{$P(x)$ is true for all but finitely many $x\in X$}, if there exists a $Y\subset X$, such that $P(x)$ is true for all $x\in X\setminus y$
+    Consider a first order formula $\varphi(X,Y,p)$ where $X,Y$ are free variables of $\varphi$ such that 
+    $$\forall X\exists! Y(\varphi(X,Y,p))$$
+    We denote this unique $Y$ by $F(X)$ and it is called the \textit{class function for $\varphi$ at $X$}
 \end{definition}
-\subsection{Natural Numbers \& the Peano Axioms}
-\subsection{Von Neumann Ordinals: A Construction of $\N$ (the Natural Numbers)}
-\subsection{NGB Set Theory - Classes}
+\begin{axioms}
+   Consider a first order formula $\varphi(x,y,p)$ where $x,y$ are free variables of $\varphi$. We then have 
+      $$\forall A\forall p(\forall x\in A\exists! y\varphi(x,y,p)\implies \exists B\forall x\in A\exists y\in B\varphi(x,y,p))$$
+\end{axioms} 
+\begin{remark}
+    For a set $A$ and a class function $F$, we can then find a set $B$ containing the elements of the form $F(x)$ where $x\in A$. We may then consider the set 
+    $$F[A] := \left\{ y\in B: \exists x\in A(y=F(x))\right\}=\left\{F(x) : x\in A\right\}.$$
+\end{remark}
+The second axiom is called \textit{the axiom of foundation}
+\begin{axioms}
+    $$\forall X\left(\exists z(z\in X)\implies \exists y\in X(y\cap X = \emptyset)\right).$$
+\end{axioms}
+\begin{example}
+    Suppose for a contradiction that there is a sequence of sets satisfying $x_1\ni x_2\ni x_3\ni\dots$. Consider the set containing these sets $X=\{x_1,x_2,x_3,\dots\}$ (implicitly we are here assuming the existence of $\N$ and use the axiom schema of replacement with the formula $\varphi \equiv T$). Then take an element $x_k$ of $X$. Note $x_{k+1}\in x_k$ and $x_{k+1}\in X$, hence $x_k\cap X\neq \emptyset$, which in contradiction with the axiom of foundation. We can therefor conclude that there is no set $x$ with $x\in x$, since this would imply the existence of a descending sequence $x\ni x\ni \dots$, which shows that we cannot run into Russels paradox in Zermelo-Fraenkel set theory. Nor can we have a sequence of sets $x_1,\dots,x_n$ satisfying 
+    $$x_1\in x_2\in x_3\in \dots\in x_n\in x_1$$
+    for then we would get a sequence $x_1\ni x_n\ni \dots\ni x_2\ni x_1\ni \dots$. 
+\end{example}
 \subsection{Relations}
 \begin{definition}
-    A \textit{relation} on a non-empty set $S$ is a subset $R\subset S\times S$. For an order pair $(x,y)\in S\times S$ we write $xRy$ if $(x,y)\in R$.     
+    Consider sets $x,y$. We define the ordered pair of $x,y$ to be 
+    $$(x,y) := \{\{x\},\{x,y\}\}.$$
 \end{definition}
-
+\begin{remark}
+    $(x,y)=(x',y')\iff (x=x' \wedge y=y')$. Indeed, if $(x,y)=(x',y')$, then 
+    \begin{gather*} \{x\} = \{x'\} \wedge \{x,y\} = \{x',y'\} \vee \{x\} = \{x',y'\} \wedge \{x,y\} = \{x'\} 
+    \end{gather*}
+    In the first case we get that $x=x'$ and that $x=x' \wedge y = y'\vee x= y'\wedge y=x'$. In either case it easily follows that $x=x'$ and $y=y'$. In the second case $x=x' \wedge x=y'$ and $x' = x\wedge x' = y$, so trivially $x=x'$ and $y=y'$. 
+\end{remark}
+\begin{definition}
+    Consider sets $X$ and $Y$. The axiom schema of seperation, the axiom of powerset and the axiom of union lets us form the set
+    $$X\times Y := \left\{ (x,y)\in \pazocal{P}\left(\pazocal{P}(X\cup Y)\right) : x\in X \wedge y\in Y\right\}.$$ 
+\end{definition}
+\begin{definition}
+    A \textit{relation} on a non-empty set $S$ is a subset $R\subset S\times S$. For an ordered pair $(x,y)\in S\times S$ we write $xRy$ if $(x,y)\in R$.     
+\end{definition}
 \subsubsection{Functions}
+\begin{definition}
+    We define a \textit{(set theoretical) function} $f$ from a set $X$ to a set $Y$, denoted $f:X\rightarrow Y$, to be a relation $f\subset X\times Y$ satisfying
+    $$\forall x\in X\exists! y\in B((x,y)\in f).$$
+    For an $x\in A$ we take $f(x)$ to be the unique element in $Y$ satisfying $(x,f(x))\in f$. With this notation if $x=x'$ then $f(x)=f(x')$. For a subset $Z\subset X$, the axiom schema of seperation lets us form the \text{the image of $Z$ under $f$}, which we define as 
+    $$f(Z) := \{ f(x) : x\in S\}.$$
+    We can also define the \textit{restriction of $f$ to $S$} as the set 
+    $$ \left. f\right|_S := \{ (x,f(x))\in f : x\in S\}$$
+    We denote the set of function between $X$ and $Y$ by ${}^X\!Y$, i.e. 
+    $${}^X\!Y := \left\{ f\subset X\times Y : \forall x\in X\exists! y \in Y((x,y)\in f)\right\} $$
+\end{definition}
+\begin{definition}
+    A function $f : X\rightarrow Y$ is called \textit{surjective} or \textit{onto} if $$\forall y\in Y\exists x\in X (f(x)=y).$$ The short hand notation for a function being surjective is $f: X\twoheadrightarrow Y$.  
+\end{definition}
+\begin{definition}
+    A function $f : X\rightarrow Y$ is called \textit{injective} or \textit{one-to-one} if $$\forall x\forall x'(f(x)=f(x')\implies x=x').$$
+    The short hand notation for $f$ being injective is $f: X\hookrightarrow Y$.  
+\end{definition}
+\begin{definition}
+    If a function $f: X \rightarrow Y$ is both surjective and injective, then it is called \textit{bijective}. The short hand notation for $f$ being bijective is $f: X \overset{\sim}{\rightarrow} Y$.
+\end{definition}
+\begin{remark}
+    Note that if $f$ is bijective, then 
+    $$\forall y\in Y\exists! x\in X((x,y)\in f),$$
+    or more succinctly for each $y\in Y$ we may find a unique $x\in X$ satisfying $y=f(x)$. Indeed given a $y\in Y$, there is an $x\in X$ such that $(x,y)\in f$ (in other words $y=f(x)$) since $f$ is surjective. If $x'$ is another element in $X$ satisfying $(x',y)\in f$. Then $f(x)=y=f(x')$, hence $x=x'$ since $f$ is injective. This lets us form the \textit{the inverse of $f$}, which we take to be the set
+    $$f^{-1}:= \left\{(y,x) \in Y\times X : (x,y) \in f \right\}.$$
+    This is indeed a function, for if $y\in Y$ then there is a unique $x\in X$ such that $(x,y)\in f$, meaning $x$ is unique such that $(y,x)\in f^{-1}$. 
+\end{remark}
+We can also define a way to compose certain compatible functions to form new functions.
+\begin{definition}
+    Let $f: X\rightarrow Y$, $g:Y\rightarrow Z$ be arbitrary functions. Then we define a set 
+    $$ g\circ f := \left\{(x,z)\in X\times Z: \exists y\in Y((x,y)\in f \wedge (y,z)\in g) \right\}.$$
+\end{definition}
+\begin{lemma}
+    Let $f: X\rightarrow Y$, $g:Y\rightarrow Z$ be arbitrary functions. $g\circ f$ is a function from $X$ to $Z$ and for each $x\in X$, $(g\circ f)(x)=g(f(x))$.
+\end{lemma}
+\begin{proof}
+    Let $x\in X$. Then setting $ y:= f(x)$, $z:= g(f(x))$, $(x,y)\in f$ and $(y,z)\in g$, so $(x,z)\in g\circ f$. If $z'$ is such that $(x,z')\in g\circ f$, then there is a $y'\in Y$ such that $(x,y')\in f$ and $(y',z')\in g$. Since $f$ is a function, $y'=f(x)$ and since $g$ is a function $z'=g(y')=g(f(x))=z$.
+\end{proof}
+To get away from explicitly constructing functions as sets we prove the following lemma
+\begin{lemma}
+    Let $f,g: X\rightarrow Y$ be functions. $f=g$ iff $f(x)=g(x)$ for every $x\in X$.  
+\end{lemma}
+\begin{proof}
+    "$\implies$": Suppose $f=g$. Let $x\in X$. Then $(x,f(x))\in X$ by the converse statement of the axiom of extensionality $(x,f(x))\in g$. Then since $g$ is a function $f(x)=g(x)$.\\
+    "$\impliedby$": Supppose $f(x)=g(x)$ for every $x\in X$. Let $(x,y)\in f$ be given. Then $(x,y)=(x,f(x))=(x,g(x))\in g$, so $f\subset g$. By symmetry $g\subset f$. Then $\forall z(z\in f\iff z\in g)$, so the axiom of extensionality tells us that $f=g$.
+\end{proof}
+We may then construct a function $f: X\rightarrow Y$ only by specifying the image under each element in the \textit{domain} $X$. 
+\begin{gather*} 
+    f : X \rightarrow Y\\
+    x\mapsto f(x)
+\end{gather*}
+where $f(x)$ is some set. Explictly this postulates that  
+$$\{(x,y)\in X\times Y : y=f(x)\},$$
+so one has to check that $f(x)\in Y$ i.e. check that $f(x)$ is an element of the \textit{codomain} (this to check that it forms a set that is a subset of $X\times Y$), and that it is in particular a function (so one has to check that if $x=x'$ then $f(x)=f(x')$). 
+\begin{example}
+    Here are some simple examples of functions:
+    \begin{enumerate}
+        \item Let $X$ and $Y$ be sets and fix a $y\in Y$. Consider the function
+        \begin{gather*}
+            f : X\rightarrow Y\\
+            x\mapsto y
+        \end{gather*}
+        I.e. the set $f=\{ (x,a)\in X\times Y : a=y\}$. Indeed, $f(x)=y\in Y$ for every $x\in X$. If $x=x'$, then $f(x)=y=f(x')$. So $f$ is a function.
+        \item Let $X$ be a set. Then
+        \begin{gather*}
+            \id_X : X\rightarrow X\\
+            x \mapsto x            
+        \end{gather*}
+        i.e. the set $\{(x,y)\in X\times X : y=x\}$ defines a function. Indeed, if $(x,y)\in \id_X$, then $(x,y)=(x,x)\in X\times X$. Suppose $x=x'$, then $\id_X(x)=x=x'=\id_X(x')$, so $\id_X$ is a function. 
+    \end{enumerate}
+\end{example}
+\begin{lemma}
+    Let $f: X\rightarrow Y$ be a function. Then $f$ is bijective if and only if there is a function $g: Y\rightarrow X$ such that $g\circ f =\id_X$ and $f\circ g= \id_Y$. If so $g$ is unique.
+\end{lemma}
+\begin{proof}
+    "$\implies$:" Set $g:= f^{-1}$. Let $x\in X$. Since $(f(x),x)\in f^{-1}$, we get that $(f^{-1}\circ f)(x)=f^{-1}(f(x))= x = \id_X(x)$. So $f^{-1}\circ f = \id_X$. By symmetry $f^{-1}\circ f = \id_Y$.\\
+    "$\impliedby$": Let $y\in Y$ and set $x= g(y)$. Then $$f(x)=f(g(y)) = (f\circ g)(y)= y.$$
+    Suppose $x,x'\in X$ are given such that $f(x)=f(x')$. Then 
+    $$x= (g\circ f)(x)=g(f(x))=g(f(x'))=(g\circ f)(x')=x'.$$
+    Then $f$ is both surjective and injective, so $f$ is bijective.\\
+    Suppose $g$ is a function satisfying $g\circ f =\id_X$ and $f\circ g= \id_Y$. Let $y\in Y$, then $y=f(x)$ for some $x$, then $g(y) = g(f(x))=x=f^{-1}(f(x))=f^{-1}(y)$, so $g=f^{-1}$. 
+\end{proof}
+\begin{definition}
+    For a function $f : X\rightarrow Y$ we call a function $g: Y\rightarrow X$ such that $g\circ f =\id_X$ and $f\circ g= \id_Y$ the \textit{mutual inverse of $f$ (with respect to composition)}
+\end{definition}
+\begin{remark}
+    We have just seen that a function has a mutual inverse if and only if it is bijective and that this inverse is equal to $f^{-1}$. 
+\end{remark}
+\subsubsection{ZFC: Adding the Axiom of Choice}
+The axiom of choice is a statement that seems obvious: If we have a set $X$ that does not contain the empty set, then we can pick an element from each $x\in X$. This of course is not a precise statement, since there is no precise notion of "picking" an element that can be derived from the axioms of ZF in any case where we wish to do dish. To be precise, what we mean to say is that we may find a function, $f :X \rightarrow \bigcup X$ satisfying $\forall x\in X(f(x)\in x)$ and this statement if one thinks about satisfies our notion of picking an element from each $x\in X$. This is independent of ZF as proven by Paul Cohen in 1964. As it turns out some rather paradoxical things can happen when the axiom of choice (AOC) is assumed, but it is in some sense a sufficient and nescessary statement for the study of something as "simple" as for instance finite dimensional vector spaces. In this example we need it to be able to be able to "pick" a basis for a finite dimensional vector space, which is an action the legality of which seems self-evident. Nonetheless it is equivalent to AOC. If we take the cartesian product over any set that does contain the empty set (however you wish to interpret this), we run into the problem of proving that this is non-empty being equivalent to AOC. So it is certainly nescessary in some cases. However, it allows for a solid ball in $\R^3$ being equidecomposable to two copies of itself. In other words there is way of constructing 2 solid balls in 3 dimensional euclidean space by simply gluing together pieces of 1 such ball in such a way that no stretching is involved.   
+\begin{axioms}(AOC)
+    $$\forall X\left(\emptyset\notin X \implies \exists f\left(f\in {}^{X}\!\bigcup X\wedge \forall x\in X(f(x)\in X)\right)\right).$$
+\end{axioms}
+We now construct the cartesian product over a set $X$ and show that assuming AOC we 
+\begin{example}
+    Let $F$ be a class function on a set $I$. For each $\iota \in I$ define $A_\iota := F(\iota)$, $A=\bigcup F[I]$. The set 
+    $$\prod_{\iota \in I} A_\iota := \left\{f\in{}^{I}\!A
+    :\forall \iota\in I(f(\iota)\in A_\iota)\right\}$$
+    is called the cartesian product over $I$.
+\end{example}
 \subsubsection{Orderings}
 \begin{definition}
     Let $X$ be a non-empty set. A \textit{Partial order} on $X$ is a relation $\leq$ on $X$ satisfying,
@@ -141,8 +273,6 @@ We give a reformulation of every chain having a maximal/minimal element
     "$\implies$":We prove the contrapositive. Suppose $C\subset X$ is a chain that does not have an upper bound in $C$. Let $c_1\in C$. Then there exists $c_2 \in C$ such that $c_1 < c_2$. Continuing this process recursively we get a sequence $\{c_i\}_{i\in \N}$ such that $c_i<c_{i+1}$ for every $i\geq 0$, hence this is a sequence in $X$ that does not stabilize.\\
     "$\impliedby$": Let $\{x_i\}_{i\in \N}$ be an ascending sequence in $X$. Then $\{x_i\}_{i\in \N}$ is a chain. Then there exists a $x_n\in \{x_i\}_{i\in \N}$ such that $x_j\leq x_n$ for every $j\geq 1$. Now since $x_n \leq x_{n+d}$ for every $d\geq 0$ it follows that $x_n=x_{n+d}$ for every $d\geq0$, hence $\{x_i\}_{i\in \N}$ stabilizes. 
 \end{proof}
-
-
 \subsubsection{Equivalence Relations}
 \begin{definition}
     Let $X$ be a non-empty set. We define an \textit{equivalence relation} to be a relation $\sim$ on $X$ satisfying 
@@ -177,3 +307,10 @@ We give a reformulation of every chain having a maximal/minimal element
 \begin{proof}
     Suppose $x=y$, then $x\sim y$, hence by Lemma~\ref{EquivalenceClassLemma} $p(x)=[x]_\sim=[y]_\sim=p(y)$. Let $[x]_\sim \in X/\sim$. Then $\pi(x) =[x]_\sim$, hence $\pi$ is surjective.
 \end{proof}
+
+\begin{definition}
+    Let $X$ be a set. $P$ a predicate. We say that \textit{$P(x)$ is true for all but finitely many $x\in X$}, if there exists a $Y\subset X$, such that $P(x)$ is true for all $x\in X\setminus y$
+\end{definition}
+\subsection{Natural Numbers \& the Peano Axioms}
+\subsection{Von Neumann Ordinals: A Construction of $\N$ (the Natural Numbers)}
+\subsection{NGB Set Theory - Classes}
