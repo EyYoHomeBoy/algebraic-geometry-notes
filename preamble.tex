@@ -23,9 +23,11 @@
 \usepackage{tikz-cd}
 
 
+
 \usepackage{enumerate}
 \usepackage{verbatim}
-\usepackage{ marvosym }
+\usepackage{ marvosym}
+
 \renewcommand{\baselinestretch}{1.3}
 
 \DeclareMathAlphabet{\pazocal}{OMS}{zplm}{m}{n}
@@ -70,9 +72,27 @@
 \newcommand{\BE}{\sim_{\mathrm{bir}}}
 \newcommand{\ind}{\mathrm{ind}}
 
+
+\newcommand{\mytimes}[1][0.1]{
+  \vcenter{
+    \hbox{
+        \begin{tikzpicture}[scale=#1]
+          \draw[line width=0.8pt] (-1,1) -- (1,-1);
+          \draw[line width=0.8pt] (-1,-1) -- (1,1);
+        \end{tikzpicture}
+    }
+  }
+}
+
+\newcommand{\bigtimes}{
+  \mathop{\mathchoice{\mytimes[0.25]}{\mytimes[0.2]}{\mytimes[0.1]}{\mytimes[0.1]}}\displaylimits
+}
+
+
+
 \newcommand{\dottedarrow}{%
   \mathrel{\tikz[baseline=-0.5ex]\draw[dotted,->,thick] (0,0) -- (1.5em,0);}%
-}
+} 
 
 
 \newcommand{\squareplus}{
