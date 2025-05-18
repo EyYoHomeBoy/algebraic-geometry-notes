@@ -291,7 +291,7 @@ We give the following axiom which one check is equivalent to the axiom of choice
     In ZF Zorn's Lemma is equivalent to AC.
 \end{theorem}
 \begin{proof}
-    Assume AC. Consider the set of chains in $X$, $\mathfrak{C}$.
+    {\Large Do at some point}
 \end{proof}
 \begin{example}
     In certain situations we do not need to assume Zorn's Lemma. 
@@ -348,6 +348,57 @@ We give a reformulation of every chain having a maximal/minimal element
 \begin{definition}
     Let $X$ be a set. $P$ a predicate. We say that \textit{$P(x)$ is true for all but finitely many $x\in X$}, if there exists a $Y\subset X$, such that $P(x)$ is true for all $x\in X\setminus y$
 \end{definition}
-\subsection{Natural Numbers \& the Peano Axioms}
+\subsection{ordinal theory}
+\subsubsection{The Set $\omega$}
+    \begin{definition}
+        Let $I_0$ be an inductive non-empty set. Consider the formula $\varphi(X) \equiv  \emptyset\in X \wedge \ind(X)$. Using power sets and seperation we get the set 
+        $$ \omega := \bigcap \left\{X\in \pazocal{P}(I_0) : \emptyset \in X\wedge \ind(X)\right\}$$
+    \end{definition}
+    \begin{lemma}
+        $\omega$ is the smallest with the property of being inductive and containing $\emptyset$, i.e. it is a subset of every other set with these properties. Immediately it is the unique smallest set with the property of being inductive and containing $\emptyset$.
+    \end{lemma}
+    \begin{proof}
+        The emptyset is an element of each $X\in\pazocal{P}(I_0)$ satisfying $\emptyset \in X$ and $\ind(X)$, so $\emptyset\in \omega$. If $x\in \omega$, then for every $X\in\pazocal{P}(I_0)$ with $\emptyset \in X$ and $\ind(X)$, $x\cup \{x\}\in X$, hence $x\cup \{x\}\in \omega$, implying that $\omega$ is inductive. Let $I$ be any inductive set with $\emptyset \in I$. Consider $X_I := \omega \cap I \subset \omega\subset I_0$. Note that clearly $X_I\in \pazocal{P}(I_0)$, $\emptyset \in X_I$ and $\ind(X_I)$. Then $\omega \subset X_I$. This means $\omega = \omega \cap I\subset I$. So $\omega$ is contained in every inductive set containing the emptyset.
+    \end{proof}
+\subsubsection{ordinal numbers}
+\begin{definition}
+    Let $z\in X$. Then $z$ is \textit{$\in$-minimal} if $\forall y(y\notin z \wedge y\notin X)$. We denote this $\min_\in(z,X)$.
+\end{definition}
+\begin{definition}
+    A set $X$ is \textit{ordered by $\in$} if 
+    $$\forall y_1,y_2\in X(y_1\in y_2\vee y_2\in y_1 \vee y_1=y_2).$$
+    We denote this formula by $\ord_\in(X)$.
+\end{definition}
+\begin{definition}
+    A set $X$ is \textit{well-ordered by $\in$} if 
+    $$ \ord_\in(X) \wedge \forall Y \in \pazocal{P}(X)(y\neq \emptyset \implies \exists z \in Y \min_\in(z,Y)).$$
+    We denote this formula by $\mathrm{wo}_\in(X)$.
+\end{definition}
+\begin{definition}
+    A set $X$ is \textit{transitive} if 
+    $$\forall y(y\in X \implies y\subset X).$$
+    This formula is denoted by $\mathrm{trans}(X)$. 
+\end{definition}
+\begin{remark}
+    If $z\in y\in x$ and $\mathrm{trans}(x)$, then $z\in y\subset x$, hence $z\in x$. 
+\end{remark}
+\begin{definition}
+    An \textit{ordinal number} is a set $\alpha$ such that 
+    $$\mathrm{trans}(\alpha)\wedge \mathrm{wo}_\in(\alpha).$$
+    We denote this formula by $\mathrm{ordinal}(\alpha)$.
+\end{definition}
+\begin{remark}
+    Informally in the metalanguage we define $\Omega$ to be the collection of every ordinal number. By $\alpha\in\Omega$ we mean $\mathrm{ordinal}(\alpha)$. 
+\end{remark}
+\begin{theorem}
+    \begin{enumerate}
+        \item If $\alpha\in \Omega$, then $\alpha=\emptyset$ or $\emptyset\ \mathrm{xor}\ \alpha$.
+        \item If $\alpha\in \Omega$, then $\alpha\notin \alpha$.
+        \item If $\alpha,\beta\in \Omega$, then $\alpha\in \beta\text{ xor } \beta\in \alpha \text{ or } \alpha = \beta$.
+        \item  If $\alpha \in \beta \in \Omega$, then $\alpha\in \Omega$.
+        \item If $\alpha\in\Omega$, then $\alpha\cup\{\alpha\} \in \Omega$.
+        \item $\Omega$ is transitive and well-ordered by $\in$, i.e the collection is transitive and ordered by $\in$, and every non-empty collection in $\Omega$ has an $\in$-minimal element.
+    \end{enumerate}
+\end{theorem}
 \subsection{Von Neumann Ordinals: A Construction of $\N$ (the Natural Numbers)}
-\subsection{NGB Set Theory - Classes}
+\subsection{NGB Set Theory - A Formal Treatment of Classes}
