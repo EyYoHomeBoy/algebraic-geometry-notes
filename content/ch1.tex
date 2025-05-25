@@ -362,7 +362,7 @@ We give a reformulation of every chain having a maximal/minimal element
     \end{proof}
 \subsubsection{ordinal numbers}
 \begin{definition}
-    Let $z\in X$. Then $z$ is \textit{$\in$-minimal} if $\forall y(y\notin z \wedge y\notin X)$. We denote this $\min_\in(z,X)$.
+    Let $z\in X$. Then $z$ is \textit{$\in$-minimal in $X$} if $\forall y(y\in z \implies y\notin X)$. We denote this $\min_\in(z,X)$.
 \end{definition}
 \begin{definition}
     A set $X$ is \textit{ordered by $\in$} if 
@@ -371,7 +371,7 @@ We give a reformulation of every chain having a maximal/minimal element
 \end{definition}
 \begin{definition}
     A set $X$ is \textit{well-ordered by $\in$} if 
-    $$ \ord_\in(X) \wedge \forall Y \in \pazocal{P}(X)(y\neq \emptyset \implies \exists z \in Y \min_\in(z,Y)).$$
+    $$ \ord_\in(X) \wedge \forall Y \in \pazocal{P}(X)(Y\neq \emptyset \implies \exists z \in Y \min_\in(z,Y)).$$
     We denote this formula by $\mathrm{wo}_\in(X)$.
 \end{definition}
 \begin{definition}
@@ -392,13 +392,43 @@ We give a reformulation of every chain having a maximal/minimal element
 \end{remark}
 \begin{theorem}
     \begin{enumerate}
-        \item If $\alpha\in \Omega$, then $\alpha=\emptyset$ or $\emptyset\ \mathrm{xor}\ \alpha$.
-        \item If $\alpha\in \Omega$, then $\alpha\notin \alpha$.
-        \item If $\alpha,\beta\in \Omega$, then $\alpha\in \beta\text{ xor } \beta\in \alpha \text{ or } \alpha = \beta$.
+        \item If $\alpha\in \Omega$, then $\alpha=\emptyset$ or $\emptyset\ \mathrm{xor}\ \emptyset\in\alpha$.
+        \item Without assuming the axiom of foundation, if $\alpha\in \Omega$, then $\alpha\notin \alpha$.
+        \item If $\alpha,\beta\in \Omega$, then $\alpha\in \beta\ \mathrm{ xor }\ \beta\in \alpha \ \mathrm{ xor } \ \alpha = \beta$.
         \item  If $\alpha \in \beta \in \Omega$, then $\alpha\in \Omega$.
         \item If $\alpha\in\Omega$, then $\alpha\cup\{\alpha\} \in \Omega$.
         \item $\Omega$ is transitive and well-ordered by $\in$, i.e the collection is transitive and ordered by $\in$, and every non-empty collection in $\Omega$ has an $\in$-minimal element.
     \end{enumerate}
+\end{theorem}
+\begin{proof}
+    1.$\alpha$ is well-ordered by $\in$. If $\alpha=\emptyset$, we are done. So if $\alpha\neq \emptyset$, then since $\alpha \in \pazocal{P}(\alpha)$ there is a $z\in \alpha$ such that $\min_\in(\alpha,z)$. Consider an element of $\alpha$, $x\neq \emptyset$. Pick $y\in x$. By transitivity, $x\subset \alpha$, so $y\in \alpha$. Then $y\in x\wedge y\in \alpha$, hence $\neg\min_\in(x,\alpha)$. Then $\emptyset=z\in \alpha$.\\
+    2. Suppose for a contradiction that $\alpha\in \alpha$. Then $\{\alpha\}\in\pazocal{P}(\alpha)$. There is then a $z\in \{\alpha\}$ that is $\in$-minimal for $\{\alpha\}$. We must have $z=\alpha$. So $\min_\in(\alpha,\{\alpha\})$. But then for $\alpha\in\alpha$, $\alpha\notin \{\alpha\}$ leading to a contradiction.\\
+    3. By 2. the three cases a mutually exclusive. Since then we cannot have $\alpha\in \beta \wedge \beta \in \alpha$, since then by transitivity $\alpha\in\alpha$. Similary if $\alpha\in \beta \wedge \alpha=\beta$ or $\beta\in \alpha \wedge \alpha=\beta$, we would get $\alpha\in\alpha$. Suppose $\alpha\neq \beta$. Then WLOG $x\in \alpha\wedge x\notin \beta$, so $\alpha \setminus \beta \in \pazocal{P}(\alpha)\setminus \emptyset$.\\
+    \textbf{We claim that $\alpha\cap \beta$ is the $\in$-minimal element of $\alpha\setminus \beta$:} Let $\gamma$ be an $\in$-minimal element of $\alpha\setminus \beta$. Using $\mathrm{trans}(\alpha)$ and $\gamma\in \alpha$, we get that 
+    $$\forall u(u\in \gamma\implies u\in \alpha)\quad (\ast)$$ And using $\min_\in(\gamma,\alpha\setminus \beta)$, $\forall u(u\in \gamma \implies u\notin \alpha\setminus \beta)$ or equivalently $u(u\in \gamma\implies (u\notin \alpha \vee u\in \beta))$. Then using $(\ast)$, we get that $\forall u(u\in\gamma \implies u\in\beta)$. So $\gamma\subset \alpha\cap \beta$. Conversely, suppose for a contradiction that there is a $w\in \alpha\cap \beta \setminus \gamma$. Then since $\ord_\in(\alpha)$, $w\notin\gamma$ and $\gamma\neq w$ (since $\gamma\notin \beta\ni w$), we must have that $\gamma\in w\in \beta$, which implies that $\gamma\in \beta$ by transitivity of $\beta$. But this contradicts, $\gamma\in \alpha\setminus \beta$. So $\gamma = \alpha\cap \beta$ as we claimed.\\
+    Now if $\beta\setminus \alpha$ was non-empty, then $\alpha\cap \beta $ would also be its $\in$-minimal element. But then $\alpha\cap \beta \notin \beta \wedge \alpha\cap \beta \in \beta$, leading to a contradiction. Then $\beta\setminus \alpha = \emptyset$, hence $\beta \subset \alpha$, meaning $\beta = \alpha \cap \beta \in \alpha$.\\
+    4. Let $\alpha\in \beta \in \Omega$. Let $y_1,y_2\in \alpha$. By the transitivity of $\beta$, $y_1,y_2\in\beta$ and since $\ord_\in(\beta)$, it follows readily that $y_1\in y_2\vee y_1=y_2\vee y_1\ni y_2$, hence $\ord_\in(\alpha)$. Let $x\in \pazocal{P}(\alpha)$ be non-empty. By transitivity of $\beta$, $x\in\pazocal{P}(\beta)$, and since $\mathrm(wo)_\in(\beta)$, there is a $y\in x$ satisfying $\min_\in(y,x)$, so $\mathrm{wo}_\in(\alpha)$. Let $\gamma\in \alpha$, and let $\delta\in \gamma$. By $\mathrm{trans}(\beta)$, $\delta\in \beta$, and using $\ord_\in(\beta)$, $\delta\in \alpha\vee \delta = \alpha\vee \alpha\in \delta$. Suppose $\delta=\alpha\vee \alpha\in \delta$. Then for $X:=\{\alpha,\gamma,\delta\}\in\pazocal{P}(\beta)$, we have each element of $X$ is an element of some element member of $X$, hence $\forall x \in X \neg(\min_\in(x,X))$. So we conclude $\delta\in \alpha$, hence $\mathrm{trans}(\alpha)$. Hence $\alpha\in \Omega$.\\
+    5. If $\beta\in (\alpha\cup\{\alpha\})$, then $\beta\in \alpha\vee \beta = \alpha$. In either case $\beta\subset \alpha$, since in the first case we can use $\mathrm{trans}(\alpha)$ and in the second case we trivially have $\forall x(x\in \beta \implies x\in \alpha)$. We thus have $\beta\subset \alpha\subset \alpha\cup \{\alpha\}$. Note that if $\beta,\gamma\in \alpha\cup\{\alpha\}$ then $\beta,\gamma\in \alpha \vee \beta \in \alpha=\gamma \vee  \gamma\in \alpha=\beta$. In the first case clearly $\beta\in \gamma \vee \beta = \gamma \vee \gamma\in \beta$ since $\ord_\in(\alpha)$. In the second and third case we also get this since $\beta \in \gamma \vee \gamma\in \beta$. So $\alpha\cup\{\alpha\}$ is ordered by $\in$. Let $x\in\pazocal{P}(\alpha\cup\{\alpha\})$ be a non-empty set. If $x=\{\alpha\}$, then we have already seen that $\alpha$ is $\in$-minimal of $x$. In the case where $x\cap \alpha \neq \emptyset$, this is a non-empty subset of $\alpha$ so it has a $\in$-minimal element, $z$ say, which implies $z\cap x = \emptyset$, for otherwise there would be an element of $z$ that is also in $x$, $y$ say, which would contradict $\min_\in(z,x\cap \alpha)$, for then using that $\alpha$ is transitive we would have $y\in \alpha$, meaning $y\in \alpha \cap x$.\\
+    6.    
+\end{proof}
+\begin{remark}
+
+\end{remark}
+\begin{definition}
+    For a set $X$, define $X+1:= X\cup\{X\}$.
+\end{definition}
+\begin{corollary}
+    \begin{enumerate}
+        \item If $A\subset \Omega$ is a set of ordinals (a set whose elements are ordinals), then $\bigcup A \in \Omega$.  
+        \item If $\alpha,\beta\in \Omega$ and $\alpha\in \beta$, then $\alpha+1\subset \beta$. So $\alpha+1$ is the smallest ordinal containing $\alpha$. 
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    
+\end{proof}
+
+\begin{theorem}
+    
 \end{theorem}
 \subsection{Von Neumann Ordinals: A Construction of $\N$ (the Natural Numbers)}
 \subsection{NGB Set Theory - A Formal Treatment of Classes}
