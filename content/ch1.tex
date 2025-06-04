@@ -387,8 +387,14 @@ We give a reformulation of every chain having a maximal/minimal element
     $$\mathrm{trans}(\alpha)\wedge \mathrm{wo}_\in(\alpha).$$
     We denote this formula by $\mathrm{ordinal}(\alpha)$.
 \end{definition}
+\begin{example}
+    \begin{enumerate}
+        \item $\omega$ is an example of an ordinal number. Consider the set $\pi = \{x\in \omega :x\subset \omega\}$. Let $x\in \pi$. Then $x\in omega \implies \{x\}\subset \omega$ and $x\subset \omega$, hence $x\cup\{x\}\subset \omega$. It follows that $\pi$ is inductive and has $\emptyset$ as an element. Therefor $\omega = \pi$, meaning $\omega$ is transitive.\\
+        Let $x\in \omega$. Define $\pi_x:=\{z\in \omega : z\in x\vee z= x \vee x\in z\}$. If $x=z$, then $x\in \{z\}$, hence $x\in z\cup \{z\}$. If $x\in z$, then $x\in z\cup\{z\}$ trivially. Suppose $z\in x$
+    \end{enumerate}
+\end{example}
 \begin{remark}
-    Informally in the metalanguage we define $\Omega$ to be the collection of every ordinal number. By $\alpha\in\Omega$ we mean $\mathrm{ordinal}(\alpha)$. 
+    Informally, we define $\Omega$ to be the collection of every ordinal number. By $\alpha\in\Omega$ we mean $\mathrm{ordinal}(\alpha)$. 
 \end{remark}
 \begin{theorem}
     \begin{enumerate}
@@ -409,10 +415,20 @@ We give a reformulation of every chain having a maximal/minimal element
     Now if $\beta\setminus \alpha$ was non-empty, then $\alpha\cap \beta $ would also be its $\in$-minimal element. But then $\alpha\cap \beta \notin \beta \wedge \alpha\cap \beta \in \beta$, leading to a contradiction. Then $\beta\setminus \alpha = \emptyset$, hence $\beta \subset \alpha$, meaning $\beta = \alpha \cap \beta \in \alpha$.\\
     4. Let $\alpha\in \beta \in \Omega$. Let $y_1,y_2\in \alpha$. By the transitivity of $\beta$, $y_1,y_2\in\beta$ and since $\ord_\in(\beta)$, it follows readily that $y_1\in y_2\vee y_1=y_2\vee y_1\ni y_2$, hence $\ord_\in(\alpha)$. Let $x\in \pazocal{P}(\alpha)$ be non-empty. By transitivity of $\beta$, $x\in\pazocal{P}(\beta)$, and since $\mathrm(wo)_\in(\beta)$, there is a $y\in x$ satisfying $\min_\in(y,x)$, so $\mathrm{wo}_\in(\alpha)$. Let $\gamma\in \alpha$, and let $\delta\in \gamma$. By $\mathrm{trans}(\beta)$, $\delta\in \beta$, and using $\ord_\in(\beta)$, $\delta\in \alpha\vee \delta = \alpha\vee \alpha\in \delta$. Suppose $\delta=\alpha\vee \alpha\in \delta$. Then for $X:=\{\alpha,\gamma,\delta\}\in\pazocal{P}(\beta)$, we have each element of $X$ is an element of some element member of $X$, hence $\forall x \in X \neg(\min_\in(x,X))$. So we conclude $\delta\in \alpha$, hence $\mathrm{trans}(\alpha)$. Hence $\alpha\in \Omega$.\\
     5. If $\beta\in (\alpha\cup\{\alpha\})$, then $\beta\in \alpha\vee \beta = \alpha$. In either case $\beta\subset \alpha$, since in the first case we can use $\mathrm{trans}(\alpha)$ and in the second case we trivially have $\forall x(x\in \beta \implies x\in \alpha)$. We thus have $\beta\subset \alpha\subset \alpha\cup \{\alpha\}$. Note that if $\beta,\gamma\in \alpha\cup\{\alpha\}$ then $\beta,\gamma\in \alpha \vee \beta \in \alpha=\gamma \vee  \gamma\in \alpha=\beta$. In the first case clearly $\beta\in \gamma \vee \beta = \gamma \vee \gamma\in \beta$ since $\ord_\in(\alpha)$. In the second and third case we also get this since $\beta \in \gamma \vee \gamma\in \beta$. So $\alpha\cup\{\alpha\}$ is ordered by $\in$. Let $x\in\pazocal{P}(\alpha\cup\{\alpha\})$ be a non-empty set. If $x=\{\alpha\}$, then we have already seen that $\alpha$ is $\in$-minimal of $x$. In the case where $x\cap \alpha \neq \emptyset$, this is a non-empty subset of $\alpha$ so it has a $\in$-minimal element, $z$ say, which implies $z\cap x = \emptyset$, for otherwise there would be an element of $z$ that is also in $x$, $y$ say, which would contradict $\min_\in(z,x\cap \alpha)$, for then using that $\alpha$ is transitive we would have $y\in \alpha$, meaning $y\in \alpha \cap x$.\\
-    6.    
+    6. $\Omega$ is transitive by 4. and ordered by $\in$ by 3. Let $C$ be a non-empty collection of ordinals. If $C$ is singleton, then this element is $\in$-minimal for $C$. If $C$ is not a singleton, then given any two distinct elements of $C$, $\delta,\delta'\in C$, we have that $\delta\in \delta'$ or $\delta'\in \delta$, since $\ord_\in(\Omega)$. We may thus pick a $\delta_0\in C$ such that $\delta_0\cap C\neq \emptyset$. Set $x:= \delta_0\cap C$. Let $\alpha\in x$. Pick an $\in$-minimal element in $x\cap (\alpha \cup\{\alpha\})$, $\gamma$ say. Since $\gamma\in \alpha\cup\{\alpha\}$ and $\alpha\cup\{\alpha\}\in \Omega$, $\gamma\subset \alpha\cup \{\alpha\}$.  Let $\gamma'\in \gamma$. Then $\gamma'\in \alpha\cup \{\alpha\}$. But $\gamma'\notin x\cap (\alpha\cup\{\alpha\})$. Then $\gamma'\notin x$, which means $\gamma$ is an $\in$-minimal element of $x$ and hence therefor also in $C$ (recall that by definition of $x$, $\gamma\in C$). 
 \end{proof}
 \begin{remark}
-
+    The above theorem implies that $\Omega$ cannot be a set, since if it were $\Omega$ would an ordinal number by 6. but then $\Omega\in \Omega$ leading to a contradiction by 2. We still wish to think about objects such as $\Omega$ as some kind of collection of elements. We will call a collection of sets satisfying some condition which cannot be described as a sets a \textit{proper class}. Another example is the proper class of sets. I.e. the sets defined by tautology. If this were a set, then trivially it would have itself as an element, contradicting the axiom of foundation. The formal notion of a \textit{class} will left undiscussed for now. It is indeed possible to define this notion rigourosly by extending the ZFC axioms to the Von Neumann–Bernays–Gödel axioms, which we will do later. 
+\end{remark}
+\begin{definition}
+    For a pair of ordinal number $\alpha$ and $\beta$ we define 
+    \begin{gather*}
+        \alpha <\beta :\iff \alpha \in \beta
+        \alpha \leq \beta :\iff \alpha = \beta \vee \alpha <\beta.
+    \end{gather*}
+\end{definition}
+\begin{remark}
+    This in some sense defines a total order on the proper class of ordinal numbers and on the nose a total order on ever set of ordinal numbers. 
 \end{remark}
 \begin{definition}
     For a set $X$, define $X+1:= X\cup\{X\}$.
@@ -421,12 +437,17 @@ We give a reformulation of every chain having a maximal/minimal element
     \begin{enumerate}
         \item If $A\subset \Omega$ is a set of ordinals (a set whose elements are ordinals), then $\bigcup A \in \Omega$.  
         \item If $\alpha,\beta\in \Omega$ and $\alpha\in \beta$, then $\alpha+1\subset \beta$. So $\alpha+1$ is the smallest ordinal containing $\alpha$. 
+        \item For every ordinal $\alpha$, either $\alpha = \bigcup \alpha$ or there is an ordinal $\beta$ such that $\alpha = \beta+1$.
     \end{enumerate}
 \end{corollary}
 \begin{proof}
-    
+    1. Let $\beta \in \bigcup A$. Then there is some $\gamma\in A$ such that $\beta \in \gamma$, then $\beta \in \Omega$ by 4. of the last theorem. This means that $\bigcup A$ is a set of ordinal numbers. Then we can apply 6. of the last theorem to get that $\bigcup \ A$ is well-ordered by $\in$. Let $\beta\in \bigcup A$. Again $\beta\in \gamma$ for some $\gamma\in A$. Since $\gamma$ is transitive, we get that $\beta\subset \gamma$ and since $\gamma\subset \bigcup A$, so $\beta \subset \bigcup A$.\\
+    2. $\{\alpha\}\subset \beta$ and using $\mathrm{trans}(\beta)$, $\alpha\subset \beta$, so $\alpha+1\subset \beta$.\\
+    3. In any case since $\alpha$ is transitive, $\bigcup\alpha \subset \alpha$. Suppose $\bigcup \alpha\neq \alpha$. Then there is an $\in$-minimal element $\beta$ of $\alpha\setminus \bigcup\alpha$. In particular $\beta\in \alpha$, so by 2. $\beta+1\subset \alpha$. If $\alpha\in \beta+1$, then $\alpha\in \alpha$ contradicting 2. of the prior theorem. If $\beta +1 \in \alpha$, then $\beta\in \bigcup\alpha$, which contradicts the choice of $\beta$. Then we must have $\alpha = \beta+1$ since $\beta+1$ is also an ordinal number.    
 \end{proof}
-
+\begin{definition}
+    An ordinal $\alpha$ is called a \textit{succesor ordinal} if there is an ordinal $\beta$ satisfying $\alpha=\beta+1$. If on the other hand $\alpha = \bigcup \alpha$, it is called a \textit{limit ordinal}.
+\end{definition}
 \begin{theorem}
     
 \end{theorem}
