@@ -360,6 +360,10 @@ We give a reformulation of every chain having a maximal/minimal element
     \begin{proof}
         The emptyset is an element of each $X\in\pazocal{P}(I_0)$ satisfying $\emptyset \in X$ and $\ind(X)$, so $\emptyset\in \omega$. If $x\in \omega$, then for every $X\in\pazocal{P}(I_0)$ with $\emptyset \in X$ and $\ind(X)$, $x\cup \{x\}\in X$, hence $x\cup \{x\}\in \omega$, implying that $\omega$ is inductive. Let $I$ be any inductive set with $\emptyset \in I$. Consider $X_I := \omega \cap I \subset \omega\subset I_0$. Note that clearly $X_I\in \pazocal{P}(I_0)$, $\emptyset \in X_I$ and $\ind(X_I)$. Then $\omega \subset X_I$. This means $\omega = \omega \cap I\subset I$. So $\omega$ is contained in every inductive set containing the emptyset.
     \end{proof}
+   We thus get a kind of induction principle on $\omega$: 
+   $$\forall A(\ind(A) \wedge A\subset \omega\implies A=\omega).$$
+   So if we are given a formula $\varphi$, to prove $\forall x\in \omega\varphi(x)$, it is sufficient to prove $\varphi(\emptyset) \wedge \forall x(\varphi(x)\implies \varphi(x\cup\{x\}))$, since then $A:= \{x\in \omega  : \varphi(x)\}$, satisfies $\ind(A) \wedge A\subset \omega$.
+
 \subsubsection{ordinal numbers}
 \begin{definition}
     Let $z\in X$. Then $z$ is \textit{$\in$-minimal in $X$} if $\forall y(y\in z \implies y\notin X)$. We denote this $\min_\in(z,X)$.
@@ -387,12 +391,6 @@ We give a reformulation of every chain having a maximal/minimal element
     $$\mathrm{trans}(\alpha)\wedge \mathrm{wo}_\in(\alpha).$$
     We denote this formula by $\mathrm{ordinal}(\alpha)$.
 \end{definition}
-\begin{example}
-    \begin{enumerate}
-        \item $\omega$ is an example of an ordinal number. Consider the set $\pi = \{x\in \omega :x\subset \omega\}$. Let $x\in \pi$. Then $x\in omega \implies \{x\}\subset \omega$ and $x\subset \omega$, hence $x\cup\{x\}\subset \omega$. It follows that $\pi$ is inductive and has $\emptyset$ as an element. Therefor $\omega = \pi$, meaning $\omega$ is transitive.\\
-        Let $x\in \omega$. Define $\pi_x:=\{z\in \omega : z\in x\vee z= x \vee x\in z\}$. If $x=z$, then $x\in \{z\}$, hence $x\in z\cup \{z\}$. If $x\in z$, then $x\in z\cup\{z\}$ trivially. Suppose $z\in x$
-    \end{enumerate}
-\end{example}
 \begin{remark}
     Informally, we define $\Omega$ to be the collection of every ordinal number. By $\alpha\in\Omega$ we mean $\mathrm{ordinal}(\alpha)$. 
 \end{remark}
@@ -433,7 +431,7 @@ We give a reformulation of every chain having a maximal/minimal element
 \begin{definition}
     For a set $X$, define $X+1:= X\cup\{X\}$.
 \end{definition}
-\begin{corollary}
+\begin{corollary}\label{ClosurePropertiesOfOrdinals}
     \begin{enumerate}
         \item If $A\subset \Omega$ is a set of ordinals (a set whose elements are ordinals), then $\bigcup A \in \Omega$.  
         \item If $\alpha,\beta\in \Omega$ and $\alpha\in \beta$, then $\alpha+1\subset \beta$. So $\alpha+1$ is the smallest ordinal containing $\alpha$. 
@@ -448,6 +446,44 @@ We give a reformulation of every chain having a maximal/minimal element
 \begin{definition}
     An ordinal $\alpha$ is called a \textit{succesor ordinal} if there is an ordinal $\beta$ satisfying $\alpha=\beta+1$. If on the other hand $\alpha = \bigcup \alpha$, it is called a \textit{limit ordinal}.
 \end{definition}
+\subsubsection{$\omega$ and ordinal numbers}
+\begin{lemma}
+    $$\forall x\in \omega(\mathrm{trans}(x)).$$
+\end{lemma}
+\begin{proof}
+    Consider the set $$T:=\{x\in \omega: \forall y( y\in x\implies y\subset x)\}.$$ 
+    Clearly $\emptyset\in T$. Suppose $x\in T$. Let $y\in x\cup \{x\}$. If $y\in x$, then $y\subset x\subset x\cup\{x\}$. If $y\in \{x\}$, then $y = x\subset x\cup \{x\}$, hence   
+\end{proof}
+\begin{lemma}
+    $$\forall x\in \omega(\ord_\in(x)).$$
+\end{lemma}
+\begin{proof}
+    Consider the set $$O := \{x\in \omega : \ord_\in(x)\}.$$ Trivially, $\emptyset\in O$. Let $x\in O$. Suppose $\ord_\in(x)$. Let $y_1,y_2\in x\cup \{x\}$. If $y_1,y_2\in x$, then $y_1\in y_2\vee y_1=y_2\vee y_2\in y_1$. If $y_1,y_2\in \{x\}$, then $y_1=y_2$. If $y_1\in x$ and $y_2\in \{x\}$, then $y_2=x$, hence $y_1\in y_2$. The case $y_1\in\{x\}$ and $y_2\in x$ likewise gives that $y_2\in y_1$. It follows that $y_1\in y_2 \vee y_1 = y_2\vee y_2\in y_1$, hence $\ord_\in(x\cup\{x\})$. It follows that $O=\omega$, hence $\forall x\in \omega(\ord_\in(x))$.
+\end{proof}
+\begin{lemma}
+    $$\forall x\in \omega\forall y\in \pazocal{P}(x)(y\neq \emptyset\implies \exists z(\textstyle{\min}_\in(z,y))).$$
+    With the previous series of lemmas in mind, it follows that each element of $\omega$ is an ordinal. Every non-empty element of $\omega$ is a succesor ordinal.
+\end{lemma}
+\begin{proof}
+    Consider the set 
+    $$A := \{x\in \omega : \forall y\in \pazocal{P}(x)(y\neq \emptyset\implies \exists z(\textstyle{\min}_\in(z,y)))\}$$ 
+    Trivially $\emptyset \in A$. Let $x\in A$ and $y\in \pazocal{P}(x\cup\{x\})$ with $y\neq \emptyset$. If $\{x\}\cap y=\emptyset$, then $y\in\pazocal{P}(x)$, hence there is a $z$ with $\min_\in(z,y)$. If $x\in y$, then $x\subset y$, hence $y= x\cup \{x\}$. Let $z\in x$ be such that $\min_\in(z,x)$. Then for $\alpha\in z$, $\alpha\notin x$. Moreover $\alpha\notin\{x\}$, for if it were, then $\alpha=x$, meaning $z\in \alpha$, and by transitivity this would mean $z\subset x=\alpha$, but then there would be a $\beta \in z$ with $\beta\in x$ contradicting minimality. So we conclude that $\min_\in(z,x\cup\{x\})$. It follows that $A = \omega$.\\
+    With previous lemmas in mind, it follows that $\forall x\in \omega(\mathrm{wo}_\in(x) \wedge \mathrm{trans}(x))$, hence $\forall x\in \omega(x\in \Omega)$. Note also that if $x\in \omega\setminus \emptyset$, then $x = y\cup\{y\}$ for some $y\in \omega$. This is readily seen with an induction argument: Indeed, $\{\emptyset\}=\emptyset \cup\{\emptyset\}$, and if $x = y\cup\{y\}$ for some $y\in \omega$, then $x\cup \{x\} = y\cup\{y\} \cup \{y\cup\{y\}\} = y' \cup\{y'\}$, where $y' = y\cup\{y\}\in \omega$. So every non-empty element of $\omega$ is a succesor ordinal. The empty set is a limit ordinal. 
+\end{proof}
+\begin{lemma}
+    We have that 
+    $$\omega = \bigcup \omega$$
+\end{lemma}
+\begin{proof}
+    Let $x\in\bigcup \omega$, then $x\in y$ for some $y\in \omega$. Then $x\in \omega$, hence $x' := x\cup\{x\}\in \omega$ and $x'':= x'\cup\{x'\}\in \omega$. Then $x\cup\{x\}\in x''$, hence $x\cup x \in \bigcup \omega$.
+\end{proof}
+\begin{proposition}
+    $\omega$ is a limit ordinal.
+\end{proposition}
+\begin{proof}
+    This follows from $\omega$ being a family of ordinals, $\omega = \bigcup \omega$ and Corollary~\ref{ClosurePropertiesOfOrdinals}. 1. 
+\end{proof}
+\subsubsection{The Well-ordering Principle \& the Axiom of Choice}
 \begin{theorem}
     
 \end{theorem}
