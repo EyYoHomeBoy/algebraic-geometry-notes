@@ -310,6 +310,14 @@ We give a reformulation of every chain having a maximal/minimal element
     "$\implies$":We prove the contrapositive. Suppose $C\subset X$ is a chain that does not have an upper bound in $C$. Let $c_1\in C$. Then there exists $c_2 \in C$ such that $c_1 < c_2$. Continuing this process recursively we get a sequence $\{c_i\}_{i\in \N}$ such that $c_i<c_{i+1}$ for every $i\geq 0$, hence this is a sequence in $X$ that does not stabilize.\\
     "$\impliedby$": Let $\{x_i\}_{i\in \N}$ be an ascending sequence in $X$. Then $\{x_i\}_{i\in \N}$ is a chain. Then there exists a $x_n\in \{x_i\}_{i\in \N}$ such that $x_j\leq x_n$ for every $j\geq 1$. Now since $x_n \leq x_{n+d}$ for every $d\geq 0$ it follows that $x_n=x_{n+d}$ for every $d\geq0$, hence $\{x_i\}_{i\in \N}$ stabilizes. 
 \end{proof}
+\begin{definition}
+    A total order $\leq$ on a set $X$ is called a \textit{well-ordering} if every non-empty subset $Y\subset X$ has an element $y_0\in Y$ such that for every $y\in Y$, $y_0\leq y$. If $X$ is a set that can be well ordered by a total order $\leq$, we write $\mathrm{wo}_\leq(X)$. 
+\end{definition}
+\begin{definition}
+    \textit{The well-ordering principle} refers to the statement
+    $$\forall X(X \neq \emptyset \implies \exists \leq\subset X\times X\ \mathrm{wo}_\leq(X))$$ 
+\end{definition}
+We will later see that the well-ordering principle is in fact equivalent to the axiom of choice.  
 \subsubsection{Equivalence Relations}
 \begin{definition}
     Let $X$ be a non-empty set. We define an \textit{equivalence relation} to be a relation $\sim$ on $X$ satisfying 
@@ -421,7 +429,7 @@ We give a reformulation of every chain having a maximal/minimal element
 \begin{definition}
     For a pair of ordinal number $\alpha$ and $\beta$ we define 
     \begin{gather*}
-        \alpha <\beta :\iff \alpha \in \beta
+        \alpha <\beta :\iff \alpha \in \beta\\
         \alpha \leq \beta :\iff \alpha = \beta \vee \alpha <\beta.
     \end{gather*}
 \end{definition}
@@ -484,8 +492,65 @@ We give a reformulation of every chain having a maximal/minimal element
     This follows from $\omega$ being a family of ordinals, $\omega = \bigcup \omega$ and Corollary~\ref{ClosurePropertiesOfOrdinals}. 1. 
 \end{proof}
 \subsubsection{The Well-ordering Principle \& the Axiom of Choice}
+\begin{definition}
+    Let $M$ be a non-emptyset. Set $\pazocal{P}^\ast(M):= \pazocal{P}(M)\setminus\{\emptyset\}$. Assuming the axiom of choice, pick a choice function 
+    \begin{gather*}
+        f : \pazocal{P}^\ast(M)\rightarrow \bigcup \pazocal{P}^\ast(M) = M 
+    \end{gather*}
+    Let an ordinal $\alpha\in \Omega$ be given. An injective function 
+    $$w_\alpha : \alpha \hookrightarrow M$$
+    is called an \textit{$f$-set} if for all $\gamma\in \alpha$
+    $$w_\alpha(\gamma) = f(M\setminus\{w_\alpha(\delta):\delta\in \gamma\}).$$
+    The data of a set $w$ being an $f$-set for an ordinal $\alpha$ is distilled into the formula 
+    $$f\mathrm{-set}(w,\alpha)\equiv \alpha\in \Omega\wedge w \text{ is an }f\text{-set},$$
+    for future reference. 
+\end{definition}
+\begin{lemma}
+    Assume \verb|AC| and let a set $M$ and a choice function $f$ as in the above definition be given. Consider an ordinal $\alpha\in \Omega$. There is at most one $f$-set for $\alpha$. 
+\end{lemma}
+\begin{proof}
+    Suppose for a contradiction that there are two distinct $f$-sets $w_\alpha$ and $w_\alpha'$. Consider the non-empty set $\{\beta\in \alpha : w_\alpha(\beta)\neq w_\alpha'(\beta)\}\in \pazocal{P}(\alpha)$. Since $\alpha$ is an ordinal, this set has an $\in$-minimal element $\gamma$. Now if $\delta \in \gamma$, then $w_\alpha(\delta)=w_\alpha'(\delta)$. But then
+    $$w_\alpha(\gamma) = f(M\setminus\{w_\alpha(\delta):\delta \in \gamma \}) = f(M\setminus \{w_\alpha'(\delta):\delta\in \gamma\}) = w_\alpha'(\gamma),$$
+    leading to a contradiction.    
+\end{proof}
+\begin{remark}
+    Consider $f$-sets $w_\alpha$ and $w_\beta$ with $\beta\in \alpha$. Then for every $\delta\in \beta$, 
+    $$\left.w_\alpha\right|_\beta(\delta)=w_\alpha(\delta)=f(M\setminus\{w_\alpha(\delta):\delta \in \beta\}).$$
+    Hence $\left.w_\alpha\right|_{\beta}$ is an $f$-set and is therefor equal to $w_\beta$ by the above lemma.
+\end{remark}
 \begin{theorem}
-    
+    The well-ordering principle is equivalent to the axiom of choice. 
 \end{theorem}
+\begin{proof}
+    "$\implies$": Let $X$ be a family of non-empty sets. Let $\leq$ be a well-ordering on $\bigcup X$. For each $x\in X$, let $m_x\in x$ denote the element that is minimal with respect to $\leq$. Then 
+    \begin{gather*}
+        f : X \rightarrow \bigcup X\\
+        x \mapsto m_x
+    \end{gather*}
+    defines a choice function.\\
+    "$\impliedby$": 
+    We claim that we may form the set 
+    $$S:= \left\{w_\alpha : f\mathrm{-set}(w_\alpha,\alpha)\wedge\alpha \in \Omega\right\}$$
+    Let $N$ be the elements $n$ of $M$ for which there is an $f$-set $w$, for some ordinal such that for some ordinal $\delta$, $w(\delta)=n$. We may form this set by the axiom of seperation. Consider the formula
+    $$(\exists \alpha\in \Omega\exists w(f\mathrm{-set}(w,\alpha)\implies \exists \delta\in \alpha (w(\delta)=n))\implies y=w) \vee \neg(\dots)\implies y=\emptyset. $$
+    This gives rise to the class function 
+    $$G(n) := \begin{cases}
+        w & \text{if } w \text{ is an } f \text{-set that maps to } n\\
+        \emptyset &\text{otherwise} 
+    \end{cases}$$
+    Then $S=G(N)$ by the axiom schema of replacement {\Large I don't like this}.
+    Consider now the formula
+    $$((\exists \alpha\ f\mathrm{-set}(w,\alpha)) \implies y = \alpha)\vee (\neg(\exists \alpha \ f\mathrm{-set}(w,\alpha)) \implies y = \emptyset).$$
+    This induces the class function $F$ defined by
+    $$F(w) = \begin{cases}
+        \alpha & \text{if } w \text{ is an } f-\text{set with domain } \alpha\in \Omega\\
+        \emptyset & \text{otherwise} 
+    \end{cases}$$
+    By the axiom schema of replacement $F(S)=\{F(w) : w\in S\}$ is a family of ordinals, hence $\alpha_0:=\bigcup F(S)$ is an ordinal. For $w_\alpha,w_\beta \in S$, write $w_\alpha \preceq w_\beta$ if $\alpha \leq \beta$. This is easily verified to be a well-ordering on $S$, since essentially we get that the well-ordering is inherited by the well-ordering on families of ordinals due to $\alpha\mapsto w_\alpha$ being order preserving. Set $w_{\alpha_0} := \bigcup S= \{x: \exists w\in S(x\in w)\}=\{(\delta,w_\alpha(\delta): \delta\in\alpha\wedge w_\alpha\in S)\}$. Note that for $\delta\in \alpha_0$, $w_{\alpha_0}(\delta)=w_\delta(\delta)$, so $\dom(w_{\alpha_0}) = \alpha_0$. Consider now 
+    $$M':=\{m\in M : \exists \gamma(w_{\alpha_0}(\gamma)=m)\}.$$
+    Then $M=M'$, since otherwise 
+    $$w_{\alpha_0}\cup \{(\alpha_0, f(M\setminus M'))\}$$
+    is a $f$-set strictly containing $\alpha_0$, which is not possible by the construction of $\alpha_0$, since $\alpha<\alpha_0$ for each $\alpha\in F(S)$, hence $w_\alpha <w_{\alpha_0}$. It follows that $w_{\alpha_0}:\alpha_0\rightarrow M$ is a bijection. We then get a well-ordering on $M$, where $x,y\in M$ we write $x\leq y$ if $w_{\alpha_0}^{-1}(x)\leq w_{\alpha_0}^{-1}(y)$.
+\end{proof}
 \subsection{Von Neumann Ordinals: A Construction of $\N$ (the Natural Numbers)}
 \subsection{NGB Set Theory - A Formal Treatment of Classes}
