@@ -532,7 +532,7 @@ We will later see that the well-ordering principle is in fact equivalent to the 
     We claim that we may form the set 
     $$S:= \left\{w_\alpha : f\mathrm{-set}(w_\alpha,\alpha)\wedge\alpha \in \Omega\right\}$$
     Let $N$ be the elements $n$ of $M$ for which there is an $f$-set $w$, for some ordinal such that for some ordinal $\delta$, $w(\delta)=n$. We may form this set by the axiom of seperation. Consider the formula
-    $$(\exists \alpha\in \Omega\exists w(f\mathrm{-set}(w,\alpha)\implies \exists \delta\in \alpha (w(\delta)=n))\implies y=w) \vee \neg(\dots)\implies y=\emptyset. $$
+    $$(\exists \alpha\in \Omega\exists w(f\mathrm{-set}(w,\alpha)\implies \exists \delta\in \alpha (w(\delta)=n))\implies y=w) \vee \neg(...)\implies y=\emptyset. $$
     This gives rise to the class function 
     $$G(n) := \begin{cases}
         w & \text{if } w \text{ is an } f \text{-set that maps to } n\\
@@ -546,11 +546,31 @@ We will later see that the well-ordering principle is in fact equivalent to the 
         \alpha & \text{if } w \text{ is an } f-\text{set with domain } \alpha\in \Omega\\
         \emptyset & \text{otherwise} 
     \end{cases}$$
-    By the axiom schema of replacement $F(S)=\{F(w) : w\in S\}$ is a family of ordinals, hence $\alpha_0:=\bigcup F(S)$ is an ordinal. For $w_\alpha,w_\beta \in S$, write $w_\alpha \preceq w_\beta$ if $\alpha \leq \beta$. This is easily verified to be a well-ordering on $S$, since essentially we get that the well-ordering is inherited by the well-ordering on families of ordinals due to $\alpha\mapsto w_\alpha$ being order preserving. Set $w_{\alpha_0} := \bigcup S= \{x: \exists w\in S(x\in w)\}=\{(\delta,w_\alpha(\delta): \delta\in\alpha\wedge w_\alpha\in S)\}$. Note that for $\delta\in \alpha_0$, $w_{\alpha_0}(\delta)=w_\delta(\delta)$, so $\dom(w_{\alpha_0}) = \alpha_0$. Consider now 
+    By the axiom schema of replacement $F(S)=\{F(w) : w\in S\}$ is a family of ordinals, hence $\alpha_0:=\bigcup F(S)$ is an ordinal. For $w_\alpha,w_\beta \in S$, write $w_\alpha \preceq w_\beta$ if $\alpha \leq \beta$. This is easily verified to be a well-ordering on $S$, since essentially we get that the well-ordering is inherited by the well-ordering on families of ordinals due to $\alpha\mapsto w_\alpha$ being order preserving. Set $w_{\alpha_0} := \bigcup S= \{x: \exists w\in S(x\in w)\}=\{(\delta,w_\alpha(\delta): \delta\in\alpha\wedge w_\alpha\in S)\}$. The claim is now that this is an $f$-set, $\alpha_0\rightarrow M$. Let $(\delta,w_{\alpha}(\delta)),(\delta',w_{\alpha'}(\delta'))\in w_{\alpha_0}$ with $\delta=\delta'$. WLOG $\alpha \leq \alpha'$ and then $w_{\alpha'}(\delta')=w_{\alpha}(\delta')=w_{\alpha}(\delta)$, so $w_{\alpha_0}$ is well-defined. Suppose $\delta,\delta'\in \alpha_0$ is such that $w_{\alpha_0}(\delta)=w_{\alpha_0}(\delta')$. As before for some ordinal $\alpha$, $w_\alpha(\delta)=w_{\alpha_0}(\delta)=w_{\alpha_0}(\delta')=w_\alpha(\delta')$, hence $\delta=\delta'$. Moreover, for $\delta\in \alpha_0$, we see that for a suitable $\alpha\in F(w_\alpha)$ for some $w_\alpha\in S$, 
+    $$w_{\alpha_0}(\delta)=w_{\alpha}(\delta)=f(M\setminus \{w_\alpha(\gamma) : \gamma \in \delta\})=f(M\setminus \{w_{\alpha_0}(\gamma) : \gamma\in \delta\}).$$
+    It follows that $w_{\alpha_0}$ is the maximal $f$-set, i.e. if $w$ is an $f$-set, then $w\leq w_{\alpha_0}$. Consider now 
     $$M':=\{m\in M : \exists \gamma(w_{\alpha_0}(\gamma)=m)\}.$$
     Then $M=M'$, since otherwise 
     $$w_{\alpha_0}\cup \{(\alpha_0, f(M\setminus M'))\}$$
-    is a $f$-set strictly containing $\alpha_0$, which is not possible by the construction of $\alpha_0$, since $\alpha<\alpha_0$ for each $\alpha\in F(S)$, hence $w_\alpha <w_{\alpha_0}$. It follows that $w_{\alpha_0}:\alpha_0\rightarrow M$ is a bijection. We then get a well-ordering on $M$, where $x,y\in M$ we write $x\leq y$ if $w_{\alpha_0}^{-1}(x)\leq w_{\alpha_0}^{-1}(y)$.
+    is an $f$-set strictly greater than $w_{\alpha_0}$. It follows that $w_{\alpha_0}:\alpha_0\rightarrow M$ is a bijection. We then get a well-ordering on $M$, where for $x,y\in M$, we write $x\leq y$ if $w_{\alpha_0}^{-1}(x)\leq w_{\alpha_0}^{-1}(y)$.
 \end{proof}
-\subsection{Von Neumann Ordinals: A Construction of $\N$ (the Natural Numbers)}
+\subsection{Peano Arithmetic}
+\subsubsection{The Standard Model $\N$ of Peano Arithmetic}
+We introduce to the language of first order predicate logic the following symbols, $\mathcal{L}_{\mathrm{PA}}:=\{0,\mathrm{s},+,\cdot\}$ and these symbols make up the language of Peano Arithmetic ($\verb|PA|)$. The axioms of Peano arithmetic are as follows. 
+    \begin{axioms}
+        \begin{align*}
+            \mathrm{PA}_0\colon\quad & \neg \exists x (\mathrm{s} x = 0) \\
+            \mathrm{PA}_1\colon\quad & \forall x \forall y (\sverb x = \sverb y \rightarrow x = y) \\
+            \mathrm{PA}_2\colon\quad & \forall x (x + 0 = x) \\
+            \mathrm{PA}_3\colon\quad & \forall x \forall y (x + \sverb y = \sverb(x + y)) \\
+            \mathrm{PA}_4\colon\quad & \forall x (x \cdot 0 = 0) \\
+            \mathrm{PA}_5\colon\quad & \forall x \forall y (x \cdot \sverb y = (x \cdot y) + x) \\
+            \mathrm{PA}_6\colon\quad & \left( \varphi(0) \land \forall x (\varphi(x) \rightarrow \varphi(\sverb (x))) \right) \rightarrow \forall x \varphi(x)
+        \end{align*}
+    \end{axioms}
+The domain of the metatheory is the list $\N$ of the form $[\mathbf{0},\mathbf{S0},\mathbf{SS0},\dots]$
+where $\dots$ means that to generate the next element of the list we concatenate $\mathbf{S}$ to the right with the last element generated, e.g. the element after $\mathbf{SS0}$ is $\mathbf{SSS0}$. To the metatheory we add a unary relation symbol $\mathrm{N}$ and the meta-axiom which is the formula in the meta theory,
+$$\Phi \equiv \forall x\left(\{\mathrm{N}(0), \forall z(\mathrm{N}(z)\implies \mathrm{N}(\mathrm{s}z))\}\vdash \mathrm{N}(x)\right)$$ 
+
+\subsubsection{The Standard Model $\N_\omega$ of Peano Arithmetic with Domain $\omega$}
 \subsection{NGB Set Theory - A Formal Treatment of Classes}
