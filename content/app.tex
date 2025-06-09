@@ -1,5 +1,6 @@
 \appendix
 \section{First Order Predicate Logic}
+The purpose of this section is to introduce a framework for doing mathematics. We will choose first order logic \verb|FOL|.
 \subsection{The Metatheory of First Order Logic}
 \subsubsection{Classical Metatheory}
 We assume a notion of \emph{finiteness}. With this notion consider symbols $\mathbf{0}$ and $\mathbf{s}$, from which we build a \emph{potentially infinite} list $\mathbf{N}$ of \emph{natural numbers} of finite strings formed by appending $\mathbf{s}$ to the left to the prior string in the list, where the list starts with $\mathbf{0}$. In other words the have a list
@@ -22,3 +23,26 @@ Note here that we have implicitly introduced the notion of indexing. Given a fin
 \subsubsection{Strong Metatheory}
 Sometimes we need to strengthen our metatheory with \emph{the law of excluded middle} and \emph{naive set theory}. The first of these notions is that a statement is either true or false. The last of which is the notion that we can consider a sufficiently small (always finite) collection of objects and ask whether something is a member of such a collection. 
 \subsection{The Alphabet of First Order Logic}
+\subsubsection*{The Logical Symbols}
+\verb|FOL| is a framework for formalizing different theories. It is therefor has to flexible enough to be augmented to work in a large variety of contexts and domains. We therefor make distinctions between the role of the symbols that comprise \verb|FOL|. The \emph{logical symbols} in the language of \verb|FOL| are those symbols that are not context specific. These are 
+\begin{enumerate}
+    \item \textbf{Variables}: These are play the role of placeholders for objects in the domain to which we want to apply \verb|FOL|. Eg. $x$ might be a placeholder for a set in Zermol-Fraenkel set theory or $n$ might be a placeholder for a natural number in the standard model of Peano arithemetic or $\mathcal{C}$ could be a placeholder for a category in Category Theory. We presuppose a potentially infinite list of such symbols. That is we may always generate sufficiently large number of distinct variables.
+    \item \textbf{Logical operators:} $\neg$ (not), $\wedge$ (and), $\vee$ (or), $\to$ (implies).
+    \item \textbf{Logical quantifiers:} $\forall$ (universal quantifier, to be read as "for all" or "for every") and $\exists$ (existential quantifier, to be read as "exists" or "there is").
+    \item \textbf{Equality symbol:} $=$ a \emph{relational symbol} (scroll down a little for a definition) which is not context specific.    
+\end{enumerate}
+\subsubsection{The Non-logical Symbols}
+Those symbols that are introduced in some context to use \verb|FOL| to talk about some domain. these are 
+\begin{enumerate}
+    \item \textbf{Constant symbols:} These are symbols that signify a specific object in a specific domain. Examples are $\emptyset$ in for example Zermelo-Fraenkel set theory or $0$ in Peano arithmetic.
+    \item \textbf{Function symbols:} A symbol that is a placeholder for an object that depends on finite list of objects in a domain called arguments. For instance if $F$ is a function symbol that takes $n$ arguments, then given variables $x_1,\dots, x_n$, $F(x_1,\dots,x_n)$ is some object. A function symbol has a natural number attached to them called an \emph{arity}. A function symbol that takes $n$ arguments is an $n$-ary function. Examples are $+$ in Peano Arithmetic or $\cup$ in Zermelo-fraenkel set theory. 
+    \item \textbf{Relation symbols:} Symbol that signify relations of objects. Like function symbols these have a natural number arity and given a relation symbol $R$ and objects $x_1,\dots, x_n$, $R(x_1,\dots,x_n)$ signifies that $x_1,\dots,x_n$ are in relation by $R$.  
+\end{enumerate}
+To actually give these syntactical meaning, we need to define rules for building well-formed. I.e. we need to define what strings of symbols we are allowed to write in the language. 
+\subsubsection{Terms and Formulae}
+\subsection{Axioms and Inference Rules}
+\subsubsection{Logical Axioms: Assigning Truth Values to Formulae}
+\subsubsection{Non-logical Axioms: Defining a Theory}
+\subsubsection{Proofs}
+\subsubsection{Tautology and Logical Equivalence}
+
