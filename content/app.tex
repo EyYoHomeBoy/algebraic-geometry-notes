@@ -38,8 +38,28 @@ Those symbols that are introduced in some context to use \verb|FOL| to talk abou
     \item \textbf{Function symbols:} A symbol that is a placeholder for an object that depends on finite list of objects in a domain called arguments. For instance if $F$ is a function symbol that takes $n$ arguments, then given variables $x_1,\dots, x_n$, $F(x_1,\dots,x_n)$ is some object. A function symbol has a natural number attached to them called an \emph{arity}. A function symbol that takes $n$ arguments is an $n$-ary function. Examples are $+$ in Peano Arithmetic or $\cup$ in Zermelo-fraenkel set theory. 
     \item \textbf{Relation symbols:} Symbol that signify relations of objects. Like function symbols these have a natural number arity and given a relation symbol $R$ and objects $x_1,\dots, x_n$, $R(x_1,\dots,x_n)$ signifies that $x_1,\dots,x_n$ are in relation by $R$.  
 \end{enumerate}
-To actually give these syntactical meaning, we need to define rules for building well-formed. I.e. we need to define what strings of symbols we are allowed to write in the language. 
+To actually give these syntactical meaning, we need to define rules for building well-formed. I.e. we need to define what strings of symbols we are allowed to write in the language. A set of non-logical symbols is called a \textit{signature} often denoted $\mathcal{L}$. 
 \subsubsection{Terms and Formulae}
+For a signature $\mathcal{L}$, a string of symbols is an \emph{$\mathcal{L}$-term} if it is a result of finitely applying these rules in some order
+\begin{align*}
+    \mathrm{T0}\colon\quad & \text{Each variable is an } \mathcal{L}\text{-term}.\\
+    \mathrm{T1}\colon\quad & \text{Each constant symbol in }\mathcal{L} \text{ is an } \mathcal{L}\text{-term}.\\
+    \mathrm{T2}\colon\quad & \text{If } \tau_1,\dots,\tau_n \text{ are any } \mathcal{L}\text{-terms and }F \text{ is an } n \text{-ary function symbol in } \mathcal{L}\text{,}\\
+    &\text{then } F(\tau_1,\dots,\tau_n) \text{ is an } \mathcal{L}\text{-term}. 
+\end{align*} 
+When the symbols are not involving any non-logical symbols, it is called a \emph{term}. Those terms of the form $\mathrm{T0}$ or $\mathrm{T1}$ are called \emph{atomic terms}. Note that in the above, the $\tau$'s are placeholders for objects in the language \textbf{not} for objects in a domain of interest. If we want to prove a property $\Phi$ of terms, then we do that by proving that each of the three categories of terms satisfy $\Phi$, which is called the \emph{induction on term construction}.\\
+An \emph{$\mathcal{L}$-formula} is a string of symbols resulting from finite application of the rules
+\begin{align*}
+    \mathrm{F0}\colon\quad & \text{For } \mathcal{L}\text{-terms } \tau_1,\tau_2\text{ then } \tau_1 = \tau_2\text{ is an } \mathcal{L}\text{-formula.}\\
+    \mathrm{F1}\colon\quad & \text{For } \mathcal{L}\text{-terms } \tau_1,\dots,\tau_n \text{ and } R \text{ a non-logical } n\text{-ary relation symbol in }\mathcal{L},\\
+     &\text{then } R(\tau_1,\dots,\tau_n) \text{ is an } \mathcal{L}\text{-formula.}\\
+     \mathrm{F2}\colon\quad & \text{if }\varphi \text{ is an }\mathcal{L}\text{-formula, then } \neg\varphi \text{ is an }\mathcal{L}\text{-formula.}\\
+     \mathrm{F3}\colon\quad & \text{if }\varphi \text{ and } \psi \text{ are } \mathcal{L}\text{-formulae, then } \varphi\to \psi, \varphi\wedge \psi \text{ and } \varphi\vee \psi \text{ are } \mathcal{L}\text{-formulae.}\\
+     \mathrm{F4}\colon\quad &  \text{if }\varphi \text{ is an }\mathcal{L}\text{-formula, then given a variable }x\text{, } \exists x\varphi \text{ and } \forall x\varphi \text{ are } \mathcal{L}\text{-formulae.}  
+\end{align*}
+When an $\mathcal{L}$-formula is build from terms, it is simply called a \emph{formula}. $\mathrm{F0}$- and $\mathrm{F1}$-formulae are called \emph{atomic formulae}. The \emph{induction on formula construction} refers to the fact that proving a property $\Phi$ is satisfied by formulae, we can prove that it is satisfied for atomic formulae, and that for $\mathcal{L}$-formulae $\varphi,\psi$ satisfying $\Phi$, given a variable $x$, then $\neg\varphi,\varphi \wedge \psi,\varphi\vee\psi,\varphi\to \psi,\exists x\varphi,\forall x\varphi$ also satisfy $\Phi$.\\
+Consider a variable $x$ and a formula $\varphi$ of the form $\forall x\psi$ or $\exists x\psi$. If $x$ is used to construct $\psi$ and does not immediately appear after a logical quantifier at some position in $\psi$, it is said to be in the \emph{range of} said logical quantifier. Such a variable is said to \emph{bound at that position} by the last quantifier that it is in the range of. A variable that is not bound by a quantifier at a particular position is said to be \emph{free} at position. A variable may appear in a formula as both bounded and free. For instance $(\forall x(x\neq x))\to \exists z(x=x)$. The first two occurences of $x$ are bound by the $\forall$ and the last two are bound by the $\exists$. The set of free variables of a formula (a rule given later will show that this set is uniquely defined) is denoted $\mathrm{free}(\varphi)$. A formula $\varphi$ is a \emph{sentence} if $\mathrm{free}(\varphi)=\emptyset$, so $x\neq x\to x=x$ is a formula while $\forall x(x\neq x\to x=x)$ is a sentence. 
+
 \subsection{Axioms and Inference Rules}
 \subsubsection{Logical Axioms: Assigning Truth Values to Formulae}
 \subsubsection{Non-logical Axioms: Defining a Theory}
