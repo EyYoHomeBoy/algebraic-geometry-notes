@@ -58,10 +58,36 @@ An \emph{$\mathcal{L}$-formula} is a string of symbols resulting from finite app
      \mathrm{F4}\colon\quad &  \text{if }\varphi \text{ is an }\mathcal{L}\text{-formula, then given a variable }x\text{, } \exists x\varphi \text{ and } \forall x\varphi \text{ are } \mathcal{L}\text{-formulae.}  
 \end{align*}
 When an $\mathcal{L}$-formula is build from terms, it is simply called a \emph{formula}. $\mathrm{F0}$- and $\mathrm{F1}$-formulae are called \emph{atomic formulae}. The \emph{induction on formula construction} refers to the fact that proving a property $\Phi$ is satisfied by formulae, we can prove that it is satisfied for atomic formulae, and that for $\mathcal{L}$-formulae $\varphi,\psi$ satisfying $\Phi$, given a variable $x$, then $\neg\varphi,\varphi \wedge \psi,\varphi\vee\psi,\varphi\to \psi,\exists x\varphi,\forall x\varphi$ also satisfy $\Phi$.\\
-Consider a variable $x$ and a formula $\varphi$ of the form $\forall x\psi$ or $\exists x\psi$. If $x$ is used to construct $\psi$ and does not immediately appear after a logical quantifier at some position in $\psi$, it is said to be in the \emph{range of} said logical quantifier. Such a variable is said to \emph{bound at that position} by the last quantifier that it is in the range of. A variable that is not bound by a quantifier at a particular position is said to be \emph{free} at position. A variable may appear in a formula as both bounded and free. For instance $(\forall x(x\neq x))\to \exists z(x=x)$. The first two occurences of $x$ are bound by the $\forall$ and the last two are bound by the $\exists$. The set of free variables of a formula (a rule given later will show that this set is uniquely defined) is denoted $\mathrm{free}(\varphi)$. A formula $\varphi$ is a \emph{sentence} if $\mathrm{free}(\varphi)=\emptyset$, so $x\neq x\to x=x$ is a formula while $\forall x(x\neq x\to x=x)$ is a sentence. 
-
+Consider a variable $x$ and a formula $\varphi$ of the form $\forall x\psi$ or $\exists x\psi$. If $x$ is used to construct $\psi$ and does not immediately appear after a logical quantifier at some position in $\psi$, it is said to be in the \emph{range of} said logical quantifier. Such a variable is said to \emph{bound at that position} by the last quantifier that it is in the range of. A variable that is not bound by a quantifier at a particular position is said to be \emph{free} at position. A variable may appear in a formula as both bounded and free. For instance $(\forall x(x\neq x))\to \exists z(x=x)$. The first two occurences of $x$ are bound by the $\forall$ and the last two are bound by the $\exists$. The set of free variables of a formula (a rule given later will show that this set is uniquely defined) is denoted $\mathrm{free}(\varphi)$. A formula $\varphi$ is a \emph{sentence} if $\mathrm{free}(\varphi)=\emptyset$, so $x\neq x\to x=x$ is a formula while $\forall x(x\neq x\to x=x)$ is a sentence. A term is \emph{closed} if it contains no variables. For a formula $\phi$ and variables $x_1,\dots,x_n$ with $\{x_1,\dots, x_n\}\subset \mathrm{free}(\phi)$, we denote $\phi$ by $\phi(x_1,\dots,x_n)$. In the metalanguage of \verb|FOL|, we write $\varphi \equiv \psi$ for formulas, if the strings comprising these are identical.\\ 
+When $\tau$ is a term and $x$ is a variable in $\tau$, for a term $\omega$, we get a new term by \emph{substituting} $x$ with $\omega$, i.e. by replacing every instance of $x$ by $\omega$, which we may do considering $\tau$ as unary function symbol in $\mathcal{L}$. We denote this new term by $\tau(x/\omega)$.\\ 
+For a formula $\varphi$ and a variable $x$ and $\tau$ a term, $\varphi(x/\tau)$ is the formula obtained by replacing every free instance of $x$ in $\varphi$ by $\tau$. So we obtain a notion of substitution for formulas as well. A substition of $x$ in a formula $\varphi$ with a term $\tau$ is called \emph{admissible} if it is not in the range of a quantifier that binds a variable in $\tau$. If $x$ does not occur as a free variable in $\varphi$, then trivially $x$ is not bound hence, $\varphi(x/\tau)$ is admissible. In this case the string $\varphi$ is unchanged, since no instance $x$ is replaced by $\tau$. So $\varphi\equiv \varphi(x/\tau)$. In general, for an admissible substitution, we write $\varphi(\tau)$ instead of $\varphi(x/\tau)$. When we declare that a symbol, $\phi$, in the metalanguage denotes another, $\psi$, we write $\phi :\equiv \psi$. For instance, $\varphi(\tau) :=  \varphi(x/\tau)$. 
 \subsection{Axioms and Inference Rules}
+An \emph{axiom} is a special formula, which will be one ingredient in producing new formulas. In a looser sense (for now), think of axioms as statements that are valid in some context. Sometimes we also consider \emph{axiom schemae}, defined to be a collection axioms taken to be valid for every instance of some fixed list of function symbols, a fixed list of relation symbols and a fixed list of formulae.
 \subsubsection{Logical Axioms: Assigning Truth Values to Formulae}
+The \emph{logical axioms} are those axioms that are valid in any context. These are given by the following axiom schemae. Consider $\varphi,\varphi_1,\varphi_2,\varphi_3,\psi$ arbitrary formulae. We have formulae
+\begin{align*}
+    \mathrm{L0}\colon\quad & \varphi\vee \neg\varphi\\
+    \mathrm{L1}\colon\quad & \varphi\to (\psi\to \varphi)\\
+    \mathrm{L2}\colon \quad & (\psi\to (\varphi_1\to \varphi_2))\to ((\psi\to \varphi_1)\to (\psi\to \varphi_2))\\
+    \mathrm{L3}\colon \quad & (\varphi\wedge \psi)\to \varphi\\
+    \mathrm{L4}\colon \quad & (\varphi\wedge \psi)\to \psi\\
+    \mathrm{L5}\colon \quad & \varphi\to (\psi\to (\varphi\wedge \psi))\\
+    \mathrm{L6}\colon \quad & \varphi \to (\varphi\vee \psi)\\
+    \mathrm{L7}\colon \quad & \psi \to (\varphi \vee \psi)\\
+    \mathrm{L8}\colon \quad & (\varphi_1\to \varphi_3)\to ((\varphi_2\to \varphi_3)\to ((\varphi_1\vee \varphi_2)\to \varphi_3 ))\\
+    \mathrm{L9}\colon \quad & \neg\varphi \to (\varphi \to \psi).
+\end{align*}
+Moreover if $x$ is a variable in $\varphi$ and $\tau$ a term such that $\varphi(x/\tau)$ is admissible, then 
+\begin{align*}
+    \mathrm{L10}\colon \quad & \forall x\varphi(x) \to \varphi(\tau)\\
+    \mathrm{L11}\colon \quad & \varphi(\tau)\to \exists x\varphi(x). 
+\end{align*}
+Suppose $x$ is a variable of $\psi$ with $x\notin\mathrm{free}(\psi)$. Then 
+\begin{align*}
+    \mathrm{L12}\colon \quad & \forall x(\psi\to \varphi(x))\to (\psi\to \forall x\varphi(x))\\
+    \mathrm{L13}\colon \quad & \forall x(\varphi(x)\to \psi)\to (\exists\varphi(x)\to \psi).
+\end{align*} 
+
 \subsubsection{Non-logical Axioms: Defining a Theory}
 \subsubsection{Proofs}
 \subsubsection{Tautology and Logical Equivalence}
