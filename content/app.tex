@@ -87,8 +87,88 @@ Suppose $x$ is a variable of $\psi$ with $x\notin\mathrm{free}(\psi)$. Then
     \mathrm{L12}\colon \quad & \forall x(\psi\to \varphi(x))\to (\psi\to \forall x\varphi(x))\\
     \mathrm{L13}\colon \quad & \forall x(\varphi(x)\to \psi)\to (\exists\varphi(x)\to \psi).
 \end{align*} 
+Lastly we have axioms for the binary relational symbol $=$. Let $\tau,\tau_1,\dots,\tau_n,\tau_1',\dots,\tau_n'$ be terms and $R$ an $n$-ary relation symbol and $F$ an $n$-ary function symbol.
+\begin{align*}
+    \mathrm{L14}\colon \quad & \tau = \tau\\
+    \mathrm{L15}\colon \quad & \tau_1 = \tau_1' \wedge \dots \wedge \tau_n = \tau_n' \to (R(\tau_1,\dots,\tau_n)\to R(\tau_1',\dots,\tau_n'))\\
+    \mathrm{L16}\colon \quad & \tau_1 = \tau_1' \wedge \dots \wedge \tau_n = \tau_n' \to (F(\tau_1,\dots,\tau_n)\to F(\tau_1',\dots,\tau_n'))  
+\end{align*}
+We use $:\iff$ to define relations on symbols in metalanguage of \verb|FOL|. For instance, we define for formulae $\varphi,\psi$, terms $\tau,\tau'$ and a variable $x$, 
+\begin{gather*}
+    \varphi \leftrightarrow \psi :\iff (\varphi \to \psi \wedge \psi \to \varphi)\\
+    \exists! x\varphi :\iff \exists x\varphi(x) \wedge \forall y(\varphi(y)\to x=y)\\
+    \tau \neq \tau' :\iff \neg(\tau = \tau').
+\end{gather*}
 
 \subsubsection{Non-logical Axioms: Defining a Theory}
+To the logical axioms we may add a set of formulae, formed from a signature $\mathcal{L}$, which we call an \emph{$\mathcal{L}$-theory}. Examples of non-logical axioms are those of, \verb|ZF|-axioms which forms Zermelo-Fraenkel set theory, the axioms of topology which forms the theory of topology, \verb|PA|-axioms which forms number theory, etc. For mathematical theories such axioms are always sentences.  
 \subsubsection{Proofs}
+To deduce new formulas from the axioms of some $\mathcal{L}$-theory, we two \emph{inference rules}: 
+$$\infer{\psi}{\varphi \to \psi & \varphi} \quad \quad \quad\text{and}\quad \quad \quad  \infer{\forall x \varphi}{\varphi}.$$
+These are called \emph{modus ponens} and \emph{generalization} respectively.\\
+We want to use the notion of axiom and inference rule to prove statements in different $\mathcal{L}$-theories. Let $\Phi$ be a finite set of $\mathcal{L}$-formulae and $\psi$ be an $\mathcal{L}$-formula. We say that \emph{$\psi$ is provable from $\Phi$}, denoted $\Phi\vdash \psi$ if there are $\mathcal{L}$-formulae $\varphi_1,\dots,\varphi_n$, called \emph{a formal proof of $\psi$} satisfying $\varphi_n\equiv \psi$ and for $i\leq n$ $\varphi_i$ satisfies one of the following conditions 
+\begin{enumerate}
+    \item It is a logical axiom.
+    \item It is an element of $\Phi$
+    \item There are $j,k< i$ such that $\varphi_j\equiv \varphi_k \to \varphi_i$.
+    \item There is a $j<i$ with $\varphi_i \equiv \forall x \varphi_j$, where $x\notin \mathrm{free}(\phi)$ for any of the $\phi\in \Phi$.
+\end{enumerate} 
+We take $\vdash \psi$ to mean $\emptyset \vdash \psi$. In this case $\psi$ is called a \emph{tautology}. $\Phi$ is called a \emph{context}. If $\psi$ has no formal proof in a fixed context $\Phi$, we write $\Phi \not\vdash \psi$. Rather than writing down formal proofs down in, for instance, a box proof, we will just note that this is possible to do. Instead, we will write proofs in natural language in such a way that it to a sufficiently knowledgeable reader is somewhat clear what a formal proof would look like. At a certain point we also formulate formulae in natural language. Additionally we take certain basic proofs in \verb|FOL| for granted. This treatment of \verb|FOL| only serves to provide a clear and precise language for building mathematical theory and we will quickly become satisfied that it exists and be happy that if we properly formulate theory in natural language it will be formalizable in \verb|FOL|.  
 \subsubsection{Tautology and Logical Equivalence}
+We say that formulae $\varphi$ and $\psi$ are \emph{logically equivalent} if $\vdash \varphi \leftrightarrow \psi$. We write 
+$$\varphi \iff \psi \iff_{\mathrm{meta}} \vdash \varphi \leftrightarrow \psi.$$
+If $\Phi \vdash \varphi \leftrightarrow \psi$, we write $\varphi \iff_\Phi \psi$. In a natural language context, $\Phi$ will be a sequence of sentences in natural language and will not explicitly be written as a finite set, so therefore we usually just write $\varphi \iff \psi$ if we want to symbolically express that $\varphi$ is equivalent to $\psi$ in a given context (it should then be clear what the context is). 
+\subsubsection{Proofs in Natural Deduction}
+A different approach to building a system of deduction in \verb|FOL| is to write inference rules which tells us how to introduce and eliminate certain formulae to obtain new formulae. There is a different notion of proof in natural deduction. Luckily this approach is equivalent to that of introducing logical axioms, modus ponens and generalization. So when building proofs, we can also apply introduction and elimination rules. 
 
+\subsubsection{Consistency and Compactness}
+To discuss the notion of consistency we first introduce the notion of \emph{ex falso quodlibet}. given formulae $\varphi$ and $\psi$, this is $\{\varphi,\neg \varphi\}\vdash \psi$. It is proven in the following way: we get $\varphi$ and $\neg \varphi$ from the context. From modus ponens applied to $\neg\varphi \to (\varphi \to \psi)$ (from $\mathrm{L}9$) and $\neg \varphi$ we get $\varphi\to \psi$. Applying modus ponens to $\varphi\to \psi$ and $\varphi$ we get $\psi$ as desired. An \emph{ex falso quadlibet introduction} is $\Phi\vdash \varphi\wedge neg\varphi$. \\
+A set of formulae $\Phi$ is called consistent if $\Phi\not\vdash \varphi \wedge \neg\varphi$ for any formula $\varphi$. We denote this by $\mathrm{Con}(\varphi)$. A set of formulae that is not consistent is called \emph{inconsistent}, denoted $\neg\mathrm{Con}(\Phi)$.     
+
+\subsection{Semantics of First Order Logic}
+We are now going to assign truth values to formulae. That is we want for some signature $\mathcal{L}$ to assign either false or true to each $\mathcal{L}$-formula. In propositional logic this can be done by asserting truth tabels for logical connectives, $\wedge$, $\vee$, $\neg$, $\to$. This simple approach does not extend to \verb|FOL|. Take for instance the formula, $\forall x \exists y \varphi(x,y)$. Could we possibly assign a truthtable to such a formula. Suppose for instance that $\varphi\equiv x<y$. Then there is a dependency on what $x$ and $y$ is and we are therefor at a loss in computing a truth table in terms of $\varphi$ in general. Introducing an algorithm for determining truth for $\forall$ and $\exists$ is not terrible, but we need a way to map formulas onto some sort of context. To discuss how to do this we need the notion of an \emph{interpretatation} for which we will assume some notion of naive set theory and a notion of law of excluded middle, i.e. we assume that a statement (to be interpreted informally) is either true or false. We are thus working in the strong metatheory.
+\subsubsection{Structures and Interpretations}
+given a signature $\mathcal{L}$ an $\mathcal{L}$-structure $M$ is a pair of a non-empty set $A$ (the domain of $M$) and a mapping from $\mathcal{L}$ to $A$ taking constant symbols $c\in \mathcal{L}$ to an element $c^M\in A$, $n$-ary relation symbols $R\in \mathcal{L}$ to a set of $n$-tuples $R^M\subset A^n$ and $n$-ary function symbols $F$ to a function $F^M: A^n \rightarrow A$. An \emph{assignment} on an $\mathcal{L}$-structure $M$ is a mapping, $\iota$, taking variables $x$ in $\mathcal{L}$ to $A$. An $\mathcal{L}$-interpretation $I$ is then a pair consisting of an $\mathcal{L}$-structure $M$ and an assignment $\iota$ on $M$ where to a variable $x\in \mathcal{L}$ and an element $a\in A$, we define for variables $y$ in $\mathcal{L}$
+$$
+    \iota[x\mapsto a] (y)=
+    \begin{cases}
+        a & \text{if } x\equiv y\\
+        \iota(y) & \text{else}
+    \end{cases}
+$$
+$\iota[x\mapsto a]$ is thus itself an assigment on $M$. We define 
+$$I[x\mapsto a] := (M,\iota[x\mapsto a]).$$
+For an $\mathcal{L}$-term $\tau$ we define $I(\tau)\in A$ by recursion on terms in the following way: On a variable $x$, $I(x):=\iota(x)$, on a constant $c$, $I(c):= c^M$, for an $n$-ary function symbol and terms $\tau_1,\dots,\tau_n$, $I(F(\tau_1,\dots,\tau_n)):= F^M(I(\tau_1),\dots,I(\tau_n)).$ We now define how to assign truth value to formulae under an interpretation. When a formula $\varphi$ is true in an interpretatation $I$ we write $I\vDash \varphi$. This mapping is constructed inductively on symbols that are used to construct formulae. So for instance given terms $\tau_1,\tau_2$ and variable $x$, $I\vDash \tau_1=\tau_2 :\iff_{\mathrm{meta}} I(\tau_1) = I(\tau_2)$ and $I\vDash \exists x \varphi: \iff_{\mathrm{meta}}\ \mathrm{there}\ \mathrm{exists}\ a\ \mathrm{in}\ A: \ I[x\mapsto a]\vDash \varphi$ and $I\vDash \neg\varphi :\iff_{\mathrm{meta}} I\vDash \varphi \text{is not true}$. I.e. we translate truth of a formula in some interpretation to statements in the metatheory. I feel that there is only a need to illustrate the idea as I don't want to write all of the rules down. Under the assumption of classical logic in the meta theory, we now have that $I \vDash \varphi \ \mathrm{or} \ I\vDash \neg \varphi$. It is still necessarily true that $\Phi \vdash \varphi$ or $\Phi \vdash \neg\varphi$. That is there may be statements in some theory that is true but not provable or a statement that is true but where $\Phi \vdash \varphi$.\\
+Given a set of $\mathcal{L}$-formulae $\Phi$ and an $\mathcal{L}$-structure $M$, we say that\emph{$M$ is a model of $\Phi$} if for for every assignment $\iota$ and for each $\varphi\in \Phi$, 
+$$(M,j) \vDash \varphi.$$
+If this is the case, we write 
+$$M\vDash \Phi.$$
+We note that one can construct a signature $\mathcal{L}$ and a domain $A$ for which there is a set of sentences $\Phi$ and two $\mathcal{L}$-structures $M_1$ and $M_2$ where $M_1$ is a model of $\Phi$ and $M_2$ is not. Take $\mathcal{L}=\{c,f\}$ where $c$ is constant and $f$ is a unary function symbol, $A=\{0,1\}$ and $\Phi = \{\varphi_1,\varphi_2\}$ with $\varphi_1 :\equiv\forall x(x=c\vee x=f(c))$ and $\varphi_2:\equiv \exists(x\neq c)$. Now we define $c^{M_1} :=0$, $f^{M_1}(0)=1, f^{M_2}(1)=0$ and $c^{M_2}:=0, f^{M_2}(0)=0,f^{M_2}(1)=1$. Fix an assignment. {\Large do example later}.\\
+\subsubsection{Universal closure}
+
+\subsubsection{Isomorphisms of $\mathcal{L}$-structures}
+
+\subsubsection{Soundness and the Soundness Theorem}
+
+\subsection{Gödels Completeness Theorem}
+
+\subsection{The Axioms and Standard Model of Peano Arithmetic}
+
+\subsubsection{The Axioms}
+We introduce to the language of first order predicate logic the following symbols, $\mathcal{L}_{\mathrm{PA}}:=\{0,\mathrm{s},+,\cdot\}$ and these symbols make up the language of Peano Arithmetic ($\verb|PA|)$. The axioms of Peano arithmetic are as follows. 
+    \begin{axioms}
+        \begin{align*}
+            \mathrm{PA}_0\colon\quad & \neg \exists x (\mathrm{s} x = 0) \\
+            \mathrm{PA}_1\colon\quad & \forall x \forall y (\sverb x = \sverb y \rightarrow x = y) \\
+            \mathrm{PA}_2\colon\quad & \forall x (x + 0 = x) \\
+            \mathrm{PA}_3\colon\quad & \forall x \forall y (x + \sverb y = \sverb(x + y)) \\
+            \mathrm{PA}_4\colon\quad & \forall x (x \cdot 0 = 0) \\
+            \mathrm{PA}_5\colon\quad & \forall x \forall y (x \cdot \sverb y = (x \cdot y) + x) \\
+            \mathrm{PA}_6\colon\quad & \left( \varphi(0) \land \forall x (\varphi(x) \rightarrow \varphi(\sverb (x))) \right) \rightarrow \forall x \varphi(x)
+        \end{align*}
+    \end{axioms}
+\subsubsection{The Standard Model}
+For the standard model we let the domain be $\N$, i.e. the naive notion of natural numbers we described earlier consisting of $\mathbf{0}$ and finite strings of the form $\mathbf{s}\dots \mathbf{s}\mathbf{0}$. 
+
+
+\subsubsection{Gödels Incompleteness Theorem}

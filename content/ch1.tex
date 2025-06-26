@@ -555,22 +555,6 @@ We will later see that the well-ordering principle is in fact equivalent to the 
     is an $f$-set strictly greater than $w_{\alpha_0}$. It follows that $w_{\alpha_0}:\alpha_0\rightarrow M$ is a bijection. We then get a well-ordering on $M$, where for $x,y\in M$, we write $x\leq y$ if $w_{\alpha_0}^{-1}(x)\leq w_{\alpha_0}^{-1}(y)$.
 \end{proof}
 \subsection{Peano Arithmetic}
-\subsubsection{The Standard Model $\N$ of Peano Arithmetic}
-We introduce to the language of first order predicate logic the following symbols, $\mathcal{L}_{\mathrm{PA}}:=\{0,\mathrm{s},+,\cdot\}$ and these symbols make up the language of Peano Arithmetic ($\verb|PA|)$. The axioms of Peano arithmetic are as follows. 
-    \begin{axioms}
-        \begin{align*}
-            \mathrm{PA}_0\colon\quad & \neg \exists x (\mathrm{s} x = 0) \\
-            \mathrm{PA}_1\colon\quad & \forall x \forall y (\sverb x = \sverb y \rightarrow x = y) \\
-            \mathrm{PA}_2\colon\quad & \forall x (x + 0 = x) \\
-            \mathrm{PA}_3\colon\quad & \forall x \forall y (x + \sverb y = \sverb(x + y)) \\
-            \mathrm{PA}_4\colon\quad & \forall x (x \cdot 0 = 0) \\
-            \mathrm{PA}_5\colon\quad & \forall x \forall y (x \cdot \sverb y = (x \cdot y) + x) \\
-            \mathrm{PA}_6\colon\quad & \left( \varphi(0) \land \forall x (\varphi(x) \rightarrow \varphi(\sverb (x))) \right) \rightarrow \forall x \varphi(x)
-        \end{align*}
-    \end{axioms}
-The domain of the metatheory is the list $\N$ of the form $[\mathbf{0},\mathbf{S0},\mathbf{SS0},\dots]$
-where $\dots$ means that to generate the next element of the list we concatenate $\mathbf{S}$ to the right with the last element generated, e.g. the element after $\mathbf{SS0}$ is $\mathbf{SSS0}$. To the metatheory we add a unary relation symbol $\mathrm{N}$ and the meta-axiom which is the formula in the meta theory,
-$$\Phi \equiv \forall x\left(\{\mathrm{N}(0), \forall z(\mathrm{N}(z)\implies \mathrm{N}(\mathrm{s}z))\}\vdash \mathrm{N}(x)\right)$$ 
 
 \subsubsection{The Standard Model $\N_\omega$ of Peano Arithmetic with Domain $\omega$}
 \subsection{NGB Set Theory - A Formal Treatment of Classes}
