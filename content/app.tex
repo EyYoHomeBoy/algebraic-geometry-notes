@@ -143,15 +143,52 @@ Given a set of $\mathcal{L}$-formulae $\Phi$ and an $\mathcal{L}$-structure $M$,
 $$(M,j) \vDash \varphi.$$
 If this is the case, we write 
 $$M\vDash \Phi.$$
-We note that one can construct a signature $\mathcal{L}$ and a domain $A$ for which there is a set of sentences $\Phi$ and two $\mathcal{L}$-structures $M_1$ and $M_2$ where $M_1$ is a model of $\Phi$ and $M_2$ is not. Take $\mathcal{L}=\{c,f\}$ where $c$ is constant and $f$ is a unary function symbol, $A=\{0,1\}$ and $\Phi = \{\varphi_1,\varphi_2\}$ with $\varphi_1 :\equiv\forall x(x=c\vee x=f(c))$ and $\varphi_2:\equiv \exists(x\neq c)$. Now we define $c^{M_1} :=0$, $f^{M_1}(0)=1, f^{M_2}(1)=0$ and $c^{M_2}:=0, f^{M_2}(0)=0,f^{M_2}(1)=1$. Fix an assignment. {\Large do example later}.\\
+We note that one can construct a signature $\mathcal{L}$ and a domain $A$ for which there is a set of sentences $\Phi$ and two $\mathcal{L}$-structures $M_1$ and $M_2$ where $M_1$ is a model of $\Phi$ and $M_2$ is not. Take $\mathcal{L}=\{c,f\}$ where $c$ is constant and $f$ is a unary function symbol, $A=\{0,1\}$ and $\Phi = \{\varphi_1,\varphi_2\}$ with $\varphi_1 :\equiv\forall x(x=c\vee x=f(c))$ and $\varphi_2:\equiv \exists(x\neq c)$. Now we define $c^{M_1} :=0$, $f^{M_1}(0)=1, f^{M_2}(1)=0$ and $c^{M_2}:=0, f^{M_2}(0)=0,f^{M_2}(1)=1$. Fix an assignment and consider the associated interpretatations $I_1$ and $I_2$. It turns out that $I_i\vDash \varphi_2$ for $i=1,2$ while $I_1 \vDash\varphi_1$ and $I_2\vDash \neg\varphi_1$. Indeed, $I_i\vdash \varphi_2$ is equivalent to $I_i[x\mapsto 0] \vDash x\neq c$ or $I_i[x\mapsto 1] \vDash x\neq c$. We check that $I_i[x\mapsto 1] \vDash x\neq c$. To do this we have to check that it isn't true that $I_i[x\mapsto 1](x)$ is equal to $I_i[x\mapsto 1](c)$. This is obvious since $I_i[x\mapsto 1](x)=1$ and $I_i[x\mapsto 1](c)=c^{I_i}=0$. To check that $M_1\vDash \varphi_1$ it is sufficient to check that $I_1[x\mapsto 0] \vDash x=c$ and $I_1[x\mapsto 1]\vDash x = f(c)$. To check the first we simply note that $I_1[x\mapsto 0](x)=0$ and $I[x\mapsto 0](c)=c^{M_1}=0$. To check the second statement we again note that $I_1[x\mapsto1](x)=1$ and also note that $I_1[x\mapsto 1](f(c))=f^{M_1}(I[x\mapsto 1](c))=f^{M_1}(c^{M_1})=f^{M_1}(0)= 1$. To see that $M_2\vDash \neg \varphi_1$ (which is in fact equivalent to $M_2\not\vDash \varphi_1$, since $\varphi_1$ is a sentence), we need to check that $I_2 \vDash \exists x(x\neq c \wedge x\neq f(c))$ and for this it is sufficient to check that $I_2[x\mapsto 1]\vDash x\neq c \wedge x\neg f(c)$. Indeed, $I_2[x\mapsto 1](x)=1$ and $I_2[x\mapsto 1](c) =0$. Furthermore, $I_2[x\mapsto 1](f(c))=f^{M_2}(I_2[x\mapsto 1](c))=f^{M_2}(c^{M_2})=f^{M_2}(0)=0$.
 \subsubsection{Universal closure}
-
+Consider an $\mathcal{L}$-formula $\varphi$ and a model $M$ and some variable $x$. Then $M\vDash \varphi$ if and only if $M\vDash \forall x \varphi$. Upon defining $\overline{\varphi}:\equiv \forall x_1\forall x_2\forall \dots \forall x_n \varphi$ where $x_1,\dots,x_n$ are those variables that appear free in $\varphi$ at some position, then we get that $$M\vDash \varphi \iff_{\mathrm{meta}} M\vDash \overline{\varphi}.$$
+this $\overline{\cdot}$-construction is called the \emph{universal closure of $\varphi$}.\\
+We also introduce the following notation. Let $\varphi$ be an $\mathcal{L}$-formula with free variables $x_1,\dots,x_n$ and consider a sequence of elements in the domain $A$, $a_1,\dots,a_n$. Then we define $M\vDash \varphi(a_1,\dots,a_n)$ to mean that $(M,j [x\mapsto a_1][x\mapsto a_2]\dots[x\mapsto a_n]) \vDash \varphi(a_1,\dots,a_n)$ for every assignment $j$ in $M$.\\
 \subsubsection{Isomorphisms of $\mathcal{L}$-structures}
-
+We now give following notion of checking that two models are essentially the same:
+\begin{definition}
+    Fix a signature $\mathcal{L}$. Consider two $\mathcal{L}$-structures $M$ and $N$ with domains $A$ resp. $B$. We say that $M$ and $N$ are \emph{isomorphic}, denoted $M\simeq N$, if there is a bijection $f:A\rightarrow B$ satisfying
+    \begin{enumerate}
+        \item For every constant symbol $c\in \mathcal{L}$ 
+        $$f(c^M)=f(c^N)$$
+        \item For $n$ and every $n$-ary function symbol $F\in \mathcal{L}$ and all $n$-ary relation symbols $R\in\mathcal{L}$ and every $a_1,\dots,a_n\in A$, we have that 
+        $$
+            f(F^M(a_1,\dots,a_n))=F^{N}(f(a_1),\dots,f(a_n)),
+        $$
+        and that 
+        $$
+            (a_1,\dots,a_n)\in R^M \iff (f(a_1),\dots,f(a_n)) \in R^N.
+        $$
+    \end{enumerate}
+    Two models are \emph{isomorphic} if there respective underlying $\mathcal{L}$-structures are isomorphic.   
+\end{definition}
+\begin{remark}
+    An immediate consequence is that if two models $M$ and $N$ are isomorphic, then for each $\mathcal{L}$-formula $\varphi$, 
+    $$M\vDash \varphi \iff_{\mathrm{meta}} N\vDash \varphi.$$
+    It may happen that there is a pair of models $M'$ and $N'$ for which
+    $$M'\vDash\varphi \iff_{\mathrm{meta}} N' \vDash \varphi$$
+    for every $\mathcal{L}$-sentence $\varphi$ where $M'$ and $N'$ are NOT isomorphic. This leads us to the give the following definition:\\
+    We say that an $\mathcal{L}$-structures $M$ is \emph{elementarily equivalent} to an $\mathcal{L}$-structure $N$, denoted $M\equiv_e N$ if 
+    $$ M\vDash \varphi \implies_{\mathrm{meta}} N \vDash \varphi$$
+    It turns out that with this definition we also have that $N\equiv _e M$ when $M\equiv_e N$. Applying the fact about universal closure it sufficient to check $M\vDash \varphi \iff_{\mathrm{meta}} N\vDash \varphi$ for every $\mathcal{L}$-sentence $\varphi$.    
+\end{remark}
 \subsubsection{Soundness and the Soundness Theorem}
-
+\begin{definition}
+    A logical calculus $\verb|L|$ is sound if every statement that on syntactical side can be proven is true on the semantical side
+\end{definition}
+\begin{theorem}
+    Let $\Phi$ be a set of $\mathcal{L}$-formulae and $M$ a model of $\Phi$. Then for every $\mathcal{L}$-formula $\varphi$,
+    $$\Phi \vdash \varphi \implies_{\mathrm{meta}} M \vdash \varphi.$$
+\end{theorem}
 \subsection{Gödels Completeness Theorem}
-
+A set $T$ of $\mathcal{L}$-sentences is said to be an \emph{$\mathcal{L}$-theory} if 
+\begin{definition}
+    An $\mathcal{L}$-theory $T$ is complete if for every $\mathcal{L}$-sentence $\varphi$, either $T \vdash \varphi$ or $T \vdash \neg\varphi$.
+\end{definition}
 \subsection{The Axioms and Standard Model of Peano Arithmetic}
 
 \subsubsection{The Axioms}
