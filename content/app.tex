@@ -1,4 +1,5 @@
 \appendix
+\section{Logical Calcilii}
 \section{First Order Predicate Logic}
 The purpose of this section is to introduce a framework for doing mathematics. We will choose first order logic \verb|FOL|.
 \subsection{The Metatheory of First Order Logic}
@@ -91,8 +92,9 @@ Lastly we have axioms for the binary relational symbol $=$. Let $\tau,\tau_1,\do
 \begin{align*}
     \mathrm{L14}\colon \quad & \tau = \tau\\
     \mathrm{L15}\colon \quad & \tau_1 = \tau_1' \wedge \dots \wedge \tau_n = \tau_n' \to (R(\tau_1,\dots,\tau_n)\to R(\tau_1',\dots,\tau_n'))\\
-    \mathrm{L16}\colon \quad & \tau_1 = \tau_1' \wedge \dots \wedge \tau_n = \tau_n' \to (F(\tau_1,\dots,\tau_n)\to F(\tau_1',\dots,\tau_n'))  
+    \mathrm{L16}\colon \quad & \tau_1 = \tau_1' \wedge \dots \wedge \tau_n = \tau_n' \to (F(\tau_1,\dots,\tau_n)= F(\tau_1',\dots,\tau_n'))  
 \end{align*}
+The above axioms when $\mathrm{L}_0$ is excluded is called the logical axioms of \emph{intuitionistic logic}. The inclusion of $\mathrm{L}_0$ comprises the axioms of \emph{classical logic}.
 We use $:\iff$ to define relations on symbols in metalanguage of \verb|FOL|. For instance, we define for formulae $\varphi,\psi$, terms $\tau,\tau'$ and a variable $x$, 
 \begin{gather*}
     \varphi \leftrightarrow \psi :\iff (\varphi \to \psi \wedge \psi \to \varphi)\\
@@ -116,15 +118,57 @@ We want to use the notion of axiom and inference rule to prove statements in dif
 We take $\vdash \psi$ to mean $\emptyset \vdash \psi$. In this case $\psi$ is called a \emph{tautology}. $\Phi$ is called a \emph{context}. If $\psi$ has no formal proof in a fixed context $\Phi$, we write $\Phi \not\vdash \psi$. Rather than writing down formal proofs down in, for instance, a box proof, we will just note that this is possible to do. Instead, we will write proofs in natural language in such a way that it to a sufficiently knowledgeable reader is somewhat clear what a formal proof would look like. At a certain point we also formulate formulae in natural language. Additionally we take certain basic proofs in \verb|FOL| for granted. This treatment of \verb|FOL| only serves to provide a clear and precise language for building mathematical theory and we will quickly become satisfied that it exists and be happy that if we properly formulate theory in natural language it will be formalizable in \verb|FOL|.  
 \subsubsection{Tautology and Logical Equivalence}
 We say that formulae $\varphi$ and $\psi$ are \emph{logically equivalent} if $\vdash \varphi \leftrightarrow \psi$. We write 
-$$\varphi \iff \psi \iff_{\mathrm{meta}} \vdash \varphi \leftrightarrow \psi.$$
-If $\Phi \vdash \varphi \leftrightarrow \psi$, we write $\varphi \iff_\Phi \psi$. In a natural language context, $\Phi$ will be a sequence of sentences in natural language and will not explicitly be written as a finite set, so therefore we usually just write $\varphi \iff \psi$ if we want to symbolically express that $\varphi$ is equivalent to $\psi$ in a given context (it should then be clear what the context is). 
+$$\varphi \iff \psi \metaiff \vdash \varphi \leftrightarrow \psi.$$
+If $\Phi \vdash \varphi \leftrightarrow \psi$, we write $\varphi \iff_\Phi \psi$. In a natural language context, $\Phi$ will be a sequence of sentences in natural language and will not explicitly be written as a finite set, so therefore we usually just write $\varphi \iff \psi$ if we want to symbolically express that $\varphi$ is equivalent to $\psi$ in a given context (it should then be clear what the context is). In the same vein we write $\varphi\implies_\Phi \psi$ to mean $\Phi \vdash \varphi \to \psi$ and in a mathematical context we shorten it to $\varphi \implies \psi$. 
 \subsubsection{Proofs in Natural Deduction}
 A different approach to building a system of deduction in \verb|FOL| is to write inference rules which tells us how to introduce and eliminate certain formulae to obtain new formulae. There is a different notion of proof in natural deduction. Luckily this approach is equivalent to that of introducing logical axioms, modus ponens and generalization. So when building proofs, we can also apply introduction and elimination rules. 
-
+\subsubsection{The Deduction Theorem}
+Beyond the extra proof techniques that are provided by natural deduction which remain unmentioned we give a useful metatheoretic principical 
+\begin{theorem}(Deduction Theorem)
+    Let a signature $\mathcal{L}$ be given and $\Phi$ be a set of $\mathcal{L}$-formulae. Consider $\mathcal{L}$-formulae $\varphi,\psi$. Then 
+    $$\Phi+\varphi \vdash \psi \metaiff \Phi \vdash \varphi\to \psi,$$
+    where $\Phi+\varphi$ is $\Phi\cup\{\varphi\}.$
+\end{theorem}
+\begin{proofsketch}
+    "$\impliedby$": Suppose $\Phi\vdash \varphi\to \psi$. With the assumption $\Phi+\varphi$, we then get $\varphi\to \psi$, by the metatheoretic assumption, there is a formal proof $\varphi_1,\dots,\varphi_n:\equiv \varphi\to \psi$ from $\Phi$. Then using modus ponens on $\varphi_n$ and $\varphi\in \Phi+\varphi$ we get $\psi$. Then from $\Phi+\varphi$, $\varphi_1,\dots,\varphi_n,\psi$ is a sequence of formulae such that $\Phi+\varphi \vdash \psi$.\\
+    "$\implies$": Suppose $\Phi+\varphi\vdash \psi$. Then there is a formal proof $\varphi_1,\dots,\varphi_n$ of $\psi$ from $\Phi+\varphi$. We now aim to show $\Phi \vdash \varphi\to \varphi_n$ (note that $\varphi_n\equiv \psi$) for each $i\leq n$. Note that if $\varphi_i\in \Phi$ or is a logical axiom, we first using the logical axiom $\mathrm{L}_1$ get $\sigma\equiv \varphi_i \to (\varphi\to \varphi_i)$ and using modus ponens on $\sigma$ and $\varphi_i$ we get $\varphi\to \varphi_i$. If $\varphi_i\equiv \varphi$, we get $\Phi\vdash \varphi\to\varphi$, since $\vdash \varphi\to \varphi$. From this we conclude $\Phi\vdash \varphi\to \varphi_0$, since $\varphi_0$ can only be obtained in the three ways described above. Suppose now that for $j< i$, $\Phi\vdash \varphi\to \varphi_j$. If we then can show that when $\varphi_i$ is obtained from modus ponens or generalization, it will follow by (metatheoretical) induction on $i\leq n$ that $\Phi\vdash \varphi\to\varphi_n$.
+\end{proofsketch}
 \subsubsection{Consistency and Compactness}
-To discuss the notion of consistency we first introduce the notion of \emph{ex falso quodlibet}. given formulae $\varphi$ and $\psi$, this is $\{\varphi,\neg \varphi\}\vdash \psi$. It is proven in the following way: we get $\varphi$ and $\neg \varphi$ from the context. From modus ponens applied to $\neg\varphi \to (\varphi \to \psi)$ (from $\mathrm{L}9$) and $\neg \varphi$ we get $\varphi\to \psi$. Applying modus ponens to $\varphi\to \psi$ and $\varphi$ we get $\psi$ as desired. An \emph{ex falso quadlibet introduction} is $\Phi\vdash \varphi\wedge neg\varphi$. \\
-A set of formulae $\Phi$ is called consistent if $\Phi\not\vdash \varphi \wedge \neg\varphi$ for any formula $\varphi$. We denote this by $\mathrm{Con}(\varphi)$. A set of formulae that is not consistent is called \emph{inconsistent}, denoted $\neg\mathrm{Con}(\Phi)$.     
+To discuss the notion of consistency we first introduce the notion of \emph{ex falso quodlibet}. given formulae $\varphi$ and $\psi$, this is $\{\varphi,\neg \varphi\}\vdash \psi$. It is proven in the following way: we get $\varphi$ and $\neg \varphi$ from the context. From modus ponens applied to $\neg\varphi \to (\varphi \to \psi)$ (from $\mathrm{L}9$) and $\neg \varphi$ we get $\varphi\to \psi$. Applying modus ponens to $\varphi\to \psi$ and $\varphi$ we get $\psi$ as desired. An \emph{ex falso quadlibet introduction} is $\Phi\vdash \varphi\wedge \neg\varphi$ where $\varphi$ is some $\mathcal{L}$-formula. We denote the existence of such an instance, $\varphi\wedge \neg\varphi$ by $\mathrm{False}$ \\
+A set of formulae $\Phi$ is called \emph{consistent} if $\Phi\not\vdash \mathrm{False}$. We denote this by $\mathrm{Con}(\varphi)$. A set of formulae that is not consistent is called \emph{inconsistent}, denoted $\neg\mathrm{Con}(\Phi)$. Note that if a set of formulae is not consistent then we may prove anything from that set of formulae. I.e. for a formula $\varphi$ 
+$$\neg\mathrm{Con}(\Phi)\metaimplies \Phi \vdash \mathrm{False} \metaimplies \Phi \vdash \varphi.$$
+If on the other hand $\Phi$ is a consistent set of formulae and we can prove a formula $\varphi$ from $\Phi$, then then there is no way to prove $\neg\varphi$ from $\Phi$,
+$$\mathrm{Con}(\Phi) \text{ and } \Phi\vdash \varphi\metaimplies \Phi\not\vdash \neg\varphi.$$
+Indeed if $\Phi\vdash \neg\varphi$, and we suppose $\Phi\vdash \varphi$, then $\Phi\vdash \mathrm{False}$, hence $\neg\mathrm{Con}(\Phi)$.\\
 
+A use case for the principle of ex falso quodlibet is contraposition
+\begin{theorem}(Proof by Contraposition)
+    Given $\mathcal{L}$-formulae $\varphi$ and $\psi$,
+    $$\vdash (\varphi \to \psi) \leftrightarrow (\neg\psi\to \neg\varphi).$$
+\end{theorem}
+\begin{proof}
+    We aim to apply $\wedge$-introduction. To do this we need to show $\vdash (\varphi\to \psi) \to (\neg \psi\to \varphi)$ and $\vdash (\neg \psi\to \neg \varphi)\to (\varphi\to \psi)$. First we show $\varphi \to \psi \vdash (\neg\psi\to \neg\varphi)$ which can be shown by $\varphi \to \psi + \neg \psi\vdash \neg \varphi$. Now note that $\{\varphi\to \psi,\neg\psi\}+\varphi\vdash \psi\wedge \neg\psi$, since by modus ponens on $\varphi\to\psi$ and $\varphi$ results in $\psi$, hence upon applying $\wedge$-introduction we get $\psi\wedge \neg\psi$. We can therefor use ex falso to get $\neg \varphi$.\\
+    Next we show $\neg \psi \to \neg \varphi \vdash \varphi\to \psi$ which can be shown by $\{\neg\psi\to \neg \varphi,\varphi\}\vdash \psi$. Using $\mathrm{L}_0$ we get $\psi\vee \neg\psi$. If $\psi$, then we are done. If $\neg \psi$, then using modus ponens on $\neg\psi\to \neg \varphi$ and $\neg \psi$ we get $\neg \varphi$, hence $\varphi\wedge \neg \varphi$. Then using ex falso we obtain $\psi$.
+\end{proof}
+\begin{remark}
+    Note that $\vdash (\varphi\to \psi)\to (\neg \psi\to \neg \varphi)$ can be done fully in intuitionistic logic. A more general statement then the above is 
+    $$\Phi+\varphi \vdash \psi \metaiff \Phi+\neg\psi\vdash \neg\varphi.$$
+    With the above in mind, it is easy to see how one proves this. 
+\end{remark}
+\begin{theorem}(Proof by Contradiction) Let $\Phi$ be a set of $\mathcal{L}$-formulae and $\varphi,\psi $ be $\mathcal{L}$-formulae. Then 
+$$
+    \Phi+\neg\varphi \vdash \mathrm{False} \metaimplies \Phi \vdash \varphi
+$$
+\end{theorem}
+\begin{proof}
+    There is some way to prove $\psi \wedge \neg \psi$ for some $\mathcal{L}$-formula from $\Phi+\neg\varphi$, hence $\Phi\vdash \neg\varphi \to \psi\wedge \neg \psi$. We then apply $\mathrm{L}_0$ to get $\varphi\vee \neg \varphi$. If $\varphi$, we are done. If $\neg\varphi$ we get $\psi\wedge \neg \psi$ using modus ponens, hence using exfalso we get $\varphi$. 
+\end{proof}
+Given some $\mathcal{L}$-formula $\varphi$ and a set of $\mathcal{L}$-formulae $\Phi$ we also have that 
+$$\neg\mathrm{Con}(\Phi+\varphi)\metaimplies \Phi \vdash \neg\varphi,$$
+since then $\Phi+\varphi \vdash \mathrm{False}$ which is equivalent to $\Phi +\neg(\neg \varphi) \vdash \mathrm{False}$, so using contradiction we get $\Phi\vdash \neg\varphi$. 
+Conversely if 
+$$(\text{there is an }\mathcal{L}\text{-formula }\varphi \text{ such that } \Phi\vdash \neg \varphi)\metaimplies \neg\mathrm{Con}(\Phi+\varphi),$$
+since then get $\Phi+\varphi\vdash \varphi\wedge \neg \varphi$, hence by contradiction, $\Phi+\varphi\vdash \mathrm{False}$.
 \subsection{Semantics of First Order Logic}
 We are now going to assign truth values to formulae. That is we want for some signature $\mathcal{L}$ to assign either false or true to each $\mathcal{L}$-formula. In propositional logic this can be done by asserting truth tabels for logical connectives, $\wedge$, $\vee$, $\neg$, $\to$. This simple approach does not extend to \verb|FOL|. Take for instance the formula, $\forall x \exists y \varphi(x,y)$. Could we possibly assign a truthtable to such a formula. Suppose for instance that $\varphi\equiv x<y$. Then there is a dependency on what $x$ and $y$ is and we are therefor at a loss in computing a truth table in terms of $\varphi$ in general. Introducing an algorithm for determining truth for $\forall$ and $\exists$ is not terrible, but we need a way to map formulas onto some sort of context. To discuss how to do this we need the notion of an \emph{interpretatation} for which we will assume some notion of naive set theory and a notion of law of excluded middle, i.e. we assume that a statement (to be interpreted informally) is either true or false. We are thus working in the strong metatheory.
 \subsubsection{Structures and Interpretations}
@@ -138,8 +182,8 @@ $$
 $$
 $\iota[x\mapsto a]$ is thus itself an assigment on $M$. We define 
 $$I[x\mapsto a] := (M,\iota[x\mapsto a]).$$
-For an $\mathcal{L}$-term $\tau$ we define $I(\tau)\in A$ by recursion on terms in the following way: On a variable $x$, $I(x):=\iota(x)$, on a constant $c$, $I(c):= c^M$, for an $n$-ary function symbol and terms $\tau_1,\dots,\tau_n$, $I(F(\tau_1,\dots,\tau_n)):= F^M(I(\tau_1),\dots,I(\tau_n)).$ We now define how to assign truth value to formulae under an interpretation. When a formula $\varphi$ is true in an interpretatation $I$ we write $I\vDash \varphi$. This mapping is constructed inductively on symbols that are used to construct formulae. So for instance given terms $\tau_1,\tau_2$ and variable $x$, $I\vDash \tau_1=\tau_2 :\iff_{\mathrm{meta}} I(\tau_1) = I(\tau_2)$ and $I\vDash \exists x \varphi: \iff_{\mathrm{meta}}\ \mathrm{there}\ \mathrm{exists}\ a\ \mathrm{in}\ A: \ I[x\mapsto a]\vDash \varphi$ and $I\vDash \neg\varphi :\iff_{\mathrm{meta}} I\vDash \varphi \text{is not true}$. I.e. we translate truth of a formula in some interpretation to statements in the metatheory. I feel that there is only a need to illustrate the idea as I don't want to write all of the rules down. Under the assumption of classical logic in the meta theory, we now have that $I \vDash \varphi \ \mathrm{or} \ I\vDash \neg \varphi$. It is still necessarily true that $\Phi \vdash \varphi$ or $\Phi \vdash \neg\varphi$. That is there may be statements in some theory that is true but not provable or a statement that is true but where $\Phi \vdash \varphi$.\\
-Given a set of $\mathcal{L}$-formulae $\Phi$ and an $\mathcal{L}$-structure $M$, we say that\emph{$M$ is a model of $\Phi$} if for for every assignment $\iota$ and for each $\varphi\in \Phi$, 
+For an $\mathcal{L}$-term $\tau$ we define $I(\tau)\in A$ by recursion on terms in the following way: On a variable $x$, $I(x):=\iota(x)$, on a constant $c$, $I(c):= c^M$, for an $n$-ary function symbol and terms $\tau_1,\dots,\tau_n$, $I(F(\tau_1,\dots,\tau_n)):= F^M(I(\tau_1),\dots,I(\tau_n)).$ We now define how to assign truth value to formulae under an interpretation. When a formula $\varphi$ is true in an interpretatation $I$ we write $I\vDash \varphi$. This mapping is constructed inductively on symbols that are used to construct formulae. So for instance given terms $\tau_1,\tau_2$ and variable $x$, $I\vDash \tau_1=\tau_2 :\iff_{\mathrm{meta}} I(\tau_1) = I(\tau_2)$ and $I\vDash \exists x \varphi: \iff_{\mathrm{meta}}\ \mathrm{there}\ \mathrm{exists}\ a\ \mathrm{in}\ A: \ I[x\mapsto a]\vDash \varphi$ and $I\vDash \neg\varphi :\iff_{\mathrm{meta}} I\vDash \varphi \text{is not true}$. I.e. we translate truth of a formula in some interpretation to statements in the metatheory. I feel that there is only a need to illustrate the idea as I don't want to write all of the rules down. Under the assumption of classical logic in the meta theory, we now have that $I \vDash \varphi \ \mathrm{or} \ I\vDash \neg \varphi$. It is still necessarily NOT true that $\Phi \vdash \varphi$ or $\Phi \vdash \neg\varphi$. That is there may be statements in some theory that is true but not provable or a statement that is true but where $\Phi \vdash \neg\varphi$.\\
+Given a set of $\mathcal{L}$-formulae $\Phi$ and an $\mathcal{L}$-structure $M$, we say that \emph{$M$ is a model of $\Phi$} if for for every assignment $\iota$ and for each $\varphi\in \Phi$, 
 $$(M,j) \vDash \varphi.$$
 If this is the case, we write 
 $$M\vDash \Phi.$$
@@ -182,13 +226,102 @@ We now give following notion of checking that two models are essentially the sam
 \end{definition}
 \begin{theorem}
     Let $\Phi$ be a set of $\mathcal{L}$-formulae and $M$ a model of $\Phi$. Then for every $\mathcal{L}$-formula $\varphi$,
-    $$\Phi \vdash \varphi \implies_{\mathrm{meta}} M \vdash \varphi.$$
+    $$\Phi \vdash \varphi \implies_{\mathrm{meta}}\ M \vDash \varphi.$$
 \end{theorem}
+\begin{proofsketch}
+    We first prove that given any model $M$, we have that $M\vDash \theta_i$ for $i\in \{0,\dots,16\}$, where $\theta_i$ is an instance of $\mathrm{L}_i$, which are the logical axioms of $\verb|FOL|$. For $\mathrm{L}_0$ this follows from the assumption that we have classical logic in the metatheory.  Given the logical symbols $\vee,\wedge, \neg, \to$, and formulae $\varphi,\psi$ to for instance show that $M\vDash \varphi \vee \psi$ we have to show that $M\vDash \varphi$ or $M\vDash \psi$. Setting $\Theta:\equiv_{\mathrm{meta}} M\vDash \varphi \vee \psi$, $\Phi :\equiv_{\mathrm{meta}} M\vDash \varphi$ and $\Psi :\equiv_{\mathrm{meta}} M\vDash \psi$, we note that the truth value of $\Theta$ is dependent on the truth values of $\Phi$ and $\Psi$, by definition, via a truth table. We can for $\mathrm{L}_i$, $i=1,\dots,9$, set $\Theta_i :\equiv_{\mathrm{meta}} M\vDash \theta_i$ and see that the truth of this formula can be verified using such truth tables.\\
+    We now consider the domain of $M$, $A$ and fix an assignment $j$, denote the associated interpretation $(M,j)$ by $I$.\\ 
+    \textbf{"$\mathrm{L}_{10}$ is valid in $M$":} Fix an $\mathcal{L}$-formula $\varphi$, a term $\tau$ and a variable $x$ such that $\varphi(x/\tau)$ is admissible. We need to prove that assuming $I\vDash \forall x\varphi(x)$ that $I\vdash \varphi(\tau)$. Our assumption is equivalent to for every $a\in A$, $I[x\mapsto a]\vDash \varphi(x)$. Then $I[x\mapsto I(\tau)] \vDash \varphi(x)$, which is equivalent to {\Large explain why} $I \vdash  \varphi(\tau)$. So $(M,j)\vDash \forall x\varphi(x) \to \varphi(\tau)$ for every assignment $j$, hence $M\vDash \forall x\varphi(x)\to \varphi(\tau)$.\\
+    \textbf{"$\mathrm{L}_{11}$ is valid in $M$":} Fix $\varphi,x,\tau$ as before. We need to show assuming $I \vDash \varphi(\tau)$ that there is an $a\in A $ such that $I[x\mapsto a]\vDash \varphi(x)$. Using the same fact as before, our assumption is equivalent to $I[x\mapsto I(\tau)] \vDash \varphi(x)$. Then $(M,j) \vDash \varphi(\tau)\to \exists x\varphi(x)$ for every interpretation $j$, hence $M\vDash \varphi(\tau)\to \exists x\varphi(x)$.\\
+    \textbf{"$\mathrm{L}_{12}$ is valid in $M$":} Fix a non-free variable $x$ of a formula $\psi$ and let $\varphi(x)$ be an arbitrary formula. Suppose that forall $a\in A$, if $I[x\mapsto a]\vDash \psi$, then $I[x\mapsto a]\vDash \varphi(x)$. Note that by {\large insert fact later} $I[x\mapsto a]\vDash \psi$ is equivalent to $I\vDash \psi$ and that by definition $I[x\mapsto a]\vDash \varphi(x)$ is equivalent to $I\vDash \forall x\varphi(x)$. Assume then $I\vDash \psi$. From what have just noted it follows then that $I\vDash \forall x \varphi(x)$. So we conclude that $I \vDash \forall x(\psi \to \varphi(x))\to (\psi \to \forall x \varphi(x))$, and since $j$ was arbitrary, it follows that $M\vDash  \forall x(\psi \to \varphi(x))\to (\psi \to \forall x \varphi(x))$.\\
+    \textbf{"$\mathrm{L}_{13}$ is valid in $M$":} Assume that for every $a\in A$ if $I[x\mapsto a] \vDash\varphi(x)$, then $I[x\mapsto a]\vDash \psi$. Suppose there is a $b\in A$ such that $I[x\mapsto b]\vDash \varphi(x)$. Then by assumption $I[x\mapsto b]\vDash \psi$ which using the same fact as before is equivalent to $I\vDash \psi$. We thus conclude that $I \vDash \forall x(\varphi(x)\to \psi) \to (\exists x \varphi x \to \psi)$, and since $j$ was arbitrarily chosen, $M\vDash\forall x(\varphi(x)\to \psi) \to (\exists x \varphi x \to \psi)$.\\
+    \textbf{"$\mathrm{L}_{14}$ is valid in $M$":}
+    Let $\tau$ be a term. Clearly $I(\tau)$ is the same element as $I(\tau)$, $I\vDash \tau = \tau$ and it immediately follows that $M\vDash \tau = \tau$.\\
+    \textbf{"$\mathrm{L}_{14}$ is valid in $M$":} Let $R$ be an $n$-ary relation symbol in $\mathcal{L}$ and $\tau_1,\dots,\tau_n,\tau_1',\dots,\tau_n'$ be $\mathcal{L}$-terms. Suppose $I(\tau_i)$ is the same object as $I(\tau_i')$ for each $i$. Suppose moreover that $I\vDash R(\tau_1,\dots,\tau_i)$. Then $(I(\tau_1'),\dots, I(\tau_n'))=(I(\tau_1),\dots,I(\tau_n))\in R^M\subset A$, hence by definition $I \vDash R(\tau_1',\dots,\tau_n')$. This shows that 
+    $$I \vDash \tau_1 = \tau_1'\wedge \dots \wedge \tau_n=\tau_n' \to (R(\tau_1,\dots,\tau_n)\to R(\tau_1',\dots,\tau_n'))$$
+    which means 
+    $$M\vDash \tau_1 = \tau_1'\wedge \dots \wedge \tau_n=\tau_n' \to (R(\tau_1,\dots,\tau_n)\to R(\tau_1',\dots,\tau_n')).$$
+    \textbf{"$\mathrm{L}_{15}$ is valid in $M$":} Let $F$ be an $n$-ary function symbol. Let $\tau_1,\dots,\tau_n,\tau_1',\dots,\tau_n'$ be given as before. Suppose $I(\tau_i)$ is the same object as $I(\tau_i')$ for each $i$. Then 
+    $$F^M(I(\tau_1),\dots,I(\tau_n)) = F^{M}(I(\tau_1'),\dots,I(\tau_n'))$$
+    hence 
+    $$I\vDash F(\tau_1,\dots,\tau_n) = F(\tau_1',\dots,\tau_n') \implies_{\mathrm{meta}} M \vDash F(\tau_1,\dots,\tau_n) = F(\tau_1',\dots,\tau_n').$$
+    Now, let $\Phi$ be a set of $\mathcal{L}$-formulae and $M$ a model of $\Phi$. Let $\varphi$ be an $\mathcal{L}$-formula. Suppose $\Phi\vdash \varphi$. Note now that every instance of modus ponens is obviously valid in $M$ and that by {\large insert fact} every instance of generalization is valid in $M$. It thus follows that every application of these rules to conclude that $\Phi\vdash \varphi$ is valid in $M$. Since we know that the logical axioms of $\verb|FOL|$ are valid in $M$, it follows that if the formulae $\varphi_1,\dots,\varphi_n$ that make up a formal proof of $\varphi$ from $\Phi$, are all valid. In particular, since $\varphi_n \equiv \varphi$, it follows that $M\vDash \varphi$, which finishes the proof (sketch) 
+\end{proofsketch}
+\begin{corollary}
+    \begin{enumerate}
+        \item For every tautology $\varphi$ we get that $M\vDash \varphi$ for any model $M$.
+        \item For a set of $\mathcal{L}$-formulae $\Phi$, if there is a model $M$ with $M\vDash \Phi$, then $\mathrm{Con}(\Phi)$.
+        \item Every instance of a logical axiom is consistent.
+        \item For any sentence $\sigma$, model $M$ and set of formulae $\Phi$,
+        $$\text{if } (M\not\vDash \sigma \text{ and } M\vDash \Phi) \text{ then } \Phi\not\vdash \sigma$$ 
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    1. Indeed, $M$ is a model of the empty set (of formulae), hence by an application of the above theorem the result follows.\\
+    2. Indeed, given a formula $\varphi\in\Phi$, 
+    $$M\not\vDash \varphi \wedge \neg\varphi,$$
+    which means $\Phi \not\vdash \varphi\wedge \neg\varphi$ {\large note to self: write something about contraposition in metatheory}.\\
+    3. Any model of a set of formulae is a model of any instance of logical axiom, hence by 2. such an instance is consistent.\\
+    4. This is just a special case of the contrapositive of the soundness theorem. 
+\end{proof}
 \subsection{Gödels Completeness Theorem}
-A set $T$ of $\mathcal{L}$-sentences is said to be an \emph{$\mathcal{L}$-theory} if 
+We now refine the definition of an $\mathcal{L}$-theory. A set $T$ of $\mathcal{L}$-sentences is said to be an \emph{$\mathcal{L}$-theory}. In mathematics a set of axioms will always consist of sentences. Note that as far as semantics is concerned we may replace every formula in a set of $\mathcal{L}$-formulae by the set of the universal closures of these formulae and nothing will change. 
 \begin{definition}
-    An $\mathcal{L}$-theory $T$ is complete if for every $\mathcal{L}$-sentence $\varphi$, either $T \vdash \varphi$ or $T \vdash \neg\varphi$.
+    An $\mathcal{L}$-theory $T$ is complete if for every $\mathcal{L}$-sentence $\varphi$, either $T \vdash \varphi$ or $T \vdash \neg\varphi$. An $\mathcal{L}$-theory that is not complete is called \emph{incomplete}
 \end{definition}
+\begin{remark}
+    Note that an inconsistent theory is incomplete. 
+\end{remark}
+\begin{definition}
+    For an $\mathcal{L}$-theory $T$, let $\mathrm{Th}(T)$ denote the set of $\mathcal{L}$-sentences $\sigma$ with $T\vdash \sigma$.
+\end{definition}
+\begin{remark}
+    Note that a consistent theory $T$ is complete if and only if either $\sigma\in \mathrm{Th}(T)$ or $\neg \sigma in\mathrm{Th}(T)$ for every $\mathcal{L}$-sentence $\sigma$. 
+\end{remark}
+\begin{theorem}
+    Let $T$ be an $\mathcal{L}$-theory such that there is a model $M$ of $T$. Then there is a complete $\mathcal{L}$-theory $\overline{T}$ with $\overline{T}\supset T$. 
+\end{theorem}
+\begin{proof}
+    Define $\overline{T}$ to be the sentences, $\sigma$, which satisfy $M\vDash \sigma$. Since for any sentence $\tau$, either $M\vDash \tau$ or $M\vDash \neg\tau$, we get that either $\tau\in \overline{T}$ or $\neg \tau\in \overline{T}$. Let $\sigma$ be any $\mathcal{L}$-sentence. If $\sigma\in \overline{T}$, then since $\sigma\vdash \sigma$, it follows that $\overline{T}\vdash \sigma$. Similary, if $\neg\sigma\in \overline{T}$, then $\overline{T} \vdash \neg\sigma$. We thus conclude that $\overline{T}$ is complete. Since $M\vDash T$, it follows that $T\subset \overline{T}$.
+\end{proof}
+\begin{definition}
+    Let $M$ be a model of some theory $T$. Then $\mathrm{Th}(M)=\overline{T}$ is called the \emph{model of $M$} 
+\end{definition}
+\begin{remark}
+    Note that $\mathrm{Th}(M)$ is complete.
+\end{remark}
+
+\subsubsection{Maximally Consistent Theories}
+\begin{definition}
+    An $\mathcal{L}$-theory $T$ is \emph{maximally consistent} if for $\mathrm{Con}(T)$ and for every $\mathcal{L}$-sentence $\sigma\in T$ or $\neg\mathrm{Con}(T+\sigma)$. 
+\end{definition}
+\begin{remark}
+    From the last two facts gathered about consistency in the section on consistency and compactness we get that 
+    $$\neg\mathrm{Con}(T+\sigma)\metaiff T\vdash \neg \sigma,$$
+    so a consistent $\mathcal{L}$-theory $T$ is maximally consistent if and only if $\sigma\in T$ or $T\vdash \neg\sigma$. 
+\end{remark}
+\begin{lemma}
+    For a consistent $\mathcal{L}$-theory $T$, $T$ is maximally consistent if and only if $\sigma \in T$ or $\neg\sigma\in T$ for every $\mathcal{L}$-formula $\sigma$.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+\begin{lemma}
+    
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+\begin{lemma}
+    
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+\subsubsection{Universal List of Sentences}
+\subsubsection{Lindenbaum's Lemma}
+\subsubsection{Gödel's Completeness Theorem (for Countable Signatures)}
+
 \subsection{The Axioms and Standard Model of Peano Arithmetic}
 
 \subsubsection{The Axioms}

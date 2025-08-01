@@ -81,7 +81,7 @@ The axioms of Zermelo set theory with these two added axioms is called Zermelo-F
 \begin{definition}
     Consider a first order formula $\varphi(X,Y,p)$ where $X,Y$ are free variables and $p$ a tuple of parameters of $\varphi$ such that 
     $$\forall X\exists! Y(\varphi(X,Y,p))$$
-    We define a unary function symbol $F${\Large There's some weirdness about what such an object actually is that I will leave undefined for now} given by 
+    We define a unary function symbol $F$ given by 
     $$F(X)=Y :\iff \varphi(X,Y)$$
     Such a unary function symbol is called a \textit{class function for $\varphi$}.
 \end{definition}
@@ -103,6 +103,7 @@ This axiom was introduced in 1925 by John von Neumann in order to define ordinal
     Suppose for a contradiction that there is a sequence of sets satisfying $x_1\ni x_2\ni x_3\ni\dots$. Consider the set containing these sets $X=\{x_1,x_2,x_3,\dots\}$ (implicitly we are here assuming the existence of $\N$ and use the axiom schema of replacement with the formula $\varphi \equiv T$). Then take an element $x_k$ of $X$. Note $x_{k+1}\in x_k$ and $x_{k+1}\in X$, hence $x_k\cap X\neq \emptyset$, which in contradiction with the axiom of foundation. We can therefor conclude that there is no set $x$ with $x\in x$, since this would imply the existence of a descending sequence $x\ni x\ni \dots$, which shows that we cannot run into Russels paradox in Zermelo-Fraenkel set theory. Nor can we have a sequence of sets $x_1,\dots,x_n$ satisfying 
     $$x_1\in x_2\in x_3\in \dots\in x_n\in x_1$$
     for then we would get a sequence $x_1\ni x_n\ni \dots\ni x_2\ni x_1\ni \dots$. 
+    One can also prove that $\forall x(x\notin x)$ simply using the axiom of foundation on the set $\{x\}$. Indeed, there is an element $z\in \{x\}$, so there must be a $y\in\{x\}$ such that $y\cap \{x\} = \emptyset$, which implies that for any $w\in \{x\}$, $w\notin y$. Now note that $y=w=x$, which means $x\notin x$.  
 \end{example}
 \subsection{Relations}
 \begin{definition}
@@ -118,18 +119,26 @@ This axiom was introduced in 1925 by John von Neumann in order to define ordinal
 \begin{definition}
     Consider sets $X$ and $Y$. The axiom schema of seperation, the axiom of powerset and the axiom of union lets us form the set
     $$X\times Y := \left\{ (x,y)\in \pazocal{P}\left(\pazocal{P}(X\cup Y)\right) : x\in X \wedge y\in Y\right\}.$$ 
+    Given sets $X_1,\dots,X_n$ we recursively define $X_1\times \cdots \times X_n$ to be 
+    $$(X_1\times \cdots \times X_{n-1})\times X_n.$$
+    We denote an element of this set $((x_1,\dots,x_{n-1}),x_n)$ by $(x_1,\dots,x_n)$
 \end{definition}
+\begin{remark}
+    Using induction on the number of sets we can show that $(x_1,\dots,x_n)=(x_1',\dots,x_n')$ if and only if $x_i=x_i'$ for every $i\in\{1,\dots,n\}$.  
+\end{remark}
 \begin{definition}
-    A \textit{(binary) relation} on a pair of set $X,Y$ is a subset $R\subset X\times Y$. For an ordered pair $(x,y)\in X\times Y$ we write $xRy$ if $(x,y)\in R$. If $R$ is a relation on $S\times S$ for some set $S$, we call it a \textit{(binary) relation on $S$}     
+    An \textit{$n$-ary relation} on $n$ sets $X_1,\dots,X_n$ is a subset $R\subset X_1\times \cdots\times X_n$. For an $n$-tuple $(x_1,\dots,x_n)\in X_1\times\cdots\times  X_n$.\\ 
+    A $2$-ary relation $R$ on sets $X,Y$ is called a \emph{binary relation}. We define $xRy: \equiv (x,y)\in R$. If $R$ is a relation on $S\times S$ for some set $S$, we call it a \textit{(binary) relation on $S$}.
 \end{definition}
+In the following we will investigate different notions of (binary) relations between elements in sets. 
 \subsubsection{Functions}
 \begin{definition}
     We define a \textit{(set theoretical) function} $f$ from a set $X$ to a set $Y$, denoted $f:X\rightarrow Y$, to be a relation $f\subset X\times Y$ satisfying
     $$\forall x\in X\exists! y\in B((x,y)\in f).$$
     For an $x\in A$ we take $f(x)$ to be the unique element in $Y$ satisfying $(x,f(x))\in f$. With this notation if $x=x'$ then $f(x)=f(x')$. For a subset $Z\subset X$, the axiom schema of seperation lets us form the \text{the image of $Z$ under $f$}, which we define as 
-    $$f(Z) := \{ f(x) : x\in S\}.$$
-    We can also define the \textit{restriction of $f$ to $S$} as the set 
-    $$ \left. f\right|_S := \{ (x,f(x))\in f : x\in S\}$$
+    $$f(Z) := \{ f(x) : x\in Z\}.$$
+    We can also define the \textit{restriction of $f$ to $Z$} as the set 
+    $$ \left. f\right|_Z := \{ (x,f(x))\in f : x\in Z\}$$
     We denote the set of function between $X$ and $Y$ by ${}^X\!Y$, i.e. 
     $${}^X\!Y := \left\{ f\subset X\times Y : \forall x\in X\exists! y \in Y((x,y)\in f)\right\} $$
 \end{definition}
@@ -402,7 +411,7 @@ We will later see that the well-ordering principle is in fact equivalent to the 
 \begin{remark}
     Informally, we define $\Omega$ to be the collection of every ordinal number. By $\alpha\in\Omega$ we mean $\mathrm{ordinal}(\alpha)$. 
 \end{remark}
-\begin{theorem}
+\begin{theorem}\label{FactsAboutOrdinals}
     \begin{enumerate}
         \item If $\alpha\in \Omega$, then $\alpha=\emptyset$ or $\emptyset\ \mathrm{xor}\ \emptyset\in\alpha$.
         \item Without assuming the axiom of foundation, if $\alpha\in \Omega$, then $\alpha\notin \alpha$.
@@ -554,7 +563,57 @@ We will later see that the well-ordering principle is in fact equivalent to the 
     $$w_{\alpha_0}\cup \{(\alpha_0, f(M\setminus M'))\}$$
     is an $f$-set strictly greater than $w_{\alpha_0}$. It follows that $w_{\alpha_0}:\alpha_0\rightarrow M$ is a bijection. We then get a well-ordering on $M$, where for $x,y\in M$, we write $x\leq y$ if $w_{\alpha_0}^{-1}(x)\leq w_{\alpha_0}^{-1}(y)$.
 \end{proof}
-\subsection{Peano Arithmetic}
+\subsection{Models of $\mathrm{ZF(C)}$}
+\subsubsection{The standard model $\mathrm{V}$ of $\mathrm{ZF(C)}$}
+\subsubsection{Non-standard models of $\mathrm{ZF(C)}$}
+\subsection{Peano Arithmetic in a model of $\mathrm{ZF}$}
+Fix a model $V$ of $\verb|ZF|$, we aim to construct a $\mathcal{L}_{\mathrm{PA}}$-structure within $V$ which we denote $\N_{\omega}$ whose domain is $\omega$ and show that it is a model of $\verb|PA|$, where $\mathcal{L}_{\mathrm{PA}}=\{0,\mathrm{s},+,\cdot\}$. We then define 
+\begin{gather*}
+    0^{\N_\omega} := \emptyset\in \omega\\
+    \mathrm{s}^{\N_\omega} : \omega \rightarrow \omega\\
+    n \mapsto n+1:= n\cup\{n\}\\
+\end{gather*}
+On $\omega$ we define a binary operation, called addition, recursively by $n+0:= n$ and $n+\mathrm{s}(m)=\mathrm{s}(n+m)$, hence we define 
+\begin{gather*}
+    +^{\N_\omega}: \omega \times \omega \rightarrow \omega\\
+    (n,m) \mapsto n+m
+\end{gather*}
+We also define a binary operation, called multiplication, recursively by $n\cdot 0 = 0$ and $n\cdot \mathrm{s}(m)= n\cdot m+n$, hence we define 
+\begin{gather*}
+    \cdot^{\N_\omega}: \omega\times \omega \rightarrow \omega\\
+    (n,m)\mapsto nm := n\cdot m
+\end{gather*}
+\begin{theorem}
+    $$\N_\omega \vDash \mathrm{PA}$$
+\end{theorem}
+\begin{proof}
+    Fix an assignment $j$. We prove that $\N_\omega \vDash \mathrm{PA}_i$ for each $i\in\{0,1,\dots, 6\}$. For $i=0$, the prove will use the inductive definition on the complexity of verifying validity of a formula. This is a little cumbersome, so for the other axioms we will use a more natural language approach.\\
+    "$(\N_\omega, j) \vDash \mathrm{PA}_0$": We need to show that $\N_\omega \vDash \neg\exists x(\mathrm{s}(x) = 0)$. Note that this means, we need to prove that $\N_\omega \vDash \forall x(\mathrm{s}(x)\neq 0)$. Let $n\in \omega$ be given. We then need to prove that $\N_\omega[x\mapsto n]\vDash \mathrm{s}(x) \neq 0$, i.e. that $\N_\omega[x\mapsto n] \vDash \mathrm{s}(x) = 0$ is not true. We thus have to verify that 
+    $$\N_\omega[x\mapsto n](\mathrm{s}(x))=\mathrm{s}^{\N_\omega}(\N_\omega[x\mapsto n](x))=\mathrm{s}^{\N_\omega}(n)=n\cup \{n\}$$ is not equal to $0^{\N_\omega} = \emptyset$, but this is indeed obvious since $n\in n\cup\{n\}$.\\
+    "$(\N_\omega,j)\vDash\mathrm{PA}_1$": Let $n$ and $m$ in $\omega$ be given. Suppose $n\neq m$. Then $n\in m$ or $m\in n$. In the first case, by Corollary~\ref{ClosurePropertiesOfOrdinals} 2. $n+1\subset m$, hence $n+1\in m$ or $n+1=m$. In either case since $m\subsetneq m+1$, $n+1\subsetneq m+1$ and in particular $n+1 \neq m+1$.{\Large I feel like I have explained some facts about ordinals multiple times different places -- collect in lemma!}\\
+    "$(\N_\omega,j)\vDash\mathrm{PA}_2$": The result follows from the base case of the definition of addition on $\omega$.\\
+    "$(\N_\omega,j)\vDash\mathrm{PA}_3$": The result follows from the recursion step of the definition of addition on $\omega$.
+    "$(\N_\omega,j)\vDash\mathrm{PA}_4$": Again it follows from the base case recursive definition of multiplication on $\omega$.\\
+    "$(\N_\omega,j)\vDash\mathrm{PA}_5$": Again it follows from the recursion step in the definition of multiplication on $\omega$.\\
+    "$(\N_\omega,j)\vDash\mathrm{PA}_6$": Let a $\mathcal{L}_\mathrm{PA}$-formula $\varphi$ with $x\in \mathrm{free}(\varphi)$ be given. We need to show that under the given interpretation, if 
+    $$\psi:\equiv\varphi(\emptyset)\wedge \forall n\in \omega(\varphi(n)\to \varphi(n+1)),$$
+    then $\forall n\in \omega( \varphi(n))$. Set 
+    $$E := \{n\in \omega : \neg\varphi(n)\}.$$
+    If we can show that 
+    $$E = \emptyset$$
+    then we are done. Suppose $E\neq \emptyset$. Then $E$ has an $\in$-minimal element $m$. Since we assumed $\psi$, $m\neq \emptyset$ and $m$ cannot be the succesor of some $m'$ for then $\neg \varphi(m')$ (since we with $\psi$ assumed $\varphi(n)\to \varphi(n+1)$ which is equivalent to $\neg\varphi(n+1)\to \neg \varphi(n)$ ) and hence $m'\in E$ which would contradict the minimality of $m$. We must therefor have that $E$ is empty. 
+\end{proof}
 
-\subsubsection{The Standard Model $\N_\omega$ of Peano Arithmetic with Domain $\omega$}
+\begin{theorem}
+    $\N\simeq \N_\omega$    
+\end{theorem}
+\begin{proof}
+    {\Large DO!}
+\end{proof}
+\begin{corollary}
+    $\omega$ is an ordered semi-ring, which we will from now on denote $\N$. 
+\end{corollary}
+\begin{proof}
+    {\Large DO!}
+\end{proof}
 \subsection{NGB Set Theory - A Formal Treatment of Classes}
