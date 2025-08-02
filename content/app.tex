@@ -247,7 +247,7 @@ We now give following notion of checking that two models are essentially the sam
     $$I\vDash F(\tau_1,\dots,\tau_n) = F(\tau_1',\dots,\tau_n') \implies_{\mathrm{meta}} M \vDash F(\tau_1,\dots,\tau_n) = F(\tau_1',\dots,\tau_n').$$
     Now, let $\Phi$ be a set of $\mathcal{L}$-formulae and $M$ a model of $\Phi$. Let $\varphi$ be an $\mathcal{L}$-formula. Suppose $\Phi\vdash \varphi$. Note now that every instance of modus ponens is obviously valid in $M$ and that by {\large insert fact} every instance of generalization is valid in $M$. It thus follows that every application of these rules to conclude that $\Phi\vdash \varphi$ is valid in $M$. Since we know that the logical axioms of $\verb|FOL|$ are valid in $M$, it follows that if the formulae $\varphi_1,\dots,\varphi_n$ that make up a formal proof of $\varphi$ from $\Phi$, are all valid. In particular, since $\varphi_n \equiv \varphi$, it follows that $M\vDash \varphi$, which finishes the proof (sketch) 
 \end{proofsketch}
-\begin{corollary}
+\begin{corollary}\label{ConsequencesOfSoundnessTheorem}
     \begin{enumerate}
         \item For every tautology $\varphi$ we get that $M\vDash \varphi$ for any model $M$.
         \item For a set of $\mathcal{L}$-formulae $\Phi$, if there is a model $M$ with $M\vDash \Phi$, then $\mathrm{Con}(\Phi)$.
@@ -260,7 +260,7 @@ We now give following notion of checking that two models are essentially the sam
     1. Indeed, $M$ is a model of the empty set (of formulae), hence by an application of the above theorem the result follows.\\
     2. Indeed, given a formula $\varphi\in\Phi$, 
     $$M\not\vDash \varphi \wedge \neg\varphi,$$
-    which means $\Phi \not\vdash \varphi\wedge \neg\varphi$ {\large note to self: write something about contraposition in metatheory}.\\
+    means $\Phi \not\vdash \varphi\wedge \neg\varphi$ by the soundness theorem {\large note to self: write something about contraposition in metatheory}.\\
     3. Any model of a set of formulae is a model of any instance of logical axiom, hence by 2. such an instance is consistent.\\
     4. This is just a special case of the contrapositive of the soundness theorem. 
 \end{proof}
@@ -276,7 +276,7 @@ We now refine the definition of an $\mathcal{L}$-theory. A set $T$ of $\mathcal{
     For an $\mathcal{L}$-theory $T$, let $\mathrm{Th}(T)$ denote the set of $\mathcal{L}$-sentences $\sigma$ with $T\vdash \sigma$.
 \end{definition}
 \begin{remark}
-    Note that a consistent theory $T$ is complete if and only if either $\sigma\in \mathrm{Th}(T)$ or $\neg \sigma in\mathrm{Th}(T)$ for every $\mathcal{L}$-sentence $\sigma$. 
+    Note that a consistent theory $T$ is complete if and only if either $\sigma\in \mathrm{Th}(T)$ or $\neg \sigma \in\mathrm{Th}(T)$ for every $\mathcal{L}$-sentence $\sigma$.  
 \end{remark}
 \begin{theorem}
     Let $T$ be an $\mathcal{L}$-theory such that there is a model $M$ of $T$. Then there is a complete $\mathcal{L}$-theory $\overline{T}$ with $\overline{T}\supset T$. 
@@ -304,24 +304,115 @@ We now refine the definition of an $\mathcal{L}$-theory. A set $T$ of $\mathcal{
     For a consistent $\mathcal{L}$-theory $T$, $T$ is maximally consistent if and only if $\sigma \in T$ or $\neg\sigma\in T$ for every $\mathcal{L}$-formula $\sigma$.
 \end{lemma}
 \begin{proof}
-    
+    Suppose first that $T$ is maximally consistent. Let $\sigma$ be an $\mathcal{L}$-sentence. By assumption $\sigma\in T$ or $T\vdash \neg \sigma$. Suppose $\sigma\notin T$. Then $T\vdash \neg \sigma$, and since $\mathrm{Con}(T)$, $T\not\vdash \sigma$. This means $T\not\vdash \neg\neg\sigma$, hence $\neg\sigma\in T$.\\
+    Assume now $\sigma\in T$ or $\neg\sigma\in T$ for every $\mathcal{L}$-sentence $\sigma$. Let $\sigma$ be an arbitrary $\mathcal{L}$-sentence. Suppose $\sigma\notin T$. Then $\neg \sigma\in T$. Hence $\neg \sigma$ is by definition a formal proof of $T\vdash \neg\sigma$.  
 \end{proof}
 \begin{lemma}
-    
+    Let $T$ be a consistent $\mathcal{L}$-theory. Then 
+    \begin{enumerate}
+        \item If $T$ is complete, then $\mathrm{Th}(T)$ is maximally consistent.
+        \item If $T$ is maximally consistent, then $T=\mathrm{Th}(T)$. 
+    \end{enumerate}
 \end{lemma}
 \begin{proof}
-    
+    1. Since $T$ is complete, it is consistent. Let $\sigma$ be an $\mathcal{L}$-sentence. Since $T$ is completeness we also get $T\vdash \sigma$ or $T\vdash \neg\sigma$ which is equivalent to $\sigma\in \mathrm{Th}(T)$ or $\neg \sigma\in \mathrm{Th}(T)$ which by the prior lemma means that $\mathrm{Th}(T)$ is maximally consistent.\\
+    2. Trivially $T\subset \mathrm{Th}(T)$. Let $\sigma \in \mathrm{Th}(T)$. Then $T\vdash \sigma$. By assumption $\sigma\in T$ or $\neg\sigma\in T$.\\ 
+    For any there $S$ where $\tau\in S$ or $\neg\tau\in S$ for a  sentence $\tau\in \mathrm{Th}(S)$, if $\neg\tau\in S$, then $\neg\mathrm{Con}(T)$. So we see that $\neg\sigma\notin T$ which implies $\sigma \in T$. We thus conclude that $T=\mathrm{Th}(T)$. 
 \end{proof}
 \begin{lemma}
-    
+    If an $\mathcal{L}$-theory has a model $M$, then $\mathrm{Th}(M)$ is a maximally consistent extension of $T$. 
 \end{lemma}
 \begin{proof}
-    
+    Let $\sigma\in T$. Then $T\vdash \sigma$, hence by soundness, $M\vDash \sigma$ which means $\sigma\in \mathrm{Th}(M)$. $\mathrm{Th}(M)=\overline{T}$ is readily seen to be maximally consistent. It is consistent since a theory with a model is automatically consistent (cf. Corollary~\ref{ConsequencesOfSoundnessTheorem} 2.) and for any $\mathcal{L}$-sentence $\sigma$, either $M\vDash \sigma$ or $M\vDash \neg\sigma$ which by definition is equivalent to either $\sigma\in \mathrm{Th}(M)$ or $\neg\sigma \in \mathrm{Th}(M)$
 \end{proof}
 \subsubsection{Universal List of Sentences}
+For this sections and the one's on Lindenbaum's Lemma and Gödel's Completeness Theorem any signature $\mathcal{L}$ is countable. I.e. the symbols of $\mathcal{L}$ can be arranged in a list that is at most potentially infinite list $L_\mathcal{L}$. We now aim to encode every $\mathcal{L}$-sentence in an ordered list called the \emph{universal list of $\mathcal{L}$}. Let $\xi_i$ be a the symbol at index $i$ in $L_\mathcal{L}$. We encode this as
+$$\#\xi_i := \underbrace{22\dots2}_{i\ 2\text{'s}},$$
+i.e. we set $\#\xi_0:=2$ and recursively define $\#\xi_{i+1} := \#\xi_i 2$. For logical symbols we also define an encoding using $1$'s. First of all we define encodings for the logical connectives
+\begin{table}[h]
+\center
+\begin{tabular}{lllll}
+Symbol $\xi$    & Encoding $\#\xi$         &  &  &  \\
+$=$       & $11$             &  &  &  \\
+$\neg$    & $1111$           &  &  &  \\
+$\wedge$  & $111111$         &  &  &  \\
+$\vee$    & $11111111$       &  &  &  \\
+$\to$     & $1111111111$     &  &  &  \\
+$\exists$ & $111111111111$   &  &  &  \\
+$\forall$ & $11111111111111$ &  &  & 
+\end{tabular}
+\end{table}
+We can order the variables in a potentially infinite list. For $x_0$ we define $\#x_0:= 1$ for the $i$'th variable $x_i$ we define $\#x_{i+1}:= \#x_i11$. Now given any string of symbols in the language associated with $\mathcal{L}$, $\xi := \xi_0\xi_1\dots\xi_n$ we define 
+$$\#\xi:= \#\xi_00\#\xi_10\dots 0\#\xi_n,$$
+i.e. we recursively define the encoding on strings through recursion in the length of the string. Now we define an order on strings $\#\xi$, where $\#\xi<\#\xi'$ if $\vert \#\xi\vert < \vert \#\xi'\vert$ ($\vert\bullet\vert$ is the length of a string) and if $\vert \#\xi\vert =\vert \#\xi'\vert$ if $\#\xi <_{\mathrm{lex}} \#\xi'$, where $<_{\mathrm{lex}}$ is the lexicographic ordering with $0<1<2$. We assume WLOG that every relational or functional symbol uses Polish notation. We now obtain the desired universal list of $\mathcal{L}$-sentences, which is the potentially infinite list 
+$$\Lambda_\mathcal{L}:=[\sigma_0,\sigma_1,\dots]$$
+of $\mathcal{L}$-sentences where 
+$$\#\sigma_i <\#\sigma_j$$
+for $i<j$. To see that is potentially infinite, note that there is a finite time algorithm for generating the next element in the list of possible strings,
+\begin{enumerate}
+    \item Let $\#\sigma_n$ be some element generated in the list. Set $l:= \vert\#\sigma_n\vert$. There are only finitely many possible strings of the form $\#\sigma$ of length $l$ (since there are only finitely many strings consisting of $0$'s, $1$'s and $2$'s) where $\sigma$ is a sentence. 
+    \item If $\#\sigma_n$ is the largest of these strings compute the sentence $\sigma$ with the smallest $\#\sigma$ of length $l+1$ otherwise compute the $\sigma$ with the smallest $\#\sigma>\#\sigma_n$.  
+\end{enumerate}
 \subsubsection{Lindenbaum's Lemma}
+\begin{theorem}(Lindenbaum's Lemma) Let $\mathcal{L}$ be a countable signature and $T$ a consistent $\mathcal{L}$-theory. If there is a sentence $\sigma_0$ with $T\not\vdash \sigma_0$. Then there is a maximally consistent theory $T^\ast_{\sigma_0}\supset T+\sigma_0$. 
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+\begin{lemma}
+    Let $T$ be an $\mathcal{L}$-theory where $\mathcal{L}$ is countable and $\sigma_0$ be given as in Lindenbaum's Lemma. For any $\mathcal{L}$-sentences $\sigma,\sigma_1,\sigma_2$,
+    \begin{enumerate}
+        \item $\neg \sigma\in T^\ast_{\sigma_0}\metaiff \text{not } \sigma\in T^\ast_{\sigma_0}$.
+        \item $\wedge \sigma_1\sigma_2\in T^\ast_{\sigma_0} \metaiff \sigma_1\in T^\ast_{\sigma_0}\text{ and }\sigma_2\in T^\ast_{\sigma_0}$
+        \item $\vee\sigma_1\sigma_2 \in T^\ast_{\sigma_0} \metaiff \sigma_1\in T^\ast_{\sigma_0} \text{ or } \sigma_2\in T^\ast_{\sigma_0}$.
+        \item $\to\sigma_1\sigma_2\in T^\ast_{\sigma_0} \metaiff \sigma_1\in T^\ast_{\sigma_0} \text{ then } \sigma_2\in T^\ast_{\sigma_0}$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    1.\\
+    2.\\
+    3.\\
+    4.
+\end{proof}
+\subsubsection{An Extension of a Signature \& of a Theory}
+\begin{lemma}
+    The $\mathcal{L}_c$-theory $T\ast_{\sigma_0}(c)$ is consistent.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
 \subsubsection{Gödel's Completeness Theorem (for Countable Signatures)}
+\begin{lemma}
+    $T^\ast_{\sigma_0}(c)$ can be extended to a consistent list $\widetilde{T}$ of $\mathcal{L}_c$-sentences such that the additional sentences contain no quantifiers or free variables and such that for each $\mathcal{L}_c$-sentence $\sigma$,
+    $$\sigma\in \widetilde{T} \text{ or } \neg\sigma\in \widetilde{T}$$
+    so $\widetilde{T}$ is a maximally consistent theory.
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+\begin{theorem}
+    The $\mathcal{L}_c$-structure $M$ defined above defines a model for $\widetilde{T}$ and since $T$ is a subset of $\widetilde{T}$, when we restrict $\bullet^M$ to $\mathcal{L}$, it follows that this restriction is a model of $T+\neg\sigma_0$. 
+\end{theorem}
+\begin{proof}
 
+\end{proof}
+\begin{theorem}(Gödel's Completeness Theorem). If $\mathcal{L}$ is a countable signature and $T$ is a consistent then it has a model $M$.  
+Moreover, if $sigma_0$ is a sentence such that $T\not\vdash \sigma_0$, then there is a model of $T+\neg \sigma_0$.  
+\end{theorem}
+\begin{corollary}
+    Every theory that can be completed has a model.
+\end{corollary}
+\begin{definition}
+    Let $T$ be an $\mathcal{L}$-theory and $\sigma$ an $\mathcal{L}$-sentence, then \emph{$T$ is a model of $\sigma$}, denoted $T\vDash \sigma$, if for every model $M$ of $T$ we have $M\vDash \sigma$
+\end{definition}
+\begin{corollary}
+    Let $\mathcal{L}$ be a countable signature. Consider an $\mathcal{L}$-theory $T$ and an $\mathcal{L}$-sentence $\sigma$. Then 
+    $$T\vDash \sigma \metaiff T\vdash \sigma.$$
+\end{corollary}
+\begin{proof}
+    $T\vdash \sigma\metaimplies T\vDash \sigma$ is the soundness theorem. Suppose $T\vDash \sigma$. If $T$ is inconsistent, then $T\vdash \sigma$. So suppose $\mathrm{Con}(T)$. Then 
+\end{proof}
+The above corollary is very useful for doing mathematics. Once we have argued for the formal proofs of basic theorems in ZF(C) and when we have a standard model of ZF(C), we have a way to prove mathematical statements without needing to do formal proofs. For instance instead of doing a formal proof of some sentence $\sigma$ from the axioms of Group Theory ($\verb|GT|$), Ring Theory($\verb|RT|$), Topology ($\verb|TOP|$, which is an extension of the axioms of ZF(C)), or (almost) whatever set of axioms we desire, we simply prove $\verb|GT|\vDash \sigma$, $\verb|RT|\vDash \sigma$ or $\verb|TOP|\vDash \sigma$, which we can (in some cases not so) easily do, since  
 \subsection{The Axioms and Standard Model of Peano Arithmetic}
 
 \subsubsection{The Axioms}

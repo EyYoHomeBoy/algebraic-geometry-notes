@@ -839,7 +839,7 @@ The upshot is that the existence of a  solution  $b_w^{(i)}\in K$ to (\ref{PolHi
 $$\lambda_i = \sum_{w\in \N^n} b_w^{(i)}\mathbf{x}^v.$$
 Indeed we get that 
 $$\sum_1^m \lambda_i f_i = \sum_{u\in \N^n : \vert u\vert \leq B} c_u \mathbf{x}^u = 1$$
-and by construction $\deg \ \lambda_i f_i \leq B.$ Conversely if a solution to the Hilbert equation $\lambda_i\in K[x_1,\dots,x_n]$ with $\deg \ \lambda_i f_i \leq B$ exists then the coefficients of $\lambda_i$ constitutes a solution to (\ref{PolHilbertEquation}). The upshot is that we can produce an explicit solution to the Hilbert equation by solving the system of linear equations (\ref{LinHilbertEquation}) and we know that a solution to this system of equations exists exactly when a degree bounded solution to the Hilbert equation exists.\\
+and by construction $\deg \ \lambda_i f_i \leq B.$ Conversely if a solution to the Hilbert equation $\lambda_i\in K[x_1,\dots,x_n]$ with $\deg \ \lambda_i f_i \leq B$ exists then the coefficients of $\lambda_i$ constitutes a solution to (\ref{PolHilbertEquation}). Then we can produce an explicit solution to the Hilbert equation by solving the system of linear equations (\ref{LinHilbertEquation}) and we know that a solution to this system of equations exists exactly when a degree bounded solution to the Hilbert equation exists.\\
 
 Another approach to providing an ENS relies exclusively on Gröbner basis theory. We present this approach here. We first need to reformulate WNS such that the statement can be "observed" by a Gröbner basis. To do this we give the following definition
 \begin{definition}\label{FinPol : 1}
@@ -906,7 +906,7 @@ To extend this approach to the case where only a final polynomial to exist we ne
     Since $s_2\in \langle y_1,\dots,y_m\rangle$ and\\ $s_1\in K[z,\mathbf{x},\mathbf{y}]\setminus \langle y_1,\dots,y_m\rangle$ there is no cancellation between terms of $s_1$ and $s_2$. This means $\sum_1^m\mu_i'f_i=c$ and hence $g(z,\mathbf{x},0)=cz$, which implies $g$ is an extended final polynomial for $f_1,\dots,f_m$.
 \end{proof}
 \subsection{A Theory of Affine Varieties}
-In this section we will assume that any field is algebraically closed {\LARGE ref to def}
+In this section we will assume that any field is algebraically closed.
 \subsubsection{Morphisms of Affine Varieties: Polynomial maps}
 \begin{definition}
     Let $V\subset \A^n$ and $W\subset \A^m$ be affine varieties. A map $\varphi: V \rightarrow W$ is called a \textit{polynomial map} if there are polynomials $f_1,\dots,f_m\in K[x_1,\dots,x_n]$ such that for $v\in V$, 
@@ -994,7 +994,7 @@ The above result can be used to determine wether an algebraic set is a variety.
     A polynomial map is continuous in the Zariski topology.
 \end{proposition}
 \begin{proof}
-    Let varieties $V\subset \A^n$ and $W\subset \A^m$ be given. Consider a polynomial map $\varphi : V\rightarrow W$ defined by $f_1,\dots,f_m\in K[x_1,\dots,x_n]$. Consider a Zariski closed subset $U\subset W$. Then by Proposition~\ref{PreimageOfPolMapIsAlgebraic} 1. $\varphi^{-1}(U)$ is Zariski closed, hence it is know from topology {\Large ADD SOME TOPOLOGY EVENTUALLY} that $\varphi$ is continuous. 
+    Let varieties $V\subset \A^n$ and $W\subset \A^m$ be given. Consider a polynomial map $\varphi : V\rightarrow W$ defined by $f_1,\dots,f_m\in K[x_1,\dots,x_n]$. Consider a Zariski closed subset $U\subset W$. Then by Proposition~\ref{PreimageOfPolMapIsAlgebraic} 1. $\varphi^{-1}(U)$ is Zariski closed, hence it is know from topology that $\varphi$ is continuous. 
 \end{proof}
 \begin{definition}
     A polynomial map $\varphi: V\rightarrow W$, where $V\subset \A^n$ and $W\subset \A^m$ are affine varieties is called an \textit{isomorphism (of affine varieties)} if it is bijective and $\varphi^{-1} : W \rightarrow V$ is a polynomial map. In other words an isomorphism of affine varieties is a \textit{bi-polynomial map}.
