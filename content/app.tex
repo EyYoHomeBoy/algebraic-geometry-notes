@@ -169,6 +169,34 @@ since then $\Phi+\varphi \vdash \mathrm{False}$ which is equivalent to $\Phi +\n
 Conversely if 
 $$(\text{there is an }\mathcal{L}\text{-formula }\varphi \text{ such that } \Phi\vdash \neg \varphi)\metaimplies \neg\mathrm{Con}(\Phi+\varphi),$$
 since then get $\Phi+\varphi\vdash \varphi\wedge \neg \varphi$, hence by contradiction, $\Phi+\varphi\vdash \mathrm{False}$.
+\begin{lemma}\label{TheoryWithInconsistentSubTheoryIsInconsistent}
+    Let $\Phi$ be a set of $\mathcal{L}$-formulae and $\Phi'\subset \Phi$. Then $\neg\mathrm{Con}(\Phi')$ implies $\neg\mathrm{Con}(\Phi)$
+\end{lemma}
+\begin{proof}
+    Indeed, if there is a formula $\varphi$ such that $\Phi'\vdash \varphi\wedge \neg\varphi$, then trivially $\Phi\vdash \varphi\wedge \neg\varphi$.
+\end{proof}
+\begin{theorem}(Compactness Theorem)\label{CompactnessTheorem}
+    A set of $\mathcal{L}$-formulae $\Phi$ is consistent if and only if every finite subset $\Phi'\subset \Phi$ is consistent
+\end{theorem}
+\begin{proof}
+    One implication follows immediately from the above lemma.
+    Suppose $\Phi$ is not consistent. Then there is a formula $\varphi$ and a sequence of formulae $\varphi_1,\dots,\varphi_n$ with $\varphi_n = \varphi\wedge \neg\varphi$ that is a formal proof of $\varphi\wedge \neg\varphi$ from $\Phi$. Now consider the finite subsequence $\varphi_{i_1},\dots,\varphi_{i_m}\in \Phi$, with $1\leq i_1<\dots <i_m\leq n$. Then setting $\Phi':=\{\varphi_{i_1},\dots,\varphi_{i_m}\}\subset \Phi$ we get $\Phi'\vdash \varphi\wedge \neg\varphi$, hence $\neg\mathrm{Con}(\Phi')$.  
+\end{proof}
+\subsubsection{Sentences in PNF and sPNF}
+Let $\quantifs$ denote either $\exists$ or $\forall$.
+\begin{definition}
+    For an $\mathcal{L}$-sentence $\sigma$, it is in \emph{Prenex Normal Form of $\sigma$}, denoted \emph{PNF}, if it is on the form
+    $$\quantifs_0 x_0\quantifs_1x_1\dots \quantifs_n x_n\sigma'$$
+    where $\sigma'$ is quantifier free.\\
+    $\sigma$ is in \emph{special Prenex Normal Form}, denoted \emph{sPNF}, if it is in PNF as above where $x_1,\dots,x_n$ appear free in $\sigma'$.  
+\end{definition}
+\begin{lemma}\label{EverySentenceHasAnEquivalentSentenceInsPNF}
+    Given an $\mathcal{L}$-sentence $\sigma$ there is a sentence $\tau$ in sPNF such that
+    $$\sigma \iff \tau.$$ 
+\end{lemma}
+\begin{proof}
+    We don't prove this result.
+\end{proof}
 \subsection{Semantics of First Order Logic}
 We are now going to assign truth values to formulae. That is we want for some signature $\mathcal{L}$ to assign either false or true to each $\mathcal{L}$-formula. In propositional logic this can be done by asserting truth tabels for logical connectives, $\wedge$, $\vee$, $\neg$, $\to$. This simple approach does not extend to \verb|FOL|. Take for instance the formula, $\forall x \exists y \varphi(x,y)$. Could we possibly assign a truthtable to such a formula. Suppose for instance that $\varphi\equiv x<y$. Then there is a dependency on what $x$ and $y$ is and we are therefor at a loss in computing a truth table in terms of $\varphi$ in general. Introducing an algorithm for determining truth for $\forall$ and $\exists$ is not terrible, but we need a way to map formulas onto some sort of context. To discuss how to do this we need the notion of an \emph{interpretatation} for which we will assume some notion of naive set theory and a notion of law of excluded middle, i.e. we assume that a statement (to be interpreted informally) is either true or false. We are thus working in the strong metatheory.
 \subsubsection{Structures and Interpretations}
@@ -282,7 +310,7 @@ We now refine the definition of an $\mathcal{L}$-theory. A set $T$ of $\mathcal{
     Let $T$ be an $\mathcal{L}$-theory such that there is a model $M$ of $T$. Then there is a complete $\mathcal{L}$-theory $\overline{T}$ with $\overline{T}\supset T$. 
 \end{theorem}
 \begin{proof}
-    Define $\overline{T}$ to be the sentences, $\sigma$, which satisfy $M\vDash \sigma$. Since for any sentence $\tau$, either $M\vDash \tau$ or $M\vDash \neg\tau$, we get that either $\tau\in \overline{T}$ or $\neg \tau\in \overline{T}$. Let $\sigma$ be any $\mathcal{L}$-sentence. If $\sigma\in \overline{T}$, then since $\sigma\vdash \sigma$, it follows that $\overline{T}\vdash \sigma$. Similary, if $\neg\sigma\in \overline{T}$, then $\overline{T} \vdash \neg\sigma$. We thus conclude that $\overline{T}$ is complete. Since $M\vDash T$, it follows that $T\subset \overline{T}$.
+    Define $\overline{T}$ to be the sentences, $\sigma$, which satisfy $M\vDash \sigma$. Since for any sentence $\tau$, either $M\vDash \tau$ or $M\vDash \neg\tau$, we get that either $\tau\in \overline{T}$ or $\neg \tau\in \overline{T}$. Let $\sigma$ be any $\mathcal{L}$-sentence. If $\sigma\in \overline{T}$, then since $\sigma\vdash \sigma$, it follows that $\overline{T}\vdash \sigma$. Similarly, if $\neg\sigma\in \overline{T}$, then $\overline{T} \vdash \neg\sigma$. We thus conclude that $\overline{T}$ is complete. Since $M\vDash T$, it follows that $T\subset \overline{T}$.
 \end{proof}
 \begin{definition}
     Let $M$ be a model of some theory $T$. Then $\mathrm{Th}(M)=\overline{T}$ is called the \emph{model of $M$} 
@@ -295,8 +323,8 @@ We now refine the definition of an $\mathcal{L}$-theory. A set $T$ of $\mathcal{
 \begin{definition}
     An $\mathcal{L}$-theory $T$ is \emph{maximally consistent} if for $\mathrm{Con}(T)$ and for every $\mathcal{L}$-sentence $\sigma\in T$ or $\neg\mathrm{Con}(T+\sigma)$. 
 \end{definition}
-\begin{remark}
-    From the last two facts gathered about consistency in the section on consistency and compactness we get that 
+\begin{remark}\label{ConsistentTheoryIsInconsistentUponBeingExtendedByOneFormulaIffItCanProveSaidTheory}
+    From the last two facts gathered about consistency in the section on consistency and compactness we get that for a consistent theory $T$,
     $$\neg\mathrm{Con}(T+\sigma)\metaiff T\vdash \neg \sigma,$$
     so a consistent $\mathcal{L}$-theory $T$ is maximally consistent if and only if $\sigma\in T$ or $T\vdash \neg\sigma$. 
 \end{remark}
@@ -305,7 +333,7 @@ We now refine the definition of an $\mathcal{L}$-theory. A set $T$ of $\mathcal{
 \end{lemma}
 \begin{proof}
     Suppose first that $T$ is maximally consistent. Let $\sigma$ be an $\mathcal{L}$-sentence. By assumption $\sigma\in T$ or $T\vdash \neg \sigma$. Suppose $\sigma\notin T$. Then $T\vdash \neg \sigma$, and since $\mathrm{Con}(T)$, $T\not\vdash \sigma$. This means $T\not\vdash \neg\neg\sigma$, hence $\neg\sigma\in T$.\\
-    Assume now $\sigma\in T$ or $\neg\sigma\in T$ for every $\mathcal{L}$-sentence $\sigma$. Let $\sigma$ be an arbitrary $\mathcal{L}$-sentence. Suppose $\sigma\notin T$. Then $\neg \sigma\in T$. Hence $\neg \sigma$ is by definition a formal proof of $T\vdash \neg\sigma$.  
+    Assume now $\sigma\in T$ or $\neg\sigma\in T$ for every $\mathcal{L}$-sentence $\sigma$. Let $\sigma$ be an arbitrary $\mathcal{L}$-sentence. Suppose $\sigma\notin T$. Then $\neg \sigma\in T$. Hence, $\neg \sigma$ is by definition a formal proof of $T\vdash \neg\sigma$.  
 \end{proof}
 \begin{lemma}
     Let $T$ be a consistent $\mathcal{L}$-theory. Then 
@@ -326,9 +354,9 @@ We now refine the definition of an $\mathcal{L}$-theory. A set $T$ of $\mathcal{
     Let $\sigma\in T$. Then $T\vdash \sigma$, hence by soundness, $M\vDash \sigma$ which means $\sigma\in \mathrm{Th}(M)$. $\mathrm{Th}(M)=\overline{T}$ is readily seen to be maximally consistent. It is consistent since a theory with a model is automatically consistent (cf. Corollary~\ref{ConsequencesOfSoundnessTheorem} 2.) and for any $\mathcal{L}$-sentence $\sigma$, either $M\vDash \sigma$ or $M\vDash \neg\sigma$ which by definition is equivalent to either $\sigma\in \mathrm{Th}(M)$ or $\neg\sigma \in \mathrm{Th}(M)$
 \end{proof}
 \subsubsection{Universal List of Sentences}
-For this sections and the one's on Lindenbaum's Lemma and Gödel's Completeness Theorem any signature $\mathcal{L}$ is countable. I.e. the symbols of $\mathcal{L}$ can be arranged in a list that is at most potentially infinite list $L_\mathcal{L}$. We now aim to encode every $\mathcal{L}$-sentence in an ordered list called the \emph{universal list of $\mathcal{L}$}. Let $\xi_i$ be a the symbol at index $i$ in $L_\mathcal{L}$. We encode this as
+For this section and the one's on Lindenbaum's Lemma and Gödel's Completeness Theorem any signature $\mathcal{L}$ is countable. I.e. the symbols of $\mathcal{L}$ can be arranged in a list that is at most potentially infinite list $L_\mathcal{L}$. We now aim to encode every $\mathcal{L}$-sentence in an ordered list called the \emph{universal list of $\mathcal{L}$}. Let $\xi_i$ be the symbol at index $i$ in $L_\mathcal{L}$. We encode this as
 $$\#\xi_i := \underbrace{22\dots2}_{i\ 2\text{'s}},$$
-i.e. we set $\#\xi_0:=2$ and recursively define $\#\xi_{i+1} := \#\xi_i 2$. For logical symbols we also define an encoding using $1$'s. First of all we define encodings for the logical connectives
+i.e. we set $\#\xi_0:=2$ and recursively define $\#\xi_{i+1} := \#\xi_i 2$. For logical symbols we also define an encoding using $1$'s. First we define encodings for the logical connectives
 \begin{table}[h]
 \center
 \begin{tabular}{lllll}
@@ -344,7 +372,7 @@ $\forall$ & $11111111111111$ &  &  &
 \end{table}
 We can order the variables in a potentially infinite list. For $x_0$ we define $\#x_0:= 1$ for the $i$'th variable $x_i$ we define $\#x_{i+1}:= \#x_i11$. Now given any string of symbols in the language associated with $\mathcal{L}$, $\xi := \xi_0\xi_1\dots\xi_n$ we define 
 $$\#\xi:= \#\xi_00\#\xi_10\dots 0\#\xi_n,$$
-i.e. we recursively define the encoding on strings through recursion in the length of the string. Now we define an order on strings $\#\xi$, where $\#\xi<\#\xi'$ if $\vert \#\xi\vert < \vert \#\xi'\vert$ ($\vert\bullet\vert$ is the length of a string) and if $\vert \#\xi\vert =\vert \#\xi'\vert$ if $\#\xi <_{\mathrm{lex}} \#\xi'$, where $<_{\mathrm{lex}}$ is the lexicographic ordering with $0<1<2$. We assume WLOG that every relational or functional symbol uses Polish notation. We now obtain the desired universal list of $\mathcal{L}$-sentences, which is the potentially infinite list 
+i.e. we recursively define the encoding on strings through recursion in the length of the string. Now we define an order on strings $\#\xi$, where $\#\xi<\#\xi'$ if $\vert \#\xi\vert < \vert \#\xi'\vert$ ($\vert\bullet\vert$ is the length of a string) and when $\vert \#\xi\vert =\vert \#\xi'\vert$ if $\#\xi <_{\mathrm{lex}} \#\xi'$, where $<_{\mathrm{lex}}$ is the lexicographic ordering with $0<1<2$. We assume WLOG that every relational or functional symbol uses Polish notation. We now obtain the desired universal list of $\mathcal{L}$-sentences, which is the potentially infinite list 
 $$\Lambda_\mathcal{L}:=[\sigma_0,\sigma_1,\dots]$$
 of $\mathcal{L}$-sentences where 
 $$\#\sigma_i <\#\sigma_j$$
@@ -357,9 +385,38 @@ for $i<j$. To see that is potentially infinite, note that there is a finite time
 \begin{theorem}(Lindenbaum's Lemma) Let $\mathcal{L}$ be a countable signature and $T$ a consistent $\mathcal{L}$-theory. If there is a sentence $\sigma_0$ with $T\not\vdash \sigma_0$. Then there is a maximally consistent theory $T^\ast_{\sigma_0}\supset T+\sigma_0$. 
 \end{theorem}
 \begin{proof}
-    
+    Consider the universal list of $\mathcal{L}$-sentences
+    $$\Lambda_\mathcal{L} = [\sigma_1,\sigma_2,\dots].$$    
+    We place $\neg \sigma_0$ at the beginning of this list to obtain a list
+    $$\Lambda_\mathcal{L}' := [\neg\sigma_0,\sigma_1,\sigma_2,\dots].$$
+    Set $T_0 := [\neg\sigma_0]$ and recursively define 
+    $$
+        T_{i+1} := 
+            \begin{cases}
+                T_n + [\sigma_{n+1}] & \text{if } \mathrm{Con}(T+T_n+\sigma_{n+1})\\
+                T_n & \text{otherwise}
+            \end{cases}
+    $$
+    As a result of this process we obtain a potentially infinite list 
+    $$T_{\sigma_0}^\ast := [\neg\sigma_0, \sigma_{i_1},\sigma_{i_2},\dots],$$
+    Where we assume $\mathrm{Con}(T+T_n+\sigma_{n+1})$ or $\neg\mathrm{Con}(T+T_n+\sigma_{n+1})$. For this we could use law of excluded middle, which we already use in model theory. A weaker assumption that one can take is the weak König's Lemma whose statement is 
+    $$\text{An infinite 0-1-tree has an infinite branch}$$
+    where a 0-1-tree is a certain type of subtree of a binary tree.\\
+    We now prove that $T^\ast_{\sigma_0}$ is a maximally consistent theory containing $T+\neg\sigma_0$. Clearly $\neg\sigma_0$ is in $T^\ast_{\sigma_0}$. Note that for every sentence $\sigma$ there is an $n$ such that $\sigma_n\equiv \sigma$. Hence it is sufficient to prove for each $n$ if $\sigma_n\in T$, then $\sigma_n\in T^\ast_{\sigma_0}$. We prove this by induction in $n$. For $n=1$, note that if $\sigma_1\in T$, then $\mathrm{Con}(T+\neg\sigma_0)$. Indeed, since $T\not\vdash \sigma_0$, we have that $\mathrm{Con}(T+\neg \sigma_0)$ by Remark~\ref{ConsistentTheoryIsInconsistentUponBeingExtendedByOneFormulaIffItCanProveSaidTheory}. It thus follows that $\mathrm{Con}(T+\sigma_1)$, hence $T_1=T_0+\sigma = [\neg\sigma_0,\sigma_1]$, hence $\sigma_1\in T^\ast_{\sigma_0}$. Suppose $\sigma_m\in T$ implies $\sigma\in T^\ast_{\sigma_0}$ for every $m\leq n$. Suppose $\sigma_{n+1}\in T$. Pick $N$ to be the largest $N\leq n$ such that $\sigma_M\in T^\ast_{\sigma_0}$. Then $T_N=T_n$. Suppose for a contradiction that $\neg\mathrm{Con}(T+T_n+\sigma_{n+1})$. Then since $\sigma_{n+1}\in T$, $\neg\mathrm{Con}(T+T_n)$, which means $\neg\mathrm{Con}(T+T_N)$, but then $\sigma_N\notin T^\ast_{\sigma_0}$. Then $\mathrm{Con}(T+T_n+\sigma_{n+1})$, hence $T_{n+1}=T_n+\sigma_{n+1}\ni \sigma_{n+1}$. It thus follows that $\sigma_{n+1}\in T^\ast_{\sigma_0}$.\\
+    To show $\mathrm{Con}(T^\ast_{\sigma_0})$, by the Compactness Theorem it is sufficient to prove that every finite subset of $T_{\sigma_0}^\ast$ is consistent. Any such finite subset is contained in $T_n$ for some $n$. So it is sufficient to prove $\mathrm{Con}(T_n)$. Note that since $T\not\vdash \sigma_0$, we get $\mathrm{Con}(T+\neg\sigma_0)$, hence using the Compactness Theorem, $T_0=\{\neg\sigma_0\}$ is consistent. Suppose $\mathrm{Con}(T_m)$ for each $m\leq n$ for some $n$. If $\neg\mathrm{Con}(T+T_{n}+\sigma_{n+1})$, then $T_n=T_{n+1}$ and we are done. Suppose then that $\mathrm{Con}(T+T_n+\sigma_{n+1})$. Then since $T_{n+1}=T_n+\sigma_{n+1}$ is a finite subset $T+T_n+\sigma_{n+1}$, we get $\mathrm{Con}(T_{n+1})$.\\
+    To conclude that $T^\ast_{\sigma_0}$ is maximally consistent, we prove that $\sigma\in T^\ast_{\sigma_0}$ or $\neg\mathrm{Con}(T^\ast_{\sigma_0}+\sigma)$. Let an $\mathcal{L}$-sentence be given. Such a sentence is $\sigma_n$ for some $n\geq 1$. Suppose $\mathrm{Con}(T+T_{n-1}+sigma_n)$, then $\sigma_n\in T_{n-1}+\sigma_n=T_n$. Suppose $\neg\mathrm{Con}(T+T_{n-1}+\sigma_n)$. By Lemma~\ref{TheoryWithInconsistentSubTheoryIsInconsistent}, $\neg\mathrm{Con}(T^\ast_{\sigma_0}+\sigma_n)$. 
 \end{proof}
-\begin{lemma}
+\begin{remark}\label{RemarkAboutMaximallyConsistentExtensions}
+    \begin{enumerate}
+        \item Note that if $T \vdash \sigma$, then $\neg\mathrm{Con}(T+\neg\sigma)$. Note that if for a consistent theory $\Phi$ and a formula $\varphi\in \Phi$, then $\mathrm{Con}(\Phi+\varphi)$. Then since $T^\ast_{\sigma_0}$ is maximally consistent, we first have that $\neg \sigma\notin T^\ast_{\sigma_0}$ and then that $\sigma \in T^\ast_{\sigma_0}$.
+        \item $T^\ast_{\sigma_0}\vdash \sigma \metaiff \sigma\in T^\ast_{\sigma_0}$:\\ 
+        "$\implies$": Using maximal consistency, if $T^\ast_{\sigma_0}\vdash \sigma$, then $\mathrm{Con}(T^\ast_{\sigma_0}+\sigma)$. Note that $\sigma\equiv \sigma_n$. Then every finite subtheory of $T^\ast_{\sigma_0}+\sigma$ is consistent, hence any finite subtheory of $T+T_{n-1}+\sigma_n$ is consistent, which means $\mathrm{Con}(T+T_{n-1}+\sigma_n)$. By construction $\sigma\equiv \sigma_n\in T_n\subset T^\ast_{\sigma_0}$.\\
+        "$\impliedby$":  This is obvious. 
+        \item Note also $\sigma\iff \sigma'$ then $\sigma\in T^\ast_{\sigma_0} \metaiff \sigma'\in T^\ast_{\sigma_0}$. 
+    \end{enumerate}
+\end{remark}
+One readily verifies the following lemma
+\begin{lemma}\label{SentencesInMaximalExtensionBehaveLikeValidSentencesInAModel}
     Let $T$ be an $\mathcal{L}$-theory where $\mathcal{L}$ is countable and $\sigma_0$ be given as in Lindenbaum's Lemma. For any $\mathcal{L}$-sentences $\sigma,\sigma_1,\sigma_2$,
     \begin{enumerate}
         \item $\neg \sigma\in T^\ast_{\sigma_0}\metaiff \text{not } \sigma\in T^\ast_{\sigma_0}$.
@@ -368,15 +425,43 @@ for $i<j$. To see that is potentially infinite, note that there is a finite time
         \item $\to\sigma_1\sigma_2\in T^\ast_{\sigma_0} \metaiff \sigma_1\in T^\ast_{\sigma_0} \text{ then } \sigma_2\in T^\ast_{\sigma_0}$.
     \end{enumerate}
 \end{lemma}
-\begin{proof}
-    1.\\
-    2.\\
-    3.\\
-    4.
-\end{proof}
 \subsubsection{An Extension of a Signature \& of a Theory}
+\begin{definition}
+    Given a countable $\mathcal{L}$-signature a \emph{term constant} is the term that results from applying one of these three rules recursively finitely many times.
+    \begin{align*}
+    \mathrm{C0}\colon\quad & \text{A variable-free } \mathcal{L}\text{-term is a term constant}.\\
+    \mathrm{C1}\colon\quad & \text{if } \tau_0,\dots,\tau_{n-1} \text{ are term constants and } F \text{ is an } n \text{-ary function, then}\\ 
+    & F\tau_1\cdots\tau_{n-1} \text{ is a term constant}.\\
+    \mathrm{C2}\colon\quad & \text{If } i,n \text{ are natural numbers and }\tau_0,\dots,\tau_{n-1} \text{ are term constants, then }\\ 
+    &(i,\tau_0,\dots,\tau_{n-1},n) \text{ is a term constant.} 
+\end{align*}
+The strings of the form $(i,\tau_0,\dots,\tau_{n-1},n)$ are called \emph{special constants}. In particular $(i,0)$ is a special constant. 
+\end{definition}
+\begin{remark}
+    Note that term constants build with only $\mathrm{C0}$ and $\mathrm{C1}$ are in the language induced by $\mathcal{L}$ and are variable free, while those build with $\mathrm{C2}$ may not be.
+\end{remark}
+\begin{definition}
+    Let a countable signature $\mathcal{L}$ be given. Then we define $\mathcal{L}_c$ to be $\mathcal{L}$ together with the special constants (of which there are countably many). 
+\end{definition}
+We now encode variable terms using the same encoding as we did to construct the universal list of sentences. Moreover, $\#( := 3$, $\#0$ the empty string, $\#(i+1):=\#i1$, $\#,:=4$ and $\#):= 5$. So given a special constant $c \equiv (i,\tau_0,\dots,\tau_{n-1},n)$, we define an ecoding
+$$\#c := \#(\#i\#,\#\tau_0\#,\dots \#,\#\tau_{n-1}\#,\#n\#)$$
+As before we order strings build from $\mathcal{L}_c$ first by their length and lexicographically with $0<1<2<3<4<5$. We define potentially infinite ordered lists 
+$$
+    \Lambda_\tau := [\tau_0,\tau_1,\dots] \text{ and } \Lambda_c := [c_0,c_1,\dots]
+$$  
+of terms constants and special constants respectively.
+\begin{definition}
+    Let $\sigma_i\in T^\ast_{\sigma_0}$ and $c_j\equiv (i,\tau_0,\dots,\tau_{n-1},n)$ a special constant. We say that \emph{$c_j$ is a witness of $\sigma_i$} if 
+    \begin{enumerate}
+        \item $i\geq 1$ and $\sigma_i$ is in special Prenex Normal Form.
+        \item $\exists x_n$ appears in $\sigma_i$.
+        \item For each $m<n$: If $\exists x_m$ appears in $\sigma_i$ then $\tau_m \equiv (i,\tau_0,\dots,\tau_{m-1},m)$.  
+    \end{enumerate}
+\end{definition} 
+We replace $\neg\sigma_0$ by its equivalent formula $\sigma_k\in T^\ast_{\sigma_0}$, which is in sPNF.\\
+We now construct $T^\ast_{\sigma_0}(c)$
 \begin{lemma}
-    The $\mathcal{L}_c$-theory $T\ast_{\sigma_0}(c)$ is consistent.
+    The $\mathcal{L}_c$-theory $T^\ast_{\sigma_0}(c)$ is consistent.
 \end{lemma}
 \begin{proof}
     

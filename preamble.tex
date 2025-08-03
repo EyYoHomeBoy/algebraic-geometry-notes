@@ -23,7 +23,7 @@
 \usepackage{stmaryrd}
 \usepackage{tikz}
 \usepackage{tikz-cd}
-
+\usepackage{pict2e}
 
 
 \usepackage{enumerate}
@@ -92,6 +92,24 @@
   \mathop{\mathchoice{\mytimes[0.25]}{\mytimes[0.2]}{\mytimes[0.1]}{\mytimes[0.1]}}\displaylimits
 }
 
+\newcommand{\quantifs}{\mathpalette\xquantifs\relax}
+
+\makeatletter
+\newcommand{\xquantifs}[2]{%
+  \mspace{1.5mu}%
+  \sbox0{$\m@th#1\exists$}%
+  \setlength{\unitlength}{.8\ht0}%
+  \ifx#1\scriptstyle\linethickness{0.35pt}\fi
+  \ifx#1\scriptscriptstyle\linethickness{0.3pt}\fi
+  \begin{picture}(1.55,1.2)
+  \roundcap\roundjoin
+  \polyline(0,0.05)(0.75,0.05)(0.75,1.22)(0,1.2)
+  \polyline(0.05,0.625)(0.75,0.625)
+  \put(0.75,0.05){\line(5,6){0.8}}
+  \put(0.75,0.85){\line(11,-5){0.45}}
+  \end{picture}%
+  \mspace{1.5mu}
+}
 
 
 \newcommand{\dottedarrow}{%
