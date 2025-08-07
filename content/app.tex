@@ -295,7 +295,7 @@ We now give following notion of checking that two models are essentially the sam
 \subsection{Gödels Completeness Theorem}
 We now refine the definition of an $\mathcal{L}$-theory. A set $T$ of $\mathcal{L}$-sentences is said to be an \emph{$\mathcal{L}$-theory}. In mathematics a set of axioms will always consist of sentences. Note that as far as semantics is concerned we may replace every formula in a set of $\mathcal{L}$-formulae by the set of the universal closures of these formulae and nothing will change. 
 \begin{definition}
-    An $\mathcal{L}$-theory $T$ is complete if for every $\mathcal{L}$-sentence $\varphi$, either $T \vdash \varphi$ or $T \vdash \neg\varphi$. An $\mathcal{L}$-theory that is not complete is called \emph{incomplete}
+    An $\mathcal{L}$-theory $T$ is \emph{(syntactically) complete} if for every $\mathcal{L}$-sentence $\varphi$, either $T \vdash \varphi$ or $T \vdash \neg\varphi$. An $\mathcal{L}$-theory that is not complete is called \emph{incomplete}
 \end{definition}
 \begin{remark}
     Note that an inconsistent theory is incomplete. 
@@ -459,12 +459,32 @@ of terms constants and special constants respectively.
     \end{enumerate}
 \end{definition} 
 We replace $\neg\sigma_0$ by its equivalent formula $\sigma_k\in T^\ast_{\sigma_0}$, which is in sPNF.\\
-We now construct $T^\ast_{\sigma_0}(c)$
+We now construct $T^\ast_{\sigma_0}(c)$. Suppose we have a sentence $\sigma_i\in T^\ast_{\sigma_0}$ that is in sPNF and $\forall x_n$ or $\exists x_n$ appear in $\sigma_i$, then it is on the form 
+$$\quantifs_0 x_0\quantifs_1x_1\dots \quantifs x_n\dots \quantifs x_m \sigma_i(x_0,x_1,\dots,x_n,\dots,x_m)'$$
+where $\sigma_i$ is quantifier free and in which $x_1,\dots,x_m$ appear free, hence 
+$$\sigma_i \equiv \quantifs_0 x_0\quantifs_1 x_1\dots \quantifs x_n \sigma_{i,n}(x_0,\dots,x_n)$$ 
+where $x_1,\dots, x_n$ appear free in $\sigma_{i,n}(x_0,\dots,x_n)$. Then if $c_j \equiv (i,\tau_0,\dots,\tau_{n-1},n)$ witnesses $\sigma_i$, 
+$$\sigma_i \equiv \quantifs_0 x_0\quantifs_1 x_1\dots \exists x_n \sigma_{i,n}(x_0,\dots,x_n).$$
+Set 
+$$\sigma_{i,n}[c_j]:\equiv \sigma_{i,n}(x_0/\tau_0,\dots,x_{n-1}/\tau_{n-1},x_n/c_j).$$
+Set $T^\ast_0 := T^\ast_{\sigma_0}$. Suppose $T_j^\ast$ is already defined and $c_j \equiv (i,\tau_0,\dots,\tau_{n-1},n)$ is a special constant Then 
+$$
+    T^\ast_{j+1}:= \begin{cases}
+        T_j^\ast & \text{if } c_j \text{ does not witness } \sigma\in T^\ast_{\sigma_0}\\
+        \text{Insert } \sigma_{i,n}[c_j] \text{ into } T_j^\ast\\ \text{ such that the resulting list is ordered with } & \text{otherwise} \\ \text{ respect to the } \#\text{-encodings}  
+    \end{cases}
+$$
+\begin{definition}
+    We set $T^\ast_{\sigma_0}(c) := \bigcup T_j^\ast$
+\end{definition}
+\begin{definition}
+    Definition of height of term constant. 
+\end{definition}
 \begin{lemma}
     The $\mathcal{L}_c$-theory $T^\ast_{\sigma_0}(c)$ is consistent.
 \end{lemma}
 \begin{proof}
-    
+   We first prove that $T^\ast_{\sigma_0}$ is consistent with respect to $\mathcal{L}_c$.  
 \end{proof}
 \subsubsection{Gödel's Completeness Theorem (for Countable Signatures)}
 \begin{lemma}
