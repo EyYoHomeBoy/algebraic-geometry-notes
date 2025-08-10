@@ -14,47 +14,47 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Cache the TeX Live tree and the user texmf cache
+      # Cache the whole TeX Live tree installed under $HOME
       - name: Cache TeX Live
+        id: cache-texlive
         uses: actions/cache@v4
         with:
           path: |
-            /usr/local/texlive
+            ${{ runner.temp }}/tlcache        # installer cache (optional)
+            $HOME/texlive
             ~/.texlive*
-          key: texlive-2025-${{ runner.os }}-${{ hashFiles('.github/texlive.profile', '.github/texlive.packages') }}
-          restore-keys: |
-            texlive-2025-${{ runner.os }}-
+          key: texlive-full-2025-${{ runner.os }}
 
-      - name: Install TeX Live if cache missed
-        if: steps.cache.outputs.cache-hit != 'true'
+      - name: Full TeX Live install if cache missed
+        if: steps.cache-texlive.outputs.cache-hit != 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y perl wget xz-utils
-          mkdir -p /tmp/texlive && cd /tmp/texlive
+          mkdir -p ${{ runner.temp }}/tlcache
+          cd ${{ runner.temp }}/tlcache
           wget -q https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
           tar -xzf install-tl-unx.tar.gz --strip-components=1
-          # Use your profile to get a small but functional install
-          cat .github/texlive.profile
-          sudo ./install-tl -profile .github/texlive.profile
-          echo "/usr/local/texlive/2025/bin/x86_64-linux" | sudo tee /etc/paths.d/texlive > /dev/null || true
-          echo "::add-path::/usr/local/texlive/2025/bin/x86_64-linux"
+          cat > tl.profile <<'EOF'
+selected_scheme scheme-full
+TEXDIR $HOME/texlive/2025
+TEXMFCONFIG $HOME/.texlive2025/texmf-config
+TEXMFHOME $HOME/texmf
+TEXMFLOCAL $HOME/texlive/texmf-local
+TEXMFSYSCONFIG $HOME/texlive/2025/texmf-config
+TEXMFSYSVAR $HOME/texlive/2025/texmf-var
+TEXMFVAR $HOME/.texlive2025/texmf-var
+binary_x86_64-linux 1
+# Leave docs and sources enabled for true "full" install
+EOF
+          ./install-tl -profile tl.profile
+          echo "$HOME/texlive/2025/bin/x86_64-linux" >> $GITHUB_PATH
 
       - name: Ensure TeX Live on PATH
         run: |
-          echo "/usr/local/texlive/2025/bin/x86_64-linux" >> $GITHUB_PATH
+          echo "$HOME/texlive/2025/bin/x86_64-linux" >> $GITHUB_PATH
           tlmgr --version
 
-      # Install only the packages you need. First run may download a few hundred MB
-      - name: Install required TeX packages
-        run: |
-          if [ -f .github/texlive.packages ]; then
-            pkgs=$(tr '\n' ' ' < .github/texlive.packages)
-            tlmgr install $pkgs
-          fi
-          # Always ensure latexmk present
-          tlmgr install latexmk
-
-      - name: Build PDF with xelatex
+      - name: Build PDF with XeLaTeX
         run: |
           latexmk -xelatex -interaction=nonstopmode -file-line-error -outdir=build main.tex
 
