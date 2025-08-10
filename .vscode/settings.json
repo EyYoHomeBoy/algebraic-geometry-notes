@@ -52,6 +52,7 @@
     "build/*.ist",
     "build/*.fls",
     "build/*.log",
-    "build/*.synctex.gz"
+    "build/*.synctex.gz",
+    "*.pdf"
   ]
 }
