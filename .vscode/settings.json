@@ -12,10 +12,11 @@
     },
     {
       "name": "move-pdf",
-      "command": "sh",
+      "command":  "powershell",
       "args": [
-        "-c",
-         "cp build/$(basename %DOC%.pdf) ./ && cp build/$(basename %DOC%.synctex.gz) ./"
+        "-NoProfile",
+        "-Command",
+        "Copy-Item -Path \"build/%DOCFILE%.pdf\" -Destination \".\" -Force; Copy-Item -Path \"build/%DOCFILE%.synctex.gz\" -Destination \".\" -Force"
       ]
     }
   ],
@@ -24,7 +25,8 @@
       "name": "xelatex (build dir)",
       "tools": ["xelatex", "move-pdf"]
     }
-  ], "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+  ],
+  "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
   "latex-workshop.latex.build.forceRecipeUsage": false,
   "latex-workshop.synctex.synctexjs.enabled": true,
   "latex-workshop.synctex.afterBuild.enabled": true,
