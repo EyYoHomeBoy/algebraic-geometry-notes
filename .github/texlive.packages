@@ -1,0 +1,10 @@
+xetex
+latexmk
+fontspec
+fourier
+fouriernc
+tex-gyre
+hyperref
+geometry
+graphics
+semantic
