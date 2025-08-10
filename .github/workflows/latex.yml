@@ -2,28 +2,64 @@ name: Build LaTeX PDF
 
 on:
   push:
-    branches: [ main ]  # or your main branch name
-  workflow_dispatch:     # allows manual trigger from GitHub UI
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install TeX Live
+      # Cache the TeX Live tree and the user texmf cache
+      - name: Cache TeX Live
+        uses: actions/cache@v4
+        with:
+          path: |
+            /usr/local/texlive
+            ~/.texlive*
+          key: texlive-2025-${{ runner.os }}-${{ hashFiles('.github/texlive.profile', '.github/texlive.packages') }}
+          restore-keys: |
+            texlive-2025-${{ runner.os }}-
+
+      - name: Install TeX Live if cache missed
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-full
+          sudo apt-get install -y perl wget xz-utils
+          mkdir -p /tmp/texlive && cd /tmp/texlive
+          wget -q https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+          tar -xzf install-tl-unx.tar.gz --strip-components=1
+          # Use your profile to get a small but functional install
+          cat .github/texlive.profile
+          sudo ./install-tl -profile .github/texlive.profile
+          echo "/usr/local/texlive/2025/bin/x86_64-linux" | sudo tee /etc/paths.d/texlive > /dev/null || true
+          echo "::add-path::/usr/local/texlive/2025/bin/x86_64-linux"
 
-      - name: Compile LaTeX
+      - name: Ensure TeX Live on PATH
         run: |
-          latexmk -pdf -interaction=nonstopmode -file-line-error main.tex
+          echo "/usr/local/texlive/2025/bin/x86_64-linux" >> $GITHUB_PATH
+          tlmgr --version
+
+      # Install only the packages you need. First run may download a few hundred MB
+      - name: Install required TeX packages
+        run: |
+          if [ -f .github/texlive.packages ]; then
+            pkgs=$(tr '\n' ' ' < .github/texlive.packages)
+            tlmgr install $pkgs
+          fi
+          # Always ensure latexmk present
+          tlmgr install latexmk
+
+      - name: Build PDF with xelatex
+        run: |
+          latexmk -xelatex -interaction=nonstopmode -file-line-error -outdir=build main.tex
 
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
-          name: my-pdf
-          path: main.pdf
+          name: pdf
+          path: build/main.pdf
