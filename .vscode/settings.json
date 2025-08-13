@@ -10,20 +10,11 @@
         "%DOC%"
       ]
     },
-    {
-      "name": "move-pdf",
-      "command":  "powershell",
-      "args": [
-        "-NoProfile",
-        "-Command",
-        "Copy-Item -Path \"build/%DOCFILE%.pdf\" -Destination \".\" -Force; Copy-Item -Path \"build/%DOCFILE%.synctex.gz\" -Destination \".\" -Force"
-      ]
-    }
   ],
   "latex-workshop.latex.recipes": [
     {
       "name": "xelatex (build dir)",
-      "tools": ["xelatex", "move-pdf"]
+      "tools": ["xelatex"]
     }
   ],
   "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
