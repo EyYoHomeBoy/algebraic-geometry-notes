@@ -382,7 +382,7 @@ for $i<j$. To see that is potentially infinite, note that there is a finite time
     \item If $\#\sigma_n$ is the largest of these strings compute the sentence $\sigma$ with the smallest $\#\sigma$ of length $l+1$ otherwise compute the $\sigma$ with the smallest $\#\sigma>\#\sigma_n$.  
 \end{enumerate}
 \subsubsection{Lindenbaum's Lemma}
-\begin{theorem}(Lindenbaum's Lemma) Let $\mathcal{L}$ be a countable signature and $T$ a consistent $\mathcal{L}$-theory. If there is a sentence $\sigma_0$ with $T\not\vdash \sigma_0$. Then there is a maximally consistent theory $T^\ast_{\sigma_0}\supset T+\sigma_0$. 
+\begin{theorem}(Lindenbaum's Lemma) Let $\mathcal{L}$ be a countable signature and $T$ a consistent $\mathcal{L}$-theory. If there is a sentence $\sigma_0$ with $T\not\vdash \sigma_0$. Then there is a maximally consistent theory $T^\ast_{\sigma_0}\supset T+\neg\sigma_0$. 
 \end{theorem}
 \begin{proof}
     Consider the universal list of $\mathcal{L}$-sentences
@@ -404,7 +404,7 @@ for $i<j$. To see that is potentially infinite, note that there is a finite time
     where a 0-1-tree is a certain type of subtree of a binary tree.\\
     We now prove that $T^\ast_{\sigma_0}$ is a maximally consistent theory containing $T+\neg\sigma_0$. Clearly $\neg\sigma_0$ is in $T^\ast_{\sigma_0}$. Note that for every sentence $\sigma$ there is an $n$ such that $\sigma_n\equiv \sigma$. Hence it is sufficient to prove for each $n$ if $\sigma_n\in T$, then $\sigma_n\in T^\ast_{\sigma_0}$. We prove this by induction in $n$. For $n=1$, note that if $\sigma_1\in T$, then $\mathrm{Con}(T+\neg\sigma_0)$. Indeed, since $T\not\vdash \sigma_0$, we have that $\mathrm{Con}(T+\neg \sigma_0)$ by Remark~\ref{ConsistentTheoryIsInconsistentUponBeingExtendedByOneFormulaIffItCanProveSaidTheory}. It thus follows that $\mathrm{Con}(T+\sigma_1)$, hence $T_1=T_0+\sigma = [\neg\sigma_0,\sigma_1]$, hence $\sigma_1\in T^\ast_{\sigma_0}$. Suppose $\sigma_m\in T$ implies $\sigma\in T^\ast_{\sigma_0}$ for every $m\leq n$. Suppose $\sigma_{n+1}\in T$. Pick $N$ to be the largest $N\leq n$ such that $\sigma_M\in T^\ast_{\sigma_0}$. Then $T_N=T_n$. Suppose for a contradiction that $\neg\mathrm{Con}(T+T_n+\sigma_{n+1})$. Then since $\sigma_{n+1}\in T$, $\neg\mathrm{Con}(T+T_n)$, which means $\neg\mathrm{Con}(T+T_N)$, but then $\sigma_N\notin T^\ast_{\sigma_0}$. Then $\mathrm{Con}(T+T_n+\sigma_{n+1})$, hence $T_{n+1}=T_n+\sigma_{n+1}\ni \sigma_{n+1}$. It thus follows that $\sigma_{n+1}\in T^\ast_{\sigma_0}$.\\
     To show $\mathrm{Con}(T^\ast_{\sigma_0})$, by the Compactness Theorem it is sufficient to prove that every finite subset of $T_{\sigma_0}^\ast$ is consistent. Any such finite subset is contained in $T_n$ for some $n$. So it is sufficient to prove $\mathrm{Con}(T_n)$. Note that since $T\not\vdash \sigma_0$, we get $\mathrm{Con}(T+\neg\sigma_0)$, hence using the Compactness Theorem, $T_0=\{\neg\sigma_0\}$ is consistent. Suppose $\mathrm{Con}(T_m)$ for each $m\leq n$ for some $n$. If $\neg\mathrm{Con}(T+T_{n}+\sigma_{n+1})$, then $T_n=T_{n+1}$ and we are done. Suppose then that $\mathrm{Con}(T+T_n+\sigma_{n+1})$. Then since $T_{n+1}=T_n+\sigma_{n+1}$ is a finite subset $T+T_n+\sigma_{n+1}$, we get $\mathrm{Con}(T_{n+1})$.\\
-    To conclude that $T^\ast_{\sigma_0}$ is maximally consistent, we prove that $\sigma\in T^\ast_{\sigma_0}$ or $\neg\mathrm{Con}(T^\ast_{\sigma_0}+\sigma)$. Let an $\mathcal{L}$-sentence be given. Such a sentence is $\sigma_n$ for some $n\geq 1$. Suppose $\mathrm{Con}(T+T_{n-1}+sigma_n)$, then $\sigma_n\in T_{n-1}+\sigma_n=T_n$. Suppose $\neg\mathrm{Con}(T+T_{n-1}+\sigma_n)$. By Lemma~\ref{TheoryWithInconsistentSubTheoryIsInconsistent}, $\neg\mathrm{Con}(T^\ast_{\sigma_0}+\sigma_n)$. 
+    To conclude that $T^\ast_{\sigma_0}$ is maximally consistent, we prove that $\sigma\in T^\ast_{\sigma_0}$ or $\neg\mathrm{Con}(T^\ast_{\sigma_0}+\sigma)$. Let an $\mathcal{L}$-sentence be given. Such a sentence is $\sigma_n$ for some $n\geq 1$. Suppose $\mathrm{Con}(T+T_{n-1}+\sigma_n)$, then $\sigma_n\in T_{n-1}+\sigma_n=T_n$. Suppose $\neg\mathrm{Con}(T+T_{n-1}+\sigma_n)$. By Lemma~\ref{TheoryWithInconsistentSubTheoryIsInconsistent}, $\neg\mathrm{Con}(T^\ast_{\sigma_0}+\sigma_n)$. 
 \end{proof}
 \begin{remark}\label{RemarkAboutMaximallyConsistentExtensions}
     \begin{enumerate}
@@ -471,20 +471,120 @@ Set $T^\ast_0 := T^\ast_{\sigma_0}$. Suppose $T_j^\ast$ is already defined and $
 $$
     T^\ast_{j+1}:= \begin{cases}
         T_j^\ast & \text{if } c_j \text{ does not witness } \sigma\in T^\ast_{\sigma_0}\\
-        \text{Insert } \sigma_{i,n}[c_j] \text{ into } T_j^\ast\\ \text{ such that the resulting list is ordered with } & \text{otherwise} \\ \text{ respect to the } \#\text{-encodings}  
+        \text{Insert } \sigma_{i,n}[c_j] \text{ into } T_j^\ast\\ \text{ such that the resulting list is ordered } & \text{otherwise} \\ \text{  with respect to the } \#\text{-encodings}  
     \end{cases}
 $$
 \begin{definition}
     We set $T^\ast_{\sigma_0}(c) := \bigcup T_j^\ast$
 \end{definition}
 \begin{definition}
-    Definition of height of term constant. 
+We define the \emph{height} of term constants, denoted $\mathrm{height}(\bullet)$ by cases in the following way: 
+\begin{enumerate}
+    \item If $\tau$ is a closed term, then $\mathrm{height}(\tau):= 0$.
+    \item If $\tau_0,\dots,\tau_{n-1}$ are term constants and $F\in\mathcal{L}$ is an $n$-ary function symbol, then 
+    $$
+        \mathrm{height}(F(\tau_0,\dots,\tau_{n-1})) := \max(\mathrm{height}(\tau_0),\dots,\mathrm{height}(\tau_{n-1})). 
+    $$
+    \item If $\tau\equiv (n,\tau_0,\dots,\tau_{n-1},i)$ is a special constant, define 
+    $$
+        \mathrm{height}(\tau):= 1 + \max(\mathrm{height}(\tau_0),\dots,\mathrm{height}(\tau_{n-1})).
+    $$
+\end{enumerate}
 \end{definition}
 \begin{lemma}
     The $\mathcal{L}_c$-theory $T^\ast_{\sigma_0}(c)$ is consistent.
 \end{lemma}
 \begin{proof}
-   We first prove that $T^\ast_{\sigma_0}$ is consistent with respect to $\mathcal{L}_c$.  
+    \textbf{Step 1: $T^\ast_{\sigma_0}$ is consistent with respect to $\mathcal{L}_c$:}\\
+    Suppose for a contradiction that in $\mathcal{L}_c$
+    $$
+        T^\ast_{\sigma_0} \vdash \mathrm{False}.
+    $$
+    Fix a formal $\mathcal{L}_c$-proof $\sigma_1,\dots,\sigma_n$ of $\mathrm{False}$ from $T^\ast_{\sigma_0}$  
+    for each special constant $c$ fix a unique variable $x_c$ that does not appear in any $\varphi_i$. Note that given an instance of a logical axiom $\mathrm{L}_i$ with respect to $\mathcal{L}_c$, if we replace each special constant with its $x_c$ we get another instance of $\mathrm{L}_i$. The same is the case for instances of modus ponens and generalization, since special constants never appear after quantifiers. This means that we obtain a formal proof of $\mathcal{L}$-sentences $\sigma_1',\dots,\sigma_n'$ of $\mathrm{False}$ from $T_{\sigma_0}^\ast$ by replacing special constants by variables in the way we just described. But then $\neg\mathrm{Con}(T^\ast_{\sigma_0})$ with respect to $\mathcal{L}$, which contradicts the fact that with respect to the signature $\mathcal{L}$ the extension $T_{\sigma_0}^\ast$ is maximally consistent and then in particular consistent.\\
+    \textbf{Step 2: $T^\ast_{\sigma_0}(c)$ is consistent with respect to $\mathcal{L}_c$:}\\
+    Suppose for a contradiction that $T_{\sigma_0}^\ast(c)$ is inconsistent. Using the compactness theorem there is a finite list of $\mathcal{L}_c$-sentences in $T^\ast_{\sigma_0}(c)$ that are inconsistent. In particular we get 
+    $$
+        \neg\mathrm{Con}(T^\ast_{\sigma_0}+\{\sigma_{i_1,n_1}[c_{j_1}],\dots,\sigma_{i_m,n_m}[c_{j_m}]\})
+    $$
+    for suitable distinct $\sigma_{i_1,n_1}[c_{j_1}],\dots,\sigma_{i_m,n_m}[c_{j_m}]$. Choose these sentences such that $n_1+\dots+n_m+m$ is minimal. WLOG 
+    $$\mathrm{height}(c_{j_m}) \geq \mathrm{height}(c_{j_k})$$
+    for each $k$. We thus have that $c_{j_m}$ does not appear in $c_{j_k}$ for $k<m$ for otherwise $c_{j_k}<c_{j_m}$ {\Large elaborate at some point}. Set
+    $$
+        \Sigma := \{\sigma_{i_1,n_1}[c_{j_1}],\dots,\sigma_{i_{m-1},n_{m-1}}[c_{j_{m-1}}]\}.
+    $$
+    Write 
+    $$
+        c_{j_m} \equiv (i_m,\tau_0,\dots,\tau_{n-1},n_m),
+    $$  
+    hence $\sigma_{i_m,n_m}[c_{j_m}]\equiv \sigma_{i_m}(x_0/\tau_0,\dots,x_{n-1}/\tau_{n-1},x_n/c_{j_m})$. Note that $\exists x_n$ appears in $\sigma_{i_m}$ since $c_{j_m}$ witnesses $\sigma_{i_m}$, hence
+    $$\sigma_{i_m,n_m-1}(v_0,\dots,v_{n-1})\equiv \exists x_n \sigma_{i_m,n_m}(v_0,\dots,v_n).$$
+    Define
+    $$
+        \widetilde{\sigma}(x_n):=\sigma_{i_m,n_m}(x_0/\tau_0,\dots,x_{n-1}/\tau_{n-1},x_n)
+    $$
+    and see that only $x_n$ appears free in this formula.
+    \textbf{Claim:}
+    $$
+        \neg\mathrm{Con}(T^\ast_{\sigma_0}+\Sigma + \sigma_{i_m,n_m}[c_{j_m}])\metaimplies \neg\mathrm{Con}(T^\ast_{\sigma_0}+\Sigma+\exists x_n\widetilde{\sigma}(x_n)).
+    $$
+    Suppose $T^\ast_{\sigma_0}+\Sigma + \sigma_{i_m,n_m}[c_{j_m}]$ is not consistent. Then we get 
+    \begin{gather}\label{Deduction1}
+        T^\ast_{\sigma_0}+\Sigma + \sigma_{i_m,n_m}[c_{j_m}]\vdash \mathrm{False},
+    \end{gather}
+    hence by the deduction theorem
+    $$
+        T^\ast_{\sigma_0}+\Sigma \vdash \sigma_{i_m,n_m}[c_{j_m}] \to \mathrm{False}.
+    $$
+    In this proof replace $c_{j_m}$ by $x$; a variable that does not occur in $\sigma_{i_m,n_m}$ or in any of the formulae comprising (\ref{Deduction1}). Note that an instance of a logical axiom or an inference rule is still an instance of the same axiom or inference rule after this replacement. Any sentence in $T^\ast_{\sigma_0}$ remains unchanged upon such a replacement since these contain no special constants. The same is the case for the sentences in $\Sigma$ since $c_{j_m}$ is distinct from any other $c_{j_k}$. This means we get 
+    $$
+         T^\ast_{\sigma_0}+\Sigma \vdash \widetilde{\sigma}(x)\to \mathrm{False}.
+    $$
+    With generalization we get 
+    $$
+        T^\ast_{\sigma_0}+\Sigma \vdash \forall x(\widetilde{\sigma}(x)\to \mathrm{False}).
+    $$
+    From $\mathrm{L}_{13}$ we get 
+    $$
+        T^\ast_{\sigma_0}+\Sigma \vdash \forall x(\widetilde{\sigma}(x)\to \mathrm{False}) \to (\exists x\widetilde{\sigma}(x)\to \mathrm{False}).
+    $$
+    By modus ponens 
+    $$
+        T^\ast_{\sigma_0}+\Sigma \vdash (\exists x\widetilde{\sigma}(x)\to \mathrm{False}).  
+    $$
+    Since $x_n$ does not appear in $\widetilde{\sigma}(x)\to\mathrm{False}$ it is a tautology (which will be used without proof) that 
+    $$
+        T^\ast_{\sigma_0}+\Sigma \vdash (\exists x_n\widetilde{\sigma}(x_{n_m})\to \mathrm{False}),  
+    $$
+    which means $\neg \mathrm{Con}( T^\ast_{\sigma_0}+\Sigma + \exists x_{n_m}\widetilde{\sigma}(x_{n_m}))$.
+    Set $i:= i_{m}$. Let $p\leq n$ be the largest integer such that for every $1\leq l\leq p$, $\forall x_{n-l}$ appears in $\sigma_i$. Then $\sigma_i$ is on the form
+    \begin{gather*}\label{ImportantLogicalFormula}
+        \sigma_i \equiv \quantifs_0 x_0 \dots \quantifs_{n_m-p-2} x_{n_m-p-2} \exists x_{n_m-p-1} \forall x_{n_m-p}\dots \forall x_{n-1}\exists x_n \sigma_{i_m,n_m}(x_0,\dots,x_n)
+    \end{gather*} 
+    Define 
+    $$
+        \widetilde{\sigma}_p :\equiv \sigma_{i_m,n_m-p-1}(x_0/\tau_0,\dots,x_{n_m-p-1}/\tau_{n_m-p-1})
+    $$
+    for $p\leq n_m-1$. When $p=n_m$, $\quantifs_{n'}\equiv \forall$ for each $n'<n_m$. In this case we set $\widetilde{\sigma}_p:\equiv \sigma_i\in T^\ast_{\sigma_0}$. When $p<n_m$, $\exists x_{n_m-p-1}$ appears in $\sigma_{i}$.\\
+    In the first case,
+    $$
+        \widetilde{\sigma}_p \equiv \forall x_0\dots\forall x_{n_m-1}\exists x_{n_m} \sigma_{i,n_m}(x_0,\dots,x_{n_m})
+    $$ 
+    then since $\tau_0,\dots, \tau_{n_m-1}$ are variable free, it follows that $T^\ast_{\sigma_0} \vdash \exists x_{n_m} \widetilde{\sigma}(x_{n_m})$ by repeated use of $\mathrm{L}_{10}$. The claim together with what we assumed towards contradiction shows that $\neg\mathrm{Con}(T^\ast_{\sigma_0}+\Sigma +\exists x_{n_m}\widetilde{\sigma})$ and then $\neg\mathrm{Con}(T^\ast_{\sigma}+\Sigma)$, i.e. since we can deduce $\exists x_{n_m}\widetilde{\sigma}(x_{n_m})$, we on only need to add $\Sigma$ to $T^\ast_{\sigma_0}$ to get an inconsistent theory. But this contradicts the minimality of $n_1+\dots+n_m+m$.\\
+    In the second case, since $c_{j_m}$ witnesses $\sigma_i$ and $\exists x_{n_m-p-1}$ appears in $\sigma_i$, we get 
+    $$\tau_{n_m-p-1} \equiv (i,\tau_0,\dots,\tau_{n_m-p-2},n_m-p-1)$$
+    which also by definition witnesses $\sigma_i$. Note 
+    \begin{align*}
+        \sigma_{i,n_m-p-1}[\tau_{n_m-p-1}] &\equiv \sigma_{i,n_m-p-1}(x_0/\tau_0,\dots,x_{n_m-p-2}/\tau_{n_m-p-1},x_{n_m-p-1}/\tau_{n_m-p-1}).
+    \end{align*}
+    From $T^\ast_{\sigma_0}$ and the above formula, we get 
+    $$\forall x_{n_m-p}\dots \forall x_{n_m-1}\exists x_{n_m} \sigma_{i,n_m-p-1}[\tau_{n_m-p-1}].$$
+    Using $\mathrm{L}_{10}$ we thus get 
+    $$T^\ast_{\sigma_0}+\sigma_{i,n_m-p-1}[\tau_{n_m-p-1}]\vdash \exists x_{n_m} \widetilde{\sigma}(x_{n_m}) \metaiff T^\ast_{\sigma_0} \vdash \sigma_{i,n_m-p-1}[\tau_{n_m-p-1}]\to \exists x_{n_m} \widetilde{\sigma}(x_{n_m}).$$
+    So if we derive $\mathrm{False}$ from $T^\ast_{\sigma_0}+\Sigma+\exists$, then we also derive it from $T^\ast_{\sigma_0}+\Sigma+\sigma_{i,n_m-p-1}[\tau_{n_m-p-1}]$. But 
+    $$n_0+\dots+n_{m-1}+n_m-p-1 +m< n_0+\dots+n_{m}+m,$$
+    leading to a contradiction.\\
+    We thus conclude that $T^\ast_{\sigma_0}(c)$ is a consistent $\mathcal{L}_c$-theory.  
 \end{proof}
 \subsubsection{Gödel's Completeness Theorem (for Countable Signatures)}
 \begin{lemma}
