@@ -593,8 +593,9 @@ We define the \emph{height} of term constants, denoted $\mathrm{height}(\bullet)
     so $\widetilde{T}$ is a maximally consistent theory.
 \end{lemma}
 \begin{proof}
-    
+    We construct the universal list for variable free $\mathcal{L}_c$-sentences of $T^\ast_{\sigma_0}(c)$ and go through list, setting $\Theta_0 := T^\ast_{\sigma}(c)$ and recursively add such a $\sigma$ to $\Theta_{n+1}$ if $\mathrm{Con}(T^\ast_{\sigma_0}(c)+\Theta_n+\sigma)$. The same argument as in Lindenbaum's lemma shows that this theory, denoted $\widetilde{T}$, is maximally consistent.
 \end{proof}
+We now define a $\mathcal{L}_c$-structure $M$ which we will show in the next is a model of $\widetilde{T}$ and therefor also of $T$ and indeed $T+\neg \sigma_0$.
 \begin{theorem}
     The $\mathcal{L}_c$-structure $M$ defined above defines a model for $\widetilde{T}$ and since $T$ is a subset of $\widetilde{T}$, when we restrict $\bullet^M$ to $\mathcal{L}$, it follows that this restriction is a model of $T+\neg\sigma_0$. 
 \end{theorem}
