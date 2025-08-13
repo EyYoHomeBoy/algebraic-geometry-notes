@@ -11,7 +11,7 @@ jobs:
     permissions:
       contents: write
     container:
-      image: ghcr.io/xu-cheng/latex:latest
+      image: docker.io/texlive/texlive:latest-full
 
     steps:
       - uses: actions/checkout@v4
