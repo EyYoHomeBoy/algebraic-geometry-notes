@@ -596,14 +596,78 @@ We define the \emph{height} of term constants, denoted $\mathrm{height}(\bullet)
     We construct the universal list for variable free $\mathcal{L}_c$-sentences of $T^\ast_{\sigma_0}(c)$ and go through list, setting $\Theta_0 := T^\ast_{\sigma}(c)$ and recursively add such a $\sigma$ to $\Theta_{n+1}$ if $\mathrm{Con}(T^\ast_{\sigma_0}(c)+\Theta_n+\sigma)$. The same argument as in Lindenbaum's lemma shows that this theory, denoted $\widetilde{T}$, is maximally consistent.
 \end{proof}
 We now define a $\mathcal{L}_c$-structure $M$ which we will show in the next is a model of $\widetilde{T}$ and therefor also of $T$ and indeed $T+\neg \sigma_0$.
+
+\begin{lemma}
+    Suppose 
+    $$
+        \sigma\equiv \forall x_k\forall \dots\forall x_{n-1}\exists x_n\sigma_{i,n}(x_0/\tau_0,\dots,x_{k-1}/\tau_{k-1},x_k,\dots,x_n)
+    $$
+    is in $T_{\sigma_0}^\ast(c)$. Let $\tau_k,\dots,\tau_{n-1}$ be arbitrary term constants. Then for 
+    $$
+        c :\equiv (i,\tau_0,\dots,\tau_{n-1},n),
+    $$
+    we have that $\sigma_i[c]\in T^\ast_{\sigma_0}(c)\subset \widetilde{T}$.
+\end{lemma}
+\begin{proof}
+Note that the special constant $c$ will witness $\sigma_i$. Indeed, 
+$$
+    \sigma \equiv \sigma_{i,k}[(i,\tau_0,\dots,\tau_{k-1},k)],
+$$
+hence $ (i,\tau_0,\dots,\tau_{k-1},k)$ witnesses $\sigma_i$, and this together with the fact that $\exists x_m$ does not appear in $\sigma_i$ for $k\leq m\leq n-1$ shows that $(i,\tau_0,\dots, \tau_{n-1},n)$ witnesses $\sigma_i$, hence 
+$$
+    \sigma_{i,n}(x_0/\tau_0,\dots,x_{n-1}/\tau_{n-1},x_n/c)
+$$
+is in $T_{\sigma_0}^\ast(c)\subset \widetilde{T}$ by construction.
+\end{proof}
+\begin{lemma}
+    Suppose 
+    $$
+        \sigma\equiv \forall x_k\forall \dots\forall x_n\sigma_{i,n}(x_0/\tau_0,\dots,x_{k-1}/\tau_{k-1},x_k,\dots,x_n)
+    $$
+    is in $T_{\sigma_0}^\ast(c)$ where $\sigma_{i,n}$ is quantifier free. Let $\tau_k,\dots,\tau_n$ be arbitrary term constants. Then 
+    $$
+        \sigma' :\equiv \sigma_{i,n}(x_0/\tau_0,\dots,x_n/\tau_n)
+    $$
+    is in $\widetilde{T}$. 
+\end{lemma}
+\begin{proof}
+    By $\mathrm{L}_10$ we get $T_{\sigma_0}^\ast(c)\vdash \sigma'$, hence since $\widetilde{T}\vdash \sigma'$, which by maximal consistency of $\widetilde{T}$ shows that $\sigma'\in \widetilde{T}$.
+\end{proof}
+\subsubsection{Construction of a Model of $\widetilde{T}$ \& the Proof of Gödel's Completeness Theorem}
+First we construct the domain of the $\mathcal{L}_c$-structure. Recall that $\Lambda_\tau=[\tau_0,\tau_1,\dots]$ is the potentially infinite list of term constants with respect to $\mathcal{L}$. Set 
+$$
+    A_0 := [].
+$$
+If non of the sentences $\tau_n=\tau_0,\dots,\tau_n=\tau_{n-1}$ are in $\widetilde{T}$ we set 
+$$A_{n+1}:= A_n+[t_n].$$
+If this is not the case, for each $0\leq m\leq n $ for which $\tau_n = \tau_m$ is in $\widetilde{T}$, append $\tau_n$ to the list(s) in $A_n$ which contain $t_m$. The resulting list, $A$, will be a potentially infinite list of potentially infinite lists of the form 
+$$A := [[\tau_{n_0},\dots],[\tau_{n_1},\dots],\dots].$$
+A simple induction argument shows that each term constant $\tau$ shows up in at most one list in $A$. If so call this list $\widetilde{\tau}$. We define a mapping from $\mathcal{L}_c$ to $A$, and this mapping will comprise the desired $\mathcal{L}_c$-structure which will be a model of $\widetilde{T}$. 
+\begin{itemize}
+    \item For constants of $\mathcal{L}$ and special constants of $\mathcal{L}_c$, $c$
+    $$
+        c^M := \widetilde{c}
+    $$ 
+    \item For a function symbol $F$ in $\mathcal{L}_c$, we define
+    $$
+        F^M(\widetilde{\tau_1},\dots,\widetilde{\tau_n}) := \widetilde{F(\tau_1,\dots,\tau_n)} \quad \left(\widetilde{\tau_1},\dots\widetilde{\tau_n}\in A\right).
+    $$
+    \item For a relation symbol $R$ in $\mathcal{L}_c$, we define 
+    $$
+        (\widetilde{\tau_1},\dots,\widetilde{\tau_n})\in R^M  :\metaiff R(\tau_1,\dots,\tau_n)\in \widetilde{T} \quad 
+    $$ 
+\end{itemize}   
+\begin{remark}
+    Note that this mapping is well-defined {\Large Check!}
+\end{remark}
 \begin{theorem}
     The $\mathcal{L}_c$-structure $M$ defined above defines a model for $\widetilde{T}$ and since $T$ is a subset of $\widetilde{T}$, when we restrict $\bullet^M$ to $\mathcal{L}$, it follows that this restriction is a model of $T+\neg\sigma_0$. 
 \end{theorem}
 \begin{proof}
 
 \end{proof}
-\begin{theorem}(Gödel's Completeness Theorem). If $\mathcal{L}$ is a countable signature and $T$ is a consistent then it has a model $M$.  
-Moreover, if $sigma_0$ is a sentence such that $T\not\vdash \sigma_0$, then there is a model of $T+\neg \sigma_0$.  
+\begin{theorem}(Henkin's Existence Theorem). If $\mathcal{L}$ is a countable signature and $T$ is a consistent then it has a model $M$.  
+Moreover, if $\sigma_0$ is a sentence such that $T\not\vdash \sigma_0$, then there is a model of $T+\neg \sigma_0$.  
 \end{theorem}
 \begin{corollary}
     Every theory that can be completed has a model.
@@ -611,7 +675,7 @@ Moreover, if $sigma_0$ is a sentence such that $T\not\vdash \sigma_0$, then ther
 \begin{definition}
     Let $T$ be an $\mathcal{L}$-theory and $\sigma$ an $\mathcal{L}$-sentence, then \emph{$T$ is a model of $\sigma$}, denoted $T\vDash \sigma$, if for every model $M$ of $T$ we have $M\vDash \sigma$
 \end{definition}
-\begin{corollary}
+\begin{corollary}(Gödel's Completeness Theorem)
     Let $\mathcal{L}$ be a countable signature. Consider an $\mathcal{L}$-theory $T$ and an $\mathcal{L}$-sentence $\sigma$. Then 
     $$T\vDash \sigma \metaiff T\vdash \sigma.$$
 \end{corollary}
