@@ -518,7 +518,7 @@ We define the \emph{height} of term constants, denoted $\mathrm{height}(\bullet)
         c_{j_m} \equiv (i_m,\tau_0,\dots,\tau_{n-1},n_m),
     $$  
     hence $\sigma_{i_m,n_m}[c_{j_m}]\equiv \sigma_{i_m}(x_0/\tau_0,\dots,x_{n-1}/\tau_{n-1},x_n/c_{j_m})$. Note that $\exists x_n$ appears in $\sigma_{i_m}$ since $c_{j_m}$ witnesses $\sigma_{i_m}$, hence
-    $$\sigma_{i_m,n_m-1}(v_0,\dots,v_{n-1})\equiv \exists x_n \sigma_{i_m,n_m}(v_0,\dots,v_n).$$
+    $$\sigma_{i_m,n_m-1}(x_0,\dots,x_{n-1})\equiv \exists x_n \sigma_{i_m,n_m}(x_0,\dots,x_n).$$
     Define
     $$
         \widetilde{\sigma}(x_n):=\sigma_{i_m,n_m}(x_0/\tau_0,\dots,x_{n-1}/\tau_{n-1},x_n)
@@ -588,13 +588,18 @@ We define the \emph{height} of term constants, denoted $\mathrm{height}(\bullet)
 \end{proof}
 \subsubsection{Gödel's Completeness Theorem (for Countable Signatures)}
 \begin{lemma}
-    $T^\ast_{\sigma_0}(c)$ can be extended to a consistent list $\widetilde{T}$ of $\mathcal{L}_c$-sentences such that the additional sentences contain no quantifiers or free variables and such that for each $\mathcal{L}_c$-sentence $\sigma$,
-    $$\sigma\in \widetilde{T} \text{ or } \neg\sigma\in \widetilde{T}$$
-    so $\widetilde{T}$ is a maximally consistent theory.
+    $T^\ast_{\sigma_0}(c)$ can be extended to a consistent list $\widetilde{T}$ of $\mathcal{L}_c$-sentences such that the additional sentences contain no quantifiers or free variables and such that for each variable free $\mathcal{L}_c$-sentence $\sigma$,
+    $$\sigma\in \widetilde{T} \text{ or } \neg\sigma\in \widetilde{T}.$$
 \end{lemma}
 \begin{proof}
-    We construct the universal list for variable free $\mathcal{L}_c$-sentences of $T^\ast_{\sigma_0}(c)$ and go through list, setting $\Theta_0 := T^\ast_{\sigma}(c)$ and recursively add such a $\sigma$ to $\Theta_{n+1}$ if $\mathrm{Con}(T^\ast_{\sigma_0}(c)+\Theta_n+\sigma)$. The same argument as in Lindenbaum's lemma shows that this theory, denoted $\widetilde{T}$, is maximally consistent.
+    We construct the universal list for variable free $\mathcal{L}_c$-sentences of $T^\ast_{\sigma_0}(c)$ and go through list, setting $\Theta_0 := T^\ast_{\sigma}(c)$ and recursively add such a $\sigma$ to $\Theta_{n+1}$ if $\mathrm{Con}(T^\ast_{\sigma_0}(c)+\Theta_n+\sigma)$. The same argument as in Lindenbaum's lemma shows that this theory, denoted $\widetilde{T}$, is consistent and has the property that 
+    $$
+        \sigma \in \widetilde{T} \vee \neg \sigma\in \widetilde{T}.
+    $$
 \end{proof}
+\begin{remark}
+    Note that $\widetilde{T}$ is a maximally consistent theory. Indeed if 
+\end{remark}
 We now define a $\mathcal{L}_c$-structure $M$ which we will show in the next is a model of $\widetilde{T}$ and therefor also of $T$ and indeed $T+\neg \sigma_0$.
 
 \begin{lemma}
@@ -631,8 +636,23 @@ is in $T_{\sigma_0}^\ast(c)\subset \widetilde{T}$ by construction.
     is in $\widetilde{T}$. 
 \end{lemma}
 \begin{proof}
-    By $\mathrm{L}_10$ we get $T_{\sigma_0}^\ast(c)\vdash \sigma'$, hence since $\widetilde{T}\vdash \sigma'$, which by maximal consistency of $\widetilde{T}$ shows that $\sigma'\in \widetilde{T}$.
+    By $\mathrm{L}_{10}$ we get $T_{\sigma_0}^\ast(c)\vdash \sigma'$, hence since $\widetilde{T}\vdash \sigma'$, which by maximal consistency of $\widetilde{T}$ shows that $\sigma'\in \widetilde{T}$.
 \end{proof}
+\begin{remark}\label{ReallyImportantFactAboutExistentialWitnesses}
+    Consider a $\sigma_{i,n}[c_j]\in T^\ast_{\sigma_0}(c)$ with $c_j\equiv (i,\tau_0,\dots,\tau_{n-1},n)$. Then the next existential quantifier $\quantifs_m \equiv \exists$ with $m<n$, then $\tau_m\equiv (i,\tau_0,\dots,\tau_{m-1})$ witnesses $\sigma_i$, hence $\sigma_{i,m}[c_j]\in T^\ast_{\sigma_0}(c)$ and recall that 
+    $$
+        \sigma_{i,m} \equiv \quantifs_{m+1} x_{m+1}\dots \exists x_n \quantifs_{n+1} x_{n+1}\dots \quantifs_{N} x_{N} \sigma_{i,N}(x_0,\dots,x_N).
+    $$  
+    Then using $L_{10}$ a potential bunch of times as we did in a proof above we can derive
+    $$\sigma_{i,N}(x_0/\tau_0,\dots, x_k/\tau_k, x_{k+1},\dots,x_N)$$
+    for any $m\leq k \leq N$ and using that $\widetilde{T}$ is maximally consistent, it follows that this sentence is a an element of said theory. Of no such existential quantifier appear we obviously are in a position where we can just apply $\mathrm{L}_{10}$ a potential bunch of times to obtain the same conclusion. The upshot is that for each $\sigma\in T^\ast_{\sigma_0}(c)$, there is an sPNF sentence $\sigma'\in T^\ast_{\sigma_0}(c)$,
+    $$\sigma'\equiv \quantifs_0 x_0\dots \quantifs_n x_n \sigma_{i,n}(x_0,\dots,x_n)$$
+    such that 
+    $$
+        \sigma \equiv \quantifs_{k+1}x_{k+1} \dots \quantifs_{n}x_n \sigma_{i,n}(x_0/\tau_0,\dots,x_k/\tau_k,x_{k+1},\dots,x_n)
+    $$
+    for some $k$ and term constants $\tau_0,\dots,\tau_k$ with $\tau_k\equiv (i,\tau_0,\dots,\tau_{k-1},k)$. This fact WILL BE VERY IMPORTANT SOON AND I AM VERY HAPPY THAT I FINALLY KNOW WHY IT IS TRUE!
+\end{remark}
 \subsubsection{Construction of a Model of $\widetilde{T}$ \& the Proof of Gödel's Completeness Theorem}
 First we construct the domain of the $\mathcal{L}_c$-structure. Recall that $\Lambda_\tau=[\tau_0,\tau_1,\dots]$ is the potentially infinite list of term constants with respect to $\mathcal{L}$. Set 
 $$
@@ -664,11 +684,43 @@ A simple induction argument shows that each term constant $\tau$ shows up in at 
     The $\mathcal{L}_c$-structure $M$ defined above defines a model for $\widetilde{T}$ and since $T$ is a subset of $\widetilde{T}$, when we restrict $\bullet^M$ to $\mathcal{L}$, it follows that this restriction is a model of $T+\neg\sigma_0$. 
 \end{theorem}
 \begin{proof}
+    Note that the converse of $M\vDash \sigma \metaimplies \sigma\in \widetilde{T}$ since if $M\vDash \sigma$ then $\sigma\in \mathrm{Th}(T)\supset \widetilde{T}$.\\
+    Consider first the case where $\sigma$ is variable free. We prove the statement for such $\sigma$ by induction in the number of logical operators. In the base case $\sigma\equiv \tau = \tau'$ or, in general, $\sigma \equiv R(\tau_1,\dots,\tau_n)$ for some $n$-ary relational symbol $R$ and terms $\tau_1,\dots,\tau_n,\tau,\tau'$. By definition, given any assignment $j$, for $I=(M,j)$, $\tau=\tau'$ if and only if $I(\tau)=I(\tau')$ and $R(\tau_1,\dots,\tau_n) \in \widetilde{T}$ if and only if $(\widetilde{\tau_1},\dots,\widetilde{\tau_n})\in R^M$.\\
+    Now fix $\sigma$ to be a non-atomic sentence and assume that for every sentence $\sigma'$ containing fewer logical operators than $\sigma$ that $\sigma \in \widetilde{\sigma'}\metaiff M\vDash \sigma'$. It is a fact that one can find a sentence equivalent to $\sigma$ which only uses the logical operators $\wedge,\neg, \exists$. By the soundness theorem we may WLOG assume that any sentence is of this form. Since $\sigma$ is variable free, we need only consider two case:\\
+    \textbf{$\sigma\equiv \neg\sigma''$:} By induction $\sigma''\in \widetilde{T}$ if and only if $M\vDash \sigma''$. By definition we thus have 
+    $$
+        \neg\sigma'' \notin\widetilde{T}\metaiff M\not\vDash \neg\sigma'', 
+    $$ 
+    which is equivalent to 
+    $$
+        \sigma \in \widetilde{T}\metaiff M\vDash \sigma 
+    $$
+    \textbf{$\sigma \equiv \sigma_1 \wedge \sigma_2$:} By induction $\sigma_i\in \widetilde{T} \metaiff M\vDash \sigma_i$ for $i=1,2$, hence by elementary considerations in the metatheory it follows that 
+    $$
+        \sigma\equiv\sigma_1 \wedge \sigma_2 \in \widetilde{T} \metaiff M\vDash \sigma\equiv\sigma_1\wedge \sigma_2.
+    $$   
+    We now allow $\sigma$ to contain variables and prove the statement by induction in the number of variables used in $\sigma$. We covered the base case above. So assume that $\sigma$ is not variable free and suppose that $\sigma'\in \widetilde{T} \metaimplies M\vDash\sigma'$ for every sentence with less variables than $\sigma$. By construction every element in $\widetilde{T}$ not in $T^\ast_{\sigma_0}(c)$ is a variable free $\mathcal{L}_c$-sentence. Then $\sigma\in T^\ast_{\sigma_0}(c)$. WLOG $\sigma$ is in sPNF. There is a $\widetilde{\sigma}\in T_{\sigma_0}^\ast(c)$ in special prenex normal form,
+    $$\widetilde{\sigma} \equiv \quantifs_0 x_0\quantifs_1 x_1\dots\quantifs_n x_n \sigma_{i,n}(x_0,\dots,x_n)$$
+    such that for some $k\leq k$ and term constants $\tau_0,\dots,\tau_{k-1}$,
+    $$
+        \sigma\equiv \quantifs_k x_k\dots \quantifs_n x_n \sigma_{i,n}(x_0/\tau_0,\dots, x_{k-1}/\tau_{k-1},x_k,\dots,x_n)
+    $$   
+    by Remark~\ref{ReallyImportantFactAboutExistentialWitnesses}.\\
+    \textbf{ Case $\quantifs_k \equiv \exists$:} Since $\sigma$ has variables it must be an element of $T^\ast_{\sigma_0}(c)$. Note that 
+    $$
+        \sigma' \equiv \quantifs_{k+1} x_{k+1}\dots \quantifs_n x_n \sigma_{i,n}(x_0/t_0,\dots,x_k/t_k,x_{k+1},\dots,x_n)\in T_{\sigma_0}^\ast(c)\subset \widetilde{T}.
+    $$
+    By induction $M\vDash \sigma'$ and by $\mathrm{L}_{11}$, $\sigma ' \vdash \sigma$, hence by the Soundness Theorem $M\vDash \sigma$.\\
+    \textbf{Case $\quantifs_k\equiv \forall$:}  
+    We split this case into two cases:\\
+    \textbf{Case 1: There is an existential quantifier appearing after $\quantifs_k$:}\\
+    \textbf{Case 2: Every quantifier appearing after $\quantifs_k$ is universal:}
 
 \end{proof}
 \begin{theorem}(Henkin's Existence Theorem). If $\mathcal{L}$ is a countable signature and $T$ is a consistent then it has a model $M$.  
 Moreover, if $\sigma_0$ is a sentence such that $T\not\vdash \sigma_0$, then there is a model of $T+\neg \sigma_0$.  
 \end{theorem}
+
 \begin{corollary}
     Every theory that can be completed has a model.
 \end{corollary}
@@ -680,9 +732,18 @@ Moreover, if $\sigma_0$ is a sentence such that $T\not\vdash \sigma_0$, then the
     $$T\vDash \sigma \metaiff T\vdash \sigma.$$
 \end{corollary}
 \begin{proof}
-    $T\vdash \sigma\metaimplies T\vDash \sigma$ is the soundness theorem. Suppose $T\vDash \sigma$. If $T$ is inconsistent, then $T\vdash \sigma$. So suppose $\mathrm{Con}(T)$. Then 
+    $T\vdash \sigma\metaimplies T\vDash \sigma$ is the soundness theorem. Suppose $T\vDash \sigma$. If $T$ is inconsistent, then $T\vdash \sigma$. So suppose $\mathrm{Con}(T)$. Then if $T\not\vdash \sigma$, by Henkin's Existence Theorem we can find a model of $T+\neg \sigma$, i.e. 
+    $$\text{Exists } M(M\vDash T+\neg \sigma)$$
+    which is equivalent to 
+    $$\text{Exists } M( M \vDash T \text{ and } M\vDash \neg\sigma) \metaiff \text{not}(\text{ Forall } M(M\vDash T \metaimplies M \vDash \sigma))$$
 \end{proof}
-The above corollary is very useful for doing mathematics. Once we have argued for the formal proofs of basic theorems in ZF(C) and when we have a standard model of ZF(C), we have a way to prove mathematical statements without needing to do formal proofs. For instance instead of doing a formal proof of some sentence $\sigma$ from the axioms of Group Theory ($\verb|GT|$), Ring Theory($\verb|RT|$), Topology ($\verb|TOP|$, which is an extension of the axioms of ZF(C)), or (almost) whatever set of axioms we desire, we simply prove $\verb|GT|\vDash \sigma$, $\verb|RT|\vDash \sigma$ or $\verb|TOP|\vDash \sigma$, which we can (in some cases not so) easily do, since  
+\begin{corollary}
+    Let $T$ be a theory. If every finite subset of $T$ has a model then $T$ has a model. 
+\end{corollary}
+\begin{proof}
+    Indeed if every finite subset of $T$ has a model, then every finite subset of $T$ is consistent, hence by the Compactness Theorem $T$ is consistent, so by Henkin's Existence Theorem, $T$ has a model.   
+\end{proof}
+The above corollary is very useful for doing mathematics. Once we have argued for the formal proofs of basic theorems in ZF(C) and when we have a standard model of ZF(C), we have a way to prove mathematical statements without needing to do formal proofs. For instance instead of doing a formal proof of some sentence $\sigma$ from the axioms of Group Theory ($\verb|GT|$), Ring Theory($\verb|RT|$), Topology ($\verb|TOP|$, which is an extension of the axioms of ZF(C)), or (almost) whatever set of axioms we desire, we simply prove $\verb|GT|\vDash \sigma$, $\verb|RT|\vDash \sigma$ or $\verb|TOP|\vDash \sigma$. For example in group theory to prove that the neutral element is unique, we can take an arbitrary model of group theory and prove the result in this model.  
 \subsection{The Axioms and Standard Model of Peano Arithmetic}
 
 \subsubsection{The Axioms}
