@@ -1,2 +1,43 @@
 % !TEX root = ../main.tex
 \section{Algebraic Geometry using Schemes}
+
+\subsection{Sheaves \& Presheaves}
+
+\subsubsection{Presheaves}
+
+\begin{definition}
+    Consider a category $\mathcal{C}$. A \emph{presheaf} on $\mathcal{C}$ is a contravariant functor $\pazocal{F}: \mathcal{C}\rightarrow \mathrm{Set}$.\\
+    For a subcategory $\mathcal{C}'$ of $\mathrm{Set}$, a \emph{$\mathcal{C}'$-valued presheaf} on $\mathcal{C}$ is a contravariant functor $\pazocal{F} : \mathcal{C}\rightarrow \mathcal{C}'$. We denote the image of a morphism $\varphi: V \rightarrow U$ under $\pazocal{F}$ by $\varphi_{UV}$.
+\end{definition}
+\begin{remark}
+    We will mainly be interested in the case of $\mathcal{C}$ being obtained from a topological space: Consider a topological space $(X,\tau_X)$. We consider the category $\pazocal{T}(X)$ induced by the preorder on $\tau_X$. This will be called a \emph{presheaf on $X$}. Moreover we will mainly be interested in presheaves valued in algebraic categories such as $\mathrm{Group},\mathrm{AbGroup},\mathrm{Ring}$, etc.\\  
+\end{remark}
+\begin{example}
+    Let $X$ be a variety. Then $$\Gamma: (\tau_X,\subset) \rightarrow \mathrm{FinAlg}_K, (U, W\subset V)\mapsto (\Gamma(U), \widetilde{\varphi}: \Gamma(V)\rightarrow \Gamma(W), f \mapsto \left.f\right|_{W})$$
+    defines a presheaf on $\pazocal{T}(X)$ respect to the Zariski topology. 
+\end{example}
+\begin{definition}
+    For objects $U,V$ in $\pazocal{C}$ and a morphism $\varphi: V\rightarrow U$, for an  $s\in \pazocal{F}(U)$, we define \emph{restriction of $s$ to $V$} to be $$\left. s\right|_{V}:= \varphi_{UV}.$$
+\end{definition}
+\begin{definition}
+    Consider a topological space $X$. Let $\pazocal{F}$ be a presheaf on a category $\pazocal{T}(X)$. $\pazocal{F}$ is called a \emph{sheaf on $X$} if moreover, 
+    \begin{enumerate}
+        \item For every open $U\subset X$ and every open cover $\{U_i\}$ of $U$ and every $\phi,\varphi\in \pazocal{F}(U)$, if $\left.\varphi\right|_{U_i}= \left.\phi\right|_{U_i}$ for every $i$, then $\varphi=\phi$.
+        \item For every open $U\subset X$ and every open covering $\{U_i\}$ and for every collection of elements (functions) 
+        $$\left\{s_i\in \pazocal{F}(U_i): \left.s_i\right|_{U_i\cap U_j}=\left. s_j\right|_{U_i\cap U_j} \text{ for every }j\right\}_{i}$$
+        there is an element $s\in \pazocal{F}(U)$ such that $\left.s\right|_{U_i}=s_i$ for each $i$.   
+    \end{enumerate}
+    A sheaf valued in a subcategory of $\mathrm{Set}$ is defined in a similar way for sheaves to how it was defined for presheaves. 
+\end{definition}
+\begin{remark}
+    By condition 1. an element $s\in \pazocal{F}(U)$ obtained as described in 2. is unique.
+\end{remark}
+\begin{lemma}
+    Consider a topological space $X$ and a presheaf $\pazocal{F}$ on $X$ that satisfies the second condition of being a presheaf. Then $\pazocal{F}$ is a sheaf on $X$ if and only if for every open $U\subset X$ every open covering $\{U_i\}$ and every $s\in \pazocal{F}(U)$, if $\left.s\right|_{U_i}=0$ for every $i$, then $s=0$.   
+\end{lemma}
+\begin{proof}
+    "$\implies$": If $\pazocal{F}$ is a sheaf on $X$, then since $\left. s\right|_{U_i}=0=\left.0\right|_{0}$ for every $i$, then $s=0$.\\
+    "$\impliedby$": If $\left. s\right|_{U_i} = \left. t\right|_{U_i}$ for every $i$, hence 
+    $$0=\left. s\right|_{U_i} - \left. t\right|_{U_i} = \left. s-t\right|_{U_i}$$
+    for every $i$, which by assumption means $s-t=0$. 
+\end{proof}

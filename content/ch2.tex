@@ -6,7 +6,7 @@
     \item $\Ob(\pazocal{C})$ denotes a class of \textit{objects}. \item $\Hom(\pazocal{C})$ denotes a class of \textit{morphisms}. 
     \item A morphism $f$ in $\Hom(\pazocal{C})$ is a relation between between elements $A,B$ in $\Ob(\pazocal{C})$. We denote it by $f : A \rightarrow B$. 
     \item For objects $A,B$ in $\Ob(\pazocal{C})$ we denote the class of morphisms from $A$ to $B$ by $\Hom(A,B)$.
-    \item There is binary operation $\circ$ on the class of morphisms called \textit{composition} such that for morphisms $f: B\rightarrow C$ and $g : A \rightarrow B$ we have that
+    \item There is a binary operation $\circ$ on the class of morphisms called \textit{composition} such that for morphisms $f: B\rightarrow C$ and $g : A \rightarrow B$ we have that
     $$fg := f\circ g : A \rightarrow C$$
     and 
     $$(f\circ g)\circ h = f\circ(g\circ h)$$
@@ -22,26 +22,34 @@
 \begin{definition}
     A category $\pazocal{C}$ is called a \textit{groupoid} if every $f$ in $\Hom(\pazocal{C})$ is an isomorphism
 \end{definition}
+\begin{example}\label{MonoidIsACategoryGroupIsGroupoid}
+    Let $(M,\cdot,e)$ be a monoid. We define a category $\mathrm{B}M$ whose class of objects is $\{M\}$ and whose morphisms are $n,m\in M$ and where composition of morphisms $n,m\in M$ is given by 
+    $$nm := n\cdot m.$$  
+    Since $M$ is a monoid for $m_1,m_2,m_3\in M$, we have 
+    $$m_1(m_2m_3)=(m_1m_2)m_3.$$
+    The identity morphism is $e$. When $(G,\dot,e)$ is a group we get that every morphism is an isomorphism, since for each $g\in G$ there is a $g^{-1}\in G$ such that 
+    $$gg^{-1}=g^{-1}g = e$$ 
+\end{example}
 \begin{definition}
     A \textit{subcategory} $\pazocal{D}$ of a category $\pazocal{C}$ is a subclass of $\Ob(\pazocal{C})$ together with a subclass of $\Hom(\pazocal{C})$ that constitutes a category
 \end{definition}
 \begin{remark}
-    equivalently a subcategory of $\pazocal{C}$ is a subclass $\Ob(\pazocal{D})$ of $\Ob(\pazocal{C})$ and a subclass $\Hom(\pazocal{D})$ of $\Hom(\pazocal{C})$ such that each domain $A$ and codomain $B$ for a morphism in $\Hom(\pazocal{D})$, $A,B$ are elements of $\Ob(\pazocal{D})$. In addition $\Hom(\pazocal{D})$ is closed under composition. 
+    equivalently a subcategory of $\pazocal{C}$ is a subclass $\Ob(\pazocal{D})$ of $\Ob(\pazocal{C})$ and a subclass $\Hom(\pazocal{D})$ of $\Hom(\pazocal{C})$ such that each domain $A$ and codomain $B$ for a morphism in $\Hom(\pazocal{D})$, $A,B$ are elements of $\Ob(\pazocal{D})$. In addition such that $\Hom(\pazocal{D})$ is closed under composition. 
 \end{remark}
 \begin{definition}
     The \textit{maximal groupoid} of a category $\pazocal{C}$ is the subcategory of $\pazocal{C}$ whose objects are $\Ob(\pazocal{C})$ and whose morphisms are the isomorphisms of $\Hom(\pazocal{C})$
 \end{definition}
 \begin{remark}
-    The maximal groupoid is a subcategory. Indeed, The domain and codomain of a morphism is trivially contained in $\Ob(\pazocal{C})$. Suppose $f:A\rightarrow B$ and $g: B \rightarrow C$ are isomorphisms. Then 
+    The maximal groupoid is a subcategory. Indeed, The domain and codomain of an isomorphism are trivially in $\Ob(\pazocal{C})$. Suppose $f:A\rightarrow B$ and $g: B \rightarrow C$ are isomorphisms. Then 
     $$f^{-1}g^{-1}gf=f^{-1}\fone_B f = f^{-1}f = \fone_A$$
     and 
     $$gff^{-1}g^{-1} = g\fone_B g^{-1} = gg^{-1} = \fone_C.$$
     Hence $gf: A \rightarrow C$ is an isomorphism with inverse $f^{-1}g^{-1}$. 
 \end{remark}
 \begin{definition}
-    Let $\pazocal{C}$ be a category and $f\in \Hom(A,B)$, $g\in \Hom(B,A$.  $f$ is called a \textit{retraction} of $g$ and $g$ a section of $f$ if $fg = \fone_A$   
+    Let $\pazocal{C}$ be a category and $f\in \Hom(A,B)$, $g\in \Hom(B,A)$.  $f$ is called a \textit{retraction} of $g$ and $g$ a section of $f$ if $fg = \fone_A$   
 \end{definition}
-\begin{lemma}
+\begin{lemma}\label{AtMostOneIso}
     Let $\pazocal{C}$ be a category, $f\in \Hom(A,B)$. Suppose $g,h\in \Hom(B,A)$ are respectively a retraction and a section of $f$. Then $g=h$ and $f$ is an isomorphism. It follows that a morphism can have at most one inverse
 \end{lemma}
 \begin{proof}
@@ -106,7 +114,7 @@
     $$f \circ\op g = g\circ f : C \rightarrow A$$
     where $f: B\rightarrow C$ and $g: A \rightarrow B$ are morphisms in $\Hom(\pazocal{C}\op)$. Then for morphisms $f: C\rightarrow D$, $g: B \rightarrow C$ and $h: A \rightarrow B$
     $$(f\circ\op g)\circ\op h = h(gf)=(hg)f = f\circ\op(g\circ\op h).$$
-    Furthermore, we define the identity morphism in $\Hom(\pazocal{C}\op)$ to be the identity morphism in $\Hom(\pazocal{C})$, hence 
+    Furthermore, we define the identity morphisms in $\Hom(\pazocal{C}\op)$ to be the identity morphisms in $\Hom(\pazocal{C})$, hence 
     $$f\circ\op \mathbbm{1}_A = \mathbbm{1}_Af = f \text{ and } \mathbbm{1}_B \circ\op f = f \mathbbm{1}_B = f.$$
 \end{remark}
 \begin{definition}
@@ -119,7 +127,7 @@
     This follows immediately from Lemma~\ref{FunctorsTransferIsomorphismBetweenCategories}.
 \end{proof}
 \begin{example}\label{IntegerInvariants}
-    Suppose that there, for a category $\pazocal{C}$, is a well-defined assignment $\pazocal{F}$ of objects in $\pazocal{C}$ to integers and of a morphism $A\rightarrow B$ to $\pazocal{F}(A)\leq \pazocal{F}(B)$. This will define a functor from $\pazocal{C}$ to $(\Z,\leq)$ called \textit{an integer invariant on $\pazocal{C}$}. Indeed, $\pazocal{F}(A) \leq \pazocal{F}(A)$, hence $\pazocal{F}(\mathbbm{1}_A)=\mathbbm{1}_{\pazocal{F}(A)}$. Given morphisms $g:A\rightarrow B$, $f:B\rightarrow C$ in $\Hom(\pazocal{C})$, 
+    Suppose that there, for a category $\pazocal{C}$, is a well-defined assignment $\pazocal{F}$ of objects in $\pazocal{C}$ to integers and of a morphism $A\rightarrow B$ to $\pazocal{F}(A)\leq \pazocal{F}(B)$. This will define a functor from $\pazocal{C}$ to $(\Z,\leq)$ called \textit{an integer invariant of objects in $\pazocal{C}$}. Indeed, $\pazocal{F}(A) \leq \pazocal{F}(A)$, hence $\pazocal{F}(\mathbbm{1}_A)=\mathbbm{1}_{\pazocal{F}(A)}$. Given morphisms $g:A\rightarrow B$, $f:B\rightarrow C$ in $\Hom(\pazocal{C})$, 
     $$\pazocal{F}(A)\leq\pazocal{F}(B) \text{ and } \pazocal{F}(B)\leq \pazocal{F}(C),$$
     implying $\pazocal{F}(A)\leq \pazocal{F}(C)$, hence $\pazocal{F}(A\overset{fg}{\rightarrow} C) = \pazocal{F}(A\overset{f}{\rightarrow}B)\pazocal{F}(B\overset{g}{\rightarrow}C)$.
     
@@ -139,7 +147,26 @@
     It is called an \textit{epimorphism} if for every pair of morphisms $h_1,h_2\in \Hom(B,D)$,
     $$h_1f=h_2f\implies h_1=h_2$$    
 \end{definition}
-
+\begin{definition}
+    Let $\pazocal{C}$ be a category and fix an object $X$ in $\pazocal{C}$. Given a morphism $f:A\rightarrow B$, define 
+    \begin{gather*}
+        f_\ast : \Hom(X,A) \rightarrow \Hom(X,B)\\
+        g\mapsto fg
+    \end{gather*}  
+    we also define the dual concept 
+    \begin{gather*}
+        f^\ast : \Hom(A,Y) \rightarrow \Hom(B,X)\\
+        h\mapsto hf
+    \end{gather*}
+\end{definition}
+\begin{remark}
+    Note that $f\op_\ast = f^\ast$, i.e. for $f\op : B \rightarrow A$, the morphism $f$ interpreted as a morphism of $\pazocal{C}\op$ we have 
+    \begin{gather*}
+        f\op_\ast : \Hom^{\pazocal{C}\op}(X,B)=\Hom(B,X) \rightarrow \Hom^{\pazocal{C}\op}(X,A)=\Hom(A,X)\\
+        h: B\rightarrow X \mapsto f\circ\op h= hf
+    \end{gather*}
+    hence $f\op_\ast = f^\ast$
+\end{remark}
 \begin{lemma}
     For a category $\pazocal{C}$ a 
 \end{lemma}

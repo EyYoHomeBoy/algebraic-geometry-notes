@@ -14,15 +14,15 @@ where $\dots$ signify that to look up the next string in the list, we concatenat
     \sigma\mathbf{0} \equiv \pi\mathbf{0} \metaiff \mathbf{s}\sigma\mathbf{0}\equiv \mathbf{s}\pi\mathbf{0},\\
     \sigma\mathbf{0}\equiv \pi\mathbf{0} \metaiff \sigma\rho\mathbf{0}\equiv \sigma\rho\mathbf{0}, 
 \end{gather*}
-where "$\equiv$" means "identical to". For two elements in $\mathbf{N}$, $n,m$ we write $n<m$ if $n$ is formed earlier in the list than $m$ and $n>m$ if $n$ is formed later in the list than $m$. By $n+1$ we mean the next element to be formed in the list. And if $n$ is not $\mathbf{0}$ we write $n-1$ to be the string formed Immediately before $n$. We define 
+where "$\equiv$" means "identical to". For two elements in $\mathbf{N}$, $n,m$ we write $n<m$ if $n$ is formed earlier in the list than $m$ and $n>m$ if $n$ is formed later in the list than $m$. By $n+1$ we mean the next element to be formed in the list. And if $n$ is not $\mathbf{0}$ we write $n-1$ to be the string formed immediately before $n$. We define 
 $$\sigma\mathbf{0}+\mathbf{0} :\equiv \sigma\mathbf{0} \text{ and } 0 + \pi\mathbf{0} :\equiv \pi\mathbf{0}$$
 and 
 $$\sigma\mathbf{0} + \pi\mathbf{0} :\equiv \sigma\pi \mathbf{0}.$$
 We also have a principle of induction. I.e. if some statement $P$ holds for $\mathbf{0}$ and whenever $P$ holds for $n$, then it holds for $n+1$, then $P$ holds for all strings in $\mathbf{N}$.\\ 
 We also have a principle of recursion. I.e. If we define $X_0$ and whenever $X_n$ is defined, so is $X_{n+1}$, then $X_m$ is defined for every string $m$ in $\mathbf{N}$.\\
-Note here that we have implicitly introduced the notion of indexing. Given a finite list of objects, initialize a point on $\mathbf{N}$ at $\mathbf{0}$, pick out an element in the list of objects and assign the value point at in $\mathbf{N}$, move the point to the next element in $\mathbf{N}$ and move pick out the next element in the list of objects. This lets us consider a length $n$ list of object, e.g. $t_1,\dots,t_n$. These informal metamathematical concepts form a sufficient \emph{classical metatheory} for fist order logic. 
+Note here that we have implicitly introduced the notion of indexing. Given a finite list of objects, initialize a point on $\mathbf{N}$ at $\mathbf{0}$, pick out an element in the list of objects and assign the value point at in $\mathbf{N}$, move the point to the next element in $\mathbf{N}$ and move pick out the next element in the list of objects. This lets us consider a length $n$ list of object, e.g. $t_1,\dots,t_n$. These informal metamathematical concepts form a sufficient \emph{classical metatheory} for the syntax of  first order logic. 
 \subsubsection{Strong Metatheory}
-Sometimes we need to strengthen our metatheory with \emph{the law of excluded middle} and \emph{naive set theory}. The first of these notions is that a statement is either true or false. The last of which is the notion that we can consider a sufficiently small (always finite) collection of objects and ask whether something is a member of such a collection. 
+Sometimes we need to strengthen our metatheory with \emph{the law of excluded middle} and \emph{naive set theory}. The first of these notions is that a statement is either true or false. The last of which is the notion that we can consider a sufficiently small collection of objects and ask whether a given object is a member of such a collection. We will need this to define the semantics of first order logic.
 \subsection{The Alphabet of First Order Logic}
 \subsubsection*{The Logical Symbols}
 \verb|FOL| is a framework for formalizing different theories. It is therefor has to flexible enough to be augmented to work in a large variety of contexts and domains. We therefor make distinctions between the role of the symbols that comprise \verb|FOL|. The \emph{logical symbols} in the language of \verb|FOL| are those symbols that are not context specific. These are 
@@ -88,24 +88,24 @@ Suppose $x$ is a variable of $\psi$ with $x\notin\mathrm{free}(\psi)$. Then
     \mathrm{L12}\colon \quad & \forall x(\psi\to \varphi(x))\to (\psi\to \forall x\varphi(x))\\
     \mathrm{L13}\colon \quad & \forall x(\varphi(x)\to \psi)\to (\exists\varphi(x)\to \psi).
 \end{align*} 
-Lastly we have axioms for the binary relational symbol $=$. Let $\tau,\tau_1,\dots,\tau_n,\tau_1',\dots,\tau_n'$ be terms and $R$ an $n$-ary relation symbol and $F$ an $n$-ary function symbol.
+Lastly we have axioms for the binary relational symbol $=$, for general $n$-ary relational symbols and for $n$-ary functional symbols. Let $\tau,\tau_1,\dots,\tau_n,\tau_1',\dots,\tau_n'$ be terms and $R$ an $n$-ary relation symbol and $F$ an $n$-ary function symbol.
 \begin{align*}
     \mathrm{L14}\colon \quad & \tau = \tau\\
     \mathrm{L15}\colon \quad & \tau_1 = \tau_1' \wedge \dots \wedge \tau_n = \tau_n' \to (R(\tau_1,\dots,\tau_n)\to R(\tau_1',\dots,\tau_n'))\\
     \mathrm{L16}\colon \quad & \tau_1 = \tau_1' \wedge \dots \wedge \tau_n = \tau_n' \to (F(\tau_1,\dots,\tau_n)= F(\tau_1',\dots,\tau_n'))  
 \end{align*}
-The above axioms when $\mathrm{L}_0$ is excluded is called the logical axioms of \emph{intuitionistic logic}. The inclusion of $\mathrm{L}_0$ comprises the axioms of \emph{classical logic}.
+The above axioms when $\mathrm{L}_0$ is excluded is called the logical axioms of \emph{intuitionistic logic}. The inclusion of $\mathrm{L}_0$ comprises the logical axioms of \emph{classical logic}.
 We use $:\iff$ to define relations on symbols in metalanguage of \verb|FOL|. For instance, we define for formulae $\varphi,\psi$, terms $\tau,\tau'$ and a variable $x$, 
 \begin{gather*}
-    \varphi \leftrightarrow \psi :\iff (\varphi \to \psi \wedge \psi \to \varphi)\\
-    \exists! x\varphi :\iff \exists x\varphi(x) \wedge \forall y(\varphi(y)\to x=y)\\
-    \tau \neq \tau' :\iff \neg(\tau = \tau').
+    \varphi \leftrightarrow \psi :\metaiff (\varphi \to \psi \wedge \psi \to \varphi)\\
+    \exists! x\varphi :\metaiff \exists x\varphi(x) \wedge \forall y(\varphi(y)\to x=y)\\
+    \tau \neq \tau' :\metaiff \neg(\tau = \tau').
 \end{gather*}
 
 \subsubsection{Non-logical Axioms: Defining a Theory}
-To the logical axioms we may add a set of formulae, formed from a signature $\mathcal{L}$, which we call an \emph{$\mathcal{L}$-theory}. Examples of non-logical axioms are those of, \verb|ZF|-axioms which forms Zermelo-Fraenkel set theory, the axioms of topology which forms the theory of topology, \verb|PA|-axioms which forms number theory, etc. For mathematical theories such axioms are always sentences.  
+To the logical axioms we may add a set of formulae (non-logical axioms), formed from a signature $\mathcal{L}$, which we call an \emph{$\mathcal{L}$-theory}. Examples of non-logical axioms are those of, \verb|ZF|-axioms which forms Zermelo-Fraenkel set theory, the axioms of topology which forms the theory of topology, \verb|PA|-axioms which forms number theory, etc. For mathematical theories such axioms are always sentences.  
 \subsubsection{Proofs}
-To deduce new formulas from the axioms of some $\mathcal{L}$-theory, we two \emph{inference rules}: 
+To deduce new formulas from the axioms of some $\mathcal{L}$-theory, we introduce two \emph{inference rules}: 
 $$\infer{\psi}{\varphi \to \psi & \varphi} \quad \quad \quad\text{and}\quad \quad \quad  \infer{\forall x \varphi}{\varphi}.$$
 These are called \emph{modus ponens} and \emph{generalization} respectively.\\
 We want to use the notion of axiom and inference rule to prove statements in different $\mathcal{L}$-theories. Let $\Phi$ be a finite set of $\mathcal{L}$-formulae and $\psi$ be an $\mathcal{L}$-formula. We say that \emph{$\psi$ is provable from $\Phi$}, denoted $\Phi\vdash \psi$ if there are $\mathcal{L}$-formulae $\varphi_1,\dots,\varphi_n$, called \emph{a formal proof of $\psi$} satisfying $\varphi_n\equiv \psi$ and for $i\leq n$ $\varphi_i$ satisfies one of the following conditions 
@@ -115,7 +115,7 @@ We want to use the notion of axiom and inference rule to prove statements in dif
     \item There are $j,k< i$ such that $\varphi_j\equiv \varphi_k \to \varphi_i$.
     \item There is a $j<i$ with $\varphi_i \equiv \forall x \varphi_j$, where $x\notin \mathrm{free}(\phi)$ for any of the $\phi\in \Phi$.
 \end{enumerate} 
-We take $\vdash \psi$ to mean $\emptyset \vdash \psi$. In this case $\psi$ is called a \emph{tautology}. $\Phi$ is called a \emph{context}. If $\psi$ has no formal proof in a fixed context $\Phi$, we write $\Phi \not\vdash \psi$. Rather than writing down formal proofs down in, for instance, a box proof, we will just note that this is possible to do. Instead, we will write proofs in natural language in such a way that it to a sufficiently knowledgeable reader is somewhat clear what a formal proof would look like. At a certain point we also formulate formulae in natural language. Additionally we take certain basic proofs in \verb|FOL| for granted. This treatment of \verb|FOL| only serves to provide a clear and precise language for building mathematical theory and we will quickly become satisfied that it exists and be happy that if we properly formulate theory in natural language it will be formalizable in \verb|FOL|.  
+We take $\vdash \psi$ to mean $\emptyset \vdash \psi$. In this case $\psi$ is called a \emph{tautology}. $\Phi$ is called a \emph{context}. If $\psi$ has no formal proof in a fixed context $\Phi$, we write $\Phi \not\vdash \psi$. Rather than writing down formal proofs down in, for instance, a box proof, we will just note that this is possible to do and refer to tools like \href{https://leanprover-community.github.io/learn.html}{Lean} and \href{https://rocq-prover.org/about}{Rocq} which uses an embedding of $\verb|FOL|$ in type theory to enable formal proof writing that can be checked automatically. Instead, we will write proofs in natural language in such a way that it to a sufficiently knowledgeable reader is somewhat clear what a formal proof would look like. At a certain point we also formulate formulae in natural language. Additionally we take certain basic proofs in \verb|FOL| for granted. This treatment of \verb|FOL| only serves to provide a clear and precise language for building mathematical theory and we will quickly become satisfied that it exists and be happy that if we properly formulate theory in natural language it will be formalizable in \verb|FOL|.  
 \subsubsection{Tautology and Logical Equivalence}
 We say that formulae $\varphi$ and $\psi$ are \emph{logically equivalent} if $\vdash \varphi \leftrightarrow \psi$. We write 
 $$\varphi \iff \psi \metaiff \vdash \varphi \leftrightarrow \psi.$$
@@ -602,7 +602,7 @@ We define the \emph{height} of term constants, denoted $\mathrm{height}(\bullet)
 \end{remark}
 We now define a $\mathcal{L}_c$-structure $M$ which we will show in the next is a model of $\widetilde{T}$ and therefor also of $T$ and indeed $T+\neg \sigma_0$.
 
-\begin{lemma}
+\begin{lemma}\label{LemmaForCase1InHenkinsProof}
     Suppose 
     $$
         \sigma\equiv \forall x_k\forall \dots\forall x_{n-1}\exists x_n\sigma_{i,n}(x_0/\tau_0,\dots,x_{k-1}/\tau_{k-1},x_k,\dots,x_n)
@@ -624,7 +624,7 @@ $$
 $$
 is in $T_{\sigma_0}^\ast(c)\subset \widetilde{T}$ by construction.
 \end{proof}
-\begin{lemma}
+\begin{lemma}\label{LemmaForCase2InHenkinsProof}
     Suppose 
     $$
         \sigma\equiv \forall x_k\forall \dots\forall x_n\sigma_{i,n}(x_0/\tau_0,\dots,x_{k-1}/\tau_{k-1},x_k,\dots,x_n)
@@ -714,11 +714,38 @@ A simple induction argument shows that each term constant $\tau$ shows up in at 
     \textbf{Case $\quantifs_k\equiv \forall$:}  
     We split this case into two cases:\\
     \textbf{Case 1: There is an existential quantifier appearing after $\quantifs_k$:}\\
-    \textbf{Case 2: Every quantifier appearing after $\quantifs_k$ is universal:}
-
+    In this case for some $k< m\leq n$, 
+    $$\sigma \equiv \forall x_k \dots \forall x_{m-1} \exists x_m \sigma_{i,m}(x_0/\tau_0,\dots,x_{k-1}/\tau_{k-1},x_k,\dots,x_m).$$
+    Then setting 
+    $$ 
+        c_j \equiv (i,\tau_0,\dots,\tau_{m-1},m),
+    $$
+    where $\tau_k,\dots,\tau_{m}$ are arbitrary term constants,
+    by Lemma~\ref{LemmaForCase1InHenkinsProof},
+    $$
+        \sigma'':\equiv\sigma_{i,m}(x_0/\tau_0, \dots,x_{m-1}/\tau_{m-1},x_m/c_j)\in \widetilde{T}.
+    $$
+    By induction it follows that $M\vDash \sigma''$. Take an arbitrary assignment $j$ and consider $I=(M,j)$. Note that then 
+    \begin{align*}
+        &I \vDash \sigma_{i,m}(x_0/\tau_0, \dots,x_{m-1}/\tau_{m-1},x_m/c_j) \metaiff I [x_m\mapsto I(c_j)] \sigma_{i,m}(x_0/\tau_0, \dots,x_{m-1}/\tau_{m-1},x_m)\\ 
+        &\metaiff I \vDash \exists x_m \sigma_{i,m}(x_0/\tau_0, \dots,x_{m-1}/\tau_{m-1},x_m)\\
+        &\metaiff I[x_k\mapsto \widetilde{\tau_k}]\dots [x_{m-1}\mapsto \widetilde{\tau_{m-1}}] \vDash \exists x_m\sigma_{i,m}(x_0/\tau_0,\dots,x_{k-1}/\tau_{k-1},x_k,\dots,x_m) 
+    \end{align*}
+    Since $\tau_k,\dots,\tau_{m-1}$ were taken arbitrarily it follows that 
+    $$
+        I \vDash \forall x_k\dots \forall x_{m-1}\exists x_m \sigma_{i,m}(x_0/\tau_0,\dots,x_{k-1}/\tau_{k-1},x_k,\dots, x_m) \metaiff I \vDash \sigma \metaiff M \vDash \sigma
+    $$
+    \textbf{Case 2: Every quantifier appearing after $\quantifs_k$ is universal:}\\
+    In this case 
+    $$\sigma \equiv \forall x_k\dots \forall x_n \sigma_{i,n}(x_k,\dots,x_n).$$
+    Then using Lemma~\ref{LemmaForCase2InHenkinsProof},
+    $$\sigma'' \equiv \sigma_{i,n}(x_0/\tau,\dots, x_n/\tau_n)\in \widetilde{T}$$
+    for arbitrary term constants $\tau_k,\dots,\tau_n$. By induction $M\vDash \sigma''$. Following a similar argument to that of case 1 we obtain
+    $$M\vDash \sigma.$$
+    So we conclude that $M\vDash \sigma$ for any $\sigma \in \widetilde{T}$. It thus follows that $M\vDash \widetilde{T}$ and hence that $M\vDash T+\sigma_0$.
 \end{proof}
 \begin{theorem}(Henkin's Existence Theorem). If $\mathcal{L}$ is a countable signature and $T$ is a consistent then it has a model $M$.  
-Moreover, if $\sigma_0$ is a sentence such that $T\not\vdash \sigma_0$, then there is a model of $T+\neg \sigma_0$.  
+Moreover, if $\sigma_0$ is a sentence such that $T\not\vdash \sigma_0$, then there is a model of $T+\neg \sigma_0$ and in particular a model of $T$.  
 \end{theorem}
 
 \begin{corollary}
