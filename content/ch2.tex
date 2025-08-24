@@ -47,7 +47,7 @@
     Hence $gf: A \rightarrow C$ is an isomorphism with inverse $f^{-1}g^{-1}$. 
 \end{remark}
 \begin{definition}
-    Let $\pazocal{C}$ be a category and $f\in \Hom(A,B)$, $g\in \Hom(B,A)$.  $f$ is called a \textit{retraction} of $g$ and $g$ a section of $f$ if $fg = \fone_A$   
+    Let $\pazocal{C}$ be a category and $f\in \Hom(A,B)$, $g\in \Hom(B,A)$.  $f$ is called a \textit{retraction} of $g$ and $g$ a section of $f$ if $fg = \fone_B$   
 \end{definition}
 \begin{lemma}\label{AtMostOneIso}
     Let $\pazocal{C}$ be a category, $f\in \Hom(A,B)$. Suppose $g,h\in \Hom(B,A)$ are respectively a retraction and a section of $f$. Then $g=h$ and $f$ is an isomorphism. It follows that a morphism can have at most one inverse
@@ -118,7 +118,7 @@
     $$f\circ\op \mathbbm{1}_A = \mathbbm{1}_Af = f \text{ and } \mathbbm{1}_B \circ\op f = f \mathbbm{1}_B = f.$$
 \end{remark}
 \begin{definition}
-    Consider categories $\pazocal{C}_1$ and $\pazocal{C}_2$. A \textit{covariant functor} $\pazocal{F}$ between  $\pazocal{C}_1 $ and $ \pazocal{C}_2$ is a covariant functor between $\pazocal{C}_1$ and $\pazocal{C}_2\op$.
+    Consider categories $\pazocal{C}_1$ and $\pazocal{C}_2$. A \textit{contravariant functor} $\pazocal{F}$ between  $\pazocal{C}_1 $ and $ \pazocal{C}_2$ is a covariant functor between $\pazocal{C}_1$ and $\pazocal{C}_2\op$.
 \end{definition}
 \begin{corollary}
     Consider categories $\pazocal{C}_1$, $\pazocal{C}_2$ and a covariant functor $\pazocal{F}: \pazocal{C}_1 \rightarrow \pazocal{C}_2\op$. If $f: A \rightarrow B$ is an isomorphism in $\Hom(\pazocal{C}_1)$, then $\pazocal{F}(f): \pazocal{F}(B)\rightarrow \pazocal{F}(A)$ is an isomorphism in $\Hom(\pazocal{C}_2\op)$ 
@@ -135,20 +135,100 @@
 \begin{definition}
     A category $\pazocal{C}$ is \textit{locally small} if $\Hom(A,B)$ is a set for every object $A,B$ in $\Ob(\pazocal{C})$. It is \textit{small} if $\Ob(\pazocal{C})$ is a set.
 \end{definition}
-\begin{proposition}
-    Consider the class of small categories with morphisms being functors. This defines a category denoted $\Cat$. 
-\end{proposition}
-\begin{proof}
-    {\LARGE DO!}
-\end{proof}
 \begin{definition}
     In a category $\pazocal{C}$ a morphism $f\in \Hom(A,B)$ is a \textit{monomorphism} if for every pair of morphisms $g_1,g_2 \in \Hom(C,A)$, 
     $$fg_1=fg_2\implies g_1 = g_2.$$
     It is called an \textit{epimorphism} if for every pair of morphisms $h_1,h_2\in \Hom(B,D)$,
     $$h_1f=h_2f\implies h_1=h_2$$    
 \end{definition}
+\begin{remark}
+    Note that an epimorphism is just a monomorphism in $\pazocal{C}\op$ and vice versa
+\end{remark}\label{IsomorphismIsEpiAndMono}
+\begin{lemma}
+    Let $\pazocal{C}$ be a category and $f:A\rightarrow B$ a morphism. Then if $f$ is an isomorphism, then it is a monomorphism and an epimorphism.
+\end{lemma}
+\begin{proof}
+    Suppose $f$ is an isomorphism. Let $g_1,g_2: C \rightarrow A$ with $fg_1=fg_2$. Then 
+    $$
+        g_1=f^{-1}fg_1 = f^{-1}fg_2 = g_2.
+    $$
+    Using the dual result, we get that for every $h_1,h_2: B,D$, if $h_1f=h_2f$ then $h_1=h_2$. We thus conclude that $f$ is both an epimorphism and a monomorphism.\\
+\end{proof}
 \begin{definition}
-    Let $\pazocal{C}$ be a category and fix an object $X$ in $\pazocal{C}$. Given a morphism $f:A\rightarrow B$, define 
+    A category in which the converse of the above lemma holds is called \emph{balanced}
+\end{definition}
+\begin{lemma}
+    In the category of $\mathrm{Set}$, we have for a function $f: A\rightarrow B$
+    \begin{enumerate}
+        \item $f$ is epi if and only if it is surjective.
+        \item $f$ is mono if and only if is injective
+    \end{enumerate}
+    In particular $\mathrm{Set}$ is balanced. 
+\end{lemma}
+\begin{proof}
+    1. Suppose $f$ epimorphism. Note that in general for a subset $C\subset B$, if for each set $X$ and each pair of maps $\lambda_1,\lambda_2: B\rightarrow X$,  $\left.\lambda_1\right|_{C}=\left.\lambda\right|_C$ implies $\lambda_1 = \lambda_2$, then $C=B$. Our assumption tells us that for each pair of functions $h_1,h_2: B\rightarrow X$, $\left.h_1\right|_{\im\ f} = \left.  h_2\right|_{\im\ f}$ implies $h_1 = h_2$, hence $\im \ f = B$, meaning $f$ is surjective.\\
+    Suppose conversely that $f$ is surjective. Let $h_1,h_2\in \Hom(X,B)$ and suppose $h_1 f= h_2 f$. Let $b\in B$. Then there is an $a\in A$ such that $b=f(a)$, hence
+    $$h_1(b) = h_1(f(a))=h_1f(a)= h_2f(a)=h_2(f(a))=h_2(b).$$
+    Since $a$ was chosen arbitrarily it follows that $h_1=h_2$.\\ 
+    2. Suppse $f$ is mono. Suppose $a_1,a_2\in A$ are given such that $f(a_1)=f(a_2)$. Consider the functions, $g_i : \{\ast\} \rightarrow A,\ast\mapsto a_i$. Then 
+    $$ 
+        fg_1 = fg_2,
+    $$
+    hence $g_1 = g_2$, which implies $a_1=g_1(\ast)=g_2(\ast)= a_2$.\\
+    Suppose $f$ is injective. Consider $g_1,g_2 : C\rightarrow A$ with $fg_1 = fg_2$. Let an arbitrary $x\in C$ be given. Then 
+    $$
+        f(g_1(x)) = f(g_2(x)) \implies g_1(x) = g_2(x).
+    $$ 
+    Since $x$ was chosen arbitrarily this means $g_1 = g_2$.    
+\end{proof}
+\begin{lemma}
+    Let $\pazocal{C}$ be a category and $f : A\rightarrow B$ a morphism
+    \begin{enumerate}
+        \item If $f$ is a section of some $h: B\rightarrow A$, then it is a mono.
+        \item If $f$ is a retraction of some $h: B\rightarrow A$, then it is epi.
+    \end{enumerate} 
+\end{lemma}
+\begin{proof}
+    1. Consider $g_1,g_2: C\rightarrow A$ and suppose $fg_1 = f g_2$. Since $f$ is a section of $h$, then $hf = \fone_A$. Then 
+    $$
+        g_1 = (hf)g_1 = h(fg_1) = h (fg_2)= (hf)g_2 = g_2.
+    $$
+    2. Since a retraction is just a section in the opposite category, this result is dual to 1.
+\end{proof}
+\begin{remark}
+    If a morphism is a section of some morphism, then it is called a \emph{split monomorphism}. If a morphism is a retraction of some morphism it is called a \emph{split epimorphism}.
+\end{remark}
+\begin{lemma}
+    For every category $\pazocal{C}$, a morphism $f : A\rightarrow B$ is an isomorphism if and only if it is mono and split epi. Dually it is an isomorphism if and only if it is mono and split epi.
+\end{lemma}
+\begin{proof}
+    One direction follows from Lemma~\ref{IsomorphismIsEpiAndMono}. Suppose $f$ is mono and split epi. Since it is split epi, there is a $g:B\rightarrow A$ such that $fg = \fone_B$. Note that 
+    $$f(gf)=(fg)f=\fone_B f= f = f\fone_A,$$
+    hence $gf = \fone_A$ by the assumption that $f$ is mono.
+\end{proof}
+\begin{lemma}
+    Consider a category $\pazocal{C}$. Then 
+    \begin{enumerate}
+        \item The composition of two monos is a mono.
+        \item For $f:A\rightarrow B$ and $g : B\rightarrow C$ if $gf$ is a mono, then so is $f$. 
+    \end{enumerate}
+    Dually 
+    \begin{enumerate}
+        \item The composition of two epis is an epi.
+        \item For For $f:A\rightarrow B$ and $g : B\rightarrow C$ if $gf$ is an epi, then so is $g$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    1. Consider epis $f: B\rightarrow C$ and $g:A\rightarrow B$. Suppose $h_1,h_2 : X\rightarrow A$ are given such that $(fg)h_1 = (fg)h_2$. Then 
+    $$f(gh_1)=f(gh_2)\implies gh_1 = gh_2 \implies h_1 =h_2,$$
+    hence $fg$ is a mono.\\
+    2. Consider $h_1,h_2 : X \rightarrow A$ such that $fh_1 = fh_2$. Then $(gf)h_1 = (gf)h_2$, hence by assumption, $h_1 = h_2$. We thus conclude that $f$ is mono.
+\end{proof}
+\begin{remark}
+    From the above result it follows that $\Ob(\pazocal{C})$ with morphisms being monos/epis in $\Hom(\pazocal{C})$, defines a subcategory of $\pazocal{C}$.
+\end{remark}
+\begin{definition}
+    Let $\pazocal{C}$ be a locally small category and fix an object $X$ in $\pazocal{C}$. Given a morphism $f:A\rightarrow B$, define 
     \begin{gather*}
         f_\ast : \Hom(X,A) \rightarrow \Hom(X,B)\\
         g\mapsto fg
@@ -168,11 +248,169 @@
     hence $f\op_\ast = f^\ast$
 \end{remark}
 \begin{lemma}
-    For a category $\pazocal{C}$ a 
+    For a locally small category $\pazocal{C}$ and morphism $f:A\rightarrow B$, the following are equivalent
+    \begin{enumerate}
+        \item $f$ is an isomorphism
+        \item For every object $X$ in $\pazocal{C}$, $f_\ast$ is a bijection. 
+        \item For every object $X$ in $\pazocal{C}$, $f^\ast$ is a bijection
+    \end{enumerate}
 \end{lemma}
+\begin{proof}
+    "1. $\implies$ 2.": Let $g : B\rightarrow A$ be the inverse of $f$. Then given $h\in \Hom(X,A)$,
+    $$(g_\ast f_\ast)h = g_\ast(f_\ast h)= g_\ast(fh)=gfh=h \implies g_\ast f_\ast = \fone_{\Hom(X,A)}$$
+    and similarly one proves that $f_\ast g_\ast = \fone_{\Hom(X,B)}$.\\
+    "2.$\implies$ 1.": Consider $f_\ast : \Hom(B,A)\rightarrow \Hom(B,B)$. This by assumption has an inverse $\lambda : \Hom(B,B)\rightarrow \Hom(B,A)$. Set $g := \lambda(\fone_B)$. Then for each  
+    $$fg = f \lambda(\fone_B)= f_\ast(\lambda(\fone_B))=(f_\ast\lambda)(\fone_B)=\fone_{\Hom(B,B)}(\fone_B)=\fone_B.$$
+    Now consider the function 
+    \begin{gather*}
+        \mu : \Hom(A,A)\rightarrow \Hom(A,B)\\
+        h\mapsto fh
+    \end{gather*}
+    which just another instance of an "$f_\ast$", but we use different notation to not confuse it with $f_\ast: \Hom(B,B)\rightarrow \Hom(B,A)$. Then $\mu$ has an inverse $\mu^{-1}$. Note then that
+    $$
+        \mu(gf)= f(gf)=(fg)f= \fone_B f = f\fone_A= \mu(\fone_A)
+    $$
+    hence 
+    $$
+        gf = (\mu^{-1}\mu)(gf) = \mu^{-1}(\mu(gf)) = \mu^{-1}(\mu(\fone_A))= (\mu^{-1}\mu)(\fone_A) = \fone_A.
+    $$
+    "1. $\iff$ 3.": This is dual to "1. $\iff$ 2.".\\
+\end{proof}
+\begin{lemma}
+    Consider a locally small category $\pazocal{C}$ and a morphism $f:A\rightarrow B$.
+    \begin{enumerate}
+        \item $f$ is a split epimorphism if and only if for each $X$, $f_\ast: \Hom(X,A) \rightarrow \Hom(X,B)$ is surjective. 
+        \item Dually, $f$ is a split monomorphism if and only if for each $X$, $f^\ast : \Hom(B,X)\rightarrow \Hom(A,X)$ is injective. 
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    1. Suppose $f$ is a split epi. Then $f$ has a right inverse $g$, i.e. $fg = \fone_B$. Let $h: X \rightarrow B$ be given. Then $f_\ast(gh)= f(gh)=(fg)h = h$, hence $f_\ast$ is surjective.\\ 
+    Suppose that $f_\ast: \Hom(X,A)\rightarrow \Hom(X,B)$ is surjective for each object $X$. Then $f_\ast: \Hom(B,A) \rightarrow \Hom(B,B)$ is surjective. hence for some $g:B\rightarrow A$, 
+    $$
+        \fone_B=f_\ast(g) = fg
+    $$ 
+    hence $f$ is a retraction of $g$ and therefor a split epimorphism. 
+    2. This is dual to 1. 
+\end{proof}
+\subsubsection{Functors}
+\begin{definition}
+    Consider a locally small category $\pazocal{C}$. We then for each object $X$ in $\pazocal{C}$ get a covariant functor 
+    \begin{gather*}
+        \Hom(X,\_) : \pazocal{C}\rightarrow \mathrm{Set}\\
+        Y\mapsto \Hom(X,Y)\\
+        f : A\rightarrow B \mapsto f_\ast: \Hom(X,A)\rightarrow \Hom(X,B) 
+    \end{gather*}
+    and a contravariant functor
+    \begin{gather*}
+        \Hom(\_,X) : \pazocal{C} \rightarrow \mathrm{Set}\\
+        Y \mapsto \Hom(Y,X)\\
+        f : A\rightarrow B \mapsto f^\ast: \Hom(X,B)\rightarrow \Hom(X,A) 
+    \end{gather*}
+    We say that these are the functors \emph{represented by $X$}.
+\end{definition}
+\begin{remark}
+    Let $f: B\rightarrow C$ and $g:A\rightarrow B$ be given. Then for each $h\in \Hom(X,A)$
+    $$
+        (fg)_\ast(h)= (fg)h= f(gh)= f_\ast(gh)=f_\ast(g_\ast(h))=f_\ast g_\ast(h) \implies (fg)_\ast=f_\ast g_\ast.
+    $$ 
+    One easily checks that $(\fone_A) = \fone_{\Hom(X,A)}$. This verifies that $\Hom(X,\_)$ is a covariant functor. Note that $\Hom(\_,X)$ is just the covariant functor 
+    \begin{gather*}
+        \Hom(X,\_) : \pazocal{C}\op \rightarrow \mathrm{Set}
+    \end{gather*}
+    and is therefor a contravariant functor from $\pazocal{C}\rightarrow \mathrm{Set}$. 
+\end{remark}
+\begin{definition}
+    For categories $\pazocal{C}$ and $\pazocal{C}'$ we define the \emph{the product category of $\pazocal{C}$ and $\pazocal{C}'$} to be category $\pazocal{C}\times \pazocal{C}'$ whose objects are ordered pairs $(X,X')$ where $X$ is an object of $\pazocal{C}$ and $X'$ is an object of $\pazocal{C}'$ and whose morphisms are ordered pairs of morphisms, denoted $(f,f'):(X,X')\rightarrow (Y,Y')$.\\
+    Given a pair of morphisms in the product, $(f,f'):(X,X')\rightarrow (Y,Y')$ and $(g,g'): (Y,Y')\rightarrow (Z,Z')$, composition is defined as 
+    $$
+        (g,g')(f,f') := (gf,g'f') : (X,X')\rightarrow (Z,Z').
+    $$
+    Given an object $(A,A')$, we define $\fone_{(A,A')} = (\fone_A, \fone_{A'})$    
+    {\Large How do we know such ordered pairs exist in general?}
+\end{definition}
+\begin{remark}
+    Consider morphisms $(f,f'):(Z,Z')\rightarrow (W,W')$, $(g,g'): (Y,Y')\rightarrow (Z,Z')$ and $(h,h') : (X,X')\rightarrow (Y,Y')$. Then 
+    \begin{align*}
+        (f,f')((g,g')(h,h'))&=(f,f')(gh,g'h')=(f(gh),f'(g'h'))= ((fg)h,(f'g')h')\\ &=(fg,f'g')(h,h')
+        =((f,f')(g,g'))(h,h').
+    \end{align*} 
+    Moreover, 
+    \begin{align*}
+        (h,h')\fone_{(X,X')}= (h\fone_X, h'\fone_{X'}) = (h,h') = (\fone_{Y} h,\fone_{Y'} h')=\fone_{(Y,Y')}(h,h'). 
+    \end{align*}
+    One can thus conclude that $\pazocal{C}\times \pazocal{C}'$
+\end{remark}
+\begin{definition}
+    Given a locally small category $\pazocal{C}$ we define the \emph{two-sides represented functor}
+    \begin{gather*}
+        \Hom(\_,\_) : \pazocal{C}\op\times \pazocal{C}\rightarrow \mathrm{Set}\\
+        (X,Y) \mapsto \Hom(X,Y)\\
+        (f,h) : (A,B)\rightarrow (C,D) \mapsto (f^\ast,h_\ast) : \Hom(A,B)\rightarrow \Hom(C,D)
+    \end{gather*}
+    where $f: C\rightarrow A$ as a morphism in $\pazocal{C}$ and $(f^\ast,h_\ast)(g) := hgf$ for $g\in \Hom(A,B)$.
+\end{definition}
+\begin{lemma}
+    Consider categories $\pazocal{C},\pazocal{D},\pazocal{E}$ and covariant functors, $\pazocal{F}: \pazocal{C}\rightarrow \pazocal{D}, \pazocal{G}:\pazocal{D}\rightarrow \pazocal{E}$. Then 
+    \begin{gather*}
+        \pazocal{G}\circ \pazocal{F} : \pazocal{C}\rightarrow \pazocal{E}\\
+        X \mapsto \pazocal{G}(\pazocal{F}(X))\\
+        f: Y\rightarrow Z \mapsto \pazocal{G}(\pazocal{F}(f)): \pazocal{G}(\pazocal{F}(Y))\rightarrow \pazocal{G}(\pazocal{F}(Z))
+    \end{gather*}
+    is a functor called the \emph{composition of $\pazocal{G}$ with $\pazocal{F}$}. 
+\end{lemma}
+\begin{proof}
+    Indeed, for morphisms $f: X\rightarrow Y$ and $g: Y\rightarrow Z$,
+    \begin{align*}
+        (\pazocal{G}\circ \pazocal{F})(gf) &= \pazocal{G}(\pazocal{F}(gf))=\pazocal{G}(\pazocal{F}(g)\pazocal{F}(f))= \pazocal{G}(\pazocal{F}(g))\pazocal{G}(\pazocal{F}(f))\\
+        &=(\pazocal{G}\circ\pazocal{F})(g)(\pazocal{G}\circ\pazocal{F})(f).
+    \end{align*}
+    Moreover,
+    $$
+        (\pazocal{G}\circ\pazocal{F})(\fone_X)=\pazocal{G}(\pazocal{F}(\fone_X))=\pazocal{G}(\fone_{\pazocal{F}(X)})=\fone_{\pazocal{G}(\pazocal{F}(X))}=\fone_{(\pazocal{G}\circ\pazocal{F})(X)}.
+    $$
+\end{proof}
+\begin{lemma}
+    Composition of functors is associative.
+\end{lemma}
+\begin{proof}
+    Consider functors $\pazocal{F}: \pazocal{C}\rightarrow \pazocal{D},\pazocal{G}:\pazocal{B}\rightarrow \pazocal{C},\pazocal{H}: \pazocal{A}\rightarrow \pazocal{B}$. Given an object $A$ in $\pazocal{A}$,
+    \begin{align*}
+        (\pazocal{F}\circ (\pazocal{G}\circ\pazocal{H}))(A)&= \pazocal{F}((\pazocal{G}\circ\pazocal{H})(A))= \pazocal{F}(\pazocal{G}(\pazocal{H}(A)))=(\pazocal{F}\circ\pazocal{G})(\pazocal{H}(A))\\
+        ((\pazocal{F}\circ \pazocal{G})\circ \pazocal{H})(A).
+    \end{align*}
+    Once also easily checks that for each morphism $f:X\rightarrow Y$ 
+    $$
+        (\pazocal{F}\circ (\pazocal{G}\circ\pazocal{H}))(f)=((\pazocal{F}\circ\pazocal{G})\circ\pazocal{H})(f), 
+    $$
+    hence
+    $$\pazocal{F}\circ(\pazocal{G}\circ\pazocal{H})=(\pazocal{F}\circ\pazocal{G})\circ\pazocal{H}.$$
+\end{proof}
+\begin{remark}
+    In addition to functor composition being associative, there is an identity functor for each category 
+    \begin{gather*}
+        \pazocal{ID}_\pazocal{C}: \pazocal{C}\rightarrow \pazocal{C}\\
+        X\mapsto X\\
+        f : Y\rightarrow Z \mapsto f : Y\rightarrow Z
+    \end{gather*}
+    for which 
+    $$
+        \pazocal{F}\pazocal{ID}_\pazocal{C}=\pazocal{F}=\pazocal{ID}_\pazocal{D}\pazocal{F}.
+    $$ 
+\end{remark}
+\subsubsection{Categories of Categories}
+When our foundations are suitably developed we may consider a category of categories when we have the last lemma of the prior section in mind. Naively one cannot consider such a category, since the question of whether such a category is an object in the category of categories leads to an instance of Russel's paradox. Instead one needs to consider some more refined concepts such as the following, 
+\begin{proposition}
+    Consider the class of small categories with morphisms being functors. This defines a locally small category denoted $\Cat$. 
+\end{proposition}
+\begin{proof}
+    Note that the class of subclasses of the proper class of all sets is itself a proper class. Note that a functor between categories, whose objects and class of morphisms are sets, is a function. I.e. such a functor 
+    is a function 
+    $$\Ob(\pazocal{C})\times \Hom(\pazocal{C}) \rightarrow \Ob(\pazocal{C}')\times \Hom(\pazocal{C}').$$
+    Then the class of all such functors is a.
+\end{proof}
 \subsubsection{Products \& Co-products}
 \begin{definition}
-    Let $A$ be a set and $\{X_\alpha\}_{\alpha\in A}$ be a family of sets. We then define \textit{the direct product of $X_\alpha$ over $A$} to be the set
+    Let $A$ be a set and $\{X_\alpha\}_{\alpha\in A}$ be a family of sets. We then define \textit{the direct categoryproduct of $X_\alpha$ over $A$} to be the set
     $$\prod_{\alpha\in A} X_\alpha := \left\{ f: A \rightarrow \bigcup_{\alpha \in A} X_\alpha : f(\alpha) \in X_\alpha \text{ for every } \alpha\in A\right\}.$$
 \end{definition}
 \begin{remark}
