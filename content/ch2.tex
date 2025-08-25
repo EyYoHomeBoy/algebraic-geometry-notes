@@ -71,7 +71,7 @@
        & A \arrow[ld, "f"' ] \arrow[rd, "g"]\\
         X \arrow{rr}{h} & & Y
     \end{tikzcd}$$
-    commutes. \textit{The slice category of $\pazocal{C}$ over $A$} denoted $\pazocal{C}/A$ is $A/\pazocal{C}\op$, i.e. objects are morphisms with codomain $A$ and a morphism from $f : X \rightarrow A$ to $g : Y\rightarrow A$ is a morphism $h : X \rightarrow Y$ satisfying
+    commutes. \textit{The slice category of $\pazocal{C}$ over $A$} denoted $\pazocal{C}/A$ has morphisms with codomain $A$ as objects and a morphism from $f : X \rightarrow A$ to $g : Y\rightarrow A$ is a morphism $h : X \rightarrow Y$ satisfying
     $$\begin{tikzcd}
         X \arrow[rd, "f"'] \arrow[rr, "h"] & & Y\arrow[ld, "g"]\\
         & A 
@@ -369,7 +369,7 @@
         (\pazocal{G}\circ\pazocal{F})(\fone_X)=\pazocal{G}(\pazocal{F}(\fone_X))=\pazocal{G}(\fone_{\pazocal{F}(X)})=\fone_{\pazocal{G}(\pazocal{F}(X))}=\fone_{(\pazocal{G}\circ\pazocal{F})(X)}.
     $$
 \end{proof}
-\begin{lemma}
+\begin{lemma}\label{FunctorCompositionIsAssociative}
     Composition of functors is associative.
 \end{lemma}
 \begin{proof}
@@ -385,7 +385,7 @@
     hence
     $$\pazocal{F}\circ(\pazocal{G}\circ\pazocal{H})=(\pazocal{F}\circ\pazocal{G})\circ\pazocal{H}.$$
 \end{proof}
-\begin{remark}
+\begin{remark}\label{IdentityFunctor}
     In addition to functor composition being associative, there is an identity functor for each category 
     \begin{gather*}
         \pazocal{ID}_\pazocal{C}: \pazocal{C}\rightarrow \pazocal{C}\\
@@ -406,7 +406,33 @@ When our foundations are suitably developed we may consider a category of catego
     Note that the class of subclasses of the proper class of all sets is itself a class (in e.g. Morse-Kelley set theory). Note that a functor between categories, whose objects and class of morphisms are sets, is a function. I.e. such a functor 
     is a function 
     $$\Ob(\pazocal{C})\times \Hom(\pazocal{C}) \rightarrow \Ob(\pazocal{C}')\times \Hom(\pazocal{C}').$$
-    Then the class of all such functors is a.
+    Then the class of all such functors is a subclass of the class of all functions{\Large ?}. By Lemma~\ref{FunctorCompositionIsAssociative} and Remark~\ref{IdentityFunctor}, $\Cat$ is a category and it is locally small since $\Hom(\pazocal{C},\pazocal{D})$ is a set for each pair of small categories $\pazocal{C},\pazocal{D}$. 
+\end{proof}
+\begin{remark}
+    The collection of all locally small categories with functors as morphisms, which will be denoted $\mathrm{CAT}$, will similarly define a category, which won't be locally small.  
+\end{remark}
+From the above we get a notion of isomorphism of categories.
+\begin{proposition}
+    Given a category $\pazocal{C}$ and an object $A$, then 
+    $$\pazocal{C}/A \simeq \left(A/\pazocal{C}\op\right)\op$$
+\end{proposition}
+\begin{proof}
+    Define a functor 
+    \begin{gather*}
+        \pazocal{F} : \pazocal{C}/A \rightarrow \left(A/\pazocal{C}\op\right)\op
+    \end{gather*}
+    which maps an object $f: X\rightarrow A$ to itself. Note that the objects of $\left(A/\pazocal{C}\op\right)\op$ is the same as the objects of $\left(A/\pazocal{C}\op\right)$, which are morphisms of $\pazocal{C}\op$ with domain $A$. Such morphisms are exactly morphisms of $\pazocal{C}$ with codomain $A$. It follows that the assignment of objects is well-defined. Moreover $\pazocal{F}$ maps a morphism  
+    $$
+        \begin{tikzcd}
+            X \arrow[rd, "f"'] \arrow[rr, "h"] & & Y\arrow[ld, "g"]\\
+            & A 
+        \end{tikzcd}
+    $$ 
+    to itself. Indeed, a morphism from $\lambda\in \Hom^{\pazocal{C}\op}(A,X)$ to $\mu\in \Hom^{\pazocal{C}\op}(B,X)$ in $\left(A/\pazocal{C}\op\right)\op$ is a morphism in $A/\pazocal{C}\op$ from $\mu$ to $\lambda$, $\nu\in \Hom^{\pazocal{C}\op}(Y,X)$ such that $\lambda = \nu\circ\op\mu$. In $\pazocal{C}$, this corresponds to $\nu: X\rightarrow Y$ being a morphism satisfying $\lambda = \mu\circ \nu$. This is exactly a morphism in $\pazocal{C}/A$. It follows that $\pazocal{F}$ is well-defined on morphisms as well. The above arguments also clearly shows that the functor 
+    \begin{gather*}
+        \pazocal{G}: \left(A/\pazocal{C}\op\right)\op \rightarrow \pazocal{C}/A 
+    \end{gather*}
+    taking objects and morphisms to themselves gives a well-defined functor whose left and right inverse is $\pazocal{F}$. It follows that $\pazocal{C}/A\simeq \left(A/\pazocal{C}\op\right)\op$ at least when this category can be shown to live in some category.  
 \end{proof}
 \subsubsection{Products \& Co-products}
 \begin{definition}
