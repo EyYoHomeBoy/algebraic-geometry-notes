@@ -219,7 +219,7 @@
     \end{enumerate}
 \end{lemma}
 \begin{proof}
-    1. Consider epis $f: B\rightarrow C$ and $g:A\rightarrow B$. Suppose $h_1,h_2 : X\rightarrow A$ are given such that $(fg)h_1 = (fg)h_2$. Then 
+    1. Consider monos $f: B\rightarrow C$ and $g:A\rightarrow B$. Suppose $h_1,h_2 : X\rightarrow A$ are given such that $(fg)h_1 = (fg)h_2$. Then 
     $$f(gh_1)=f(gh_2)\implies gh_1 = gh_2 \implies h_1 =h_2,$$
     hence $fg$ is a mono.\\
     2. Consider $h_1,h_2 : X \rightarrow A$ such that $fh_1 = fh_2$. Then $(gf)h_1 = (gf)h_2$, hence by assumption, $h_1 = h_2$. We thus conclude that $f$ is mono.
@@ -292,6 +292,7 @@
     hence $f$ is a retraction of $g$ and therefor a split epimorphism. 
     2. This is dual to 1. 
 \end{proof}
+
 \subsubsection{Functors}
 \begin{definition}
     Consider a locally small category $\pazocal{C}$. We then for each object $X$ in $\pazocal{C}$ get a covariant functor 
@@ -397,6 +398,83 @@
         \pazocal{F}\pazocal{ID}_\pazocal{C}=\pazocal{F}=\pazocal{ID}_\pazocal{D}\pazocal{F}.
     $$ 
 \end{remark}
+\begin{example}
+    Note that it is not true that if a functor maps a morphism to an isomorphism, then said morphism is an isomorphism. Indeed, consider for example any functor $\pazocal{F}$ from a category $\pazocal{C}$ to the category with one object and one morphism (which will need to be the identity morphism), $\mathbbm{1}$. This will take any object to the one object and any morphism to identity morphism.   
+\end{example}
+\begin{definition}
+    Let $\pazocal{F}:\pazocal{D}\rightarrow \pazocal{C}$ and $\pazocal{G}:\pazocal{E}\rightarrow \pazocal{C}$ be functors. We define the \emph{comma category} $\pazocal{F}\downarrow \pazocal{G}$ whose objects are triples $(D\in \pazocal{D}, E\in\pazocal{E}, f:\pazocal{F}(D)\rightarrow \pazocal{G}(E))$. A morphism $(D,E,f)\rightarrow (D',E',f')$  is a pair of morphisms $(h: D\rightarrow D',k: E\rightarrow E')$ so that
+    $$
+        \begin{tikzcd}
+            \pazocal{F}(D) \arrow[r, "f"] \arrow[d,"\pazocal{F}(h)"] & \pazocal{G}(E) \arrow[d,"\pazocal{G}(k)"]\\
+            \pazocal{F}(D')\arrow[r,"f'"] & \pazocal{G}(E')  
+        \end{tikzcd}
+    $$
+    commutes
+\end{definition}
+\begin{remark}
+    Consider morphisms 
+    $$(h:D\rightarrow D',k:E\rightarrow E'):(D,E,f)\rightarrow (D',E',f')$$ 
+    and 
+    $$(h':D'\rightarrow D'',k':E'\rightarrow E''):(D',E',f')\rightarrow (D'',E'',f'').$$ 
+    We define composition by 
+    $$
+        (h',k')(h,k) := (h'h,k'k)
+    $$
+    To see that this is well defined note that 
+    $$
+        \begin{tikzcd}
+            \pazocal{F}(D) \arrow[r, "f"] \arrow[d,"\pazocal{F}(h'h)"] & \pazocal{G}(E) \arrow[d,"\pazocal{G}(k'k)"]\\
+            \pazocal{F}(D'')\arrow[r,"f''"] & \pazocal{G}(E'')
+        \end{tikzcd}
+    $$
+    commutes since $\pazocal{F}(h'h)=\pazocal{F}(h')\pazocal{F}(h)$, $\pazocal{G}(k'k)=\pazocal{G}(k')\pazocal{G}(k)$ and the diagram
+    $$
+        \begin{tikzcd}
+            \pazocal{F}(D) \arrow[r, "f"] \arrow[d,"\pazocal{F}(h)"] & \pazocal{G}(E) \arrow[d,"\pazocal{G}(k)"]\\
+            \pazocal{F}(D')\arrow[r,"f'"]\arrow[d,"\pazocal{F}(h')"] & \pazocal{G}(E') \arrow[d,"\pazocal{G}(k')"]\\
+            \pazocal{F}(D'')\arrow[r,"f''"] & \pazocal{G}(E'')
+        \end{tikzcd}
+    $$
+    commutes. Clearly composition is associative. Define the identity morphism for $(D,E,f)$ to be $(\fone_D,\fone_E)$. Note that this is indeed a morphism in $\pazocal{F}\downarrow \pazocal{G}$, since 
+    $$
+        \begin{tikzcd}
+            \pazocal{F}(D) \arrow[r,"f"]\arrow[d,"\pazocal{F}(\fone_D)=\fone_{\pazocal{F}(D)}",swap] & \pazocal{G}(E)\arrow[d,"\pazocal{G}(\fone_{E})=\fone_{\pazocal{G}(E)}"]\\
+            \pazocal{F}(D)\arrow[r,"f"] & \pazocal{G}(E) 
+        \end{tikzcd}
+    $$
+    clearly commutes. It is also clear that this is the identity morphism in $\pazocal{F}\downarrow \pazocal{G}$.
+\end{remark}
+\begin{definition}
+    Given functors $\pazocal{F}:\pazocal{D}\rightarrow \pazocal{C}$ and $\pazocal{G}:\pazocal{E}\rightarrow \pazocal{C}$ we define projection functors 
+    \begin{gather*}
+        \mathrm{dom}: \pazocal{F}\downarrow \pazocal{G} \rightarrow \pazocal{D}\\
+        (D,E,f)\mapsto D\\
+        (h,k) :(D_1,E_1,f_1) \rightarrow (D_2,E_2,f_2)\mapsto h: D_1\rightarrow D_2
+    \end{gather*} 
+    and 
+    \begin{gather*}
+        \mathrm{cod} : \pazocal{F}\downarrow\pazocal{G} \rightarrow \pazocal{E}\\
+        (D,E,f)\mapsto E\\
+        (h,k) :(D_1,E_1,f_1) \rightarrow (D_2,E_2,f_2)\mapsto k: E_1\rightarrow E_2
+    \end{gather*}
+\end{definition}
+\begin{remark}
+    Note that $C/\pazocal{C}$ is just a comma category; $\pazocal{F}_C\downarrow \pazocal{ID}_\pazocal{C}$, where $\pazocal{F}_C: \mathbbm{1} \rightarrow \pazocal{C}$ is the constant functor from the category with one object and one morphism and $\pazocal{ID}_\pazocal{C}$ is the identity functor on $\pazocal{C}$. Indeed an object in this category is a triple $(\ast\in \mathbbm{1},X\in \pazocal{C},f: C\rightarrow X)$, note that there is a unique such triple when given any morphism $f: C\rightarrow X$, so we may represent such a triple more succinctly by just providing a morphism. A morphism in $\pazocal{F}_C\downarrow \pazocal{ID}_\pazocal{C}$ from $f:C\rightarrow X$ to $g: C\rightarrow Y$ is a pair $(h:X\rightarrow Y, \id_C: C\rightarrow C)$ such that 
+    $$
+        \begin{tikzcd}
+            C \arrow[r, "f"]\arrow[d,"\id_C",swap] & X\arrow[d, "h"]\\
+            C \arrow[r, "g"] & Y  
+        \end{tikzcd}
+    $$
+    commutes. Note that the second data point in this pair is redundant and that this is equivalent to 
+    $$
+        \begin{tikzcd}
+            & C\arrow[ld, "f"]\arrow[rd, "g"]\\
+            X \arrow{rr}{h} & & Y 
+        \end{tikzcd}
+    $$
+    commuting. So the data specifying the two categories is the same. Note that projection functor simply map a morphism $f: C \rightarrow X$ to its domain and codomain respectively. We can also construct $\pazocal{C}/C$ as $\pazocal{ID}_\pazocal{C}\downarrow \pazocal{F}_C$.  
+\end{remark} 
 \subsubsection{Categories of Categories}
 When our foundations are suitably developed we may consider a category of categories when we have the last lemma of the prior section in mind. Naively one cannot consider such a category, since the question of whether such a category is an object in the category of categories leads to an instance of Russel's paradox. Instead one needs to consider some more refined concepts such as the following, 
 \begin{proposition}
@@ -434,6 +512,101 @@ From the above we get a notion of isomorphism of categories.
     \end{gather*}
     taking objects and morphisms to themselves gives a well-defined functor whose left and right inverse is $\pazocal{F}$. It follows that $\pazocal{C}/A\simeq \left(A/\pazocal{C}\op\right)\op$ at least when this category can be shown to live in some category.  
 \end{proof}
+\subsubsection{Natural Transformations}
+\begin{definition}
+    A \emph{natural transformation} of functors $\pazocal{F},\pazocal{G} : \pazocal{C}\rightarrow \pazocal{D}$,
+    $$\alpha : \pazocal{F} \Rightarrow \pazocal{G}$$
+    is a collection of morphisms 
+    $$\left\{\alpha_X : \pazocal{F}(X)\rightarrow \pazocal{G}(X) : X\in\Ob(\pazocal{C})\right\} $$
+    called \emph{components} such that for any morphism $f: X\rightarrow X'$,
+    $$
+        \begin{tikzcd}
+            \pazocal{F}(X) \arrow[r, "\alpha_X"] \arrow[d,"\pazocal{F}(f)"] & \pazocal{G}(X)\arrow[d,"\pazocal{G}(f)"]\\
+            \pazocal{F}(X') \arrow[r,"\alpha_{X'}"] & \pazocal{G}(X')
+        \end{tikzcd}
+    $$ 
+    commutes
+\end{definition}
+\begin{remark}
+    A natural transformation is also denoted 
+    $$
+        \begin{tikzcd}
+            \pazocal{C} \arrow[r,bend left = 50, "\pazocal{F}"{name=F}] & \pazocal{D} \arrow[l, bend left = 50, "\pazocal{G}"{name=G}] \arrow[Rightarrow,from=F, to=G,"\alpha",shorten >=8pt, shorten <=8pt]
+        \end{tikzcd}
+    $$
+\end{remark}
+\begin{definition}
+    A \emph{natural isomorphism} is a natural transformation for which every component is an isomorphism. 
+\end{definition}
+\begin{lemma}
+    Suppose $\alpha : \pazocal{F}\Rightarrow \pazocal{G}$ is a natural isomorphism with components $\{\alpha_X\}$. Then $\{\alpha_X^{-1}\}$ defines the components of a natural isomorphism $\alpha^{-1} : \pazocal{G} \Rightarrow \pazocal{F}$. 
+\end{lemma}
+\begin{proof}
+    Let $f: X\rightarrow X'$ be a morphism. We need to check that the diagram 
+    $$
+        \begin{tikzcd}
+            \pazocal{G}(X) \arrow[r,"\alpha_X^{-1}"] \arrow[d,"\pazocal{G}(f)"] & \pazocal{F}(X)\arrow[d,"\pazocal{F}(f)"] \\
+            \pazocal{G}(X')\arrow[r,"\alpha_{X'}^{-1}"] & \pazocal{F}(X')
+        \end{tikzcd}
+    $$
+    commutes. Indeed, using the fact that $\alpha_{X'}\pazocal{F}(f)= \pazocal{G}(f)\alpha_X$,
+    \begin{align*}
+        \pazocal{F}(f)\alpha_{X}^{-1} = \alpha_{X'}^{-1}\alpha_{X'}\pazocal{F}(f)\alpha_X^{-1} = \alpha_{X'}^{-1}\pazocal{G}(f)\alpha_X\alpha_X^{-1}= \alpha_{X'}^{-1}\pazocal{G}(f).
+    \end{align*}
+\end{proof}
+\begin{example}
+    Let $\pazocal{C}$ be a locally small category. Consider distinct morphisms... {\Large Do exercise 1.4 iv.}
+\end{example}
+\subsubsection{Equivalence of Categories}
+    \begin{definition}
+        Let $\mathbbm{2}$ denote the category with two objects $0,1$ and a single non-identity arrow $0\rightarrow 1$. 
+    \end{definition}
+    We consider two functors 
+    \begin{gather*}
+        \iota_i : \mathbbm{1}\rightarrow \mathbbm{2}\\
+        \ast \mapsto i\\
+        \id_\ast \mapsto \id_i 
+    \end{gather*}
+    for $i=0,1$. 
+    \begin{lemma}
+        Fix functors $\pazocal{F},\pazocal{G}:\pazocal{C}\rightarrow \pazocal{D}$. There is a bijection of natural transformations and functors $\pazocal{H}:\pazocal{C}\times \mathbbm{2}\rightarrow \pazocal{D}$ such that 
+        $$
+            \begin{tikzcd}
+                \pazocal{C} \arrow[r,"\pazocal{I}_0"]\arrow[rd,"\pazocal{F}",swap] & \pazocal{C}\times \mathbbm{2} \arrow[d,"\pazocal{H}"] & \pazocal{C}\arrow[ld,"\pazocal{G}"]\arrow[l,"\pazocal{I}_1",swap]\\
+                & \pazocal{D}
+            \end{tikzcd}
+        $$
+        commutes. Here $\pazocal{I}_i: X\mapsto (X,i), f:Y\rightarrow Z\mapsto (f,\id_i)$
+    \end{lemma}
+    \begin{proof}
+        Given a natural transformation $\alpha: \pazocal{F}\Rightarrow \pazocal{G}$, define 
+        \begin{gather*} 
+            \pazocal{H}_\alpha : \pazocal{C}\times \mathbbm{2}\rightarrow \pazocal{D}\\
+            (X,0) \mapsto \pazocal{F}(X)\\
+            (X,1)\mapsto \pazocal{G}(X)\\
+            (f,\id_0)\mapsto \pazocal{F}(f)\\
+            (f,\id_1) \mapsto \pazocal{G}(f)\\
+            (f,0\rightarrow 1) \mapsto ???
+        \end{gather*}
+        Conversely, let a functor $\pazocal{H}$ be given as described. For each object $X\in \pazocal{C}$, define 
+        \begin{gather*}
+            \alpha_X = \pazocal{H}(\id_X,0\rightarrow 1) 
+        \end{gather*}
+        $$
+            (\id_X,0\rightarrow 1): (X,0)= \pazocal{I}_0(X)\rightarrow (X,1)=\pazocal{I}_1(X)
+        $$
+
+        $$
+            \pazocal{H}(\id_X,0\rightarrow 1): \pazocal{H}(X,0)=\pazocal{H}\pazocal{I}_0(X)=\pazocal{F}(X)\rightarrow \pazocal{H}(X,1)=\pazocal{H}\pazocal{I}_1(X)=\pazocal{G}(X).
+        $$
+        \begin{align*}
+            \pazocal{G}(f)\alpha_X &= \pazocal{G}(f)\pazocal{H}(\id_X,0\rightarrow 1) = \pazocal{I}_1\pazocal{H}(f)\pazocal{H}(\id_X,0\rightarrow 1)\\
+            &= \pazocal{H}(f,\id_1)\pazocal{H}(\id_X,0\rightarrow 1)\\ 
+            &= \pazocal{H}(f,0\rightarrow 1) = \pazocal{H}(\id_{X'},0\rightarrow 1)\pazocal{H}(f,\id_0)\\
+            &= \alpha_{X'}\pazocal{H}\pazocal{I}_0(f)=\alpha_{X'}\pazocal{F}(f)
+        \end{align*}
+        hence $\{\alpha_X\}$ defines a collection of components of a natural transformation $\alpha: \pazocal{F}\Rightarrow \pazocal{G}$.
+    \end{proof}
 \subsubsection{Products \& Co-products}
 \begin{definition}
     Let $A$ be a set and $\{X_\alpha\}_{\alpha\in A}$ be a family of sets. We then define \textit{the direct categoryproduct of $X_\alpha$ over $A$} to be the set
