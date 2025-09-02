@@ -569,7 +569,7 @@ From the above we get a notion of isomorphism of categories.
     \end{gather*}
     for $i=0,1$. 
     \begin{lemma}
-        Fix functors $\pazocal{F},\pazocal{G}:\pazocal{C}\rightarrow \pazocal{D}$. There is a bijection of natural transformations and functors $\pazocal{H}:\pazocal{C}\times \mathbbm{2}\rightarrow \pazocal{D}$ such that 
+        Fix functors $\pazocal{F},\pazocal{G}:\pazocal{C}\rightarrow \pazocal{D}$. There is a bijection of natural transformations $\alpha: \pazocal{F} \Rightarrow \pazocal{G}$ and \textbf{witnessing functors} $\pazocal{H}:\pazocal{C}\times \mathbbm{2}\rightarrow \pazocal{D}$ such that 
         $$
             \begin{tikzcd}
                 \pazocal{C} \arrow[r,"\pazocal{I}_0"]\arrow[rd,"\pazocal{F}",swap] & \pazocal{C}\times \mathbbm{2} \arrow[d,"\pazocal{H}"] & \pazocal{C}\arrow[ld,"\pazocal{G}"]\arrow[l,"\pazocal{I}_1",swap]\\
@@ -579,34 +579,78 @@ From the above we get a notion of isomorphism of categories.
         commutes. Here $\pazocal{I}_i: X\mapsto (X,i), f:Y\rightarrow Z\mapsto (f,\id_i)$
     \end{lemma}
     \begin{proof}
-        Given a natural transformation $\alpha: \pazocal{F}\Rightarrow \pazocal{G}$, define 
+        Let a functor $\pazocal{H}$ be given as described. For each object $X\in \pazocal{C}$, define 
+        \begin{gather*}
+            \alpha_X^\pazocal{H} = \pazocal{H}(\id_X,0\rightarrow 1) 
+        \end{gather*}
+        This is a morphism with domain 
+        $$
+            \pazocal{H}(X,0)=\pazocal{H}\pazocal{I}_0(X)=\pazocal{F}(X)
+        $$
+        and codomain
+        $$
+            \pazocal{H}(X,1)=\pazocal{H}\pazocal{I}_1(X)=\pazocal{G}(X).
+        $$
+        We see that the collection 
+        $$ 
+            \left\{\alpha_X^\pazocal{H} : \pazocal{F}(X)\rightarrow \pazocal{G}(X) \mid X\in \pazocal{C}\right\}
+        $$
+        defines the components of a natural transformation, as
+        \begin{align*}
+            \pazocal{G}(f)\alpha_X &= \pazocal{G}(f)\pazocal{H}(\id_X,0\rightarrow 1) = \pazocal{H\pazocal{I}_1}(f)\pazocal{H}(\id_X,0\rightarrow 1)\\
+            &= \pazocal{H}(f,\id_1)\pazocal{H}(\id_X,0\rightarrow 1)\\ 
+            &= \pazocal{H}(f,0\rightarrow 1) = \pazocal{H}(\id_{X'},0\rightarrow 1)\pazocal{H}(f,\id_0)\\
+            &= \alpha_{X'}\pazocal{H}\pazocal{I}_0(f)=\alpha_{X'}\pazocal{F}(f).
+        \end{align*}
+        We denote this natural transformation by $\alpha^\pazocal{H}$.
+        Given a natural transformation $\alpha: \pazocal{F}\Rightarrow \pazocal{G}$, define a functor 
         \begin{gather*} 
             \pazocal{H}_\alpha : \pazocal{C}\times \mathbbm{2}\rightarrow \pazocal{D}\\
             (X,0) \mapsto \pazocal{F}(X)\\
             (X,1)\mapsto \pazocal{G}(X)\\
             (f,\id_0)\mapsto \pazocal{F}(f)\\
             (f,\id_1) \mapsto \pazocal{G}(f)\\
-            (f,0\rightarrow 1) \mapsto ???
+            (f: X\rightarrow Y,0\rightarrow 1) \mapsto \alpha_X 
         \end{gather*}
-        Conversely, let a functor $\pazocal{H}$ be given as described. For each object $X\in \pazocal{C}$, define 
-        \begin{gather*}
-            \alpha_X = \pazocal{H}(\id_X,0\rightarrow 1) 
-        \end{gather*}
+        One readily verifies that $\pazocal{F}=\pazocal{H}\pazocal{I}_0$ and that $\pazocal{G}=\pazocal{H}\pazocal{I}_1$. Note that by definition
         $$
-            (\id_X,0\rightarrow 1): (X,0)= \pazocal{I}_0(X)\rightarrow (X,1)=\pazocal{I}_1(X)
+            \alpha_X^{\pazocal{H}_\alpha} = \pazocal{H}(\id_X,0\rightarrow 1) = \alpha_X.
         $$
-
-        $$
-            \pazocal{H}(\id_X,0\rightarrow 1): \pazocal{H}(X,0)=\pazocal{H}\pazocal{I}_0(X)=\pazocal{F}(X)\rightarrow \pazocal{H}(X,1)=\pazocal{H}\pazocal{I}_1(X)=\pazocal{G}(X).
-        $$
-        \begin{align*}
-            \pazocal{G}(f)\alpha_X &= \pazocal{G}(f)\pazocal{H}(\id_X,0\rightarrow 1) = \pazocal{I}_1\pazocal{H}(f)\pazocal{H}(\id_X,0\rightarrow 1)\\
-            &= \pazocal{H}(f,\id_1)\pazocal{H}(\id_X,0\rightarrow 1)\\ 
-            &= \pazocal{H}(f,0\rightarrow 1) = \pazocal{H}(\id_{X'},0\rightarrow 1)\pazocal{H}(f,\id_0)\\
-            &= \alpha_{X'}\pazocal{H}\pazocal{I}_0(f)=\alpha_{X'}\pazocal{F}(f)
-        \end{align*}
-        hence $\{\alpha_X\}$ defines a collection of components of a natural transformation $\alpha: \pazocal{F}\Rightarrow \pazocal{G}$.
+        Suppose we are given two witnessing functors $\pazocal{H},\pazocal{H}'$ with $\alpha^\pazocal{H} = \alpha^{\pazocal{H}'}$.
+        For each object $X\in \pazocal{C}$
+        $$\pazocal{H}(X,0)=\pazocal{H}\pazocal{I}_0(X)=\pazocal{F}(X)=\pazocal{H}'\pazocal{I}_0(X)=\pazocal{H}'(X,0).$$
+        By a similar computation $\pazocal{H}(X,1)=\pazocal{H}'(X,1)$. Moreover, similar computations show that $\pazocal{H}(f,\id_i) = \pazocal{H}'(f,\id_i)$ for $i=0,1$. It remains to check that $\pazocal{H}(f,0\rightarrow 1) = \pazocal{H}'(f,0\rightarrow)$ which readily follows from the fact that $\alpha_X^\pazocal{H}=\alpha_X^{\pazocal{H}'}$ for each $X$.
     \end{proof}
+    \begin{definition}
+        Consider categories $\pazocal{C}$ and $\pazocal{D}$. An \emph{equivalence of categories} is a pair of functors $\pazocal{F}: \pazocal{C}\rightarrow \pazocal{D}$, $\pazocal{G}:\pazocal{D}\rightarrow \pazocal{C}$ and natural isomorphisms $\alpha : \pazocal{ID}_\pazocal{C} \simeq \pazocal{G}\pazocal{F}$ and $\beta: \pazocal{ID}_\pazocal{D} \simeq \pazocal{F}\pazocal{G}$. We say two categories are \emph{equivalent} if there is an equivalence of categories between them and in this case we may write $\pazocal{C}\simeq \pazocal{D}$. 
+    \end{definition}
+    \begin{remark}
+        Equivalence of categories is an equivalence relation. 
+        \begin{itemize}
+            \item Two copies of $\pazocal{ID}_\pazocal{C}$ together with two copies of components $\{\id_X : X\in \pazocal{C}\}$ defines an equivalence of categories of $\pazocal{C}$ with itself.
+            \item Suppose $\pazocal{C}\simeq \pazocal{D}$. Then there are functors $\pazocal{F}: \pazocal{C}\rightarrow \pazocal{D}$, $\pazocal{G}: \pazocal{D}\rightarrow \pazocal{C}$ together with natural isomorphisms $\alpha: \pazocal{ID}_\pazocal{C}\simeq \pazocal{G}\pazocal{F}$ and $\beta:\pazocal{ID}_\pazocal{D}\simeq \pazocal{F}\pazocal{G}$. This data by definition also expresses that $\pazocal{D}\simeq \pazocal{C}$, when we implicitly use the commutativity of conjuction. 
+            \item Suppose $\pazocal{C}\simeq \pazocal{D}$ and $\pazocal{D}\simeq \pazocal{E}$. There are then functors  $\pazocal{F}: \pazocal{C}\rightarrow \pazocal{D}$, $\pazocal{G}: \pazocal{D}\rightarrow \pazocal{C}$ together with natural isomorphisms $\alpha: \pazocal{ID}_\pazocal{C}\simeq \pazocal{G}\pazocal{F}$ and $\beta:\pazocal{ID}_\pazocal{D}\simeq \pazocal{F}\pazocal{G}$. Moreover there are functors $\pazocal{H} : \pazocal{D}\rightarrow\pazocal{E}$, $\pazocal{I}: \pazocal{E}\rightarrow \pazocal{D}$ with natural isomorphisms $\gamma : \pazocal{ID}_{\pazocal{D}} \simeq \pazocal{I}\pazocal{H}$ and $\kappa : \pazocal{ID}_\pazocal{E} \simeq \pazocal{H}\pazocal{I}$. Set 
+            $$
+                \mathfrak{F} := \pazocal{H}\pazocal{F} \text{ and } \mathfrak{G} := \pazocal{G}\pazocal{I}.
+            $$
+            Consider
+            $$
+                \mu := \left\{\mu_X:=\pazocal{G}(\gamma_{\pazocal{F}(X)})\alpha_X : X\rightarrow \mathfrak{GF}(X) \mid X\in \pazocal{C}\right\}
+            $$
+            This is a natural isomorphism. Indeed, 
+            \begin{align*}
+                \mathfrak{GF}(f)\mu_X&= \pazocal{GIHF}(f)\pazocal{G}(\gamma_{\pazocal{F}(X)})\alpha_X = \pazocal{G}(\pazocal{IH}(\pazocal{F}(f))\gamma_{\pazocal{F}(X)})\alpha_X\\ 
+                &= \pazocal{G}(\gamma_{\pazocal{F}(X')}\pazocal{F}(f))\alpha_X = \pazocal{G}(\gamma_{\pazocal{F}(X')})\pazocal{GF}(f)\alpha_X\\
+                &= \pazocal{G}(\gamma_{\pazocal{F}(X')})\alpha_{X'}f = \mu_{X'}f. 
+            \end{align*}
+            so $\mu$ is a natural transformation of $\pazocal{ID}_{\pazocal{C}}$ to $\mathfrak{GF}$. Moreover, every component of $\mu$ is a composition of isomorphism, hence every component of $\mu$ is an isomorphism. We construct a natural isomorphims $\nu : \pazocal{ID}_\pazocal{E}\simeq \mathfrak{F}\mathfrak{G}$, by considering the collection of morphisms 
+            $$
+                \nu := \left\{...\right\}.
+            $$
+            We thus conclude that $\pazocal{C}\simeq \pazocal{E}$.
+        \end{itemize}
+
+    \end{remark}
 \subsubsection{Products \& Co-products}
 \begin{definition}
     Let $A$ be a set and $\{X_\alpha\}_{\alpha\in A}$ be a family of sets. We then define \textit{the direct categoryproduct of $X_\alpha$ over $A$} to be the set
