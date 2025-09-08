@@ -645,35 +645,173 @@ From the above we get a notion of isomorphism of categories.
             \end{align*}
             so $\mu$ is a natural transformation of $\pazocal{ID}_{\pazocal{C}}$ to $\mathfrak{GF}$. Moreover, every component of $\mu$ is a composition of isomorphism, hence every component of $\mu$ is an isomorphism. We construct a natural isomorphims $\nu : \pazocal{ID}_\pazocal{E}\simeq \mathfrak{F}\mathfrak{G}$, by considering the collection of morphisms 
             $$
-                \nu := \left\{...\right\}.
+                \nu := \left\{ \nu_Y:= \pazocal{H}(\beta_{\pazocal{I}(Y)})\kappa_Y :Y \rightarrow \pazocal{HFGI}(Y)\mid Y\in\pazocal{E}\right\}.
             $$
             We thus conclude that $\pazocal{C}\simeq \pazocal{E}$.
         \end{itemize}
-
     \end{remark}
-\subsubsection{Products \& Co-products}
-\begin{definition}
-    Let $A$ be a set and $\{X_\alpha\}_{\alpha\in A}$ be a family of sets. We then define \textit{the direct categoryproduct of $X_\alpha$ over $A$} to be the set
-    $$\prod_{\alpha\in A} X_\alpha := \left\{ f: A \rightarrow \bigcup_{\alpha \in A} X_\alpha : f(\alpha) \in X_\alpha \text{ for every } \alpha\in A\right\}.$$
-\end{definition}
-\begin{remark}
-    We can identify every function $f : A \rightarrow \bigcup_{\alpha\in A}$ can be identified with a set $\{r_\alpha : \alpha\in A\}$. In particular, every $f\in \prod_{\alpha\in A} X_\alpha$ can be identified with a symbol $(r_\alpha)$ where $r_\alpha\in X_\alpha$ for each $\alpha\in A$. Thus 
-    $$\prod_{\alpha\in A} X_\alpha = \left\{ (r_\alpha) : r_\alpha\in X_\alpha \text{ for every } \alpha\in A\right\}.$$
-    Assuming the axiom of choice every such product is non-empty whenever $\{X_\alpha\}_{\alpha\in A}$ is a family of non-empty sets. For a finite family of sets $\{X_1,\dots,X_n\}$ we can identify $\prod_1^n X_i := \prod_{i\in \{1,\dots,n\}} X_i$ with $X_1\times \cdots \times X_n$.  
-\end{remark}
-\begin{axioms}
-    Let $A$ be a non-empty set. When $\{X_\alpha\}$ is a family of non-empty sets $\prod_{\alpha \in A} X_\alpha \neq \emptyset$. 
-\end{axioms}
-\begin{proposition}\label{DirectProductIsADirectProductInTheCategoryOfSets}
-    Let $A$ be a set and $\{X_\alpha\}_{\alpha\in A}$ be a family of non-empty sets. For each $\alpha\in A$, define $\pi_\alpha : \prod_{\alpha\in A} X_\alpha \rightarrow X_\alpha, (x_\alpha)\mapsto x_\alpha$. For $\alpha\in A$, $\pi_\alpha$ is a surjective map such that for every set $Y$ with maps $\{f_\alpha : Y \rightarrow M_\alpha\}_{\alpha\in A} $ there is a unique map $f : Y \rightarrow \prod_{\alpha \in A} X_\alpha$ such that for every $\alpha \in A$, $\pi_\alpha \circ f = f_\alpha$   
-\end{proposition}
-\begin{proof}
-    \textbf{$\pi_\alpha$ is surjective:} Let $\alpha \in A$ and $x_\alpha \in X_\alpha$. Using the axiom of choice there is a function mapping $\beta \mapsto x_\beta$ for some $x_\beta \in X_\beta$ for each $\beta\in A\setminus \{\alpha\}$. Then $(x_\beta)\in \prod_{\beta\in A} X_\beta$. Then $\pi_\alpha((x_\beta))=x_\alpha$.\\  
-    \textbf{Existence of $f$:} We define $f(y) = (f_\alpha(y))\in \prod_{\alpha\in A} X_\alpha$, which is easily seen to be well defined. Then for each $y\in Y$, $\alpha \in A$,
-    $$\pi_\alpha\circ f(y) = \pi_\alpha(f(y))=\pi_\alpha((f_\beta(y)))=f_\alpha(y) \implies \pi_\alpha\circ f = f_\alpha$$
-    \textbf{Uniqueness of $f$:} Let $g : Y \rightarrow \prod_{\alpha\in A} X_\alpha$ be another map satisfying $\pi_\alpha \circ g = f_\alpha$ for each $\alpha \in A$. Let $y\in Y$. Then there is a $(x_\alpha)\in \prod_{\alpha\in A} X_\alpha$ such that $g(y) = (x_\alpha)$. Then for $\beta \in A$
-    $$x_\beta = \pi_\beta ((x_\alpha))= \pi_\beta(g(y))=\pi_\beta \circ g(y) = f_\beta(y),$$
-    which implies that 
-    $$f(y) = (f_\alpha(y))=(x_\alpha)=g(y).$$
-\end{proof}
+    \begin{definition}
+        Let $\pazocal{C},\pazocal{D}$ be locally small categories and $\pazocal{F} : \pazocal{C}\rightarrow \pazocal{D}$ a functor. We say that $\pazocal{F}$ is \emph{full} if $\pazocal{F}(\bullet):\Hom(X,Y)\rightarrow \Hom(\pazocal{F}(X),\pazocal{F}(Y)), f\mapsto \pazocal{F}(f)$ is surjective for each pair of objects $X,Y$ in $\pazocal{C}$. It is \emph{faithful} if $\pazocal{F}(\bullet)$ is injective. If $\pazocal{F}(\bullet)$ is both full and faithful, we say that $\pazocal{F}(\bullet)$ is \emph{fully faithful}.
+    \end{definition}
+    \begin{definition}
+        A functor $\pazocal{F} : \pazocal{C}\rightarrow \pazocal{D}$ is \emph{essentially surjective on objects} if for every $D\in \Ob(\pazocal{D})$ there is a $C\in \Ob(\pazocal{C})$ such that $\pazocal{F}(C)\simeq D$. 
+    \end{definition}
+    \begin{definition}
+        A faithful functor $\pazocal{F}:\pazocal{C}\rightarrow\pazocal{D}$ is an \emph{embedding} if it is injective on objects, i.e. if $\pazocal{F}(C)=\pazocal{F}(C')$ implies $C=C'$ for every pair of objects $C,C'\in \pazocal{C}$. If $\pazocal{F}$ is fully faithful and injective on objects, then it is a \emph{full embedding}.
+    \end{definition}
+    \begin{lemma}\label{UniqueChangeOfDomainAndCodomainViaIsos}
+        Given a morphism $f: A\rightarrow B$ and isomorphisms $\alpha: A\simeq A'$, $\beta : B\simeq B'$ there is a unique morphism $f: A' \rightarrow B'$ so that the diagrams
+        $$
+            \begin{tikzcd}
+                A\arrow[d, "f"] & A'\arrow[l,"\alpha",swap]\arrow[d,"f'"]\\
+                B \arrow[r,"\beta",swap] & B' 
+            \end{tikzcd}
+            \begin{tikzcd}
+                A\arrow[r,"\alpha"]\arrow[d, "f"] & A'\arrow[d,"f'"]\\
+                B \arrow[r,"\beta",swap] & B'
+            \end{tikzcd}
+            \begin{tikzcd}
+                A\arrow[d, "f"] & A'\arrow[l,"\alpha",swap]\arrow[d,"f'"]\\
+                B & B' \arrow[l,"\beta"]
+            \end{tikzcd}
+            \begin{tikzcd}
+                A\arrow[d, "f"]\arrow[r,"\alpha"] & A' \arrow[d,"f'"] \\
+                B & B' \arrow[l,"\beta"]
+            \end{tikzcd}
+        $$
+        commute.
+    \end{lemma}
+    \begin{proof}
+        \textbf{Diagram 1:} Pick $f':= \beta f\alpha$. Suppose $f'': A'\rightarrow B'$ is another morphism making the diagram commute. Then $f'' = \beta f \alpha = f'$.\\
+        \textbf{Diagram 2:} Note that $f' = \beta f \alpha^{-1}$ is the unique morphism making  
+        $$
+            \begin{tikzcd}
+                A\arrow[d, "f"] & A'\arrow[l,"\alpha^{-1}",swap]\arrow[d,"f'"]\\
+                B \arrow[r,"\beta",swap] & B'
+            \end{tikzcd}
+        $$
+        commute, hence it is the unique morphism such that $ \alpha f' =\alpha\alpha^{-1}\beta f = \beta f$.\\
+        \textbf{Diagram 3:} Apply diagram 1 to $\alpha : A'\rightarrow A $, $f$ and $\beta^{-1}: B'\rightarrow B$.\\
+        \textbf{Diagram 4:} Apply diagram 1 to $\alpha^{-1}$, $f$ and $\beta^{-1}$.
+    \end{proof}
+    \begin{lemma}
+        Consider a fully faithful functor $\pazocal{F}:\pazocal{C}\rightarrow \pazocal{D}$. For each $X,Y\in \Ob(\pazocal{C})$
+            $$
+                X\simeq Y \iff \pazocal{F}(X) \simeq \pazocal{F}(Y).
+            $$
+    \end{lemma}
+    \begin{proof}
+        Consider an isomorphism $h : \pazocal{F}(X)\rightarrow \pazocal{F}(Y)$. By fullness, there is an $f:X\rightarrow Y$ such that $\pazocal{F}(f)=h$. Moreover there is a $g:Y\rightarrow X$ such that $\pazocal{F}(g)=h^{-1}$. Then 
+        $$\pazocal{F}(gf) = \pazocal{F}(g)\pazocal{F}(f)=h^{-1}h=\fone_{\pazocal{F}(X)} = \pazocal{F}(\fone_X) \implies gf = \fone_X.$$
+        By symmetry, $fg = \fone_Y$.   
+    \end{proof}
+    \begin{theorem}
+        A functor that is one functor comprising an equivalence of categories is fully faithful and essentially surjective on objects. For locally small categories, assuming the axiom of choice any fully faithful functor that is essentially surjective on objects is one functor in an equivalence of categories.  
+    \end{theorem}
+    \begin{proof}
+        Consider functors $\pazocal{F}:\pazocal{C}\rightarrow \pazocal{D}$ and $\pazocal{G}:\pazocal{D}\rightarrow \pazocal{C}$ with natural isomorphism $\alpha: \pazocal{ID}_\pazocal{C}\simeq \pazocal{GF}$ and $\beta : \pazocal{ID}_\pazocal{D}\simeq \pazocal{FG}$.\\
+         Suppose $f,g\in\Hom(X,Y)$ are given such that $\pazocal{F}(f)=\pazocal{F}(g)$. Note that
+        $$
+            \alpha_Y f =  \pazocal{F}(f)\alpha_X = \pazocal{F}(g)\alpha_X = \alpha_Y g \implies f=g 
+        $$
+        since $\alpha_Y$ is an isomorphism and thus a monomorphism. We thus conclude that $\pazocal{F}$ is faithful, and by a symmetric argument so is $\pazocal{G}$.\\
+        Consider any morphism $h\in \Hom(\pazocal{F}(X),\pazocal{F}(Y))$. Then we have commutative diagrams 
+        $$
+            \begin{tikzcd}
+                \pazocal{GF}(X) \arrow[d,"\pazocal{G}(h)"] & X \arrow[l,"\alpha_X"]\arrow[d,"f"]\\ 
+                \pazocal{GF}(Y) & Y \arrow[l,"\alpha_Y"]   
+            \end{tikzcd}
+        $$  
+        for some unique $f : X\rightarrow Y$. We thus by naturality get a commutative diagram
+        $$
+            \begin{tikzcd}
+                \pazocal{GF}(X) \arrow[d,"\pazocal{GF}(f)"] & X \arrow[l,"\alpha_X"]\arrow[d,"f"]\\ 
+                \pazocal{GF}(Y) & Y \arrow[l,"\alpha_Y"]   
+            \end{tikzcd}
+        $$
+        Using the result of Lemma~\ref{UniqueChangeOfDomainAndCodomainViaIsos} diagram 2 to these two diagrams, by uniqueness, $\pazocal{G}(\pazocal{F}(f))=\pazocal{G}(h)$. By the faithfulness of $\pazocal{G}$, 
+        $$
+            \pazocal{F}(f) = h.
+        $$  
+        We thus conclude that $\pazocal{F}$ (and $\pazocal{G}$) are fully faithful functors.\\ 
+        Consider an object $D\in \pazocal{D}$. Set $C= \pazocal{G}(D)$. Then 
+        $$
+            \begin{tikzcd}
+                D \arrow[r,"\beta_D"]\arrow[d,"\id_D"] & \pazocal{F}(C) = \pazocal{FG}(D) \arrow[d,"\id_{\pazocal{F}(C)}"]\\
+                D \arrow[r,"\beta_D"] & \pazocal{F}(C) = \pazocal{FG}(D)
+            \end{tikzcd}
+        $$
+        hence $D\simeq \pazocal{F}(C)$.\\ 
+        Consider a fully faithul functor $\pazocal{F} : \pazocal{C} \rightarrow \pazocal{D}$ that is essentially surjective on objects. We construct the functor 
+        \begin{gather*}
+            \pazocal{G} : \pazocal{D} \rightarrow \pazocal{C}\\ 
+            D \mapsto \pazocal{G}(D)\\
+            f : D_1 \rightarrow D_2 \mapsto \pazocal{G}(f) : \pazocal{G}(D_1) \rightarrow \pazocal{G}(D_2)
+        \end{gather*}
+       to make $\pazocal{F}$ and $\pazocal{G}$ equivalence of categories. For objects, we do this by for each $D\in \Ob(\pazocal{D})$ considering 
+       $$
+            \pazocal{C}_D := \{ C\in \Ob(\pazocal{C}) : \pazocal{F}(C)\simeq D\} 
+       $$
+       to obtain a family of sets indexed by objects in $\pazocal{D}$
+       $$
+            \pazocal{X} := \{ \pazocal{C}_D : D\in \Ob(\pazocal{D})\}.  
+       $$
+       Since $\pazocal{F}$ is essentially surjective on objects, this is a family of non-empty set, hence by the axiom of choice there is a well-defined assigment
+       \begin{gather*}
+            \pazocal{G}:\Ob(\pazocal{D}) \rightarrow \pazocal{X} \rightarrow \bigcup \pazocal{X}\subset \Ob(\pazocal{C})\\
+            D \mapsto \pazocal{C}_D \mapsto \pazocal{G}(D).
+       \end{gather*}
+        Hence $\pazocal{FG}(D)\simeq D$. Denote this isomorphism by $\alpha_D$. Fix a morphism $f:D\rightarrow D'$ 
+        $$
+            \begin{tikzcd}
+                \pazocal{FG}(D) \arrow[r,"\alpha_D"]\arrow[d,"\exists!h",dashed,swap] & D \arrow[d,"f"]\\
+                \pazocal{FG}(D') \arrow[r,"\alpha_{D'}",swap] & D'
+            \end{tikzcd}
+        $$
+        Since $\pazocal{F}$ is full there is a morphism $\pazocal{G}(f) : \pazocal{G}(D) \rightarrow \pazocal{G}(D')$, such that $\pazocal{F}(\pazocal{G}(f)) = h$. This assignment is well-defined, since if $k: \pazocal{G}(D)\rightarrow \pazocal{G}(D')$ is another morphism with $\pazocal{F}(k)= h = \pazocal{F}(\pazocal{G}(f))$, then by faithfulness of $\pazocal{F}$, $k = \pazocal{G}(f)$.\\
+        We now check that $\pazocal{G}$ is a functor. Consider morphisms $f:X\rightarrow Y$ and $g:Y\rightarrow Z$. Note that 
+        \begin{align*}
+            \pazocal{F}(\pazocal{G}(g)\pazocal{G}(f))\alpha_X &=\pazocal{F}(\pazocal{G}(g))\pazocal{F}(\pazocal{G}(f))\alpha_X = \pazocal{F}(\pazocal{G}(g))\alpha_Yf = \alpha_Z gf, 
+        \end{align*}
+        hence $\pazocal{G}(g)\pazocal{G}(f)=\pazocal{G}(gf)$. We also have that 
+        $$\pazocal{F}(\id_{\pazocal{G}(X)})\alpha_X = \id_{\pazocal{FG}(X)} \alpha_X = \alpha_X \id_X = \pazocal{F}(\pazocal{G}(\id_X))\alpha_X\implies \id_{\pazocal{G}(X)} = \pazocal{G}(\id_X). $$
+        Note that for any morphism $f:D\rightarrow D'$ by definition 
+        $$
+            \begin{tikzcd}
+                D \arrow[r,"\alpha_D^{-1}"]\arrow[d,"f"] & \pazocal{FG}(D)\arrow[d,"\pazocal{FG}(f)"]\\
+                D' \arrow[r,"(\alpha_{D'})^{-1}"] & \pazocal{FG}(D')
+            \end{tikzcd}
+        $$
+        commutes, so we have a natural isomorphism $\alpha: \pazocal{ID}_\pazocal{D}\simeq \pazocal{FG}$.\\
+        Fix an object $C\in \pazocal{C}$. Since $\pazocal{F}$ is fully faithful, there is an isomorphism $\beta_C : C\rightarrow \pazocal{GF}(C)$ such that $\pazocal{F}(\beta_C) = \alpha_{\pazocal{F}(C)}^{-1} : \pazocal{F}(C)\rightarrow \pazocal{FGF}(C)$. Fix a morphism $f: C\rightarrow C'$. Then 
+        \begin{align*} 
+            \pazocal{F}(\pazocal{GF}(f)\beta_C) &= \pazocal{F}(\pazocal{GF}(f))\pazocal{F}(\beta_C)= \pazocal{FG}(\pazocal{F}(f))\alpha_{\pazocal{F}(C)}^{-1} = \alpha_{\pazocal{F}(C')}^{-1}\pazocal{F}(f)= \pazocal{F}(\beta_{C'})\pazocal{F}(f)\\
+            &= \pazocal{F}(\beta_{C'} f).
+        \end{align*}
+        By the faithfulness of $\pazocal{F}$ we thus have that 
+        $$
+            \pazocal{GF}(f)\beta_C = \beta_{C'}f,
+        $$
+        hence $\beta: \pazocal{ID}_{\pazocal{D}} \simeq \pazocal{GF}$. We thus conclude that $\pazocal{C}\simeq \pazocal{D}$.
+    \end{proof}
+    \begin{example}
+        We aim to show a an equivalence of categories implicitly known from the linear algebra of finite dimensional vector space, which is for a fixed field $K$ that the study of $n\times n$ matrices over $K$ is the "same" as the study of finite dimensional vector spaces. To make this concrete, we consider two locally small categories:
+        \begin{itemize}
+            \item $\mathrm{Mat}_K$, whose objects are $\Z_{\geq 1}$ and whose morphisms are $\{\mathrm{Mat}_{n\times m}(K) : n,m\in \Z_{\geq 1}\}$. composition is given by matrix multiplication. Note we know (or will know) that for an $n\times m$ and an $m\times l$ matrix the resulting matrix from matrix multiplication is an $n\times l$ matrix. We also know that matrix multiplication is associative and the identity matrix is the neutral element with respect to matrix multiplication and thus plays the role of identity morphism in this context.
+            \item $\mathrm{Vect}^{\mathrm{fd}}_K$, whose objects is the proper class of finite dimensional vector spaces and whose morphism are linear maps. This is a subcategory of $\mathrm{Set}$.  
+        \end{itemize}    
+        We aim to show that $\mathrm{Mat}_K\simeq \mathrm{Vect}^{\mathrm{fd}}_K$. To do this, we first introduce the category $\mathrm{Vect}_K^{\mathrm{basis}}$. An object in this category is a pair $V,\pazocal{V}$, where $V$ is a finite dimensional vector space and $\pazocal{V}$ is a basis of $V$. The morphisms are linear maps. Let $\pazocal{E}_n$ denote the standard basis of $K^n$. Consider the assignment
+        \begin{gather*}
+            K^{\_} : \mathrm{Mat}_K \rightarrow \mathrm{Vect}^{\mathrm{basis}}_K\\
+            n \mapsto (K^n,\pazocal{E}_n)\\
+            \mathrm{Mat}_{n\times m}(K)\ni A \mapsto (l_A : K^m\rightarrow K^n, v\mapsto A v)
+        \end{gather*}  
+        one readily verifies that constitutes a functor. With some general linear algebra knowledge and it also easy to verify that it is fully faithful and essentially surjective on objects. Indeed, if $V$ is an $n$-dimensional vector space with basis $\pazocal{V}=\{v_1,\dots,v_n\}$, $(V,\pazocal{V})\simeq K^n$, by the map 
+        $$K^n\ni (a_1,\dots,a_n)\mapsto \sum_1^n a_iv_i,$$
+        showing that $K^{\_}$ is essentially surjective on objects.\\ 
+        If $L_A = L_B$ for some $n\times m$ matrices $A,B$, we know that $A_{ij}=(L_A e_j)_i = (L_B e_j)_i = B_{ij}$, for each $i$ and $j$, hence $A=B$.\\
+        If $L : V\rightarrow W$ is a linear map, we define the matrix $A = (L(e_j)_i)$.  
+    \end{example}
+    
+    
 \subsubsection{Currying}
