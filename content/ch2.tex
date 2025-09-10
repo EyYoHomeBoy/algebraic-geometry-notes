@@ -705,7 +705,7 @@ From the above we get a notion of isomorphism of categories.
         $$\pazocal{F}(gf) = \pazocal{F}(g)\pazocal{F}(f)=h^{-1}h=\fone_{\pazocal{F}(X)} = \pazocal{F}(\fone_X) \implies gf = \fone_X.$$
         By symmetry, $fg = \fone_Y$.   
     \end{proof}
-    \begin{theorem}
+    \begin{theorem}\label{EquivOfCatIsFFFESO}
         A functor that is one functor comprising an equivalence of categories is fully faithful and essentially surjective on objects. For locally small categories, assuming the axiom of choice any fully faithful functor that is essentially surjective on objects is one functor in an equivalence of categories.  
     \end{theorem}
     \begin{proof}
@@ -802,16 +802,63 @@ From the above we get a notion of isomorphism of categories.
         \end{itemize}    
         We aim to show that $\mathrm{Mat}_K\simeq \mathrm{Vect}^{\mathrm{fd}}_K$. To do this, we first introduce the category $\mathrm{Vect}_K^{\mathrm{basis}}$. An object in this category is a pair $V,\pazocal{V}$, where $V$ is a finite dimensional vector space and $\pazocal{V}$ is a basis of $V$. The morphisms are linear maps. Let $\pazocal{E}_n$ denote the standard basis of $K^n$. Consider the assignment
         \begin{gather*}
-            K^{\_} : \mathrm{Mat}_K \rightarrow \mathrm{Vect}^{\mathrm{basis}}_K\\
+            K^{(\_)} : \mathrm{Mat}_K \rightarrow \mathrm{Vect}^{\mathrm{basis}}_K\\
             n \mapsto (K^n,\pazocal{E}_n)\\
             \mathrm{Mat}_{n\times m}(K)\ni A \mapsto (l_A : K^m\rightarrow K^n, v\mapsto A v)
         \end{gather*}  
         one readily verifies that constitutes a functor. With some general linear algebra knowledge and it also easy to verify that it is fully faithful and essentially surjective on objects. Indeed, if $V$ is an $n$-dimensional vector space with basis $\pazocal{V}=\{v_1,\dots,v_n\}$, $(V,\pazocal{V})\simeq K^n$, by the map 
         $$K^n\ni (a_1,\dots,a_n)\mapsto \sum_1^n a_iv_i,$$
-        showing that $K^{\_}$ is essentially surjective on objects.\\ 
-        If $L_A = L_B$ for some $n\times m$ matrices $A,B$, we know that $A_{ij}=(L_A e_j)_i = (L_B e_j)_i = B_{ij}$, for each $i$ and $j$, hence $A=B$.\\
-        If $L : V\rightarrow W$ is a linear map, we define the matrix $A = (L(e_j)_i)$.  
+        showing that $K^{(\_)}$ is essentially surjective on objects.\\ 
+        If $L_A = L_B$ for some $n\times m$ matrices $A,B$, we know that $A_{ij}=(L_A e_j)_i = (L_B e_j)_i = B_{ij}$, for each $i$ and $j$, hence $A=B$. This means $K^{(\_)}$ is faithful.\\
+        Consider a linear map $L : (K^m,\pazocal{E}_m)\rightarrow (K^n,\pazocal{E}_n)$. Set $A:= (L(e_j)_i)$. For an arbitrary $v\in K^m$ we have 
+        $$
+            L_A (v) = (L(e_j)_i) v = (\sum_1^m L(e_j) v_j)= \sum_1^m L(v_j e_j) = L(v). 
+        $$
+        We thus get that $L = L_A$, which means $K^{(\_)}$ is full.\\
+        Consider the forgetful functor $\mathrm{Vect}_K^\mathrm{basis}\rightarrow \mathrm{Vect}_K^\mathrm{fd}$ which forgets the basis on objects. Clearly this is also a full faithful functor that is essentially surjective on objects. By Theorem~\ref{EquivOfCatIsFFFESO} we then get that $\mathrm{Mat}_K\simeq \mathrm{Vect}_K^\mathrm{fd}$.
     \end{example}
+
+\subsubsection{Diagrams}
+    \begin{definition}
+        A \emph{(commutative) diagram} in a category $\pazocal{C}$ is a functor from a small category, called the \emph{indexing category}, to $\pazocal{C}$. 
+    \end{definition}
+    \begin{example}
+        An example arises the category $\mathbbm{2}\times \mathbbm{2}$. This category has objects $(0,0),(0,1),(1,0),(1,1)$ and arrows $(\id_i,\id_j)$ where $i,j=0,1$ and $(\id_i,0\rightarrow 1)$, $(0\rightarrow 1,\id_i)$ and $(0\rightarrow 1,0\rightarrow 1)$. We thus have a category with four objects, and five non-trivial arrows: one arrow from $(0,0)$ to each of the other objects, one arrow from $(0,1)$ and $(1,0)$ to $(1,1)$. We may illustrate this as a directed graph.
+        $$
+            \begin{tikzcd}
+                (0,0) \arrow[r]\arrow[d]\arrow[rd] & (0,1)\arrow[d]\\
+                (1,0) \arrow[r] & (1,1)
+            \end{tikzcd}
+        $$
+        A diagram $D : \mathbbm{2}\times \mathbbm{2} \rightarrow \pazocal{C}$ maps the four objects in $\mathbbm{2} \times \mathbbm{2}$ to four objects in $\pazocal{C}$, $A,B,C,D$ say. Moreover the five non-trivial arrows of $\mathbbm{2}\times \mathbbm{2}$ to morphisms $f_{0001} : A\rightarrow B$, $f_{0010}: A\rightarrow C$, $f_{0011}: A\rightarrow D$, $f_{0111}: B \rightarrow D$ and $f_{1011} : C\rightarrow D$. Functoriality assures that the diagram (in the informal sense),
+        $$
+            \begin{tikzcd} 
+                A \arrow[r,"f_{0001}"]\arrow[rd, "f_{0011}",swap]\arrow[d,"f_{0010}",swap] & B\arrow[d,"f_{0111}"]\\
+                C \arrow[r,"f_{1011}",swap] & D
+            \end{tikzcd}
+        $$ 
+        commutes, i.e. $f_{0111}f_{0001}=f_{0011}=f_{1011}f_{0010}$
+    \end{example}
+    In general, the abstract definition of diagram lets us study the consequences of a list of morphism relations in terms of directed graph underlying these. This proof technique is called \emph{diagram chasing}.
+    \begin{lemma}
+        Functors preserve commutative diagram.
+    \end{lemma}
+    \begin{proof}
+        Indeed given a functor $\pazocal{F} : \pazocal{C}\rightarrow \pazocal{D}$ and a diagram $D : \pazocal{I} \rightarrow \pazocal{C}$. Then $\pazocal{F}D : \pazocal{I}\rightarrow \pazocal{D}$ is a diagram in $\pazocal{D}$.
+    \end{proof}
+    \begin{lemma}
+        Consider a composable sequence of morphisms $f_1,\dots,f_n$ in $\pazocal{C}$. If 
+        $$
+            f_jf_{j-1}\cdots f_{i+1}f_i = g_m\cdots g_1
+        $$
+        for some composable morphisms $g_1,\dots,g_m$ in $\pazocal{C}$, then 
+        $$
+            f_n \cdots f_1 = f_n\cdots f_{j+1} g_m\cdots g_1 f_{i-1}\cdots f_1
+        $$
+    \end{lemma}
+    \begin{proof}
+        Indeed, this is just a result of pre-composing with $f_{i-1}\cdots f_1$ and post-composing with $f_n\cdots f_{j+1}$ on both sides of the equality. 
+    \end{proof}
     
     
 \subsubsection{Currying}
