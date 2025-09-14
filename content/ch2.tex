@@ -6,7 +6,7 @@
     \item $\Ob(\pazocal{C})$ denotes a class of \textit{objects}. \item $\Hom(\pazocal{C})$ denotes a class of \textit{morphisms}. 
     \item A morphism $f$ in $\Hom(\pazocal{C})$ is a relation between between elements $A,B$ in $\Ob(\pazocal{C})$. We denote it by $f : A \rightarrow B$. 
     \item For objects $A,B$ in $\Ob(\pazocal{C})$ we denote the class of morphisms from $A$ to $B$ by $\Hom(A,B)$.
-    \item There is a binary operation $\circ$ on the class of morphisms called \textit{composition} such that for morphisms $f: B\rightarrow C$ and $g : A \rightarrow B$ we have that
+    \item There is a binary operation $\circ$ on the class of \emph{composable} morphisms called \textit{composition} such that for composable morphisms $f: B\rightarrow C$ and $g : A \rightarrow B$ we have that
     $$fg := f\circ g : A \rightarrow C$$
     and 
     $$(f\circ g)\circ h = f\circ(g\circ h)$$
@@ -15,36 +15,24 @@
     for a morphism $f: A \rightarrow B$.
     \end{enumerate}
 \end{definition}
+\begin{remark}
+    Here the notion of "class" depends foundations. For instance, it could mean a set in the sense of ZFC or it could mean a proper class in the sense of NGB {\Large I guess what I really mean is that objects and morphisms live in a model of ZFC/NGB but I am not sure}. 
+\end{remark}
+\begin{definition}
+    In a category a morphism $f : X\rightarrow X$ is called an \emph{endomorphism}.
+\end{definition}
 \begin{definition}
     Let $\pazocal{C}$ be a category. An \textit{isomorphism} $f:A \rightarrow B$ is a morphism in $\Hom(\pazocal{C})$ such that there is another morphism $f^{-1} : B\rightarrow A$ satisfying,
     $$ff^{-1} = \mathbbm{1}_B \ \mathrm{ and } \ f^{-1}f = \mathbbm{1}_A.$$
+    An endomorphism that is an isomorphism is called an \emph{automorphism}. 
 \end{definition}
-\begin{definition}
-    A category $\pazocal{C}$ is called a \textit{groupoid} if every $f$ in $\Hom(\pazocal{C})$ is an isomorphism
-\end{definition}
-\begin{example}\label{MonoidIsACategoryGroupIsGroupoid}
-    Let $(M,\cdot,e)$ be a monoid. We define a category $\mathrm{B}M$ whose class of objects is $\{M\}$ and whose morphisms are $n,m\in M$ and where composition of morphisms $n,m\in M$ is given by 
-    $$nm := n\cdot m.$$  
-    Since $M$ is a monoid for $m_1,m_2,m_3\in M$, we have 
-    $$m_1(m_2m_3)=(m_1m_2)m_3.$$
-    The identity morphism is $e$. When $(G,\dot,e)$ is a group we get that every morphism is an isomorphism, since for each $g\in G$ there is a $g^{-1}\in G$ such that 
-    $$gg^{-1}=g^{-1}g = e$$ 
-\end{example}
+
+
 \begin{definition}
     A \textit{subcategory} $\pazocal{D}$ of a category $\pazocal{C}$ is a subclass of $\Ob(\pazocal{C})$ together with a subclass of $\Hom(\pazocal{C})$ that constitutes a category
 \end{definition}
 \begin{remark}
     equivalently a subcategory of $\pazocal{C}$ is a subclass $\Ob(\pazocal{D})$ of $\Ob(\pazocal{C})$ and a subclass $\Hom(\pazocal{D})$ of $\Hom(\pazocal{C})$ such that each domain $A$ and codomain $B$ for a morphism in $\Hom(\pazocal{D})$, $A,B$ are elements of $\Ob(\pazocal{D})$. In addition such that $\Hom(\pazocal{D})$ is closed under composition. 
-\end{remark}
-\begin{definition}
-    The \textit{maximal groupoid} of a category $\pazocal{C}$ is the subcategory of $\pazocal{C}$ whose objects are $\Ob(\pazocal{C})$ and whose morphisms are the isomorphisms of $\Hom(\pazocal{C})$
-\end{definition}
-\begin{remark}
-    The maximal groupoid is a subcategory. Indeed, The domain and codomain of an isomorphism are trivially in $\Ob(\pazocal{C})$. Suppose $f:A\rightarrow B$ and $g: B \rightarrow C$ are isomorphisms. Then 
-    $$f^{-1}g^{-1}gf=f^{-1}\fone_B f = f^{-1}f = \fone_A$$
-    and 
-    $$gff^{-1}g^{-1} = g\fone_B g^{-1} = gg^{-1} = \fone_C.$$
-    Hence $gf: A \rightarrow C$ is an isomorphism with inverse $f^{-1}g^{-1}$. 
 \end{remark}
 \begin{definition}
     Let $\pazocal{C}$ be a category and $f\in \Hom(A,B)$, $g\in \Hom(B,A)$.  $f$ is called a \textit{retraction} of $g$ and $g$ a section of $f$ if $fg = \fone_B$   
@@ -57,14 +45,6 @@
     $$g=g\fone_A = gfh=\fone_B h = h.$$
     Hence $f$ is an isomorphism with $f^{-1} = g=h$. Let $f_1$ and $f_2$ be inverses of an isomorphism $f$. Note that both $f_1$ and $f_2$ is both a section and a retraction. Therefor, by the first statement, $f_1=f_2$.   
 \end{proof}
-\begin{example}\label{BasicExamplesOfCategories}
-    \begin{enumerate}
-        \item Let $\mathrm{Set}$ be defined by objects being sets and morphisms being functions. Indeed, letting $\circ$ be composition in the conventional way and letting $\mathbbm{1}_X = \mathrm{id}_X: X\rightarrow X, x\mapsto x$, we see that this indeed defines a category. 
-        \item Consider a pair $(X,R)$ of a set $X$ and a transitive, reflexive relation $R$ on $X$. Let $(a,b),(b,c)\in R$. We define 
-        $$(a,b)(b,c) := (a,c).$$
-        This is indeed well defined since $a R b$ and $bR c$ implies $a R c$, in other words $(a,c)\in R$. Let another pair $(c,d)\in R$. Then $((a,b)(b,c))(c,d)= (a,c)(c,d) = (a,d)$ and $(a,b)((b,c),(c,d))=(a,b)(b,d)=(a,d)$. We define $\mathbbm{1}_a = (a,a)$, which is indeed in $R$. Then $(a,a)(a,b)=(a,b)$ and $(a,b)(b,b)=(a,b)$. So $(X,R)$ indeed defines a morphism. 
-    \end{enumerate}
-\end{example}
 \begin{definition}
     Let $\pazocal{C}$ be a category and $A$ an object in $\pazocal{C}$. \textit{The slice category of $\pazocal{C}$ under $A$} denoted $A/\pazocal{C}$ is the category whose objects are morphisms in $\Hom(\pazocal{C})$ with domain $A$ and where a morphism from $f: A \rightarrow X$ and $g : A \rightarrow Y $ is a map $h : X\rightarrow Y$ such that 
     $$\begin{tikzcd}
@@ -292,7 +272,104 @@
     hence $f$ is a retraction of $g$ and therefor a split epimorphism. 
     2. This is dual to 1. 
 \end{proof}
-
+\subsubsection{Examples of Categories}
+\begin{example}
+    Consider the proper class of sets and the class of functions. This defines a category $\mathrm{Set}$ where composition is given by function composition and the identity morphism is the identity function.  
+\end{example}
+\begin{example}
+    The following are some examples of subcategories of $\mathrm{Set}$.
+    \begin{enumerate}  
+        \item There is the category of finite sets $\mathrm{Fin}$, whose objects are finite sets and whose morphisms are maps. 
+        \item $\mathrm{Top}$ has the proper class of topological spaces as objects and continuous functions as morphisms.
+        \item $\mathrm{Htpy}$ is the category whose objects are topological spaces and whose morphisms are homotopy classes of continuous maps. That is given continous maps $f,g: X\rightarrow Y$, these maps are \emph{homotopic} if there exists a continuous map $H: X\times [0,1]\rightarrow Y$ such that $H(x,0)=f(x)$ and $H(x,1)=g(x)$ for each $x\in X$. This defines an equivalence relation, $\sim$ say. We define $[g]_\sim[f]_\sim: = [gf]_\sim$. Suppose $f,f': X\rightarrow Y$ are homotopic via a map $I : X\times [0,1]\rightarrow Y$  and $g,g': Y\rightarrow Z$ are homotopic via $J: Y\times [0,1]\rightarrow Z$. We define 
+        \begin{gather*}
+            H : X\times[0,1] \rightarrow Z\\
+            (x,t) \mapsto J(I(x,t),t)
+        \end{gather*} 
+        Then $H(x,0)= J(I(x,0),0)=J(f(x),0)=gf(x)$ and $H(x,1)=J(I(x,1),1)=J(f'(x),1)=g'f'(x)$, so this is homotopy, hence composition is well-defined. One readily verifies associativity. The identity morphism is the homotopy class of the identity map. 
+        \item Given a (preferably algebraically closed) field $K$, a multiprojective variety over $K$ is a solution to a set of polynomial equations (a socalled algebraic set) in a set of the form $\A^n(K)\times \Pp^{n_1}(K)\times \cdots \times \Pp^{n_m}(K)$ that cannot be written as the union of two proper subsets that are sets of solutions to systems of polynomial equations. The set of varieties in such a set forms a subbasis for a topology called the Zariski topology. A subset $U$ of a multiprojective variety $V$ is called a variety if it is open in Zariski subspace topology on $V$. The collection of all such varieties is the objects in a category $\mathrm{Var}_K$. To discuss how the morphisms work in this category one has to go into a long explanation about some constructions in algebraic geometry. The jist is the following: Given a set $A$, $\Hom^\mathrm{Set}(A,K)$ defines a ring. In our context we are interested in the subring $\Gamma(A)$ of this ring consisting of maps that are essentially evaluation of fractions of polynomials. The morphisms of $\mathrm{Var}_K$ are then continuous maps of varieties $\varphi: X\rightarrow Y$ such given any open subset $U\subset Y$ and $f\in \Gamma(U)$, we have that $f\circ \varphi \in \Gamma\left(\varphi^{-1}(U)\right)$. One checks that this defines a subcategory of $\mathrm{Top}$.
+        \item As a subcategory of $\mathrm{Var}_K$ we have $\mathrm{AffVar}_K$, the category of affine varieties, whose objects are varieties isomorphic to irreducible algebraic sets in $\A^n$ for some $n$.
+        \item As a subcategory of $\mathrm{Var}_K$ we have $\mathrm{ProjVar}_K$, the category of projective varieties, whose objects are varieties isomorphic to irreducible algebraic sets in $\P^n$ for some $n$.
+        \item As another subcategory of $\mathrm{Top}$, we have $\mathrm{Man}_\R$, the category of smooth manifolds over $\R$ with morphisms being smooth maps. One can also consider $\mathrm{Man}_\C$ and as a subcategory $\mathrm{RS}$ of riemann surfaces.  
+        \item There is the category $\mathrm{Meas}$ of measure spaces and measurable functions.
+        \item $\mathrm{Mon}$ has the proper class of monoids as objects and monoid homomorphisms as morphisms.
+        \item $\mathrm{Group}$ has groups as objects and group homomorphisms as morphisms.
+        \item $\mathrm{Ab}$ has abelian groups as objects and group homomorphisms as morphisms.
+        \item $\mathrm{Ring}$ has (unital) rings as objects and ring homomorphism as morphisms. 
+        \item $\mathrm{Rng}$ has (not necessarily unital rings) as objects and maps that are monoid homomorphisms with respect to both addition and multiplication. 
+        \item Given a ring, $R$ $_R\mathrm{Mod}$ is the category with objects being left $R$-modules with left $R$-module homomorphisms.
+        \item There is a dual notion of a category of right $R$-modules $\mathrm{Mod}_R$. 
+        \item Given rings $R,S$, there is a category $_R\mathrm{Mod}_S$ of $(R,S)$-bimodules and $(R,S)$-bimodule homomorphisms. 
+        \item Given a field $K$ we have the category of vector spaces, $\mathrm{Vect}_K$. As a subcategory there is the category of finite dimensional vector spaces $\mathrm{Vect}_K^\mathrm{fd}$
+        \item Given a commutative ring $R$, we have the category of algebras over $R$, denoted $\mathrm{Alg}_R$. 
+        \item Indeed, asking that a set is endowed with some structure and finding a class of maps that preserves this structure and is closed under composition readily leads to a category. 
+    \end{enumerate}
+\end{example}
+\begin{example}
+    Given any subcategory $\pazocal{C}$ of $\mathrm{Set}$. We can form $\pazocal{C}_\ast$ consisting of a pair $(X,x)$ where $X\in \Ob(\pazocal{C})$ and $x\in X$ where a morphism $f: (X,x)\rightarrow (Y,y)$ is a map $f:X\rightarrow Y$ such that $f(x)=y$. This is the category of \emph{pointed objects in $\pazocal{C}$}. For example, we could consider the category of pointed sets $\mathrm{Set}_\ast$ or the category of pointed topological spaces $\mathrm{Top}_\ast$.
+\end{example}
+\begin{example}
+    Given a (commutative say) ring $R$ we can form the category of \emph{chain complexes} $\mathrm{Ch}_R$ whose objects are families of $R$-modules $\{M_i\}_{i\in\Z}$ together with a family of $R$-module maps $\{d_i : M_i\rightarrow M_{i-1}\}_{i\in \Z}$ such that $d_{i-1}d_i=0$ which are called \emph{boundary maps}. A morphism of chain complexes $f_\bullet : M_\bullet \rightarrow M_\bullet'$ is a collection of maps $\{f_i : M_i \rightarrow M_i'\}$ such that the square
+    $$
+        \begin{tikzcd}
+            M_i \arrow[r,"d_i"]\arrow[d,"f_i"] & M_{i-1}\arrow[d,"f_{i-1}"]\\
+            M_i' \arrow[r,"d_i'"] & M_{i-1}'
+        \end{tikzcd}
+    $$
+    commutes. Composition of $f_\bullet : M_\bullet \rightarrow M_\bullet'$ and $g_\bullet : M'_\bullet \rightarrow M_\bullet''$ is given by $\{g_if_i : M_i\rightarrow M_i''\}$. Indeed, the square 
+    $$
+        \begin{tikzcd}
+            M_i \arrow[r,"d_i"]\arrow[d,"g_if_i"] & M_{i-1}\arrow[d,"g_{i-1}f_{i-1}"]\\
+            M_i'' \arrow[r,"d_i''"] & M_{i-1}''
+        \end{tikzcd}
+    $$ 
+    commutes, since 
+    $$
+        \begin{tikzcd}
+            M_i \arrow[r,"d_i"]\arrow[d,"f_i"] & M_{i-1}\arrow[d,"f_{i-1}"]\\
+            M_i' \arrow[r,"d_i'"]\arrow[d,"g_i"] & M_{i-1}'\arrow[d,"g_{i-1}"]\\
+            M_i'' \arrow[r,"d_i''"] & M_{i-1}''
+        \end{tikzcd}
+    $$
+    commutes. The identity morphism is $\{id_{M_i}\}_{i\in\Z}$.
+\end{example} 
+\begin{example}
+    Given a preordered set $(X,\leq)$, we can construct a category whose objects are $X$ and where a morphisms are $\leq$. Composition of morphisms $a\leq b$ and $b\leq c$ is $a\leq c$. Indeed if $a\leq b$ and $b\leq c$, then $a\leq c$, so this is well-defined. One readily verifies that this is associative using transitivity a few times. The identity morphism is $a\leq a$ with exists by reflexivity.\\
+    This could for instance be an ordinal $\alpha\in \Omega$.
+\end{example}
+\begin{definition}
+    A category $\pazocal{C}$ is called a \textit{groupoid} if every $f$ in $\Hom(\pazocal{C})$ is an isomorphism
+\end{definition}
+\begin{example}\label{MonoidIsACategoryGroupIsGroupoid}
+    Let $(M,\cdot,e)$ be a monoid. We define a category $\mathrm{B}M$ whose class of objects is $\{M\}$ and whose morphisms are $n,m\in M$ and where composition of morphisms $n,m\in M$ is given by 
+    $$nm := n\cdot m.$$  
+    Since $M$ is a monoid for $m_1,m_2,m_3\in M$, we have 
+    $$m_1(m_2m_3)=(m_1m_2)m_3.$$
+    The identity morphism is $e$. When $(G,\dot,e)$ is a group we get that every morphism is an isomorphism, since for each $g\in G$ there is a $g^{-1}\in G$ such that 
+    $$gg^{-1}=g^{-1}g = e$$ 
+\end{example}
+\begin{definition}
+    The \textit{maximal groupoid} of a category $\pazocal{C}$ is the subcategory of $\pazocal{C}$ whose objects are $\Ob(\pazocal{C})$ and whose morphisms are the isomorphisms of $\Hom(\pazocal{C})$
+\end{definition}
+\begin{remark}
+    The maximal groupoid is a subcategory. Indeed, The domain and codomain of an isomorphism are trivially in $\Ob(\pazocal{C})$. Suppose $f:A\rightarrow B$ and $g: B \rightarrow C$ are isomorphisms. Then 
+    $$f^{-1}g^{-1}gf=f^{-1}\fone_B f = f^{-1}f = \fone_A$$
+    and 
+    $$gff^{-1}g^{-1} = g\fone_B g^{-1} = gg^{-1} = \fone_C.$$
+    Hence $gf: A \rightarrow C$ is an isomorphism with inverse $f^{-1}g^{-1}$. 
+\end{remark}
+\begin{definition}
+    A category $\pazocal{C}$ is \emph{discrete}, if for each morphism $f:X\rightarrow Y$, $Y=X$ and $f=\id_X$.
+\end{definition}
+\begin{example}
+    Take any non-empty set $X$. We then have a category whose objects are $X$ and whose morphisms are 
+    $$\Delta_X := \{ (x,x) \in X\times X : x\in X\}.$$
+    Upon defining $(x,x)(y,y)= (x,x)$, we thus have that 
+    $$
+        ((x,x)(y,y))(z,z)=(x,x)(z,z)= (x,x) = (x,x)(y,y)=(x,x)((y,y)(z,z)).
+    $$
+    We define $\fone_x = (x,x)$. Clearly this is neutral with respect to composition. Any morphism is by definition the identity morphism, so this is an example of a discrete category. 
+\end{example}
 \subsubsection{Functors}
 \begin{definition}
     Consider a locally small category $\pazocal{C}$. We then for each object $X$ in $\pazocal{C}$ get a covariant functor 
@@ -817,7 +894,15 @@ From the above we get a notion of isomorphism of categories.
         We thus get that $L = L_A$, which means $K^{(\_)}$ is full.\\
         Consider the forgetful functor $\mathrm{Vect}_K^\mathrm{basis}\rightarrow \mathrm{Vect}_K^\mathrm{fd}$ which forgets the basis on objects. Clearly this is also a full faithful functor that is essentially surjective on objects. By Theorem~\ref{EquivOfCatIsFFFESO} we then get that $\mathrm{Mat}_K\simeq \mathrm{Vect}_K^\mathrm{fd}$.
     \end{example}
-
+     \begin{proposition}
+        If $\pazocal{C}$ is a locally small category that is equivalent to some category $\pazocal{D}$, then $\pazocal{D}$ is locally small. 
+    \end{proposition}
+    \begin{proof}
+        Consider a morphism $f: X\rightarrow Y$ in $\pazocal{D}$. We find objects $A,B$ in $\pazocal{C}$ such that $\alpha_X: X\simeq \pazocal{F}(A)$ and $\alpha_Y : Y\simeq \pazocal{F}(B)$. Consider $f' = \alpha_Y f \alpha_X^{-1} : \pazocal{F}(A)\rightarrow \pazocal{F}(B)$. For some unique $g: A\rightarrow B$, $\pazocal{F}(g)=f'$, hence 
+        $$
+            \beta^{-1}...
+        $$ 
+    \end{proof}
 \subsubsection{Diagrams}
     \begin{definition}
         A \emph{(commutative) diagram} in a category $\pazocal{C}$ is a functor from a small category, called the \emph{indexing category}, to $\pazocal{C}$. 
@@ -859,6 +944,124 @@ From the above we get a notion of isomorphism of categories.
     \begin{proof}
         Indeed, this is just a result of pre-composing with $f_{i-1}\cdots f_1$ and post-composing with $f_n\cdots f_{j+1}$ on both sides of the equality. 
     \end{proof}
-    
-    
+   
+    \begin{definition}
+        An object $I\in \Ob(\pazocal{C})$ is \emph{initial} if for each $X\in \Ob(\pazocal{C})$ there is a unique morphism $I\rightarrow X$.\\
+        An object $T\in \Ob(\pazocal{C})$ is \emph{terminal} if for each $X\in\Ob(\pazocal{C})$ there is a unique morphism $X\rightarrow T$, i.e. $T$ is an initial object in $\pazocal{C}\op$.
+    \end{definition}
+    \begin{example}
+        \begin{enumerate}
+            \item $0$ is both initial and terminal in $\mathrm{Group},\mathrm{Ab},\mathrm{Mod}_R,\mathrm{Vect}_K$. It is also terminal in $\mathrm{Ring}$ (the category of initial rings) but not initial since there is no ring homomorphism from the zero ring. 
+            \item $\Z$ is an initial object in $\mathrm{Ring}$. Indeed 
+            \begin{gather*}
+                f_R : \Z \rightarrow R\\
+                n \mapsto \sum_1^n 1_R
+            \end{gather*}
+            defines a ring homomorphism and for any ring homomorphism $f : \Z \rightarrow R$ and integer $n\in\Z$, 
+            $$
+                f(n)= f\left(\sum_1^n 1 \right) = \sum_1^n f(1)= \sum_1^n 1_R=f_R(n).
+            $$
+            \item The rational numbers are initial in $\mathrm{Field}$. Indeed, there is a functor from the category of integral domains to the category of fields given by 
+            \begin{gather*}
+                R\mapsto \mathrm{Frac}(R)\\
+                f : R\rightarrow S \mapsto \mathrm{Frac}(f):\mathrm{Frac}(R)\ni\frac{x}{y}\mapsto \frac{f(x)}{f(y)} \in \mathrm{Frac}(S) 
+            \end{gather*}
+            We claim that $\mathrm{Frac}(f_R)$ is the unique ring map from $\mathrm{Frac}(\Z) = \Q$ to $K$. Note that given a homomorphism $f: \Q\rightarrow K$, $\left. f \right|_\Z : \Z \rightarrow K$ is equal to $f_K$, hence 
+            $$f(\frac{a}{b})= f(a)f(b)^{-1}=f_K(a)f_K(b)^{-1}=\frac{f_K(a)}{f_K(b)}=\mathrm{Frac}(f_K)(\frac{a}{b}),$$
+            for each $\frac{a}{b}\in \Q$, hence $\mathrm{Frac}(f_K)=f$.
+            \item If a preordered set has a minimum this will be the initial object. For instance $0\in \N$ is the initial object.
+            \item For a monoid $M$, the category $\mathrm{B}M$ only has an initial or terminal object when $M$ is trivial. 
+        \end{enumerate}
+    \end{example}
+    \begin{proposition}
+        Consider a category with an intial object $I$ and a terminal object $T$. If there is a map $g: T\rightarrow I$, then $I\simeq T$. It follows that $T$ is initial.
+    \end{proposition}
+    \begin{proof}
+        There is a unique $f: I \rightarrow T$. Then the morphism $fg : T\rightarrow T$ is the identity on $T$ since $T$ is terminal and $gf : I\rightarrow I$ is the identity on $I$ since $I$ is initial.
+    \end{proof}
+    \begin{definition}
+        An object that is both initial and terminal is called a zero object
+    \end{definition}
+    \begin{remark}
+        Note that initial, terminal and zero objects are unique up to unique isomorphism, so we may aswell say \emph{THE} initial, terminal and zero object. Indeed, take a initial objects $I_1,I_2$. Then $f: I_1\rightarrow I_2$ and $g: I_2 \rightarrow I_1$ define mutual inverses. A dual argument is made for terminal objects
+    \end{remark}
+    \begin{definition}
+        A \emph{concrete category} is a category $\pazocal{C}$ for which there is a faithful functor $\pazocal{C} \rightarrow \mathrm{Set}$.
+    \end{definition}
+    \begin{proposition}
+        Consider a morphism $f: X\rightarrow Y$ in a category $\pazocal{C}$. Consider a faithful functor $\pazocal{F} : \pazocal{C}\rightarrow \pazocal{D}$. If $\pazocal{F}(f)$ is mono so in $f$. Dually if $\pazocal{F}(f)$ is epi so is $f$.
+    \end{proposition}
+    \begin{proof}
+        Indeed, suppose $fg = fh$ for a pair of parallel morphisms $g,h$, composable with $f$. Then 
+        $$\pazocal{F}(f)\pazocal{F}(g)= \pazocal{F}(fg) =\pazocal{F}(fh)  = \pazocal{F}(f)\pazocal{F}(h) \implies \pazocal{F}(g) = \pazocal{F}(h) \implies g=h.$$ 
+        To make the dual argument, note the functor $\pazocal{F}\op : \pazocal{C}\op \rightarrow \pazocal{D}\op$ which maps a morphism $f\in \Hom(\pazocal{C}\op)$ with domain $X$ and codomain $Y$ to $\pazocal{F}: \pazocal{F}(Y) \rightarrow \pazocal{F}(X)$, which is a morphism from $\pazocal{F}(X)$ to $\pazocal{F}(Y)$ in $\pazocal{D}\op$, is again a faithful functor. Since an epi is the dual concept to mono the result follows by applying the statement for monos to $\pazocal{F}\op$.   
+    \end{proof}
+    \begin{corollary}
+        If $\pazocal{C}$ is a concrete category, if the image of a morphism $f\in \Hom(\pazocal{C})$ in $\mathrm{Set}$ is an injection/surjection, then $f$ is mono/epi. 
+    \end{corollary}
+    \begin{example}
+        It may not always be that faithful functors preserve epimorphisms. Take any non-zero integer $a$. Then for any $x,y\in\Z$, if $xa = ya$, then $x=y$. That is in category $\mathrm{B}(\Z,\cdot)$, $a$ is an epimorphism. Consider the injective monoid homomorpism 
+        $$
+        \Z \hookrightarrow \mathrm{Mat}_2(\Z), n \mapsto \begin{pmatrix}
+            n & 0 \\
+            0 & 0
+        \end{pmatrix}.
+        $$
+        This corresponds to a faithful functor 
+        \begin{gather*}
+            \mathrm{B}\Z \rightarrow \mathrm{B}\mathrm{Mat}_2(\Z)\\
+            \Z \mapsto \mathrm{Mat}_2(\Z)\\
+            n \mapsto \begin{pmatrix}
+            n & 0 \\
+            0 & 0
+        \end{pmatrix}
+        \end{gather*}
+        Note that 
+        $$
+            \begin{pmatrix}
+                1 & 0 \\
+                0 & 0
+            \end{pmatrix}
+            \begin{pmatrix}
+                a & 0\\
+                0 & 0  
+            \end{pmatrix}
+            = 
+            \begin{pmatrix}
+                1 & 0\\
+                0 & 1
+            \end{pmatrix}
+            \begin{pmatrix}
+                a & 0\\
+                0 & 0  
+            \end{pmatrix}.
+        $$
+        So since 
+        $$
+            \begin{pmatrix}
+                1 & 0 \\
+                0 & 0
+            \end{pmatrix} 
+            \neq
+            \begin{pmatrix}
+                1 & 0\\
+                0 & 1
+            \end{pmatrix},
+        $$
+        we conclude that 
+        $$
+            \begin{pmatrix}
+                a & 0\\
+                0 & 0
+            \end{pmatrix}
+        $$
+        is not an epimorphism in $\mathrm{B}\mathrm{Mat}_2(\Z)$. Dually, a faithful functor does not preserve monos, since these are just epis in $\Z\op$.
+    \end{example}
+    \begin{lemma}
+        Consider a faithful functor $\pazocal{F}: \pazocal{C} \rightarrow \pazocal{D}$. If a diagram in $\pazocal{C}$ (a directed graph of morphisms) commutes in the image of $\pazocal{F}$, then it commutes in $\pazocal{C}$
+    \end{lemma}
+    \begin{proof}
+        Indeed given sequences $f_1,\dots, f_n$ and $g_1,\dots,g_m$ of composable morphism in $\pazocal{C}$ with the same domain and codomain with $\pazocal{F}(f_n) \cdots \pazocal{F}(f_n) = \pazocal{F}(g_m)\cdots \pazocal{F}(g_1)$, we have that 
+        $$\pazocal{F}(f_n\cdots f_1) = \pazocal{F}(g_m\cdots g_1) \implies f_n\cdots f_1 = g_m\cdots g_1.$$
+    \end{proof}
 \subsubsection{Currying}
