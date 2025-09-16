@@ -19,17 +19,15 @@
     Here the notion of "class" depends foundations. For instance, it could mean a set in the sense of ZFC or it could mean a proper class in the sense of NGB {\Large I guess what I really mean is that objects and morphisms live in a model of ZFC/NGB but I am not sure}. 
 \end{remark}
 \begin{definition}
-    In a category a morphism $f : X\rightarrow X$ is called an \emph{endomorphism}.
+    In a category, a morphism $f : X\rightarrow X$ is called an \emph{endomorphism}.
 \end{definition}
 \begin{definition}
     Let $\pazocal{C}$ be a category. An \textit{isomorphism} $f:A \rightarrow B$ is a morphism in $\Hom(\pazocal{C})$ such that there is another morphism $f^{-1} : B\rightarrow A$ satisfying,
     $$ff^{-1} = \mathbbm{1}_B \ \mathrm{ and } \ f^{-1}f = \mathbbm{1}_A.$$
     An endomorphism that is an isomorphism is called an \emph{automorphism}. 
 \end{definition}
-
-
 \begin{definition}
-    A \textit{subcategory} $\pazocal{D}$ of a category $\pazocal{C}$ is a subclass of $\Ob(\pazocal{C})$ together with a subclass of $\Hom(\pazocal{C})$ that constitutes a category
+    A \textit{subcategory} $\pazocal{D}$ of a category $\pazocal{C}$ is a subclass of $\Ob(\pazocal{C})$ together with a subclass of $\Hom(\pazocal{C})$ that constitutes a category.
 \end{definition}
 \begin{remark}
     equivalently a subcategory of $\pazocal{C}$ is a subclass $\Ob(\pazocal{D})$ of $\Ob(\pazocal{C})$ and a subclass $\Hom(\pazocal{D})$ of $\Hom(\pazocal{C})$ such that each domain $A$ and codomain $B$ for a morphism in $\Hom(\pazocal{D})$, $A,B$ are elements of $\Ob(\pazocal{D})$. In addition such that $\Hom(\pazocal{D})$ is closed under composition. 
@@ -46,47 +44,6 @@
     Hence $f$ is an isomorphism with $f^{-1} = g=h$. Let $f_1$ and $f_2$ be inverses of an isomorphism $f$. Note that both $f_1$ and $f_2$ is both a section and a retraction. Therefor, by the first statement, $f_1=f_2$.   
 \end{proof}
 \begin{definition}
-    Let $\pazocal{C}$ be a category and $A$ an object in $\pazocal{C}$. \textit{The slice category of $\pazocal{C}$ under $A$} denoted $A/\pazocal{C}$ is the category whose objects are morphisms in $\Hom(\pazocal{C})$ with domain $A$ and where a morphism from $f: A \rightarrow X$ and $g : A \rightarrow Y $ is a map $h : X\rightarrow Y$ such that 
-    $$\begin{tikzcd}
-       & A \arrow[ld, "f"' ] \arrow[rd, "g"]\\
-        X \arrow{rr}{h} & & Y
-    \end{tikzcd}$$
-    commutes. \textit{The slice category of $\pazocal{C}$ over $A$} denoted $\pazocal{C}/A$ has morphisms with codomain $A$ as objects and a morphism from $f : X \rightarrow A$ to $g : Y\rightarrow A$ is a morphism $h : X \rightarrow Y$ satisfying
-    $$\begin{tikzcd}
-        X \arrow[rd, "f"'] \arrow[rr, "h"] & & Y\arrow[ld, "g"]\\
-        & A 
-    \end{tikzcd}$$
-\end{definition}
-\begin{remark}
-    Both these constructions are indeed categories: Consider morphisms $h_{12}$ between $f_1: A\rightarrow X$ \& $f_2 : A\rightarrow Y$ and $h_{23}$ between $f_2 : A\rightarrow Y$ \& $f_3: A\rightarrow Z$. Then we have commutative diagrams
-    $$\begin{tikzcd}
-        & A \arrow[ld, "f_1"' ] \arrow[rd, "f_2"]\\
-        X \arrow{rr}{h_{12}} & & Y
-    \end{tikzcd} \quad \begin{tikzcd}  & A \arrow[ld, "f_2"' ] \arrow[rd, "f_3"]\\
-        Y \arrow{rr}{h_{23}} & & Z \end{tikzcd}$$
-    to obtain the commutative diagram
-    $$\begin{tikzcd}
-        & A \arrow[ld, "f_1"' ] \arrow[d, "f_2"] \arrow[rd, "f_3"]\\
-        X \arrow[r, "h_{12}"] & Y \arrow[r, "h_{23}"] & Z
-    \end{tikzcd}
-    $$
-    hence $h_{23}h_{12}$ is a morphism between $f_{1}$ and $f_3$. For an object $f: A \rightarrow X$ in $A/\pazocal{C}$ define the identity morphism to be $\fone_X$. We thus get that associativity of composition and the identity morphisms being neutral with respect to composition is inherited from this being true in $\pazocal{C}$. Reversing arrows we get that $\pazocal{C}/A$ is also a category.  
-\end{remark}
-\begin{definition}
-    Let $\pazocal{C}_1,\pazocal{C}_2$ be categories. A \textit{Covariant functor} from $\pazocal{C}_1$ to $\pazocal{C}_2$ is a mapping $\pazocal{F}$, denoted $\pazocal{F} : \pazocal{C}_1 \rightarrow \pazocal{C}_2$, which assigns to each object $A$ in $\Ob(\pazocal{C}_1)$ to an object $\pazocal{F}(A)$ in $\Ob(\pazocal{C}_2)$ and to each morphism in $\Hom(\pazocal{C}_1)$, $f : A \rightarrow B$ a morphism in $\Hom(\pazocal{C}_2)$, $\pazocal{F}(f) : \pazocal{F}(A)\rightarrow \pazocal{F}(B)$ such that 
-    \begin{enumerate}
-        \item for every object $X$ in $\Ob(\pazocal{C}_1)$, $\pazocal{F}(1_X) = 1_{\pazocal{F}(X)}$.
-        \item for every pair of morphisms $f: B \rightarrow C$ and $g: A\rightarrow B$ in $\Hom(\pazocal{C}_1)$, $\pazocal{F}(fg) =\pazocal{F}(f)\pazocal{F}(g).$
-    \end{enumerate}
-\end{definition}
-\begin{lemma}\label{FunctorsTransferIsomorphismBetweenCategories}
-    Consider two categories $\pazocal{C}_1$ and $\pazocal{C}_2$ with a functor $\pazocal{F}: \pazocal{C}_1 \rightarrow \pazocal{C}_2$. If $f:A \rightarrow B$ is an isomorphism in $\Hom(\pazocal{C}_1)$, then $\pazocal{F}(f): \pazocal{F}(A)\rightarrow\pazocal{F}(A)$ is an isomorphism in $\Hom(\pazocal{C}_2)$. 
-\end{lemma}
-\begin{proof}
-    Indeed, 
-    $$\pazocal{F}(f)\pazocal{F}\left(f^{-1}\right) = \pazocal{F}\left(ff^{-1}\right) = \pazocal{F}(\mathbbm{1}_B)= \mathbbm{1}_{\pazocal{F}(B)} \ \mathrm{and} \ \pazocal{F}\left(f^{-1}\right)\pazocal{F}(f) = \pazocal{F}\left(f^{-1}f\right) = \pazocal{F}(\mathbbm{1}_A)= \mathbbm{1}_{\pazocal{F}(A)}.$$
-\end{proof}
-\begin{definition}
     Let $\pazocal{C}$ be a category. We define \textit{the opposite category of $\pazocal{C}$} denoted $\pazocal{C}\op$ to be the category with $\Ob(\pazocal{C}\op) := \Ob(\pazocal{C})$ and where a morphism $f : A \rightarrow B$ in $\Hom(\pazocal{C}\op)$ is a morphism $f : B\rightarrow A$ in $\Hom(\pazocal{C})$ 
 \end{definition}
 \begin{remark}
@@ -97,21 +54,6 @@
     Furthermore, we define the identity morphisms in $\Hom(\pazocal{C}\op)$ to be the identity morphisms in $\Hom(\pazocal{C})$, hence 
     $$f\circ\op \mathbbm{1}_A = \mathbbm{1}_Af = f \text{ and } \mathbbm{1}_B \circ\op f = f \mathbbm{1}_B = f.$$
 \end{remark}
-\begin{definition}
-    Consider categories $\pazocal{C}_1$ and $\pazocal{C}_2$. A \textit{contravariant functor} $\pazocal{F}$ between  $\pazocal{C}_1 $ and $ \pazocal{C}_2$ is a covariant functor between $\pazocal{C}_1$ and $\pazocal{C}_2\op$.
-\end{definition}
-\begin{corollary}
-    Consider categories $\pazocal{C}_1$, $\pazocal{C}_2$ and a covariant functor $\pazocal{F}: \pazocal{C}_1 \rightarrow \pazocal{C}_2\op$. If $f: A \rightarrow B$ is an isomorphism in $\Hom(\pazocal{C}_1)$, then $\pazocal{F}(f): \pazocal{F}(B)\rightarrow \pazocal{F}(A)$ is an isomorphism in $\Hom(\pazocal{C}_2\op)$ 
-\end{corollary}
-\begin{proof}
-    This follows immediately from Lemma~\ref{FunctorsTransferIsomorphismBetweenCategories}.
-\end{proof}
-\begin{example}\label{IntegerInvariants}
-    Suppose that there, for a category $\pazocal{C}$, is a well-defined assignment $\pazocal{F}$ of objects in $\pazocal{C}$ to integers and of a morphism $A\rightarrow B$ to $\pazocal{F}(A)\leq \pazocal{F}(B)$. This will define a functor from $\pazocal{C}$ to $(\Z,\leq)$ called \textit{an integer invariant of objects in $\pazocal{C}$}. Indeed, $\pazocal{F}(A) \leq \pazocal{F}(A)$, hence $\pazocal{F}(\mathbbm{1}_A)=\mathbbm{1}_{\pazocal{F}(A)}$. Given morphisms $g:A\rightarrow B$, $f:B\rightarrow C$ in $\Hom(\pazocal{C})$, 
-    $$\pazocal{F}(A)\leq\pazocal{F}(B) \text{ and } \pazocal{F}(B)\leq \pazocal{F}(C),$$
-    implying $\pazocal{F}(A)\leq \pazocal{F}(C)$, hence $\pazocal{F}(A\overset{fg}{\rightarrow} C) = \pazocal{F}(A\overset{f}{\rightarrow}B)\pazocal{F}(B\overset{g}{\rightarrow}C)$.
-    
-\end{example}
 \begin{definition}
     A category $\pazocal{C}$ is \textit{locally small} if $\Hom(A,B)$ is a set for every object $A,B$ in $\Ob(\pazocal{C})$. It is \textit{small} if $\Ob(\pazocal{C})$ is a set.
 \end{definition}
@@ -135,7 +77,7 @@
     Using the dual result, we get that for every $h_1,h_2: B,D$, if $h_1f=h_2f$ then $h_1=h_2$. We thus conclude that $f$ is both an epimorphism and a monomorphism.\\
 \end{proof}
 \begin{definition}
-    A category in which the converse of the above lemma holds is called \emph{balanced}
+    A category for which the converse of the above lemma holds is called \emph{balanced}.
 \end{definition}
 \begin{lemma}
     In the category of $\mathrm{Set}$, we have for a function $f: A\rightarrow B$
@@ -246,7 +188,7 @@
         \mu : \Hom(A,A)\rightarrow \Hom(A,B)\\
         h\mapsto fh
     \end{gather*}
-    which just another instance of an "$f_\ast$", but we use different notation to not confuse it with $f_\ast: \Hom(B,B)\rightarrow \Hom(B,A)$. Then $\mu$ has an inverse $\mu^{-1}$. Note then that
+    which is just another instance of an "$f_\ast$", but we use different notation to not confuse it with $f_\ast: \Hom(B,B)\rightarrow \Hom(B,A)$. Then $\mu$ has an inverse $\mu^{-1}$. Note then thats
     $$
         \mu(gf)= f(gf)=(fg)f= \fone_B f = f\fone_A= \mu(\fone_A)
     $$
@@ -306,7 +248,7 @@
     \end{enumerate}
 \end{example}
 \begin{example}
-    Given any subcategory $\pazocal{C}$ of $\mathrm{Set}$. We can form $\pazocal{C}_\ast$ consisting of a pair $(X,x)$ where $X\in \Ob(\pazocal{C})$ and $x\in X$ where a morphism $f: (X,x)\rightarrow (Y,y)$ is a map $f:X\rightarrow Y$ such that $f(x)=y$. This is the category of \emph{pointed objects in $\pazocal{C}$}. For example, we could consider the category of pointed sets $\mathrm{Set}_\ast$ or the category of pointed topological spaces $\mathrm{Top}_\ast$.
+    Given any subcategory $\pazocal{C}$ of $\mathrm{Set}$. We can form $\pazocal{C}_\ast$ consisting of a pair $(X,x)$ where $X\in \Ob(\pazocal{C})$ and $x\in X$ where a morphism $f: (X,x)\rightarrow (Y,y)$ is a map $f:X\rightarrow Y$ such that $f(x)=y$. This is the category of \emph{pointed sets in $\pazocal{C}$}. For example, we could consider the category of pointed sets $\mathrm{Set}_\ast$ or the category of pointed topological spaces $\mathrm{Top}_\ast$.
 \end{example}
 \begin{example}
     Given a (commutative say) ring $R$ we can form the category of \emph{chain complexes} $\mathrm{Ch}_R$ whose objects are families of $R$-modules $\{M_i\}_{i\in\Z}$ together with a family of $R$-module maps $\{d_i : M_i\rightarrow M_{i-1}\}_{i\in \Z}$ such that $d_{i-1}d_i=0$ which are called \emph{boundary maps}. A morphism of chain complexes $f_\bullet : M_\bullet \rightarrow M_\bullet'$ is a collection of maps $\{f_i : M_i \rightarrow M_i'\}$ such that the square
@@ -331,7 +273,7 @@
             M_i'' \arrow[r,"d_i''"] & M_{i-1}''
         \end{tikzcd}
     $$
-    commutes. The identity morphism is $\{id_{M_i}\}_{i\in\Z}$.
+    commutes. The identity morphism is $\{\id_{M_i}\}_{i\in\Z}$.
 \end{example} 
 \begin{example}
     Given a preordered set $(X,\leq)$, we can construct a category whose objects are $X$ and where a morphisms are $\leq$. Composition of morphisms $a\leq b$ and $b\leq c$ is $a\leq c$. Indeed if $a\leq b$ and $b\leq c$, then $a\leq c$, so this is well-defined. One readily verifies that this is associative using transitivity a few times. The identity morphism is $a\leq a$ with exists by reflexivity.\\
@@ -370,7 +312,84 @@
     $$
     We define $\fone_x = (x,x)$. Clearly this is neutral with respect to composition. Any morphism is by definition the identity morphism, so this is an example of a discrete category. 
 \end{example}
+\begin{definition}
+    Let $\pazocal{C}$ be a category and $A$ an object in $\pazocal{C}$. \textit{The slice category of $\pazocal{C}$ under $A$} denoted $A/\pazocal{C}$ is the category whose objects are morphisms in $\Hom(\pazocal{C})$ with domain $A$ and where a morphism from $f: A \rightarrow X$ and $g : A \rightarrow Y $ is a map $h : X\rightarrow Y$ such that 
+    $$\begin{tikzcd}
+       & A \arrow[ld, "f"' ] \arrow[rd, "g"]\\
+        X \arrow{rr}{h} & & Y
+    \end{tikzcd}$$
+    commutes. \textit{The slice category of $\pazocal{C}$ over $A$} denoted $\pazocal{C}/A$ has morphisms with codomain $A$ as objects and a morphism from $f : X \rightarrow A$ to $g : Y\rightarrow A$ is a morphism $h : X \rightarrow Y$ satisfying
+    $$\begin{tikzcd}
+        X \arrow[rd, "f"'] \arrow[rr, "h"] & & Y\arrow[ld, "g"]\\
+        & A 
+    \end{tikzcd}$$
+\end{definition}
+\begin{remark}
+    Both these constructions are indeed categories: Consider morphisms $h_{12}$ between $f_1: A\rightarrow X$ \& $f_2 : A\rightarrow Y$ and $h_{23}$ between $f_2 : A\rightarrow Y$ \& $f_3: A\rightarrow Z$. Then we have commutative diagrams
+    $$\begin{tikzcd}
+        & A \arrow[ld, "f_1"' ] \arrow[rd, "f_2"]\\
+        X \arrow{rr}{h_{12}} & & Y
+    \end{tikzcd} \quad \begin{tikzcd}  & A \arrow[ld, "f_2"' ] \arrow[rd, "f_3"]\\
+        Y \arrow{rr}{h_{23}} & & Z \end{tikzcd}$$
+    to obtain the commutative diagram
+    $$\begin{tikzcd}
+        & A \arrow[ld, "f_1"' ] \arrow[d, "f_2"] \arrow[rd, "f_3"]\\
+        X \arrow[r, "h_{12}"] & Y \arrow[r, "h_{23}"] & Z
+    \end{tikzcd}
+    $$
+    hence $h_{23}h_{12}$ is a morphism between $f_{1}$ and $f_3$. For an object $f: A \rightarrow X$ in $A/\pazocal{C}$ define the identity morphism to be $\fone_X$. We thus get that associativity of composition and the identity morphisms being neutral with respect to composition is inherited from this being true in $\pazocal{C}$. Reversing arrows we get that $\pazocal{C}/A$ is also a category.  
+\end{remark}
+
 \subsubsection{Functors}
+\begin{definition}
+    Let $\pazocal{C}_1,\pazocal{C}_2$ be categories. A \textit{Covariant functor} from $\pazocal{C}_1$ to $\pazocal{C}_2$ is a mapping $\pazocal{F}$, denoted $\pazocal{F} : \pazocal{C}_1 \rightarrow \pazocal{C}_2$, which assigns to each object $A$ in $\Ob(\pazocal{C}_1)$ to an object $\pazocal{F}(A)$ in $\Ob(\pazocal{C}_2)$ and to each morphism in $\Hom(\pazocal{C}_1)$, $f : A \rightarrow B$ a morphism in $\Hom(\pazocal{C}_2)$, $\pazocal{F}(f) : \pazocal{F}(A)\rightarrow \pazocal{F}(B)$ such that 
+    \begin{enumerate}
+        \item for every object $X$ in $\Ob(\pazocal{C}_1)$, $\pazocal{F}(1_X) = 1_{\pazocal{F}(X)}$.
+        \item for every pair of morphisms $f: B \rightarrow C$ and $g: A\rightarrow B$ in $\Hom(\pazocal{C}_1)$, $\pazocal{F}(fg) =\pazocal{F}(f)\pazocal{F}(g).$
+    \end{enumerate}
+\end{definition}
+\begin{definition}
+    Consider categories $\pazocal{C}_1$ and $\pazocal{C}_2$. A \textit{contravariant functor} $\pazocal{F}$ between  $\pazocal{C}_1 $ and $ \pazocal{C}_2$ is a covariant functor between $\pazocal{C}_1\op$ and $\pazocal{C}_2$.
+\end{definition}
+\begin{lemma}\label{FunctorsTransferIsomorphismBetweenCategories}
+    Consider two categories $\pazocal{C}_1$ and $\pazocal{C}_2$ with a functor $\pazocal{F}: \pazocal{C}_1 \rightarrow \pazocal{C}_2$. If $f:A \rightarrow B$ is an isomorphism in $\Hom(\pazocal{C}_1)$, then $\pazocal{F}(f): \pazocal{F}(A)\rightarrow\pazocal{F}(A)$ is an isomorphism in $\Hom(\pazocal{C}_2)$. 
+\end{lemma}
+\begin{proof}
+    Indeed, 
+    $$\pazocal{F}(f)\pazocal{F}\left(f^{-1}\right) = \pazocal{F}\left(ff^{-1}\right) = \pazocal{F}(\mathbbm{1}_B)= \mathbbm{1}_{\pazocal{F}(B)} \ \mathrm{and} \ \pazocal{F}\left(f^{-1}\right)\pazocal{F}(f) = \pazocal{F}\left(f^{-1}f\right) = \pazocal{F}(\mathbbm{1}_A)= \mathbbm{1}_{\pazocal{F}(A)}.$$
+\end{proof}
+\begin{example}\label{IntegerInvariants}
+    Suppose that there, for a category $\pazocal{C}$, is a well-defined assignment $\pazocal{F}$ of objects in $\pazocal{C}$ to integers and of morphisms $A\rightarrow B$ to $\pazocal{F}(A)\leq \pazocal{F}(B)$. This will define a functor from $\pazocal{C}$ to $(\Z,\leq)$ called \textit{an integer invariant of objects in $\pazocal{C}$}. Indeed, $\pazocal{F}(A) \leq \pazocal{F}(A)$, hence $\pazocal{F}(\mathbbm{1}_A)=\mathbbm{1}_{\pazocal{F}(A)}$, so $\fone_{\pazocal{F}(A)}= \pazocal{F}(A)$. Given morphisms $g:A\rightarrow B$, $f:B\rightarrow C$ in $\Hom(\pazocal{C})$, 
+    $$\pazocal{F}(A)\leq\pazocal{F}(B) \text{ and } \pazocal{F}(B)\leq \pazocal{F}(C),$$
+    implying $\pazocal{F}(A)\leq \pazocal{F}(C)$, hence $\pazocal{F}(A\overset{fg}{\rightarrow} C) = \pazocal{F}(A\overset{f}{\rightarrow}B)\pazocal{F}(B\overset{g}{\rightarrow}C)$.
+    Integer invariants are useful in a large variety of contexts. Some examples are:
+    \begin{enumerate}
+        \item Dimension (of vector spaces) defines an integer invariant of objects in $\mathrm{Vect}^\mathrm{fd}$.
+        \item Transcendence degree over a field $K$ of field extensions over $K$ is an integer the category of algebraic extensions over $K$. A closely related notion, when $K$ is algebraically closed, is dimension of varieties in $\mathrm{Var}_K$.
+        \item For a commutative ring $R$, $\mid$ defines a preorder on $R[x_1,\dots,x_n]\setminus 0$. An integer invariant on the category associated with this poset is the degree. 
+        \item Genus in the category of category of compact smooth manifolds.
+        \item For a set $X$, the finite subsets of $X$ is a poset with respect to inclusion
+        \item For the the posets $(\R, \leq)$ or $(\Q,\leq)$, the floor- and ceiling functions define an integer invariant. 
+    \end{enumerate}
+    One can generalize the above to any poset $X$ to a notion of \emph{invariants over $X$ of objects in $\pazocal{C}$}, which is useful if we for intance want to consider invariants over $\Z \cup \{\infty\}$, relevant to for instance dimension of vector spaces in $\mathrm{Vect}$, degree for the poset $(R[x_1,\dots,x_n],\mid)$ with the convention that $\deg \ 0 = \infty$ or cardinality for a family of subsets of some $X$. For a measure space $(X,\Omega,\mu)$, inclusion defines a poset on $\Omega$ and $\mu$ defines an invariant over $[0,\infty]$ of $\Omega$-measurable sets. 
+\end{example}
+\begin{example}
+    The assignment 
+    \begin{gather*}
+        \pazocal{P}:\mathrm{Set} \rightarrow \mathrm{Set}\\
+        X \mapsto \pazocal{P}(X):= \{A : A\subset X\}\\
+        (f : X\rightarrow Y) \mapsto (A\mapsto f(A))
+    \end{gather*}
+    where for each $A\in \pazocal{P}(X)$,
+    $$f(A):=\{f(x)\in Y : x \in A\}$$
+    defines a functor. Indeed, for $f: X\rightarrow Y$, $g:Y\rightarrow Z$,
+    $$gf(A)= \{gf(x)\in Z : x\in A\} = \{g(f(x)) \in Z : x\in A\} = g(\{f(x)\in Y : x\in A \})=g(f(A)). $$
+    Moreover, 
+    $$\id_X(A) = A = \id_{\pazocal{P}(X)}(A).$$
+\end{example}
+\begin{definition}
+    A functor $\pazocal{F} : \pazocal{C}\rightarrow \pazocal{C}$ is called an \emph{endofunctor}. 
+\end{definition}
 \begin{definition}
     Consider a locally small category $\pazocal{C}$. We then for each object $X$ in $\pazocal{C}$ get a covariant functor 
     \begin{gather*}
@@ -430,7 +449,7 @@
 \begin{lemma}
     Consider categories $\pazocal{C},\pazocal{D},\pazocal{E}$ and covariant functors, $\pazocal{F}: \pazocal{C}\rightarrow \pazocal{D}, \pazocal{G}:\pazocal{D}\rightarrow \pazocal{E}$. Then 
     \begin{gather*}
-        \pazocal{G}\circ \pazocal{F} : \pazocal{C}\rightarrow \pazocal{E}\\
+        \pazocal{G} \pazocal{F} : \pazocal{C}\rightarrow \pazocal{E}\\
         X \mapsto \pazocal{G}(\pazocal{F}(X))\\
         f: Y\rightarrow Z \mapsto \pazocal{G}(\pazocal{F}(f)): \pazocal{G}(\pazocal{F}(Y))\rightarrow \pazocal{G}(\pazocal{F}(Z))
     \end{gather*}
@@ -439,12 +458,12 @@
 \begin{proof}
     Indeed, for morphisms $f: X\rightarrow Y$ and $g: Y\rightarrow Z$,
     \begin{align*}
-        (\pazocal{G}\circ \pazocal{F})(gf) &= \pazocal{G}(\pazocal{F}(gf))=\pazocal{G}(\pazocal{F}(g)\pazocal{F}(f))= \pazocal{G}(\pazocal{F}(g))\pazocal{G}(\pazocal{F}(f))\\
-        &=(\pazocal{G}\circ\pazocal{F})(g)(\pazocal{G}\circ\pazocal{F})(f).
+        (\pazocal{G} \pazocal{F})(gf) &= \pazocal{G}(\pazocal{F}(gf))=\pazocal{G}(\pazocal{F}(g)\pazocal{F}(f))= \pazocal{G}(\pazocal{F}(g))\pazocal{G}(\pazocal{F}(f))\\
+        &=(\pazocal{G}\pazocal{F})(g)(\pazocal{G}\pazocal{F})(f).
     \end{align*}
     Moreover,
     $$
-        (\pazocal{G}\circ\pazocal{F})(\fone_X)=\pazocal{G}(\pazocal{F}(\fone_X))=\pazocal{G}(\fone_{\pazocal{F}(X)})=\fone_{\pazocal{G}(\pazocal{F}(X))}=\fone_{(\pazocal{G}\circ\pazocal{F})(X)}.
+        (\pazocal{G}\circ\pazocal{F})(\fone_X)=\pazocal{G}(\pazocal{F}(\fone_X))=\pazocal{G}(\fone_{\pazocal{F}(X)})=\fone_{\pazocal{G}(\pazocal{F}(X))}=\fone_{(\pazocal{G}\pazocal{F})(X)}.
     $$
 \end{proof}
 \begin{lemma}\label{FunctorCompositionIsAssociative}
@@ -613,7 +632,7 @@ From the above we get a notion of isomorphism of categories.
     $$
 \end{remark}
 \begin{definition}
-    A \emph{natural isomorphism} is a natural transformation for which every component is an isomorphism. 
+    A \emph{natural isomorphism} is a natural transformation for which every component is an isomorphism. If two functors $\pazocal{F},\pazocal{G}: \pazocal{C}\rightarrow \pazocal{D}$ are naturally isomorphic via a natural transformation $\alpha$, we write $\alpha: \pazocal{F}\cong \pazocal{G}$ 
 \end{definition}
 \begin{lemma}
     Suppose $\alpha : \pazocal{F}\Rightarrow \pazocal{G}$ is a natural isomorphism with components $\{\alpha_X\}$. Then $\{\alpha_X^{-1}\}$ defines the components of a natural isomorphism $\alpha^{-1} : \pazocal{G} \Rightarrow \pazocal{F}$. 
@@ -699,14 +718,14 @@ From the above we get a notion of isomorphism of categories.
         By a similar computation $\pazocal{H}(X,1)=\pazocal{H}'(X,1)$. Moreover, similar computations show that $\pazocal{H}(f,\id_i) = \pazocal{H}'(f,\id_i)$ for $i=0,1$. It remains to check that $\pazocal{H}(f,0\rightarrow 1) = \pazocal{H}'(f,0\rightarrow)$ which readily follows from the fact that $\alpha_X^\pazocal{H}=\alpha_X^{\pazocal{H}'}$ for each $X$.
     \end{proof}
     \begin{definition}
-        Consider categories $\pazocal{C}$ and $\pazocal{D}$. An \emph{equivalence of categories} is a pair of functors $\pazocal{F}: \pazocal{C}\rightarrow \pazocal{D}$, $\pazocal{G}:\pazocal{D}\rightarrow \pazocal{C}$ and natural isomorphisms $\alpha : \pazocal{ID}_\pazocal{C} \simeq \pazocal{G}\pazocal{F}$ and $\beta: \pazocal{ID}_\pazocal{D} \simeq \pazocal{F}\pazocal{G}$. We say two categories are \emph{equivalent} if there is an equivalence of categories between them and in this case we may write $\pazocal{C}\simeq \pazocal{D}$. 
+        Consider categories $\pazocal{C}$ and $\pazocal{D}$. An \emph{equivalence of categories} is a pair of functors $\pazocal{F}: \pazocal{C}\rightarrow \pazocal{D}$, $\pazocal{G}:\pazocal{D}\rightarrow \pazocal{C}$ and natural isomorphisms $\alpha : \pazocal{ID}_\pazocal{C} \cong \pazocal{G}\pazocal{F}$ and $\beta: \pazocal{ID}_\pazocal{D} \cong \pazocal{F}\pazocal{G}$. We say two categories are \emph{equivalent} if there is an equivalence of categories between them and in this case we may write $\pazocal{C}\cong \pazocal{D}$. 
     \end{definition}
     \begin{remark}
         Equivalence of categories is an equivalence relation. 
         \begin{itemize}
             \item Two copies of $\pazocal{ID}_\pazocal{C}$ together with two copies of components $\{\id_X : X\in \pazocal{C}\}$ defines an equivalence of categories of $\pazocal{C}$ with itself.
-            \item Suppose $\pazocal{C}\simeq \pazocal{D}$. Then there are functors $\pazocal{F}: \pazocal{C}\rightarrow \pazocal{D}$, $\pazocal{G}: \pazocal{D}\rightarrow \pazocal{C}$ together with natural isomorphisms $\alpha: \pazocal{ID}_\pazocal{C}\simeq \pazocal{G}\pazocal{F}$ and $\beta:\pazocal{ID}_\pazocal{D}\simeq \pazocal{F}\pazocal{G}$. This data by definition also expresses that $\pazocal{D}\simeq \pazocal{C}$, when we implicitly use the commutativity of conjuction. 
-            \item Suppose $\pazocal{C}\simeq \pazocal{D}$ and $\pazocal{D}\simeq \pazocal{E}$. There are then functors  $\pazocal{F}: \pazocal{C}\rightarrow \pazocal{D}$, $\pazocal{G}: \pazocal{D}\rightarrow \pazocal{C}$ together with natural isomorphisms $\alpha: \pazocal{ID}_\pazocal{C}\simeq \pazocal{G}\pazocal{F}$ and $\beta:\pazocal{ID}_\pazocal{D}\simeq \pazocal{F}\pazocal{G}$. Moreover there are functors $\pazocal{H} : \pazocal{D}\rightarrow\pazocal{E}$, $\pazocal{I}: \pazocal{E}\rightarrow \pazocal{D}$ with natural isomorphisms $\gamma : \pazocal{ID}_{\pazocal{D}} \simeq \pazocal{I}\pazocal{H}$ and $\kappa : \pazocal{ID}_\pazocal{E} \simeq \pazocal{H}\pazocal{I}$. Set 
+            \item Suppose $\pazocal{C}\cong \pazocal{D}$. Then there are functors $\pazocal{F}: \pazocal{C}\rightarrow \pazocal{D}$, $\pazocal{G}: \pazocal{D}\rightarrow \pazocal{C}$ together with natural isomorphisms $\alpha: \pazocal{ID}_\pazocal{C}\cong \pazocal{G}\pazocal{F}$ and $\beta:\pazocal{ID}_\pazocal{D}\cong \pazocal{F}\pazocal{G}$. This data by definition also expresses that $\pazocal{D}\cong \pazocal{C}$, when we implicitly use the commutativity of conjuction. 
+            \item Suppose $\pazocal{C}\cong \pazocal{D}$ and $\pazocal{D}\cong \pazocal{E}$. There are then functors  $\pazocal{F}: \pazocal{C}\rightarrow \pazocal{D}$, $\pazocal{G}: \pazocal{D}\rightarrow \pazocal{C}$ together with natural isomorphisms $\alpha: \pazocal{ID}_\pazocal{C}\cong \pazocal{G}\pazocal{F}$ and $\beta:\pazocal{ID}_\pazocal{D}\cong \pazocal{F}\pazocal{G}$. Moreover there are functors $\pazocal{H} : \pazocal{D}\rightarrow\pazocal{E}$, $\pazocal{I}: \pazocal{E}\rightarrow \pazocal{D}$ with natural isomorphisms $\gamma : \pazocal{ID}_{\pazocal{D}} \cong \pazocal{I}\pazocal{H}$ and $\kappa : \pazocal{ID}_\pazocal{E} \cong \pazocal{H}\pazocal{I}$. Set 
             $$
                 \mathfrak{F} := \pazocal{H}\pazocal{F} \text{ and } \mathfrak{G} := \pazocal{G}\pazocal{I}.
             $$
@@ -720,11 +739,11 @@ From the above we get a notion of isomorphism of categories.
                 &= \pazocal{G}(\gamma_{\pazocal{F}(X')}\pazocal{F}(f))\alpha_X = \pazocal{G}(\gamma_{\pazocal{F}(X')})\pazocal{GF}(f)\alpha_X\\
                 &= \pazocal{G}(\gamma_{\pazocal{F}(X')})\alpha_{X'}f = \mu_{X'}f. 
             \end{align*}
-            so $\mu$ is a natural transformation of $\pazocal{ID}_{\pazocal{C}}$ to $\mathfrak{GF}$. Moreover, every component of $\mu$ is a composition of isomorphism, hence every component of $\mu$ is an isomorphism. We construct a natural isomorphims $\nu : \pazocal{ID}_\pazocal{E}\simeq \mathfrak{F}\mathfrak{G}$, by considering the collection of morphisms 
+            so $\mu$ is a natural transformation of $\pazocal{ID}_{\pazocal{C}}$ to $\mathfrak{GF}$. Moreover, every component of $\mu$ is a composition of isomorphism, hence every component of $\mu$ is an isomorphism. We construct a natural isomorphims $\nu : \pazocal{ID}_\pazocal{E}\cong \mathfrak{F}\mathfrak{G}$, by considering the collection of morphisms 
             $$
                 \nu := \left\{ \nu_Y:= \pazocal{H}(\beta_{\pazocal{I}(Y)})\kappa_Y :Y \rightarrow \pazocal{HFGI}(Y)\mid Y\in\pazocal{E}\right\}.
             $$
-            We thus conclude that $\pazocal{C}\simeq \pazocal{E}$.
+            We thus conclude that $\pazocal{C}\cong \pazocal{E}$.
         \end{itemize}
     \end{remark}
     \begin{definition}
@@ -786,7 +805,7 @@ From the above we get a notion of isomorphism of categories.
         A functor that is one functor comprising an equivalence of categories is fully faithful and essentially surjective on objects. For locally small categories, assuming the axiom of choice any fully faithful functor that is essentially surjective on objects is one functor in an equivalence of categories.  
     \end{theorem}
     \begin{proof}
-        Consider functors $\pazocal{F}:\pazocal{C}\rightarrow \pazocal{D}$ and $\pazocal{G}:\pazocal{D}\rightarrow \pazocal{C}$ with natural isomorphism $\alpha: \pazocal{ID}_\pazocal{C}\simeq \pazocal{GF}$ and $\beta : \pazocal{ID}_\pazocal{D}\simeq \pazocal{FG}$.\\
+        Consider functors $\pazocal{F}:\pazocal{C}\rightarrow \pazocal{D}$ and $\pazocal{G}:\pazocal{D}\rightarrow \pazocal{C}$ with natural isomorphism $\alpha: \pazocal{ID}_\pazocal{C}\cong \pazocal{GF}$ and $\beta : \pazocal{ID}_\pazocal{D}\cong \pazocal{FG}$.\\
          Suppose $f,g\in\Hom(X,Y)$ are given such that $\pazocal{F}(f)=\pazocal{F}(g)$. Note that
         $$
             \alpha_Y f =  \pazocal{F}(f)\alpha_X = \pazocal{F}(g)\alpha_X = \alpha_Y g \implies f=g 
@@ -869,7 +888,7 @@ From the above we get a notion of isomorphism of categories.
         $$
             \pazocal{GF}(f)\beta_C = \beta_{C'}f,
         $$
-        hence $\beta: \pazocal{ID}_{\pazocal{D}} \simeq \pazocal{GF}$. We thus conclude that $\pazocal{C}\simeq \pazocal{D}$.
+        hence $\beta: \pazocal{ID}_{\pazocal{D}} \cong\pazocal{GF}$. We thus conclude that $\pazocal{C}\cong \pazocal{D}$.
     \end{proof}
     \begin{example}
         We aim to show a an equivalence of categories implicitly known from the linear algebra of finite dimensional vector space, which is for a fixed field $K$ that the study of $n\times n$ matrices over $K$ is the "same" as the study of finite dimensional vector spaces. To make this concrete, we consider two locally small categories:
@@ -877,11 +896,11 @@ From the above we get a notion of isomorphism of categories.
             \item $\mathrm{Mat}_K$, whose objects are $\Z_{\geq 1}$ and whose morphisms are $\{\mathrm{Mat}_{n\times m}(K) : n,m\in \Z_{\geq 1}\}$. composition is given by matrix multiplication. Note we know (or will know) that for an $n\times m$ and an $m\times l$ matrix the resulting matrix from matrix multiplication is an $n\times l$ matrix. We also know that matrix multiplication is associative and the identity matrix is the neutral element with respect to matrix multiplication and thus plays the role of identity morphism in this context.
             \item $\mathrm{Vect}^{\mathrm{fd}}_K$, whose objects is the proper class of finite dimensional vector spaces and whose morphism are linear maps. This is a subcategory of $\mathrm{Set}$.  
         \end{itemize}    
-        We aim to show that $\mathrm{Mat}_K\simeq \mathrm{Vect}^{\mathrm{fd}}_K$. To do this, we first introduce the category $\mathrm{Vect}_K^{\mathrm{basis}}$. An object in this category is a pair $V,\pazocal{V}$, where $V$ is a finite dimensional vector space and $\pazocal{V}$ is a basis of $V$. The morphisms are linear maps. Let $\pazocal{E}_n$ denote the standard basis of $K^n$. Consider the assignment
+        We aim to show that $\mathrm{Mat}_K\cong \mathrm{Vect}^{\mathrm{fd}}_K$. To do this, we first introduce the category $\mathrm{Vect}_K^{\mathrm{basis}}$. An object in this category is a pair $V,\pazocal{V}$, where $V$ is a finite dimensional vector space and $\pazocal{V}$ is a basis of $V$. The morphisms are linear maps. Let $\pazocal{E}_n$ denote the standard basis of $K^n$. Consider the assignment
         \begin{gather*}
             K^{(\_)} : \mathrm{Mat}_K \rightarrow \mathrm{Vect}^{\mathrm{basis}}_K\\
             n \mapsto (K^n,\pazocal{E}_n)\\
-            \mathrm{Mat}_{n\times m}(K)\ni A \mapsto (l_A : K^m\rightarrow K^n, v\mapsto A v)
+            \mathrm{Mat}_{n\times m}(K)\ni A \mapsto (L_A : K^m\rightarrow K^n, v\mapsto A v)
         \end{gather*}  
         one readily verifies that constitutes a functor. With some general linear algebra knowledge and it also easy to verify that it is fully faithful and essentially surjective on objects. Indeed, if $V$ is an $n$-dimensional vector space with basis $\pazocal{V}=\{v_1,\dots,v_n\}$, $(V,\pazocal{V})\simeq K^n$, by the map 
         $$K^n\ni (a_1,\dots,a_n)\mapsto \sum_1^n a_iv_i,$$
