@@ -391,6 +391,36 @@
     A functor $\pazocal{F} : \pazocal{C}\rightarrow \pazocal{C}$ is called an \emph{endofunctor}. 
 \end{definition}
 \begin{definition}
+    For each subcategory $\pazocal{C}$ of $\mathrm{Set}$ there is a \emph{forgetful functor} 
+    \begin{gather*}
+        \pazocal{C} \rightarrow \mathrm{Set}\\
+        X \mapsto X\\
+        f : X \rightarrow Y \mapsto f : X \rightarrow Y
+    \end{gather*}
+    In general, given a pair of subcategories of $\mathrm{Set}$, $\pazocal{C}$ and $\pazocal{D}$ say, such that $\pazocal{D}$ is a subcategory of $\pazocal{C}$, we can construct a forgetful functor from $\pazocal{D}$ to $\pazocal{C}$ in the same fashion.   
+\end{definition}
+\begin{example}
+    Consider for instance the forgetful functor taking rings $(R,+,\cdot)$ to the underlying set $R$, or intermediately, the underlying additive group $(R,+)$ in $\mathrm{Group}$ and ring maps to maps or intermediately to group maps.  
+\end{example}
+\begin{example}
+    Another example is the forgetful functor 
+    \begin{gather*}
+        \mathrm{Mon} \rightarrow \mathrm{Set}_\ast\\
+        (M,\cdot,e)\mapsto (M,e)\\
+        f : (M,\cdot_M,e_M)\rightarrow (N,\cdot_N,e_N) \mapsto (f: (M,e_M)\rightarrow (N,e_N)), x\mapsto f(x)
+    \end{gather*}
+    which is well-defined since monoid homomorphisms fix the neutral element.
+\end{example}
+\begin{example}
+    Given an algebraically closed field $K$, there is a contravariant functor
+    \begin{gather*}
+        \Gamma : \mathrm{Var}_K\rightarrow \mathrm{FinGenAlg}_K\\
+        X \mapsto \Gamma(X)\\
+        \varphi : X\rightarrow Y \mapsto \widetilde{\varphi} : \Gamma(Y)\rightarrow \Gamma(X)
+    \end{gather*}
+    where $\mathrm{FinGenAlg}_K$ is the category of finitely generated algebras over $K$.
+\end{example}
+\begin{definition}
     Consider a locally small category $\pazocal{C}$. We then for each object $X$ in $\pazocal{C}$ get a covariant functor 
     \begin{gather*}
         \Hom(X,\_) : \pazocal{C}\rightarrow \mathrm{Set}\\
@@ -585,7 +615,7 @@ When our foundations are suitably developed we may consider a category of catego
 \begin{remark}
     The collection of all locally small categories with functors as morphisms, which will be denoted $\mathrm{CAT}$, will similarly define a category, which won't be locally small.  
 \end{remark}
-From the above we get a notion of isomorphism of categories.
+From the above we get a notion of isomorphism of categories with this we have for instance the following result
 \begin{proposition}
     Given a category $\pazocal{C}$ and an object $A$, then 
     $$\pazocal{C}/A \simeq \left(A/\pazocal{C}\op\right)\op$$
@@ -608,6 +638,83 @@ From the above we get a notion of isomorphism of categories.
     \end{gather*}
     taking objects and morphisms to themselves gives a well-defined functor whose left and right inverse is $\pazocal{F}$. It follows that $\pazocal{C}/A\simeq \left(A/\pazocal{C}\op\right)\op$ at least when this category can be shown to live in some category.  
 \end{proof}
+\begin{example}
+    Another example of an isomorphism of categories is the functor 
+    \begin{gather*}
+        (\_)\op : \mathrm{CAT} \rightarrow \mathrm{CAT}\\
+        \pazocal{C} \mapsto \pazocal{C}\op\\
+        \pazocal{F} : \pazocal{C}\op \rightarrow \pazocal{C}\op \mapsto \pazocal{F}\op : \pazocal{C}\op \rightarrow \pazocal{D}\op
+    \end{gather*}
+    where for a given functor $\pazocal{F}:\pazocal{C}\rightarrow \pazocal{D}$\\
+    \begin{gather*}
+        \pazocal{F}\op : \pazocal{C}\op \rightarrow \pazocal{D}\op\\
+        X \mapsto \pazocal{F}(X)\\
+        f : X \rightarrow Y \mapsto f\op : Y \rightarrow X
+    \end{gather*}
+    Note that clearly $(\_)\op(\_)\op = \pazocal{ID}_\mathrm{CAT}$.
+\end{example}
+\begin{example}
+    Consider the category $\mathrm{Set}^\partial$ whose objects are sets and whose morphisms are partial functions. For a given set $X$, we define 
+    $$
+        X_{+} := X\cup \{X\}
+    $$
+    and for a given partial map $f : X\dottedarrow Y$ we define 
+    \begin{gather*}
+        f_{+} : X_{+} \rightarrow Y_{+}
+    \end{gather*}
+    where 
+    $$
+        f_{+}(x) := 
+        \begin{cases}
+            f(x) & \text{if } x\in \dom\ f\\
+            Y & \text{otherwise}
+        \end{cases}
+    $$
+    We thus get a functor
+    \begin{gather*}
+        (\_)_{+} : \mathrm{Set}^\partial \rightarrow \mathrm{Set}_\ast\\
+        X \mapsto X_{+}\\
+        f : X \dottedarrow Y \mapsto f : X_{+}\rightarrow Y_{+}
+    \end{gather*}
+    Indeed, given partial maps $f: X\dottedarrow Y$ and $g : Y \dottedarrow Z$, note that we have a partial map $gf : X\dottedarrow Z$ with 
+    $$\dom \ gf = \dom \ f \cap f^{-1}(\dom\ g).$$
+    If $x\in \dom \ gf$, then $f(x)\in \dom \ g$, hence 
+    $$
+        (gf)_{+}(x)= gf(x) = g(f(x)) = g_{+}(f(x))= g_{+}(f_{+}(x))=g_{+}f_{+}(x).
+    $$ 
+    Suppose $x\notin \dom \ gf \subset X_{+}$. Then $x\notin \dom\ f$ or $x\notin f^{-1}(\dom \ g)$. In the first case $f(x)=Y$, hence
+    $$
+        (gf)_{+}(x) = Z = g_{+}(Y)=g_{+}(f_{+}(x))= g_{+}f_{+}(x). 
+    $$
+    Suppose $x\in \dom \ f$. Then  $f(x)\notin \dom \ g$, hence $g_{+}(f_{+} (x)) = Z$, hence 
+    $$
+        (gf)_{+}(x) = Z = g_{+}(f_{+}(x)) = g_{+}f_{+}(x).   
+    $$
+    We conclude that $(gf)_{+} = g_{+}f_{+}$. We define a left inverse to $(\_)_{+}$, by 
+    \begin{gather*}
+        \pazocal{U} : \mathrm{Set}_\ast \rightarrow \mathrm{Set}^\partial\\
+        (X,x)\mapsto X\\
+        f : (X,x)\rightarrow (Y,y) \mapsto \pazocal{U}(f) : X\setminus\{x\} \dottedarrow Y\setminus \{y\}
+    \end{gather*}
+    where 
+    $$\dom \ \pazocal{U}(f) := X\setminus f^{-1}(y)$$
+    and on the domain of $\pazocal{U}(f)$, $\pazocal{U}(f)(a) = f(a)$. On objects $X$,
+    $$
+        \pazocal{U}(X_{+})=\pazocal{U}(X\cup\{X\},X) = X
+    $$
+    and on morphisms $f : X\dottedarrow Y$, 
+    $$
+        \dom\ \pazocal{U}(f_{+}) = (X\cup\{X\})\setminus (f_{+})^{-1}(Y) = (X\cup\{X\})\setminus (X\setminus \dom\ f \cup \{X\}) = \dom\ f \cap X = \dom \ f.
+    $$ 
+    Moreover for $x\in \dom \ f$
+    \begin{align*}
+        \pazocal{U}(f_{+})(x) = f_{+}(x) = f(x),
+    \end{align*}
+    hence 
+    $$
+        \pazocal{U}(f_{+})= f.
+    $$
+\end{example}
 \subsubsection{Natural Transformations}
 \begin{definition}
     A \emph{natural transformation} of functors $\pazocal{F},\pazocal{G} : \pazocal{C}\rightarrow \pazocal{D}$,
