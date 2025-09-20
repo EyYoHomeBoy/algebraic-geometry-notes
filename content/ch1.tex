@@ -99,7 +99,7 @@ The second axiom is called \textit{the axiom of foundation}
     $$\forall X\left(\exists z(z\in X)\implies \exists y\in X(y\cap X = \emptyset)\right).$$
 \end{axioms}
 This axiom was introduced in 1925 by John von Neumann in order to define ordinal numbers.
-\begin{example}
+\begin{example}\label{ASetCannotHaveItselfAsAnElement}
     Suppose for a contradiction that there is a sequence of sets satisfying $x_1\ni x_2\ni x_3\ni\dots$. Consider the set containing these sets $X=\{x_1,x_2,x_3,\dots\}$ (implicitly we are here assuming the existence of $\N$ and use the axiom schema of replacement with the formula $\varphi \equiv T$). Then take an element $x_k$ of $X$. Note $x_{k+1}\in x_k$ and $x_{k+1}\in X$, hence $x_k\cap X\neq \emptyset$, which in contradiction with the axiom of foundation. We can therefor conclude that there is no set $x$ with $x\in x$, since this would imply the existence of a descending sequence $x\ni x\ni \dots$, which shows that we cannot run into Russels paradox in Zermelo-Fraenkel set theory. Nor can we have a sequence of sets $x_1,\dots,x_n$ satisfying 
     $$x_1\in x_2\in x_3\in \dots\in x_n\in x_1$$
     for then we would get a sequence $x_1\ni x_n\ni \dots\ni x_2\ni x_1\ni \dots$. 

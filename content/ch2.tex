@@ -280,7 +280,7 @@
     This could for instance be an ordinal $\alpha\in \Omega$.
 \end{example}
 \begin{definition}
-    A category $\pazocal{C}$ is called a \textit{groupoid} if every $f$ in $\Hom(\pazocal{C})$ is an isomorphism
+    A small category $\pazocal{C}$ is called a \textit{groupoid} if every $f$ in $\Hom(\pazocal{C})$ is an isomorphism
 \end{definition}
 \begin{example}\label{MonoidIsACategoryGroupIsGroupoid}
     Let $(M,\cdot,e)$ be a monoid. We define a category $\mathrm{B}M$ whose class of objects is $\{M\}$ and whose morphisms are $n,m\in M$ and where composition of morphisms $n,m\in M$ is given by 
@@ -289,6 +289,7 @@
     $$m_1(m_2m_3)=(m_1m_2)m_3.$$
     The identity morphism is $e$. When $(G,\dot,e)$ is a group we get that every morphism is an isomorphism, since for each $g\in G$ there is a $g^{-1}\in G$ such that 
     $$gg^{-1}=g^{-1}g = e$$ 
+    Note that a groupoid with one object $X$ is a group in the following sense: The set $\Hom(X,X)$ forms a group.
 \end{example}
 \begin{definition}
     The \textit{maximal groupoid} of a category $\pazocal{C}$ is the subcategory of $\pazocal{C}$ whose objects are $\Ob(\pazocal{C})$ and whose morphisms are the isomorphisms of $\Hom(\pazocal{C})$
@@ -300,10 +301,11 @@
     $$gff^{-1}g^{-1} = g\fone_B g^{-1} = gg^{-1} = \fone_C.$$
     Hence $gf: A \rightarrow C$ is an isomorphism with inverse $f^{-1}g^{-1}$. 
 \end{remark}
+
 \begin{definition}
     A category $\pazocal{C}$ is \emph{discrete}, if for each morphism $f:X\rightarrow Y$, $Y=X$ and $f=\id_X$.
 \end{definition}
-\begin{example}
+\begin{example}\label{SetIsDiscreteCategory}
     Take any non-empty set $X$. We then have a category whose objects are $X$ and whose morphisms are 
     $$\Delta_X := \{ (x,x) \in X\times X : x\in X\}.$$
     Upon defining $(x,x)(y,y)= (x,x)$, we thus have that 
@@ -386,6 +388,18 @@
     $$gf(A)= \{gf(x)\in Z : x\in A\} = \{g(f(x)) \in Z : x\in A\} = g(\{f(x)\in Y : x\in A \})=g(f(A)). $$
     Moreover, 
     $$\id_X(A) = A = \id_{\pazocal{P}(X)}(A).$$
+\end{example}
+\begin{example}
+    Given any function $f: X\rightarrow Y$, when considering both $X$ and $Y$ with the structure of discrete category, we get a functor 
+    \begin{gather*}
+        X\rightarrow Y\\
+        x\mapsto f(x)\\
+        \fone_x \mapsto \fone_{f(x)}
+    \end{gather*}  
+\end{example}
+\begin{example}
+    Consider a pair of monoids $M,N$ and a functor 
+    $\pazocal{F} : \mathrm{B}M \rightarrow \mathrm[B]N$ this is just a function $M\rightarrow N,x\mapsto \pazocal{F}(x)$. By functoriality $\pazocal{F}(e_M)=e_N$ and $\pazocal{F}(xy)=\pazocal{F}(x)\pazocal{F}(y)$, so in particular $\pazocal{F}$ corresponds to a monoid homomorphism. Conversely, any monoid homomorphism gives rise to functor of monoids. Similar considerations can be made to a ring $R$.
 \end{example}
 \begin{definition}
     A functor $\pazocal{F} : \pazocal{C}\rightarrow \pazocal{C}$ is called an \emph{endofunctor}. 
@@ -693,14 +707,14 @@ From the above we get a notion of isomorphism of categories with this we have fo
     We conclude that $(gf)_{+} = g_{+}f_{+}$. We define a left inverse to $(\_)_{+}$, by 
     \begin{gather*}
         \pazocal{U} : \mathrm{Set}_\ast \rightarrow \mathrm{Set}^\partial\\
-        (X,x)\mapsto X\\
+        (X,x)\mapsto X\setminus \{x\}\\
         f : (X,x)\rightarrow (Y,y) \mapsto \pazocal{U}(f) : X\setminus\{x\} \dottedarrow Y\setminus \{y\}
     \end{gather*}
     where 
     $$\dom \ \pazocal{U}(f) := X\setminus f^{-1}(y)$$
     and on the domain of $\pazocal{U}(f)$, $\pazocal{U}(f)(a) = f(a)$. On objects $X$,
     $$
-        \pazocal{U}(X_{+})=\pazocal{U}(X\cup\{X\},X) = X
+        \pazocal{U}(X_{+})=\pazocal{U}(X\cup\{X\},X) = (X\cup\{X\})\setminus\{X\} = X.
     $$
     and on morphisms $f : X\dottedarrow Y$, 
     $$
@@ -714,6 +728,29 @@ From the above we get a notion of isomorphism of categories with this we have fo
     $$
         \pazocal{U}(f_{+})= f.
     $$
+    On the other hand 
+    $$
+        (\pazocal{U}(X,x))_{+} = (X\setminus \{x\})_{+} = (X\setminus \{x\})\cup\{X\setminus \{x\}\}.
+    $$
+    Thus $\pazocal{U}$ and $(\_)_{+}$ are not mutual inverses. However, 
+    \begin{gather*}
+        (X\setminus\{x\})\cup\{X\setminus\{x\}\}\\
+        X\ni y\mapsto y\\
+        X\setminus \{x\} \mapsto x
+    \end{gather*}
+    Defines a bijection. So every set $X\in \mathrm{Set}^\partial$ is isomorphic to $\pazocal{U}(Y,y)$ for some $(Y,y)\in \mathrm{Set}_{+}$. Moreover, given a map of pointed sets $f: (X\cup\{X\},X) \rightarrow (Y\cup\{Y\}, Y)$, $\left. f\right|_{X\setminus f^{-1}(Y)} : X\setminus f^{-1}(Y)\rightarrow Y$ gives rise to partial map $g : X\dottedarrow Y$ where for $x\in \dom\ g$,
+    $$
+        g_{+}(x) = f(x)
+    $$
+    and for $x\notin \dom \ g$,
+    $$
+        g_{+}(x) = Y = f(x).
+    $$
+    It thus follows that $g_{+}= f$. Additionally, suppose for partial maps $f,g : X \dottedarrow Y$  that 
+    $$
+        f_{+} = g_{+}.
+    $$
+    If $x\in \dom \ f$, then $Y\neq f(x)=f_{+}(x)=g_{+}(x)$, hence $g_{+}(x)=g(x)$, meaning $x\in \dom\ g$. It follows by symmetry that $\dom\ f = \dom \ g$ and thus readily that $ f= \left. f_{+} \right|_{\dom \ f} = \left. g_{+}\right|_{\dom\ g} = g$. Later we will see that this shows that $(\_)_{+}$ and $\pazocal{U}$ defines and equivalence of categories between $\mathrm{Set}^\partial$ and $\mathrm{Set}_{+}$. 
 \end{example}
 \subsubsection{Natural Transformations}
 \begin{definition}
@@ -1020,7 +1057,74 @@ From the above we get a notion of isomorphism of categories with this we have fo
         We thus get that $L = L_A$, which means $K^{(\_)}$ is full.\\
         Consider the forgetful functor $\mathrm{Vect}_K^\mathrm{basis}\rightarrow \mathrm{Vect}_K^\mathrm{fd}$ which forgets the basis on objects. Clearly this is also a full faithful functor that is essentially surjective on objects. By Theorem~\ref{EquivOfCatIsFFFESO} we then get that $\mathrm{Mat}_K\simeq \mathrm{Vect}_K^\mathrm{fd}$.
     \end{example}
-     \begin{proposition}
+    \begin{definition}
+        A category is \emph{connected} if for each pair of objects $X,Y$ there is a finite sequence of objects
+        $$
+            X_0:= X, X_1,\dots,X_{n-1},X_n := Y
+        $$
+        and for each $i\in \{0,\dots,n-1\}$ there is a morphism $f : X_i\rightarrow X_{i+1}$ or $f: X_{i+1}\rightarrow X_i$.
+    \end{definition}
+    \begin{proposition}
+        A connected groupoid $\pazocal{G}$ is equivalent to the category induced by the automorphism group $G_X:= \mathrm{Aut}(X)$ for any object $X\in \Ob(\pazocal{G})$.
+    \end{proposition}
+    \begin{proof}
+        We construct a functor, 
+        \begin{gather*}
+           \pazocal{F}:\mathrm{B}G_X \rightarrow \pazocal{G}\\
+           G_X \mapsto X\\ 
+           (f : G_X\rightarrow G_X) \mapsto (f: X \rightarrow X) 
+        \end{gather*}
+        This is full since any morphism $f:X\rightarrow X$ in $\pazocal{G}$ is an isomorphism, hence $f$ is a morphism in $G_X$ and by definition $\pazocal{F}(f: G_X\rightarrow G_X)= f:X\rightarrow X$. It is also faithful, since if $\pazocal{f},\pazocal{g}: X\rightarrow Y$ are such that $\pazocal{f}=\pazocal{g}$, then trivially $f=g$. Note that given an object $Y$ in $\pazocal{G}$, there is a sequence of objects $X_0 = X,\dots,X_n = Y$ and a morphism $f_i : X_i\rightarrow X_{i+1}$ or $f: X_{i+1}\rightarrow X_i$ for $i=0,\dots,n-1$. Each $f_i$ is an isomorphism, hence $\pazocal{F}(G_X)=X\simeq Y$. This implies that $\pazocal{F}$ is essentially surjective on objects. We conclude that $\pazocal{G} \cong \mathrm{B}G_X$ for each $X\in \Ob(\pazocal{G})$.
+    \end{proof}
+    The upshot of the above result is that, as categories, a connected groupoid is just an automorphism group. In particular, a one object groupoid is, again, as categories, the same as the automorphism group of its one object. This makes precise the fact that, in category theory, groups are just one object groupoids. 
+    \begin{corollary}
+        The category of one object groupoids, $\pazocal{GRP}_1$, is equivalent to the category of groups $\mathrm{Grp}$. 
+    \end{corollary}   
+    \begin{proof}
+        We construct the functor
+        \begin{gather*}
+            \Omega: \pazocal{GRP}_{1} \rightarrow \mathrm{Grp}\\
+            (\pazocal{G},X)\mapsto \mathrm{Aut}(X)\\
+            \pazocal{F} : (\pazocal{G},X)\rightarrow (\pazocal{G}',X') \mapsto \mathrm{Aut}(X)\ni f\mapsto \pazocal{F}(f) \in \mathrm{Aut}(X')
+        \end{gather*}
+        This is a full. Indeed consider $f : \mathrm{Aut}(X)\rightarrow \mathrm{Aut}(X')$. We construct a functor
+        \begin{gather*}
+            \pazocal{F}_f : (\pazocal{G},X)\rightarrow (\pazocal{G},X')\\
+            X\mapsto X'\\
+            g : X\rightarrow X \mapsto f(g) : X'\rightarrow X'
+        \end{gather*}
+        clearly $\Omega(\pazocal{F}_f)= f$. Suppose $\Omega(\pazocal{F}_0) = \Omega(\pazocal{F}_1)$. Take a morphism $g:X\rightarrow X$. Then $\pazocal{F}_0(g) = \Omega(\pazocal{F}_0)(g)=\Omega(\pazocal{F}_1(g)) = \pazocal{F}_1(g)$, hence $\pazocal{F}_0=\pazocal{F}_1$. We conclude that $\Omega$ is faithful. Take an arbitrary group $G\in \mathrm{Grp}$. Then $G\simeq \Omega(\mathrm{B}G,G)$. 
+    \end{proof}
+    \begin{definition}
+        Consider a locally small category $\pazocal{C}$. We define the \emph{isomorphism class} of an object $X$ in $\pazocal{C}$ to be the class of all objects isomorphic to $X$.
+    \end{definition}
+    \begin{definition}
+        A category $\pazocal{C}$ is \emph{skeletal}, if each isomorphism class of $\pazocal{C}$ contains a single object. 
+    \end{definition}
+    \begin{lemma}
+        An equivalence of skeletal categories is an isomorphism of categories. 
+    \end{lemma}
+    \begin{proof}
+        
+    \end{proof}
+    \begin{proposition}
+        Consider a category $\pazocal{C}$. There is a skeletal category $\mathrm{Sk}\pazocal{C}$ equivalent to $\pazocal{C}$. It is unique up to isomorphism.   
+    \end{proposition}
+    \begin{proof}
+        The objects of $\mathrm{Sk}\pazocal{C}$ are given by choosing one object from each isomorphism class (here implicitly we use some version of the axiom of choice, so some assumption on smallness is probably appropriate as to not discuss foundations). The morphisms are those with domain and codomain in the aforementioned objects. The inclusion of $\mathrm{Sk}\pazocal{C}$ is trivially fully faithful and essentially surjective on objects. We thus conclude that $\mathrm{Sk}\pazocal{C}\cong \pazocal{C}$. Consider another skeletal category $\pazocal{D}$ equivalent to $\pazocal{C}$ via a fully faithful functor $\pazocal{F}$ that is essentially surjective on objects. Any object $X$ in $\pazocal{C}$ has a unique object $X_\pazocal{D}$ such that $X\simeq \pazocal{F}(X_\pazocal{D})$. The assignment $\mathrm{Sk}\pazocal{C}\rightarrow \pazocal{D}, X \mapsto X_{\pazocal{D}}$ is thus a bijective assignment of objects. Given a morphism $f: X \rightarrow Y$ in $\mathrm{Sk}\pazocal{C}$, we make the assignment $f\mapsto f_\pazocal{D} : X_\pazocal{D}\rightarrow Y_\pazocal{D}$, where $f_\pazocal{D}$ is the unique morphism with $\pazocal{F}(f_{\pazocal{D}})=f$. The inverse assignment is simply $\pazocal{F}$ on morphisms.  
+    \end{proof}
+    We have seen that equivalence of categories does not necessarily preserve smallness. For instance $\mathrm{Mat}_K$ is small while $\mathrm{Vect}_K^\mathrm{fd}$ is locally small but not small since the collection of finite dimensional vector spaces is a proper class. Indeed for any non-empty set $X$, we can form $K[X]$, the free vector space generated by $X$. If $\mathrm{Vect}_K^\mathrm{fd}$ was a set, then $K[\{X\}]$ would be an element of $\mathrm{Vect}_K^\mathrm{fd}$ for every set $X$. Then $S:=\{K[\{X\}] : X \text{ is a set}\}$ is a subset of $\mathrm{Vect}_K^\mathrm{fd}$. But then $ \bigcup S$ is a set, which every set is an element of. But no such set can exist as an immediate consequence axiom of foundation (cf. Example~\ref{ASetCannotHaveItselfAsAnElement}). In this sense smallness is an ugly notion. We can introduce a weaker notion of smallness, which is preserved by equivalence of categories. 
+    \begin{definition}
+        A category is \emph{essentially small} if it is equivalent to a small category.
+    \end{definition}
+    Another property not preserved by equivalence is discreteness. Take for instance the example of a poset $(X,\leq)$ with non-trivial arrows, eg. $X=\N$. This also has an associated discrete category (cf. Example~\ref{SetIsDiscreteCategory}). There is a fully faithful functor, surjective on objects, 
+    \begin{gather*}
+        X\rightarrow (X,\leq)\\
+        x\mapsto x\\
+        x\mapsto x\leq x
+    \end{gather*}
+    hence $X\cong (X,\leq)$. Again we may consider the class of \emph{essentially discrete categories}, i.e. categories that are equivalent to a discrete category.
+    \begin{proposition}
         If $\pazocal{C}$ is a locally small category that is equivalent to some category $\pazocal{D}$, then $\pazocal{D}$ is locally small. 
     \end{proposition}
     \begin{proof}
