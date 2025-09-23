@@ -771,7 +771,7 @@ From the above we get a notion of isomorphism of categories with this we have fo
     A natural transformation is also denoted 
     $$
         \begin{tikzcd}
-            \pazocal{C} \arrow[r,bend left = 50, "\pazocal{F}"{name=F}] & \pazocal{D} \arrow[l, bend left = 50, "\pazocal{G}"{name=G}] \arrow[Rightarrow,from=F, to=G,"\alpha",shorten >=8pt, shorten <=8pt]
+            \pazocal{C} \arrow[r,bend left = 50, "\pazocal{F}"{name=F}] \arrow[r, bend right = 50, "\pazocal{G}"{name=G},swap] & \pazocal{D}  \arrow[Rightarrow,from=F, to=G,"\alpha", shorten <= 10pt, shorten >= 10 pt]
         \end{tikzcd}
     $$
 \end{remark}
@@ -1294,4 +1294,179 @@ From the above we get a notion of isomorphism of categories with this we have fo
         Indeed given sequences $f_1,\dots, f_n$ and $g_1,\dots,g_m$ of composable morphism in $\pazocal{C}$ with the same domain and codomain with $\pazocal{F}(f_n) \cdots \pazocal{F}(f_n) = \pazocal{F}(g_m)\cdots \pazocal{F}(g_1)$, we have that 
         $$\pazocal{F}(f_n\cdots f_1) = \pazocal{F}(g_m\cdots g_1) \implies f_n\cdots f_1 = g_m\cdots g_1.$$
     \end{proof}
+\subsubsection{Natural Transformations as Morphisms}
+\begin{proposition}
+    Consider categories $\pazocal{C}$ and $\pazocal{D}$. $\Hom(\pazocal{C},\pazocal{D})$, i.e. functors between $\pazocal{C}$ and $\pazocal{D}$ define the objects in category where morphisms are natural transformations.
+\end{proposition}
+\begin{proof}
+    Given natural transformations $\alpha: \pazocal{F} \Rightarrow \pazocal{G}$ and $\beta : \pazocal{G}\Rightarrow \pazocal{H}$, we define 
+    $$\beta\alpha : \pazocal{F} \Rightarrow \pazocal{H}$$
+    to be the collection of morphisms
+    $$\left\{\beta_{X}\alpha_X : \pazocal{F}(X)\rightarrow \pazocal{H}(X) : X\in \Ob(\pazocal{C})\right\}.$$
+    This is seen to be a natural transformation by  
+    $$
+        \begin{tikzcd}
+            \pazocal{F}(X) \arrow[r, "\alpha_X"] \arrow[d,"\pazocal{F}(f)"] & \pazocal{G}(X)\arrow[d,"\pazocal{G}(f)"]\arrow[r,"\beta_X"] & \pazocal{H}(X)\arrow[d,"\pazocal{H}(f)"]\\
+            \pazocal{F}(X') \arrow[r,"\alpha_{X'}"] & \pazocal{G}(X') \arrow[r,"\beta_{X'}"] & \pazocal{H}(X')
+        \end{tikzcd}
+    $$ 
+    commuting for each morphism $f: X\rightarrow X'$. This composition is clearly associative. The identity morphism is 
+    $$\{\id_{\pazocal{F}(X)}: \pazocal{F}(X)\rightarrow \pazocal{F}(X): X\in \Ob(\pazocal{C})\}.$$
+\end{proof}
+\begin{remark}
+    We call the composition of natural transformations defined above \emph{vertical composition}.
+\end{remark}
+An important instance of the above category is $\Hom(\Hom(X,\_),\pazocal{F})$ where $X$ lives in a locally small category $\pazocal{C}$ and $\pazocal{F}$ is another functor from $\pazocal{C}$ to $\mathrm{Set}$. Its importance is due to the Yoneda lemma, which will tell us that this is a set that is isomorphic to the set $\pazocal{F}(X)$.  
+\begin{definition}
+    Given a pair of natural transformations
+    $$
+        \begin{tikzcd}
+            \pazocal{C} \arrow[r,bend left = 50, "\pazocal{F}"{name=F}] \arrow[r, bend right = 50, "\pazocal{G}"{name=G},swap] & \pazocal{D}  \arrow[Rightarrow,from=F, to=G,"\alpha", shorten <= 10pt, shorten >= 10 pt]
+        \end{tikzcd}
+        \begin{tikzcd}
+            \pazocal{D} \arrow[r,bend left = 50, "\pazocal{H}"{name=F}] \arrow[r, bend right = 50, "\pazocal{K}"{name=G},swap] & \pazocal{E}  \arrow[Rightarrow,from=F, to=G,"\beta", shorten <= 10pt, shorten >= 10 pt]
+        \end{tikzcd}
+    $$
+    We define \emph{horizontal composition of $\beta$ and $\alpha$} denoted $\beta\ast\alpha$ to be the natural transformations whose components is the diagonal of the commutative square
+    $$
+        \begin{tikzcd}
+            \pazocal{HF}(X) \arrow[rd, dashed, "(\beta\ast \alpha)_X"] \arrow[r,"\beta_{\pazocal{F}(X)}"] \arrow[d,"\pazocal{H}(\alpha_X)",swap] & \pazocal{KF}(X)\arrow[d,"\pazocal{K}(\alpha_X)"]\\
+            \pazocal{HG}(X) \arrow[r,"\beta_{\pazocal{G}(X)}",swap] & \pazocal{KG}(X)
+        \end{tikzcd}
+    $$
+\end{definition}
+\begin{proposition}
+    horizontal composition is well-defined.
+\end{proposition}
+\begin{proof}
+    The square commutes by naturality of $\beta$. We need to check that $\beta\ast\alpha : \pazocal{HF} \Rightarrow \pazocal{KG}$ is indeed a natural transformation. Indeed, consider the rectangle 
+    $$
+        \begin{tikzcd}
+            \pazocal{HF}(X) \arrow[d,"\pazocal{HF}(f)"]\arrow[r,"\pazocal{H}(\alpha_X)"] & \pazocal{HG}(X) \arrow[r,"\beta_{\pazocal{G}(X)}"] \arrow[d,"\pazocal{HG}(f)"] & \pazocal{KG}(X)\arrow[d,"\pazocal{KG}(f)"]\\
+            \pazocal{HF}(X') \arrow[r,"\pazocal{H}(\alpha_{X'})"]& \pazocal{HG}(X') \arrow[r,"\beta_{\pazocal{G}(X')}"] & \pazocal{KG}(X')
+        \end{tikzcd}
+    $$ 
+    commutes by the naturality of $\alpha$. This shows that 
+    \begin{align*} 
+        \pazocal{KG}(f)(\beta\ast\alpha)_X&=\pazocal{KG}(f)\beta_{\pazocal{G}(X)}(\beta_{\pazocal{G}(X)}\pazocal{H}(\alpha_X))\\
+         &= (\beta_{\pazocal{G}(X')}\pazocal{H}(\alpha_{X'}))\pazocal{HF}(f)= (\beta\ast\alpha)_{X'}\pazocal{HF}(f)
+    \end{align*}
+    hence $\beta\ast \alpha$ is a natural tranformation. Associativity follows by the trivial componentwise associativity
+\end{proof}
+\begin{lemma}
+    Consider the functors and natural transformations
+    $$
+        \begin{tikzcd}
+            \pazocal{C} \arrow[r, bend left=70, "\pazocal{F}"{name=F}] \arrow[r, "\pazocal{G}"{name=G, description}]
+            \arrow[r, bend right=70, "\pazocal{H}"{name=H,swap}] & \pazocal{D} \arrow[Rightarrow, from=F, to=G, "\alpha"]\arrow[Rightarrow,from=G, to=H, "\beta"] \arrow[r, bend left=70, "\pazocal{J}"{name=J}] \arrow[r, "\pazocal{K}"{name=K, description}]
+            \arrow[r, bend right=70, "\pazocal{L}"{name=L,swap}] & \pazocal{E} \arrow[Rightarrow, from=J, to=K,"\gamma"]\arrow[Rightarrow, from=K, to=L, "\delta"]
+        \end{tikzcd}
+    $$
+    Then 
+    $$
+        \delta\gamma \ast \beta\alpha = (\delta\ast \beta)(\gamma\ast \alpha).
+    $$
+\end{lemma}
+\begin{proof}
+    By the naturality of $\delta$ we get that the square 
+    $$
+        \begin{tikzcd}
+            \pazocal{K}(\pazocal{F}(X)) \arrow[r, "\delta_{\pazocal{F}(X)}"] \arrow[d,"\pazocal{K}(\alpha_X)"] & \pazocal{L}(\pazocal{F}(X)) \arrow[d, "\pazocal{L}(\alpha_X)"]\\
+            \pazocal{K}(\pazocal{G}(X)) \arrow[r,"\delta_{\pazocal{G}(X)}"] & \pazocal{L}(\pazocal{G}(X))
+        \end{tikzcd}
+    $$
+    commutes. It thus follows that 
+    \begin{align*}
+        (\delta\gamma \ast \beta\alpha)_X &= \pazocal{L}(\beta_X\alpha_X)(\delta\gamma)_{\pazocal{F}(X)} = \pazocal{L}(\beta_X)\pazocal{L}(\alpha_X)\delta_{\pazocal{F}(X)}\gamma_{\pazocal{F}(X)}\\
+        &= \pazocal{L}(\beta_X)\delta_{\pazocal{G}(X)} \pazocal{K}(\alpha_X)\gamma_{\pazocal{F}(X)}= (\delta \ast \beta)_X (\gamma\ast\alpha)_X\\
+        &=((\delta\ast\beta)(\gamma\ast \alpha))_X.
+    \end{align*}
+\end{proof}
+\begin{proposition}
+    The objects of $\mathrm{Cat}$ form a category with morphisms being \textbf{cells} of the form 
+    $$
+        \begin{tikzcd}
+            \pazocal{C} \arrow[r, bend right=50,""{name=1}]\arrow[r,bend left=50,""{name=2}] & \pazocal{D} \arrow[Rightarrow, from=2, to=1, shorten <= 6, shorten >= 6] 
+        \end{tikzcd}
+    $$ 
+    where a composition of cells is horinzontal composition of the natural transformations. 
+\end{proposition}
+\begin{proof}
+    This follows directly from the prior lemma, i.e. after one checks that horizontal composition is associative, which is readily verifiable. The identity cell is a pair of identity functors together with the identity transformation of these functors. 
+\end{proof}
+\begin{definition}
+    A \emph{2-category} $\pazocal{C}$ is a class of objects, a class of 1-morphisms between objects, together with a class of 2-morphisms between parallel morphisms, where for $f,g : X\rightarrow Y$, we denote such an arrow $\alpha$ by $\alpha : f\Rightarrow g$. Moreover, this data has to adhere to the following restrictions: 
+    \begin{enumerate}
+        \item objects and 1-morphisms form a category
+        \item There is an operation of 2-morphisms between 1-morphisms of any fixed pair of objects $X,Y$ called \emph{vertical composition} such that 1-morphisms between $X$ and $Y$ are objects in a category with $2$-morphisms form a category. 
+        \item There is a category whose objects are objects in $\pazocal{C}$ where morphisms are \emph{2-cells} of the form 
+        $$
+            \begin{tikzcd}
+                X \arrow[r, bend right=50,""{name=a}] \arrow[r,bend left=50,""{name=b}] & Y \arrow[Rightarrow,from=b, to=a,shorten <= 6, shorten >= 6]
+            \end{tikzcd}
+        $$
+        Morphisms are 2-morphisms and these compose by a binary operation called \emph{horizontal composition}. Given a pair of $2$-morphisms
+        $$
+            \begin{tikzcd}
+                X
+                \arrow[r, bend left=50]
+                \arrow[r, bend right=50]
+                \arrow[phantom, from=1-1, to=1-2, "\Downarrow\,\alpha" description,
+                shorten >=4pt, shorten <=4pt]
+                & Y
+                \arrow[r, bend left=50]
+                \arrow[r, bend right=50]
+                \arrow[phantom, from=1-2, to=1-3, "\Downarrow\,\beta" description,
+                shorten >=4pt, shorten <=4pt]
+                & Z
+            \end{tikzcd}
+        $$
+        we denote this composition by $\beta\ast\alpha$.
+        \item For 1-morphisms $f : X\rightarrow Y$ and $g: Y\rightarrow Z$, 
+        $$
+            \fone_g\ast\fone_f = \fone_{gf}.
+        $$
+        \item 
+        For 2-cells,
+        $$
+        \begin{tikzcd}
+            X \arrow[r, bend left=70, "f"{name=F}] \arrow[r, "g"{name=G, description}]
+            \arrow[r, bend right=70, "h"{name=H,swap}] & Y \arrow[Rightarrow, from=F, to=G, "\alpha"]\arrow[Rightarrow,from=G, to=H, "\beta"] \arrow[r, bend left=70, "j"{name=J}] \arrow[r, "k"{name=K, description}]
+            \arrow[r, bend right=70, "l"{name=L,swap}] & Z \arrow[Rightarrow, from=J, to=K,"\gamma"]\arrow[Rightarrow, from=K, to=L, "\delta"]
+        \end{tikzcd}
+    $$
+    Then 
+    $$
+        \delta\gamma \ast \beta\alpha = (\delta\ast \beta)(\gamma\ast \alpha).
+    $$
+   \end{enumerate} 
+\end{definition}
+Readily, we see that we have seen one example of a 2-category, namely the 2-category of small categories. 
+\subsection{The Yoneda Lemma}
+\subsubsection{Representable Functors}
+We give an alternative definition of initial and terminal objects.
+\begin{definition}
+    \begin{itemize}
+        \item An object $I$ in a locally small category $\pazocal{C}$ is \emph{initial} if and only if $\Hom(I,\_)\cong \ast$, where $\ast : \pazocal{C}\rightarrow \mathrm{Set}, X\mapsto \{\ast\}$. 
+        \item An object $T$ in a locally small category $\pazocal{C}$ is \emph{terminal} if and only if $\Hom(\_,T)\cong \ast\op$, where $\ast\op : \pazocal{C}\op\rightarrow \mathrm{Set}$. 
+    \end{itemize}
+\end{definition}
+\begin{definition}
+    A co-/contravariant functor $\pazocal{F}$ whose domain is locally small is \emph{representable} if there is an object $X$ such that $\Hom(X,\_)$ resp. $\Hom(\_,X)$ is naturally isomorphic to $\pazocal{F}$. We then say that \emph{$\pazocal{F}$ is represented by $X$}
+\end{definition}
+\begin{definition}
+    A \emph{representation} of a functor $\pazocal{F}$ whose domain is locally small is a pair of an object $X$ and a natural isomorphism of $\pazocal{F}$ with $Hom(X,\_)$ and $\Hom(\_,X)$ depending on variance. 
+\end{definition}
+\subsubsection{Statement \& Proof of The Yoneda Lemma}
+\begin{theorem}(The Yoneda Lemma) For any $\pazocal{C}$ in $\mathrm{Cat}$, given a functor $\pazocal{F}:\pazocal{C}\rightarrow \mathrm{Set}$ and an object $X\in \Ob(\pazocal{C})$
+$$
+    \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(X,\_),\pazocal{F}) \simeq \pazocal{F}(X).
+$$
+It in particular follows that the left-hand side is a set. This bijection maps a natural transformation $\alpha: \Hom(X,\_) \Rightarrow \pazocal{F}$ to $\alpha_X(\fone_X)$. The assignment of $X$ resp. $\pazocal{F}$ is natural. 
+\end{theorem}
+\subsubsection{Corollaries of The Yoneda Lemma}
+\subsection{Universal Properties \& Universal Elements}
+\subsubsection{The Category of Elements}
+\subsection{Limits \& Colimits}
+
 \subsubsection{Currying}
