@@ -1462,10 +1462,116 @@ We give an alternative definition of initial and terminal objects.
 $$
     \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(X,\_),\pazocal{F}) \simeq \pazocal{F}(X).
 $$
-It in particular follows that the left-hand side is a set. This bijection maps a natural transformation $\alpha: \Hom(X,\_) \Rightarrow \pazocal{F}$ to $\alpha_X(\fone_X)$. The assignment of $X$ resp. $\pazocal{F}$ is natural. 
+This bijection maps a natural transformation $\alpha: \Hom(X,\_) \Rightarrow \pazocal{F}$ to $\alpha_X(\fone_X)$. The assignment of $X$ resp. $\pazocal{F}$ is natural. I.e.
+\begin{enumerate}
+    \item \textbf{Naturality in Functors:} Fix an object $X$. For each functor $\pazocal{F}$ we write $\Phi^{\pazocal{F}} : \Hom^{\pazocal{C}^{\mathrm{Set}}}(\Hom(X,\_),\pazocal{F}) \rightarrow \pazocal{F}(X)$ for the bijection. The claim is that 
+    $$\Phi^{\bullet}  : \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(X,\_),\bullet) \Rightarrow \bullet(X)$$
+    given by the collection of morphisms
+    $$\left\{\Phi^\pazocal{F} : \pazocal{F} \in \pazocal{C}^\mathrm{Set}\right\}$$
+    is natural. Here $\bullet(X)$ denotes the functor 
+    \begin{gather*}
+        \pazocal{C}^\mathrm{Set} \rightarrow \mathrm{Set}\\
+        \pazocal{F} \mapsto \pazocal{F}(X)\\
+        \beta : \pazocal{F}\Rightarrow \pazocal{G} \mapsto \beta_X
+    \end{gather*}
+    \item \textbf{Naturality in Objects:} Fix a functor $\pazocal{F}\in \pazocal{C}^\mathrm{Set}$. For each object $X$ we write $\Phi_X : \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(X,\_),\pazocal{F}) \rightarrow \pazocal{F}(X)$ for the bijection. The claim is that 
+    $$\Phi_\bullet : \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(\bullet,\_),\pazocal{F})\Rightarrow \pazocal{F}(\bullet)$$
+    given by the collection of morphisms
+    $$\left\{ \Phi_X : X\in \Ob(\pazocal{C})\right\}$$
+    is natural. Here $\Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(\bullet,\_),\pazocal{F})$ is the functor 
+    \begin{gather*}
+        \pazocal{C}\rightarrow \mathrm{Set}\\
+        X \mapsto \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(X,\_),\pazocal{F})\\
+        f : X\rightarrow Y \mapsto \left((f^\ast)^\ast: \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(X,\_),\pazocal{F}) \Rightarrow \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(Y,\_),\pazocal{F}),\alpha \mapsto \alpha f^\ast\right)
+    \end{gather*}
+
+\end{enumerate}
 \end{theorem}
+\begin{proof}
+    Note that the functor category $\pazocal{C}^\mathrm{Set}$ is locally small, hence $\Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(X,\_),\pazocal{F})$ is a set.\\
+    \textbf{Explicit construction of bijection:}
+    We define
+    \begin{gather*}
+        \Phi : \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(X,\_),\pazocal{F}) \rightarrow \pazocal{F}(X)\\
+        (\alpha : \Hom(X,\_) \Rightarrow \pazocal{F})  \mapsto \alpha_X(\fone_X)
+    \end{gather*}
+    We aim to construct an inverse to this function. Let $y\in \pazocal{F}(X)$. We wish to find a natural transformation $\Psi(y) : \Hom(X,\_)\Rightarrow \pazocal{F}$. For this to be a natural transformation we must in particular have that for any object $Y$ and any morphism $f: X\rightarrow Y$, it must be that the square 
+    $$
+        \begin{tikzcd}
+            \Hom(X,X) \arrow[r, "\Psi(y)_X"] \arrow[d,"f_\ast"] & \pazocal{F}(X) \arrow[d,"\pazocal{F}(f)"]\\
+            \Hom(X,Y) \arrow[r,"\Psi(y)_Y"] & \pazocal{F}(Y)
+        \end{tikzcd}    
+    $$
+    commutes. Note that in particular
+    $$
+        \pazocal{F}(f)(\Psi(y)_X(\fone_X))= \Psi(y)_Yf_\ast(\fone_X)= \Psi(y)_Y(f)
+    $$
+    We want 
+    $$X= \Phi(\Psi(y)) = \Psi(y)_X(\fone_X).$$
+    For this to hold we must then have that 
+    $$\pazocal{F}(f)(X) = \Psi(y)_Y(f).$$
+    That is to say, we must define the inverse of $\Phi$, to be 
+    \begin{gather*}
+        \Psi:\pazocal{F}(X)\rightarrow \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(X,\_),\pazocal{F})\\
+        y \mapsto \Psi(y):= \{\left.\Psi(y)_Y : \Hom(X,Y)\rightarrow \pazocal{F}(Y), f\mapsto \pazocal{F}(f)(y)\right| Y\in \Ob(\pazocal{C}) \}
+    \end{gather*}
+    We check that this is indeed a natural transformation. Let a morphism $g: Z\rightarrow W$ be given. Then for any $f\in \Hom(X,Z)$,
+    \begin{align*}
+        \Psi(y)_Wg_\ast(f) = \Psi(y)_W(gf) =\pazocal{F}(gf) \pazocal{F}(g)\pazocal{F}(f)(y) = \pazocal{F}(g)\Psi(y)_Z(f).
+    \end{align*}
+    hence the square
+    $$
+        \begin{tikzcd}
+            \Hom(X,Z) \arrow[r,"\Psi(y)_Z"]\arrow[d,"g_\ast"] & \pazocal{F}(Z)\arrow[d,"\pazocal{F}(g)"] \\
+            \Hom(X,W) \arrow[r,"\Psi(y)_W"] & \pazocal{F}(W)
+        \end{tikzcd}
+    $$
+    commutes. Note that we constructed $\Psi$ to be a right inverse of $\Phi$, so it remains to check that it is also a left inverse. Let a natural transformation $\alpha: \Hom(X,\_)\Rightarrow \pazocal{F}$ be given. Then for every $f\in \Hom(X,Y)$
+    $$
+        \begin{tikzcd} 
+            \Hom(X,X) \arrow[r,"\alpha_X"] \arrow[d,"f_\ast"] & \pazocal{F}(X) \arrow[d,"\pazocal{F}(f)"]\\
+            \Hom(X,Y) \arrow[r, "\alpha_Y"] & \pazocal{F}(Y)
+        \end{tikzcd}
+    $$ 
+    commutes, hence 
+    $$
+        \Psi\Phi(\alpha)(f)= \Psi(\alpha_X(\fone_X))(f) = \pazocal{F}(f)(\alpha_X(\fone_X)) = \pazocal{F}(f)\alpha_X(\fone_X)=\alpha_Y f_\ast(\fone_X)=\alpha_Y(f).
+    $$
+    We can thus conclude that $\Psi\Phi(\alpha)=\alpha$.\\
+    \textbf{Naturality on functors:} Let a natural transformation $\beta : \pazocal{F}\Rightarrow \pazocal{G}$ be given. We need to check that the square
+    $$
+        \begin{tikzcd}
+            \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(X,\_),\pazocal{F}) \arrow[r,"\Phi^\pazocal{F}"]\arrow[d,"\beta_\ast"] & \pazocal{F}(X)\arrow[d,"\beta_X"]\\
+            \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(X,\_),\pazocal{G}) \arrow[r,"\Phi^\pazocal{G}"] & \pazocal{G}(X)
+        \end{tikzcd}
+    $$
+    Indeed for any natural transformation $\alpha : \Hom(X,\_)\Rightarrow \pazocal{F}$,
+    \begin{align*}
+        \Phi^\pazocal{G}\beta_\ast(\alpha) = \Phi^\pazocal{G}(\beta\alpha) = (\beta\alpha)_X(\fone_X)= \beta_X(\alpha_X(\fone_X))= \beta_X\Phi^\pazocal{F}(\alpha).
+    \end{align*}
+    \textbf{Naturality on Objects:} Let a morphism be given $f:X\rightarrow Y$. We need to check that 
+    $$
+        \begin{tikzcd}
+            \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(X,\_),\pazocal{F}) \arrow[r,"\Phi_X"]\arrow[d,"(f^\ast)^\ast"] & \pazocal{F}(X)\arrow[d,"\pazocal{F}(f)"]\\
+            \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(Y,\_),\pazocal{F}) \arrow[r,"\Phi_Y"] & \pazocal{F}(Y)
+        \end{tikzcd}
+    $$
+    commutes. Indeed, for a natural transformation $\alpha: \Hom(X,\_)\Rightarrow \pazocal{F}$, 
+    \begin{align*}
+        \Phi_Y(f^\ast)^\ast(\alpha)= \Phi_Y(\alpha f^\ast) = \alpha_Y (f^\ast)_Y(\fone_Y) = \alpha_Y(f) = \pazocal{F}(f)(\alpha_X(\fone_X))= \pazocal{F}(f)\Phi_X(\alpha).
+    \end{align*}
+\end{proof}
 \subsubsection{Corollaries of The Yoneda Lemma}
 \subsection{Universal Properties \& Universal Elements}
+\begin{definition}
+    two objects $X$ and $Y$ in the same locally small category are \emph{representably isomorphic} if $\Hom(X,\_)\cong \Hom(Y,\_)$ and $\Hom(\_,X)\cong\Hom(\_,Y)$.
+\end{definition}
+\begin{lemma}
+    If $X$ and $Y$ in the same locally small category are isomorphic, then they are representably isomorphic.  
+\end{lemma}
+\begin{definition}
+    A \emph{universal property} of an object $X\in \pazocal{C}$, where $\pazocal{C}$ is locally small, is a pair consisting of a representable functor $\pazocal{F}$ together with a \emph{universal element} $x\in \pazocal{F}(X)$ that defines a natural isomorphism of $\Hom(X,\_)$ and $\pazocal{F}$ or $\Hom(\_,X)$ and $\pazocal{F}$. 
+\end{definition}
 \subsubsection{The Category of Elements}
 \subsection{Limits \& Colimits}
 
