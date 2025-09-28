@@ -794,9 +794,23 @@ From the above we get a notion of isomorphism of categories with this we have fo
         \pazocal{F}(f)\alpha_{X}^{-1} = \alpha_{X'}^{-1}\alpha_{X'}\pazocal{F}(f)\alpha_X^{-1} = \alpha_{X'}^{-1}\pazocal{G}(f)\alpha_X\alpha_X^{-1}= \alpha_{X'}^{-1}\pazocal{G}(f).
     \end{align*}
 \end{proof}
-\begin{example}
-    Let $\pazocal{C}$ be a locally small category. Consider distinct morphisms... {\Large Do exercise 1.4 iv.}
-\end{example}
+\begin{lemma}\label{PreCompositionIsANaturalTransformationAndThisAssignmentIsInjective}
+    Let $\pazocal{C}$ be a locally small category. Consider a morphism $f\in \Hom(X,Y)$. Then the collection of maps
+    \begin{gather*}
+        \{ f_\ast : \Hom(Z,X)\rightarrow \Hom(Z,Y), \Hom(Z,X)\ni g \mapsto fg \in \Hom(Z,Y) : Z\in \Ob(\pazocal{C})\}
+    \end{gather*}
+    defines a natural transformation $f_\ast : \Hom(\_,X)\Rightarrow \Hom(\_,Y)$. By duality $f^\ast : \Hom(Y,\_)\Rightarrow \Hom(X,\_)$ defines a natural transformation. Moreover if $f\neq f'$ for parallel morphisms $f,f'$, then $f_\ast \neq f'_\ast$
+\end{lemma}
+\begin{proof}
+    Let a morphism $h : A\rightarrow B$ be given. Then
+    $$
+        \begin{tikzcd}
+            \Hom(A,X)\arrow[r,"_Af_\ast"]\arrow[d,"{_Y}h^\ast"] & \Hom(A,Y)\arrow[d,"{_X}h^\ast"]\\
+            \Hom(B,X) \arrow[r,"{_B}f_\ast"] & \Hom(B,Y)
+        \end{tikzcd}
+    $$
+    commutes by associativity of composition. Suppose $f\neq f'$. Then ${_X}f_\ast(\fone_X) \neq {_X}f_\ast'(\fone_X)$, hence ${_X}f_\ast\neq {_X}f_\ast'$, which implies $f_\ast \neq f_\ast'$.
+\end{proof}
 \subsubsection{Equivalence of Categories}
     \begin{definition}
         Let $\mathbbm{2}$ denote the category with two objects $0,1$ and a single non-identity arrow $0\rightarrow 1$. 
@@ -1562,17 +1576,189 @@ This bijection maps a natural transformation $\alpha: \Hom(X,\_) \Rightarrow \pa
     \end{align*}
 \end{proof}
 \subsubsection{Corollaries of The Yoneda Lemma}
+We first give an alternative characterization of the Yoneda lemma as a natural isomorphism of a pair of functors. 
+\begin{definition} 
+    The first of these functors is the \emph{evaluation functor}: Given a locally small category $\pazocal{C}$, we consider 
+    \begin{gather*}
+        \ev: \pazocal{C}\times \mathrm{Set}^\pazocal{C}\rightarrow \mathrm{Set}\\
+        (X,\pazocal{F})\mapsto \pazocal{F}(X)\\
+        (f,\alpha): (X,\pazocal{F})\rightarrow (Y,\pazocal{G})\mapsto \alpha_X\pazocal{F}(f) : \pazocal{F}(X)\rightarrow \pazocal{G}(Y)
+    \end{gather*}
+\end{definition} 
+Before constructing the second functor to consider we prove a lemma to provide a different characterization of bifunctors
+\begin{lemma}\label{BifunctorAsFunctorToFunctorCategory}
+    Consider locally small categories $\pazocal{C},\pazocal{D},\pazocal{E}$. There is a one-to-one correspondence of bifunctors $\pazocal{C}\times \pazocal{D}\rightarrow \pazocal{E}$ onto functors $\pazocal{C}\rightarrow\pazocal{E}^\pazocal{D}$.
+\end{lemma}
+\begin{proof}
+    Let a bifunctor $\pazocal{F} : \pazocal{C}\times \pazocal{D}\rightarrow \pazocal{E}$ be given. We define a functor 
+    \begin{gather*}
+        \mathrm{Cur}: \pazocal{C}\rightarrow \pazocal{E}^\pazocal{D}\\
+        X \mapsto \pazocal{F}(X,\_)\\
+        f : X\rightarrow Y  \mapsto \pazocal{F}(f,\_): \pazocal{F}(X,\_)\Rightarrow  \pazocal{F}(Y,\_)
+    \end{gather*}
+    where 
+    \begin{gather*}
+        \pazocal{F}(X,\_): \pazocal{D}\rightarrow \pazocal{E}\\
+        S \mapsto \pazocal{F}(X,S)\\
+        g : S\rightarrow T \mapsto \pazocal{F}(\fone_X,g) 
+    \end{gather*}
+    and $\pazocal{F}(f,\_)$ is the collection
+    $$\{\pazocal{F}(f,S):= \pazocal{F}(f,\fone_S): \pazocal{F}(X,S)\rightarrow \pazocal{F}(Y,S)\}.$$
+    The square
+    $$
+        \begin{tikzcd}
+            \pazocal{F}(X,S) \arrow[r,"\pazocal{F}(f{,}S)"]\arrow[d,"\pazocal{F}(X{,}g)"] & \pazocal{F}(Y,S) \arrow[d, "\pazocal{F}(Y{,}g)"]\\
+            \pazocal{F}(X,T) \arrow[r,"\pazocal{F}(f{,}T)"] & \pazocal{F}(Y,T)
+        \end{tikzcd}
+    $$
+    commutes since 
+    \begin{align*}
+        \pazocal{F}(Y,g)\pazocal{F}(f,S) &= \pazocal{F}(\fone_Y, g)\pazocal{F}(f,\fone_S) = \pazocal{F}(\fone_Yf,g\fone_S)= \pazocal{F}(f\fone_X,\fone_T g)\\
+        &= \pazocal{F}((f,\fone_T)(\fone_X,g)) = \pazocal{F}(f,\fone_T)\pazocal{F}(\fone_X,g)= \pazocal{F}(f,T)\pazocal{F}(X,g).
+    \end{align*}
+    So $\pazocal{F}(f,\_)$ is a natural transformation. Given a functor $\pazocal{G} : \pazocal{C}\rightarrow \pazocal{E}^\pazocal{D}$, the functor 
+    \begin{gather*}
+        \pazocal{C}\times \pazocal{D}\rightarrow \pazocal{E}\\
+        (X,S)\mapsto \pazocal{G}(X)(S)\\
+        (f,g): (X,S)\rightarrow (Y,T)\mapsto (\pazocal{G}(f))_T(\pazocal{G}(X)(g))
+    \end{gather*}
+    is the bifunctor associated with $\pazocal{G}$. Given two bifunctors $\pazocal{F}$ and $\pazocal{F}'$ with the same image under this association, note that $$\pazocal{F}(X,S) = \pazocal{F}(X,\_)(S) =\pazocal{F}'(X,\_)(S)=\pazocal{F}'(X,S).$$
+    Moreover,
+    $$\pazocal{F}(f,g) = \pazocal{F}(\fone_Y,g)\pazocal{F}(f,\fone_S) = \pazocal{F}(Y,g)\pazocal{F}(f,S) = \pazocal{F}'(Y,g)\pazocal{F}'(f,S) = \pazocal{F}'(f,g),$$ 
+    hence $\pazocal{F}=\pazocal{F}'$.
+\end{proof}
+Consider the bifunctor 
+$$
+    \Hom(\_,\_) : \pazocal{C}\op \times \pazocal{C} \rightarrow \mathrm{Set}.
+$$
+We can then apply the prior lemma to obtain a contravariant functor 
+\begin{gather*}
+    y: \pazocal{C}\op \rightarrow \mathrm{Set}^\pazocal{C}\\
+    X\mapsto \Hom(X,\_)\\
+    f : X\rightarrow Y \mapsto f^\ast : \Hom(Y,\_) \rightarrow \Hom(X,\_)
+\end{gather*}
+We may regard this as a  functor $\pazocal{C} \rightarrow (\mathrm{Set}^\pazocal{C})\op$ to obtain a functor 
+\begin{gather}
+    \Hom(y(\_),\_) : \pazocal{C}\times \mathrm{Set}^\pazocal{C}\rightarrow (\mathrm{Set^\pazocal{C}})\op\times \mathrm{Set}^\pazocal{C}\rightarrow \mathrm{SET}\\
+    (X,\pazocal{F})\mapsto (\Hom(X,\_),\pazocal{F}) \mapsto \Hom(\Hom(X,\_),\pazocal{F})
+\end{gather}
+where $\mathrm{SET}$ is the category of sufficient notion of collection of objects to contain the collection of all natural transformations between of objects.\\
+By the Yoneda lemma we are in a position where we know that we can replace $\mathrm{SET}$ by $\mathrm{Set}$. We thus more succinctly express the Yoneda Lemma as the existence of a natural isomorphism 
+$$
+    \begin{tikzcd}
+        \pazocal{C}\times \mathrm{Set}^\pazocal{C} \arrow[r,bend left=50,"\Hom(y(\_){,}\_)"{name=1, above}]\arrow[r,bend right=50,"\ev"{name=2,below}] & \mathrm{Set} \arrow[Rightarrow, from=1,to=2,shorten <= 8, shorten >= 8, "\cong\Phi"]
+    \end{tikzcd}
+$$ 
+
+\begin{corollary}\label{YonedaEmbedding}
+    For a locally small category $\pazocal{C}$ consider the functor
+    \begin{gather*}
+        y: \pazocal{C} \hookrightarrow \mathrm{Set}^{\pazocal{C}\op}\\
+        X \mapsto \Hom(\_,X)\\
+        f : X\rightarrow Y \mapsto f_\ast : \Hom(\_,X)\Rightarrow \Hom(\_,Y)
+    \end{gather*}
+    which we by Lemma~\ref{BifunctorAsFunctorToFunctorCategory} may be identified with the functor 
+    \begin{gather*}
+        y: \pazocal{C}\op \hookrightarrow \mathrm{Set}^{\pazocal{C}}\\
+        X \mapsto \Hom(X,\_)\\
+        f : X\rightarrow Y \mapsto f^\ast : \Hom(Y,\_)\Rightarrow \Hom(X,\_)
+    \end{gather*}
+    and $\Hom(\_,\_)$. This (or these) functor(s) is a fully faithful embedding called the \textbf{Yoneda embedding}
+\end{corollary}
+\begin{proof}
+    It is clearly an embedding since if $X\neg Y$, then $\fone_X\in \Hom(X,X)$ and $\fone_X\notin \Hom(X,Y)$, hence $\Hom(\_,X)\neq \Hom(\_,Y)$. To prove fullness and faithfullness, it is equivalent to show that the mapping 
+    $$
+        \Hom(X,Y)\ni f \mapsto f_\ast\in \Hom(\Hom(\_,X),\Hom(\_,Y))
+    $$
+    is a bijection. By Lemma~\ref{PreCompositionIsANaturalTransformationAndThisAssignmentIsInjective}, it is injective. Let a natural transformation $\alpha\in \Hom(\Hom(\_,X),\Hom(\_,Y))$ be given. For an object $A$, set $f:= \alpha_X(\fone_X) : X \rightarrow Y$. Then $f_\ast$, takes a $\fone_X$ to 
+    $$f\fone_X = f = \alpha_X(\fone_X),$$
+    i.e. $\Phi(f_\ast)=\alpha_X(\fone_X)=\Phi(\alpha)$, hence by the Yoneda Lemma, 
+    $$f_\ast = \alpha.$$
+
+\end{proof}
+\begin{corollary}
+    Given a ring $R$ and an $n\times m$ matrix $A$, a row operation on $A$ is uniquely determined by left multiplication by the matrix resulting from the same row operation performed on $I_n$. 
+\end{corollary}
+\begin{proof}
+    Fix a positive integer $n$. For each $i,j\in\{ 1,\dots,n\}$ and $a,b\in R$ consider the family of maps 
+    \begin{gather*}
+        {_m}\alpha_{ij}^{a,b}: \mathrm{Mat}_{n\times m}(R) \simeq (R^m)^n \rightarrow \mathrm{Mat}_{n\times m}(R)\simeq (R^m)^n\\
+        (r_1,\dots,r_n) \mapsto (r_1,\dots,r_{i-1}, ar_i+b r_j,\dots,r_n) = (r_1,\dots,ar_i,\dots,r_n) + (b\delta_{ip}r_{pq}) 
+    \end{gather*}
+    over positive integers $m$. Clearly every row operation is a special case of such maps. We claim that ${_\bullet}\alpha_{ij}^{a,b}$ defines a natural endomorphism of $\Hom(\_,n)$. Indeed, given a matrix $A\in \mathrm{Mat}_{kl}=\Hom(l,k)$, the square 
+    $$
+        \begin{tikzcd}
+            \mathrm{Mat}_{nk} \arrow[r,"{_k}\alpha_{ij}^{a{,}b}"]\arrow[d,"A^\ast"] & \mathrm{Mat}_{nk}\arrow[d,"A^\ast"]\\
+            \mathrm{Mat}_{nl} \arrow[r, "{_l}\alpha^{a{,}b}_{ij}"] & \mathrm{Mat}_{nl}
+        \end{tikzcd}
+    $$
+    commutes. To see this let $B\in \mathrm{Mat}_{nk}$ be given. We shorten notation and let ${_\bullet}\alpha$ denote horinzontal maps and $r(C)_i$ denote the $i$'th row of a matrix $C$. We thus get that 
+    \begin{align*}
+        {_l}\alpha A^\ast(B)&={_l}\alpha(BA)= (r(BA)_1,\dots, ar(BA)_i+br(BA)_j,\dots, r(BA)_n)\\
+        &= (r(B)_1A,\dots, ar(B)_iA+br(B)_jA,\dots, r(B)_nA)\\
+        &= (r(B)_1A,\dots, (ar(B)_i+br(B)_j)A,\dots, r(B)_nA)\\
+        &= {_k}\alpha(B)A = A^\ast {_k}\alpha(B).    
+    \end{align*}
+    This proves naturality. To spell it out, we now have a natural transformation 
+    $$
+        \alpha_{ij}^{a,b}: \Hom(\_,n) \Rightarrow \Hom(\_,n)
+    $$ 
+    This is given by the Yoneda embedding applied to some $n\times n$ matrix. The proof of fullness of the Yoneda embedding or simply applying the Yoneda Lemma tells that this $n\times n$ matrix is ${_n}\alpha_{ij}^{a,b}(I_n)$. Thus in the special case where the map in question is a row operation, $\rho$ say, it is via the Yoneda embedding uniquely determined by $\rho(I_n)$.   
+\end{proof}
 \subsection{Universal Properties \& Universal Elements}
 \begin{definition}
-    two objects $X$ and $Y$ in the same locally small category are \emph{representably isomorphic} if $\Hom(X,\_)\cong \Hom(Y,\_)$ and $\Hom(\_,X)\cong\Hom(\_,Y)$.
+    two objects $X$ and $Y$ in the same small category are \emph{representably isomorphic} if $\Hom(X,\_)\cong \Hom(Y,\_)$ and $\Hom(\_,X)\cong\Hom(\_,Y)$.
 \end{definition}
 \begin{lemma}
     If $X$ and $Y$ in the same locally small category are isomorphic, then they are representably isomorphic.  
 \end{lemma}
+\begin{proof}
+    This is a consequence functoriality of the Yoneda embeddings. 
+\end{proof}
+\begin{lemma}
+    Let $X$ and $Y$ be a pair of objects in a locally small category $\pazocal{C}$. If $\Hom(\_,X)\cong \Hom(\_,Y)$ or $\Hom(X,\_)\cong \Hom(Y,\_)$, then $X\simeq Y$. As a consequence, if $\pazocal{F} : \pazocal{C}\rightarrow \mathrm{Set}$ is a functor represented by $X$ and $Y$, then $X\simeq Y$.
+\end{lemma}
+\begin{proof}
+    Suppose $\alpha: \Hom(\_,X)\cong \Hom(\_,Y)$ or $\alpha: \Hom(Y,\_)\cong \Hom(X,\_)$, then since the Yoneda embedding is fully faithful, then $\alpha = y(f)$ for some unique isomorphism $f: X\rightarrow Y$.  
+\end{proof}
+\begin{remark}
+    With this result in mind, we have motivated the use of the definite article when refering to an object representing a representable functor, since given a pair of representations there is a unique isomorphism between the objects. In this way there is a canonical way of identifying objects in this context.   
+\end{remark}
 \begin{definition}
-    A \emph{universal property} of an object $X\in \pazocal{C}$, where $\pazocal{C}$ is locally small, is a pair consisting of a representable functor $\pazocal{F}$ together with a \emph{universal element} $x\in \pazocal{F}(X)$ that defines a natural isomorphism of $\Hom(X,\_)$ and $\pazocal{F}$ or $\Hom(\_,X)$ and $\pazocal{F}$. 
+    A \emph{universal property} of an object $X\in \pazocal{C}$, where $\pazocal{C}$ is locally small, is a pair consisting of a representable functor $\pazocal{F}$ together with a \emph{universal element} $x\in \pazocal{F}(X)$ that defines a natural isomorphism of $\Hom(X,\_)$ and $\pazocal{F}$ or $\Hom(\_,X)$ and $\pazocal{F}$ via $\Phi$ (as seen in the Yoneda Lemma). 
 \end{definition}
 \subsubsection{The Category of Elements}
+\begin{definition}
+    Let $\pazocal{F}: \pazocal{C}\rightarrow\mathrm{Set}$, where $\pazocal{C}$ is a locally small category, be a covariant functor. Then $\int \pazocal{F}$ is the category characterised by the following data: 
+    \begin{enumerate}
+        \item Objects are pairs $(A,X)$ where $A\in \Ob(\pazocal{C})$ and $X\in \pazocal{F}(A)$.
+        \item A morphism $(A,X)\rightarrow (B,Y)$ is a morphism $f: A\rightarrow B$ in $\pazocal{C}$ so that $(\pazocal{F}(f))(X)=Y$.
+    \end{enumerate} 
+    This category is called \emph{the category of elements}.
+\end{definition}
+\begin{remark}
+    Note that $(\pazocal{F}(\fone_A))(X)=\id_{\pazocal{F}(X)}(X)=X$, so $\fone_A\in \Hom(\int\pazocal{F})$. Consider morphisms $f\in \Hom((A,X),(B,Y))$ and $g\in \Hom((B,Y),(C,Z))$. Then 
+    $$(\pazocal{F}(gf))(X)=(\pazocal{F}(g)\circ \pazocal{F}(f))(X)= \pazocal{F}(g)(\pazocal{F}(f)(X))=\pazocal{F}(g)(Y)=Z,$$
+    so $gf\in \Hom(\int\pazocal{F})$. Clearly composition is associative and $\fone_(A,X):=\fone_A$ is the identity morphism for each object $A$. So $\int\pazocal{F}$ indeed does define a category.
+\end{remark}
+We denote the forgetful functor 
+\begin{gather*}
+    \int\pazocal{F} \rightarrow \pazocal{C}\\
+    (A,X)\mapsto A\\
+    f: (A,X)\rightarrow (B,X) \mapsto f: A\rightarrow B
+\end{gather*}
+by $\Pi$. 
+\begin{definition}
+    The \emph{category of elements} for a contravariant functor $\pazocal{F}:\pazocal{C}\rightarrow \mathrm{Set}$ is just the category of elements of $\pazocal{F}$ regarded as covariant functor $\pazocal{F} :\pazocal{C}\op\rightarrow \mathrm{Set}$.
+\end{definition}
+\begin{lemma}
+    For a covariant functor $\pazocal{F}:\pazocal{C}\op \rightarrow \mathrm{Set}$, 
+    $$\int\pazocal{F} \cong y \downarrow \pazocal{F}.$$
+    Here $y: \pazocal{C}\rightarrow \mathrm{Set}^{\pazocal{C}\op}$ is the yoneda embedding and $\pazocal{F}$ is regarded as functor $\fone\rightarrow \mathrm{Set}^{\pazocal{C}\op}$.
+\end{lemma}
+\begin{proposition}
+    A covariant functor $\pazocal{F} : \pazocal{C}\rightarrow \mathrm{Set}$ is representable if and only if $\int \pazocal{F}$ has an initial object. For a contravariant functor, the same but the category of elements has a terminal object.  
+\end{proposition}
 \subsection{Limits \& Colimits}
 
 \subsubsection{Currying}
