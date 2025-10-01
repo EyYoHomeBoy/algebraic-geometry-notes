@@ -12,25 +12,39 @@ or $2^X$ with the binary operation
 \end{gather*}
  Another example example of another algebraic structure on a set could also be that another set $S$ acting on $M$, i.e. there is a function taking a pair of elements in $S\times M$/$M\times S$ to an element in $M$. When we ask that such operations or the overlying sets adhere to certain axioms we obtain a rich family of sub-classes of objects having a certain kind of algebraic structure which will be preserved by certain maps. For instance $(2^X, \cup)$ and $(2^X,\cap)$ have the property of having associative operations, making them semi-groups. Moreover $\emptyset$ resp. $X$ possess the property of being neutral with respect to the respective operation making them so-called monoids. The operations are even commutative, so these are examples of commutative monoids We will in the following be focusing broadly on the classes of rings and modules. However, it will be useful to also introduce groups and monoids in this context.
 \subsection{Monoids}
+
 \subsubsection{Definitions and Basic Properties}
 \begin{definition}
-    A \textit{monoid} is a set $M$ with an operation $\circ : M\times M \rightarrow M$ where $m_1m_2 := m_1 \circ m_2 := \circ(m_1,m_2)$ for $m_1,m_2\in M$ that satisfy the following two axioms
-    \begin{enumerate}
-        \item The operation $\circ$ satisfies the \textit{associative law}, i.e. for every $m_1,m_2,m_3\in M$, 
-        $$m_1(m_2m_3) = (m_1m_2)m_3.$$
-        \item There is an element $e\in M$ such that for every $m\in M$,
-        $$me = em = m.$$
-        The element $e$ is referred to as the \textit{neutral element with respect to $\circ$}. 
-    \end{enumerate}
-    The data specifying a monoid is often written as the tuple $(M,\circ)$.
+    For a subcategory $\pazocal{C}$ of $\mathrm{Set}$, a \emph{$\pazocal{C}$-monoid} is an object $M$ in $\pazocal{C}$ together with morphisms $\circ : M\times M \rightarrow M$, $e : \{\ast\} \rightarrow M$ such that 
+    $$
+    \begin{tikzcd}
+        M\times M \times M \arrow[r,"\fone_M\times \circ"] \arrow[d,"\circ \times \fone_M",swap] & M\times M \arrow[d,"\circ"]\\
+        M\times M \arrow[r,"\circ"] & M
+    \end{tikzcd}
+    \text{ and }
+    \begin{tikzcd}
+        M\times \{\ast\} \arrow[r, "\fone_M\times e"] \arrow[rd,"\pi_2",swap] & M \times  M \arrow[d,"\circ"] & \{\ast\}\times M\arrow[l,"e\times \fone_M",swap] \arrow[ld, "\pi_1"]\\
+        & M
+    \end{tikzcd}
+    $$ 
+    commute. When $\pazocal{C}$ is $\mathrm{Set}$, we simply refer to such an object as a \emph{monoid}.
 \end{definition}
-\begin{remark}\label{UniquenessOfNeutralElement}
-    The neutral element with respect to $\circ$ is unique. Indeed, suppose $e,e'\in M$ are neutral with respect to $\circ$. Then 
-    $$e = e e' = e'.$$
-    For an element $m\in M$ and a non-negative integer $n$ we define 
-    $$m^n = \underbrace{m\cdots m}_{n}$$
-    with the convention that $m^0 = e$.
+\begin{remark}
+    \begin{enumerate}
+        \item For a pair of elements $m_1,m_2\in M$, we use the notational convention $m_1m_2 := m_1\circ m_2:= m_1m_2$. 
+        \item The first diagram is a compact way of saying that $\circ$ is an \emph{associative binary operation} on $M$. 
+        \item We may identify $e$ with the element $e(\ast)\in M$. This element has the property that for any $m \in M$,
+        $$
+            e m = \circ e\times \fone_M(e,m) = \pi_1(e,m)= m = \pi_2(m,e)= \circ \fone_m\times e(m,e) = me  
+        $$
+        we call this the \emph{neutral element with respect to $\circ$}   
+        \item As we saw in {\Large Ref} $\mathrm{B}M := (\{M\}, M)$ is a one object category, where the neutral element is the identity morphism. As an immediate consequence, $e$ is unique.
+        \item For an element $m\in M$ and a non-negative integer $n$ we define 
+        $$m^n = \underbrace{m\cdots m}_{n}$$
+        with the convention that $m^0 = e$.
+    \end{enumerate}
 \end{remark}
+The data specifying a monoid is often written as the tuple $(M,\circ)$ or $(M,\circ,e)$.
 \begin{definition}
     A \textit{commutative monoid} is a monoid $M$ such that for every $m_1,m_2\in M$,
     $$m_1m_2 = m_2m_1.$$

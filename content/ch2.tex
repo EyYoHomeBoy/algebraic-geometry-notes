@@ -848,6 +848,31 @@ From the above we get a notion of isomorphism of categories with this we have fo
     $$
     commutes by associativity of composition. Suppose $f\neq f'$. Then ${_X}f_\ast(\fone_X) \neq {_X}f_\ast'(\fone_X)$, hence ${_X}f_\ast\neq {_X}f_\ast'$, which implies $f_\ast \neq f_\ast'$.
 \end{proof}
+\begin{example}
+    Let $V$ a vector space over some field $K$. Let for any vector space $W$ over $K$, $W^\ast$ denote $\Hom(W,K)$, \emph{the dual vector space of $W$}, i.e. $(\_)^\ast= \Hom(\_,K)$.
+    Consider the linear maps 
+    \begin{gather*}
+        {_V}\ev: V \rightarrow V^{\ast\ast}\\
+        v \mapsto \ev_v
+    \end{gather*}
+    where $\ev_v$ is the linear map
+    \begin{gather*}
+        V^\ast \rightarrow K\\
+        (l: V\rightarrow K)\mapsto l(v)
+    \end{gather*}
+    The collection $\{{_W}\ev : W\rightarrow W^{\ast\ast} : W\in\Ob(\mathrm{Vect}_K)\}$, defines a natural transformation of $\pazocal{ID}_{\mathrm{Vect}_K}$ with  $(\_)^{\ast\ast}$. The square 
+    $$
+        \begin{tikzcd}
+            V \arrow[r,"{_V}\ev"] \arrow[d,"l"] &V^{\ast\ast}\arrow[d,"l^{\ast\ast}"]\\
+            W \arrow[r,"{_W}\ev"] & W^{\ast\ast}
+        \end{tikzcd}
+    $$
+    commutes. Indeed, 
+    \begin{align*}
+        (({_W}\ev l)(v))(\phi) &= \ev_{l(v)}(\phi) = \phi(l(v))= \phi l(v)=\ev_v(\phi l)=(\ev_vl^\ast)(\phi)=(l^{\ast\ast}(\ev_v))(\phi)\\ 
+        &=((l^{\ast\ast}{_V}\ev)(v))(\phi) 
+    \end{align*}
+\end{example}
 \subsubsection{Equivalence of Categories}
     \begin{definition}
         Let $\mathbbm{2}$ denote the category with two objects $0,1$ and a single non-identity arrow $0\rightarrow 1$. 
@@ -1242,17 +1267,29 @@ From the above we get a notion of isomorphism of categories with this we have fo
             $$
                 f(n)= f\left(\sum_1^n 1 \right) = \sum_1^n f(1)= \sum_1^n 1_R=f_R(n).
             $$
-            \item The rational numbers are initial in $\mathrm{Field}$. Indeed, there is a functor from the category of integral domains to the category of fields given by 
+            \item The rational numbers are initial in $\mathrm{Field}_{0}$, the category of fields of characteristic $0$. Indeed, there is a functor from the category of integral domains to the category of fields given by 
             \begin{gather*}
                 R\mapsto \mathrm{Frac}(R)\\
                 f : R\rightarrow S \mapsto \mathrm{Frac}(f):\mathrm{Frac}(R)\ni\frac{x}{y}\mapsto \frac{f(x)}{f(y)} \in \mathrm{Frac}(S) 
             \end{gather*}
-            We claim that $\mathrm{Frac}(f_R)$ is the unique ring map from $\mathrm{Frac}(\Z) = \Q$ to $K$. Note that given a homomorphism $f: \Q\rightarrow K$, $\left. f \right|_\Z : \Z \rightarrow K$ is equal to $f_K$, hence 
+            We claim that $\mathrm{Frac}(f_R)$ is the unique ring map from $\mathrm{Frac}(\Z) = \Q$ to $K$ for any characteristic $0$ field $K$. Note that given a homomorphism $f: \Q\rightarrow K$, $\left. f \right|_\Z : \Z \rightarrow K$ is equal to $f_K$, hence 
             $$f(\frac{a}{b})= f(a)f(b)^{-1}=f_K(a)f_K(b)^{-1}=\frac{f_K(a)}{f_K(b)}=\mathrm{Frac}(f_K)(\frac{a}{b}),$$
             for each $\frac{a}{b}\in \Q$, hence $\mathrm{Frac}(f_K)=f$.
             \item If a preordered set has a minimum this will be the initial object. For instance $0\in \N$ is the initial object.
             \item For a monoid $M$, the category $\mathrm{B}M$ only has an initial or terminal object when $M$ is trivial. 
+            \item The empty set, $\emptyset$, is the initial object in $\mathrm{Set}$. Indeed, the only function with domain $\emptyset$ is $\emptyset$.
+            \item In $\mathrm{Set}_\ast$, $(\{\ast\},\ast)$ is both initial and terminal.
+            \item In $\mathrm{Cat}$, the category $(\emptyset,\emptyset)$ is the initial object. Indeed, there is a functor that maps objects and morphisms via the empty function and these are the only mappings with the empty set as domain. $\fone$ is the terminal object. Indeed, for any locally small category $\pazocal{C}$, there is a functor 
+            \begin{gather*}
+                \ast : \pazocal{C}\rightarrow\fone\\
+                X\mapsto \ast\\
+                f: X\rightarrow Y \mapsto \fone_\ast
+            \end{gather*}  
+            Since $\fone$ have only one object and one morphism any such functor must map every object to this one object and every morphism to this one morphism, hence it is equal to $\ast$.  
         \end{enumerate}
+    \end{example}
+    \begin{example}
+        Faithful functors need not preserve epimorphism. Indeed, the ring map $\Z\hookrightarrow \Q$ is epi but not surjective, but under the forgetful functor $\mathrm{Ring}\rightarrow \mathrm{Set}$, it is not an epi, since $\mathrm{Set}$ is balanced. In $\mathrm{Ring}\op$, it is a mono but in $\mathrm{Set}\op$ it is not. 
     \end{example}
     \begin{proposition}
         Consider a category with an intial object $I$ and a terminal object $T$. If there is a map $g: T\rightarrow I$, then $I\simeq T$. It follows that $T$ is initial.
@@ -1266,6 +1303,22 @@ From the above we get a notion of isomorphism of categories with this we have fo
     \begin{remark}
         Note that initial, terminal and zero objects are unique up to unique isomorphism, so we may aswell say \emph{THE} initial, terminal and zero object. Indeed, take a initial objects $I_1,I_2$. Then $f: I_1\rightarrow I_2$ and $g: I_2 \rightarrow I_1$ define mutual inverses. A dual argument is made for terminal objects
     \end{remark}
+    \begin{definition}
+        Consider an endofunctor $\pazocal{T}: \pazocal{C}\rightarrow \pazocal{C}$. A \emph{coalgebra for $\pazocal{T}$} is an object $X$ in $\pazocal{C}$ with a morphism $\gamma : X\rightarrow \pazocal{T}(X)$. We define a category of coalgebras for $\pazocal{T}$ by letting a morphism of coalgebras $(X,\gamma)\rightarrow (X', \gamma')$ be a morphism $f: X\rightarrow X'$ such that 
+        $$
+            \begin{tikzcd}
+                X \arrow[r,"f"]\arrow[d,"\gamma",swap] & X'\arrow[d,"\gamma'"]\\
+                \pazocal{T}(X) \arrow[r,"\pazocal{T}(f)",swap] & \pazocal{T}(X')
+            \end{tikzcd}
+        $$
+        commutes. Composition is given by the composition inherited by $\pazocal{C}$ and the identity morphisms are also inherited by $\pazocal{C}$. 
+    \end{definition}
+    \begin{proposition}
+        For terminal coalgebras $(X,\gamma)$, we have that $\gamma: X\rightarrow \pazocal{T}(X)$ is an isomorphism. 
+    \end{proposition}
+    \begin{proof}
+        There is a unique morphism $\delta: \pazocal{T}(X)\rightarrow X$...
+    \end{proof}
     \begin{definition}
         A \emph{concrete category} is a category $\pazocal{C}$ for which there is a faithful functor $\pazocal{C} \rightarrow \mathrm{Set}$.
     \end{definition}
@@ -1496,20 +1549,77 @@ Readily, we see that we have seen one example of a 2-category, namely the 2-cate
 \subsection{The Yoneda Lemma}
 \subsubsection{Representable Functors}
 We give an alternative definition of initial and terminal objects.
-\begin{definition}
-    \begin{itemize}
-        \item An object $I$ in a locally small category $\pazocal{C}$ is \emph{initial} if and only if $\Hom(I,\_)\cong \ast$, where $\ast : \pazocal{C}\rightarrow \mathrm{Set}, X\mapsto \{\ast\}$. 
-        \item An object $T$ in a locally small category $\pazocal{C}$ is \emph{terminal} if and only if $\Hom(\_,T)\cong \ast\op$, where $\ast\op : \pazocal{C}\op\rightarrow \mathrm{Set}$. 
-    \end{itemize}
-\end{definition}
+\begin{lemma}
+    \begin{enumerate}
+        \item An object $I$ in a locally small category $\pazocal{C}$ is initial if and only if $\Hom(I,\_)\cong \ast$, where $\ast : \pazocal{C}\rightarrow \mathrm{Set}, S\mapsto \{\ast\}$. 
+        \item An object $T$ in a locally small category $\pazocal{C}$ is terminal if and only if $\Hom(\_,T)\cong \ast\op$, where $\ast\op : \pazocal{C}\op\rightarrow \mathrm{Set}, S\mapsto \{\ast\}$. 
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    1. Suppose $I$ is initial. For each object $X$ in $\pazocal{C}$, $\Hom(I,X)$ is a singleton $\{f_X\}$. Then 
+    $$
+        \{ \ast:\Hom(I,X) \rightarrow \ast(X), f_X\mapsto to \{\ast\} : X\in \Ob(\pazocal{C})\}
+    $$
+    defines a natural isomorphism $\Hom(I,\_)\cong \ast$. Indeed, each of these maps is a bijection with inverse, $\{\ast\}\mapsto f_X$. Note that any square
+    $$
+        \begin{tikzcd}
+            \Hom(I,X) \arrow[r,"\ast"] \arrow[d] & \{\ast\} \arrow[d] \\
+            \Hom(I,Y) \arrow[r,"\ast"] &\{\ast\} 
+        \end{tikzcd}
+    $$
+    must have vertical maps that are constant maps, so naturality follows.\\
+    Suppose now that $\Hom(I,\_)\cong \ast$. Then there is a collection of bijective maps 
+    $$
+        \{\Hom(I,X) \simeq \{\ast\} : X\in \Ob(\pazocal{C})\}.
+    $$
+    In particular, $\vert \Hom(I,X) \vert  =\vert \{\ast\}\vert = 1$, for each object $X$ in $\pazocal{C}$. It follows that $\Hom(I,X)$ is a singleton for each object and thus that $I$ is the initial object in $\pazocal{C}$.\\
+    2. is to dual to 1.
+\end{proof}
 \begin{definition}
     A co-/contravariant functor $\pazocal{F}$ whose domain is locally small is \emph{representable} if there is an object $X$ such that $\Hom(X,\_)$ resp. $\Hom(\_,X)$ is naturally isomorphic to $\pazocal{F}$. We then say that \emph{$\pazocal{F}$ is represented by $X$}
 \end{definition}
+\begin{remark}
+    $\pazocal{C}$ has an initial resp. termninal object if and only if $\ast : \pazocal{C}\rightarrow \mathrm{Set}$ resp. $\ast\op: \pazocal{C}\op \rightarrow \mathrm{Set}$.  
+\end{remark}
 \begin{definition}
     A \emph{representation} of a functor $\pazocal{F}$ whose domain is locally small is a pair of an object $X$ and a natural isomorphism of $\pazocal{F}$ with $Hom(X,\_)$ and $\Hom(\_,X)$ depending on variance. 
 \end{definition}
+The motivation for restating the notion of initial and terminal object is that these are special cases of objects with universal properties. We shall define what this means exactly.
+\begin{definition}
+    A \emph{universal property} for an object $X$ in a locally small category $\pazocal{C}$ is a co/contravariant representable functor $\pazocal{C}\rightarrow \mathrm{Set}$ represented by $X$. 
+\end{definition}
+\begin{example}
+    Consider the functor
+    \begin{gather*}
+        \Ob: \mathrm{Cat} \rightarrow \mathrm{Set}\\
+        \pazocal{C} \mapsto \Ob(\pazocal{C})\\
+        (\pazocal{F} :\pazocal{C}\rightarrow \pazocal{D})\mapsto (\Ob(\pazocal{C})\rightarrow \Ob(\pazocal{D}), X\mapsto \pazocal{F}(X))
+    \end{gather*}
+    Consider also the functor $\Hom(\fone,\_)$. For any category $\pazocal{C}$, a functor $\fone\rightarrow \pazocal{C}$ is of the form 
+    \begin{gather*}
+        \fone \rightarrow \pazocal{C}\\
+        \ast \mapsto X\\
+        \fone_\ast \mapsto \fone_X
+    \end{gather*}
+    for some object $X$ in $\pazocal{C}$.  The functor $\mathrm{Ob}$ is represented by $\fone_X$. Indeed, 
+    $$
+        \{f_\pazocal{X}:\Hom(\fone,\pazocal{X})\rightarrow \Ob(\pazocal{X}), \pazocal{F}_X \mapsto X \mid \pazocal{X}\in \mathrm{Cat}\}
+    $$
+    is a family of isomorphisms, where $X\mapsto \pazocal{F}_X$ is the inverse. One should note that this is a collection of well defined maps, since if $\pazocal{F}_X=\pazocal{F}_Y$, then $X=\pazocal{F}_X(\ast)=\pazocal{F}_Y(\ast)=Y$. We check that for an arbitrary functor $\pazocal{G}: \pazocal{X}\rightarrow \pazocal{Y}$, the square 
+    $$
+        \begin{tikzcd}
+            \Hom(\fone,\pazocal{X}) \arrow[r,"f_\pazocal{X}"]\arrow[d, "\pazocal{G}_\ast"] & \Ob(\pazocal{X})\arrow[d,"\Ob(\pazocal{G})"]\\
+            \Hom(\fone,\pazocal{Y}) \arrow[r,"f_\pazocal{Y}"] & \Ob(\pazocal{Y})
+        \end{tikzcd}
+    $$
+    commutes. Indeed, given a functor $\pazocal{F}_X : \fone \rightarrow \pazocal{X}$ for some object $X\in \pazocal{X}$,
+    $$\Ob(\pazocal{G})f_\pazocal{X}(\pazocal{F}_X)= \Ob(\pazocal{G})(X)= \pazocal{G}(X) = f_\pazocal{Y}(\pazocal{H}_{\pazocal{G}(X)})= f_\pazocal{Y}(\pazocal{G}\pazocal{F}_X)= f_\pazocal{Y}\pazocal{G}_\ast(\pazocal{F}_X).$$
+\end{example}
+\begin{example}
+    
+\end{example}
 \subsubsection{Statement \& Proof of The Yoneda Lemma}
-\begin{theorem}(The Yoneda Lemma) For any $\pazocal{C}$ in $\mathrm{Cat}$, given a functor $\pazocal{F}:\pazocal{C}\rightarrow \mathrm{Set}$ and an object $X\in \Ob(\pazocal{C})$
+\begin{theorem}(The Yoneda Lemma) For any $\pazocal{C}$ in $\mathrm{CAT}$, given a functor $\pazocal{F}:\pazocal{C}\rightarrow \mathrm{Set}$ and an object $X\in \Ob(\pazocal{C})$
 $$
     \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(X,\_),\pazocal{F}) \simeq \pazocal{F}(X).
 $$
