@@ -649,7 +649,7 @@
     commuting. So the data specifying the two categories is the same. Note that projection functor simply map a morphism $f: C \rightarrow X$ to its domain and codomain respectively. We can also construct $\pazocal{C}/C$ as $\pazocal{ID}_\pazocal{C}\downarrow \pazocal{F}_C$.  
 \end{remark} 
 \subsubsection{Functors on Groups}
-Fix a group $G$ and a category $\pazocal{C}$. A functors $\mathrm{B}G \rightarrow \pazocal{C}$, maps $G$ to an object $X$ in $\pazocal{C}$ and a group element $g\in G$ to an endomorphism $g^\star : X\rightarrow X$ with 
+Fix a group $G$ and a category $\pazocal{C}$. A functors $\mathrm{B}G \rightarrow \pazocal{C}$, maps $G$ to an object $X$ in $\pazocal{C}$ and a group element $g\in G$ to an endomorphism $g_\star : X\rightarrow X$ with 
 $$(gh)_\star = g_\star h_\star$$
 and $e_\star = \fone_X$. Such a functor is called an \emph{action}. When $\pazocal{C} = \mathrm{Set}$, it is a $G$-set. When $\pazocal{C} = \mathrm{Vect}_K$ for some field $K$ it is called a \emph{$G$-representation}. Each endomorphism induced by $G$ is an isomorphism, again, by functoriality. 
 \subsubsection{Categories of Categories}
@@ -1140,7 +1140,7 @@ From the above we get a notion of isomorphism of categories with this we have fo
         $$
         and for each $i\in \{0,\dots,n-1\}$ there is a morphism $f : X_i\rightarrow X_{i+1}$ or $f: X_{i+1}\rightarrow X_i$.
     \end{definition}
-    \begin{proposition}
+    \begin{proposition}\label{AConnectedGroupoidIsEquivalentToAllItsAutomorphismGroups}
         A connected groupoid $\pazocal{G}$ is equivalent to the category induced by the automorphism group $G_X:= \mathrm{Aut}(X)$ for any object $X\in \Ob(\pazocal{G})$.
     \end{proposition}
     \begin{proof}
@@ -1150,7 +1150,7 @@ From the above we get a notion of isomorphism of categories with this we have fo
            G_X \mapsto X\\ 
            (f : G_X\rightarrow G_X) \mapsto (f: X \rightarrow X) 
         \end{gather*}
-        This is full since any morphism $f:X\rightarrow X$ in $\pazocal{G}$ is an isomorphism, hence $f$ is a morphism in $G_X$ and by definition $\pazocal{F}(f: G_X\rightarrow G_X)= f:X\rightarrow X$. It is also faithful, since if $\pazocal{f},\pazocal{g}: X\rightarrow Y$ are such that $\pazocal{f}=\pazocal{g}$, then trivially $f=g$. Note that given an object $Y$ in $\pazocal{G}$, there is a sequence of objects $X_0 = X,\dots,X_n = Y$ and a morphism $f_i : X_i\rightarrow X_{i+1}$ or $f: X_{i+1}\rightarrow X_i$ for $i=0,\dots,n-1$. Each $f_i$ is an isomorphism, hence $\pazocal{F}(G_X)=X\simeq Y$. This implies that $\pazocal{F}$ is essentially surjective on objects. We conclude that $\pazocal{G} \cong \mathrm{B}G_X$ for each $X\in \Ob(\pazocal{G})$.
+        This is full since any morphism $f:X\rightarrow X$ in $\pazocal{G}$ is an isomorphism, hence $f$ is a morphism in $G_X$ and by definition $\pazocal{F}(f: G_X\rightarrow G_X)= f:X\rightarrow X$. It is also trivially faithful. Note that given an object $Y$ in $\pazocal{G}$, there is a sequence of objects $X_0 = X,\dots,X_n = Y$ and a morphism $f_i : X_i\rightarrow X_{i+1}$ or $f: X_{i+1}\rightarrow X_i$ for $i=0,\dots,n-1$. Each $f_i$ is an isomorphism, hence $\pazocal{F}(G_X)=X\simeq Y$. This implies that $\pazocal{F}$ is essentially surjective on objects. We conclude that $\pazocal{G} \cong \mathrm{B}G_X$ for each $X\in \Ob(\pazocal{G})$.
     \end{proof}
     The upshot of the above result is that, as categories, a connected groupoid is just an automorphism group. In particular, a one object groupoid is, again, as categories, the same as the automorphism group of its one object. This makes precise the fact that, in category theory, groups are just one object groupoids. 
     \begin{corollary}
@@ -1159,18 +1159,24 @@ From the above we get a notion of isomorphism of categories with this we have fo
     \begin{proof}
         We construct the functor
         \begin{gather*}
-            \Omega: \pazocal{GRP}_{1} \rightarrow \mathrm{Grp}\\
+            \mathrm{Aut}: \pazocal{GRP}_{1} \rightarrow \mathrm{Grp}\\
             (\pazocal{G},X)\mapsto \mathrm{Aut}(X)\\
             \pazocal{F} : (\pazocal{G},X)\rightarrow (\pazocal{G}',X') \mapsto \mathrm{Aut}(X)\ni f\mapsto \pazocal{F}(f) \in \mathrm{Aut}(X')
         \end{gather*}
-        This is a full. Indeed consider $f : \mathrm{Aut}(X)\rightarrow \mathrm{Aut}(X')$. We construct a functor
+        This is a full. Indeed consider $\sigma : \mathrm{Aut}(X)\rightarrow \mathrm{Aut}(X')$. We construct a functor
         \begin{gather*}
-            \pazocal{F}_f : (\pazocal{G},X)\rightarrow (\pazocal{G},X')\\
+            \pazocal{F}_\sigma : (\pazocal{G},X)\rightarrow (\pazocal{G},X')\\
             X\mapsto X'\\
-            g : X\rightarrow X \mapsto f(g) : X'\rightarrow X'
+            g : X\rightarrow X \mapsto \sigma(g) : X'\rightarrow X'
         \end{gather*}
-        clearly $\Omega(\pazocal{F}_f)= f$. Suppose $\Omega(\pazocal{F}_0) = \Omega(\pazocal{F}_1)$. Take a morphism $g:X\rightarrow X$. Then $\pazocal{F}_0(g) = \Omega(\pazocal{F}_0)(g)=\Omega(\pazocal{F}_1(g)) = \pazocal{F}_1(g)$, hence $\pazocal{F}_0=\pazocal{F}_1$. We conclude that $\Omega$ is faithful. Take an arbitrary group $G\in \mathrm{Grp}$. Then $G\simeq \Omega(\mathrm{B}G,G)$. 
+        clearly $\mathrm{Aut}(\pazocal{F}_\sigma)= \sigma$. Suppose $\mathrm{Aut}(\pazocal{F}_0) = \mathrm{Aut}(\pazocal{F}_1)$. Take a morphism $g:X\rightarrow X$. Then $\pazocal{F}_0(g) = \mathrm{Aut}(\pazocal{F}_0)(g)=\mathrm{Aut}(\pazocal{F}_1(g)) = \pazocal{F}_1(g)$, hence $\pazocal{F}_0=\pazocal{F}_1$. We conclude that $\mathrm{Aut}$ is faithful. Take an arbitrary group $G\in \mathrm{Grp}$. Then $G\simeq \mathrm{Aut}(\mathrm{B}G,G)$ by the prior proposition. The result thus follows 
     \end{proof}
+    Another application is to a basic result in algebraic topology
+    \begin{example}
+        Consider a path-connected topological space $X$. In this example we see that given any pair of points $x,x'$ in $X$,
+        $$\pi(X,x)\simeq \pi(X,x').$$
+        Note upon considering $x$ as an object of $\Pi(X)$, the fundemental groupoid of $X$, we see that $\pi(X,x)=\mathrm{Aut}(x)$. Since $X$ is path-connected there is a morphism between any pair objects in $\Pi(X)$, hence the fundemental groupoid of $X$ is connected. We then get that $\mathrm{B}\pi(X,x)\cong \Pi(X) \cong \mathrm{B}\pi(X,x')$ by Proposition~\ref{AConnectedGroupoidIsEquivalentToAllItsAutomorphismGroups}. A fully faithful functor between categories with only one object is automatically a bijection on objects. It follows that $\pi(X,x)\simeq \pi(X,x')$.  
+    \end{example}
     \begin{definition}
         Consider a locally small category $\pazocal{C}$. We define the \emph{isomorphism class} of an object $X$ in $\pazocal{C}$ to be the class of all objects isomorphic to $X$.
     \end{definition}
@@ -1181,14 +1187,15 @@ From the above we get a notion of isomorphism of categories with this we have fo
         An equivalence of skeletal categories is an isomorphism of categories. 
     \end{lemma}
     \begin{proof}
-        
+        Suppose $\pazocal{C}$ and $\pazocal{D}$ are equivalent skeletal categories via functors $\pazocal{F}: \pazocal{C}\rightarrow \pazocal{D}$ and $\pazocal{G}:\pazocal{D}\rightarrow \pazocal{C}$. We aim to show that $\pazocal{FG}$ and $\pazocal{GF}$ are not just naturally isomorphic to but equal to the identity functors. Indeed for each object $X$ in $\pazocal{C}$, $\pazocal{GF}(X)\simeq X$, since $\pazocal{GF}\cong \pazocal{ID}_\pazocal{C}$. Since $\pazocal{C}$ is skeletal, it follows that $\pazocal{GF}(X)=X$. A similar argument for $\pazocal{FG}$ shows that $\pazocal{F}$ and $\pazocal{G}$ are mutual inverses on functors. Using that $\pazocal{F}$ and $\pazocal{G}$ fully faithful one easily sees that they are also mutual inverses on morphisms and the result follows.
     \end{proof}
     \begin{proposition}
         Consider a category $\pazocal{C}$. There is a skeletal category $\mathrm{Sk}\pazocal{C}$ equivalent to $\pazocal{C}$. It is unique up to isomorphism.   
     \end{proposition}
     \begin{proof}
-        The objects of $\mathrm{Sk}\pazocal{C}$ are given by choosing one object from each isomorphism class (here implicitly we use some version of the axiom of choice, so some assumption on smallness is probably appropriate as to not discuss foundations). The morphisms are those with domain and codomain in the aforementioned objects. The inclusion of $\mathrm{Sk}\pazocal{C}$ is trivially fully faithful and essentially surjective on objects. We thus conclude that $\mathrm{Sk}\pazocal{C}\cong \pazocal{C}$. Consider another skeletal category $\pazocal{D}$ equivalent to $\pazocal{C}$ via a fully faithful functor $\pazocal{F}$ that is essentially surjective on objects. Any object $X$ in $\pazocal{C}$ has a unique object $X_\pazocal{D}$ such that $X\simeq \pazocal{F}(X_\pazocal{D})$. The assignment $\mathrm{Sk}\pazocal{C}\rightarrow \pazocal{D}, X \mapsto X_{\pazocal{D}}$ is thus a bijective assignment of objects. Given a morphism $f: X \rightarrow Y$ in $\mathrm{Sk}\pazocal{C}$, we make the assignment $f\mapsto f_\pazocal{D} : X_\pazocal{D}\rightarrow Y_\pazocal{D}$, where $f_\pazocal{D}$ is the unique morphism with $\pazocal{F}(f_{\pazocal{D}})=f$. The inverse assignment is simply $\pazocal{F}$ on morphisms.  
+        The objects of $\mathrm{Sk}\pazocal{C}$ are given by choosing one object from each isomorphism class (here implicitly we use some version of the axiom of choice, so some assumption on smallness is probably appropriate as to not discuss foundations). The morphisms are those with domain and codomain in the aforementioned objects. The inclusion of $\mathrm{Sk}\pazocal{C}$ is trivially fully faithful and essentially surjective on objects. We thus conclude that $\mathrm{Sk}\pazocal{C}\cong \pazocal{C}$. Another skeletal category equivalent to $\pazocal{C}$ is by transitivity equivalent to $\mathrm{Sk}\pazocal{C}$. This equivalence is upgraded to an isomorphism of categories via the prior lemma. 
     \end{proof}
+    
     We have seen that equivalence of categories does not necessarily preserve smallness. For instance $\mathrm{Mat}_K$ is small while $\mathrm{Vect}_K^\mathrm{fd}$ is locally small but not small since the collection of finite dimensional vector spaces is a proper class. Indeed for any non-empty set $X$, we can form $K[X]$, the free vector space generated by $X$. If $\mathrm{Vect}_K^\mathrm{fd}$ was a set, then $K[\{X\}]$ would be an element of $\mathrm{Vect}_K^\mathrm{fd}$ for every set $X$. Then $S:=\{K[\{X\}] : X \text{ is a set}\}$ is a subset of $\mathrm{Vect}_K^\mathrm{fd}$. But then $ \bigcup S$ is a set, which every set is an element of. But no such set can exist as an immediate consequence axiom of foundation (cf. Example~\ref{ASetCannotHaveItselfAsAnElement}). In this sense smallness is an ugly notion. We can introduce a weaker notion of smallness, which is preserved by equivalence of categories. 
     \begin{definition}
         A category is \emph{essentially small} if it is equivalent to a small category.
@@ -1204,10 +1211,10 @@ From the above we get a notion of isomorphism of categories with this we have fo
         If $\pazocal{C}$ is a locally small category that is equivalent to some category $\pazocal{D}$, then $\pazocal{D}$ is locally small. 
     \end{proposition}
     \begin{proof}
-        Consider a morphism $f: X\rightarrow Y$ in $\pazocal{D}$. We find objects $A,B$ in $\pazocal{C}$ such that $\alpha_X: X\simeq \pazocal{F}(A)$ and $\alpha_Y : Y\simeq \pazocal{F}(B)$. Consider $f' = \alpha_Y f \alpha_X^{-1} : \pazocal{F}(A)\rightarrow \pazocal{F}(B)$. For some unique $g: A\rightarrow B$, $\pazocal{F}(g)=f'$, hence 
-        $$
-            \beta^{-1}...
-        $$ 
+        There is a fully faithful functor $\pazocal{F}:\pazocal{C}\rightarrow \pazocal{D}$ that is essentially surjective on objects. Let $X$ and $Y$ be objects in $\pazocal{D}$. Then $\alpha: X\simeq \pazocal{F}(A)$ and $\beta: Y\simeq \pazocal{F}(B)$ for some objects $A,B$ in $\pazocal{C}$. We consider the first order formula 
+        $$\varphi :\equiv y = \pazocal{F}(f).$$
+        Note that for the set $\Hom(A,B)$, for every $f\in \Hom(A,B)$ we have that $\pazocal{F}(f)$ is the unique set satifying $\varphi(f,\pazocal{F}(f))$. Via the axiom schema of replacemen, this gives rise to a class function, $f\mapsto \pazocal{F}(f)$, whose image $\pazocal{F}(\Hom(A,B)):= \{ \pazocal{F}(f): f\in \Hom(A,B)\}$ is a set. Let $g: \pazocal{F}(A)\rightarrow \pazocal{F}(B)$. since $\pazocal{F}$ is full there is a morphism $f: A\rightarrow B$ such that $\pazocal{F}(f)=g$. Then $g\in \pazocal{F}(\Hom(A,B))$, so $\Hom(\pazocal{F}(A),\pazocal{F}(B))$ is the set $\pazocal{F}(\Hom(A,B))$.\\
+        We also have a class function, $k\mapsto \beta k\alpha^{-1}$. This takes the set $\Hom(\pazocal{F}(A),\pazocal{F}(B))$ to the set $\beta\Hom(\pazocal{F}(A),\pazocal{F}(B))\alpha^{-1}$. Consider $g: X\rightarrow Y$. Then $h := \beta^{-1}g\alpha$ is a morphism in $\Hom(\pazocal{F}(A),\pazocal{F}(B))$. Then $g\in \beta \Hom(\pazocal{F}(A),\pazocal{F}(B))\alpha^{-1}$. We thus conclude that $\Hom(X,Y)$ is the set $\beta \Hom(\pazocal{F}(A),\pazocal{F}(B))\alpha^{-1}$. It follows that $\pazocal{D}$ is a locally small category. 
     \end{proof}
 \subsubsection{Diagrams}
     \begin{definition}
@@ -1317,7 +1324,21 @@ From the above we get a notion of isomorphism of categories with this we have fo
         For terminal coalgebras $(X,\gamma)$, we have that $\gamma: X\rightarrow \pazocal{T}(X)$ is an isomorphism. 
     \end{proposition}
     \begin{proof}
-        There is a unique morphism $\delta: \pazocal{T}(X)\rightarrow X$...
+        There is a unique morphism $\delta: \pazocal{T}(X)\rightarrow X$. Note that $X\rightarrow X$ has to be the identity morphism. It follows that $\delta\gamma= \id_X$. Additionally, the square
+        $$
+            \begin{tikzcd}
+                \pazocal{T}(X) \arrow[r,"\delta"]\arrow[d,"\pazocal{T}(\gamma)"] & X\arrow[d,"\gamma"] \\
+                \pazocal{TT}(X) \arrow[r, "\pazocal{T}(\delta)"] & \pazocal{T}(X)
+            \end{tikzcd}
+        $$
+        commutes. Note that  $\fone_{\pazocal{T}(X)} = \pazocal{T}(\fone_X)= \pazocal{T}(\delta)\pazocal{T}(\gamma)$. Hence we get the commutative triangle 
+        $$
+            \begin{tikzcd}
+                \pazocal{T}(X)\arrow[r,"\delta"] \arrow[rd,"\fone",swap] & X \arrow[d,"\gamma"]\\
+                & \pazocal{T}(X)
+            \end{tikzcd}
+        $$
+        We thus conclude that $\gamma$ is an isomorphism with mutual inverse $\delta$.
     \end{proof}
     \begin{definition}
         A \emph{concrete category} is a category $\pazocal{C}$ for which there is a faithful functor $\pazocal{C} \rightarrow \mathrm{Set}$.
@@ -1546,6 +1567,16 @@ An important instance of the above category is $\Hom(\Hom(X,\_),\pazocal{F})$ wh
    \end{enumerate} 
 \end{definition}
 Readily, we see that we have seen one example of a 2-category, namely the 2-category of small categories. 
+\begin{proposition}
+    Let $\pazocal{C}\in \mathrm{Cat}$ and $\pazocal{D}\in \mathrm{CAT}$. Then $\pazocal{D}^\pazocal{C}\in \mathrm{CAT}$.  
+\end{proposition}
+\begin{proof}
+    For each pair of functors $\pazocal{F},\pazocal{G}:\pazocal{C}\rightarrow \pazocal{D}$, we construct a class function whose image contains all natural transformations $\pazocal{F}\Rightarrow \pazocal{G}$. Consider the set $N(\pazocal{F},\pazocal{G})$ given by
+    \begin{align*} 
+        \left\{(\alpha_X) \in \prod_{X\in \Ob(\pazocal{C})} \Hom(\pazocal{F}(X),\pazocal{G}(X)) : \pazocal{G}(f)\alpha_Y  =\alpha_Z\pazocal{F}(f)\ \forall Y,Z\in \Ob(\pazocal{C}), f\in \Hom(Y,Z)  \right\}.
+    \end{align*}
+    There is a class function taking an element $(\alpha_X)$ of $N(\pazocal{F},\pazocal{G})$ to the natural transformation whose components are $\{\alpha_X : X\in \Ob(\pazocal{C})\}$. Any natural transformation is obviously contained in the image of this class function,  hence $\Hom(\pazocal{F},\pazocal{G})$ is a set. 
+\end{proof}
 \subsection{The Yoneda Lemma}
 \subsubsection{Representable Functors}
 We give an alternative definition of initial and terminal objects.
@@ -1616,8 +1647,105 @@ The motivation for restating the notion of initial and terminal object is that t
     $$\Ob(\pazocal{G})f_\pazocal{X}(\pazocal{F}_X)= \Ob(\pazocal{G})(X)= \pazocal{G}(X) = f_\pazocal{Y}(\pazocal{H}_{\pazocal{G}(X)})= f_\pazocal{Y}(\pazocal{G}\pazocal{F}_X)= f_\pazocal{Y}\pazocal{G}_\ast(\pazocal{F}_X).$$
 \end{example}
 \begin{example}
-    
+    Consider the functor
+    \begin{gather*}
+        \mathrm{mor}: \mathrm{Cat} \rightarrow \mathrm{Set}\\
+        \pazocal{C} \mapsto \mathrm{mor}(\pazocal{C})\\
+        (\pazocal{F} : \pazocal{C}\rightarrow \pazocal{D}) \mapsto (\mathrm{mor}(\pazocal{C})\rightarrow \mathrm{mor}(\pazocal{D}), f:X\rightarrow Y\mapsto \pazocal{F}(f))
+    \end{gather*}  
+    For a small category $\pazocal{C}$ and a morphism $f: X\rightarrow Y$ consider the functor 
+    \begin{gather*}
+        \pazocal{F}_f : \mathbbm{2} \rightarrow \pazocal{C}\\
+        0 \mapsto X, 1\mapsto Y\\
+        (0\rightarrow 1) \mapsto f : X\rightarrow Y
+    \end{gather*}
+    Any functor $\mathbbm{2}\rightarrow \pazocal{C}$ must be of this form. The category $\mathbbm{2}$ represents the functor $\mathrm{mor}$. Indeed, we get a natural isomorphism by considering the collection 
+    $$
+        \{g_\pazocal{X}: \Hom(\mathbbm{2},\pazocal{X}) \rightarrow \mathrm{mor}(\pazocal{X}), \pazocal{F}_f \mapsto f \mid \pazocal{X}\in \mathrm{Cat}\}
+    $$
+    where each local inverse is given by $f\mapsto \pazocal{F}_f$. Naturality is checked completely analogously to the prior example. 
 \end{example}
+\begin{example}
+    We aim to describe natural transformations between $\Ob$ and $\mathrm{mor}$. Consider
+    $$
+        \dom:= \left\{ \dom_\pazocal{X} : \mathrm{mor}(\pazocal{X}) \rightarrow \Ob(\pazocal{X})\\
+        f : X\rightarrow Y \mapsto X\right\}.
+    $$
+    There is an analogous collection, $\mathrm{cod}$, of maps between morphisms of categories and objects of categories that for a given category maps each morphism to its codomain. 
+    $$
+        \begin{tikzcd}
+            \mathrm{mor}(\pazocal{C}) \arrow[r,"\dom_\pazocal{C}"] \arrow[d, "\mathrm{mor}(\pazocal{F})"] & \Ob(\pazocal{C}) \arrow[d,"\Ob(\pazocal{F})"]\\
+            \mathrm{mor}(\pazocal{D}) \arrow[r,"\dom_\pazocal{D}"] & \Ob(\pazocal{D}) 
+        \end{tikzcd}
+    $$
+    commutes. Indeed, let a morphism $f: X\rightarrow Y$ in $\pazocal{C}$ be given. Then 
+    \begin{align*}
+        \Ob(\pazocal{F})\dom_\pazocal{C}(f) = \Ob(\pazocal{F})(X) = \pazocal{F}(X) = \dom_\pazocal{D}(\pazocal{F}(f))= \dom_\pazocal{D}\mathrm{mor}(\pazocal{F})(f).
+    \end{align*}
+\end{example}
+\begin{proposition}
+    A representable functor $\pazocal{F} : \pazocal{C}\rightarrow \mathrm{Set}$ preserves mononomorphisms. 
+\end{proposition}
+\begin{proof}
+    Let a monomorphism $f : X\rightarrow Y$ in $\pazocal{C}$ be given. We need to show that $\pazocal{F}(f) : \pazocal{F}(X)\rightarrow \pazocal{F}(Y)$ is injective. Let $x,x'\in \pazocal{F}(X)$ be given with $\pazocal{F}(f)(x)=\pazocal{F}(f)(x')$. Note that $\alpha:\pazocal{F}\cong \Hom(A,\_)$ for some $A$ in $\pazocal{C}$. then $x= \alpha_X(g)$ for some $g:A\rightarrow X$ and $x' = \alpha_X(g')$ for some $g: A\rightarrow X$. By naturality we thus have that 
+    \begin{align*}
+        \alpha_Y(fg) &=\alpha_Y f_\ast(g) = \pazocal{F}(f)\alpha_X(g) = \pazocal{F}(f)(x)=\pazocal{F}(f)(x') = \pazocal{F}(f)\alpha_X(g')\\ 
+        &= \alpha_Yf_\ast(g) = \alpha_Y(fg),
+    \end{align*}
+    hence 
+    $$
+        fg = fg' \implies g=g' \implies x=\alpha_X(g)=\alpha_X(g') = x'.
+    $$
+\end{proof}
+\begin{example}
+    The forgetful functor $\mathrm{Ring}\hookrightarrow \mathrm{Set}$ is, by the above proposition, not a representable functor.  
+\end{example}
+
+\subsubsection{Currying}
+Consider the functor 
+\begin{gather*}
+    \Hom(\_\times A,B) : \mathrm{Set}\op \rightarrow \mathrm{Set}\\
+    X \mapsto \Hom(X\times A, B)\\
+    f: X\rightarrow Y \mapsto (\Hom(Y\times A, B) \rightarrow \Hom(X\times A,B), g\mapsto g \circ f \times \id_A)
+\end{gather*}
+\begin{proposition}
+    This functor is represented by $\Hom(A,B)$, the set of functions from $A$ to $B$.
+\end{proposition}
+\begin{proof}
+    Consider the family of \emph{uncurrying} functions 
+    $$
+        \{ \mathrm{uncur}_X : \Hom(X, \Hom(A,B)) \rightarrow \Hom(X\times A,B)\}
+    $$
+    where for a function $f : X\rightarrow \Hom(A,B)$ and $(x,a)\in X\times A$,  
+    $$
+        \mathrm{uncur}_X(f)(x,a) := (f(x))(a)
+    $$
+    the inverse component is the function 
+    \begin{gather*}
+        \mathrm{cur}_X : \Hom(X\times A, B) \rightarrow \Hom(X,\Hom(A,B))
+    \end{gather*} 
+    where for a function $g:X\times A \rightarrow B$ and an element $x\in X$ 
+    $$
+        \mathrm{cur}_X(g)(x) : A\rightarrow B\\
+        a \mapsto g(x,a)
+    $$
+    That is, \emph{currying} is the function obtained by fixing the first element in the cartesian product.  
+    Let $f\in \Hom(X,\Hom(A,B))$ and $x\in X$, $a\in A$ be given. Then 
+    \begin{align*}
+        (\mathrm{cur}_X\mathrm{uncur_X}(f))(x)(a) &= \mathrm{uncur}_X(f)(x,a)=f(x)(a) = \id_{\Hom(X,\Hom(A,B))}(f)(x)(a)\\ 
+        &\implies \mathrm{cur}_X\mathrm{uncur}_X = \id_{\Hom(X,\Hom(A,B))}.
+    \end{align*}
+    Let $g\in \Hom(X\times A,B)$ and $(x,a)\in X\times A$. Then
+    \begin{align*}
+        (\mathrm{uncur}_X\mathrm{cur}_X(f))(x,a) &= \mathrm{cur}_X(f)(x)(a)=f(x,a) = \id_{\Hom(X\times A,B)}(f)(x,a)\\
+        &\implies \mathrm{uncur}_X\mathrm{cur}_X = \id_{\Hom(X\times A,B)}.
+    \end{align*}
+    We check naturality of uncurrying. Let a function $F: X\rightarrow Y$ be given. To show naturality, we need to check that given a function $g\in \Hom(X,\Hom(A,B))$, then $ \mathrm{uncur}_YF^\ast(g) = (F\times \id_A)^\ast\mathrm{uncur}_X(g)$. Let $(x,a)\in X\times A$. Then 
+    \begin{align*}
+         \mathrm{uncur}_YF^\ast(g)(x,a) = (gF)(x)(a)= \mathrm{uncur}_X(g)(F(x),a)= (F\times \id_A)^\ast\mathrm{uncur}_X(x,a). 
+    \end{align*} 
+\end{proof}
+
 \subsubsection{Statement \& Proof of The Yoneda Lemma}
 \begin{theorem}(The Yoneda Lemma) For any $\pazocal{C}$ in $\mathrm{CAT}$, given a functor $\pazocal{F}:\pazocal{C}\rightarrow \mathrm{Set}$ and an object $X\in \Ob(\pazocal{C})$
 $$
@@ -1649,14 +1777,13 @@ This bijection maps a natural transformation $\alpha: \Hom(X,\_) \Rightarrow \pa
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-    Note that the functor category $\pazocal{C}^\mathrm{Set}$ is locally small, hence $\Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(X,\_),\pazocal{F})$ is a set.\\
     \textbf{Explicit construction of bijection:}
     We define
     \begin{gather*}
         \Phi : \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(X,\_),\pazocal{F}) \rightarrow \pazocal{F}(X)\\
         (\alpha : \Hom(X,\_) \Rightarrow \pazocal{F})  \mapsto \alpha_X(\fone_X)
     \end{gather*}
-    We aim to construct an inverse to this function. Let $y\in \pazocal{F}(X)$. We wish to find a natural transformation $\Psi(y) : \Hom(X,\_)\Rightarrow \pazocal{F}$. For this to be a natural transformation we must in particular have that for any object $Y$ and any morphism $f: X\rightarrow Y$, it must be that the square 
+    We aim to construct an inverse to this (class) function. Let $y\in \pazocal{F}(X)$. We wish to find a natural transformation $\Psi(y) : \Hom(X,\_)\Rightarrow \pazocal{F}$. For this to be a natural transformation we must in particular have that for any object $Y$ and any morphism $f: X\rightarrow Y$, it must be that the square 
     $$
         \begin{tikzcd}
             \Hom(X,X) \arrow[r, "\Psi(y)_X"] \arrow[d,"f_\ast"] & \pazocal{F}(X) \arrow[d,"\pazocal{F}(f)"]\\
@@ -1676,7 +1803,7 @@ This bijection maps a natural transformation $\alpha: \Hom(X,\_) \Rightarrow \pa
         \Psi:\pazocal{F}(X)\rightarrow \Hom^{\pazocal{C}^\mathrm{Set}}(\Hom(X,\_),\pazocal{F})\\
         y \mapsto \Psi(y):= \{\left.\Psi(y)_Y : \Hom(X,Y)\rightarrow \pazocal{F}(Y), f\mapsto \pazocal{F}(f)(y)\right| Y\in \Ob(\pazocal{C}) \}
     \end{gather*}
-    We check that this is indeed a natural transformation. Let a morphism $g: Z\rightarrow W$ be given. Then for any $f\in \Hom(X,Z)$,
+    We check that this is indeed maps to natural transformations. Let a morphism $g: Z\rightarrow W$ be given. Then for any $f\in \Hom(X,Z)$,
     \begin{align*}
         \Psi(y)_Wg_\ast(f) = \Psi(y)_W(gf) =\pazocal{F}(gf) \pazocal{F}(g)\pazocal{F}(f)(y) = \pazocal{F}(g)\Psi(y)_Z(f).
     \end{align*}
@@ -1698,7 +1825,7 @@ This bijection maps a natural transformation $\alpha: \Hom(X,\_) \Rightarrow \pa
     $$
         \Psi\Phi(\alpha)(f)= \Psi(\alpha_X(\fone_X))(f) = \pazocal{F}(f)(\alpha_X(\fone_X)) = \pazocal{F}(f)\alpha_X(\fone_X)=\alpha_Y f_\ast(\fone_X)=\alpha_Y(f).
     $$
-    We can thus conclude that $\Psi\Phi(\alpha)=\alpha$.\\
+    We can thus conclude that $\Psi\Phi(\alpha)=\alpha$. Note that we have at this point worked with class functions. Since $\pazocal{F}(X)$ is a set, $\Psi$ is a set function whose image are the natural transformations of $\Hom(X,\_)$ to $\pazocal{F}$, which is therefor a set. This upgrades $\Phi$ to a set function {Foundationally I don't if the functions are functions in the sense I think they are}.\\
     \textbf{Naturality on functors:} Let a natural transformation $\beta : \pazocal{F}\Rightarrow \pazocal{G}$ be given. We need to check that the square
     $$
         \begin{tikzcd}
@@ -1886,7 +2013,7 @@ $$
 \begin{remark}
     Note that $(\pazocal{F}(\fone_A))(X)=\id_{\pazocal{F}(X)}(X)=X$, so $\fone_A\in \Hom(\int\pazocal{F})$. Consider morphisms $f\in \Hom((A,X),(B,Y))$ and $g\in \Hom((B,Y),(C,Z))$. Then 
     $$(\pazocal{F}(gf))(X)=(\pazocal{F}(g)\circ \pazocal{F}(f))(X)= \pazocal{F}(g)(\pazocal{F}(f)(X))=\pazocal{F}(g)(Y)=Z,$$
-    so $gf\in \Hom(\int\pazocal{F})$. Clearly composition is associative and $\fone_(A,X):=\fone_A$ is the identity morphism for each object $A$. So $\int\pazocal{F}$ indeed does define a category.
+    so $gf\in \Hom(\int\pazocal{F})$. Clearly composition is associative and $\fone_{(A,X)}:=\fone_A$ is the identity morphism for each object $A$. So $\int\pazocal{F}$ indeed does define a category.
 \end{remark}
 We denote the forgetful functor 
 \begin{gather*}
@@ -1913,5 +2040,3 @@ by $\Pi$.
     
 \end{proof}
 \subsection{Limits \& Colimits}
-
-\subsubsection{Currying}

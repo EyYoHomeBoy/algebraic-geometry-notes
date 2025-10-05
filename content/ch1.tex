@@ -79,10 +79,10 @@ By the axiom of extensionality we get that for each $X$ there is a unique $PS$ s
 \subsubsection{ZF Set Theory}
 The axioms of Zermelo set theory with these two added axioms is called Zermelo-Fraenkel set theory. The first added axiom is in fact an axiom schema called \textit{the axiom schema of replacement}. Before stating the axiom we introduce the notion of class function
 \begin{definition}
-    Consider a first order formula $\varphi(X,Y,p)$ where $X,Y$ are free variables and $p$ a tuple of parameters of $\varphi$ such that 
+    Consider a first order formula $\varphi(X,Y,p)$ where $X,Y$ are free variables and $p$ a tuple of variables of $\varphi$ such that 
     $$\forall X\exists! Y(\varphi(X,Y,p))$$
     We define a unary function symbol $F$ given by 
-    $$F(X)=Y :\iff \varphi(X,Y)$$
+    $$F(X)=Y :\iff \varphi(X,Y,p)$$
     Such a unary function symbol is called a \textit{class function for $\varphi$}.
 \end{definition}
 \begin{axioms}
