@@ -975,6 +975,9 @@ From the above we get a notion of isomorphism of categories with this we have fo
     \begin{definition}
         A faithful functor $\pazocal{F}:\pazocal{C}\rightarrow\pazocal{D}$ is an \emph{embedding} if it is injective on objects, i.e. if $\pazocal{F}(C)=\pazocal{F}(C')$ implies $C=C'$ for every pair of objects $C,C'\in \pazocal{C}$. If $\pazocal{F}$ is fully faithful and injective on objects, then it is a \emph{full embedding}.
     \end{definition}
+    \begin{remark}
+        Given a full embedding $\pazocal{F}: \pazocal{C}\hookrightarrow \pazocal{D}$, we get a subcategory of $\pazocal{D}$ called \emph{the full subcategory of $\pazocal{D}$ spanned by $\pazocal{F}$}, denoted $\pazocal{F}(\pazocal{C})$ whose objects are $\pazocal{F}(X)$ where $X\in \Ob(\pazocal{C})$ and whose morphisms are morphism $f: \pazocal{F}(X)\rightarrow\pazocal{F}(Y)$. Incidentally, $f = \pazocal{F}(g)$ for some $g : X\rightarrow Y$. So we may aswell characterise morphism as being of the form $\pazocal{F}(g) : \pazocal{F}(X)\rightarrow \pazocal{F}(Y)$ where $g: X\rightarrow Y$ is a morphism in $\pazocal{C}$. By functoriality, this subclass of morphisms is closed under composition, hence the full subcategory of $\pazocal{D}$ spanned by $\pazocal{F}$ is a subcategory of $\pazocal{D}$.
+    \end{remark}
     \begin{lemma}\label{UniqueChangeOfDomainAndCodomainViaIsos}
         Given a morphism $f: A\rightarrow B$ and isomorphisms $\alpha: A\simeq A'$, $\beta : B\simeq B'$ there is a unique morphism $f: A' \rightarrow B'$ so that the diagrams
         $$
