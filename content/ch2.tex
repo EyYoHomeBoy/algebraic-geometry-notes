@@ -478,7 +478,7 @@
     \begin{gather*}
         \Hom(\_,X) : \pazocal{C} \rightarrow \mathrm{Set}\\
         Y \mapsto \Hom(Y,X)\\
-        f : A\rightarrow B \mapsto f^\ast: \Hom(X,B)\rightarrow \Hom(X,A) 
+        f : A\rightarrow B \mapsto f^\ast: \Hom(B,X)\rightarrow \Hom(A,X) 
     \end{gather*}
     We say that these are the functors \emph{represented by $X$}.
 \end{definition}
@@ -2008,33 +2008,43 @@ $$
 \begin{definition}
     Let $\pazocal{F}: \pazocal{C}\rightarrow\mathrm{Set}$, where $\pazocal{C}$ is a locally small category, be a covariant functor. Then $\int \pazocal{F}$ is the category characterised by the following data: 
     \begin{enumerate}
-        \item Objects are pairs $(A,X)$ where $A\in \Ob(\pazocal{C})$ and $X\in \pazocal{F}(A)$.
-        \item A morphism $(A,X)\rightarrow (B,Y)$ is a morphism $f: A\rightarrow B$ in $\pazocal{C}$ so that $(\pazocal{F}(f))(X)=Y$.
+        \item Objects are pairs $(A,x)$ where $A\in \Ob(\pazocal{C})$ and $x\in \pazocal{F}(A)$.
+        \item A morphism $(A,x)\rightarrow (B,y)$ is a morphism $f: A\rightarrow B$ in $\pazocal{C}$ so that $(\pazocal{F}(f))(x)=y$.
     \end{enumerate} 
     This category is called \emph{the category of elements}.
 \end{definition}
 \begin{remark}
-    Note that $(\pazocal{F}(\fone_A))(X)=\id_{\pazocal{F}(X)}(X)=X$, so $\fone_A\in \Hom(\int\pazocal{F})$. Consider morphisms $f\in \Hom((A,X),(B,Y))$ and $g\in \Hom((B,Y),(C,Z))$. Then 
-    $$(\pazocal{F}(gf))(X)=(\pazocal{F}(g)\circ \pazocal{F}(f))(X)= \pazocal{F}(g)(\pazocal{F}(f)(X))=\pazocal{F}(g)(Y)=Z,$$
-    so $gf\in \Hom(\int\pazocal{F})$. Clearly composition is associative and $\fone_{(A,X)}:=\fone_A$ is the identity morphism for each object $A$. So $\int\pazocal{F}$ indeed does define a category.
+    Note that $(\pazocal{F}(\fone_A))(x)=\id_{\pazocal{F}(A)}(x)=x$, so $\fone_A\in \Hom(\int\pazocal{F})$. Consider morphisms $f\in \Hom((A,x),(B,y))$ and $g\in \Hom((B,y),(C,z))$. Then 
+    $$(\pazocal{F}(gf))(x)=(\pazocal{F}(g)\circ \pazocal{F}(f))(x)= \pazocal{F}(g)(\pazocal{F}(f)(x))=\pazocal{F}(g)(y)=z,$$
+    so $gf\in \Hom(\int\pazocal{F})$. Clearly composition is associative and $\fone_{(A,x)}:=\fone_A$ is the identity morphism for each object $A$. So $\int\pazocal{F}$ indeed does define a category.
 \end{remark}
 We denote the forgetful functor 
 \begin{gather*}
     \int\pazocal{F} \rightarrow \pazocal{C}\\
-    (A,X)\mapsto A\\
-    f: (A,X)\rightarrow (B,X) \mapsto f: A\rightarrow B
+    (A,x)\mapsto A\\
+    f: (A,x)\rightarrow (B,y) \mapsto f: A\rightarrow B
 \end{gather*}
 by $\Pi$. 
 \begin{definition}
     The \emph{category of elements} for a contravariant functor $\pazocal{F}:\pazocal{C}\rightarrow \mathrm{Set}$ is just the category of elements of $\pazocal{F}$ regarded as covariant functor $\pazocal{F} :\pazocal{C}\op\rightarrow \mathrm{Set}$.
 \end{definition}
+\begin{example}
+    \begin{enumerate}
+        \item Let $\pazocal{C}$ be a concrete category associated with a faithful functor $\pazocal{U} : \pazocal{C}\rightarrow \mathrm{Set}$. The objects of $\int \pazocal{U}$ are uniquely determined by sets $X\in \pazocal{U}(A)$ where $A$ is an object of $\pazocal{C}$. A morphism $f: (A,x)\rightarrow(B,y)$ of $\int \pazocal{U}$ has an underlying function $\pazocal{F}(f) : \pazocal{F}(A)\rightarrow \pazocal{F}(B)$ that maps $x$ to $y$. In this way $\int\pazocal{U}$ defines the category of \emph{based objects}, i.e. objects in $\pazocal{C}$ with a basepoint in the by $\pazocal{U}$ defined underlying set where a morphism is a morphism in $\pazocal{C}$ that as function in the underlying subcategory of sets preserves basepoints. With this in mind, we could choose to define $\pazocal{C}_\ast := \int \pazocal{U}$ as a generalization of the notion of a based subcategory of $\mathrm{Set}$.   
+    \end{enumerate}
+\end{example}
 \begin{lemma}
     For a covariant functor $\pazocal{F}:\pazocal{C}\op \rightarrow \mathrm{Set}$, 
     $$\int\pazocal{F} \cong y \downarrow \pazocal{F}.$$
     Here $y: \pazocal{C}\rightarrow \mathrm{Set}^{\pazocal{C}\op}$ is the yoneda embedding and $\pazocal{F}$ is regarded as functor $\fone\rightarrow \mathrm{Set}^{\pazocal{C}\op}$.
 \end{lemma}
 \begin{proof}
-    
+    By the Yoneda Lemma for each object $A\in \pazocal{C}$ we have a bijection 
+    \begin{gather*}
+        \pazocal{F}(A) \rightarrow \Hom(\Hom(\_,A),\pazocal{F})\\
+        x\mapsto \Psi(x) 
+    \end{gather*}
+    In other words there is a one-to-one correspondence of objects $(A,x)\in\pazocal{F}(A)$, and natural transformations unique natural transformation $\Hom(\_,A,\pazocal{F})\Rightarrow \pazocal{F}$, obtained by the mapping $x\mapsto \Psi(x)$. We suppress the dependence on $A$ from the notation for simplicity and to stay consistent with the notation of the Yoneda Lemma. Consider now the functor $\Hom(\_, \pazocal{F}) : \mathrm{Set}^\pazocal{C} \rightarrow \mathrm{Set}$. We construct a category whose objects are natural transformations of the form $\Psi(x) : \Hom(\_ ,A)\rightarrow \pazocal{F}$ and where are morphism $\Psi(x)\rightarrow \Psi(x')$ is a natural transformation $f_\ast : \Hom(\_,A) \Rightarrow \Hom(\_,A')$ where $f:A\rightarrow A'$ (all natural tranformations with this domain \& codomain are of this form) such that $\Psi(x) = \Psi(x')f_\ast$. 
 \end{proof}
 \begin{proposition}
     A covariant functor $\pazocal{F} : \pazocal{C}\rightarrow \mathrm{Set}$ is representable if and only if $\int \pazocal{F}$ has an initial object. For a contravariant functor, the same but the category of elements has a terminal object.  
