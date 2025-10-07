@@ -1943,7 +1943,7 @@ $$
     and $\Hom(\_,\_)$. This (or these) functor(s) is a fully faithful embedding called the \textbf{Yoneda embedding}
 \end{corollary}
 \begin{proof}
-    It is clearly an embedding since if $X\neg Y$, then $\fone_X\in \Hom(X,X)$ and $\fone_X\notin \Hom(X,Y)$, hence $\Hom(\_,X)\neq \Hom(\_,Y)$. To prove fullness and faithfullness, it is equivalent to show that the mapping 
+    It is clearly an embedding since if $X\neq Y$, then $\fone_X\in \Hom(X,X)$ and $\fone_X\notin \Hom(X,Y)$, hence $\Hom(\_,X)\neq \Hom(\_,Y)$. To prove fullness and faithfullness, it is equivalent to show that the mapping 
     $$
         \Hom(X,Y)\ni f \mapsto f_\ast\in \Hom(\Hom(\_,X),\Hom(\_,Y))
     $$
@@ -2025,6 +2025,25 @@ We denote the forgetful functor
     f: (A,x)\rightarrow (B,y) \mapsto f: A\rightarrow B
 \end{gather*}
 by $\Pi$. 
+\begin{lemma}
+    $\int \_ : \mathrm{Set}^{\pazocal{C}}\rightarrow \mathrm{CAT}$ is functorial. 
+\end{lemma}
+\begin{proof}
+    Given a natural transformation $\alpha: \pazocal{F}\Rightarrow \pazocal{G}$ is mapped to the functor 
+    \begin{gather*}
+        \int \alpha: \int\pazocal{F} \rightarrow \int \pazocal{G}\\
+        (A,x) \mapsto (A, \alpha_A(x))\\
+        f : (A,x)\rightarrow (B,y) \mapsto (A, \alpha_A(x)) \rightarrow (B,\alpha_B(y))
+    \end{gather*}
+    By naturality,
+    $\pazocal{G}(f)(\alpha_A(x))= \alpha_B\pazocal{F}(f)(x)= \alpha_B(y)$, which means the assigment of morphisms is well-defined. Functoriality is trivial. Given $\alpha: \pazocal{F}\Rightarrow \pazocal{G}$ and $\beta : \pazocal{G}\Rightarrow \pazocal{H}$, we need to prove that $\int \beta\alpha = \int \beta\int \alpha$. For an object $(A,x)$ in $\pazocal{C}$, we have that 
+    \begin{align*}
+        \left(\int \beta \alpha\right)(A,x) = (A,(\beta\alpha)_A(X))=(A,\beta_A\alpha_A(x)) =\int \beta(A,\alpha_A(x)) = \left(\int\beta\int\alpha\right) (A,x). 
+    \end{align*}
+    It is similarly easy to verify that 
+    $$\left(\int\beta\alpha\right)(f)=\left(\int\beta\int \alpha\right)(f)$$
+    for a morphism a $f: (A,x)\rightarrow (B,y)$.
+\end{proof}
 \begin{definition}
     The \emph{category of elements} for a contravariant functor $\pazocal{F}:\pazocal{C}\rightarrow \mathrm{Set}$ is just the category of elements of $\pazocal{F}$ regarded as covariant functor $\pazocal{F} :\pazocal{C}\op\rightarrow \mathrm{Set}$.
 \end{definition}
@@ -2039,17 +2058,46 @@ by $\Pi$.
     Here $y: \pazocal{C}\rightarrow \mathrm{Set}^{\pazocal{C}\op}$ is the yoneda embedding and $\pazocal{F}$ is regarded as functor $\fone\rightarrow \mathrm{Set}^{\pazocal{C}\op}$.
 \end{lemma}
 \begin{proof}
-    By the Yoneda Lemma for each object $A\in \pazocal{C}$ we have a bijection 
+    The objects of the comma category $y\downarrow \pazocal{F}$ are objects $(A,\ast, \alpha : \Hom(\_,A) \Rightarrow \pazocal{F})$ and a morphism $(A,\ast,\alpha)\rightarrow (B,\ast,\beta)$ is a pair of natural transformations $\mu: \Hom(\_,A) \Rightarrow \Hom(\_,B)$ and $\nu: \pazocal{F} \Rightarrow \pazocal{F}$ such that
+    $$
+        \begin{tikzcd}
+            \Hom(\_,A) \arrow[d, Rightarrow, "\mu", swap] \arrow[r,Rightarrow, "\alpha"] & \pazocal{F} \arrow[d,Rightarrow, "\nu"] \\
+            \Hom(\_,B) \arrow[r, Rightarrow, "\beta", swap] & \pazocal{F}
+        \end{tikzcd}
+    $$
+    commutes. Note that necessarily $\nu = \id_\pazocal{F}$ and that via the Yoneda embedding $\mu = f_\ast$ for some morphism $ f: A\rightarrow B$. A morphism $(A,\ast,\alpha)\rightarrow (B,\ast,\beta)$ is more succinctly described as natural transformation $f_\ast : \Hom(\_,A)\Rightarrow \Hom(\_,B)$ such that 
+    $$
+        \begin{tikzcd}
+            \Hom(\_,A) \arrow[Rightarrow, r, "\alpha"] \arrow[Rightarrow, d, "f_\ast"] &\pazocal{F}\\
+            \Hom(\_,B) \arrow[Rightarrow, ur, "\beta", swap] 
+        \end{tikzcd}
+    $$
+    We now describe the isomorphism $\int \pazocal{F}\cong y\downarrow \pazocal{F}$, 
     \begin{gather*}
-        \pazocal{F}(A) \rightarrow \Hom(\Hom(\_,A),\pazocal{F})\\
-        x\mapsto \Psi(x) 
+        \int \pazocal{F} \rightarrow y\downarrow \pazocal{F}\\
+        (A,x) \mapsto \Psi(x) : \Hom(\_,A)\Rightarrow \pazocal{F}\\
+        (A,x)\rightarrow (B,y) \mapsto f_\ast : \Hom(\_,A)\Rightarrow \Hom(\_,B)
     \end{gather*}
-    In other words there is a one-to-one correspondence of objects $(A,x)\in\pazocal{F}(A)$, and natural transformations unique natural transformation $\Hom(\_,A,\pazocal{F})\Rightarrow \pazocal{F}$, obtained by the mapping $x\mapsto \Psi(x)$. We suppress the dependence on $A$ from the notation for simplicity and to stay consistent with the notation of the Yoneda Lemma. Consider now the functor $\Hom(\_, \pazocal{F}) : \mathrm{Set}^\pazocal{C} \rightarrow \mathrm{Set}$. We construct a category whose objects are natural transformations of the form $\Psi(x) : \Hom(\_ ,A)\rightarrow \pazocal{F}$ and where are morphism $\Psi(x)\rightarrow \Psi(x')$ is a natural transformation $f_\ast : \Hom(\_,A) \Rightarrow \Hom(\_,A')$ where $f:A\rightarrow A'$ (all natural tranformations with this domain \& codomain are of this form) such that $\Psi(x) = \Psi(x')f_\ast$. 
+    Note that by the Yoneda Lemma, the assignment of objects is a bijection. The assignment of morphisms is just that of the yoneda embedding, hence morphisms in $y\downarrow \pazocal{F}$ are in bijection with morphisms in $\int \pazocal{F}$. We thus conclude that the above functor defines an isomorphism. 
+\end{proof}
+\begin{remark}
+    There is of course a dual result for the covariant case. In this case a morphism in the comma category is of the form $f^\ast : \Hom(B,\_)\rightarrow \Hom(A,\_)$ for a morphism $f: A \rightarrow B$. 
+\end{remark}
+\begin{lemma}
+    For a locally small category $\pazocal{C}$ and a fixed object $X$ in $\pazocal{C}$, 
+    $$\int \Hom(X,\_) \cong X/\pazocal{C}.$$
+\end{lemma}
+\begin{proof}
+    
 \end{proof}
 \begin{proposition}
     A covariant functor $\pazocal{F} : \pazocal{C}\rightarrow \mathrm{Set}$ is representable if and only if $\int \pazocal{F}$ has an initial object. For a contravariant functor, the same but the category of elements has a terminal object.  
 \end{proposition}
 \begin{proof}
-    
+    Suppose $\pazocal{F}$ is representable. Then $\pazocal{F}\cong \Hom(X,\_)$ for some object $X$ in $\pazocal{C}$. By functoriality and the prior lemma, $\int \pazocal{F}\cong  \int \Hom(X,\_)\cong \int X/\pazocal{C}$. The initial object in $X/\pazocal{C}$ is $\fone_X$, hence $\int \pazocal{F}$ has an initial object.\\
+    Suppose conversely that $\int\pazocal{F}$ has an initial object $(A,x)$. 
 \end{proof}
 \subsection{Limits \& Colimits}
+
+\subsubsection{Products}
+\subsubsection{Coproducts}
