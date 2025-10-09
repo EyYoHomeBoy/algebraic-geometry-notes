@@ -1808,7 +1808,7 @@ This bijection maps a natural transformation $\alpha: \Hom(X,\_) \Rightarrow \pa
     \end{gather*}
     We check that this is indeed maps to natural transformations. Let a morphism $g: Z\rightarrow W$ be given. Then for any $f\in \Hom(X,Z)$,
     \begin{align*}
-        \Psi(y)_Wg_\ast(f) = \Psi(y)_W(gf) =\pazocal{F}(gf) \pazocal{F}(g)\pazocal{F}(f)(y) = \pazocal{F}(g)\Psi(y)_Z(f).
+        \Psi(y)_Wg_\ast(f) = \Psi(y)_W(gf) =\pazocal{F}(gf)(y)=\pazocal{F}(g)\pazocal{F}(f)(y) = \pazocal{F}(g)\Psi(y)_Z(f).
     \end{align*}
     hence the square
     $$
@@ -2094,10 +2094,41 @@ by $\Pi$.
     A covariant functor $\pazocal{F} : \pazocal{C}\rightarrow \mathrm{Set}$ is representable if and only if $\int \pazocal{F}$ has an initial object. For a contravariant functor, the same but the category of elements has a terminal object.  
 \end{proposition}
 \begin{proof}
-    Suppose $\pazocal{F}$ is representable. Then $\pazocal{F}\cong \Hom(X,\_)$ for some object $X$ in $\pazocal{C}$. By functoriality and the prior lemma, $\int \pazocal{F}\cong  \int \Hom(X,\_)\cong \int X/\pazocal{C}$. The initial object in $X/\pazocal{C}$ is $\fone_X$, hence $\int \pazocal{F}$ has an initial object.\\
-    Suppose conversely that $\int\pazocal{F}$ has an initial object $(A,x)$. 
+    Suppose $\pazocal{F}$ is representable. Then $\pazocal{F}\cong \Hom(X,\_)$ for some object $X$ in $\pazocal{C}$. By functoriality and the prior lemma, $\int \pazocal{F}\cong  \int \Hom(X,\_)\cong  X/\pazocal{C}$. The initial object in $X/\pazocal{C}$ is $\fone_X$, hence $\int \pazocal{F}$ has an initial object.\\
+    Suppose conversely that $\int\pazocal{F}$ has an initial object $(A,x)$. Let an object $(B,y)$ be given. Then there is a unique morphism $f : A\rightarrow B$ with 
+    $$
+        \pazocal{F}(f)(x)=y.
+    $$
+    Recall from the proof of the Yoneda lemma that $\Psi(x)_B(f)=\pazocal{F}(f)$. Then $\psi_B(x)$ is surjective by existence of $f$ and injective by uniqueness of $f$, hence $\Psi(x): \Hom(A,\_) \Rightarrow \pazocal{F}$ is a natural isomorphism.   
+\end{proof}
+\begin{remark}
+    A representation of a set-valued functor on a locally small category $\pazocal{C}$ can thus equivalently be defined as an initial object in $\int\pazocal{C}$. 
+\end{remark}
+\begin{definition}
+    A category $\pazocal{C}$ is a \emph{contractible groupoid}, if 
+    $$
+        \pazocal{C} \cong \fone := (\{\ast\},\{\fone_\ast\}).
+    $$
+\end{definition}
+\begin{lemma}
+    Consider a locally small category $\pazocal{C}$. The subcategory of $\pazocal{C}$ consisting of the initial/terminal objects of $\pazocal{C}$, $\mathrm{init}(\pazocal)$/$\mathrm{term}(\pazocal{C})$ is either empty or a contractible groupoid
+\end{lemma}
+\begin{proof}
+    Suppose $\mathrm{init}(\pazocal{C})$ has an object. The functor 
+    \begin{gather*}
+        \mathrm{init}(\pazocal{C})\rightarrow \fone\\
+        X\mapsto \ast\\
+        f: X\rightarrow X' \mapsto \fone_\ast
+    \end{gather*} 
+    is clearly full and essentially surjective on objects. and since a morphism from an initial object is unique also faithful. 
+\end{proof}
+\begin{proposition}
+    Consider a set-valued functor $\pazocal{F}$ on a locally small category $\pazocal{C}$. Then the full subcategory of $\int\pazocal{F}$ spanned by its representations, $\mathrm{rep}(\pazocal{F})$, is either empty or a contractible groupoid. 
+\end{proposition}
+\begin{proof}
+    If $\pazocal{F}$ is not representable, then $\mathrm{rep}(\pazocal{F})= \emptyset$. If $\pazocal{F}$ is representable, then $\int\pazocal{F}$ has an initial object, hence by the prior lemma and $\mathrm{rep}(\pazocal{F})=\mathrm{init}\left(\int\pazocal{F}\right) \cong \fone$.
 \end{proof}
 \subsection{Limits \& Colimits}
-
+\subsubsection{Universal Cones}
 \subsubsection{Products}
 \subsubsection{Coproducts}
