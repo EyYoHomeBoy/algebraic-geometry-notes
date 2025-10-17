@@ -4,11 +4,11 @@
     A category $\pazocal{C}$ is a pair $(\Ob(\pazocal{C}),\Hom(\pazocal{C}))$ where 
     \begin{enumerate} 
     \item $\Ob(\pazocal{C})$ denotes a class of \textit{objects}. \item $\Hom(\pazocal{C})$ denotes a class of \textit{morphisms}. 
-    \item A morphism $f$ in $\Hom(\pazocal{C})$ is a relation between between elements $A,B$ in $\Ob(\pazocal{C})$. We denote it by $f : A \rightarrow B$. 
+    \item A morphism $f$ in $\Hom(\pazocal{C})$ is a binary relation between between members $A,B$ of $\Ob(\pazocal{C})$. We denote it by $f : A \rightarrow B$. 
     \item For objects $A,B$ in $\Ob(\pazocal{C})$ we denote the class of morphisms from $A$ to $B$ by $\Hom(A,B)$.
-    \item There is a binary operation $\circ$ on the class of \emph{composable} morphisms called \textit{composition} such that for composable morphisms $f: B\rightarrow C$ and $g : A \rightarrow B$ we have that
-    $$fg := f\circ g : A \rightarrow C$$
-    and 
+    \item There is a binary operation $\circ$ on the class of \emph{composable} morphisms called \textit{composition} such that for composable morphisms $f: B\rightarrow C$ and $g : A \rightarrow B$ we have a morphism
+    $$fg := f\circ g : A \rightarrow C,$$
+    such that 
     $$(f\circ g)\circ h = f\circ(g\circ h)$$
     where $f : C \rightarrow D$, $g: B \rightarrow C$ and $h: A \rightarrow B$ for objects $A,B,C,D$ in $\Ob(\pazocal{C})$. Furthermore for each object $X$ in $\Ob(\pazocal{C})$ there is a morphism $\mathbbm{1}_X : X \rightarrow X$ called the \textit{identity morphism} such that 
     $$\mathbbm{1}_B f = f = f \mathbbm{1}_A,$$
@@ -16,7 +16,7 @@
     \end{enumerate}
 \end{definition}
 \begin{remark}
-    Here the notion of "class" depends foundations. For instance, it could mean a set in the sense of ZFC or it could mean a proper class in the sense of NGB {\Large I guess what I really mean is that objects and morphisms live in a model of ZFC/NGB but I am not sure}. 
+    Here the notion of "class" depends on foundations. For instance, it could mean a set in the sense of ZFC or it could mean a proper class in the sense of NGB {\Large I guess what I really mean is that objects and morphisms live in a model of ZFC/NGB but I am not sure}. 
 \end{remark}
 \begin{definition}
     In a category, a morphism $f : X\rightarrow X$ is called an \emph{endomorphism}.
@@ -30,7 +30,7 @@
     A \textit{subcategory} $\pazocal{D}$ of a category $\pazocal{C}$ is a subclass of $\Ob(\pazocal{C})$ together with a subclass of $\Hom(\pazocal{C})$ that constitutes a category.
 \end{definition}
 \begin{remark}
-    equivalently a subcategory of $\pazocal{C}$ is a subclass $\Ob(\pazocal{D})$ of $\Ob(\pazocal{C})$ and a subclass $\Hom(\pazocal{D})$ of $\Hom(\pazocal{C})$ such that each domain $A$ and codomain $B$ for a morphism in $\Hom(\pazocal{D})$, $A,B$ are elements of $\Ob(\pazocal{D})$. In addition such that $\Hom(\pazocal{D})$ is closed under composition. 
+    equivalently a subcategory of $\pazocal{C}$ is a subclass $\Ob(\pazocal{D})$ of $\Ob(\pazocal{C})$ and a subclass $\Hom(\pazocal{D})$ of $\Hom(\pazocal{C})$ such that each domain $A$ and codomain $B$ for a morphism in $\Hom(\pazocal{D})$, $A,B$ are elements of $\Ob(\pazocal{D})$ and such that $\Hom(\pazocal{D})$ is closed under composition. 
 \end{remark}
 \begin{definition}
     Let $\pazocal{C}$ be a category and $f\in \Hom(A,B)$, $g\in \Hom(B,A)$.  $f$ is called a \textit{retraction} of $g$ and $g$ a section of $f$ if $fg = \fone_B$   

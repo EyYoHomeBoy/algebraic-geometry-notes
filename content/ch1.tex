@@ -3,7 +3,7 @@
 \subsection{An axiomatization of set theory}
 \subsubsection{Zermelos axioms}
 
-We introduce set theory first via the Zermelo-Frankel axioms with an added axiom of choice which will be necessary in some cases. We add to first order predicate logic a non-logical, relational symbol $\in$. For a pair of variables $z,X$ we define $z\in X :=  \in(z,X)$ to be read as "$z$ is an element of $X$" or "$z$ belongs to $X$". We now introduce the axioms of Zermelos set theory, starting with the first 4. 
+We introduce set theory first via the Zermelo-Frankel axioms with an added axiom of choice which will be necessary in some cases. This will be axioms with respect to the signature $\{\in\}$ For a pair of variables $z,X$ we define $z\in X :=  \in(z,X)$. This is to be read as "$z$ is an element of $X$" or "$z$ belongs to $X$". We now introduce the axioms of Zermelos set theory, starting with the first four. 
 \begin{axioms}
     \begin{enumerate}\addtocounter{enumi}{-1}
         \item The axiom of empty set: $\exists \emptyset\forall z(\neg(z\in \emptyset))$
@@ -566,8 +566,8 @@ We will later see that the well-ordering principle is in fact equivalent to the 
 \subsection{Models of $\mathrm{ZF(C)}$}
 \subsubsection{The standard model $\mathrm{V}$ of $\mathrm{ZF(C)}$}
 \subsubsection{Non-standard models of $\mathrm{ZF(C)}$}
-\subsection{Peano Arithmetic in a model of $\mathrm{ZF}$}
-Fix a model $V$ of $\verb|ZF|$, we aim to construct a $\mathcal{L}_{\mathrm{PA}}$-structure within $V$ which we denote $\N_{\omega}$ whose domain is $\omega$ and show that it is a model of $\verb|PA|$, where $\mathcal{L}_{\mathrm{PA}}=\{0,\mathrm{s},+,\cdot\}$. We then define 
+\subsection{A Model of $\mathrm{PA}$ in $\mathrm{V}$}
+We aim to construct a $\mathcal{L}_{\mathrm{PA}}$-structure within $V$ which we denote $\N_{\omega}$ whose domain is $\omega$ and show that this is a model of $\verb|PA|$, where $\mathcal{L}_{\mathrm{PA}}=\{0,\mathrm{s},+,\cdot\}$. We then define 
 \begin{gather*}
     0^{\N_\omega} := \emptyset\in \omega\\
     \mathrm{s}^{\N_\omega} : \omega \rightarrow \omega\\

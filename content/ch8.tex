@@ -16,9 +16,10 @@
     Let $X$ be a variety. Then $$\Gamma: (\tau_X,\subset) \rightarrow \mathrm{FinAlg}_K, (U, W\subset V)\mapsto (\Gamma(U), \widetilde{\varphi}: \Gamma(V)\rightarrow \Gamma(W), f \mapsto \left.f\right|_{W})$$
     defines a presheaf on $\pazocal{T}(X)$ respect to the Zariski topology. 
 \end{example}
-\begin{definition}
+\begin{definition}\label{RestrictionInImageOfPresheaf}
     For objects $U,V$ in $\pazocal{C}$ and a morphism $\varphi: V\rightarrow U$, for an  $s\in \pazocal{F}(U)$, we define \emph{restriction of $s$ to $V$} to be $$\left. s\right|_{V}:= \varphi_{UV}.$$
 \end{definition}
+\subsubsection{Sheaves}
 \begin{definition}
     Consider a topological space $X$. Let $\pazocal{F}$ be a presheaf on a category $\pazocal{T}(X)$. $\pazocal{F}$ is called a \emph{sheaf on $X$} if moreover, 
     \begin{enumerate}
@@ -33,7 +34,7 @@
     By condition 1. an element $s\in \pazocal{F}(U)$ obtained as described in 2. is unique.
 \end{remark}
 \begin{lemma}
-    Consider a topological space $X$ and a presheaf $\pazocal{F}$ on $X$ that satisfies the second condition of being a presheaf. Then $\pazocal{F}$ is a sheaf on $X$ if and only if for every open $U\subset X$ every open covering $\{U_i\}$ and every $s\in \pazocal{F}(U)$, if $\left.s\right|_{U_i}=0$ for every $i$, then $s=0$.   
+    Consider a topological space $X$ and a presheaf $\pazocal{F}$ on $X$ valued in the category of abelian groups that satisfies the second condition of being a sheaf. Then $\pazocal{F}$ is a sheaf on $X$ if and only if for every open $U\subset X$ every open covering $\{U_i\}$ and every $s\in \pazocal{F}(U)$, if $\left.s\right|_{U_i}=0$ for every $i$, then $s=0$.   
 \end{lemma}
 \begin{proof}
     "$\implies$": If $\pazocal{F}$ is a sheaf on $X$, then since $\left. s\right|_{U_i}=0=\left.0\right|_{0}$ for every $i$, then $s=0$.\\
@@ -41,3 +42,85 @@
     $$0=\left. s\right|_{U_i} - \left. t\right|_{U_i} = \left. s-t\right|_{U_i}$$
     for every $i$, which by assumption means $s-t=0$. 
 \end{proof}
+\begin{example}
+    The presheaf $\Gamma$ on a variety $X$ seen as a space equipped with the Zariski topology is a sheaf. Consider an subvariety $U\subset X$ and open covering $\{U_i\}$ of $U$ and suppose there is a regular function $f\in \Gamma(U)$ such that $\left. f\right|_{U_i}=0$ for every $i$. Viewing $f$ as a function $U$ it follows that given a point $x\in U$ since $x\in U_i$ for some $i$, 
+    $$f(x)=\left.f\right|_{U_i}(x)= 0 \implies f = 0.$$
+    Consider an open covering, $\{U_i\}$ of a subvariety $U\subset X$ and a collection of regular functions 
+    $$\left\{f_i\in \Gamma(U_i): \left.f_i\right|_{U_i\cap U_j}= \left. f_j\right|_{U_i\cap U_j} \right\}_i,$$
+    then the function 
+    \begin{gather*}
+        f : U \rightarrow K \\
+         x\mapsto f_i(x) \quad \text{if } x\in U_i
+    \end{gather*} 
+    is a regular function on $U$ such that $\left. f\right|_{U_i} = f_i$. Indeed, restriction in the sense of Definition~\ref{RestrictionInImageOfPresheaf} is in this instance literally restriction in the usual sence, so the definition of $f$ is indenpendent of the choice of $U_i$.
+\end{example}
+\begin{definition}
+    Given a category $\pazocal{C}$ \emph{a morphism of presheaves} is just a morphism in the functor category $\mathrm{Set}^{\pazocal{C}\op}$, i.e. a morphism $\Phi: \pazocal{F} \rightarrow \pazocal{G}$ of parallel presheaves on $\pazocal{C}$ is just a natural transformation $\Phi : \pazocal{F}\Rightarrow \pazocal{G}$.\\
+    An isomorphism of presheaves is therefor just a natural isomorphism of presheaves. \\
+    \emph{A morphism of sheaves} is just a morphism of presheaves in the category of sheaves, $\mathrm{Sh}(X)$, which is a subcategory of $\mathrm{Set}^{\pazocal{T}(X)\op}$.   
+\end{definition}
+\subsection{Schemes}
+We adopt the convention that all rings are commutative.
+\subsubsection{Affine Schemes}
+\begin{definition}
+    For a ring $R$, we define \emph{the spectrum of $R$} to be the set
+    $$
+        \Spec\ R := \{ I \subset R : I \text{ is a prime ideal}\}
+    $$
+    For an ideal $I\subset R$, we define 
+    $$
+        V(I) := \{ J\in \Spec \ R : I\subset J\}
+    $$
+\end{definition}
+\begin{lemma}
+    If $I\subset J\subset R$ are ideals, then $V(I)\supset V(J)$.
+\end{lemma}
+\begin{proof}
+    This is trivial. 
+\end{proof}
+\begin{lemma}
+    For ideals $I,J\subset R$
+    $$V(IJ) = V(I)\cup V(J).$$
+\end{lemma}
+\begin{proof}
+    Consider a prime ideal $\mathfrak{P}\in \Spec \ R$ containing $IJ$. Then given $ab\in IJ$ with $a\in I$ and $b\in J$ we have that $a \in \mathfrak{P}$ or $b\in \mathfrak{P}$, hence $\mathfrak{P}\in V(I)\cup V(J)$. The converse inclusion follows from $I,J\supset IJ$ by the prior lemma. 
+\end{proof}
+\begin{lemma}
+    For a family of ideals $\{I_\mu\}$ in $R$, 
+    $$V(\sum_\mu I_\mu) = \bigcap_\mu V(I_\mu).$$ 
+\end{lemma}
+\begin{proof}
+    Again one inclusion follows from $I_\nu\subset \sum_\mu I_\mu$. Suppose conversely that $\mathfrak{P}\in \Spec \ R$ is given such that it contains every $I_\mu$, then since ideals are closed under addition it contains $\sum_\mu I_\mu$.  
+\end{proof}
+\begin{proposition}
+    For a ring $R$, the family of sets 
+    $$
+        \{V(I) : I \text{ is an ideal in } R\}
+    $$
+    are the closed set in a topology on $\Spec \ R$. 
+\end{proposition}
+\begin{proof}
+    Indeed, note that 
+    $$\bigcap_{I\subset R} V(I) = V\left(\sum_{I\subset R} I\right)= V(R) = \emptyset.$$
+    and that $\Spec\ R = V(0)$. The two prior lemmas show that this family is closed under countable union and intersection over arbitrary index sets. 
+\end{proof}
+\begin{remark}
+    The topology in question is unsurprisingly called the \emph{Zariski topology on $\Spec \ R$}. For an algebraically closed field $K$ and an affine variety $V\subset \A^n$, the points of $V$ correspond to the maximal ideals of $\Gamma(V)$. In this way we can identify $V$ with the subspace of maximal ideals of $\Gamma(V)$ in $\Spec \ \Gamma(V)$. In this sense $\Spec \ \Gamma(V)$ is a refinement of the notion of point in variety. namely, points have by definition come to mean the subvarieties of $V$.
+\end{remark}
+\begin{lemma}
+    If $I,J\subset R$ are ideals, then $V(I)\subset V(J)$ if and only if $\rad(I)\supset \rad(J)$.
+\end{lemma}
+\begin{proof}
+    Note that $V(I)\subset V(J)$ if and only if every prime ideal that contains $I$ also contains $J$ which again is equivalent to 
+    $$
+        \bigcap_{\mathfrak{p}\supset I \text{ prime }} \mathfrak{p} \supset \bigcap_{\mathfrak{p}\supset J \text{ prime }} \mathfrak{p}, 
+    $$
+    which by lemma \ref{RadicalOfIdealIsIntersectionOfAllPrimeIdealsContainingIt} is equivalent to 
+    $$
+        \rad(I)\supset \rad(J).
+    $$
+\end{proof}
+Given a ring $R$ and prime ideal $\mathfrak{p}$ in $R$. We denote the localization of $R$ with respect to $\mathfrak{p}$ by $R_\mathfrak{p}$.
+\begin{definition}
+    {\Large Define sheaf of rings on $\Spec R$}
+\end{definition}
