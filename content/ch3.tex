@@ -2052,7 +2052,7 @@ In our exploration of unique factorization domains and Euclidean Domains we will
     $$X^{-1}R = \left\{\frac{r}{x} : r \in R, x\in X \right\}.$$
     This is called the \textit{localization of $R$ with respect to $X$}. For an $x\in X$, if 
     $$X:= \left\{x^n : n\geq 0\right\},$$
-    we define $R_x := X^{-1}R$. When $X = R\setminus \{0\}$, we define $Q(R) := X^{-1}R$. In this case $Q(R)$ is called the \textit{field of fractions} of $R$.
+    we define $R_x := X^{-1}R$. When $X = R\setminus \{0\}$, we define $Q(R) := X^{-1}R$. In this case, when $R$ is an integral domain, $Q(R)$ is called the \textit{field of fractions} of $R$.
 \end{definition}
 \begin{remark}
     We give some properties of this construction. Note that every $x,y \in X$
@@ -2064,18 +2064,31 @@ In our exploration of unique factorization domains and Euclidean Domains we will
     Furthermore,
     $$(rx)x= rx^2  \implies \frac{rx}{x^2} = \frac{r}{x}$$
 \end{remark}
+\begin{definition}
+    Let $R$ be a commutative ring and $\mathfrak{p}\subset R$ a prime ideal. Then we define the \emph{localization with respect to $\mathfrak{p}$} to be 
+    $$
+        R_\mathfrak{p} := (R\setminus \mathfrak{p})^{-1}R
+    $$
+\end{definition}
+\begin{remark}
+    Note that $X:=R\setminus \mathfrak{p}$ is a submonoid of $(R,\cdot)$. Indeed, take $x,y\in X$. Then $xy\notin \mathfrak{p}$ since otherwise $x$ or $y$ would be in $\mathfrak{p}$. Moreover, $X$ does not contain $0$ since $0\in \mathfrak{p}$. It does contain $1$ since $\mathfrak{p}$ is a proper ideal. 
+\end{remark}
 \begin{lemma}
-    Let $R$ be a commutative ring, $X\subset R$ a submonoid of $R$
-\end{lemma}
-\begin{lemma}
-    Let $R$ be an integral domain and $X\subset R\setminus \{0\}$ a subset that is a submonoid of $(R,\cdot)$. For $\frac{r_1}{x_1},\frac{r_2}{x_2} \in X^{-1}R$ we define 
-    $$\frac{r_1}{x_1}+\frac{r_2}{x_2} := \frac{r_1x_2+r_2x_1}{x_1x_2}$$
+    Let $R$ be a commutative ring and $\mathfrak{p}\subset R$ a prime ideal. $R_\mathfrak{p}$ is a commutative ring. The ring structure is given by 
+    $$
+        \frac{r}{x}+\frac{s}{y} := \frac{ry+sx}{xy} \quad \left(\frac{r}{x},\frac{s}{y} \in R_\mathfrak{p}\right)$$
     and 
-    $$\frac{r_1}{x_1}\frac{r_2}{x_2} := \frac{r_1r_2}{x_1x_2}.$$
-    This makes $(X^{-1}R,+,\cdot)$ a commutative ring containing $R$ as a subring, i.e. the image of the embedding of $R$ in $X^{-1}R$ is a subring isomorphic to $R$. 
+    $$
+        \frac{r}{x}\frac{s}{y} := \frac{rs}{xy} \quad \left(\frac{r}{x},\frac{s}{y} \in R_\mathfrak{p}\right)
+    $$
+    with $1 := \frac{1}{1}$ and $ 0 := \frac{0}{1}$. The set 
+    $$
+        \{ \frac{r}{1}\in R_\mathfrak{p}: r\in R\}
+    $$
+    is a subring of $R_\mathfrak{p}$ isomorphic to $R$. 
 \end{lemma}
 \begin{proof}
-    We first need to check that the two operations are well-defined. Let $\frac{r_1}{x_1}=\frac{r_1'}{x_1'}\in X^{-1}R$ and $\frac{r_2}{x_2}=\frac{r_2'}{x_2'}\in X^{-1}R$. Then $r_1x_1' = r_1'x_1$ and $r_2x_2'=r_2'x_2$, which means
+    We first check that addition and multiplication are well-defined. :et $\frac{r_1}{x_1}=\frac{r_1'}{x_1'}\in R_\mathfrak{p}$ and $\frac{r_2}{x_2}=\frac{r_2'}{x_2'}\in R_\mathfrak{p}$. Then $r_1x_1' = r_1'x_1$ and $r_2x_2'=r_2'x_2$, which means
     \begin{align*}
         (r_1x_2+r_2x_1)x_1'x_2' &= r_1x_1'x_2x_2'+r_2x_2'x_1x_1' = r_1'x_1x_2x_2'+r_2'x_2x_1x_1'=\left(r_1'x_2'+r_2'x_1'\right)x_1x_2,
     \end{align*}
@@ -2084,12 +2097,12 @@ In our exploration of unique factorization domains and Euclidean Domains we will
     $$r_1r_2x_1'x_2' = r_1x_2'r_2x_1' = r_1'x_2r_2'x_1 = r_1'r_2'x_1x_2,$$
     implies 
     $$\frac{r_1}{x_1}\frac{r_2}{x_2} = \frac{r_1r_2}{x_1x_2} = \frac{r_1'r_2'}{x_1'x_2'} = \frac{r_1'}{x_1'}\frac{r_2'}{x_2'}.$$
-    We proceed to check the ring axioms. Let, in addition, $\frac{r_3}{x_3}\in X^{-1}R$ be given. Then 
+    We proceed to check the ring axioms. Let, in addition, $\frac{r_3}{x_3}\in R_\mathfrak{p}$ be given. Then 
     \begin{align*}
         \frac{r_1}{x_1}+\left(\frac{r_2}{x_2}+\frac{r_3}{x_3}\right) &= \frac{r_1}{x_1} + \frac{r_2x_3+r_3x_2}{x_2x_3} = \frac{r_1x_2x_3+r_2x_3x_1+r_3x_2x_1}{x_1x_2x_3} = \frac{(r_1x_2+r_2x_1)x_3+r_3x_2x_1}{x_1x_2x_3} \\
         &= \frac{r_1x_2+r_2x_1}{x_1x_2}+\frac{r_3}{x_3} = \left(\frac{r_1}{x_1}+\frac{r_2}{x_2}\right) + \frac{r_3}{x_3}.
     \end{align*}
-    We define $0 := \frac{0}{1}$, with which we get 
+    We get
     $$0+\frac{r_1}{x_1} = \frac{0x_1+r_1\cdot 1}{1x_1} = \frac{r_1}{x_1}.$$
     One should note that for any $x\in X$ $x\cdot 0 = 1\cdot 0$, hence
     $$\frac{0}{1} = \frac{0}{x}.$$
@@ -2097,18 +2110,18 @@ In our exploration of unique factorization domains and Euclidean Domains we will
     $$\frac{r_1}{x_1}-\frac{r_1}{x_1}=\frac{r_1x_1-r_1x_1}{x_1x_1} = \frac{0}{x_1x_1}= 0.$$
     Lastly 
     $$\frac{r_1}{x_1}+\frac{r_2}{x_2} = \frac{r_1x_2+r_2x_1}{x_1x_2} = \frac{r_2x_1+r_1x_2}{x_2x_1} = \frac{r_2}{x_2}+\frac{r_1}{x_1},$$
-    hence $(X^{-1}R,+)$ is an additive group. We also have that 
+    hence $(R_\mathfrak{p},+)$ is an additive group. We also have that 
     \begin{align*}
         \frac{r_1}{x_1}\left(\frac{r_2}{x_2}\frac{r_3}{x_3}\right) &= \frac{r_1}{x_1}\frac{r_2r_3}{x_2x_3} = \frac{r_1(r_2r_3)}{x_1(x_2x_3)} = \frac{(r_1r_2)r_3}{(x_1x_2)x_3} = \left(\frac{r_1r_2}{x_1x_2}\right)\frac{r_3}{x_3} = \left(\frac{r_1}{x_1}\frac{r_2}{x_2} \right)\frac{r_3}{x_3}.
     \end{align*}
-    We define $1 := \frac{1}{1}$. Then 
+    $1$ is the identity with respect to multiplication since 
     $$1 \frac{r_1}{x_1} = \frac{1r_1}{1x_1} = \frac{r_1\cdot 1}{x_1\cdot 1} = \frac{r_1}{x_1}.$$
     Furthermore,
     \begin{align*}
         \frac{r_1}{x_1}\left(\frac{r_2}{x_2}+\frac{r_3}{x_3}\right) &= \frac{r_1}{x_1}\frac{r_2x_3+r_3x_2}{x_2x_3} = \frac{r_1r_2x_3+r_1r_3x_2}{x_1x_2x_3} = \frac{r_1r_2x_3x_1+r_1r_3x_2x_1}{x_1x_2x_1x_3} = \frac{r_1r_2}{x_1x_2} + \frac{r_1r_3}{x_1x_3}\\
         &= \frac{r_1}{x_1}\frac{r_2}{x_2}+\frac{r_1}{x_1}\frac{r_3}{x_3}.
     \end{align*}
-    Thus $(X^{-1}R,+,\cdot)$ is a ring. We check that is commutative. Indeed
+    Thus $(R_\mathfrak{p},+,\cdot)$ is a ring. We check that it is commutative. Indeed
     $$\frac{r_1}{x_1}\frac{r_2}{x_2} = \frac{r_1r_2}{x_1x_2}= \frac{r_2r_1}{x_2x_1}=\frac{r_2}{x_2}\frac{r_1}{x_1}.$$
     Let $r,r'\in R$. Then 
     \begin{align*} 
@@ -2118,13 +2131,7 @@ In our exploration of unique factorization domains and Euclidean Domains we will
         &rr' = \frac{r}{1}\frac{r'}{1}= \frac{rr'}{1}\in R\\
         & 1 = \frac{1}{1}\in R.
     \end{align*}
-    These computations prove that $\text{im}\ R\hookleftarrow X^{-1}R$ is a subring of $X^{-1}R$ (or that $R\hookleftarrow X^{-1}R$ is a ring homomorphism), hence $\text{im}\ R\hookrightarrow X^{-1}R\simeq R$. 
-\end{proof}
-\begin{proposition}
-     Let $R$ be a commutative ring, $\mathfrak{p}\subset R$ a prime ideal and $X := R\setminus \mathfrak{p}$. Then $X$ is a submonoid of $(R,\cdot)$ and $X^{-1}R$ is a local ring. 
-\end{proposition}
-\begin{proof}
-    Let 
+    These computations prove that $\text{im}\ R\hookrightarrow X^{-1}R$ is a subring of $X^{-1}R$ (or that $R\hookrightarrow X^{-1}R$ is a ring homomorphism), hence $\text{im}\ R\hookrightarrow X^{-1}R\simeq R$.
 \end{proof}
 \begin{definition}
     Let $R$ be an integral domain. Let $X$ be a submonoid of $(R\setminus \{0\}, \cdot)$. We define the \textit{saturation} of $X$ to be the set
@@ -2165,16 +2172,19 @@ In our exploration of unique factorization domains and Euclidean Domains we will
     Let $r \in Y$. Then for some $\frac{s}{y}\in X^{-1}S$, $r\frac{s}{y}=1$, meaning
     $$sr = sr \frac{1}{y}y = r\frac{s}{y}y= y \in X \implies r \in \widehat{X}.$$
 \end{proof}
-\begin{proposition}
-    Let $R$ be an integral domain. Then $Q(R)$ is the smallest field containing $R$ as a subring. 
-\end{proposition}
+\begin{corollary}
+    When $R$ is an integral domain, and $X$ is a multiplicative submonoid of $R$ not containing $0$, we have that $Q(R)$ is a field and $X^{-1}R$ is a subring of $Q(R)$. Moreover $Q(R)$ is the smallest field containing $R$.
+\end{corollary}
 \begin{proof}
-    The monoid $(R\setminus\{0\}, \cdot)$ is obviously saturated. Hence, by the above lemma,
+    By the assumption that $R$ is an integral domain, $0$ i a prime ideal, hence $Q(R)$ is a commutative ring. The monoid $(R\setminus0, \cdot)$ is obviously saturated. Hence, by the above lemma,
     $$Q(R)^\ast = \left\{ \frac{r}{s}\in Q(R) : r\in R\setminus\{0\} \right\} = Q(R)\setminus\{0\}.$$
-    This means $Q(R)$ is a field. Let $K$ be a field containing $R$ as a subring. Let $\frac{r}{s}\in Q(R)$. Then $r \in K$ and $\frac{1}{s}=s^{-1} \in K$, hence $\frac{r}{s} = r \frac{1}{s} \in K$. This means $Q(R) \subset K$, hence $Q(R)$ is the smallest field containing $R$ as a subring. 
+    This means $Q(R)$ is a field. Let $K$ be a field containing $R$ as a subring. Let $\frac{r}{s}\in Q(R)$. Then $r \in K$ and $\frac{1}{s}=s^{-1} \in K$, hence $\frac{r}{s} = r \frac{1}{s} \in K$. This means $Q(R) \subset K$, hence $Q(R)$ is the smallest field containing $R$ as a subring. If $\frac{x}{r},\frac{y}{s}\in X^{-1}R$, then since $sr\in X$, $\frac{x}{r}+\frac{y}{s}\in X^{-1}R$. The same argument show $\frac{x}{r}\frac{y}{s}\in X^{-1}R$. Clearly $1,0\in X^{-1}R$.
 \end{proof}
+\begin{corollary}
+    When $R$ is an integral domain, for a prime ideal $\mathfrak{p}\subset R$,  $R_\mathfrak{p}$ is an integral domain. 
+\end{corollary}
 \begin{remark}
-    From the above we conclude that if $K$ is a field then $K = Q(K)$, and in general $Q(R) =  Q(Q(R))$.
+    From the above we conclude that if $K$ is a field then we can canonically (to be shown) make the identification $K = Q(K)$, and in general $Q(R) =  Q(Q(R))$.
 \end{remark}
 \begin{definition}
     We define the \textit{rational numbers} to be the field $\Q := Q(\Z)$.
@@ -2242,9 +2252,19 @@ In our exploration of unique factorization domains and Euclidean Domains we will
     $$\frac{a}{x}=\frac{1}{x}a\in I.$$
     Conversely, let $\frac{a}{x}\in I$. Then $a=x\frac{a}{x}\in I$, hence $\frac{a}{x}\in X^{-1}(I\cap R)$.
 \end{proof}
-    \begin{lemma}
-        A local ring $R$ with principal maximal ideal is Noetherian 
-    \end{lemma}
+\begin{proposition}
+    Given a commutative ring $R$ and a prime ideal $\mathfrak{p}$ of $R$, $R_\mathfrak{p}$ is local ring. 
+\end{proposition}
+\begin{proof}
+    We check that $R\setminus \mathfrak{p}$ is saturated. Suppose $x\in R$ such that there is some $x'\in R$ such that $xx'\notin \mathfrak{p}$. Then $x\notin \mathfrak{p}$ for otherwise $xx'\in \mathfrak{p}$. It follows that $\widehat{R\setminus\mathfrak{p}} = R\setminus \mathfrak{p}$. The units of $R_\mathfrak{p}$ are thus those elements $\frac{x}{r}$ where $x\notin \mathfrak{p}$. Hence 
+    $$
+        R_\mathfrak{p}\setminus \left(R_\mathfrak{p}\right)^\ast = \left\{\frac{x}{r}\in R_\mathfrak{p} : x\in \mathfrak{p}\right\}
+    $$
+    is an ideal, which means $R_\mathfrak{p}$ is local by Proposition~\ref{EquivalentFormulationOfRingBeingLocal}.
+\end{proof}
+\begin{lemma}
+    A local ring $R$ with principal maximal ideal is Noetherian 
+\end{lemma}
 \subsubsection{Discrete Valuation Rings}
     \begin{definition}
         Let $R$ be a non-field integral domain. $R$ is a \textit{discrete valuation ring (DVR)} if it is noetherian and local with the maximal ideal is principal. 
@@ -2386,9 +2406,10 @@ In our exploration of unique factorization domains and Euclidean Domains we will
         where we also use the prior lemma. We now that $z = \lambda t^{\ord(z)}$, hence $\langle z \rangle = \langle t\rangle^{\ord(z)} = \mathfrak{m}^{\ord(z)},$ hence $\ord(z) = \dim \ R/\mathfrak{m}^{\ord(z)}.$
     \end{proof}    
 \subsection{Polynomial Rings \& Formal Power Series}
-In this subsection every ring will be commutative, unless we explicitly declare it to not (necessarily) be the case. Really the base ring for a polynomial ring need not be commutative, but for our purposes we do not need to explore the non-commutative case. By a polynomial in $n$ variables over a ring $R$, we mean some expression of the form 
+In this subsection every ring will be commutative, unless we explicitly declare it to not (necessarily) be the case. Really the base ring for a polynomial ring need not be commutative, but for our purposes we do not need to explore the non-commutative case. A motivation to not be too general is that non-commutative polynomial rings do not admit a nice notion of evaluation.\\
+ By a polynomial in $n$ variables over a ring $R$, we mean some expression of the form 
 $$\sum_{v=(v_1,\dots,v_n)\in \N^n} a_vx_1^{v_1}\cdots x_n^{v_n},$$
-where $x_1,\dots,x_n$ are \textit{variables} and $a_v = 0$ for all but finitely many $a_v\in R$. Thus we want to consider elements of the algebra over $R$ generated by $x_1,\dots,x_n$, i.e. $R[x_1,\dots,x_n]$. The term variable is informal, and our goal will be to make the term variable precise. There are some properties that we want these variables to have. For instance we do not want $x_i = x_j$ when $i\neq j$. In general, we want $x_1^{v_1}\cdots x_n^{v_n} \neq x_1^{w_1}\cdots x_n^{w_n}$ whenever $(v_1,\dots,v_n)\neq (w_1,\dots,w_n)$. To do this, we first introduce the notion of algebraic (in)dependence
+where $x_1,\dots,x_n$ are \textit{variables} and $a_v = 0$ for all but finitely many $a_v\in R$. Thus we want to consider elements of the algebra over $R$ generated by $x_1,\dots,x_n$, i.e. $R[x_1,\dots,x_n]$. The term variable is informal, and a goal of this section is be equip \emph{variable} with a mathematical definition. There are some properties that we want these variables to have. For instance we do not want $x_i = x_j$ when $i\neq j$. In general, we want $x_1^{v_1}\cdots x_n^{v_n} \neq x_1^{w_1}\cdots x_n^{w_n}$ whenever $(v_1,\dots,v_n)\neq (w_1,\dots,w_n)$. To do this, we first introduce the notion of algebraic (in)dependence
 \begin{definition}
     Let $S$ be an $R$-algebra. We say a finite sequence of elements 
     $s_1,\dots,s_n\in Z(S)$ are \textit{algebraically independent} over $R$ if for every 
@@ -2400,9 +2421,9 @@ One quickly sees that the concept over algebraic independence is really just a s
 \begin{lemma}\label{AlgebraicallyIndependentIffMonomialsLinearlyIndependent}
     Let $S$ be an $R$-algebra. Then a finite sequence in $s_1,\dots,s_n \in Z(S)$ is algebraically independent over $R$ if and only if $\left\{s_1^{v_1}\cdots s_n^{v_n}\right\}_{(v_1,\dots,v_n)\in \N^n}$ is linearly independent over $R$.
 \end{lemma}
-We also want that elements of $R$ can be seen as polynomials. Before proceeding with actually constructing a polynomial ring that does the job we will present the approach that at first might seem fruitful, but will not quite capture the behaviour we desire. That is to define $R[x_1,\dots,x_n]$ as the set of functions 
+We also want that elements of $R$ can be seen as polynomials, so a ring of polynomials should contain its base ring as a subring in a nice canonical way. Before proceeding with actually constructing a polynomial ring that does the job we will present the approach that at first might seem fruitful, but will not quite capture the behaviour we desire. That is to define $R[x_1,\dots,x_n]$ as the set of functions 
 $$\text{Pol}(R^n,R):= \left\{ f : R^n\rightarrow R : \substack{f(x_1,\dots,x_n) = \sum_{v\in \N^n} a_vx_1^{v_1}\cdots x_n^{v_n} \text{ for some}\\ \text{ finite sequence } \{a_v\}_{v\in\N^n}\subset R  \text{ for all } (x_1,\dots,x_n)\in R^n} \right\},$$
-i.e. the set of polynomial functions, which is a subring of $\text{Fun}(R^n,R)$, the set of functions from $R^n$ to $R$. The main issue is that we can't always distinguish terms of form $x_1^{v_1}\cdots x_n^{v_n}$. For instance, if $\#R < \infty$, then clearly $\#\text{Pol}(R^n,R) < \infty$, but we want the number of distinct terms $x_1^{v_1}\cdots x_n^{v_n}$ to be countably infinite. To be concrete, taking $R := \Z/2\Z$ then $x\mapsto x$ and $x\mapsto x^2$ is the same function, hence $x = x^2 \iff x^2-x = 0$, thus $\text{Pol}(R^n,R)$ fails to produce the right notion of variable in a lot of cases. Instead we will present an alternative approach.  
+i.e. the set of polynomial functions, which is a subring of $\text{Fun}(R^n,R)$, the set of functions from $R^n$ to $R$. The main issue is that we cannot always distinguish terms of form $x_1^{v_1}\cdots x_n^{v_n}$. For instance, if $\#R < \infty$, then clearly $\#\text{Pol}(R^n,R) < \infty$, but we want the number of distinct terms $x_1^{v_1}\cdots x_n^{v_n}$ to be countably infinite in every case. To be concrete, taking $R := \Z/2\Z$ then $x\mapsto x$ and $x\mapsto x^2$ is the same function, hence $x = x^2 \iff x^2-x = 0$, thus $\text{Pol}(R^n,R)$ fails to produce the right notion of variable in a lot of cases. Instead we will present an alternative approach.  
 \subsubsection{Defining the Polynomial Ring} 
 In this subsection we give a rigorous construction of the polynomial ring. 
 \begin{definition}
@@ -2427,9 +2448,9 @@ We have the following result.
     $$\vert v+w\vert = \vert (v_1+w_1,\dots,v_n+w_n)\vert = \sum_1^n (v_i+w_i) = \sum_1^n v_i + \sum_1^n w_i = \vert v\vert +\vert w\vert.$$
 \end{proof}
 \begin{definition}
-    Let $R$ be a ring and $n$ a positive integer. By a \textit{polynomial in $n$ variables over $R$}, we mean an element $(a_v)$ in the left $R$-module $\bigoplus_{v\in \N^n} R$. We denote the set of polynomials in $n$ variables over $R$ by $R[\N^n]$, i.e. $R[\N^n] := \bigoplus_{v\in \N^n} R$.
+    Let $R$ be a ring and $n$ a positive integer. By a \textit{polynomial in $n$ variables over $R$}, we mean an element $(a_v)$ in the $R$-module $\bigoplus_{v\in \N^n} R$. We denote the set of polynomials in $n$ variables over $R$ by $R[\N^n]$, i.e. $R[\N^n] := \bigoplus_{v\in \N^n} R$.
 \end{definition}
-With this definition we already have that $R[\N^n]$ is a left $R$-module, since it is an $R$-submodule of $\prod_{v\in \N^n} R$. The set $\{e_v : v\in \N^n\}$ where $e_v = (\delta_{vw})\in \prod_{w\in \N^n} R$ is a basis of $R[\N^n]$. We now aim to equip $R[\N^n]$ with a suitable multiplication. We do this by adding structure of ring on $\prod_{v\in \N^n} R$ and showing that $R[\N^n]$ is a subring. The set $\prod_{v\in \N^n} R$ with this structure of ring is called \textit{the ring of formal power series in $n$ variables over $R$}. 
+With this definition we already have that $R[\N^n]$ is a$R$-module, since it is an $R$-submodule of $\prod_{v\in \N^n} R$. The set $\{e_v : v\in \N^n\}$ where $e_v = (\delta_{vw})\in \prod_{w\in \N^n} R$ is a basis of $R[\N^n]$. We now aim to equip $R[\N^n]$ with a suitable multiplication. We do this by adding structure of ring on $\prod_{v\in \N^n} R$ and showing that $R[\N^n]$ is a subring. The set $\prod_{v\in \N^n} R$ with this structure of ring is called \textit{the ring of formal power series in $n$ variables over $R$}. 
 \begin{lemma}
     We define multiplication on $\prod_{v\in \N^n} R$ by
     $$(a_v)(b_v)=\left( \sum_{v,w\in \N^n : v+w =u} a_vb_v \right)\in \prod_{u\in \N^n} R.$$
