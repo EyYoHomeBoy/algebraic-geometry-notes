@@ -122,5 +122,17 @@ We adopt the convention that all rings are commutative.
 \end{proof}
 Given a ring $R$ and prime ideal $\mathfrak{p}$ in $R$. We denote the localization of $R$ with respect to $\mathfrak{p}$ by $R_\mathfrak{p}$.
 \begin{definition}
-    {\Large Define sheaf of rings on $\Spec R$}
+    Given a ring $R$, we define a presheaf on $\Spec \ R$ by, 
+    \begin{gather*}
+        \pazocal{O}:(\Spec\ R, \tau_{\Spec\ R})\op\rightarrow \mathrm{Ring}\\
+        U \mapsto \prod_{\mathfrak{p}\in U} R_\mathfrak{p}\\
+        U\subset V \mapsto (\prod_{\mathfrak{p}\in V} R_\mathfrak{p}\rightarrow \prod_{\mathfrak{p}\in U} R_\mathfrak{p}, s\mapsto \left. s\right|_U) 
+    \end{gather*}
 \end{definition}
+\begin{remark}
+    Clearly this presheaf is a sheaf, since the elements of $\pazocal{O}(U)$ are functions and restriction is just set function restriction in the same we saw in the example discussing the presheaf $\Gamma$. 
+\end{remark}
+\begin{definition}
+    An \emph{affine scheme} is a topological space...
+\end{definition}
+

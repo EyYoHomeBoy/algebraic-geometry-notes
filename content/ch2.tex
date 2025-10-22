@@ -2090,7 +2090,7 @@ by $\Pi$.
 \begin{proof}
     
 \end{proof}
-\begin{proposition}
+\begin{proposition}\label{AFunctorIsRepresentableIfAndOnlyIfCategoryOfElementsHasAnInitialObject}
     A covariant functor $\pazocal{F} : \pazocal{C}\rightarrow \mathrm{Set}$ is representable if and only if $\int \pazocal{F}$ has an initial object. For a contravariant functor, the same but the category of elements has a terminal object.  
 \end{proposition}
 \begin{proof}
@@ -2129,6 +2129,154 @@ by $\Pi$.
     If $\pazocal{F}$ is not representable, then $\mathrm{rep}(\pazocal{F})= \emptyset$. If $\pazocal{F}$ is representable, then $\int\pazocal{F}$ has an initial object, hence by the prior lemma and $\mathrm{rep}(\pazocal{F})=\mathrm{init}\left(\int\pazocal{F}\right) \cong \fone$.
 \end{proof}
 \subsection{Limits \& Colimits}
-\subsubsection{Universal Cones}
-\subsubsection{Products}
-\subsubsection{Coproducts}
+\subsubsection{Universal Cones \& Cocones}
+\begin{definition}
+    Consider categories $\pazocal{C}$ and $\pazocal{J}$. Let an object $X$ in $\pazocal{C}$ be given. There is a constant functor 
+    \begin{gather*}
+        X:= X_\pazocal{J} : \pazocal{J} \rightarrow \pazocal{C}\\
+        A\mapsto X\\
+        f : A\rightarrow B \mapsto \fone_X
+    \end{gather*}
+    associated with $X$. We get an embedding 
+    \begin{gather*}
+        \Delta: \pazocal{C}\hookrightarrow \pazocal{J}^\pazocal{C}\\
+        X \mapsto X_\pazocal{J}\\
+        f : X\rightarrow Y \mapsto \{f: X=X_\pazocal{J}(A)\rightarrow Y=Y_\pazocal{J}(A): A\in \Ob(\pazocal{J})\}
+    \end{gather*}
+    One readily verifies that given a morphism $f : X\rightarrow Y$ in $\pazocal{C}$, $\Delta(f)$ is a natural transformation $X_\pazocal{J}\Rightarrow Y_\pazocal{J}$, which we refer to as \emph{the constant natural transformation associated with $f$}.
+\end{definition}
+\begin{definition}
+    Consider a diagram $\pazocal{F} :\pazocal{J}\rightarrow \pazocal{C}$ on $\pazocal{C}$. \emph{A cone over $\pazocal{F}$} with \emph{apex} $X\in \Ob(\pazocal{C})$ is a natural transformation $\lambda : X \Rightarrow \pazocal{C}$
+\end{definition}
+\begin{lemma}
+    Consider a diagram $\pazocal{F} :\pazocal{J}\rightarrow \pazocal{C}$ on a category $\pazocal{C}$. Let an object $X$ in $\pazocal{C}$ be given. A family of morphisms $\{\lambda_j: X\rightarrow \pazocal{F}_j\}_{j\in \Ob(\pazocal{J})}$ is a cone over $\pazocal{F}$ if and only if for each $f: j\rightarrow k$,
+    $$
+        \begin{tikzcd}
+            & X\arrow[ld, "\lambda_j", swap]\arrow[rd, "\lambda_k"]\\
+            \pazocal{F}_j \arrow[rr,"\pazocal{F}(f)",swap] & & \pazocal{F}_k 
+        \end{tikzcd}
+    $$ 
+    commutes.
+\end{lemma}
+\begin{proof}
+    Clearly the family of diagrams
+    $$
+        \begin{tikzcd} 
+            X \arrow[d, "\fone_X",swap] \arrow[r,"\lambda_j"] &\pazocal{F}_j \arrow[d,"\pazocal{F}(f)"]\\
+            X \arrow[r,"\lambda_k",swap] & \pazocal{F}_k
+        \end{tikzcd}
+    $$
+    commuting is equivalent to the family of diagrams in question commuting.  
+\end{proof}
+\begin{definition}
+    A \emph{cocone under a diagram $\pazocal{F}: \pazocal{J}\rightarrow \pazocal{C}$} with \emph{nadir} $X\in \Ob(\pazocal{C})$  is a natural transformation $\lambda: X_\pazocal{J}\Rightarrow \pazocal{F}$, i.e. a family of morphisms $\{\lambda_j: X\rightarrow \pazocal{F}_j\}$ indexed by $J$ such that for each morphisms $f: j\rightarrow k$,
+    $$
+        \begin{tikzcd}
+            \pazocal{F}_j \arrow[rr,"\pazocal{F}(f)"] && \pazocal{F}_k\\
+            &  X\arrow[ru, "\lambda_k",swap]\arrow[lu,"\lambda_j"]
+        \end{tikzcd}
+    $$
+    commutes.
+\end{definition}
+\begin{remark}
+    A cocone under $\pazocal{F}: \pazocal{J}\rightarrow \pazocal{C}$ is just a cone over the associated diagram $\pazocal{F}: \pazocal{J}\op \rightarrow \pazocal{C}\op$.
+\end{remark}
+\begin{definition}
+    Given a diagram $\pazocal{F}: \pazocal{J}\rightarrow \pazocal{C}$ we consider the contravariant \emph{cone functor}
+    \begin{gather*}
+        \mathrm{Cone}(\_,\pazocal{F}): \pazocal{C}\op \rightarrow \mathrm{Set}\\
+        X\mapsto \Hom(X_\pazocal{F},\pazocal{F})\\
+        (g : X\rightarrow Y) \mapsto (\Hom(Y_\pazocal{F},\pazocal{F})\rightarrow\Hom(X_\pazocal{F},\pazocal{F}),\mu\mapsto g^\ast \mu) 
+    \end{gather*}
+    A \emph{limit of $\pazocal{F}$} is representation given by $X\in \Ob(\pazocal{C})$ and $\alpha\in \Hom(\Hom(\_,X),\mathrm{Cone}(\_,\pazocal{F}))$ of the contravariant cone functor. 
+\end{definition}
+\begin{remark}
+    \begin{itemize}
+        \item We denote the object $X$ by $\lim\ \pazocal{F}$. By Yoneda, such a representation corresponds to an element $\lambda\in \mathrm{Cone}(X,\pazocal{F})$. 
+        \item A dual notion of \emph{colimit} similarly from the covariant cone functor
+    $$\mathrm{Cone}(\pazocal{F},\_): \pazocal{C}\rightarrow \mathrm{Set}$$
+    that sends an object to the corresponding cone under $\pazocal{F}$ and a morphism $g: X\rightarrow Y$ to the function 
+    \begin{gather*}
+        \Hom(\pazocal{F},X_\pazocal{F})\rightarrow \Hom(\pazocal{F},Y_\pazocal{F})\\
+        \lambda \mapsto \lambda g_\ast
+    \end{gather*}
+    \item An equivalent definition of the limit is that it is the terminal object in $\int \mathrm{Cone}(\_,\pazocal{F})$. Such an object is a summit $\lim \ \pazocal{F}$ together with a \emph{limit cone} $\lambda$. The colimit is then the initial object in $\int \mathrm{Cone}(\pazocal{F},\_)$, i.e. a pair $\mathrm{colim}\ \pazocal{F}$ and \emph{colimit cone}. 
+    \end{itemize}
+\end{remark}
+For clarity, consider the category of cones over a diagram $\pazocal{F}:\pazocal{J}\rightarrow \pazocal{C}$, namely $\int\mathrm{Cone}(\_,\pazocal{F})$. An object in this category is a cone $(X,\lambda: X\Rightarrow \pazocal{F})$ and a morphism of cones $f: (X,\lambda)\rightarrow (Y,\mu)$ is a morphism $f:X\rightarrow Y$ such that $\lambda = f^\ast \mu$. With this in mind we present the following proposition. 
+\begin{proposition}
+    A limit of a diagram $\pazocal{F}:\pazocal{J}\rightarrow \pazocal{C}$ is essentially unique, i.e. limits are unique up to unique isomorphism. 
+\end{proposition}
+\begin{proof}
+    The subcategory of limit cones is the same as the subcategory of terminal objects in the category cones. These are unique up to unique isomorphism. 
+\end{proof}
+\subsubsection{Products \& Coproducts}
+\begin{definition}
+    A \emph{product} over a discrete category $\pazocal{J}$ in a category $\pazocal{C}$ is the limit of a diagram $\pazocal{F}: \pazocal{J}\rightarrow \pazocal{C}$. We denote this limit by
+    $$\prod_{j\in \pazocal{J}} \pazocal{F}_j.$$
+    The components of the limit cone 
+    $$\left.\left\{\pi_i : \prod_{j\in \pazocal{J}} X_j \rightarrow X_i\ \right| \ i\in \pazocal{J}\right\}$$
+    are called the \emph{projections} of the product. 
+\end{definition}
+\begin{remark}
+    Note that any family of maps $\{\lambda_j : X\rightarrow \pazocal{F}_j\}$ trivially satisfies the naturality condition and is thus a cone over $\pazocal{F}$. 
+\end{remark}
+\begin{example}
+    Consider a set $I$ considered as discrete category in the canonical way. Suppose we have a diagram $X: I\rightarrow \mathrm{Set}$. The subcategory spanned by this diagram is a family of sets $\{X_i\}$ indexed by $I$. We will in the next proposition show that the cartesian product, $\prod_{i\in I} X_i$, is in fact the product of $X$.
+\end{example}
+\begin{proposition}\label{DirectProductIsADirectProductInTheCategoryOfSets}
+    Consider a set $I$. The objects of the category of products over $I$ in $\mathrm{Set}$ are cartesian products over $I$.
+\end{proposition}
+\begin{proof}
+    Indeed, consider a cartesian product $\prod_{i\in I} X_i$ and the cone over $X$, 
+    $$\pi:=\left.\left\{\pi_i : \prod_{j\in I} X_j\rightarrow X_i, (x_j)\mapsto x_i \ \right| \ i\in I \right\}.$$
+    The claim is that this is the terminal object in the category of cones over $X$. Consider any cone $\phi:=\{ f_i: A\rightarrow X_i\}$ over $X$ indexed by $I$. We define the function
+    \begin{gather*}
+        f:  A\rightarrow\prod_{i\in I} X_i\\
+         a \mapsto (f_i(a)) 
+    \end{gather*}
+    we claim that is the unique morphism of cones from $(A,\{f_i\})$ to $(\prod_{i\in I} X_i, \{\pi_i\})$ such that 
+    $$\phi = f^\ast \pi.$$
+    Let $i\in I$. It is sufficient to check that $f$ is the unique map making the diagram 
+    $$
+        \begin{tikzcd}
+            A \arrow[d] \arrow[rd,"f_i"] \\
+            \prod_{j\in I} X_j \arrow[r,"\pi_i",swap] & X_i 
+        \end{tikzcd}
+    $$
+    commute. Indeed, for any $a\in A$, 
+    $$
+        \pi_if(a)= \pi_i((f_j(a)))= f_i(a),
+    $$
+    hence $pi_i f= f_i$. Suppose $g: A\rightarrow \prod_{j\in I}X_j$ is another map such that $\pi_i g= f_i$. Let an arbitrary $a\in A$ be given and set $(x_i):= g(a)$. Then $x_i = \pi_ig(a)= f_i(a)$, hence $f(a)=(f_i(a))=(x_i)=g(a)$, which means $f=g$.
+\end{proof}
+\begin{definition}
+ A \emph{coproduct} over a discrete category $\pazocal{J}$ in a category $\pazocal{C}$ is the colimit of a diagram $\pazocal{F}: \pazocal{J}\rightarrow \pazocal{C}$. We denote this colimit by
+    $$\coprod_{j\in \pazocal{J}} \pazocal{F}_j.$$
+    The components of the colimit cocone 
+    $$\left.\left\{\iota_i : X_i \rightarrow \coprod_{j\in \pazocal{J}} X_j\ \right| \ i\in \pazocal{J}\right\}$$
+    are called the \emph{injections} of the coproduct. 
+\end{definition}
+\begin{example}
+    In the category of sets, a coproduct $\coprod_{i\in I} X_i$ index by a set $I$ is simply disjoint union over $I$, i.e.
+    $$
+        \coprod_{i\in I} X_i = \bigsqcup_{i\in I} X_i.
+    $$ 
+    injection maps simply the inclusion maps
+    $$
+        \left.\left\{\iota_i: X_i \rightarrow \bigsqcup_{j\in I} X_j, x_i \mapsto (x_i,i) \ \right| i\in I \ \right\}.
+    $$
+    Indeed, consider an arbitrary cocone $(A,\{f_i : X_i\rightarrow A\})$ over $X$. We define 
+    \begin{gather*}
+        f : \bigsqcup_{i\in I} X_i \rightarrow A\\
+        (x,i) \mapsto f_i(x)
+    \end{gather*}
+    We must then check for each $i\in I$ that $f\iota_i = f_i$ and that $f$ is unique with this property. Indeed, for each $x\in X_i$
+    $$
+        f\iota_i(x)=f(x,i)=f_i(x) \implies f\iota_i = f.  
+    $$
+    Consider another map $g: \bigsqcup_{i\in I} X_i \rightarrow A$ such that $g\iota_i = f_i$. Let $(x,i)\in \bigsqcup_{j\in I} X_j$ be given. Then 
+    $$
+        g(x,i) = g\iota_i(x) = f\iota_i(x)= f(x,i)\implies f=g. 
+    $$  
+\end{example}

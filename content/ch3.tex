@@ -149,7 +149,8 @@ The data specifying a monoid is often written as the tuple $(M,\circ)$ or $(M,\c
 \begin{proof}
     We define $e := (e):= (e_\alpha)$ where $e_\alpha$ is the neutral element in $M_\alpha$ for each $\alpha$. Let $(m_\alpha),(m_\alpha'),(m_\alpha'')\in \prod_{\alpha\in A} M_\alpha$. We then have that
     \begin{align*}
-        (m_\alpha)\left((m_\alpha') (m_\alpha'') \right) = (m_\alpha)(m_\alpha'm_\alpha'')  = (m_\alpha(m_\alpha'm_\alpha'')) = ((m_\alpha m_\alpha')m_\alpha'') =(m_\alpha m_\alpha')(m_\alpha'') = \left((m_\alpha)(m_\alpha')\right)(m_\alpha'')
+        (m_\alpha)\left((m_\alpha') (m_\alpha'') \right) &= (m_\alpha)(m_\alpha'm_\alpha'')  = (m_\alpha(m_\alpha'm_\alpha'')) = ((m_\alpha m_\alpha')m_\alpha'') =(m_\alpha m_\alpha')(m_\alpha'')\\ 
+        &= \left((m_\alpha)(m_\alpha')\right)(m_\alpha'')
     \end{align*}
     and that
     \begin{align*}
@@ -165,7 +166,10 @@ The data specifying a monoid is often written as the tuple $(M,\circ)$ or $(M,\c
 \end{lemma}
 \begin{proof}
     Let $(m_\alpha),(m_\alpha')\in \prod_{\alpha\in A} M_\alpha$ and fix $\beta \in A$. Then 
-    $$\pi_\beta((m_\alpha)(m_\alpha'))= \pi_\beta((m_\alpha m_\alpha')) = m_\beta m_\beta' = \pi_\beta((m_\alpha))\pi_\beta((m_\alpha')).$$
+    \begin{align*} 
+        \pi_\beta((m_\alpha)(m_\alpha') &)\\ 
+        &= \pi_\beta((m_\alpha m_\alpha')) = m_\beta m_\beta' = \pi_\beta((m_\alpha))\pi_\beta((m_\alpha')).
+    \end{align*}
     Lastly 
     $$\pi_\beta(e)=\pi_\beta((e_\alpha))=e_\beta.$$
     Let $n,n' \in N$. Then 
