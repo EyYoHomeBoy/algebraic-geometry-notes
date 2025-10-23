@@ -1,4 +1,4 @@
-name: Build
+name: Build and Publish PDF
 
 on:
   push:
@@ -23,4 +23,39 @@ jobs:
           name: main-pdf
           path: build/main.pdf
 
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download built PDF
+        uses: actions/download-artifact@v4
+        with:
+          name: main-pdf
+          path: public
+
+      - name: Create simple index page
+        run: |
+          echo '<!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="UTF-8">
+              <title>Download PDF</title>
+              <style>
+                body { font-family: sans-serif; text-align: center; margin-top: 10%; }
+                a { font-size: 1.5em; color: #0366d6; text-decoration: none; }
+                a:hover { text-decoration: underline; }
+              </style>
+            </head>
+            <body>
+              <h1>Download the compiled PDF</h1>
+              <p><a href="main.pdf">Click here to view or download main.pdf</a></p>
+            </body>
+          </html>' > public/index.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: public
  
