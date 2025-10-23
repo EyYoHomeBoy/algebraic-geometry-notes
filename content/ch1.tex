@@ -608,7 +608,30 @@ $$
         \emptyset & \text{otherwise} 
     \end{cases}
 $$
+By transfinite recursion there is a class function $G$ on $\Omega$ such that 
+$$G(\alpha) = F\left(\left.G\right|_\alpha\right).$$
+Note that 
+$$\left. G\right|_\alpha$$
+is a function $\alpha \rightarrow G[\alpha]$, where $G[\alpha]$ is a set by the axiom schema of replacement. We see that 
+$$G(\alpha) = V_\alpha$$
+for each $\alpha\in \Omega$, thus we have the following lemma on the above construction
+\begin{lemma}
+    $V_\alpha$ is a set for each $\alpha\in \Omega$.
+\end{lemma}
+Moreover we have the following
+\begin{lemma}
+    \begin{enumerate}
+        \item $V_\alpha$ is inductive for each $\alpha$.
+        \item The class $\mathbf{V}:= \bigcup_{\alpha\in \Omega}$ is inductive.
+        \item if $\alpha\in \beta\in \Omega$, then $V_\alpha\subset V_\beta$.
+        \item For $\alpha\in \Omega$, if $\alpha\subset V_\alpha$ and $\alpha\in V_{\alpha+1}$
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    {\Large do!}
+\end{proof}
 \subsubsection{Non-standard models of $\mathrm{ZF(C)}$}
+\subsubsection{Gödel's Model of $\mathrm{ZF}$ and of $\mathrm{ZFC}$: The Relative Consistency of $\mathrm{ZF}$ and $\mathrm{AC}$}
 \subsection{A Model of $\mathrm{PA}$ in $\mathrm{V}$}
 We aim to construct a $\mathcal{L}_{\mathrm{PA}}$-structure within $V$ which we denote $\N_{\omega}$ whose domain is $\omega$ and show that this is a model of $\verb|PA|$, where $\mathcal{L}_{\mathrm{PA}}=\{0,\mathrm{s},+,\cdot\}$. We then define 
 \begin{gather*}
