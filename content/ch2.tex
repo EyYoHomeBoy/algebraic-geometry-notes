@@ -2210,6 +2210,27 @@ For clarity, consider the category of cones over a diagram $\pazocal{F}:\pazocal
 \begin{proof}
     The subcategory of limit cones is the same as the subcategory of terminal objects in the category cones. These are unique up to unique isomorphism. 
 \end{proof}
+\subsubsection{Examples}
+\begin{example}
+    {\Large Equalizers and coequalizers - show that $\ker$ and $\mathrm{coker}$ are equalizer resp. coequalizer in $\mathrm{grp}$}. 
+\end{example}
+\begin{example}
+    {\Large Pullbacks}
+\end{example}
+\subsubsection{Limits in $\mathrm{Set}$}
+\begin{definition}
+    A diagram $\pazocal{F}: \pazocal{J}\rightarrow \pazocal{C}$ is \emph{small} if $\pazocal{J}$ is small.
+\end{definition}
+\begin{definition}
+    A category $\pazocal{C}$ is \emph{complete}, if it every small diagram has a limit. It is \emph{cocomplete} if every small diagram has a colimit.  
+\end{definition}
+\begin{proposition}\label{TheCategoryOfSetsIsComplete}
+    $\mathrm{Set}$ is complete.
+\end{proposition}
+\begin{proof}
+    Given a diagram $\pazocal{F}$, we define 
+    $$\lim\ \pazocal{F} := \mathrm{Cone}(1,\pazocal{F})$$
+\end{proof}
 \subsubsection{Products \& Coproducts}
 \begin{definition}
     A \emph{product} over a discrete category $\pazocal{J}$ in a category $\pazocal{C}$ is the limit of a diagram $\pazocal{F}: \pazocal{J}\rightarrow \pazocal{C}$. We denote this limit by
@@ -2280,11 +2301,3 @@ For clarity, consider the category of cones over a diagram $\pazocal{F}:\pazocal
         g(x,i) = g\iota_i(x) = f\iota_i(x)= f(x,i)\implies f=g. 
     $$  
 \end{example}
-\subsubsection{Examples}
-\begin{example}
-    {\Large Equalizers and coequalizers - show that $\ker$ and $\mathrm{coker}$ are equalizer resp. coequalizer in $\mathrm{grp}$}. 
-\end{example}
-\begin{example}
-    {\Large Pullbacks}
-\end{example}
-\subsubsection{}

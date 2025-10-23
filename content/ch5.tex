@@ -813,9 +813,7 @@ HNS establishes a hands-on way of decomposing ANY hypersurface into its irreduci
 \end{example}
 \subsubsection{Introduction to Effective Nullstellensätze: Degree Bounds and a Gröbner Basis Method}
 We fix an algebraically closed field $K$.
-\begin{remark}
-    An \textit{effective Nullstellensatz (ENS)} is a theorem that proves the weak Nullstellensatz in a way that gives rise to an algorithm for computing a solution to Hilbert Equations.  
-\end{remark}
+An \textit{effective Nullstellensatz (ENS)} is a theorem that proves the weak Nullstellensatz in a way that gives rise to an algorithm for computing a solution to Hilbert Equations. 
 The proof of the weak Nullstellensatz provided in these notes thus far does not give a way for constructing an explicit solution to the Hilbert Equation associated with polynomials $f_1,\dots,f_m\in K[x_1,\dots,x_n]$, which vanish nowhere simultaneously and is therefor not an ENS.
 We are thus presented with the question of how to construct a solution to this Hilbert equation explicitly.\\
 One way to accomplish this, is to prove that there is an upper bound $B\geq 0$ (which will typically dependent on $\deg \ f_1,\dots,\deg f_m$) on $\{\deg\ \lambda_i\}_1^m$ or equivalently on $\{\deg\ \lambda_if_i\}_1^m$.\\ 
@@ -841,7 +839,7 @@ Indeed we get that
 $$\sum_1^m \lambda_i f_i = \sum_{u\in \N^n : \vert u\vert \leq B} c_u \mathbf{x}^u = 1$$
 and by construction $\deg \ \lambda_i f_i \leq B.$ Conversely if a solution to the Hilbert equation $\lambda_i\in K[x_1,\dots,x_n]$ with $\deg \ \lambda_i f_i \leq B$ exists then the coefficients of $\lambda_i$ constitutes a solution to (\ref{PolHilbertEquation}). Then we can produce an explicit solution to the Hilbert equation by solving the system of linear equations (\ref{LinHilbertEquation}) and we know that a solution to this system of equations exists exactly when a degree bounded solution to the Hilbert equation exists.\\
 
-Another approach to providing an ENS relies exclusively on Gröbner basis theory. We present this approach here. We first need to reformulate WNS such that the statement can be "observed" by a Gröbner basis. To do this we give the following definition
+Another approach to providing an ENS relies exclusively on Gröbner basis theory. We present this approach here. We first need to reformulate WNS such that the statement can be observed by a Gröbner basis. To do this we give the following definition
 \begin{definition}\label{FinPol : 1}
     Consider polynomials $f_1,\dots,f_m\in K[x_1,\dots,x_n]$. A polynomial $p(\mathbf{x},y_1\dots,y_m) \in K[\mathbf{x},y_1,\dots,y_m]$ is called a \textit{final polynomial for} $f_1,\dots,f_m$ if 
     \begin{align*}

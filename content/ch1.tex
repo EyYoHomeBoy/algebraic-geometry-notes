@@ -566,8 +566,48 @@ We will later see that the well-ordering principle is in fact equivalent to the 
     $$w_{\alpha_0}\cup \{(\alpha_0, f(M\setminus M'))\}$$
     is an $f$-set strictly greater than $w_{\alpha_0}$. It follows that $w_{\alpha_0}:\alpha_0\rightarrow M$ is a bijection. We then get a well-ordering on $M$, where for $x,y\in M$, we write $x\leq y$ if $w_{\alpha_0}^{-1}(x)\leq w_{\alpha_0}^{-1}(y)$.
 \end{proof}
+\subsubsection{Transfinite Recursion and Transfinite Induction}
+We provide without proof {\Large for now?} recursion and induction principles that generalize to the proper class of ordinals. 
+\begin{theorem}\label{TransfiniteRecursion}(Transfinite Recursion)
+    Let $F$ be a class function defined for all sets. Then there is a unique class function $G$, defined on $\Omega$ such that for each $\alpha\in \Omega$,
+    $$
+        G(\alpha) = F\left(\left.G\right|_\alpha\right)
+    $$
+    where 
+    $$
+        \left. G\right|_\alpha := \{(\beta,G(\beta)):\beta\in \alpha\}
+    $$
+\end{theorem}
+
+\begin{theorem}\label{TransfiniteInduction}(Transfinite Induction) Suppose $\varphi(\alpha)$ is an $\{\in\}$-formula such that 
+\begin{enumerate}
+    \item $\varphi(0)$.
+    \item $\forall\alpha\in \Omega(\varphi(\alpha)\rightarrow \varphi(\alpha+1))$.
+    \item $(\forall \beta<\alpha(\varphi(\beta)))\rightarrow \varphi(\alpha)$ if $\alpha\in \Omega$ is a limit ordinal.
+\end{enumerate}
+Then $\varphi(\alpha)$ for every $\alpha\in \Omega$. 
+\end{theorem}
 \subsection{Models of $\mathrm{ZF(C)}$}
 \subsubsection{The standard model $\mathrm{V}$ of $\mathrm{ZF(C)}$}
+In this section we construct a model of $\mathrm{ZF}$ under the assumption that $\mathrm{ZF}$ is consistent. Then there is a model $(M,\in^\mathbb{M})$ of $\mathrm{ZF}$. We define a set for each ordinal $\alpha\in \Omega$,
+$$
+    V_\alpha := 
+    \begin{cases}
+        \emptyset & \text{if } \alpha = 0\\
+        \bigcup_{\beta \in \alpha} & \text{if } \alpha \text{ is a limit ordinal}\\
+        \pazocal{P}(V_\alpha) & \text{if } \alpha \text{ is a succesor ordinal}
+    \end{cases}
+$$ 
+We claim that any element in $M$ corresponds to some element of one of these sets. To see this consider the class function that is the empty set on a sets that are not set functions and where for $x$ that is a function 
+$$
+    F(x):=
+    \begin{cases}
+        \emptyset & \text{if } x=\emptyset\\
+        \pazocal{P}(x(\beta)) & \text{if } \dom\ x \text{ is the succesor of an ordinal } \beta\\
+        \bigcup_{\delta\in \dom\ x} \delta & \text{if }\dom \ x \text{ is a nonempty limit ordinal}\\
+        \emptyset & \text{otherwise} 
+    \end{cases}
+$$
 \subsubsection{Non-standard models of $\mathrm{ZF(C)}$}
 \subsection{A Model of $\mathrm{PA}$ in $\mathrm{V}$}
 We aim to construct a $\mathcal{L}_{\mathrm{PA}}$-structure within $V$ which we denote $\N_{\omega}$ whose domain is $\omega$ and show that this is a model of $\verb|PA|$, where $\mathcal{L}_{\mathrm{PA}}=\{0,\mathrm{s},+,\cdot\}$. We then define 
