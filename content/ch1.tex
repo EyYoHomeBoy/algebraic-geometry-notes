@@ -3,7 +3,7 @@
 \subsection{An axiomatization of set theory}
 \subsubsection{Zermelos axioms}
 
-We introduce set theory first via the Zermelo-Frankel axioms with an added axiom of choice which will be necessary in some cases. This will be axioms with respect to the signature $\{\in\}$ For a pair of variables $z,X$ we define $z\in X :=  \in(z,X)$. This is to be read as "$z$ is an element of $X$" or "$z$ belongs to $X$". We now introduce the axioms of Zermelos set theory, starting with the first four. 
+We introduce set theory first via the Zermelo-Frankel axioms of set theory with an added axiom of choice. This will be axioms with respect to the signature $\{\in\}$. For a pair of variables $z,X$ we define $z\in X :=  \in(z,X)$, hence $\in$ is a binary relational symbol. This is to be read as "$z$ is an element of $X$" or "$z$ belongs to $X$". We now introduce the axioms of Zermelos set theory, starting with the first four. 
 \begin{axioms}
     \begin{enumerate}\addtocounter{enumi}{-1}
         \item The axiom of empty set: $\exists \emptyset\forall z(\neg(z\in \emptyset))$
@@ -14,17 +14,20 @@ We introduce set theory first via the Zermelo-Frankel axioms with an added axiom
 \end{axioms}
 To shorten notation we define $z\notin X :\iff \neg(z\in X)$. with the axioms above in mind we make some definitions. Before that we give a few remarks on the axioms given so far
 \begin{remark}
-    One should think about the set produced from the axiom of the empty set to be a set that contains no element.\\ \textbf{The converse statement in the axiom of extensionality is also true}, i.e. if $\forall X \forall Y(X=Y\implies \forall z(z\in X\iff z\in Y))$: If $z\in X$, using substitution rule for formulas, $z\in Y$. Conversely by the same argument, if $z\in Y$ we get that $z\in X$.\\
+    One should think about the set produced from the axiom of the empty set to be a set that contains no element.\\ \textbf{The converse statement in the axiom of extensionality is also true}, i.e. 
+    $$\forall X \forall Y(X=Y\implies \forall z(z\in X\iff z\in Y)).$$ 
+    If $z\in X$
+    using substitution rule for formulas, $z\in Y$. Conversely by the same argument, if $z\in Y$ we get that $z\in X$.\\
     \textbf{The empty set is unique:} For if $\emptyset$ and $\emptyset'$ satisfy axiom 0, then $\forall z(z\notin \emptyset \wedge z\notin \emptyset')$, meaning $\forall z(z\in \emptyset \iff z\in \emptyset')$, hence by axiom 1, $\emptyset = \emptyset'$.\\
-    \textbf{The set $P$ obtained from the axiom of pairing is uniquely given by $X$ and $Y$}: Indeed if to elements $x$ and $y$, $P$ and $P'$ are sets satisfying $\forall z(z\in P \iff (z=x\vee z=y))$ and $\forall z(z\in P' \iff (z=x\vee z=y))$, then $z\in P\iff z=x \vee z=y \iff z\in P$, hence by axiom 1 $P=P'$.\\
-    Given sets $x,y$ we can therefor define $\{x,y\}$ to be the unique set satisfying the pairing axiom. We also define $\{x\}$ to be the unique set satisfying the pairing axiom and such a set is called \textit{the singleton containing $x$}.\\
+    \textbf{The set $P$ obtained from the axiom of pairing is uniquely given by $x$ and $y$}: Indeed, if given $x$ and $y$, and $P$ and $P'$ are sets satisfying $\forall z(z\in P \iff (z=x\vee z=y))$ and $\forall z(z\in P' \iff (z=x\vee z=y))$, then $z\in P\iff z=x \vee z=y \iff z\in P$, hence by axiom 1 $P=P'$.\\
+    Given sets $x,y$ we can therefor define $\{x,y\}$ to be the unique set satisfying the pairing axiom. We also define $\{x\}$ to be the unique set satisfying the pairing axiom for the pair $x,x$ and such a set is called \textit{the singleton containing $x$}.\\
     \textbf{The set of pairs is unordered,} i.e. $\forall X\forall Y(\{X,Y\}=\{Y,X\})$. This is an immediate consequence of $\vee$ being commutative and the axiom of extensionality. We will return to the question of defining ordered pairs later on.\\
-    \textbf{On the axiom of union}: Loosely izt states that given a set we may define the union over this set. The axiom of extensionality again implies that this is uniquely determined by the first set in the first universal quantifier presented in formula, i.e. there is a unique set, $\bigcup X$, satisfying $\forall z(z\in \bigcup X \iff \exists w\in X(z\in w))$. We may then form the \textit{the union of $X$ and $Y$}, defined to be the set 
-    $$ X\cup Y := \bigcup \{X,Y\}$$
+    \textbf{On the axiom of union}: Loosely, it states that given a set, we may define the union over this set. The axiom of extensionality again implies that this is uniquely determined by the first set in the first universal quantifier presented in formula, i.e. there is a unique set, $\bigcup X$, satisfying $\forall z(z\in \bigcup X \iff \exists w\in X(z\in w))$. We may then form a binary functional symbol $\cup$, \textit{the union of $X$ and $Y$}, defined by
+    $$\cup(X,Y):= X\cup Y := \bigcup \{X,Y\}$$
 \end{remark}
 \begin{definition}
-    We introduce yet another binary relation $\subset$,
-    $$X \subset Y :\iff \forall z(z\in X \implies z\in Y),$$
+    We introduce yet another binary relation symbol $\subset$, defined by 
+    $$\subset(X,Y):equiv X \subset Y :\iff \forall z(z\in X \implies z\in Y),$$
     i.e. if $X$ and $Y$ are sets we get that $X\subset Y$ to be read \textit{$X$ is a subset of $Y$} if every element of $X$ is also an element of $Y$.\\
     We introduce a another binary relation $\subsetneq$,
     $$ X\subsetneq Y :\iff X\subset Y \wedge \neg(X=Y)$$
@@ -47,26 +50,26 @@ To get more inductive sets we need the \textit{axiom of infinity}
     $$\exists I(\emptyset \in I \wedge \ind(I))$$
 \end{axioms}
 \begin{remark}
-    One notes that for such an $I$, $\{\emptyset\}=\emptyset \cup \{\emptyset\}\in I$ and by the same argument $\{\emptyset,\{\emptyset\}\}\in I$ so it seems that we have postulated an inductive set which is significantly more interesting than $\emptyset$.  
+    One notes that for such an $I$, $\{\emptyset\}=\emptyset \cup \{\emptyset\}\in I$ and by the same argument $\{\emptyset,\{\emptyset\}\}\in I$ so from this we get a way to recursively construct non-empty sets. 
 \end{remark}
 The following is an axiom schema called the axiom schema of seperation
 \begin{axioms}
-    For each formula $\varphi(z,p_1,\dots,p_n)$ where the free variables of $\varphi$ are among $z,p_1,\dots, p_n$ we postulate 
+    For each formula $\varphi(z,p_1,\dots,p_n)$ where all the free variables of $\varphi$ are among $z,p_1,\dots, p_n$, we postulate 
     $$\forall X\forall p_1\dots \forall p_n\exists Y\forall z(z\in Y\iff (z\in X\wedge \varphi(z,p_1,\dots,p_n)))$$
 \end{axioms}
 The above axioms lets us form new sets by imposing some conditions on the elements of the set using a formula, i.e. we can in many instances construct sets of the form $\{z\in X: \varphi(z)\}$, i.e. given a set $X$ and the sufficient data to write a term of the formula $\varphi$ we can find a set $Y$ such that $z\in Y \iff  (z \in X \wedge \varphi(z,\_))$. By the usual argument, once the sufficient data is provided to this axiom schema, the set $Y$ which it produces is uniquely given by this data, so we may define 
 $$\{z\in X : \varphi(z,\_)\}$$
-as the unique set satisfying the axiom schema of seperation. Note that $\{z\in X : \varphi(z)\}\subset X$.
+as the unique set satisfying the axiom of seperation with respect to $\varphi$. Note that $\{z\in X : \varphi(z)\}\subset X$.
 \begin{example}
     \begin{enumerate}
         \item Consider sets $X,Y$ and consider the formula $\varphi(z,S) \equiv z\in S$. We then define 
         $$X\cap Y := \{ z\in Y : \varphi(z,X)\}.$$
         Note that $z\in X\cap Y\iff (z\in X\wedge z\in Y)$, which shows that given arbitrary sets $X$ and $Y$
         $$\{z : z\in X\wedge z\in Y\}$$
-        can be uniquely defined. We call this set \textit{the intersection of $X$ and $Y$}.
+        can be uniquely defined. We call this set \textit{the intersection of $X$ and $Y$}, hence we obtain a binary function symbol $\cap$ taking a pair of sets to their intersection.
         \item A more general construction than the one above, is to consider $\varphi(z,S) \equiv \forall T\in S(z\in T)$. Than given a set $X$ and applying the axiom schema of seperation to $\bigcup X$ and the formula $\varphi(z,X)$ we get the set 
         $$ \bigcap X := \left\{z \in \bigcup X : \forall Y \in X(z\in Y)\right\}$$
-        which is a subset of $\bigcup X$. Note that $X\cap Y = \bigcap\{X, Y\} = \bigcap X\cup Y$.
+        which is a subset of $\bigcup X$. In this way we obtain a unary function symbol $\bigcap$ taking $X$ to the intersection of the elements in $X$. Note that $X\cap Y = \bigcap\{X, Y\} = \bigcap X\cup Y$.
         \item We can also define \textit{set difference}  from this axiom schema. Consider sets $X$ and $Y$ and a formula $\varphi(z,Y) \equiv z\notin Y$. Then we can form
         $$ \{z\in X : z\notin Y\}.$$
     \end{enumerate}
@@ -75,15 +78,15 @@ The next axiom lets us form the the set of all subsets of any set.
 \begin{axioms}
     $$\forall X\exists PS\forall z(z\in PS\iff z \subset X)$$
 \end{axioms}
-By the axiom of extensionality we get that for each $X$ there is a unique $PS$ satisfying $\forall z(z \in PS \iff z\subset X)$. We from now on denote this set $2^X$ or $\pazocal{P}(X)$. At this point we have enough axioms to build a lot of mathematics. We could at this point for instant diverge to construct a set of natural numbers $\N$ and define cartesian products of a pair of sets from which we could define relations such as orders, equivalence relations and functions and from thereon, we could define functions on $\N$ satisfying the Peano Axioms. Before doing this, however, we will opt to introduce two more axioms.
+By the axiom of extensionality we get that for each $X$ there is a unique $PS$ satisfying $\forall z(z \in PS \iff z\subset X)$. We from now on denote this set $2^X$ or $\pazocal{P}(X)$. At this point, we have enough axioms to build a lot of mathematics. We could at this point for instant diverge to construct a set of ordinal numbers $\omega$, that assuming the consistency of $\mathrm{Z}$, in a model of $\mathrm{Z}$ will let us construct a model of $\mathrm{PA}$. We may also define cartesian products of a pair of sets from which, we could define relations such as orders, equivalence relations and functions and from thereon, we could define functions on $\N$ satisfying the Peano Axioms. Before doing this, however, we will opt to introduce two more axioms.
 \subsubsection{ZF Set Theory}
-The axioms of Zermelo set theory with these two added axioms is called Zermelo-Fraenkel set theory. The first added axiom is in fact an axiom schema called \textit{the axiom schema of replacement}. Before stating the axiom we introduce the notion of class function
+The axioms of Zermelo set theory with the addition of the following two added axioms is called \emph{Zermelo-Fraenkel set theory}. The first added axiom is in fact an axiom schema called \textit{the axiom schema of replacement}. Before stating the axiom we introduce the notion of class function
 \begin{definition}
     Consider a first order formula $\varphi(X,Y,p)$ where $X,Y$ are free variables and $p$ a tuple of variables of $\varphi$ such that 
     $$\forall X\exists! Y(\varphi(X,Y,p))$$
     We define a unary function symbol $F$ given by 
     $$F(X)=Y :\iff \varphi(X,Y,p)$$
-    Such a unary function symbol is called a \textit{class function for $\varphi$}.
+    Such a unary function symbol is called the \textit{class function for $\varphi$}.
 \end{definition}
 \begin{axioms}
    Consider a first order formula $\varphi(x,y,p)$ where $x,y$ and $p$ a tuple of parameters are free variables of $\varphi$. We then have 
