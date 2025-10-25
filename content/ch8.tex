@@ -33,6 +33,7 @@
 \begin{remark}
     By condition 1. an element $s\in \pazocal{F}(U)$ obtained as described in 2. is unique.
 \end{remark}
+
 \begin{lemma}
     Consider a topological space $X$ and a presheaf $\pazocal{F}$ on $X$ valued in the category of abelian groups that satisfies the second condition of being a sheaf. Then $\pazocal{F}$ is a sheaf on $X$ if and only if for every open $U\subset X$ every open covering $\{U_i\}$ and every $s\in \pazocal{F}(U)$, if $\left.s\right|_{U_i}=0$ for every $i$, then $s=0$.   
 \end{lemma}
@@ -54,11 +55,127 @@
     \end{gather*} 
     is a regular function on $U$ such that $\left. f\right|_{U_i} = f_i$. Indeed, restriction in the sense of Definition~\ref{RestrictionInImageOfPresheaf} is in this instance literally restriction in the usual sence, so the definition of $f$ is indenpendent of the choice of $U_i$.
 \end{example}
+Recall the following definition
+Recall from \ref{DirectLimits} the definition of a direct limit. We shall construct the direct limit in the category of groups
+\begin{definition}
+    Let $G_\bullet: (I,\leq) \rightarrow \mathrm{grp}$ be a direct system and the associated collections of objects and morphisms $(\{G_i\},\{f_{ij}\})$. Given elements $(x_i,i),(x_j,j)$ in  
+    $$
+        \bigsqcup_{i\in I} G_i
+    $$
+    we define an equivalence relation $\sim$, by postulating $x_i\sim x_j$ if there exists $k\in I$ with $i,j\leq k$ and 
+    $$
+        f_{ik}(x_i) = f_{jk}(x_j).
+    $$
+    The \emph{direct limit of $G_\bullet$} is defined to be the set 
+    $$
+        \varinjlim G_i := \bigcup_{i\in I} G_i/\sim.
+    $$
+    Given a pair of elements $[x_i],[x_j]\in \varinjlim G_i$ we define 
+    $$
+        [x_i][x_j] := [f_{ik}(x_i)f_{jk}(x_j)]
+    $$
+    where $k\in I$ is an element such that $i,j\leq k$. There is a canonical natural transformation $\phi: G_\bullet \Rightarrow \varinjlim G_i$ given by
+    $$\{G_i \rightarrow \varinjlim G_i, x_i \mapsto [x_i]\}$$
+\end{definition}
+\begin{remark}
+    By functioriality the definition of the binary operation of the direct limit of $\{G_i\}$ is independent of the choice of $k$. Since for $i\leq l$, 
+    $$
+        f_{il}(x_i) = f_{ll}f_{il}(x_i) \implies [x_i]=[f_{il}(x_i)].
+    $$
+    This means that for every $h\geq k$, 
+    $$
+        [f_{ik}(x_i)f_{jk}(x_j)] = [f_{kh}(f_{ik}(x_i)f_{jk}(x_j))] =[(f_{kh}f_{ik})(x_i)(f_{kh}f_{ik})(x_j)]=[f_{ih}(x_i)f_{jh}(x_j)].
+    $$
+\end{remark}
+\begin{lemma}
+    Keeping the notation from the prior definition, the set $\varinjlim G_i$ with the described binary operation is a group. When the direct system is valued in $\mathrm{ab}$, the direct limit is an abelian group
+\end{lemma}
+\begin{proof}
+    first we check that the operation is well defined. Let $([x_i],[x_j]),([x_p],[x_q])$ in the direct limit of $\{G_i\}$. Then $f_{ik}(x_i)=f_{pk}(x_p)$ and $f_{jh}(x_j)=f_{qh}(x_q)$ for suitable $k,h\in I$ with $i,p\leq k$ and $j,q\leq h$. Pick an $l\in I$ with $h,k\leq l$. Then 
+    $$
+        [x_i][x_j]=[f_{il}(x_i)f_{jl}(x_j)]=[f_{pl}(x_p)f_{ql}(x_q)] = [x_p][x_q].
+    $$
+    One readily verifies that this operation is associative.
+    Note that since each $f_{ij}$ is a group homomorphism, the identity of each $G_i$ is in the same equivalence class and one sees that $e:=[e_i]$ is neutral with respect to the binary operation in $\varinjlim G_i$. Lastly defining $[x_i]^{-1} = [x_i^{-1}]$, one readily verifies that this is independent of the choice of representative and that it is inverse element of $[x_i]$.
+\end{proof}
+\begin{lemma}
+    Consider a direct system $(\{G_i\},\{f_{ij}\})$ of groups. Then $\varinjlim G_i$ with $\phi: G_\bullet \Rightarrow \varinjlim G_i$ is the direct limit in the category theoretic sense.
+\end{lemma}
+\begin{proof}
+    Let a cocone $(G,\lambda)$ of the direct system be given. We define 
+    \begin{gather*}
+        u : \varinjlim G_k \rightarrow G\\
+        [x_i] \mapsto \lambda_i(x_i)
+    \end{gather*}
+    This is well defined by the naturality of $\{\lambda_i\}$. Let $i,j\in I$ with $i\leq j$ be given. Clearly, $u$ is the unique homomorphism making 
+    $$
+        \begin{tikzcd}
+            G_i \arrow[rr,"f_{ij}"] \arrow[rd, "\phi_i"]\arrow[rdd, "\lambda_i",bend right = 20] && G_j \arrow[ld,"\phi_j"]\arrow[ldd,"\lambda_j",bend left = 20]\\
+            & \varinjlim G_k \arrow[d," u"]\\
+            & G
+        \end{tikzcd}
+    $$    
+    commute. We thus conclude that our construction is indeed the direct limit in the categorical sense. 
+\end{proof}
+\begin{definition}
+    Consider a topological space $X$ and a presheaf $\pazocal{F}$ on $X$ valued in $\mathrm{ab}$. Let $P\in X$. We define the \emph{stalk of $\pazocal{F}$ at $P$} to be  
+    $$
+        \pazocal{F}_P := \varinjlim_{U\ni P} \pazocal{F}\in \mathrm{ab}. 
+    $$ 
+\end{definition}
+\begin{remark}
+    Note that by construction $(U,s),(V,t)\in \pazocal{F}_P$ are equal if and only if there is some open neighborhood of $P$,  $W\subset U\cap V$ with 
+    $$\left. s\right|_{W} = \left. t\right|_W.$$
+    There is a natural transformation 
+    \begin{gather*}
+        \phi : \pazocal{F}(U) \Rightarrow \pazocal{F}_p\\
+        s\mapsto (U,s)
+    \end{gather*}
+\end{remark}
 \begin{definition}
     Given a category $\pazocal{C}$ \emph{a morphism of presheaves} is just a morphism in the functor category $\mathrm{Set}^{\pazocal{C}\op}$, i.e. a morphism $\Phi: \pazocal{F} \rightarrow \pazocal{G}$ of parallel presheaves on $\pazocal{C}$ is just a natural transformation $\Phi : \pazocal{F}\Rightarrow \pazocal{G}$.\\
     An isomorphism of presheaves is therefor just a natural isomorphism of presheaves. \\
     \emph{A morphism of sheaves} is just a morphism of presheaves in the category of sheaves, $\mathrm{Sh}(X)$, which is a subcategory of $\mathrm{Set}^{\pazocal{T}(X)\op}$.   
 \end{definition}
+\begin{definition}
+    Consider a parallel pair of presheaves $\pazocal{F},\pazocal{G}: X\rightarrow \mathrm{ab}$ and fix a point $P\in X$. For a morphism of presheaves $\Phi : \pazocal{F}\Rightarrow \pazocal{G}$, there is an induced morphism of stalks at $P$ given by
+    \begin{gather*}
+        \Phi_P : \pazocal{F}_P \rightarrow \pazocal{G}_P\\
+        (U,s) \mapsto (U,\Phi_U(s)). 
+    \end{gather*}
+\end{definition}
+\begin{proposition}
+    Consider a parallel pair of sheaves $\pazocal{F},\pazocal{G}: X\rightarrow \mathrm{ab}$ and morphism of sheaves $\Phi: \pazocal{F}\Rightarrow \pazocal{G}$. Then $\Phi$ is an isomorphism if and only if $\Phi_P:\pazocal{F}_P\rightarrow \pazocal{G}_P$ is an isomorphism for each $P\in X$.  
+\end{proposition}
+\begin{proof}    
+\end{proof}
+
+\begin{definition}
+     Consider a parallel pair of presheaves $\pazocal{F},\pazocal{G}: \pazocal{C}\rightarrow \mathrm{ab}$ and morphism of sheaves $\Phi: \pazocal{F}\Rightarrow \pazocal{G}$. 
+    \begin{itemize}
+        \item We define \emph{the presheaf kernel of $\Phi$} to be the presheaf 
+    \begin{gather*}
+        \ker \ \Phi: \pazocal{C} \rightarrow \mathrm{ab}\\
+        U \mapsto \ker\ \Phi_U\\
+        U\rightarrow V \mapsto \left.\varphi_{UV}\right|_{\ker\ \Phi_V} : \ker \ \Phi_V \rightarrow \ker \ \Phi_U
+    \end{gather*}
+    \item  We define \emph{the presheaf cokernel of $\Phi$} to be the presheaf 
+    \begin{gather*}
+        \coker\  \Phi: \pazocal{C}\rightarrow \mathrm{ab}\\
+        U \mapsto \coker\ \Phi_U\\
+        U\rightarrow V \mapsto \coker\ \Phi_V \rightarrow \coker\ \Phi_U, x+ \im \ \Phi_V \mapsto \pi_{UV}(x) + \im\ \Phi_U  
+    \end{gather*}
+    \item We define \emph{the presheaf image of $\Phi$} to be the presheaf
+    \begin{gather*}
+        \im \ \Phi : \pazocal{C}\rightarrow \mathrm{ab}\\
+        U\mapsto \im \ \Phi_U\\
+        U\rightarrow V\mapsto \left.\pi_{UV}\right|_{\im \ \Phi_V} \im \ \Phi_V\rightarrow \im \ \Phi_U, x\mapsto \pi_{UV}(x) 
+    \end{gather*}
+    \end{itemize}
+\end{definition}
+\begin{remark}
+    Unsurprisingly, the welldefinedness of the above presheaves are ensured by naturality. Functorialty follows from the functioriality of $\pazocal{F}$ and $\pazocal{G}$.
+\end{remark}
 \subsection{Schemes}
 We adopt the convention that all rings are commutative.
 \subsubsection{Affine Schemes}

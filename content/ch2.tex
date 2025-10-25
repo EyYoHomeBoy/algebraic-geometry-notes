@@ -2301,3 +2301,43 @@ For clarity, consider the category of cones over a diagram $\pazocal{F}:\pazocal
         g(x,i) = g\iota_i(x) = f\iota_i(x)= f(x,i)\implies f=g. 
     $$  
 \end{example}
+\subsubsection{Direct systems and direct limits}\label{DirectLimits}
+recall the following definition
+\begin{definition}
+    A preordered set $(A,\leq)$ is a \emph{directed set} if for each pair of elements $a,b\in A$ there is an element $c\in A$ such that $a\leq c$ and $b\leq c$. 
+\end{definition}
+\begin{example}
+    Consider a topological space $X$ and fix a point $P\in X$. Then the family of subsets in $X$
+    $$
+        \{U\in \tau_X : P\in U\}
+    $$
+    is a directed set. Indeed, a pair of open neighborhoods about $P$ are contained in their union, which is an open neighborhood of $P$. 
+\end{example}
+\begin{definition}
+    Consider a directed set $(I,\leq)$ and a category $\pazocal{C}$. A \emph{direct system} is a diagram
+    $$
+        X_{\bullet} : I \rightarrow \pazocal{C}
+    $$
+\end{definition}
+We aim to characterise colimits of direct systems. These are called \emph{direct limits}. First we describe cocones of direct systems. Fix a direct system $X_\bullet : (I,\leq)\rightarrow \pazocal{C}$ and an object $X\in \Ob(\pazocal{C})$. A cocone over $X_\bullet$ with summit $X$ is then a natural transformation $\lambda : X_\bullet \Rightarrow X $. The subcategory in $\pazocal{C}$ spanned by $X_\bullet$  consists of a collection of objects 
+$$
+    \{X_i : i\in I\}
+$$ 
+and a collection of morphisms 
+$$
+    \left.\left\{ f_{ij} : X_i\rightarrow X_j \ \right| \ i,j\in I, i\leq j \right\}
+$$   
+When the colimit of such a diagram exist (for instance when $\pazocal{C}$ is complete), we denote it by
+$$
+    \varinjlim_{i\in I}X_i.
+$$
+This object has the universal property that given another cocone $(X,\lambda)$ the diagram
+$$
+    \begin{tikzcd}
+        X_i \arrow[rr,"f_{ij}"] \arrow[rd, "\mu_i"]\arrow[rdd, "\lambda_i",bend right = 20] && X_j \arrow[ld,"\mu_j"]\arrow[ldd,"\lambda_j",bend left = 20]\\
+        & \varinjlim X_k \arrow[d,dashrightarrow,"\exists! u"]\\
+        & X
+    \end{tikzcd}
+$$
+commutes for each $i,j\in I$ with $i\leq j$. When we get to describing sheafs valued in the category of groups, we will give an explicit construction of such an object. 
+
