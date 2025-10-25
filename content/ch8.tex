@@ -161,13 +161,13 @@ Recall from \ref{DirectLimits} the definition of a direct limit. We shall constr
     \end{gather*}
     \item  We define \emph{the presheaf cokernel of $\Phi$} to be the presheaf 
     \begin{gather*}
-        \coker\  \Phi: \pazocal{C}\rightarrow \mathrm{ab}\\
+        \mathrm{pscoker} \  \Phi: \pazocal{C}\rightarrow \mathrm{ab}\\
         U \mapsto \coker\ \Phi_U\\
         U\rightarrow V \mapsto \coker\ \Phi_V \rightarrow \coker\ \Phi_U, x+ \im \ \Phi_V \mapsto \pi_{UV}(x) + \im\ \Phi_U  
     \end{gather*}
     \item We define \emph{the presheaf image of $\Phi$} to be the presheaf
     \begin{gather*}
-        \im \ \Phi : \pazocal{C}\rightarrow \mathrm{ab}\\
+        \mathrm{psim}\ \Phi : \pazocal{C}\rightarrow \mathrm{ab}\\
         U\mapsto \im \ \Phi_U\\
         U\rightarrow V\mapsto \left.\pi_{UV}\right|_{\im \ \Phi_V} \im \ \Phi_V\rightarrow \im \ \Phi_U, x\mapsto \pi_{UV}(x) 
     \end{gather*}
@@ -191,7 +191,84 @@ Recall from \ref{DirectLimits} the definition of a direct limit. We shall constr
 \begin{remark}
     We call $\pazocal{F}^{+}$ \emph{the sheaf associated with $\pazocal{F}$}
 \end{remark}
-
+\begin{definition}
+    A \emph{subsheaf} of a sheaf $\pazocal{F}$ is a sheaf $\pazocal{F}'$ such that for every open set $U$ in $X$, $\pazocal{F}'(U)\leq \pazocal{F}(U)$ and, letting $\varphi_{UV}:\pazocal{F}(V)\rightarrow \pazocal{F}(U)$ denote the image of $U\subset V$ under $\pazocal{F}$, the image of $U\subset V$ under $\pazocal{F}'$ is the restriction of $\varphi_{UV}$ to $\pazocal{F}(V)$.
+\end{definition}
+\begin{remark}
+    Note that given $(U,s)\in \pazocal{F}'_P$, we have that $s\in \pazocal{F}'(U)\subset \pazocal{F}(U)$, hence $(U,s)\in \pazocal{F}_P$. 
+\end{remark}
+\begin{example}
+    The presheaf kernel of morphism of sheaves $\Phi:\pazocal{F}\Rightarrow \pazocal{G}$ is sheaf called the \emph{sheaf kernel}. By construction $(\ker \ \Phi)(U) = \ker \ \Phi_U \leq \pazocal{F}(U)$ and 
+    $$(\ker \ \Phi)(U\subset V) = \left. \varphi_{UV}\right|_{\ker\ \Phi_U},$$
+    hence $\ker \ \Phi$ is a subsheaf of $\pazocal{F}$. 
+\end{example}
+\begin{definition}
+    A morphism of sheaves $\Phi:\pazocal{F}\Rightarrow \pazocal{G}$ is \emph{injective} if $\ker \ \Phi=0$, i.e. the sheaf that takes every open subset of $X$ to the trivial group.
+\end{definition}
+\begin{remark}
+    $\Phi$ being injective is equivalent to $\Phi_U$ being injective for each open set $U$. 
+\end{remark}
+\begin{definition}
+    For a morphism of sheaves $\Phi: \pazocal{F}\Rightarrow \pazocal{G}$, we define the \emph{image of $\Phi$} to be $\im \ \Phi:= (\mathrm{psim}\ \Phi)^{+}$
+\end{definition}
+\begin{proposition}
+    Given a morphism of sheaves $\Phi:\pazocal{F}\Rightarrow \pazocal{G}$, the canonical morphism $\im\ \Phi\Rightarrow \pazocal{G}$ is injective, hence it can be indentified with a subsheaf of $\pazocal{G}$. 
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+\begin{definition}
+    A morphism of sheaves $\Phi:\pazocal{F}\Rightarrow \pazocal{G}$ is \emph{surjective} if $\im\ \Phi = \pazocal{G}$.
+\end{definition}
+\begin{definition}
+    A sequence 
+    $$
+        \begin{tikzcd}
+            \dots \arrow[r, Rightarrow, "\Phi^{i-1}"] & \pazocal{F}^{i-1} \arrow[r, Rightarrow, "\Phi^i"] & \pazocal{F}^i \arrow[r, Rightarrow, "\Phi^{i+1}"] & \pazocal{F}^{i+1} \arrow[r, Rightarrow] & \dots
+        \end{tikzcd}
+    $$
+    is \emph{exact}, if $\ker\ \Phi^i = \im \ \Phi^{i-1}$ for each $i \in \Z$. 
+\end{definition}
+\begin{definition}
+    Consider a sheaf $\pazocal{F}$ and subsheaf $\pazocal{F}'\subset \pazocal{F}$. We define the \emph{quotient sheaf $\pazocal{F}/\pazocal{F}'$} to be the sheaf associated with 
+    \begin{gather*}
+        X\rightarrow \mathrm{ab}\\
+        U\mapsto \pazocal{F}(U)/\pazocal{F}'(U)\\
+        U\subset V \mapsto \pazocal{F}(V)/\pazocal{F}'(V) \rightarrow \pazocal{F}(U)/\pazocal{F}'(U), s + \pazocal{F}'(V) \mapsto \left. s\right|_{U}+\pazocal{F}'(U)
+    \end{gather*}
+\end{definition}
+\begin{remark}
+    Fix a point $P\in X$ and consider $(U,s)\in (\pazocal{F}/\pazocal{F}')_P$. Note that then $s\in \pazocal{F}(U)/\pazocal{F}'(U)$, hence $(U,s)\in \pazocal{F}_P/\pazocal{F}'_P$.
+\end{remark}
+With the above in mind we can make the following definition
+\begin{definition}
+    For a morphism of sheaves $\Phi : \pazocal{F}\Rightarrow \pazocal{G}$, we define the \emph{cokernel of $\Phi$} to be $\coker\ \Phi := (\mathrm{pscoker}\ \Phi)^{+}$.
+\end{definition}
+\begin{definition}
+    For a continuous map $f : X\rightarrow Y$ and a sheaf $\pazocal{F}$ on $X$, we define the \emph{direct image sheaf}, $f_\star\pazocal{F}$, on $Y$, to be the sheaf
+    \begin{gather*}
+        Y \rightarrow \mathrm{ab}\\
+        U \mapsto \pazocal{F}(f^{-1}(U))\\
+        U\subset V \mapsto \varphi_{f^{-1}(U)f^{-1}(V)}
+    \end{gather*}
+\end{definition}
+\begin{remark}
+    We check that this indeed a sheaf {\Large Check!}
+\end{remark}
+\begin{definition}
+    For a continuous map $f : X\rightarrow Y$ and a sheaf $\pazocal{F}$ on $Y$, we define the \emph{inverse image sheaf}, $f^{-1}\pazocal{G}$ on $X$ to be the sheaf associated with the presheaf
+    \begin{gather*}
+        X\rightarrow \mathrm{ab}\\
+        U\mapsto \varinjlim_{V\supset f(U)}\pazocal{G}(V)\\
+        U\subset V\mapsto \varphi_{\lim_{W\supset f(U)}\pazocal{G}(W)\lim_{W\supset f(V)}\pazocal{G}(W)}
+    \end{gather*}
+\end{definition}
+\begin{definition}
+    Consider a topological space $X$, a subspace $Z\subset X$ and a sheaf $\pazocal{F}$ on $X$. Let $iota$ denote the inclusion map $Z\hookrightarrow X$. We define \emph{the restriction of $\pazocal{F}$ to $Z$} to be the sheaf $\left.\pazocal{F}\right|_{Z}:= \iota^{-1}\pazocal{F}$.
+\end{definition}
+\begin{remark}
+    Fix a point $P\in Z$. Let $(U,s)\in \left(\left. \pazocal{F}\right|_Z\right)_P$... {\Large Do!}
+\end{remark}
 \subsection{Schemes}
 We adopt the convention that all rings are commutative.
 \subsubsection{Affine Schemes}
