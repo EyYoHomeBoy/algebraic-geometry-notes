@@ -121,7 +121,8 @@ Recall from \ref{DirectLimits} the definition of a direct limit. We shall constr
     Consider a topological space $X$ and a presheaf $\pazocal{F}$ on $X$ valued in $\mathrm{ab}$. Let $P\in X$. We define the \emph{stalk of $\pazocal{F}$ at $P$} to be  
     $$
         \pazocal{F}_P := \varinjlim_{U\ni P} \pazocal{F}\in \mathrm{ab}. 
-    $$ 
+    $$
+    given an element $s\in \pazocal{F}(U)$ we call $[s]_P := [s]$ a \emph{germ} of $f$ at $P$. 
 \end{definition}
 \begin{remark}
     Note that by construction $(U,s),(V,t)\in \pazocal{F}_P$ are equal if and only if there is some open neighborhood of $P$,  $W\subset U\cap V$ with 
@@ -141,9 +142,12 @@ Recall from \ref{DirectLimits} the definition of a direct limit. We shall constr
     Consider a parallel pair of presheaves $\pazocal{F},\pazocal{G}: X\rightarrow \mathrm{ab}$ and fix a point $P\in X$. For a morphism of presheaves $\Phi : \pazocal{F}\Rightarrow \pazocal{G}$, there is an induced morphism of stalks at $P$ given by
     \begin{gather*}
         \Phi_P : \pazocal{F}_P \rightarrow \pazocal{G}_P\\
-        (U,s) \mapsto (U,\Phi_U(s)). 
+        (U,s)\mapsto (U,\Phi_U(s))
     \end{gather*}
 \end{definition}
+\begin{remark}
+    Alternatively, we can describe the above map as taking a germ $[s]_P$ to $[\Phi_U(s)]_P$ where $U$ is any open neighborhood of $P$. 
+\end{remark}
 \begin{proposition}
     Consider a parallel pair of sheaves $\pazocal{F},\pazocal{G}: X\rightarrow \mathrm{ab}$ and morphism of sheaves $\Phi: \pazocal{F}\Rightarrow \pazocal{G}$. Then $\Phi$ is an isomorphism if and only if $\Phi_P:\pazocal{F}_P\rightarrow \pazocal{G}_P$ is an isomorphism for each $P\in X$.  
 \end{proposition}
@@ -186,7 +190,20 @@ Recall from \ref{DirectLimits} the definition of a direct limit. We shall constr
     Consider a presheaf $\pazocal{F}:X\rightarrow \mathrm{ab}$ on topological space $X$. There is a sheaf $\pazocal{F}^{+}: X\rightarrow \mathrm{ab}$ and morphism of presheaves $\Theta : \pazocal{F}\Rightarrow\pazocal{F}^{+}$ such that for any sheaf $\pazocal{G}:X\rightarrow \mathrm{ab}$ and any morphism of presheaves $\Phi : \pazocal{F} \Rightarrow \pazocal{G}$ there is a unique morphism of sheaves $\Psi : \pazocal{F}^{+}\Rightarrow \pazocal{G}$ such that $\Phi = \Psi \Theta$. Furthermore $(\pazocal{F}^{+},\Theta)$ is unique up to unique isomorphism. 
 \end{lemma}
 \begin{proof}
-    
+    We construct a presheaf
+    \begin{gather*}
+        X\rightarrow \mathrm{ab}
+    \end{gather*}
+    Given an open subset $U$ in $X$, we define $\pazocal{F}^{+}(U)$ to be the group of elements $s$ in 
+    $$\prod_{P\in U} \pazocal{F}_P$$
+    such that for each $P\in U$ there is an open neighborhood of $P$, $W\subset U$ with an element $t\in \pazocal{F}(W)$ such that for each $Q\in V$ the germ $[t]_Q\in \pazocal{F}_Q$ of $t$ at $Q$,
+    $$s(Q) = [t]_Q.$$
+    Given $U\subset V$ we define $\varphi_UV : \pazocal{F}^{+}(V)\rightarrow \pazocal{F}^{+}(U)$ to be given by restriction. It thus readily follows that $\pazocal{F}^{+}$ is a sheaf. We have a natural transformation
+    $$
+        \Theta : \pazocal{F}\Rightarrow \pazocal{F}^{+}\\
+        \{\Theta_U : \pazocal{F}(U)\rightarrow \pazocal{F}^{+}(U), s \mapsto ([s]_P)\}.
+    $$
+    Indeed, $(U,s)$ is a pair witnessing the fact that $[s]_P\in \pazocal{F}^{+}$...
 \end{proof}
 \begin{remark}
     We call $\pazocal{F}^{+}$ \emph{the sheaf associated with $\pazocal{F}$}
@@ -344,6 +361,7 @@ Given a ring $R$ and prime ideal $\mathfrak{p}$ in $R$. We denote the localizati
 \end{remark}
 \begin{lemma}
     
+
 \end{lemma}
 \begin{definition}
     {\Large Ringed space}
