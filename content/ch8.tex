@@ -194,16 +194,31 @@ Recall from \ref{DirectLimits} the definition of a direct limit. We shall constr
     \begin{gather*}
         X\rightarrow \mathrm{ab}
     \end{gather*}
-    Given an open subset $U$ in $X$, we define $\pazocal{F}^{+}(U)$ to be the group of elements $s$ in 
+    Given an open subset $U$ in $X$, we define $\pazocal{F}^{+}(U)$ to be the group of elements $([s]_P)$ in 
     $$\prod_{P\in U} \pazocal{F}_P$$
-    such that for each $P\in U$ there is an open neighborhood of $P$, $W\subset U$ with an element $t\in \pazocal{F}(W)$ such that for each $Q\in V$ the germ $[t]_Q\in \pazocal{F}_Q$ of $t$ at $Q$,
-    $$s(Q) = [t]_Q.$$
+    such that for each $P\in U$ there is an open neighborhood of $P$, $W\subset U$ with an element $t\in \pazocal{F}(W)$ such that for each $Q\in V$ the germ $[t]_Q\in \pazocal{F}_Q$ of $t$ at $Q$ satisfies
+    $$([s]_P)(Q) = [t]_Q.$$
     Given $U\subset V$ we define $\varphi_UV : \pazocal{F}^{+}(V)\rightarrow \pazocal{F}^{+}(U)$ to be given by restriction. It thus readily follows that $\pazocal{F}^{+}$ is a sheaf. We have a natural transformation
-    $$
+    \begin{gather*}
         \Theta : \pazocal{F}\Rightarrow \pazocal{F}^{+}\\
         \{\Theta_U : \pazocal{F}(U)\rightarrow \pazocal{F}^{+}(U), s \mapsto ([s]_P)\}.
+    \end{gather*}
+    Indeed, $(U,s)$ is a pair witnessing the fact that $[s]_P\in \pazocal{F}^{+}$, so this is well-defined. Let a natural transformation of presheaves $\Phi : \pazocal{F}\Rightarrow \pazocal{G}$ be given. We define a natural transformation of sheaves 
+    \begin{gather*}
+        \Psi: \pazocal{F}^{+} \Rightarrow \pazocal{G}
+    \end{gather*}
+    defined by the collection of morphisms  
     $$
-    Indeed, $(U,s)$ is a pair witnessing the fact that $[s]_P\in \pazocal{F}^{+}$...
+        \left.\left\{ \Psi_U: \pazocal{F}^{+}(U) \rightarrow \pazocal{G}(U), ([s]_P)\mapsto \Psi_U(s) \ \right| \   U\subset X \text{ open}\right\}
+    $$
+    This is well-defined since $\pazocal{G} \cong \pazocal{G}^{+}$ or in other words since $\pazocal{G}(U)\simeq \pazocal{G}^{+}(U)$. $\Psi$ is the unique morphism of sheaves making the diagram
+    $$
+        \begin{tikzcd}
+            \pazocal{F} \arrow[rd,Rightarrow, "\Phi"] \arrow[d,"\Theta",Rightarrow]\\
+            \pazocal{F}^{+} \arrow[r, dashrightarrow] & \pazocal{G}
+        \end{tikzcd}
+    $$
+    commute. Note that $(\pazocal{F}^{+},\Theta)$ is thus the coequalizer two copies of the identity transformation of $\pazocal{F}$ (cf. Example~\ref{EqualisersAndCoequalisers}) which means it is unique up to unique isomorphism.
 \end{proof}
 \begin{remark}
     We call $\pazocal{F}^{+}$ \emph{the sheaf associated with $\pazocal{F}$}

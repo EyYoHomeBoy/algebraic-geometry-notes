@@ -2210,9 +2210,53 @@ For clarity, consider the category of cones over a diagram $\pazocal{F}:\pazocal
 \begin{proof}
     The subcategory of limit cones is the same as the subcategory of terminal objects in the category cones. These are unique up to unique isomorphism. 
 \end{proof}
-\subsubsection{Examples}
-\begin{example}
-    {\Large Equalizers and coequalizers - show that $\ker$ and $\mathrm{coker}$ are equalizer resp. coequalizer in $\mathrm{grp}$}. 
+\subsubsection{Examples of Limits}
+\begin{example}\label{EqualisersAndCoequalisers}
+    Consider a diagram indexed by the category with two elements $\{0,1\}$ with only two distinct non-trivial arrows both from $0$ to $1$ to a category $\pazocal{C}$. Such a diagram is of the form 
+    $$
+        \begin{tikzcd}
+            A \arrow[r,"f", shift left = 0.5ex] \arrow[r,"g", shift right = 0.5ex,swap] & B
+        \end{tikzcd}
+    $$
+    A cone with summit $X$ of such a diagram is a pair of morphisms $a:X\rightarrow A$ and $b: X\rightarrow B$ such that the diagram 
+    $$
+        \begin{tikzcd}
+            & X \arrow[ld,"a",swap] \arrow[rd, "b"] \\
+            A \arrow[rr,"f",shift left =0.5ex] \arrow[rr,"g",shift right =0.5ex,swap] && B
+        \end{tikzcd}
+    $$
+    commutes equivalently it is a single morphism $a: X\rightarrow A$ such that 
+    $$
+        \begin{tikzcd}
+            X \arrow[r,"a"] & A\arrow[r,"f",shift left=0.5ex] \arrow[r,"g", shift right=0.5ex, swap] & B
+        \end{tikzcd}
+    $$
+    commutes. The limit of a diagram 
+    $$
+        \begin{tikzcd}
+            A \arrow[r,"f",shift left=0.5ex] \arrow[r,"g", shift right=0.5ex, swap] & B
+        \end{tikzcd}
+    $$
+    is called an \emph{equaliser} for $f$ and $g$. This is an object $E$ and a morphism $h: E\rightarrow A$ such that for every morphism $a:X\rightarrow A$, the diagram 
+    $$
+        \begin{tikzcd}
+            X \arrow[rd,"a"]\arrow[d, dashrightarrow, "\exists! k", swap] \\
+            E \arrow[r,"h", swap] & A \arrow[r,"f",shift left=0.5ex] \arrow[r,"g", shift right=0.5ex, swap] & B
+        \end{tikzcd}
+    $$
+    A cocone with nadir $Y$ is a morphism $b : B \rightarrow Y$ such that 
+    $$
+        \begin{tikzcd}
+            A \arrow[r,"f",shift left=0.5ex] \arrow[r,"g", shift right=0.5ex, swap] & B \arrow[r,"b"] & Y
+        \end{tikzcd}
+    $$
+    commutes. A \emph{coequaliser} for $f$ and $g$ is a morphism $h : B\rightarrow C$ such that for each $b : B\rightarrow Y$
+    $$
+        \begin{tikzcd}
+            A \arrow[r,"f",shift left=0.5ex] \arrow[r,"g", shift right=0.5ex, swap] & B \arrow[r, "b"] \arrow[rd, "h", swap] & Y \arrow[d,"\exists! k", dashrightarrow] \\
+            && C 
+        \end{tikzcd}
+    $$
 \end{example}
 \begin{example}
     {\Large Pullbacks}
