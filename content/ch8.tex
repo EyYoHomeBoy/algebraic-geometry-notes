@@ -374,14 +374,88 @@ Given a ring $R$ and prime ideal $\mathfrak{p}$ in $R$. We denote the localizati
 \begin{remark}
     Clearly this presheaf is a sheaf, since the elements of $\pazocal{O}(U)$ are functions and restriction is just set function restriction in the same we saw in the example discussing the presheaf $\Gamma$. 
 \end{remark}
-\begin{lemma}
-    
-
-\end{lemma}
 \begin{definition}
-    {\Large Ringed space}
+    For $f\in R$, we define 
+    $$
+        D(f) := (\Spec \ R)\setminus V(\langle f\rangle)
+    $$
+\end{definition}
+\begin{lemma}
+    For a ring $R$,
+    $$
+        \{D(f)\subset \Spec\ R : f\in A\}
+    $$
+    forms a basis of the Zariski topology on $\Spec\ R$.
+\end{lemma}
+\begin{proof}
+    Indeed, for $\mathfrak{p}\notin V(I)$, there is an $f\in I$ not in $\mathfrak{p}$, hence $\mathfrak{p}\notin V(\langle f\rangle)$, meaning $\mathfrak{p}\in D(f)$. Then $V(I)\cap D(f) = \emptyset$. This means that every point in an open subset $U$ in $\Spec \ R$ has an open neighborhood contained in $U$. It follows that the collection in question forms an open basis for the Zariski topology. 
+\end{proof}
+\begin{lemma}
+    Consider a ring $R$. Then 
+    \begin{enumerate}
+        \item For every point $\mathfrak{p}\in \Spec\ R$
+        $$
+            \pazocal{O}_\mathfrak{p} \simeq R_\mathfrak{p}.
+        $$
+        \item For any $f\in R$,
+        $$
+            \pazocal{O}(D(f)) \simeq R_f.
+        $$
+        \item In particular,
+        $$
+            \Gamma(\Spec\ R,\pazocal{O}):= \pazocal{O}(\Spec\ R) = D(1) \simeq R_1 = R.
+        $$
+    \end{enumerate}    
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+\begin{definition}
+    A \emph{ringed space} is a topological space $X$ together with a sheaf 
+    $$
+        \pazocal{O}_X : X \rightarrow \mathrm{CRing}.
+    $$
+    A \emph{locally ringed space} is a ringed space $(X,\pazocal{O}_X)$ such that each stalk $\pazocal{O}_{X,P}$ for $P\in X$ is a local ring
 \end{definition}
 \begin{definition}
-    An \emph{affine scheme} is a topological space...
+    A morphism of ringed spaces, $(X,\pazocal{O}_X)\rightarrow (Y,\pazocal{O}_Y)$ is a continuous map $f: X\rightarrow Y$ and a natural transformation $f^\# : \pazocal{O}_Y \Rightarrow f_\star \pazocal{O}_X$.
+\end{definition}
+We wish to define a morphism between locally ringed spaces. To do this we first show how to construct a ring homomorphism between the stalks $\pazocal{O}_{Y,f(P)}$ and $\pazocal{O}_{X,P}$ for each $P\in X$. Indeed, $f^\#$ induces a ring homomorphism 
+$$
+    \pazocal{O}_{Y,f(P)} = \varinjlim_{U\ni f(P)} \pazocal{O}(U)\rightarrow \varinjlim_{U\ni f(P)} \pazocal{O}_{X}\left(f^{-1}(U)\right) = \varinjlim_{f^{-1}(U)\ni P} \pazocal{O}_X\left(f^{-1}(U)\right)
+$$
+Composing this with 
+$$
+    \varinjlim_{f^{-1}(U)\ni P} \pazocal{O}_X\left(f^{-1}(U)\right)\hookrightarrow \varinjlim_{W\ni P} \pazocal{O}_X(W) = \pazocal{O}_{X,P}
+$$
+We denote this composition by $f^\#_P$.
+\begin{definition}
+    A morphism of locally ringed spaces is a morphism of ringed spaces $(f,f^\#):(X,\pazocal{O}_X)\rightarrow (Y,\pazocal{O}_Y)$ such that $f^\#_P$ is local ring homomorphism (cf. Definition~\ref{LocalRingDefinition}) for each $P\in X$. 
+\end{definition}
+\begin{lemma}
+    \begin{enumerate}
+        \item $\Spec \ R$ is a locally ringed space for each ring $R$.
+        \item If $\sigma: A\rightarrow B$ is a map of rings, then it induces a morphism of locally ringed spaces
+        \begin{gather*}
+            (f,f^\#)_\sigma : (\Spec\ B, \pazocal{O}_{\Spec\ B}) \rightarrow (\Spec\ A, \pazocal{O}_{\Spec\ A})
+        \end{gather*}
+        \item The functor
+        \begin{gather*}
+            \Spec : \mathrm{CRing} \rightarrow \mathrm{LRS}\\
+            R\mapsto \Spec\ R\\
+            \sigma : A\rightarrow B \mapsto (f,f^\#)_\sigma
+        \end{gather*}
+    \end{enumerate}
+    is fully faithful. Here $\mathrm{LRS}$ denotes the category of locally ringed spaces. 
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+\begin{definition}
+    An \emph{affine scheme} is a locally ringed space $(X,\pazocal{O}_X)$ isomorphic to $(\Spec \ R, \pazocal{O})$ for some ring $R$ as locally ringed spaces. 
+\end{definition}
+\subsubsection{Schemes}
+\begin{definition}
+    A \emph{scheme} is a locally ringed space $(X,\pazocal{O}_X)$ where for each $P\in X$ there is an open neighborhood of $P$ such that $(U,\left.\pazocal{O}_X\right|_U)$ is an affine scheme. I.e. there is an open covering of $X$ where each open set in the covering is an affine scheme. 
 \end{definition}
 
