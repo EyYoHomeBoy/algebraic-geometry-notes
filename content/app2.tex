@@ -1,0 +1,686 @@
+% !TEX root = ../main.tex
+\section{Set Theory}
+\subsection{An axiomatization of set theory}
+\subsubsection{Zermelos axioms}
+
+We introduce set theory first via the Zermelo-Frankel axioms of set theory with an added axiom of choice. This will be axioms with respect to the signature $\{\in\}$. For a pair of variables $z,X$ we define $z\in X :=  \in(z,X)$, hence $\in$ is a binary relational symbol. This is to be read as "$z$ is an element of $X$" or "$z$ belongs to $X$". We now introduce the axioms of Zermelos set theory, starting with the first four. 
+\begin{axioms}
+    \begin{enumerate}\addtocounter{enumi}{-1}
+        \item The axiom of empty set: $\exists \emptyset\forall z(\neg(z\in \emptyset))$
+        \item The axiom of extensionality: $\forall X\forall Y(\forall z(z\in X \iff z \in Y)\implies X=Y)$.
+        \item The axiom of pairing: $\forall x\forall y\exists P \forall z\left(z\in P \iff \left(z = x \vee z = y\right)\right)$.
+        \item The axiom of Union: $\forall X\exists U \forall z ( z \in U \iff \exists w \in X(z\in w))$.
+    \end{enumerate}
+\end{axioms}
+To shorten notation we define $z\notin X :\iff \neg(z\in X)$. with the axioms above in mind we make some definitions. Before that we give a few remarks on the axioms given so far
+\begin{remark}
+    One should think about the set produced from the axiom of the empty set to be a set that contains no element.\\ \textbf{The converse statement in the axiom of extensionality is also true}, i.e. 
+    $$\forall X \forall Y(X=Y\implies \forall z(z\in X\iff z\in Y)).$$ 
+    If $z\in X$
+    using substitution rule for formulas, $z\in Y$. Conversely by the same argument, if $z\in Y$ we get that $z\in X$.\\
+    \textbf{The empty set is unique:} For if $\emptyset$ and $\emptyset'$ satisfy axiom 0, then $\forall z(z\notin \emptyset \wedge z\notin \emptyset')$, meaning $\forall z(z\in \emptyset \iff z\in \emptyset')$, hence by axiom 1, $\emptyset = \emptyset'$.\\
+    \textbf{The set $P$ obtained from the axiom of pairing is uniquely given by $x$ and $y$}: Indeed, if given $x$ and $y$, and $P$ and $P'$ are sets satisfying $\forall z(z\in P \iff (z=x\vee z=y))$ and $\forall z(z\in P' \iff (z=x\vee z=y))$, then $z\in P\iff z=x \vee z=y \iff z\in P$, hence by axiom 1 $P=P'$.\\
+    Given sets $x,y$ we can therefor define $\{x,y\}$ to be the unique set satisfying the pairing axiom. We also define $\{x\}$ to be the unique set satisfying the pairing axiom for the pair $x,x$ and such a set is called \textit{the singleton containing $x$}.\\
+    \textbf{The set of pairs is unordered,} i.e. $\forall X\forall Y(\{X,Y\}=\{Y,X\})$. This is an immediate consequence of $\vee$ being commutative and the axiom of extensionality. We will return to the question of defining ordered pairs later on.\\
+    \textbf{On the axiom of union}: Loosely, it states that given a set, we may define the union over this set. The axiom of extensionality again implies that this is uniquely determined by the first set in the first universal quantifier presented in formula, i.e. there is a unique set, $\bigcup X$, satisfying $\forall z(z\in \bigcup X \iff \exists w\in X(z\in w))$. We may then form a binary functional symbol $\cup$, \textit{the union of $X$ and $Y$}, defined by
+    $$\cup(X,Y):= X\cup Y := \bigcup \{X,Y\}$$
+\end{remark}
+\begin{definition}
+    We introduce yet another binary relation symbol $\subset$, defined by 
+    $$\subset(X,Y):\equiv X \subset Y :\iff \forall z(z\in X \implies z\in Y),$$
+    i.e. if $X$ and $Y$ are sets we get that $X\subset Y$ to be read \textit{$X$ is a subset of $Y$} if every element of $X$ is also an element of $Y$.\\
+    We introduce a another binary relation $\subsetneq$,
+    $$ X\subsetneq Y :\iff X\subset Y \wedge \neg(X=Y)$$
+    We then say that \textit{$X$ is a proper subset of $Y$}
+\end{definition}
+\begin{remark}
+    Using the axiom of extensionality we get that if $X\subsetneq Y$ then $\neg(\forall z(z\in X\iff z\in Y))$, hence $\exists z((z\in X\wedge z\notin Y) \vee (z\in Y \wedge z\notin X))$, and since $X\subset Y$, we get $\exists z(z\in Y \wedge z\notin X)$. Note that $\emptyset \subset X$, since proving $\forall z(z\in \emptyset \implies z\in X)$ boils down to the fact that $z\in \emptyset$ definitionally is equal to $\mathrm{False}$.
+\end{remark}
+\begin{definition}
+    A set $X$ is called \textit{inductive} if 
+    $$\forall y(y\in X \implies (y\cup \{y\})\in X).$$
+    We define 
+    $$\ind(X) :\iff y(y\in X \implies (y\cup \{y\})\in X)$$
+\end{definition}
+\begin{example}
+    Note that $\ind(\emptyset)$ by ex falso.
+\end{example}
+To get more inductive sets we need the \textit{axiom of infinity}
+\begin{axioms}
+    $$\exists I(\emptyset \in I \wedge \ind(I))$$
+\end{axioms}
+\begin{remark}
+    One notes that for such an $I$, $\{\emptyset\}=\emptyset \cup \{\emptyset\}\in I$ and by the same argument $\{\emptyset,\{\emptyset\}\}\in I$ so from this we get a way to recursively construct non-empty sets. 
+\end{remark}
+The following is an axiom schema called the axiom schema of seperation
+\begin{axioms}
+    For each formula $\varphi(z,p_1,\dots,p_n)$ where all the free variables of $\varphi$ are among $z,p_1,\dots, p_n$, we postulate 
+    $$\forall X\forall p_1\dots \forall p_n\exists Y\forall z(z\in Y\iff (z\in X\wedge \varphi(z,p_1,\dots,p_n)))$$
+\end{axioms}
+The above axioms lets us form new sets by imposing some conditions on the elements of the set using a formula, i.e. we can in many instances construct sets of the form $\{z\in X: \varphi(z)\}$, i.e. given a set $X$ and the sufficient data to write a term of the formula $\varphi$ we can find a set $Y$ such that $z\in Y \iff  (z \in X \wedge \varphi(z,\_))$. By the usual argument, once the sufficient data is provided to this axiom schema, the set $Y$ which it produces is uniquely given by this data, so we may define 
+$$\{z\in X : \varphi(z,\_)\}$$
+as the unique set satisfying the axiom of seperation with respect to $\varphi$. Note that $\{z\in X : \varphi(z)\}\subset X$.
+\begin{example}
+    \begin{enumerate}
+        \item Consider sets $X,Y$ and consider the formula $\varphi(z,S) \equiv z\in S$. We then define 
+        $$X\cap Y := \{ z\in Y : \varphi(z,X)\}.$$
+        Note that $z\in X\cap Y\iff (z\in X\wedge z\in Y)$, which shows that given arbitrary sets $X$ and $Y$
+        $$\{z : z\in X\wedge z\in Y\}$$
+        can be uniquely defined. We call this set \textit{the intersection of $X$ and $Y$}, hence we obtain a binary function symbol $\cap$ taking a pair of sets to their intersection.
+        \item A more general construction than the one above, is to consider $\varphi(z,S) \equiv \forall T\in S(z\in T)$. Than given a set $X$ and applying the axiom schema of seperation to $\bigcup X$ and the formula $\varphi(z,X)$ we get the set 
+        $$ \bigcap X := \left\{z \in \bigcup X : \forall Y \in X(z\in Y)\right\}$$
+        which is a subset of $\bigcup X$. In this way we obtain a unary function symbol $\bigcap$ taking $X$ to the intersection of the elements in $X$. Note that $X\cap Y = \bigcap\{X, Y\} = \bigcap X\cup Y$.
+        \item We can also define \textit{set difference}  from this axiom schema. Consider sets $X$ and $Y$ and a formula $\varphi(z,Y) \equiv z\notin Y$. Then we can form
+        $$ \{z\in X : z\notin Y\}.$$
+    \end{enumerate}
+\end{example}
+The next axiom lets us form the the set of all subsets of any set. 
+\begin{axioms}
+    $$\forall X\exists PS\forall z(z\in PS\iff z \subset X)$$
+\end{axioms}
+By the axiom of extensionality we get that for each $X$ there is a unique $PS$ satisfying $\forall z(z \in PS \iff z\subset X)$. We from now on denote this set $2^X$ or $\pazocal{P}(X)$. At this point, we have enough axioms to build a lot of mathematics. We could at this point for instant diverge to construct a set of ordinal numbers $\omega$, that assuming the consistency of $\mathrm{Z}$, in a model of $\mathrm{Z}$ will let us construct a model of $\mathrm{PA}$. We may also define cartesian products of a pair of sets from which, we could define relations such as orders, equivalence relations and functions and from thereon, we could define functions on $\N$ satisfying the Peano Axioms. Before doing this, however, we will opt to introduce two more axioms.
+\subsubsection{ZF Set Theory}
+The axioms of Zermelo set theory with the addition of the following two added axioms is called \textit{Zermelo-Fraenkel set theory}. The first added axiom is in fact an axiom schema called \textit{the axiom schema of replacement}. Before stating the axiom we introduce the notion of class function
+\begin{definition}
+    Consider a first order formula $\varphi(X,Y,p)$ where $X,Y$ are free variables and $p$ a tuple of variables of $\varphi$ such that 
+    $$\forall X\exists! Y(\varphi(X,Y,p))$$
+    We define a unary function symbol $F$ given by 
+    $$F(X)=Y :\iff \varphi(X,Y,p)$$
+    Such a unary function symbol is called the \textit{class function for $\varphi$}.
+\end{definition}
+\begin{axioms}
+   Consider a first order formula $\varphi(x,y,p)$ where $x,y$ and $p$ a tuple of parameters are free variables of $\varphi$. We then have 
+      $$\forall A\forall p(\forall x\in A\exists! y\varphi(x,y,p)\implies \exists B\forall x\in A\exists y\in B\varphi(x,y,p))$$
+\end{axioms} 
+\begin{remark}
+    For a set $A$ and a class function $F$, we can then find a set $B$ containing the elements of the form $F(x)$ where $x\in A$. We may then consider the set 
+    $$F[A] := \left\{ y\in B: \exists x\in A(y=F(x))\right\}=\left\{F(x) : x\in A\right\}.$$
+    The axiom was introduced by Fraenkel and Skolem, who independently of each other in 1922 discovered that in Zermelo's axioms it is not possible to prove the existence of the set $\{\N,\pazocal{P}(\N),\pazocal{P}(\pazocal{P}(\N)),\dots\}$. With this axiom the class function $X\mapsto \pazocal{P}(X)$ gives rise to such a set. 
+\end{remark}
+The second axiom is called \textit{the axiom of foundation}
+\begin{axioms}
+    $$\forall X\left(\exists z(z\in X)\implies \exists y\in X(y\cap X = \emptyset)\right).$$
+\end{axioms}
+This axiom was introduced in 1925 by John von Neumann in order to define ordinal numbers.
+\begin{example}\label{ASetCannotHaveItselfAsAnElement}
+    Suppose for a contradiction that there is a sequence of sets satisfying $x_1\ni x_2\ni x_3\ni\dots$. Consider the set containing these sets $X=\{x_1,x_2,x_3,\dots\}$ (implicitly we are here assuming the existence of $\N$ and use the axiom schema of replacement with the formula $\varphi \equiv T$). Then take an element $x_k$ of $X$. Note $x_{k+1}\in x_k$ and $x_{k+1}\in X$, hence $x_k\cap X\neq \emptyset$, which in contradiction with the axiom of foundation. We can therefor conclude that there is no set $x$ with $x\in x$, since this would imply the existence of a descending sequence $x\ni x\ni \dots$, which shows that we cannot run into Russels paradox in Zermelo-Fraenkel set theory. Nor can we have a sequence of sets $x_1,\dots,x_n$ satisfying 
+    $$x_1\in x_2\in x_3\in \dots\in x_n\in x_1$$
+    for then we would get a sequence $x_1\ni x_n\ni \dots\ni x_2\ni x_1\ni \dots$. 
+    One can also prove that $\forall x(x\notin x)$ simply using the axiom of foundation on the set $\{x\}$. Indeed, there is an element $z\in \{x\}$, so there must be a $y\in\{x\}$ such that $y\cap \{x\} = \emptyset$, which implies that for any $w\in \{x\}$, $w\notin y$. Now note that $y=w=x$, which means $x\notin x$.  
+\end{example}
+\subsection{Relations}
+\begin{definition}
+    Consider sets $x,y$. We define the ordered pair of $x,y$ to be 
+    $$(x,y) := \{\{x\},\{x,y\}\}.$$
+\end{definition}
+\begin{remark}
+    $(x,y)=(x',y')\iff (x=x' \wedge y=y')$. Indeed, if $(x,y)=(x',y')$, then 
+    \begin{gather*} \{x\} = \{x'\} \wedge \{x,y\} = \{x',y'\} \vee \{x\} = \{x',y'\} \wedge \{x,y\} = \{x'\} 
+    \end{gather*}
+    In the first case we get that $x=x'$ and that $x=x' \wedge y = y'\vee x= y'\wedge y=x'$. In either case it easily follows that $x=x'$ and $y=y'$. In the second case $x=x' \wedge x=y'$ and $x' = x\wedge x' = y$, so trivially $x=x'$ and $y=y'$. 
+\end{remark}
+\begin{definition}
+    Consider sets $X$ and $Y$. The axiom schema of seperation, the axiom of powerset and the axiom of union lets us form the set
+    $$X\times Y := \left\{ (x,y)\in \pazocal{P}\left(\pazocal{P}(X\cup Y)\right) : x\in X \wedge y\in Y\right\}.$$ 
+    Given sets $X_1,\dots,X_n$ we recursively define $X_1\times \cdots \times X_n$ to be 
+    $$(X_1\times \cdots \times X_{n-1})\times X_n.$$
+    We denote an element of this set $((x_1,\dots,x_{n-1}),x_n)$ by $(x_1,\dots,x_n)$
+\end{definition}
+\begin{remark}
+    Using induction on the number of sets we can show that $(x_1,\dots,x_n)=(x_1',\dots,x_n')$ if and only if $x_i=x_i'$ for every $i\in\{1,\dots,n\}$.  
+\end{remark}
+\begin{definition}
+    An \textit{$n$-ary relation} on $n$ sets $X_1,\dots,X_n$ is a subset $R\subset X_1\times \cdots\times X_n$. For an $n$-tuple $(x_1,\dots,x_n)\in X_1\times\cdots\times  X_n$.\\ 
+    A $2$-ary relation $R$ on sets $X,Y$ is called a \textit{binary relation}. We define $xRy: \equiv (x,y)\in R$. If $R$ is a relation on $S\times S$ for some set $S$, we call it a \textit{(binary) relation on $S$}.
+\end{definition}
+In the following we will investigate different notions of (binary) relations between elements in sets. 
+\subsubsection{Functions}
+\begin{definition}
+    We define a \textit{(set theoretical) function} $f$ from a set $X$ to a set $Y$, denoted $f:X\rightarrow Y$, to be a relation $f\subset X\times Y$ satisfying
+    $$\forall x\in X\exists! y\in B((x,y)\in f).$$
+    For an $x\in A$ we take $f(x)$ to be the unique element in $Y$ satisfying $(x,f(x))\in f$. With this notation if $x=x'$ then $f(x)=f(x')$. For a subset $Z\subset X$, the axiom schema of seperation lets us form the \text{the image of $Z$ under $f$}, which we define as 
+    $$f(Z) := \{ f(x) : x\in Z\}.$$
+    We can also define the \textit{restriction of $f$ to $Z$} as the set 
+    $$ \left. f\right|_Z := \{ (x,f(x))\in f : x\in Z\}$$
+    We denote the set of function between $X$ and $Y$ by ${}^X\!Y$, i.e. 
+    $${}^X\!Y := \left\{ f\subset X\times Y : \forall x\in X\exists! y \in Y((x,y)\in f)\right\} $$
+\end{definition}
+\begin{definition}
+    A function $f : X\rightarrow Y$ is called \textit{surjective} or \textit{onto} if $$\forall y\in Y\exists x\in X (f(x)=y).$$ The short hand notation for a function being surjective is $f: X\twoheadrightarrow Y$.  
+\end{definition}
+\begin{definition}
+    A function $f : X\rightarrow Y$ is called \textit{injective} or \textit{one-to-one} if $$\forall x\forall x'(f(x)=f(x')\implies x=x').$$
+    The short hand notation for $f$ being injective is $f: X\hookrightarrow Y$.  
+\end{definition}
+\begin{definition}
+    If a function $f: X \rightarrow Y$ is both surjective and injective, then it is called \textit{bijective}. The short hand notation for $f$ being bijective is $f: X \overset{\sim}{\rightarrow} Y$.
+\end{definition}
+\begin{remark}
+    Note that if $f$ is bijective, then 
+    $$\forall y\in Y\exists! x\in X((x,y)\in f),$$
+    or more succinctly for each $y\in Y$ we may find a unique $x\in X$ satisfying $y=f(x)$. Indeed given a $y\in Y$, there is an $x\in X$ such that $(x,y)\in f$ (in other words $y=f(x)$) since $f$ is surjective. If $x'$ is another element in $X$ satisfying $(x',y)\in f$. Then $f(x)=y=f(x')$, hence $x=x'$ since $f$ is injective. This lets us form the \textit{the inverse of $f$}, which we take to be the set
+    $$f^{-1}:= \left\{(y,x) \in Y\times X : (x,y) \in f \right\}.$$
+    This is indeed a function, for if $y\in Y$ then there is a unique $x\in X$ such that $(x,y)\in f$, meaning $x$ is unique such that $(y,x)\in f^{-1}$. 
+\end{remark}
+We can also define a way to compose certain compatible functions to form new functions.
+\begin{definition}
+    Let $f: X\rightarrow Y$, $g:Y\rightarrow Z$ be arbitrary functions. Then we define a set 
+    $$ g\circ f := \left\{(x,z)\in X\times Z: \exists y\in Y((x,y)\in f \wedge (y,z)\in g) \right\}.$$
+\end{definition}
+\begin{lemma}
+    Let $f: X\rightarrow Y$, $g:Y\rightarrow Z$ be arbitrary functions. $g\circ f$ is a function from $X$ to $Z$ and for each $x\in X$, $(g\circ f)(x)=g(f(x))$.
+\end{lemma}
+\begin{proof}
+    Let $x\in X$. Then setting $ y:= f(x)$, $z:= g(f(x))$, $(x,y)\in f$ and $(y,z)\in g$, so $(x,z)\in g\circ f$. If $z'$ is such that $(x,z')\in g\circ f$, then there is a $y'\in Y$ such that $(x,y')\in f$ and $(y',z')\in g$. Since $f$ is a function, $y'=f(x)$ and since $g$ is a function $z'=g(y')=g(f(x))=z$.
+\end{proof}
+To get away from explicitly constructing functions as sets we prove the following lemma
+\begin{lemma}
+    Let $f,g: X\rightarrow Y$ be functions. $f=g$ iff $f(x)=g(x)$ for every $x\in X$.  
+\end{lemma}
+\begin{proof}
+    "$\implies$": Suppose $f=g$. Let $x\in X$. Then $(x,f(x))\in X$ by the converse statement of the axiom of extensionality $(x,f(x))\in g$. Then since $g$ is a function $f(x)=g(x)$.\\
+    "$\impliedby$": Supppose $f(x)=g(x)$ for every $x\in X$. Let $(x,y)\in f$ be given. Then $(x,y)=(x,f(x))=(x,g(x))\in g$, so $f\subset g$. By symmetry $g\subset f$. Then $\forall z(z\in f\iff z\in g)$, so the axiom of extensionality tells us that $f=g$.
+\end{proof}
+We may then construct a function $f: X\rightarrow Y$ only by specifying the image under each element in the \textit{domain} $X$. 
+\begin{gather*} 
+    f : X \rightarrow Y\\
+    x\mapsto f(x)
+\end{gather*}
+where $f(x)$ is some set. Explictly this postulates that  
+$$\{(x,y)\in X\times Y : y=f(x)\},$$
+so one has to check that $f(x)\in Y$ i.e. check that $f(x)$ is an element of the \textit{codomain} (this to check that it forms a set that is a subset of $X\times Y$), and that it is in particular a function (so one has to check that if $x=x'$ then $f(x)=f(x')$). 
+\begin{example}
+    Here are some simple examples of functions:
+    \begin{enumerate}
+        \item Let $X$ and $Y$ be sets and fix a $y\in Y$. Consider the function
+        \begin{gather*}
+            f : X\rightarrow Y\\
+            x\mapsto y
+        \end{gather*}
+        I.e. the set $f=\{ (x,a)\in X\times Y : a=y\}$. Indeed, $f(x)=y\in Y$ for every $x\in X$. If $x=x'$, then $f(x)=y=f(x')$. So $f$ is a function.
+        \item Let $X$ be a set. Then
+        \begin{gather*}
+            \id_X : X\rightarrow X\\
+            x \mapsto x            
+        \end{gather*}
+        i.e. the set $\{(x,y)\in X\times X : y=x\}$ defines a function. Indeed, if $(x,y)\in \id_X$, then $(x,y)=(x,x)\in X\times X$. Suppose $x=x'$, then $\id_X(x)=x=x'=\id_X(x')$, so $\id_X$ is a function. 
+    \end{enumerate}
+\end{example}
+\begin{lemma}
+    Let $f: X\rightarrow Y$ be a function. Then $f$ is bijective if and only if there is a function $g: Y\rightarrow X$ such that $g\circ f =\id_X$ and $f\circ g= \id_Y$. If so $g$ is unique.
+\end{lemma}
+\begin{proof}
+    "$\implies$:" Set $g:= f^{-1}$. Let $x\in X$. Since $(f(x),x)\in f^{-1}$, we get that $(f^{-1}\circ f)(x)=f^{-1}(f(x))= x = \id_X(x)$. So $f^{-1}\circ f = \id_X$. By symmetry $f^{-1}\circ f = \id_Y$.\\
+    "$\impliedby$": Let $y\in Y$ and set $x= g(y)$. Then $$f(x)=f(g(y)) = (f\circ g)(y)= y.$$
+    Suppose $x,x'\in X$ are given such that $f(x)=f(x')$. Then 
+    $$x= (g\circ f)(x)=g(f(x))=g(f(x'))=(g\circ f)(x')=x'.$$
+    Then $f$ is both surjective and injective, so $f$ is bijective.\\
+    Suppose $g$ is a function satisfying $g\circ f =\id_X$ and $f\circ g= \id_Y$. Let $y\in Y$, then $y=f(x)$ for some $x$, then $g(y) = g(f(x))=x=f^{-1}(f(x))=f^{-1}(y)$, so $g=f^{-1}$. 
+\end{proof}
+\begin{definition}
+    For a function $f : X\rightarrow Y$ we call a function $g: Y\rightarrow X$ such that $g\circ f =\id_X$ and $f\circ g= \id_Y$ the \textit{mutual inverse of $f$ (with respect to composition)}
+\end{definition}
+\begin{remark}
+    We have just seen that a function has a mutual inverse if and only if it is bijective and that this inverse is equal to $f^{-1}$. 
+\end{remark}
+\subsubsection{Products of Sets}
+\begin{definition}
+    Consider a set $I$ and a set $X$ such that there is a surjective function 
+    \begin{gather*}
+        I\rightarrow X\\
+        i\mapsto x_i
+    \end{gather*}
+    We call $X$ a \textit{family of sets indexed by $I$} and it is denoted $\{x_i\}:=\{x_i\}_{i\in I}$. We introduce the notation
+    $$\bigcup_{i\in I} x_i := \bigcup \{x_i\} = \bigcup X$$
+    and 
+    $$\bigcap_{i\in I} x_i := \bigcap \{x_i\} = \bigcap X.$$
+\end{definition}
+Note that given a class function $F$ and a set $I$, we get a well-defined function $I\rightarrow F[I], i\mapsto F(i)$ using the axiom schema of replacement. So given a class function we can think about $F[I]$ as a family of sets indexed by $I$. 
+\begin{definition}
+    Let a set $I$ and a family of sets index by $I$, $\{X_i\}$ be given such that $X_i\neq \emptyset$ for each $i\in I$. We then define \textit{the cartesian/direct product of $\{X_i\}$} to be the set
+    $$\prod_{i\in I} X_i := \left\{f\in {}^I\!\bigcup_{i\in I} X_i : \forall i\in I(f(i)\in X_i)\right\}.$$  
+\end{definition}
+With this definition presupposing the construction of the ordinals, we may construct a $n$-ary relation on an $n$-fold product of sets.
+\begin{definition}
+    Let $n\in \omega$ (where $\omega$ is the first infinite ordinal). We then define an \textit{$n$-ary relation} on sets $X_1,\dots,X_n$ to be a subset $R\subset X_1\times X_2\times \cdots \times X_n$ where $X_1\times X_2\times \cdots \times X_n:= \prod_{i\in n} X_i$.
+\end{definition}
+\subsubsection{ZFC: Adding the Axiom of Choice}
+The axiom of choice is a statement that seems obvious: If we have a set $X$ that does not contain the empty set, then we can pick an element from each $x\in X$. This of course is not a precise statement, since there is no precise notion of "picking" an element that can be derived from the axioms of ZF in any case where we wish to do dish. To be precise, what we mean to say is that we may find a function, $f :X \rightarrow \bigcup X$ satisfying $\forall x\in X(f(x)\in x)$ and this statement if one thinks about satisfies our notion of picking an element from each $x\in X$. This is independent of ZF as proven by Paul Cohen in 1964. As it turns out some rather paradoxical things can happen when the axiom of choice (AC) is assumed, but it is in some sense a sufficient and nescessary statement for the study of something as "simple" as for instance finite dimensional vector spaces. In this example we need it to be able to be able to "pick" a basis for a finite dimensional vector space, which is an action the legality of which seems self-evident. Nonetheless it is equivalent to AC. If we take the cartesian product over any set that does contain the empty set (however you wish to interpret this), we run into the problem of proving that this is non-empty being equivalent to AC. So it is certainly nescessary in some cases. However, it allows for a solid ball in $\R^3$ being equidecomposable to two copies of itself. In other words there is way of constructing 2 solid balls in 3 dimensional euclidean space by simply gluing together pieces of 1 such ball in such a way that no stretching is involved.   
+\begin{axioms}(AC)
+    $$\forall X\left(\emptyset\notin X \implies \exists f\left(f\in {}^{X}\!\bigcup X\wedge \forall x\in X(f(x)\in x)\right)\right).$$
+\end{axioms}
+The $f$ in this axiom is called a choice function. 
+We now construct the cartesian product over a set $X$ and show that assuming AC we 
+\begin{theorem}
+    The following are equivalent
+    \begin{enumerate}
+        \item AC
+        \item For every $X=\{X_i\}_{i\in I}$ where $X_i\neq \emptyset$ for every $i\in I$, $\prod_{i\in I} X_i\neq \emptyset$. 
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Assume AC. Let $f$ be a choice function on $X$. By definition of the cartesian product, $f\circ (i\mapsto X_i)\in \prod_{i\in I} X_i$.  
+    Assume 2. Let $X$ that does not have $\emptyset$ as a member. We may view $X$ as a family of sets indexed by $X$ using $\id_X$. Then using the assumption there is a function $f : X\rightarrow \bigcup_{x\in X} x = \bigcup X$ such that $f(x)\in x$ for every $x\in X$, meaning $f$ is a choice function.
+\end{proof}
+\subsubsection{Orderings}
+\begin{definition}
+    Let $X$ be a non-empty set. A \textit{Partial order} on $X$ is a relation $\leq$ on $X$ satisfying,
+    \begin{enumerate}
+        \item reflexivity,
+        $$x\sim x \text{ for every } x \in X$$
+        \item antisymmetry, 
+        $$x\leq y \text{ and } y\leq x \implies x = y \text{ for every } x,y\in X$$
+        \item transitivity, 
+        $$x \leq y \text{ and } y \leq z \implies x \leq z \text{ for every } x,y,z\in X.$$
+    \end{enumerate}
+\end{definition}
+\begin{remark}
+    Given a partial order $\leq$, we have that $\geq$ is a partial order as well.
+\end{remark}
+\begin{example}
+    Let $X$ be a set and $\mathcal{X}\subset 2^X$. Then $\subset := \left\{(A,B)\in \mathcal{X}\times \mathcal{X} : \forall x(x\in A \implies x\in B) \right\}$ defines a partial order on $\mathcal{X}$.\\
+    Another example is that of $\leq$ on $\N$,$\Z$ or $\Q$. 
+\end{example}
+\begin{definition}
+    Let $X$ be a set with a partial order and $\{x_i\}_{i\in \N} \subset X$ be a sequence. We say that $\{x_i\}_{i\in\N}$ is \textit{descending with respect to $\leq$} if $x_i \geq x_{i+1}$ for every $i\geq 0$ and \textit{ascending with respect to $\leq$} if $x_i \leq x_{i+1}$ for every $i\geq 0$. A sequence $\{x_i\}_{i\in \N}$ is said to \textit{stabilize} if there is a non-negative integer $n$ such that $x_n = x_{n+d}$ for every $d\geq 0$. 
+\end{definition}
+\begin{definition}
+    A partial order $\leq$ on a non-empty set $X$ is called \textit{total order} if for every $x,y\in X$, $x\leq y$ or $y\leq x$. 
+\end{definition}
+\begin{definition}
+    Let $X$ be a set with a partial order $\leq$. A subset $Y$ of $X$ is called a \textit{chain} if $\leq$ defines a total order on $Y$.  
+\end{definition}
+\begin{remark}
+    Any ascending/descending sequence $\{x_i\}_{i\in \N}$ is a chain and is denoted 
+    $$x_1\leq x_2\leq \dots \text{ respectively } x_1\geq x_2 \geq \dots,$$
+    these are called \textit{ascending/descending chains}
+\end{remark}
+We give the following axiom which one check is equivalent to the axiom of choice 
+\begin{axioms}\label{ZornsLemma}(Zorn's Lemma)
+    Let $X\neq \emptyset$ be a set with a partial order $\leq$ such that for every chain $C\subset X$ there exists an $x\in C$ such that $c\leq x$ for every $c\in C$, (i.e. there is an upper bound $x$ for $C$ in $C$). Then there is a maximal element in $m \in X$, i.e. for every $y \in X$ if $m\leq y$, then $m=y$.
+\end{axioms}
+\begin{theorem}
+    In ZF Zorn's Lemma is equivalent to AC.
+\end{theorem}
+\begin{proof}
+    {\Large Do at some point}
+\end{proof}
+\begin{example}
+    In certain situations we do not need to assume Zorn's Lemma. 
+    \begin{enumerate}
+        \item Suppose $X$ is a non-empty finite set with $n$ elements and a partial order $\leq$. Then $X$ has a maximal element. Indeed, this is easily proven by induction in $n$. If $X$ has one element this is trivially maximal. Consider for $n\geq1$ $X= \{x_1,\dots,x_{n+1}\}$. Then by induction $\{x_1,\dots,x_n\}$ has a maximal element $x_i$. Then $\max_\leq(x_i,x_{n+1})$ is a maximal element of $X$. 
+        \item A topology $\tau$ on some set $X$ has $X$ as a maximal element
+    \end{enumerate}
+     
+\end{example}
+We give a reformulation of every chain having a maximal/minimal element
+\begin{lemma}\label{MaximalMinimalIsEquivalentToAscendingDescendingChainCondition}
+    Let $X\neq \emptyset$ be a set with a partial ordering $\leq$. Every ascending/descending sequence in $X$ stabilizes if and only if every chain $C$ in $X$ has a upper/lower bound in $C$.
+\end{lemma}
+\begin{proof}
+    We only check the ascending case since a descending sequence is just an ascending sequence with respect to $>$ and a minimal element is just a maximal element with respect to $>$.\\
+    "$\implies$":We prove the contrapositive. Suppose $C\subset X$ is a chain that does not have an upper bound in $C$. Let $c_1\in C$. Then there exists $c_2 \in C$ such that $c_1 < c_2$. Continuing this process recursively we get a sequence $\{c_i\}_{i\in \N}$ such that $c_i<c_{i+1}$ for every $i\geq 0$, hence this is a sequence in $X$ that does not stabilize.\\
+    "$\impliedby$": Let $\{x_i\}_{i\in \N}$ be an ascending sequence in $X$. Then $\{x_i\}_{i\in \N}$ is a chain. Then there exists a $x_n\in \{x_i\}_{i\in \N}$ such that $x_j\leq x_n$ for every $j\geq 1$. Now since $x_n \leq x_{n+d}$ for every $d\geq 0$ it follows that $x_n=x_{n+d}$ for every $d\geq0$, hence $\{x_i\}_{i\in \N}$ stabilizes. 
+\end{proof}
+\begin{definition}
+    A total order $\leq$ on a set $X$ is called a \textit{well-ordering} if every non-empty subset $Y\subset X$ has an element $y_0\in Y$ such that for every $y\in Y$, $y_0\leq y$. If $X$ is a set that can be well ordered by a total order $\leq$, we write $\mathrm{wo}_\leq(X)$. 
+\end{definition}
+\begin{definition}
+    \textit{The well-ordering principle} refers to the statement
+    $$\forall X(X \neq \emptyset \implies \exists \leq\subset X\times X\ \mathrm{wo}_\leq(X))$$ 
+\end{definition}
+We will later see that the well-ordering principle is in fact equivalent to the axiom of choice.  
+\subsubsection{Equivalence Relations}
+\begin{definition}
+    Let $X$ be a non-empty set. We define an \textit{equivalence relation} to be a relation $\sim$ on $X$ satisfying 
+    \begin{enumerate}
+        \item reflexivity,
+        $$x\sim x \text{ for every } x \in X$$
+        \item symmetry,
+        $$x \sim y \implies y\sim x \text{ for every } x,y\in X$$
+        \item transitivity
+        $$x \sim y\ \wedge y\sim z \implies x\sim z \text{ for every } x,y,z\in X.$$
+    \end{enumerate}
+    Here we define $x\sim y$ to mean $(x,y)\in \sim$. For an $x\in X$ we define the \textit{equivalence class under $\sim$ represented by $x$} to be the set 
+    $$[x]_\sim:= \{y\in X : y\sim x\}.$$
+    We denote the set of equivalence classes under $\sim$ by $X/\sim$.
+\end{definition}
+\begin{lemma}\label{EquivalenceClassLemma}
+    Let $X$ be a non-empty set and $\sim$ an equivalence relation on $X$. Let $x,y\in X$. Then 
+    $$[x]_\sim = [y]_\sim \iff x\sim y$$
+\end{lemma}
+\begin{proof}
+    "$\limplies$": Let $z\in [x]_\sim$, then $z\sim x$ and $z\sim y$, since also $z\in [y]_\sim$. Then $x\sim z$ (by symmetry) and $z\sim y$, implying $x\sim y$ by transitivity.\\
+    "$\impliedby$": If $x\sim y$, then $x\in [y]_\sim$. By symmetry $y\sim x$, hence $y\in [x]_\sim$. 
+\end{proof}
+\begin{lemma}\label{CanonicalSurjection}
+    Let $X$ be a non-empty set and $\sim$ an equivalence relation on $X$. The function
+    \begin{gather*}
+        \pi : X\rightarrow X/\sim\\
+        x\mapsto [x]_\sim
+    \end{gather*}
+    is a well-defined surjective function.
+\end{lemma}
+\begin{proof}
+    Suppose $x=y$, then $x\sim y$, hence by Lemma~\ref{EquivalenceClassLemma} $p(x)=[x]_\sim=[y]_\sim=p(y)$. Let $[x]_\sim \in X/\sim$. Then $\pi(x) =[x]_\sim$, hence $\pi$ is surjective.
+\end{proof}
+
+\begin{definition}
+    Let $X$ be a set. $P$ a predicate. We say that \textit{$P(x)$ is true for all but finitely many $x\in X$}, if there exists a $Y\subset X$, such that $P(x)$ is true for all $x\in X\setminus y$
+\end{definition}
+\subsection{ordinal theory}
+\subsubsection{The Set $\omega$}
+    \begin{definition}
+        Let $I_0$ be an inductive non-empty set. Consider the formula $\varphi(X) \equiv  \emptyset\in X \wedge \ind(X)$. Using power sets and seperation we get the set 
+        $$ \omega := \bigcap \left\{X\in \pazocal{P}(I_0) : \emptyset \in X\wedge \ind(X)\right\}$$
+    \end{definition}
+    \begin{lemma}
+        $\omega$ is the smallest with the property of being inductive and containing $\emptyset$, i.e. it is a subset of every other set with these properties. Immediately it is the unique smallest set with the property of being inductive and containing $\emptyset$.
+    \end{lemma}
+    \begin{proof}
+        The emptyset is an element of each $X\in\pazocal{P}(I_0)$ satisfying $\emptyset \in X$ and $\ind(X)$, so $\emptyset\in \omega$. If $x\in \omega$, then for every $X\in\pazocal{P}(I_0)$ with $\emptyset \in X$ and $\ind(X)$, $x\cup \{x\}\in X$, hence $x\cup \{x\}\in \omega$, implying that $\omega$ is inductive. Let $I$ be any inductive set with $\emptyset \in I$. Consider $X_I := \omega \cap I \subset \omega\subset I_0$. Note that clearly $X_I\in \pazocal{P}(I_0)$, $\emptyset \in X_I$ and $\ind(X_I)$. Then $\omega \subset X_I$. This means $\omega = \omega \cap I\subset I$. So $\omega$ is contained in every inductive set containing the emptyset.
+    \end{proof}
+   We thus get a kind of induction principle on $\omega$: 
+   $$\forall A(\ind(A) \wedge A\subset \omega\implies A=\omega).$$
+   So if we are given a formula $\varphi$, to prove $\forall x\in \omega\varphi(x)$, it is sufficient to prove $\varphi(\emptyset) \wedge \forall x(\varphi(x)\implies \varphi(x\cup\{x\}))$, since then $A:= \{x\in \omega  : \varphi(x)\}$, satisfies $\ind(A) \wedge A\subset \omega$.
+
+\subsubsection{ordinal numbers}
+\begin{definition}
+    Let $z\in X$. Then $z$ is \textit{$\in$-minimal in $X$} if $\forall y(y\in z \implies y\notin X)$. We denote this $\min_\in(z,X)$.
+\end{definition}
+\begin{definition}
+    A set $X$ is \textit{ordered by $\in$} if 
+    $$\forall y_1,y_2\in X(y_1\in y_2\vee y_2\in y_1 \vee y_1=y_2).$$
+    We denote this formula by $\ord_\in(X)$.
+\end{definition}
+\begin{definition}
+    A set $X$ is \textit{well-ordered by $\in$} if 
+    $$ \ord_\in(X) \wedge \forall Y \in \pazocal{P}(X)(Y\neq \emptyset \implies \exists z \in Y \min_\in(z,Y)).$$
+    We denote this formula by $\mathrm{wo}_\in(X)$.
+\end{definition}
+\begin{definition}
+    A set $X$ is \textit{transitive} if 
+    $$\forall y(y\in X \implies y\subset X).$$
+    This formula is denoted by $\mathrm{trans}(X)$. 
+\end{definition}
+\begin{remark}
+    If $z\in y\in x$ and $\mathrm{trans}(x)$, then $z\in y\subset x$, hence $z\in x$. 
+\end{remark}
+\begin{definition}
+    An \textit{ordinal number} is a set $\alpha$ such that 
+    $$\mathrm{trans}(\alpha)\wedge \mathrm{wo}_\in(\alpha).$$
+    We denote this formula by $\mathrm{ordinal}(\alpha)$.
+\end{definition}
+\begin{remark}
+    Informally, we define $\Omega$ to be the collection of every ordinal number. By $\alpha\in\Omega$ we mean $\mathrm{ordinal}(\alpha)$. 
+\end{remark}
+\begin{theorem}\label{FactsAboutOrdinals}
+    \begin{enumerate}
+        \item If $\alpha\in \Omega$, then $\alpha=\emptyset$ or $\emptyset\ \mathrm{xor}\ \emptyset\in\alpha$.
+        \item Without assuming the axiom of foundation, if $\alpha\in \Omega$, then $\alpha\notin \alpha$.
+        \item If $\alpha,\beta\in \Omega$, then $\alpha\in \beta\ \mathrm{ xor }\ \beta\in \alpha \ \mathrm{ xor } \ \alpha = \beta$.
+        \item  If $\alpha \in \beta \in \Omega$, then $\alpha\in \Omega$.
+        \item If $\alpha\in\Omega$, then $\alpha\cup\{\alpha\} \in \Omega$.
+        \item $\Omega$ is transitive and well-ordered by $\in$, i.e the collection is transitive and ordered by $\in$, and every non-empty collection in $\Omega$ has an $\in$-minimal element.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    1.$\alpha$ is well-ordered by $\in$. If $\alpha=\emptyset$, we are done. So if $\alpha\neq \emptyset$, then since $\alpha \in \pazocal{P}(\alpha)$ there is a $z\in \alpha$ such that $\min_\in(\alpha,z)$. Consider an element of $\alpha$, $x\neq \emptyset$. Pick $y\in x$. By transitivity, $x\subset \alpha$, so $y\in \alpha$. Then $y\in x\wedge y\in \alpha$, hence $\neg\min_\in(x,\alpha)$. Then $\emptyset=z\in \alpha$.\\
+    2. Suppose for a contradiction that $\alpha\in \alpha$. Then $\{\alpha\}\in\pazocal{P}(\alpha)$. There is then a $z\in \{\alpha\}$ that is $\in$-minimal for $\{\alpha\}$. We must have $z=\alpha$. So $\min_\in(\alpha,\{\alpha\})$. But then for $\alpha\in\alpha$, $\alpha\notin \{\alpha\}$ leading to a contradiction.\\
+    3. By 2. the three cases a mutually exclusive. Since then we cannot have $\alpha\in \beta \wedge \beta \in \alpha$, since then by transitivity $\alpha\in\alpha$. Similary if $\alpha\in \beta \wedge \alpha=\beta$ or $\beta\in \alpha \wedge \alpha=\beta$, we would get $\alpha\in\alpha$. Suppose $\alpha\neq \beta$. Then WLOG $x\in \alpha\wedge x\notin \beta$, so $\alpha \setminus \beta \in \pazocal{P}(\alpha)\setminus \emptyset$.\\
+    \textbf{We claim that $\alpha\cap \beta$ is the $\in$-minimal element of $\alpha\setminus \beta$:} Let $\gamma$ be an $\in$-minimal element of $\alpha\setminus \beta$. Using $\mathrm{trans}(\alpha)$ and $\gamma\in \alpha$, we get that 
+    $$\forall u(u\in \gamma\implies u\in \alpha)\quad (\ast)$$ And using $\min_\in(\gamma,\alpha\setminus \beta)$, $\forall u(u\in \gamma \implies u\notin \alpha\setminus \beta)$ or equivalently $u(u\in \gamma\implies (u\notin \alpha \vee u\in \beta))$. Then using $(\ast)$, we get that $\forall u(u\in\gamma \implies u\in\beta)$. So $\gamma\subset \alpha\cap \beta$. Conversely, suppose for a contradiction that there is a $w\in \alpha\cap \beta \setminus \gamma$. Then since $\ord_\in(\alpha)$, $w\notin\gamma$ and $\gamma\neq w$ (since $\gamma\notin \beta\ni w$), we must have that $\gamma\in w\in \beta$, which implies that $\gamma\in \beta$ by transitivity of $\beta$. But this contradicts, $\gamma\in \alpha\setminus \beta$. So $\gamma = \alpha\cap \beta$ as we claimed.\\
+    Now if $\beta\setminus \alpha$ was non-empty, then $\alpha\cap \beta $ would also be its $\in$-minimal element. But then $\alpha\cap \beta \notin \beta \wedge \alpha\cap \beta \in \beta$, leading to a contradiction. Then $\beta\setminus \alpha = \emptyset$, hence $\beta \subset \alpha$, meaning $\beta = \alpha \cap \beta \in \alpha$.\\
+    4. Let $\alpha\in \beta \in \Omega$. Let $y_1,y_2\in \alpha$. By the transitivity of $\beta$, $y_1,y_2\in\beta$ and since $\ord_\in(\beta)$, it follows readily that $y_1\in y_2\vee y_1=y_2\vee y_1\ni y_2$, hence $\ord_\in(\alpha)$. Let $x\in \pazocal{P}(\alpha)$ be non-empty. By transitivity of $\beta$, $x\in\pazocal{P}(\beta)$, and since $\mathrm(wo)_\in(\beta)$, there is a $y\in x$ satisfying $\min_\in(y,x)$, so $\mathrm{wo}_\in(\alpha)$. Let $\gamma\in \alpha$, and let $\delta\in \gamma$. By $\mathrm{trans}(\beta)$, $\delta\in \beta$, and using $\ord_\in(\beta)$, $\delta\in \alpha\vee \delta = \alpha\vee \alpha\in \delta$. Suppose $\delta=\alpha\vee \alpha\in \delta$. Then for $X:=\{\alpha,\gamma,\delta\}\in\pazocal{P}(\beta)$, we have each element of $X$ is an element of some element member of $X$, hence $\forall x \in X \neg(\min_\in(x,X))$. So we conclude $\delta\in \alpha$, hence $\mathrm{trans}(\alpha)$. Hence $\alpha\in \Omega$.\\
+    5. If $\beta\in (\alpha\cup\{\alpha\})$, then $\beta\in \alpha\vee \beta = \alpha$. In either case $\beta\subset \alpha$, since in the first case we can use $\mathrm{trans}(\alpha)$ and in the second case we trivially have $\forall x(x\in \beta \implies x\in \alpha)$. We thus have $\beta\subset \alpha\subset \alpha\cup \{\alpha\}$. Note that if $\beta,\gamma\in \alpha\cup\{\alpha\}$ then $\beta,\gamma\in \alpha \vee \beta \in \alpha=\gamma \vee  \gamma\in \alpha=\beta$. In the first case clearly $\beta\in \gamma \vee \beta = \gamma \vee \gamma\in \beta$ since $\ord_\in(\alpha)$. In the second and third case we also get this since $\beta \in \gamma \vee \gamma\in \beta$. So $\alpha\cup\{\alpha\}$ is ordered by $\in$. Let $x\in\pazocal{P}(\alpha\cup\{\alpha\})$ be a non-empty set. If $x=\{\alpha\}$, then we have already seen that $\alpha$ is $\in$-minimal of $x$. In the case where $x\cap \alpha \neq \emptyset$, this is a non-empty subset of $\alpha$ so it has a $\in$-minimal element, $z$ say, which implies $z\cap x = \emptyset$, for otherwise there would be an element of $z$ that is also in $x$, $y$ say, which would contradict $\min_\in(z,x\cap \alpha)$, for then using that $\alpha$ is transitive we would have $y\in \alpha$, meaning $y\in \alpha \cap x$.\\
+    6. $\Omega$ is transitive by 4. and ordered by $\in$ by 3. Let $C$ be a non-empty collection of ordinals. If $C$ is singleton, then this element is $\in$-minimal for $C$. If $C$ is not a singleton, then given any two distinct elements of $C$, $\delta,\delta'\in C$, we have that $\delta\in \delta'$ or $\delta'\in \delta$, since $\ord_\in(\Omega)$. We may thus pick a $\delta_0\in C$ such that $\delta_0\cap C\neq \emptyset$. Set $x:= \delta_0\cap C$. Let $\alpha\in x$. Pick an $\in$-minimal element in $x\cap (\alpha \cup\{\alpha\})$, $\gamma$ say. Since $\gamma\in \alpha\cup\{\alpha\}$ and $\alpha\cup\{\alpha\}\in \Omega$, $\gamma\subset \alpha\cup \{\alpha\}$.  Let $\gamma'\in \gamma$. Then $\gamma'\in \alpha\cup \{\alpha\}$. But $\gamma'\notin x\cap (\alpha\cup\{\alpha\})$. Then $\gamma'\notin x$, which means $\gamma$ is an $\in$-minimal element of $x$ and hence therefor also in $C$ (recall that by definition of $x$, $\gamma\in C$). 
+\end{proof}
+\begin{remark}
+    The above theorem implies that $\Omega$ cannot be a set, since if it were $\Omega$ would an ordinal number by 6. but then $\Omega\in \Omega$ leading to a contradiction by 2. We still wish to think about objects such as $\Omega$ as some kind of collection of elements. We will call a collection of sets satisfying some condition which cannot be described as a sets a \textit{proper class}. Another example is the proper class of sets. I.e. the sets defined by tautology. If this were a set, then trivially it would have itself as an element, contradicting the axiom of foundation. The formal notion of a \textit{class} will left undiscussed for now. It is indeed possible to define this notion rigourosly by extending the ZFC axioms to the Von Neumann–Bernays–Gödel axioms, which we will do later. 
+\end{remark}
+\begin{definition}
+    For a pair of ordinal number $\alpha$ and $\beta$ we define 
+    \begin{gather*}
+        \alpha <\beta :\iff \alpha \in \beta\\
+        \alpha \leq \beta :\iff \alpha = \beta \vee \alpha <\beta.
+    \end{gather*}
+\end{definition}
+\begin{remark}
+    This in some sense defines a total order on the proper class of ordinal numbers and on the nose a total order on ever set of ordinal numbers. 
+\end{remark}
+\begin{definition}
+    For a set $X$, define $X+1:= X\cup\{X\}$.
+\end{definition}
+\begin{corollary}\label{ClosurePropertiesOfOrdinals}
+    \begin{enumerate}
+        \item If $A\subset \Omega$ is a set of ordinals (a set whose elements are ordinals), then $\bigcup A \in \Omega$.  
+        \item If $\alpha,\beta\in \Omega$ and $\alpha\in \beta$, then $\alpha+1\subset \beta$. So $\alpha+1$ is the smallest ordinal containing $\alpha$. 
+        \item For every ordinal $\alpha$, either $\alpha = \bigcup \alpha$ or there is an ordinal $\beta$ such that $\alpha = \beta+1$.
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    1. Let $\beta \in \bigcup A$. Then there is some $\gamma\in A$ such that $\beta \in \gamma$, then $\beta \in \Omega$ by 4. of the last theorem. This means that $\bigcup A$ is a set of ordinal numbers. Then we can apply 6. of the last theorem to get that $\bigcup \ A$ is well-ordered by $\in$. Let $\beta\in \bigcup A$. Again $\beta\in \gamma$ for some $\gamma\in A$. Since $\gamma$ is transitive, we get that $\beta\subset \gamma$ and since $\gamma\subset \bigcup A$, so $\beta \subset \bigcup A$.\\
+    2. $\{\alpha\}\subset \beta$ and using $\mathrm{trans}(\beta)$, $\alpha\subset \beta$, so $\alpha+1\subset \beta$.\\
+    3. In any case since $\alpha$ is transitive, $\bigcup\alpha \subset \alpha$. Suppose $\bigcup \alpha\neq \alpha$. Then there is an $\in$-minimal element $\beta$ of $\alpha\setminus \bigcup\alpha$. In particular $\beta\in \alpha$, so by 2. $\beta+1\subset \alpha$. If $\alpha\in \beta+1$, then $\alpha\in \alpha$ contradicting 2. of the prior theorem. If $\beta +1 \in \alpha$, then $\beta\in \bigcup\alpha$, which contradicts the choice of $\beta$. Then we must have $\alpha = \beta+1$ since $\beta+1$ is also an ordinal number.    
+\end{proof}
+\begin{definition}
+    An ordinal $\alpha$ is called a \textit{succesor ordinal} if there is an ordinal $\beta$ satisfying $\alpha=\beta+1$. If on the other hand $\alpha = \bigcup \alpha$, it is called a \textit{limit ordinal}.
+\end{definition}
+\subsubsection{$\omega$ and ordinal numbers}
+\begin{lemma}
+    $$\forall x\in \omega(\mathrm{trans}(x)).$$
+\end{lemma}
+\begin{proof}
+    Consider the set $$T:=\{x\in \omega: \forall y( y\in x\implies y\subset x)\}.$$ 
+    Clearly $\emptyset\in T$. Suppose $x\in T$. Let $y\in x\cup \{x\}$. If $y\in x$, then $y\subset x\subset x\cup\{x\}$. If $y\in \{x\}$, then $y = x\subset x\cup \{x\}$, hence   
+\end{proof}
+\begin{lemma}
+    $$\forall x\in \omega(\ord_\in(x)).$$
+\end{lemma}
+\begin{proof}
+    Consider the set $$O := \{x\in \omega : \ord_\in(x)\}.$$ Trivially, $\emptyset\in O$. Let $x\in O$. Suppose $\ord_\in(x)$. Let $y_1,y_2\in x\cup \{x\}$. If $y_1,y_2\in x$, then $y_1\in y_2\vee y_1=y_2\vee y_2\in y_1$. If $y_1,y_2\in \{x\}$, then $y_1=y_2$. If $y_1\in x$ and $y_2\in \{x\}$, then $y_2=x$, hence $y_1\in y_2$. The case $y_1\in\{x\}$ and $y_2\in x$ likewise gives that $y_2\in y_1$. It follows that $y_1\in y_2 \vee y_1 = y_2\vee y_2\in y_1$, hence $\ord_\in(x\cup\{x\})$. It follows that $O=\omega$, hence $\forall x\in \omega(\ord_\in(x))$.
+\end{proof}
+\begin{lemma}
+    $$\forall x\in \omega\forall y\in \pazocal{P}(x)(y\neq \emptyset\implies \exists z(\textstyle{\min}_\in(z,y))).$$
+    With the previous series of lemmas in mind, it follows that each element of $\omega$ is an ordinal. Every non-empty element of $\omega$ is a succesor ordinal.
+\end{lemma}
+\begin{proof}
+    Consider the set 
+    $$A := \{x\in \omega : \forall y\in \pazocal{P}(x)(y\neq \emptyset\implies \exists z(\textstyle{\min}_\in(z,y)))\}$$ 
+    Trivially $\emptyset \in A$. Let $x\in A$ and $y\in \pazocal{P}(x\cup\{x\})$ with $y\neq \emptyset$. If $\{x\}\cap y=\emptyset$, then $y\in\pazocal{P}(x)$, hence there is a $z$ with $\min_\in(z,y)$. If $x\in y$, then $x\subset y$, hence $y= x\cup \{x\}$. Let $z\in x$ be such that $\min_\in(z,x)$. Then for $\alpha\in z$, $\alpha\notin x$. Moreover $\alpha\notin\{x\}$, for if it were, then $\alpha=x$, meaning $z\in \alpha$, and by transitivity this would mean $z\subset x=\alpha$, but then there would be a $\beta \in z$ with $\beta\in x$ contradicting minimality. So we conclude that $\min_\in(z,x\cup\{x\})$. It follows that $A = \omega$.\\
+    With previous lemmas in mind, it follows that $\forall x\in \omega(\mathrm{wo}_\in(x) \wedge \mathrm{trans}(x))$, hence $\forall x\in \omega(x\in \Omega)$. Note also that if $x\in \omega\setminus \emptyset$, then $x = y\cup\{y\}$ for some $y\in \omega$. This is readily seen with an induction argument: Indeed, $\{\emptyset\}=\emptyset \cup\{\emptyset\}$, and if $x = y\cup\{y\}$ for some $y\in \omega$, then $x\cup \{x\} = y\cup\{y\} \cup \{y\cup\{y\}\} = y' \cup\{y'\}$, where $y' = y\cup\{y\}\in \omega$. So every non-empty element of $\omega$ is a succesor ordinal. The empty set is a limit ordinal. 
+\end{proof}
+\begin{lemma}
+    We have that 
+    $$\omega = \bigcup \omega$$
+\end{lemma}
+\begin{proof}
+    Let $x\in\bigcup \omega$, then $x\in y$ for some $y\in \omega$. Then $x\in \omega$, hence $x' := x\cup\{x\}\in \omega$ and $x'':= x'\cup\{x'\}\in \omega$. Then $x\cup\{x\}\in x''$, hence $x\cup x \in \bigcup \omega$.
+\end{proof}
+\begin{proposition}
+    $\omega$ is a limit ordinal.
+\end{proposition}
+\begin{proof}
+    This follows from $\omega$ being a family of ordinals, $\omega = \bigcup \omega$ and Corollary~\ref{ClosurePropertiesOfOrdinals}. 1. 
+\end{proof}
+\subsubsection{The Well-ordering Principle \& the Axiom of Choice}
+\begin{definition}
+    Let $M$ be a non-emptyset. Set $\pazocal{P}^\ast(M):= \pazocal{P}(M)\setminus\{\emptyset\}$. Assuming the axiom of choice, pick a choice function 
+    \begin{gather*}
+        f : \pazocal{P}^\ast(M)\rightarrow \bigcup \pazocal{P}^\ast(M) = M 
+    \end{gather*}
+    Let an ordinal $\alpha\in \Omega$ be given. An injective function 
+    $$w_\alpha : \alpha \hookrightarrow M$$
+    is called an \textit{$f$-set} if for all $\gamma\in \alpha$
+    $$w_\alpha(\gamma) = f(M\setminus\{w_\alpha(\delta):\delta\in \gamma\}).$$
+    The data of a set $w$ being an $f$-set for an ordinal $\alpha$ is distilled into the formula 
+    $$f\mathrm{-set}(w,\alpha)\equiv \alpha\in \Omega\wedge w \text{ is an }f\text{-set},$$
+    for future reference. 
+\end{definition}
+\begin{lemma}
+    Assume \verb|AC| and let a set $M$ and a choice function $f$ as in the above definition be given. Consider an ordinal $\alpha\in \Omega$. There is at most one $f$-set for $\alpha$. 
+\end{lemma}
+\begin{proof}
+    Suppose for a contradiction that there are two distinct $f$-sets $w_\alpha$ and $w_\alpha'$. Consider the non-empty set $\{\beta\in \alpha : w_\alpha(\beta)\neq w_\alpha'(\beta)\}\in \pazocal{P}(\alpha)$. Since $\alpha$ is an ordinal, this set has an $\in$-minimal element $\gamma$. Now if $\delta \in \gamma$, then $w_\alpha(\delta)=w_\alpha'(\delta)$. But then
+    $$w_\alpha(\gamma) = f(M\setminus\{w_\alpha(\delta):\delta \in \gamma \}) = f(M\setminus \{w_\alpha'(\delta):\delta\in \gamma\}) = w_\alpha'(\gamma),$$
+    leading to a contradiction.    
+\end{proof}
+\begin{remark}
+    Consider $f$-sets $w_\alpha$ and $w_\beta$ with $\beta\in \alpha$. Then for every $\delta\in \beta$, 
+    $$\left.w_\alpha\right|_\beta(\delta)=w_\alpha(\delta)=f(M\setminus\{w_\alpha(\delta):\delta \in \beta\}).$$
+    Hence $\left.w_\alpha\right|_{\beta}$ is an $f$-set and is therefor equal to $w_\beta$ by the above lemma.
+\end{remark}
+\begin{theorem}
+    The well-ordering principle is equivalent to the axiom of choice. 
+\end{theorem}
+\begin{proof}
+    "$\implies$": Let $X$ be a family of non-empty sets. Let $\leq$ be a well-ordering on $\bigcup X$. For each $x\in X$, let $m_x\in x$ denote the element that is minimal with respect to $\leq$. Then 
+    \begin{gather*}
+        f : X \rightarrow \bigcup X\\
+        x \mapsto m_x
+    \end{gather*}
+    defines a choice function.\\
+    "$\impliedby$": 
+    We claim that we may form the set 
+    $$S:= \left\{w_\alpha : f\mathrm{-set}(w_\alpha,\alpha)\wedge\alpha \in \Omega\right\}$$
+    Let $N$ be the elements $n$ of $M$ for which there is an $f$-set $w$, for some ordinal such that for some ordinal $\delta$, $w(\delta)=n$. We may form this set by the axiom of seperation. Consider the formula
+    $$(\exists \alpha\in \Omega\exists w(f\mathrm{-set}(w,\alpha)\implies \exists \delta\in \alpha (w(\delta)=n))\implies y=w) \vee \neg(...)\implies y=\emptyset. $$
+    This gives rise to the class function 
+    $$G(n) := \begin{cases}
+        w & \text{if } w \text{ is an } f \text{-set that maps to } n\\
+        \emptyset &\text{otherwise} 
+    \end{cases}$$
+    Then $S=G(N)$ by the axiom schema of replacement {\Large I don't like this}.
+    Consider now the formula
+    $$((\exists \alpha\ f\mathrm{-set}(w,\alpha)) \implies y = \alpha)\vee (\neg(\exists \alpha \ f\mathrm{-set}(w,\alpha)) \implies y = \emptyset).$$
+    This induces the class function $F$ defined by
+    $$F(w) = \begin{cases}
+        \alpha & \text{if } w \text{ is an } f-\text{set with domain } \alpha\in \Omega\\
+        \emptyset & \text{otherwise} 
+    \end{cases}$$
+    By the axiom schema of replacement $F(S)=\{F(w) : w\in S\}$ is a family of ordinals, hence $\alpha_0:=\bigcup F(S)$ is an ordinal. For $w_\alpha,w_\beta \in S$, write $w_\alpha \preceq w_\beta$ if $\alpha \leq \beta$. This is easily verified to be a well-ordering on $S$, since essentially we get that the well-ordering is inherited by the well-ordering on families of ordinals due to $\alpha\mapsto w_\alpha$ being order preserving. Set $w_{\alpha_0} := \bigcup S= \{x: \exists w\in S(x\in w)\}=\{(\delta,w_\alpha(\delta): \delta\in\alpha\wedge w_\alpha\in S)\}$. The claim is now that this is an $f$-set, $\alpha_0\rightarrow M$. Let $(\delta,w_{\alpha}(\delta)),(\delta',w_{\alpha'}(\delta'))\in w_{\alpha_0}$ with $\delta=\delta'$. WLOG $\alpha \leq \alpha'$ and then $w_{\alpha'}(\delta')=w_{\alpha}(\delta')=w_{\alpha}(\delta)$, so $w_{\alpha_0}$ is well-defined. Suppose $\delta,\delta'\in \alpha_0$ is such that $w_{\alpha_0}(\delta)=w_{\alpha_0}(\delta')$. As before for some ordinal $\alpha$, $w_\alpha(\delta)=w_{\alpha_0}(\delta)=w_{\alpha_0}(\delta')=w_\alpha(\delta')$, hence $\delta=\delta'$. Moreover, for $\delta\in \alpha_0$, we see that for a suitable $\alpha\in F(w_\alpha)$ for some $w_\alpha\in S$, 
+    $$w_{\alpha_0}(\delta)=w_{\alpha}(\delta)=f(M\setminus \{w_\alpha(\gamma) : \gamma \in \delta\})=f(M\setminus \{w_{\alpha_0}(\gamma) : \gamma\in \delta\}).$$
+    It follows that $w_{\alpha_0}$ is the maximal $f$-set, i.e. if $w$ is an $f$-set, then $w\leq w_{\alpha_0}$. Consider now 
+    $$M':=\{m\in M : \exists \gamma(w_{\alpha_0}(\gamma)=m)\}.$$
+    Then $M=M'$, since otherwise 
+    $$w_{\alpha_0}\cup \{(\alpha_0, f(M\setminus M'))\}$$
+    is an $f$-set strictly greater than $w_{\alpha_0}$. It follows that $w_{\alpha_0}:\alpha_0\rightarrow M$ is a bijection. We then get a well-ordering on $M$, where for $x,y\in M$, we write $x\leq y$ if $w_{\alpha_0}^{-1}(x)\leq w_{\alpha_0}^{-1}(y)$.
+\end{proof}
+\subsubsection{Transfinite Recursion and Transfinite Induction}
+We provide without proof {\Large for now?} recursion and induction principles that generalize to the proper class of ordinals. 
+\begin{theorem}\label{TransfiniteRecursion}(Transfinite Recursion)
+    Let $F$ be a class function defined for all sets. Then there is a unique class function $G$, defined on $\Omega$ such that for each $\alpha\in \Omega$,
+    $$
+        G(\alpha) = F\left(\left.G\right|_\alpha\right)
+    $$
+    where 
+    $$
+        \left. G\right|_\alpha := \{(\beta,G(\beta)):\beta\in \alpha\}
+    $$
+\end{theorem}
+
+\begin{theorem}\label{TransfiniteInduction}(Transfinite Induction) Suppose $\varphi(\alpha)$ is an $\{\in\}$-formula such that 
+\begin{enumerate}
+    \item $\varphi(0)$.
+    \item $\forall\alpha\in \Omega(\varphi(\alpha)\rightarrow \varphi(\alpha+1))$.
+    \item $(\forall \beta<\alpha(\varphi(\beta)))\rightarrow \varphi(\alpha)$ if $\alpha\in \Omega$ is a limit ordinal.
+\end{enumerate}
+Then $\varphi(\alpha)$ for every $\alpha\in \Omega$. 
+\end{theorem}
+\subsection{Models of $\mathrm{ZF(C)}$}
+\subsubsection{The standard model $\mathrm{V}$ of $\mathrm{ZF(C)}$}
+In this section we construct a model of $\mathrm{ZF}$ under the assumption that $\mathrm{ZF}$ is consistent. Then there is a model $(M,\in^\mathbb{M})$ of $\mathrm{ZF}$. We define a set for each ordinal $\alpha\in \Omega$,
+$$
+    V_\alpha := 
+    \begin{cases}
+        \emptyset & \text{if } \alpha = 0\\
+        \bigcup_{\beta \in \alpha} & \text{if } \alpha \text{ is a limit ordinal}\\
+        \pazocal{P}(V_\alpha) & \text{if } \alpha \text{ is a succesor ordinal}
+    \end{cases}
+$$ 
+We claim that any element in $M$ corresponds to some element of one of these sets. To see this consider the class function that is the empty set on a sets that are not set functions and where for $x$ that is a function 
+$$
+    F(x):=
+    \begin{cases}
+        \emptyset & \text{if } x=\emptyset\\
+        \pazocal{P}(x(\beta)) & \text{if } \dom\ x \text{ is the succesor of an ordinal } \beta\\
+        \bigcup_{\delta\in \dom\ x} \delta & \text{if }\dom \ x \text{ is a nonempty limit ordinal}\\
+        \emptyset & \text{otherwise} 
+    \end{cases}
+$$
+By transfinite recursion there is a class function $G$ on $\Omega$ such that 
+$$G(\alpha) = F\left(\left.G\right|_\alpha\right).$$
+Note that 
+$$\left. G\right|_\alpha$$
+is a function $\alpha \rightarrow G[\alpha]$, where $G[\alpha]$ is a set by the axiom schema of replacement. We see that 
+$$G(\alpha) = V_\alpha$$
+for each $\alpha\in \Omega$, thus we have the following lemma on the above construction
+\begin{lemma}
+    $V_\alpha$ is a set for each $\alpha\in \Omega$.
+\end{lemma}
+Moreover we have the following
+\begin{lemma}
+    \begin{enumerate}
+        \item $V_\alpha$ is inductive for each $\alpha$.
+        \item The class $\mathbf{V}:= \bigcup_{\alpha\in \Omega}$ is inductive.
+        \item if $\alpha\in \beta\in \Omega$, then $V_\alpha\subset V_\beta$.
+        \item For $\alpha\in \Omega$, if $\alpha\subset V_\alpha$ and $\alpha\in V_{\alpha+1}$
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    {\Large do!}
+\end{proof}
+\subsubsection{Non-standard models of $\mathrm{ZF(C)}$}
+\subsubsection{Gödel's Model of $\mathrm{ZF}$ and of $\mathrm{ZFC}$: The Relative Consistency of $\mathrm{ZF}$ and $\mathrm{AC}$}
+\subsection{A Model of $\mathrm{PA}$ in $\mathrm{V}$}
+We aim to construct a $\mathcal{L}_{\mathrm{PA}}$-structure within $V$ which we denote $\N_{\omega}$ whose domain is $\omega$ and show that this is a model of $\verb|PA|$, where $\mathcal{L}_{\mathrm{PA}}=\{0,\mathrm{s},+,\cdot\}$. We then define 
+\begin{gather*}
+    0^{\N_\omega} := \emptyset\in \omega\\
+    \mathrm{s}^{\N_\omega} : \omega \rightarrow \omega\\
+    n \mapsto n+1:= n\cup\{n\}\\
+\end{gather*}
+On $\omega$ we define a binary operation, called addition, recursively by $n+0:= n$ and $n+\mathrm{s}(m)=\mathrm{s}(n+m)$, hence we define 
+\begin{gather*}
+    +^{\N_\omega}: \omega \times \omega \rightarrow \omega\\
+    (n,m) \mapsto n+m
+\end{gather*}
+We also define a binary operation, called multiplication, recursively by $n\cdot 0 = 0$ and $n\cdot \mathrm{s}(m)= n\cdot m+n$, hence we define 
+\begin{gather*}
+    \cdot^{\N_\omega}: \omega\times \omega \rightarrow \omega\\
+    (n,m)\mapsto nm := n\cdot m
+\end{gather*}
+\begin{theorem}
+    $$\N_\omega \vDash \mathrm{PA}$$
+\end{theorem}
+\begin{proof}
+    Fix an assignment $j$. We prove that $\N_\omega \vDash \mathrm{PA}_i$ for each $i\in\{0,1,\dots, 6\}$. For $i=0$, the prove will use the inductive definition on the complexity of verifying validity of a formula. This is a little cumbersome, so for the other axioms we will use a more natural language approach.\\
+    "$(\N_\omega, j) \vDash \mathrm{PA}_0$": We need to show that $\N_\omega \vDash \neg\exists x(\mathrm{s}(x) = 0)$. Note that this means, we need to prove that $\N_\omega \vDash \forall x(\mathrm{s}(x)\neq 0)$. Let $n\in \omega$ be given. We then need to prove that $\N_\omega[x\mapsto n]\vDash \mathrm{s}(x) \neq 0$, i.e. that $\N_\omega[x\mapsto n] \vDash \mathrm{s}(x) = 0$ is not true. We thus have to verify that 
+    $$\N_\omega[x\mapsto n](\mathrm{s}(x))=\mathrm{s}^{\N_\omega}(\N_\omega[x\mapsto n](x))=\mathrm{s}^{\N_\omega}(n)=n\cup \{n\}$$ is not equal to $0^{\N_\omega} = \emptyset$, but this is indeed obvious since $n\in n\cup\{n\}$.\\
+    "$(\N_\omega,j)\vDash\mathrm{PA}_1$": Let $n$ and $m$ in $\omega$ be given. Suppose $n\neq m$. Then $n\in m$ or $m\in n$. In the first case, by Corollary~\ref{ClosurePropertiesOfOrdinals} 2. $n+1\subset m$, hence $n+1\in m$ or $n+1=m$. In either case since $m\subsetneq m+1$, $n+1\subsetneq m+1$ and in particular $n+1 \neq m+1$.{\Large I feel like I have explained some facts about ordinals multiple times different places -- collect in lemma!}\\
+    "$(\N_\omega,j)\vDash\mathrm{PA}_2$": The result follows from the base case of the definition of addition on $\omega$.\\
+    "$(\N_\omega,j)\vDash\mathrm{PA}_3$": The result follows from the recursion step of the definition of addition on $\omega$.
+    "$(\N_\omega,j)\vDash\mathrm{PA}_4$": Again it follows from the base case recursive definition of multiplication on $\omega$.\\
+    "$(\N_\omega,j)\vDash\mathrm{PA}_5$": Again it follows from the recursion step in the definition of multiplication on $\omega$.\\
+    "$(\N_\omega,j)\vDash\mathrm{PA}_6$": Let a $\mathcal{L}_\mathrm{PA}$-formula $\varphi$ with $x\in \mathrm{free}(\varphi)$ be given. We need to show that under the given interpretation, if 
+    $$\psi:\equiv\varphi(\emptyset)\wedge \forall n\in \omega(\varphi(n)\to \varphi(n+1)),$$
+    then $\forall n\in \omega( \varphi(n))$. Set 
+    $$E := \{n\in \omega : \neg\varphi(n)\}.$$
+    If we can show that 
+    $$E = \emptyset$$
+    then we are done. Suppose $E\neq \emptyset$. Then $E$ has an $\in$-minimal element $m$. Since we assumed $\psi$, $m\neq \emptyset$ and $m$ cannot be the succesor of some $m'$ for then $\neg \varphi(m')$ (since we with $\psi$ assumed $\varphi(n)\to \varphi(n+1)$ which is equivalent to $\neg\varphi(n+1)\to \neg \varphi(n)$ ) and hence $m'\in E$ which would contradict the minimality of $m$. We must therefor have that $E$ is empty. 
+\end{proof}
+
+\begin{theorem}
+    $\N\simeq \N_\omega$    
+\end{theorem}
+\begin{proof}
+    {\Large DO!}
+\end{proof}
+\begin{corollary}
+    $\omega$ is an ordered semi-ring, which we will from now on denote $\N$. 
+\end{corollary}
+\begin{proof}
+    If one finishes the \href{https://adam.math.hhu.de/#/g/leanprover-community/nng4}{The Natural Number Game} one can show that you can derive the axioms of an ordered semi-ring in $\mathrm{PA}$. It thus follows from the Soundness Theorem that any model of $\mathrm{PA}$ will be an ordered semi-ring. 
+\end{proof}
+\subsection{NGB Set Theory: A Formal Treatment of Classes}
+\subsection{MK Set Theory: Quantification over Classes}
