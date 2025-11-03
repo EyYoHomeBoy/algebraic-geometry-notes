@@ -1309,7 +1309,11 @@ Another result that one could note that is that
 \end{lemma}
 
 \begin{definition}
-    Let $R$ be a ring and $M$ a left $R$-module. Then $M$ is said to be \textit{finitely generated over $R$} if there is a finite sequence $m_1,\dots,m_n\in M$ such that $_RM= \sum_1^n Rm_i$ resp. $M_R = \sum m_i R$.
+    Let $R$ be a ring and $M$ a left $R$-module. Then $M$ is \emph{generated over by a set $X\subset M$ over $R$} if 
+    $$
+        M = \sum_{x\in X} Rx.
+    $$
+    $M$ is said to be \textit{finitely generated over $R$} if there is a finite sequence $m_1,\dots,m_n\in M$ such that $_RM= \sum_1^n Rm_i$ resp. $M_R = \sum m_i R$.
 \end{definition}
 \begin{definition}
     Let $A$ be a set, $R$ a ring and $\{M_\alpha\}_{\alpha\in A}$ a family of left $R$-modules. We say that $\sum_{\alpha\in A} M_\alpha$ is \textit{direct}, if 
@@ -1335,9 +1339,9 @@ Another result that one could note that is that
     This implies $m_{\alpha_j}\in M_{\alpha_j}\cap \sum_{\alpha \in A\setminus\{\alpha_j\}} M_\alpha =0$, hence $m_{\alpha_j} = 0$, which means $m_\alpha = 0$ for each $\alpha\in A$ and so $(m_\alpha)=0$. By the 1st Isomorphism Theorem for modules it follows that $\sum_{\alpha\in A} M_\alpha \simeq \bigoplus_{\alpha \in A} M_\alpha$.  
 \end{proof}
 \begin{definition}
-    Let $R$ be a ring and $M$ a left $R$-module. A subset $X\subset M$ is said to be \textit{left linearly independent over $R$} (or if $R$ is commutative just \textit{linearly independent}), if for every finite sequence $m_1,\dots,m_n\in M$ and every finite sequence $r_1,\dots,r_n\in R$, 
+    Let $R$ be a ring and $M$ a left $R$-module. A subset $X\subset M$ is said to be \textit{left linearly independent over $R$} (or if $R$ is commutative just \textit{linearly independent}), if for every finite sequence of distinct $m_1,\dots,m_n\in X$ and every finite sequence $r_1,\dots,r_n\in R$, 
     \begin{gather*}
-        \sum_1^n r_im_i = 0 \iff r_i = 0\ \forall i\in \{1,\dots,m\} \text{ resp. } \sum_1^n m_ir_i =0 \iff r_i = 0\  \forall i\in \{1,\dots,m\}
+        \sum_1^n r_im_i = 0 \iff r_i = 0\ \forall i\in \{1,\dots,m\}
     \end{gather*}
 \end{definition}
 \begin{remark}
@@ -1357,6 +1361,43 @@ Another result that one could note that is that
 \begin{definition}
     Let $R$ be a ring, $M$ a left $R$-module. A subset $X\subset M$ is called a \textit{basis of $M$ over $R$} if $X$ is linearly independent over $R$ and $M= RX$ respectively $M=XR$. If $X$ is finite and a basis of $M$ over $R$ it is called a \textit{finite basis}.
 \end{definition}
+\begin{lemma}\label{BasisOfDirectSum}
+    Consider a ring $R$ and a non-empty set $X$. Then 
+    $$
+        \bigoplus_{x\in X} R
+    $$
+    has basis 
+    $$
+        D:=\left.\left\{ (\delta_{yx})\in \bigoplus_{x\in X} R \ \right| \ x\in X\right\}
+    $$
+    where 
+    $$
+         \delta_{yx} = 
+        \begin{cases}
+            1 & \text{if } x=y \\
+            0 & \text{otherwise}
+        \end{cases}
+    $$
+    as an $(R,R)$-bimodule. 
+\end{lemma}
+\begin{proof}
+    Let $(r_x)\in \bigoplus_x R$. Then for each $x\in X$,
+    \begin{align*}
+        (r_x)(x) &= r_x = \sum_{y\in \mathrm{supp} \ (r_x)} r_y\delta_{yx} =  \left(\sum_{y\in \mathrm{supp} \ (r_x)}r_x(\delta_{zy})(x)\right)\\ 
+        &= \left(\sum_{y\in \mathrm{supp} \ (r_x)}r_x(\delta_{zy})\right)(x), 
+    \end{align*}
+    hence 
+    $$(r_x) = \sum_{x \in X} r_x(\delta_{yx})\in \sum_{x\in X} R(\delta_{yx})$$
+    Therefore $D$ generates $\bigoplus_{x\in X} R$. Suppose 
+    $$
+        \sum_{1}^m a_i(\delta_{yx_i}) = \sum_1^m b_i(\delta_{yx_i}).
+    $$
+    Then for each $j$,
+    $$
+        a_j = \left(\sum_{1}^m a_i(\delta_{yx_i})\right)(x_j) = \left(\sum_1^m b_i(\delta_{yx_i})\right)(x_j)=b_j.
+    $$
+    So $D$ is linearly independent over $R$. 
+\end{proof}
 \begin{proposition}
     Let $S$ be a ring and $R\subset S$ a subring. Consider $(M,\cdot,+)$, a left $S$-module, then $rm:= r\cdot m$, for $r\in R$, defines a structure of left $R$-modules. If in addition $Q$ is a subring of a ring $T$ and $M$ is an $(S,T)$-bimodule, then $M$ is an $(R,Q)$-bimodule.  
 \end{proposition}
@@ -1547,9 +1588,7 @@ Assuming the axiom of choice we get the following result.
 \begin{definition}
     Consider a left $R$-module $M$. A \emph{maximal left $R$-submodule of $M$} is a maximal element of the family of all proper left $R$-submodules   
 \end{definition}
-\begin{lemma}
-    Consider a family of left $R$-submodules of $_RM$, $X$, that is totally ordered by inclusion. Then {\Large Here!}
-\end{lemma}
+
 \subsubsection{A First Look at Algebras over Rings}
 \begin{definition}
     By a \textit{ring extension $S$ over $R$} we mean a ring $S$ containing a ring $R$ as a subring. Such a pair is denoted $S\supset R$. Such a pair is a \textit{field extension} if $S$ is a field and $R$ is a subfield.
@@ -1587,7 +1626,7 @@ Assuming the axiom of choice we get the following result.
 \begin{definition}
     Let $S$ be an algebra over commutative ring $R$ and $s_1,\dots,s_n\in Z(S)$. We define the \textit{algebra over $R$ generated by $s_1,\dots,s_n$} to be the set 
     \begin{align*}
-        R[s_1,\dots,s_n] &:= \left\{ \sum_{v=(v_1,\dots,v_n)\in \N^n} a_vs_1^{v_1}\cdots s_n^{v_n} : a_v\in R \forall v\in \N^n, a_v = 0 \text{ for all but finitely many } v\in \N^n \right\}.
+        R[s_1,\dots,s_n] &:= \left\{ \sum_{v=(v_1,\dots,v_n)\in \N^n} a_vs_1^{v_1}\cdots s_n^{v_n} : (a_v)\in \bigoplus_{v\in\N^n} R \right\}.
     \end{align*}
     If $S\supset R$, then the above set is the \textit{ring extension over $R$ generated by $s_1\dots,s_n$}
 \end{definition}
@@ -1601,7 +1640,7 @@ Assuming the axiom of choice we get the following result.
     \end{align*}
     and 
     \begin{align*}
-        \left(\sum_{v\in \N^n} a_vs_1^{v_1}\cdots s_n^{v_n}\right)\left(\sum_{w\in \N^n} b_ws_1^{w_1}\cdots s_n^{w_n}\right) &= \sum_{v\in \N^n}\sum_{w \in \N^n} a_vb_w s_1^{v_1+w_1}\cdots s_n^{v_n+w_n} \\
+        \left(\sum_{v\in \N^n} a_vs_1^{v_1}\cdots s_n^{v_n}\right)&\left(\sum_{w\in \N^n} b_ws_1^{w_1}\cdots s_n^{w_n}\right) = \sum_{v\in \N^n}\sum_{w \in \N^n} a_vb_w s_1^{v_1+w_1}\cdots s_n^{v_n+w_n} \\
         &= \sum_{u\in \N^n} \left(\sum_{v,w\in \N^n : v+w = u} a_vb_w \right)s_1^{u_1}\cdots s_n^{u_n}\in R[s_1,\dots,s_n]
     \end{align*}
     Let $r\in R$. Then 
@@ -1618,48 +1657,18 @@ Assuming the axiom of choice we get the following result.
     Let $R$ be a ring and consider $R$-algebras $A,B$. A map $\sigma : A\rightarrow B$ is an \textit{$R$-algebra homomorphism} if it is both a ring homomorphism and an $R$-module homomorphism.
 \end{definition}
 \begin{lemma}
-    Let $R$ be a ring, consider $R$-algebras $A,B$ and a map $\sigma : A\rightarrow B$. Then $\sigma$ is an $R$-algebra homomorphism if and only if $\sigma$ is a multiplicative map fixing $R$, i.e. for every $a_1,a_2\in A$, $\sigma(a_1a_2)=\sigma(a_1)\sigma(a_2)$ and for every $r\in R$, $\sigma(r) = r$.
+    Let $R$ be a ring, consider $R$-algebras $A,B$ and a map $\sigma : A\rightarrow B$. Then $\sigma$ is an $R$-algebra homomorphism if and only if $\sigma$ is a multiplicative, additive map fixing $R$, i.e. for every $a_1,a_2\in A$, $\sigma(a_1a_2)=\sigma(a_1)\sigma(a_2)$ and for every $r\in R$, $\sigma(r) = r$. Here $r := r1$.
 \end{lemma}
 \begin{proof}
-    {\Large DO AT SOME POINT}.
+    If $\sigma$ is an $R$-algebra homomorphism, then it is by definition multiplicative. Moreover, since $\sigma$ is an $R$-module map, 
+    $$
+        \sigma(r)=r\sigma(1)= r1.
+    $$
+    If $\sigma$ is a multiplicative, additive map fixing $R$, then 
+    $$
+        \sigma(ra)=\sigma(r)\sigma(a)=r\sigma(a).
+    $$
 \end{proof}
-\subsection{Abelian Categories}
-\subsubsection{Preadditive Categories}
-\begin{definition}
-    A category $\pazocal{C}$ is \textit{preadditive} if every $\Hom(A,B)$ is an additive group and 
-    $$f(g+h)=fg+fh, \quad (f+g)h=fh+gh.$$
-\end{definition}
-\begin{example}
-    \begin{enumerate}
-        \item 
-    \end{enumerate}
-\end{example}
-\subsubsection{Additive, Pre-abelian \& Abelian Categories}
-\begin{definition}
-    A preadditive category $\pazocal{C}$ with zero objects is called \textit{additive} if it admits binary coproducts.{\LARGE by some theorem} 
-\end{definition}
-\begin{definition}
-    In an additive category $\pazocal{C}$ of a pair of objects $A,B$ in $\pazocal{C}$ a \textit{biproduct} of $A$ and $B$ is an object $A\oplus B$ such that 
-    $$\begin{tikzcd}
-        A \arrow[r, shift left, "p_1"] & A\oplus B \arrow[l, shift left, "i_1"] \arrow[r,shift left, "p_2"] & B \arrow[l, shift left, "i_2"]
-    \end{tikzcd}$$
-    $i_1p_1 = \fone_A$, $p_2i_2 = \fone_B$ and $p_1i_1+ i_2p_2=\fone_{A\oplus B}$
-\end{definition}
-\begin{lemma}
-    Any additive category admits a biproduct. In particular it admits a product and finite coproducts and products are isomorphic. 
-\end{lemma}
-\begin{proof}
-    
-\end{proof}
-\begin{definition}
-    In an additive category $\pazocal{C}$ a \textit{kernel} of a morphism $f: A \rightarrow B$ is an object $K$ and a morphism $k: K \rightarrow A $ such that 
-    $$\begin{tikzcd}
-        K \arrow[r, "0"] \arrow[d, "k"] & B\\
-        A \arrow[ur, "f"]
-    \end{tikzcd}$$
-    commutes. 
-    A \textit{cokernel} in $\pazocal{C}$ is a kernel in $\pazocal{C}\op$
-\end{definition}
     
 \subsection{Homological Algebra}
 \subsubsection{Exact Sequences}
@@ -1715,141 +1724,49 @@ Assuming the axiom of choice we get the following result.
         is exact.
     \end{corollary}
     \subsubsection{Isomorphism Theorems}
-    We are going to construct ways of identifying certain algebraic structures given certain maps. We will develop these theorems for groups, rings, modules and algebra homomorphisms in a sense separately. However, in a certain categorical setting {\Large which I don't know} we would be able to develop them all at once.   
-\begin{definition}
-    An \textit{isomorphism of groups} is a bijective group homomorphism. A \textit{isomorphism of rings} is a bijective ring homomorphism. If there exists an isomorphism between groups/rings $G,H$/$R,S$ then $G,H$/$R,S$ are said to be \textit{isomorphic as groups/rings} and we write $G\simeq H$/$R\simeq S$, when this does not lead to confusion.   
-\end{definition}
-\begin{remark}
-    One easily check that the inverse of of a bijective group/ring homomorphism is automatically a group/ring homomorphism itself. Indeed, if $\rho: G\rightarrow H$ is a bijective monoid map, let $h,h'\in H$, then for some $g,g'\in G$, $h=\rho(g)$ and $h' = \rho(g')$. Then 
-    $$\rho^{-1}(hh')=\rho^{-1}(\rho(g)\rho(g'))=\rho^{-1}(\rho(gg'))=gg'=\rho^{-1}(h)\rho^{-1}(h').$$
-    Lastly 
-    $$\rho^{-1}(e_H) = \rho^{-1}(\rho(e_G))= e_G.$$
-\end{remark}
-\begin{example}
-    Let $R$ be a commutative ring. Consider the identity map
-    \begin{gather*}
-        \text{id} : (R,\cdot) \rightarrow (R,\ast)= R^{(\text{op})},
-        r \mapsto r
-    \end{gather*}
-    Then this clearly a bijective map of groups. Let $r,r'\in R$ then 
-    $$\text{id}(rr') = rr' = r'r = \text{id}(r')\text{id}(r) = \text{id}(r)\ast \text{id}(r'),$$
-    hence $R\simeq R^{(\text{op})}$.
-\end{example}
-\begin{lemma}\label{KernelIsZerosIffInjective}
-    Let $\rho : G \rightarrow H$ be a group homomorphism. Then $\ker \ \rho = \{e\}$ if and only if $\rho$ is injective.
-\end{lemma}
-\begin{proof}
-    "$\implies$": Let $g_1,g_2 \in G$ be given such that $\rho(g_1)=\rho(g_2)$. Then
-    $$\rho\left(g_1g_2^{-1}\right)=\rho(g_1)\rho(g_2)^{-1} = e \implies g_1g_2^{-1} = e \implies g_1 = g_2.$$
-    "$\impliedby$": Let $k\in \ker \ \rho$. Then $\rho(k) = e = \rho(e)$, implying $k=e$, hence $k\in \{e\}$.
-\end{proof}
-\begin{corollary}
-    Let $\sigma : R \rightarrow S$ be a ring homomorphism. Then $\ker \ \sigma = 0$ if and only if $\sigma$ is injective.
-\end{corollary}
-\begin{corollary}\label{WellDefinedQuotientRingHomFromRingHom}
-    Let $R,S$ be rings, $\sigma : R \rightarrow S$ a ring homomorphism and $I\subset R$, $J\subset S$ be left/right ideals. Then the $\vartheta : R/I \rightarrow S/J,$ $r+I \mapsto \sigma(r)+J$ is a well-defined ring homomorphism if and only if $\sigma(I)\subset J$
-\end{corollary}
-\begin{proof}
-    By the above proposition $\vartheta$ being a well-defined ring homomorphism implies $\sigma(I)\subset J$. Conversely if $\sigma(I)\subset J$ it remains to check that $\vartheta$ is a ring homomorphism. Let $r_1+I,r_2+I\in R/I$. Then 
-    $$\vartheta((r_1+I)(r_2+I)) = \vartheta(r_1r_2+I)=\sigma(r_1r_2)+ J= \sigma(r_1)\sigma(r_2) +J= \vartheta(r_1+I)\vartheta(r_2+I).$$
-    Furthermore, 
-    $$\vartheta(1+I) = \sigma(1) + J = 1 + J.$$
-\end{proof}
-\begin{corollary}
+      
+\begin{proposition}
     Let $R$ be a subring of a ring $S$. Let $I\subset R$ be a left/right ideal. Then $\sigma : R/I \rightarrow S/IS, r+I \mapsto r+SI$ is a well defined ring map in the left case and so is $r+ I \mapsto r+IS$ in the right case.
-\end{corollary}
+\end{proposition}
 \begin{proof}
     Consider $\iota : R \hookrightarrow S, r\mapsto r$. Then since $\iota(I)\subset SI$, it follows that $\sigma : R/I \mapsto S/SI, r + I \mapsto \iota(r)+SI=r+SI$ is a well-defined ring map.
 \end{proof}
-\begin{corollary}\label{WellDefinedQuotientModuleHomFromModuleHom}
-    Let $R$ be a ring, $M,N$ left/right $R$-modules, $\rho : M \rightarrow N$ a left/right module homomorphism and $L\subset M$, $K\subset N$ be submodules. Then the $\vartheta : M/L \rightarrow N/K,$ $m+L \mapsto \rho(m)+K$ is a well-defined module homomorphism if and only if $\rho(L)\subset K$
+\begin{corollary}
+    Let $R$ be a ring $M$ a left $R$-module. Consider submodules $N,N'\subset M$ with $N'\subset N$. Then 
+    $$\frac{M/N'}{N/N'}\simeq M/N.$$
 \end{corollary}
 \begin{proof}
-    The above proposition again tells us that if $\vartheta$ is a well defined module homomorphism, then $\rho(L)\subset K$. Conversely if $\rho(L)\subset K$, we just need to check the map is homogeneous of degree $1$. Indeed let $r\in R$, $m\in M$. Then 
-    $$\vartheta(rm + L) =  \sigma(rm)+ K = r(\sigma(m)+K)=r\vartheta(m+L).$$
-\end{proof}
-\begin{proposition}\label{UniqueMapQuotientGroupMap}
-    Let $G,H$ be groups, $\rho : G \rightarrow H$ a group homomorphism and $N \subset G$ a normal subgroup such that $N\subset \ker \ \rho$. Consider the canonical surjection $\pi : G \twoheadrightarrow G/N$, i.e. $g \mapsto gN$. Then $\varrho : G/N \rightarrow H$, $gN \mapsto \rho(g)$ is the unique group homomorphism with the property that 
-    $\rho= \varrho \pi.$ In other words the diagram 
-     $$
-            \begin{tikzcd}
-                G \arrow[rd, "\rho"] \arrow[r, "\pi", twoheadrightarrow] & G/N \arrow[d, "\exists! \varrho", dotted] \\
-                & H
-            \end{tikzcd}
+    Follows from the 1st isomorphism theorem for modules: Consider the map
+    \begin{gather*}
+        M/N' \rightarrow M/N\\
+        m + N' \mapsto m+N
+    \end{gather*}
+    This is a surjective left $R$-module map. Suppose $m+N = 0+N$, then $m+N'\in N/N'$, hence the kernel of this map is $N/N'$, so
     $$
-    commutes.
-\end{proposition}
-\begin{proof}
-    The assumption that $I\subset \ker \ \rho$ implies that $ \rho(I) = \{e\}$ hence the above lemma shows that $\varrho$ is a well-defined group homomorphism. Since $H/\{e\} = H$. Indeed, for $g\in G$,
-    $$\varrho \pi (g) = \varrho(\pi(g))= \varrho(gI)=\rho(g) \implies \varrho\pi = \rho.$$
-    \textbf{Uniqueness:} Consider another group homomorphism $\varrho': G/I \rightarrow H$ such that $\varrho \pi = \rho$. Let $gI \in G/I$. Then 
-    $$\varrho'(gI) = \varrho'(\pi(g))=\rho(g) = \varrho(\pi(g))=\varrho(gI)\implies \varrho' = \varrho.$$
-\end{proof}
-\begin{corollary}\label{UniqueMapQuotientRingMap}
-    Let $R,S$ be rings, $\sigma : R \rightarrow S$ and $I\subset R$ an ideal such that $I \subset \ker \ \sigma$. Define $\pi : R \rightarrow R/I $ to be the canonical surjection, i.e. $r\mapsto r + I$. Then there is a unique ring homomorphism $\varrho : R/I \rightarrow S$ such that  
-    $$\sigma = \varrho \pi.$$
-\end{corollary}
-\begin{proof}
-    This follows from the above proposition together with corollary~\ref{WellDefinedQuotientRingHomFromRingHom}. 
-\end{proof}
-\begin{corollary}\label{UniqueMapQuotientModuleMap}
-    Let $R$ be a ring and $M,N$ be left/right $R$-modules. Consider $\rho : M \rightarrow N$ a left/right module map and $L\subset M$ a submodule such that $L \subset \ker \ \sigma$. Define $\pi : M \rightarrow M/L $ to be the canonical surjection, i.e. $r\mapsto r + L$. Then there is a unique ring homomorphism $\varrho : M/L \rightarrow N$ such that  
-    $$\rho = \varrho \pi.$$
-\end{corollary}
-\begin{proof}
-    This follows from the above proposition together with corollary~\ref{WellDefinedQuotientModuleHomFromModuleHom}. 
-\end{proof}
-\begin{theorem}\label{1stIsomorphismTheoremForGroups}(1st Isomorphism Theorem for Groups)\\
-    Let $G,H$ be a group and $\rho : G \rightarrow H$ a group homomorphism. Then $G/\ker \ \rho \simeq \rho(G)$ via the group homomorphism $\varrho : G/\ker\ \rho \rightarrow H$, $g(\ker \ \rho)\mapsto \rho(g)$ 
-\end{theorem}
-\begin{proof}
-    By Proposition~\ref{UniqueMapQuotientGroupMap}, $\varrho : G/\ker\ \rho \rightarrow H$, $g(\ker \ \rho)\mapsto \rho(g)$ is a well-defined group homomorphism. Then  $\overline{\varrho} : G/\ker\ \rho \rightarrow \overline{\varrho}(G/\ker\ \rho) $, $g(\ker \ \rho)\mapsto \varrho(g)$ is a surjective group homomorphism. We check that $\varrho(G/\ker\ \rho) = \rho(G)$. Indeed, let $\varrho(g(\ker \ \rho))\in \varrho(G/\ker\ \rho)$. Then $\varrho(g(\ker \ \rho))=\rho(g)\in \rho(G)$. Similarly, if $\rho(g)\in \rho(G)$, then $\rho(g)=\varrho(g(\ker\ \rho))\in \varrho(G/\ker \ \rho)$. It remains to check that $\overline{\varrho}$ is injective. Suppose $0=\overline{\varrho}(g(\ker \ \rho))$. Then $\rho(g) = 0$, which implies $g\in \ker \ \rho$, hence $g(\ker \ \rho) = e(\ker \ \rho)$, meaning $\ker \overline{\varrho} = 0$. By Lemma~\ref{KernelIsZerosIffInjective} $\overline{\varrho}$ is injective. We thus conclude that $\overline{\varrho}$ is a bijective group homomorphism, which means $$G/\ker \ \rho \simeq \overline{\varrho}(G/\ker\ \rho) =\varrho(G/\ker\ \rho) = \rho(G).$$
-\end{proof}
-\begin{corollary}\label{1stIsomorphismTheoremForRings}(1st Isomorphism Theorem for Rings)\\
-    Let $R,S$ be rings and $\sigma: R \rightarrow S$ a ring homomorphism. Set $ I= \ker\ \sigma$. Then $R/I \simeq \sigma(R)$ via the ring homomorphism $\vartheta : R/I \rightarrow \sigma(R)$, $r+I \mapsto \sigma(r).$
-\end{corollary}
-\begin{proof}
-    By Corollary~\ref{UniqueMapQuotientRingMap} and the above theorem $\vartheta$ is a bijective ring homomorphism, hence $R/I \simeq \sigma(R)$. 
-\end{proof}
-\begin{corollary}\label{1stIsomorphismTheoremForModules}(1st Isomorphism Theorem for Modules) Let $R$ be a ring, $M,N$ be a left/right $R$-modules and consider a left/right $R$-module homomorphism $\rho : M \rightarrow N$. Then $M/\ker \ \rho \simeq \rho(M)$ via the left/right $R$-module homomorphism $\varrho : M/\ker \ \rho \rightarrow \rho(M)$, $m + \ker \ \rho \mapsto \rho(m) $ 
-\end{corollary}
-\begin{proof}
-    Theorem~\ref{1stIsomorphismTheoremForGroups} and Corollary~\ref{UniqueMapQuotientModuleMap} ensures that $\varrho : M/\ker\ \rho \rightarrow \rho(M)$ is a bijective module homomorphism.
-\end{proof}
-\begin{corollary}(1st Isomorphism Theorem for Algebras) Let $R$ be a commutative ring and $A,B$ be $R$-algebras. Consider an $R$-algebra homomorphism $\sigma: A\rightarrow B$. Then $A/\ker\ \sigma \simeq \sigma(A)$ via the $R$-algebra homomorphism $\vartheta : A/\ker\ \sigma \rightarrow \sigma(A), a+\ker\ \sigma \mapsto \sigma(a)$.
-\end{corollary}
-\begin{proposition}
-    Let $G$ be a group, $N',N\subset G$  normal subgroups with $N'\subset N$. Then 
-    $$\frac{G/N'}{N/N'}\simeq G/N.$$
-\end{proposition}
-\begin{proof}
-    Consider the surjective group map 
-    $$\pi : G \rightarrow G/N, g \mapsto gN'.$$
-    Then by Lemma~\ref{WellDefinednessOfQuotientGroupMaps}
-    $$\varpi : G/N' \rightarrow G/N, gN'\mapsto gN,$$
-    is a surjective group map, since $N'\subset \ker \ \pi$. Clearly $N'/N\subset \ker \ \varpi$. Let $gN'\in \ker\ \varpi$. Then $gN = 0$, hence $g\in N$. Thus $gN' \in N/N'$. Then $\ker \ \varpi = N/N'$, hence by the 1st isomorphism theorem
-    $$\frac{G/N'}{N/N'}=\frac{G/N'}{\ker\ \varpi}\overset{\varpi}{\simeq} G/N.$$
+        \frac{M/N'}{N/N'}\simeq M/N.
+    $$ 
 \end{proof}
 \begin{corollary}
     Let $R$ be a ring $I,J\subset R$ left/right ideals with $J\subset I$. Then 
     $$\frac{R/J}{I/J}\simeq R/I.$$
 \end{corollary}
 \begin{proof}
-    Follows from the 1st isomorphism for rings and the fact that $\pi$ is also a ring homomorphism. 
+    Follows from the 1st isomorphism theorem for rings and the fact that 
+    \begin{gather*}
+        R/J \rightarrow R/I\\
+        r+ J \mapsto r+I
+    \end{gather*}
+    is also a ring homomorphism. 
 \end{proof}
-\begin{corollary}
-    Let $R$ be a ring $M$ a left/right $R$-module. Consider submodules $N,N'\subset M$ with $N'\subset N$. Then 
-    $$\frac{M/N'}{N/N'}\simeq M/N.$$
-\end{corollary}
-\begin{proof}
-    Follows from the 1st isomorphism theorem for modules together with the fact that $\pi$ is also a module homomorphism. 
-\end{proof}
+
 \begin{lemma}\label{NoetherSecondIsoForModules}
-        Consider $_RL\leq {_RN} \leq {_RM}$. Then 
-        $$\begin{tikzcd}
-            0 \arrow[r] & N/L \arrow[r,hookrightarrow] & M/L \arrow[r, twoheadrightarrow] &M/N \arrow[r] &0
-        \end{tikzcd}$$
-        is exact
+    Consider $_RL\leq {_RN} \leq {_RM}$. Then 
+        $$  
+            \begin{tikzcd}
+                0 \arrow[r] & N/L \arrow[r,hookrightarrow] & M/L \arrow[r, twoheadrightarrow] &M/N \arrow[r] &0
+            \end{tikzcd}
+        $$
+    is exact
 \end{lemma}
 \begin{proof}
     This is an immediate consequence of Lemma~\ref{ExactnessIsEquivalentToInjFirstSESSurjSecondSES}
@@ -1871,189 +1788,12 @@ Assuming the axiom of choice we get the following result.
     It follows that $\im \ \overline{\rho} = \ker\ \rho'\mid_{\im\ \rho} = \ker \ 0 = (N+L)/N$, hence $\rho$ is surjective. By exactness $\rho$ is also injective hence $N/(N\cap L) \overset{\rho}{\simeq} (N+L)/N$.
 \end{proof}
 \subsubsection{Free Modules}
-\subsection{Vector Spaces}
-\subsubsection{Finite Dimensional Vector Spaces}
-\begin{definition}
-    Let $V$ be an $n$-dimensional vector space over a field $K$ with basis $\pazocal{V}=\{v_1,\dots,v_n\}$. Let $\pazocal{W}=\{w_1,\dots,w_n\}\subset V$. Write $w_i = \sum_1^n a_{ij}v_j$ for suitable (unique!) $a_{ij}\in K$ and consider the matrix 
-    $$_\pazocal{V}T_\pazocal{W} := (a_{ij})^T\in M_n(K).$$
-    When $_\pazocal{V}T_\pazocal{W}$ is invertible we call it \textit{the basis transformation of $\pazocal{V}$ to $\pazocal{W}$} or \textit{a change-of-basis}  
-\end{definition}
-\begin{remark}
-    We canonically identify $_\pazocal{V}T_\pazocal{W}$ with an endomorphism on $V$:
-    \begin{gather*}
-        _\pazocal{V}T_\pazocal{W} : V\rightarrow V,
-        v = \sum_1^n \alpha_i v_i \mapsto \sum_1^n \left(\sum_1^n a_{ji}a_j \right)v_i
-    \end{gather*}
-    Note that 
-    $$_\pazocal{V}T_\pazocal{W} v_i= \sum_1^n\left(\sum_1^n a_{kj}\delta_{ki}\right)v_j = \sum_1^n a_{ij}v_j = w_i $$
-\end{remark}
-\begin{theorem}\label{BasisTransformationTheorem}
-    Let $V$ be an $n$-dimensional vector space over a field $K$ with basis $\pazocal{V}=\{v_1,\dots,v_n\}$. Consider $\pazocal{W}=\{w_1,\dots,w_n\}\subset V$. Then $\pazocal{W}$ is a basis of $V$ over $K$ if and only if $_\pazocal{V}T_\pazocal{W}$ is invertible.  
-\end{theorem}
+\begin{lemma}
+    For a non-empty set $X$, the free additive group $R[X]$, where $R$ is a ring, is an $(R,R)$-bimodule with generating set $\{\delta_{yx}: X\rightarrow R \ \| \ x\in X\}$
+\end{lemma}
 \begin{proof}
-    "$\implies$": write $v_i = \sum_1^n b_{ij}w_j$. Note that 
-    $w_i = _\pazocal{V}T_\pazocal{W} v_i = _\pazocal{V}T_\pazocal{W} {_\pazocal{W}}T_\pazocal{V} w_i$, and that $v_i = _\pazocal{W}T_\pazocal{V} w_i = _\pazocal{W}T_\pazocal{V} {_\pazocal{V}}T_\pazocal{W} v_i$. Since a module homomorphism is uniquely characterized by its behavior on the basis elements {\Large to be written} it follows that $_\pazocal{V}T_\pazocal{W} {_\pazocal{W}}T_\pazocal{V} = _\pazocal{W}T_\pazocal{V} {_\pazocal{V}}T_\pazocal{W} = I_n$, hence ${_\pazocal{V}}T_\pazocal{W}$ is invertible with inverse ${_\pazocal{W}}T_\pazocal{V}$.\\
-    "$\impliedby$": by {\large An invertible linear map, maps a basis to a basis}, hence $\pazocal{W} = _\pazocal{V}T_\pazocal{W}(\pazocal{V})$ is a basis of $V$.
+    This is just a reformulation of Lemma~\ref{BasisOfDirectSum}.
 \end{proof}
-\begin{lemma}\label{DimensionsOfExactSequence}
-        Given an exact sequence of vector spaces
-         $$\begin{tikzcd}
-            0 \arrow[r] &V \arrow[r,"\rho"] & V' \arrow[r,"\rho'"] & V'' \arrow[r] & 0
-        \end{tikzcd}$$
-        we have that 
-        $$\dim\ V= \dim \ V' + \dim \ V''$$
-    \end{lemma}
-    \begin{proof}
-        This follows from the above Lemma~\ref{ExactnessIsEquivalentToInjFirstSESSurjSecondSES} and {\LARGE theorem not yet written about finite dimensional vector spaces}.
-    \end{proof}
-    \begin{proposition}
-        For sequence of vector spaces
-         $$\begin{tikzcd}
-            0 \arrow[r] & V_1 \arrow[r,"\rho_1"] & V_2 \arrow[r,"\rho_2"] & V_3 \arrow[r,"\rho_3"] & V_4 \arrow[r] & 0
-        \end{tikzcd}$$
-        we have that 
-        $\dim \ V_4 = \dim \ V_3 -\dim \ V_2 + \dim \ V_1$.
-    \end{proposition}
-    \begin{proof}
-        Set $W := \im \ \rho_2 = \ker \ \rho_3$. Then 
-        $$\begin{tikzcd}
-            0 \arrow[r] & V_1 \arrow[r,"\rho_1"] & V_2 \arrow[r,"\rho_2"] & W \arrow[r] & 0 
-        \end{tikzcd}$$
-        and 
-        $$\begin{tikzcd}
-            0\arrow[r] &W \arrow[hookrightarrow,r] &V_3 \arrow[r, "\rho_3"] &V_4 \arrow[r] &0
-        \end{tikzcd}$$
-        are exact, hence by the above lemma $\dim \ V_2 = \dim \ V_1 +\dim \ W$ implying $\dim \ W = \dim \ V_2- \dim \ V_1$. Moreover, 
-        $$\dim\ V_3 = \dim \ V_4 +\dim \ W = \dim \ V_4 +\dim \ V_2 - \dim \ V_1,$$
-        hence $\dim \ V_4 = \dim \ V_3 -\dim \ V_2 +\dim \ V_1.$
-    \end{proof}
-    \begin{lemma}\label{SecondIsomorphismTheoremForVS}
-        Let $U\subset W\subset V$ be vector spaces where $V/U$ finite dimensional. Then 
-        $$\dim\ V/U = \dim \ V/W+ \dim \ W/U,$$
-        In particular we get that $V/W$ and $W/U$ are finite dimensional. 
-    \end{lemma}
-    \begin{proof}
-        This follows directly from the above proposition and Lemma~\ref{NoetherSecondIsoForModules}. 
-    \end{proof}
-    \begin{lemma}
-        Let 
-        $$\begin{tikzcd}
-            0 \arrow[r,"\rho_0"] &V_1\arrow[r,"\rho_1"] & \cdots \arrow[r,"\rho_{n-1}"] & V_n\arrow[r,"\rho_n"] & 0
-        \end{tikzcd}$$
-        be an exact sequence of finite dimensional vector spaces. Then $\sum_1^n (-1)^i \dim\ V_i = 0$
-    \end{lemma}
-    \begin{proof}
-        In the case $n=1$, it's easy to see that $V_1=0$. Denote the first $0$-map
-        In general for a finite sequence of elements in an additive group, $a_0,\dots,a_n$, say $\sum_{1}^{1} (-1)^i(a_{i-1}+a_{i})= -a_0+(-1)^{n-1} a_n$. By the rank nullity theorem and exactness we have for each $i\in\{1,\dots,n\}$ that $\dim\ V_i = \dim\ \ker \ \rho_i +\dim \ \im \ \rho_i = \dim \ \im \ \rho_{i-1 } + \dim \ \im \ \rho_i$. Hence picking $a_i = \dim \ \im\ \rho_i$, it follows that 
-        \begin{align*}
-            \sum_1^n (-1)^i\dim\ V_i &= \sum_1^n (-1)^i(a_{i-1}+a_i)= -a_0 + (-1)^na_n = -\dim\ \im \ \rho_0 +(-1)^n \dim\ \im \ \rho_n\\ &= -\dim\ \im \ 0 +(-1)^n \dim\ \im \ 0 = 0.
-        \end{align*}
-    \end{proof}
-    \begin{lemma}\label{CodimensionOfIntersectionIsBoundedBySumOfCodimensions}
-        Let $V$ be a finite dimensional vector space and $V_1,\dots,V_n$ be subspaces. Then 
-        $$\codim \ \bigcap_1^n V_i \leq \sum_1^n \codim \ V_i.$$
-    \end{lemma}
-    \begin{proof}
-        Pick a basis of $V$, $B$ and bases of $V_1,\dots,V_n,\bigcap_1^n V_i$, denoted respectively $\pazocal{V}_1,\dots,\pazocal{V}_n,\pazocal{V}\subset B$. Then 
-        $$\codim\ \bigcap_1^n V_i = \#\left( B\setminus \pazocal{V}\right)= \#\left(\bigcup_1^n B\setminus \pazocal{V}_i \right)\leq \sum_1^n \#\left(B\setminus \pazocal{V}_i\right)=\sum_1^n \codim\ V_i.$$
-    \end{proof}
-\subsubsection{Projective Space}
-    \begin{definition}\label{ProjectiveEquivalence}
-        Let $V$ be a vector space over some field $K$. For $v,w\in V\setminus 0$ we write $v\sim w$ if there exists a $\lambda\in K\setminus 0$ such that $w = \lambda v$
-    \end{definition}
-    \begin{remark}
-        This an equivalence relation. Indeed $v = 1\cdot v$, hence $v\sim v$. If $v\sim w$, then $w =\lambda v$, hence $v= \lambda^{-1}w$, meaning $w\sim v$. Suppose $v\sim w$ and $w\sim u$. Then $w=\lambda v$ and $u = \mu w$, hence $u = \mu\lambda v$, implying $v\sim u$. 
-    \end{remark}
-    \begin{definition}
-        We define \textit{the projective space of $V$ over $K$} to be the set 
-        $$\Pp(V) := (V\setminus 0)/\sim.$$
-        We furthermore define $\Pp^n:=\Pp^n(K):= \Pp(K^{n+1})$ which is called \textit{the projective $n$-space over $K$}. We denote an element $[v]=[(v_1,\dots,v_{n+1})]\in \Pp^n$ by $[v_1,\dots,v_n]$.   We call $\Pp^1$ \textit{the projective line over $K$} and $\Pp^2$ \textit{the projective plane over $K$}.   
-    \end{definition}
-    \begin{remark}
-        Note that $[\lambda v]=[v]$ for every $\lambda\in K\setminus 0$ and $[v]\in \Pp(V)$, hence $[\lambda v_1,\dots,\lambda v_{n+1}]=[v_1,\dots,v_{n+1}]$ for every $[v_1,\dots,v_{n+1}]\in\Pp^n$.\\
-        Consider the category of Vector Spaces with morphism being maps that are homogeneous of degree $1$. Consider also category of sets $P$ with a $(K^\ast,\cdot)$-action, satisfying $p=\lambda p$ for every $p\in P$, with morphisms being maps that are homogeneous of degree $1$ with respect to this $K^\ast$-action. Then $V\mapsto \Pp(V)$ and $f: V\rightarrow W\mapsto \widehat{f} : \Pp(V)\rightarrow \Pp(W), [v]\mapsto [f(v)]$, defines a functor. Restricting all sets to be topological spaces (with vector spaces being topological vector spaces) and all maps to be continuous, we get two subcategories of category of topological spaces such that the functor $(V,f)\mapsto (\Pp(f),\widehat{f})$ restricts to a functor between these categories. Indeed if $f: X\rightarrow Y$ is continuous and $\pi: X\rightarrow X/\sim_X$, $\tau: Y\rightarrow Y/\sim_Y$, denotes quotient maps to some quotient spaces and $\widehat{f}: X/\sim_X \rightarrow Y/\sim_Y, [x]\mapsto [f(x)]$ is well-defined, then $\widehat{f}\pi = \tau f $, hence $\widehat{f}$ is continuous, by the universal property of quotient space {\large perhaps write some point set topology?}.    
-    \end{remark}
-    \begin{definition}
-        For each $i\in\{1,\dots,n+1\}$ we define \textit{the $i$'th copy of $K^n$ in $\Pp^n$} to be the set 
-        $$U_i := \left\{[v_1,\dots,v_{n+1}]\in \Pp^n : v_i\neq 0 \right\}.$$
-        We furthermore define \textit{the $i$'th hyperplane at infinity in $\Pp^n$} to be the set 
-        $$H_{\infty,i}:=\left\{[v_1,\dots,v_{n+1}]\in \Pp^n: v_i=0\right\}.$$
-        We define \text{the hyperplane at infinity in $\Pp^n$} to be $H_\infty := H_{\infty,{n+1}}$
-    \end{definition}
-    \begin{remark}
-        \begin{enumerate}
-            \item Suppose $V$ is a topological vector space. Consider the map $m_\lambda : \Pp(V)\rightarrow \Pp(V), [v]\mapsto [\lambda v]$ for $\lambda\in K\setminus0$. One clearly has that $m_\lambda =\mathrm{id}$, hence it is continuous.  
-            \item One notes that $\Pp^n = \bigcup_1^{n+1} U_i$. Note that $\varphi : K^n \rightarrow U_i, v\mapsto [v_1,\dots,v_{i-1},1,v_{i+1},\dots,v_{n}]$ is a bijection. Indeed the map $$\varphi^{-1} : U_i\rightarrow K^n, [v_1,\dots,v_i,\dots,v_{n+1}]\mapsto (v_1/v_i,\dots,v_{i-1}/v_i,v_{i+1}/v_i,\dots,v_{n+1}/v_i)$$
-            is well-defined, since 
-            \begin{align*}((\lambda v_1)/(\lambda v_i),\dots,(\lambda v_{i-1})/(\lambda v_i),(\lambda v_{i+1})/(\lambda v_i),\dots,(\lambda v_{n+1})/(\lambda v_i)) &=\\ (v_1/v_i,\dots,v_{i-1}/v_i,v_{i+1}/v_i,\dots,v_{n+1}/v_i).\end{align*} 
-            Clearly $\varphi$ and $\varphi^{-1}$ are mutual inverses. Suppose $K$ is a topological field. Then $K^m$ becomes a topological vector space and we can endow $\Pp^m$ with the quotient topology. Note that $\varphi$ is continuous, since it is given by pre-composition of $\iota: K^n\rightarrow \pi^{-1}(U_i)\setminus 0, v\mapsto (v_1,\dots,v_{i-1},1,v_{i+1},\dots,v_{n+1})$ with $\pi\mid_{\pi^{-1}(U_i)}: \pi^{-1}(U_i)\rightarrow U_i$, which are continuous maps. Let $U\subset K^n$ be open. Let $Q:=\{ v\in K^{n+1} : v_i\in K, (v_1,\dots,v_{i-1},v_{i+1},\dots,v_{n+1})\in KU\}\simeq_{\pazocal{S}_{n+1}} K\times KU$. Define $O:= Q\setminus 0$. One easily verifies that $O=Q\cap K^{n+1}\setminus 0$ and that $\pi^{-1}(\pi(O))=O$, implying that $\pi(O)$ is open. One checks that $\varphi(U)=U_i\cap \pi(O)$, hence $\varphi(U)$ is open in $U_i$, hence $\varphi^{-1}$ is continuous. We thus conclude that $K^{n}$ is homeomorphic to $U_i$ for each $i$. Hence $\Pp^n$ is locally homeomorphic to $K^n$. 
-            \item Consider the map $\pi\mid_{S^n(\R)}: S^n(\R) \rightarrow \Pp^n(\R)$, $S^n(K)=\{v\in \R^{n+1} : \Vert v\Vert =1\}$. Then for $[v]\in \Pp^n(\R)$, $[v]=[1/\Vert v\Vert v]=\pi_{S^n(\R)}(1/\Vert v\Vert v)$, hence $\Pp^n(\R)$ is compact. Since $\C^n \simeq \R^{2n}$, it follows from functoriality that $\Pp^n(\C)\simeq \Pp^{2n+1}(\R)$. Moreover for every $[v]=[w]$ for $v,w\in S^n(\R)$, then $w=\lambda v$, hence  $1=\Vert\lambda v\Vert = \vert \lambda \vert \Vert v\Vert = \vert \lambda \vert$, hence $w = \pm v$. So $\Pp^n(\R)$ is homeomorphic to the northern hemisphere, i.e. $S^n(\R)/(x\sim -x)$.
-            \item Another thing to note is that $\Pp^n = U_i\sqcup H_{\infty,i}$
-        \end{enumerate}
-    \end{remark}
-    \subsubsection{The Projective Span}
-        \begin{definition}
-            For $[v_1],\dots,[v_m]\in\Pp^n$ we define 
-            $$\Span([v_1],\dots,[v_m]):=\left\{\left[\sum_1^m \lambda_iv_i\right] : (\lambda_1,\dots,\lambda_m)\in K^m\setminus 0 \right\}$$
-        \end{definition}
-        \begin{remark}
-            Of course one should ask if this is well-defined. Suppose we are given $\alpha_1,\dots,\alpha_m\in K\setminus 0$. Then for any $(\lambda_1,\dots,\lambda_m)\in K^m\setminus 0$,
-            $$\sum_1^m \lambda_i(\alpha_i v_i) = \sum_1^m (\lambda_i\alpha_i)v_i\in \left\{\left[\sum_1^m \lambda_iv_i\right] : (\lambda_1,\dots,\lambda_m)\in K^m\setminus 0 \right\} $$
-            and conversely 
-            $$\sum_1^m \lambda v_i = \sum_1^m (\lambda_i\alpha_i^{-1})\alpha_iv_i \in \left\{\left[\sum_1^m \lambda_i(\alpha_iv_i)\right] : (\lambda_1,\dots,\lambda_m)\in K^m\setminus 0 \right\}.$$
-            A further thing to note with this construction, is that if $v_1,\dots,v_m\in \A^{n+1}\setminus 0$ span $\A^{n+1}$ (this can only happen for $m\geq n+1$, then $\Span([v_1],\dots,[v_m])=\Pp^n.$
-        \end{remark}
-        \begin{lemma}\label{EquivalentDefinitionOfLinearlyIndependent}
-            $v_1,\dots,v_m\in \Pp^n$ are linearly independent if and only if $[v_i]\notin \Span([v_1],\dots,\widehat{[v_i]},\dots,[v_m])$ for any $i$.
-        \end{lemma}
-        \begin{proof}
-            "$\implies$": Suppose there is a $[v_i]\in \Span([v_1],\dots,\widehat{[v_i]},\dots,[v_m])$. Then for some $\lambda_1,\dots,\lambda_m\in K^m$ with $\lambda_i \neq 0$,
-            $$-\lambda_i v_i = \sum_{j\neq i} \lambda_jv_j \implies \sum_1^m \lambda_jv_j = 0,$$
-            hence $v_1,\dots,v_m$ are not linearly independent. 
-            "$\impliedby$": Suppose there are $(\lambda_1,\dots,\lambda_m)\in K^m\setminus 0$ such that $\sum_1^m \lambda_i v_i = 0$. Then for some $j\in\{1,\dots,m\}$, $\lambda_j\neq 0$, hence 
-            $$v_j = \lambda_j^{-1}\sum_{i\neq j} \lambda_i v_i \in \Span([v_1],\dots,\widehat{[v_j]},\dots, [v_m])$$
-        \end{proof}
-    \subsubsection{Normed Vector Spaces}
-        \begin{definition}
-            An \textit{ordered field} is a field $K$ together with a total ordering $\leq$ on $K$, satisfying, for every $a,b,c\in K$
-            \begin{enumerate}
-                \item $a\leq b \implies a+c \leq b+c$
-                \item $0\leq a, 0\leq b\implies 0\leq ab$
-            \end{enumerate}
-        \end{definition}
-        \begin{example}
-            In this example we endow $\Q$ with the structure of ordered field. For $\frac{a}{b},\frac{c}{d}\in \Q$ we define $\frac{a}{b} \leq \frac{c}{d}$ if $ad\leq cb$ and $b,d>0$. Note that we can always find a representative of a rational number whose numerator is greater than $0$. It is easy to check that this is a partial order on $\Q$. Given any two $\frac{a}{b},\frac{c}{d}\in\Q$ with $b,d>0$ we get that $bd>0$ and $ad\leq bc$ or $ad\geq bc$, since $(\Z,\leq)$ is totally ordered. It follows that $\leq$ is a total ordering. Suppose $\frac{x}{y},\frac{z}{w},\frac{v}{u}\in \Q$ with $y,w,u>0$ are given. Suppose $\frac{x}{y}\leq \frac{z}{w}$. Then $yu,wu>0$ and
-            \begin{align*}
-                wu(xu+vy) \leq u(yzu+vwy)=yu(zu+vw) \implies \frac{x}{y}+\frac{v}{u}=\frac{xu+vy}{yu} \leq \frac{zu+vw}{wu}=\frac{z}{w}+\frac{v}{u}.
-            \end{align*}
-            Suppose instead now that $0\leq \frac{x}{y}$ and $0\leq \frac{z}{w}$.  Then $0\leq x$ and $0\leq z$, hence $0\leq xz$, meaning $0\leq \frac{xz}{yw}$.
-        \end{example}
-        \begin{definition}
-            On an ordered field $K$, we define \textit{the absolute value} to be the function $\vert \cdot \vert : K \rightarrow K_{\geq 0} :=\{a\in K : a\geq 0\}$ to be given by 
-            $$\vert a \vert = \begin{cases}
-                a & \text{if } a\geq 0\\
-                -a & \text{if } a <0
-            \end{cases}$$
-        \end{definition}
-        \begin{definition}
-            A \textit{normed vector space} is a vector space $V$ over an ordered field $K$ with a map $\Vert \cdot \Vert : V\rightarrow K$ satisfying 
-            \begin{enumerate}
-                \item For every $v\in V$, $\Vert v\Vert \geq 0$.
-                \item For every $v\in V$, $\Vert v \Vert = 0\iff v = 0$.
-                \item For every $v\in V$, $a\in K$, $\Vert av\Vert = \vert a\vert \Vert v\Vert$.
-                \item For every $v,w\in V$, $\Vert v+ w\Vert \leq \Vert v\Vert +\Vert w\Vert.$
-            \end{enumerate}
-            We call such a function \textit{a norm on $V$ over $K$}.
-        \end{definition}
-        \begin{lemma}
-            On an ordered field $K$, the absolute value defines a norm on $K$ over $K$, making $K$ a normed vector space over $K$.
-        \end{lemma}
-        \begin{proof}
-            1. This is trivial, since if $a <0$, then $-a>0$.\\
-            2. Suppose $\vert a \vert =0$. Then $a\geq 0$, hence $a=\vert a\vert =0$.\\
-            3. Let $a,b\in K$. Then if $a,b\geq 0$ we have that $ab\geq 0$, hence $\vert ab\vert = ab=\vert a \vert \vert b\vert$. If $a,b <0$, then $-a,-b>0$, hence $ab=(-a)(-b)>0$. It follows that $\vert ab\vert=ab =(-a)(-b)=\vert a\vert \vert b\vert$. If $a\geq 0$ and $b<0$, then $ab\leq 0$, hence $\vert ab\vert = -ab=a(-b)=\vert a\vert \vert b\vert$. The case $a<0$ and $b\geq 0$ is symmetric.\\
-            4. Let $a,b\in K$. Observe that in any case $-c,c\leq \vert c \vert $ for any $c\in K$. If $a+b\geq 0$, then $\vert a+b\vert = a+b\leq \vert a \vert +\vert b\vert$. In the other case $\vert a+b\vert = -a-b\leq \vert a \vert + \vert b\vert $.
-        \end{proof}
 \subsection{Ring theory}
 \subsubsection{Matrix Rings}
 \begin{definition}
@@ -2062,7 +1802,7 @@ Assuming the axiom of choice we get the following result.
     For an element $(a_{i,j})\in M_{n\times m}(R)$ we define $(a_{ij}):= (a_{i,j})$, when no disambiguity arises from this notation. An element of $M_{n\times m}(R)$ is called an ($n\times m$) \textit{matrix}. We define $M_n(R):= M_{n\times n}(R)$. 
 \end{definition}
 \begin{remark}\label{SetOfMatricesIsAnAdditiveGroup}
-    By Lemma~\ref{DirectProductRestrictedDirectProductOfGroupsAreGroups} $M_{n,m}(R)$ is an additive group.
+    Note that $M_{n\times m}(R)$ is an $(R,R)$-bimodule.
 \end{remark}
 \begin{example}
     Let $R= \Z$, $n = 2$ and $m = 3$ and consider $a_{11} = 1, a_{12} = 2, a_{13}=3$ and $a_{21} = 2, a_{22} = 3, a_{23} = 2$. We opt to write the element $(a_{ij})$ as table with $2$ rows and $3$ columns, i.e.
@@ -2106,10 +1846,10 @@ Assuming the axiom of choice we get the following result.
     Let $R$ be a ring and $n$ a positive integer. Then $(M_n(R),+,\cdot)$, where $\cdot$ is matrix multiplication of matrices in $M_n(R)$ and $M_n(R)$, is a ring called \textit{the ($n\times n$) matrix ring (over $R$)}. 
 \end{lemma}
 \begin{proof}
-    $M_n(R)$ is an additive group by Remark~\ref{SetOfMatricesIsAnAdditiveGroup}. Let $I:=1:=  (\delta_{ij})$ (where $\delta_{ii}=1$ for $i\in \{1,\dots,n\}$ and $\delta_{ij} = 0$ for $i,j\in\{1,\dots,n\}$ with $i \neq j$). Then for $(r_{ij})\in M_n(R)$ 
-    $$1(r_{ij}) = \left(\sum_{k=1}^n \delta_{ik}r_{kj}\right) = \left(\delta_{ii}a_{ij} +\sum_{k\in\{1,\dots,n\}\setminus\{i\}}\delta_{ik}a_{kj} \right) = (1a_{ij}+0)=(a_{ij}).$$
+    $M_n(R)$ is trivially an additive group. Let $I:=1:=  (\delta_{ij})$ (where $\delta_{ii}=1$ for $i\in \{1,\dots,n\}$ and $\delta_{ij} = 0$ for $i,j\in\{1,\dots,n\}$ with $i \neq j$). Then for $(r_{ij})\in M_n(R)$ 
+    $$1(r_{ij}) = \left(\sum_{k=1}^n \delta_{ik}r_{kj}\right) = \left(\delta_{ii}r_{ij} +\sum_{k\in\{1,\dots,n\}\setminus\{i\}}\delta_{ik}r_{kj} \right) = (1r_{ij}+0)=(r_{ij}).$$
     In a dual way one can prove that 
-    $$(a_{ij})1= (a_{ij}).$$
+    $$(r_{ij})1= (r_{ij}).$$
     By Lemma~\ref{MatrixMultiplicationIsAssociativeAndDistributesOverAddition} it follows that $(M_n(R),+,\cdot)$ is a ring.
 \end{proof}
 \begin{example}
@@ -2124,7 +1864,7 @@ Assuming the axiom of choice we get the following result.
         \item Suppose there are two elements $r_1,r_2$ such that $rr_i = r_ir = 1$. Then 
         $$r(r_1-r_2) = rr_1-rr_2=1-1=0 \implies r_1-r_2=r_1r(r_1-r_2)=0 \implies r_1 =r_2.$$
         Hence an element satisfying $rr'=r'r=1$ is unique. We denote it by $r^{-1}$ and refer to it as the multiplicative inverse of $r$. 
-        \item $(R^\ast, \cdot)$ is a group. We check that $R^\ast$ is a submonoid of $R$ and hence a monoid. Clearly $1 \in R^\ast$. Let $r,r' \in R^\ast$. Then $$\left(rr'\right)\left(r'^{-1}r^{-1}\right)=r\left(r'\left(r'^{-1}r^{-1}\right)\right)=r\left(\left(r'r'^{-1}\right)r^{-1}\right)=r\left(er^{-1}\right) = rr^{-1} = 1,$$
+        \item $(R^\ast, \cdot)$ is a group. We check that $R^\ast$ is a submonoid of $(R,\cdot)$ and hence a monoid. Clearly $1 \in R^\ast$. Let $r,r' \in R^\ast$. Then $$\left(rr'\right)\left(r'^{-1}r^{-1}\right)=r\left(r'\left(r'^{-1}r^{-1}\right)\right)=r\left(\left(r'r'^{-1}\right)r^{-1}\right)=r\left(er^{-1}\right) = rr^{-1} = 1,$$
         and similarly one can check that $\left(r'^{-1}r^{-1}\right)(rr') = 1$, hence $rr'\in R^\ast$ a. Let $r\in R^\ast$. Then $r^{-1}r=rr^{-1}=1$, hence $r^{-1}$ is a unit, hence $R^\ast$ is a group.
         \item If $R$ is commutative it is sufficient to check that $rr'=1$ to verify that $r$ is a unit.
     \end{enumerate}   
@@ -2133,7 +1873,7 @@ Assuming the axiom of choice we get the following result.
     A commutative ring $K$ where $K^\ast = K\setminus \{0\}$ is called a \textit{field}. Removing the restriction of $K$ being commutative, $K$ is called a \textit{division ring} or \textit{skew field}.
 \end{definition}
 \begin{definition}
-    An left/right ideal $M\subsetneq R$ is called a \textit{left/right maximal} ideal, if for every left/right ideal $I\subset R$ with $M\subset I$, either $I=M$ or $I=R$. If $M$ is an ideal with aforementioned property it is called a \textit{maximal ideal}.  
+    An left ideal $M\subsetneq R$ is called a \textit{left maximal} ideal, if for every left ideal $I\subset R$ with $M\subset I$, either $I=M$ or $I=R$. If $M$ is an ideal with aforementioned property it is called a \textit{maximal ideal}.  
 \end{definition}
 \begin{definition}
     A ring $R$ is called \textit{simple} if the only ideals in $R$ are the trivial ones, i.e. $0$ and $R$.
@@ -2152,7 +1892,7 @@ Assuming the axiom of choice we get the following result.
     "$\impliedby$": Conversely, consider and ideal $J\subset R$ such that $I\subsetneq J$. Then $0\neq J/I\subset R/I$, implying that $J/I = R/I$ and hence that $J=R$. 
 \end{proof}
 \begin{lemma}\label{UnionOverChainOfSubmodulesIsSubmodule}
-    Let $M$ be a left/right $R$-module. Consider a chain $C$ of submodules of $M$. Then 
+    Let $M$ be a left $R$-module. Consider a chain $C$ of submodules of $M$. Then 
     $$\bigcup_{N\in C} N$$
     is a submodule.
 \end{lemma}
@@ -2176,7 +1916,7 @@ Assuming the axiom of choice we get the following result.
     "$\implies$": We need to prove that every non-zero element of $R/I$ is a unit. Consider $a + I \in R/I\setminus \{0+I\}$, i.e. an element in $R/I$, where $a \notin I$. Since $I$ is maximal we have that $I+Ra = R = R1$. This implies that we can find $b\in I$ and $r \in R$ such that $1 = b + ra$, hence
     $$(r+I)(a+I) = (ra + I) + (b+I) = (ra+b)+I = 1 + I,$$
     and since $R/I$ is commutative, this implies $a+I$ is a unit.\\
-    "$\impliedby$": Since $R/I$ is a field, it is in particular a division ring. Then by Lemma~\ref{DivisionRingsAreSimple} $R/I$ is simple. By Lemma~\ref{InCommutativeRingMaximalIdealIffQuotientRingField} $I$ is maximal.  
+    "$\impliedby$": Since $R/I$ is a field, it is in particular a division ring. Then by Lemma~\ref{DivisionRingsAreSimple} $R/I$ is simple. Given any ideal $J\supsetneq I$, $J/I=R/I$, hence $J=R$, meaning $I$ is maximal.  
 \end{proof}
 \begin{definition}
     Let $R$ be a ring, $r\in R$. $d\in R$ is called a \textit{left divisor of $r$} if $r\in Rd$ and a \textit{right divisor of $r$} if $r\in dR$. If $d$ is both a left and a right divisor of $r$, we write $d\mid r$. Hence if $R$ is commutative, $d\mid r \iff r\in \langle d\rangle$.
@@ -2197,7 +1937,7 @@ Assuming the axiom of choice we get the following result.
     A division ring $D$ is a domain. Hence a field is an integral domain.
 \end{proposition}
 \begin{proof}
-    Let $a\in D\setminus 0$. Then $\langle a \rangle = D$ since $D$ is simple, hence $1\in \langle a\rangle$, meaning there is some $b\in a$ such that $ba = ab = 1$. 
+    Let $a\in D\setminus 0$. Then $\langle a \rangle = D$ since $D$ is simple, hence $1\in \langle a\rangle$, meaning there is some $b\in D$ such that $ba = ab = 1$. 
 \end{proof}
 \begin{lemma}\label{WeCanDivideByElementsWhichAreNotZeroDivisors}
     Let $x,y, a\in R$ where $a$ is not a zero divisor. If $ax = ay$, then $x=y$. The same result can be proven if $xa = ya$. In particular, if $R$ is a domain, then for $x,y\in R$, $a\in R\setminus 0$, $ax=ay$ xor $xa=ya$ implies $x=y$. 
@@ -2221,12 +1961,20 @@ Assuming the axiom of choice we get the following result.
 \begin{proof}
     Indeed $R/M$ is a field and a field is an integral domain, hence $M$ is prime.
 \end{proof}
-
+\begin{lemma}
+    Let $R\subset S$ be a commutative subring of $S$ and $I\subset S$ be a two sided ideal. Then $R+I$ is a subring of $R$.
+\end{lemma}
+\begin{proof}
+    Clearly $1\in R+I$. Let $x,y\in R$ and $a,b\in I$, then 
+    $$
+        (x+a)(y+b)= \underbrace{xy}_{\in R}+\underbrace{xb+ay+ab}_{I}\in R+I.
+    $$
+\end{proof}
 \begin{proposition}\label{EliminationIdealOfPrimeIdealIsPrime}
     Let $S\supset R$ be a commutative ring extension. Let $I\subset S$ be prime. Then $I\cap R\subset R$ is prime.  
 \end{proposition}
 \begin{proof}
-    By Proposition~\ref{PrimeIdealIffQuotientRingID} $S/I$ is an integral domain. Note that $S/I\supset (R+I)/I$ (cf. {\LARGE res saying $R+I$ is subring}). Hence from Lemma~\ref{SubringOfIDIsID} $(R+I)/I$ is an integral. It follows from {\LARGE Isomorphism theorem not yet written} that $(R+I)/I\simeq R/(I\cap R)$, hence $I\cap R$ is prime.
+    By Proposition~\ref{PrimeIdealIffQuotientRingID} $S/I$ is an integral domain. Note that $S/I\supset (R+I)/I$. Hence from Lemma~\ref{SubringOfIDIsID} $(R+I)/I$ is an integral domain. It follows from Theorem~\ref{FirstNoetherIsoTheorem} that $(R+I)/I\simeq R/(I\cap R)$, hence $I\cap R$ is prime.
 \end{proof}
 \begin{definition}
     Let $R$ be a commutative ring. A non-unit and non-zero element $p \in R$ is called a \textit{prime element} if for every $a,b\in R$, $p\mid ab$ implies $p\mid a$ or $p\mid b$. 
@@ -2360,7 +2108,7 @@ In this subsection every ring will be assumed commutative.
     $\lcm(a,0)=$ since $0$ is the only element that is a multiple of $0$.
 \end{remark}
 \subsubsection{Unique Factorization Domains and Euclidean Domains}
-In our exploration of unique factorization domains and Euclidean Domains we will mean fix an integral domain $R$.
+In our exploration of unique factorization domains and Euclidean Domains we will fix an integral domain $R$.
 \begin{definition}
     Let a non-unit and non-zero element $a\in R$ be given. $a$ is said to be an \textit{irreducible element} if for every $b,c\in R$
     $$a = bc \implies b\in R^\ast \text{ or } c \in R^\ast.$$
@@ -2804,7 +2552,7 @@ In our exploration of unique factorization domains and Euclidean Domains we will
     \end{lemma}
     \begin{proof}
         \textbf{The case $z\in \mathfrak{m}$:} Pick $\lambda =0$. By the prior lemma for any $\mu\in K\setminus0$ $\ord(z-\mu)=\ord(\mu)=0$, hence $z-\mu\notin \mathfrak{m}$.\\
-        \textbf{The case $z\notin \mathfrak{m}$:} Then $z$ is a unit in $R$. By {\LARGE a result in the "A First Look a Algebras"-subsubsection} $\sigma$ is a $K$-algebra isomorphism. For some $\lambda \setminus 0$, $\lambda =\sigma(\lambda)=z$, hence $z-\lambda =0\in \mathfrak{m}$. Since $\sigma$ is injective it follows that $\lambda$ is unique. 
+        \textbf{The case $z\notin \mathfrak{m}$:} Then $z$ is a unit in $R$. Clear $\sigma$ fixes $K$, hence it is a $K$-algebra isomorphism. For some $\lambda \setminus 0$, $\lambda =\sigma(\lambda)=z$, hence $z-\lambda =0\in \mathfrak{m}$. Since $\sigma$ is injective it follows that $\lambda$ is unique. 
     \end{proof}
     \begin{proposition}\label{PropositionTowardsPowerSeriesDescriptionOfCerationDVRs}
         We assume the same setup as the prior lemma. Let $t$ be a uniformizing parameter of $R$ and $z\in R$. For any $n\geq 0$ there are unique $\lambda_0,\dots,\lambda_n\in K$, $z_{n}\in R$ such that 
@@ -2818,6 +2566,177 @@ In our exploration of unique factorization domains and Euclidean Domains we will
         $$\sum_0^n \lambda_it^i +z_nt^{n+1} = \sum_0^n \mu_it^i +w_nt^{n+1},$$
         Then $\sum_0^n (\lambda_i-\mu_i)t^i + (z_n-w_n)t^{n+1}=0,$
         hence $\ord((\lambda_i-\mu_i)t^i)=\ord((\lambda_j-\mu_j)t^j)$ for every $i,j$ hence $(\lambda_i-\mu_i)t^i=0$ for every $i$, implying $\lambda_i=\mu_i$. Similarly one can conclude that $z_n=w_n$.  
+    \end{proof}
+    
+\subsection{Vector Spaces}
+\begin{definition}
+    A \emph{vector space} is a module over a field $K$.
+\end{definition}
+For a field $K$, we define $\mathrm{Vect}_K:=\mathrm{Mod}_K$.
+\subsubsection{Finite Dimensional Vector Spaces}
+\begin{lemma}
+    Assuming the Axiom of Choice, any vector space $V$ over a field $K$ has a basis.
+\end{lemma}
+\begin{proof}
+    Let $X$ be the set of all linearly independent subsets of $V$. Let $C$ be a chain in $X$. Suppose 
+    $$
+        \sum_1^n a_i v_i=0 
+    $$
+    where 
+    $$
+        v_1,\dots,v_n\in \bigcup_{\pazocal{V}\in C} \pazocal{V}
+    $$
+    Then for each $i$, $v_i \in \pazocal{V}_i$ for some $\pazocal{V_i}\in C$. Then for each $i$, $\pazocal{V_i}\subset \pazocal{V}_m$ for some $m\in \{1,\dots,n\}$. It thus follows that $a_i = 0$ for every $i$. Then 
+    $\bigcup_{\pazocal{V}\in C}\pazocal{V}\in X$ and is an upper bound of $C$. Then $X$ has a maximal element. A maximally linear independent set is a basis, hence $V$ has a basis.  
+\end{proof}
+\begin{lemma}
+    Given a vector space $V$ over a field $K$, if $\pazocal{V},\pazocal{V}'$ are bases for $V$ over $K$, then they have the same cardinality.
+\end{lemma}
+\begin{lemma}
+    Consider a vector space $V$ over a field $K$, if $\{v_1,\dots,v_n\}\subset V$ are linearly independent over $K$ and $\{w_1,\dots,w_m\}$ generates $V$ over $K$, then 
+    $$
+        n\leq m.
+    $$
+\end{lemma}
+\begin{proof}
+     If $v\neq 0$ 
+     $$
+        v = \sum_1^m a_i w_i
+     $$
+     for $a_i\in K$ where wlog $a_1 \neq 0$. Then 
+     $$
+        w_1 = a_1^{-1}v+\sum_2^m a_1^{-1}a_i w_i 
+     $$
+     hence $\{v,w_2,\dots,w_m\}$.\\
+     Assume that if $\{v_1,\dots,v_n\}$ are linearly independent that $n\leq m$. Suppose $\{v_1,\dots,v_{n+1}\}$ are linearly independent. Using linear independence of $\{v_1,\dots,v_n\}$ over $K$, we find that 
+     $$
+        \{v_1,\dots,v_n,w_{n+1},\dots,w_{m}\}
+     $$
+     which is a set of cardinality $m$. Then 
+     $$
+        v_{n+1} = \sum_1^n b_i v_i + \sum_{1}^{m-n} c_iw_{n+i}
+     $$
+    for suitable $b_i,c_j\in K$. Then $n<m$ and $c_k\neq 0$ for some $k$ for otherwise $\{v_1,\dots,v_{n+1}\}$ are linearly dependent. Then $\{v_1,\dots,v_{n+1},w_{n+2},\dots,w_{m}\}$, a set of cardinality $m$, generates $V$ over $K$. It thus follows that since 
+    $$
+        \{v_1,\dots,v_{n+1}\}\subset \{v_1,\dots,v_{n+1},w_{n+2},\dots,w_{m}\}.
+    $$
+    which means $n+1\leq m$.
+\end{proof}
+\begin{corollary}
+    If $\pazocal{V},\pazocal{V}'$ are finite bases of a vector space, then 
+    $$
+        \#\pazocal{V}=\#\pazocal{V}'.
+    $$
+\end{corollary}
+\begin{definition}
+    Given a vector space $V$ over a field $K$ with finite basis $\pazocal{V}$, we define the \emph{dimension of $V$ over $K$} to be 
+    $$
+        \dim\ V:=\dim_K\ V := \#\pazocal{V}.
+    $$
+    Such a vector space is called a \emph{finite dimensional vector space}. When $V$ does not have a finite basis we define
+    $$
+        \dim\ V := \infty
+    $$
+\end{definition}
+\begin{remark}
+    We see that $\dim$ defines an invariant of vector spaces over $K$ valued in $(\Z\cup\{\infty\})$. Indeed, if $l:V\hookrightarrow W$ and $B$ is a basis for $B$, then if 
+    $$
+        \sum_{v\in B} a_v l(v)=0
+    $$
+    we get that 
+    $$
+        0 = l\left(\sum_{v\in B} a_v v \right) \implies \sum_{v\in B} a_v v =0 \implies a_v=0 \text{ for all } v,
+    $$
+    hence $l(B)$ is linearly independent over $K$. Then if $C$ is a basis of $W$ over $K$, it follows that $\#B=\#l(B)\leq \# C$, hence 
+    $$\dim \ V \leq \dim \ W.$$
+\end{remark}
+\begin{definition}
+    Let $V$ be an $n$-dimensional vector space over a field $K$ with basis $\pazocal{V}=\{v_1,\dots,v_n\}$. Let $\pazocal{W}=\{w_1,\dots,w_n\}\subset V$. Write $w_i = \sum_1^n a_{ij}v_j$ for suitable (unique!) $a_{ij}\in K$ and consider the matrix 
+    $$_\pazocal{V}T_\pazocal{W} := (a_{ij})^T\in M_n(K).$$
+    When $_\pazocal{V}T_\pazocal{W}$ is invertible we call it \textit{the basis transformation of $\pazocal{V}$ to $\pazocal{W}$} or \textit{a change-of-basis}  
+\end{definition}
+\begin{remark}
+    We canonically identify $_\pazocal{V}T_\pazocal{W}$ with an endomorphism on $V$:
+    \begin{gather*}
+        _\pazocal{V}T_\pazocal{W} : V\rightarrow V,
+        v = \sum_1^n \alpha_i v_i \mapsto \sum_1^n \left(\sum_1^n a_{ji}a_j \right)v_i
+    \end{gather*}
+    Note that 
+    $$_\pazocal{V}T_\pazocal{W} v_i= \sum_1^n\left(\sum_1^n a_{kj}\delta_{ki}\right)v_j = \sum_1^n a_{ij}v_j = w_i $$
+\end{remark}
+\begin{theorem}\label{BasisTransformationTheorem}
+    Let $V$ be an $n$-dimensional vector space over a field $K$ with basis $\pazocal{V}=\{v_1,\dots,v_n\}$. Consider $\pazocal{W}=\{w_1,\dots,w_n\}\subset V$. Then $\pazocal{W}$ is a basis of $V$ over $K$ if and only if $_\pazocal{V}T_\pazocal{W}$ is invertible.  
+\end{theorem}
+\begin{proof}
+    "$\implies$": write $v_i = \sum_1^n b_{ij}w_j$. Note that 
+    $w_i = _\pazocal{V}T_\pazocal{W} v_i = _\pazocal{V}T_\pazocal{W} {_\pazocal{W}}T_\pazocal{V} w_i$, and that $v_i = _\pazocal{W}T_\pazocal{V} w_i = _\pazocal{W}T_\pazocal{V} {_\pazocal{V}}T_\pazocal{W} v_i$. Since a module homomorphism is uniquely characterized by its behavior on the basis elements, it follows that 
+    $$
+        _\pazocal{V}T_\pazocal{W} {_\pazocal{W}}T_\pazocal{V} = _\pazocal{W}T_\pazocal{V} {_\pazocal{V}}T_\pazocal{W} = I_n,
+    $$ 
+    hence ${_\pazocal{V}}T_\pazocal{W}$ is invertible with inverse ${_\pazocal{W}}T_\pazocal{V}$.\\
+    "$\impliedby$": by {\large An invertible linear map, maps a basis to a basis}, hence $\pazocal{W} = _\pazocal{V}T_\pazocal{W}(\pazocal{V})$ is a basis of $V$.
+\end{proof}
+\begin{lemma}\label{DimensionsOfExactSequence}
+        Given an exact sequence of vector spaces
+         $$\begin{tikzcd}
+            0 \arrow[r] &V \arrow[r,"\rho"] & V' \arrow[r,"\rho'"] & V'' \arrow[r] & 0
+        \end{tikzcd}$$
+        we have that 
+        $$\dim\ V= \dim \ V' + \dim \ V''$$
+    \end{lemma}
+    \begin{proof}
+        This follows from the above Lemma~\ref{ExactnessIsEquivalentToInjFirstSESSurjSecondSES} and {\LARGE theorem not yet written about finite dimensional vector spaces}.
+    \end{proof}
+    \begin{proposition}
+        For sequence of vector spaces
+         $$\begin{tikzcd}
+            0 \arrow[r] & V_1 \arrow[r,"\rho_1"] & V_2 \arrow[r,"\rho_2"] & V_3 \arrow[r,"\rho_3"] & V_4 \arrow[r] & 0
+        \end{tikzcd}$$
+        we have that 
+        $\dim \ V_4 = \dim \ V_3 -\dim \ V_2 + \dim \ V_1$.
+    \end{proposition}
+    \begin{proof}
+        Set $W := \im \ \rho_2 = \ker \ \rho_3$. Then 
+        $$\begin{tikzcd}
+            0 \arrow[r] & V_1 \arrow[r,"\rho_1"] & V_2 \arrow[r,"\rho_2"] & W \arrow[r] & 0 
+        \end{tikzcd}$$
+        and 
+        $$\begin{tikzcd}
+            0\arrow[r] &W \arrow[hookrightarrow,r] &V_3 \arrow[r, "\rho_3"] &V_4 \arrow[r] &0
+        \end{tikzcd}$$
+        are exact, hence by the above lemma $\dim \ V_2 = \dim \ V_1 +\dim \ W$ implying $\dim \ W = \dim \ V_2- \dim \ V_1$. Moreover, 
+        $$\dim\ V_3 = \dim \ V_4 +\dim \ W = \dim \ V_4 +\dim \ V_2 - \dim \ V_1,$$
+        hence $\dim \ V_4 = \dim \ V_3 -\dim \ V_2 +\dim \ V_1.$
+    \end{proof}
+    \begin{lemma}\label{SecondIsomorphismTheoremForVS}
+        Let $U\subset W\subset V$ be vector spaces where $V/U$ finite dimensional. Then 
+        $$\dim\ V/U = \dim \ V/W+ \dim \ W/U,$$
+        In particular we get that $V/W$ and $W/U$ are finite dimensional. 
+    \end{lemma}
+    \begin{proof}
+        This follows directly from the above proposition and Lemma~\ref{NoetherSecondIsoForModules}. 
+    \end{proof}
+    \begin{lemma}
+        Let 
+        $$\begin{tikzcd}
+            0 \arrow[r,"\rho_0"] &V_1\arrow[r,"\rho_1"] & \cdots \arrow[r,"\rho_{n-1}"] & V_n\arrow[r,"\rho_n"] & 0
+        \end{tikzcd}$$
+        be an exact sequence of finite dimensional vector spaces. Then $\sum_1^n (-1)^i \dim\ V_i = 0$
+    \end{lemma}
+    \begin{proof}
+        In the case $n=1$, it's easy to see that $V_1=0$. Denote the first $0$-map
+        In general for a finite sequence of elements in an additive group, $a_0,\dots,a_n$, say $\sum_{1}^{1} (-1)^i(a_{i-1}+a_{i})= -a_0+(-1)^{n-1} a_n$. By the rank nullity theorem and exactness we have for each $i\in\{1,\dots,n\}$ that $\dim\ V_i = \dim\ \ker \ \rho_i +\dim \ \im \ \rho_i = \dim \ \im \ \rho_{i-1 } + \dim \ \im \ \rho_i$. Hence picking $a_i = \dim \ \im\ \rho_i$, it follows that 
+        \begin{align*}
+            \sum_1^n (-1)^i\dim\ V_i &= \sum_1^n (-1)^i(a_{i-1}+a_i)= -a_0 + (-1)^na_n = -\dim\ \im \ \rho_0 +(-1)^n \dim\ \im \ \rho_n\\ &= -\dim\ \im \ 0 +(-1)^n \dim\ \im \ 0 = 0.
+        \end{align*}
+    \end{proof}
+    \begin{lemma}\label{CodimensionOfIntersectionIsBoundedBySumOfCodimensions}
+        Let $V$ be a finite dimensional vector space and $V_1,\dots,V_n$ be subspaces. Then 
+        $$\codim \ \bigcap_1^n V_i \leq \sum_1^n \codim \ V_i.$$
+    \end{lemma}
+    \begin{proof}
+        Pick a basis of $V$, $B$ and bases of $V_1,\dots,V_n,\bigcap_1^n V_i$, denoted respectively $\pazocal{V}_1,\dots,\pazocal{V}_n,\pazocal{V}\subset B$. Then 
+        $$\codim\ \bigcap_1^n V_i = \#\left( B\setminus \pazocal{V}\right)= \#\left(\bigcup_1^n B\setminus \pazocal{V}_i \right)\leq \sum_1^n \#\left(B\setminus \pazocal{V}_i\right)=\sum_1^n \codim\ V_i.$$
     \end{proof}
     \begin{lemma}
         We keep the same setup as the above two results. Then $\dim_K\ \mathfrak{m}^n/\mathfrak{m}^{n+1} = 1$ for every $n\geq 0$. 
@@ -2840,6 +2759,104 @@ In our exploration of unique factorization domains and Euclidean Domains we will
         $$\dim\ R/\mathfrak{m}^{n+1} = \dim\ \mathfrak{m}^n/\mathfrak{m}^{n+1}+\dim\ R/\mathfrak{m}^n = n+1,$$
         where we also use the prior lemma. We now that $z = \lambda t^{\ord(z)}$, hence $\langle z \rangle = \langle t\rangle^{\ord(z)} = \mathfrak{m}^{\ord(z)},$ hence $\ord(z) = \dim \ R/\mathfrak{m}^{\ord(z)}.$
     \end{proof}    
+\subsubsection{Projective Space}
+    \begin{definition}\label{ProjectiveEquivalence}
+        Let $V$ be a vector space over some field $K$. For $v,w\in V\setminus 0$ we write $v\sim w$ if there exists a $\lambda\in K\setminus 0$ such that $w = \lambda v$
+    \end{definition}
+    \begin{remark}
+        This an equivalence relation. Indeed $v = 1\cdot v$, hence $v\sim v$. If $v\sim w$, then $w =\lambda v$, hence $v= \lambda^{-1}w$, meaning $w\sim v$. Suppose $v\sim w$ and $w\sim u$. Then $w=\lambda v$ and $u = \mu w$, hence $u = \mu\lambda v$, implying $v\sim u$. 
+    \end{remark}
+    \begin{definition}
+        We define \textit{the projective space of $V$ over $K$} to be the set 
+        $$\Pp(V) := (V\setminus 0)/\sim.$$
+        We furthermore define $\Pp^n:=\Pp^n(K):= \Pp(K^{n+1})$ which is called \textit{the projective $n$-space over $K$}. We denote an element $[v]=[(v_1,\dots,v_{n+1})]\in \Pp^n$ by $[v_1,\dots,v_n]$.   We call $\Pp^1$ \textit{the projective line over $K$} and $\Pp^2$ \textit{the projective plane over $K$}.   
+    \end{definition}
+    \begin{remark}
+        Note that $[\lambda v]=[v]$ for every $\lambda\in K\setminus 0$ and $[v]\in \Pp(V)$, hence $[\lambda v_1,\dots,\lambda v_{n+1}]=[v_1,\dots,v_{n+1}]$ for every $[v_1,\dots,v_{n+1}]\in\Pp^n$.\\
+        Consider the category of Vector Spaces with morphism being maps that are homogeneous of degree $1$. Consider also category of sets $P$ with a $(K^\ast,\cdot)$-action, satisfying $p=\lambda p$ for every $p\in P$, with morphisms being maps that are homogeneous of degree $1$ with respect to this $K^\ast$-action. Then $V\mapsto \Pp(V)$ and $f: V\rightarrow W\mapsto \widehat{f} : \Pp(V)\rightarrow \Pp(W), [v]\mapsto [f(v)]$, defines a functor. Restricting all sets to be topological spaces (with vector spaces being topological vector spaces) and all maps to be continuous, we get two subcategories of category of topological spaces such that the functor $(V,f)\mapsto (\Pp(f),\widehat{f})$ restricts to a functor between these categories. Indeed if $f: X\rightarrow Y$ is continuous and $\pi: X\rightarrow X/\sim_X$, $\tau: Y\rightarrow Y/\sim_Y$, denotes quotient maps to some quotient spaces and $\widehat{f}: X/\sim_X \rightarrow Y/\sim_Y, [x]\mapsto [f(x)]$ is well-defined, then $\widehat{f}\pi = \tau f $, hence $\widehat{f}$ is continuous, by the universal property of quotient space {\large perhaps write some point set topology?}.    
+    \end{remark}
+    \begin{definition}
+        For each $i\in\{1,\dots,n+1\}$ we define \textit{the $i$'th copy of $K^n$ in $\Pp^n$} to be the set 
+        $$U_i := \left\{[v_1,\dots,v_{n+1}]\in \Pp^n : v_i\neq 0 \right\}.$$
+        We furthermore define \textit{the $i$'th hyperplane at infinity in $\Pp^n$} to be the set 
+        $$H_{\infty,i}:=\left\{[v_1,\dots,v_{n+1}]\in \Pp^n: v_i=0\right\}.$$
+        We define \text{the hyperplane at infinity in $\Pp^n$} to be $H_\infty := H_{\infty,{n+1}}$
+    \end{definition}
+    \begin{remark}
+        \begin{enumerate}
+            \item Suppose $V$ is a topological vector space. Consider the map $m_\lambda : \Pp(V)\rightarrow \Pp(V), [v]\mapsto [\lambda v]$ for $\lambda\in K\setminus0$. One clearly has that $m_\lambda =\mathrm{id}$, hence it is continuous.  
+            \item One notes that $\Pp^n = \bigcup_1^{n+1} U_i$. Note that $\varphi : K^n \rightarrow U_i, v\mapsto [v_1,\dots,v_{i-1},1,v_{i+1},\dots,v_{n}]$ is a bijection. Indeed the map $$\varphi^{-1} : U_i\rightarrow K^n, [v_1,\dots,v_i,\dots,v_{n+1}]\mapsto (v_1/v_i,\dots,v_{i-1}/v_i,v_{i+1}/v_i,\dots,v_{n+1}/v_i)$$
+            is well-defined, since 
+            \begin{align*}((\lambda v_1)/(\lambda v_i),\dots,(\lambda v_{i-1})/(\lambda v_i),(\lambda v_{i+1})/(\lambda v_i),\dots,(\lambda v_{n+1})/(\lambda v_i)) &=\\ (v_1/v_i,\dots,v_{i-1}/v_i,v_{i+1}/v_i,\dots,v_{n+1}/v_i).\end{align*} 
+            Clearly $\varphi$ and $\varphi^{-1}$ are mutual inverses. Suppose $K$ is a topological field. Then $K^m$ becomes a topological vector space and we can endow $\Pp^m$ with the quotient topology. Note that $\varphi$ is continuous, since it is given by pre-composition of $\iota: K^n\rightarrow \pi^{-1}(U_i)\setminus 0, v\mapsto (v_1,\dots,v_{i-1},1,v_{i+1},\dots,v_{n+1})$ with $\pi\mid_{\pi^{-1}(U_i)}: \pi^{-1}(U_i)\rightarrow U_i$, which are continuous maps. Let $U\subset K^n$ be open. Let $Q:=\{ v\in K^{n+1} : v_i\in K, (v_1,\dots,v_{i-1},v_{i+1},\dots,v_{n+1})\in KU\}\simeq_{\pazocal{S}_{n+1}} K\times KU$. Define $O:= Q\setminus 0$. One easily verifies that $O=Q\cap K^{n+1}\setminus 0$ and that $\pi^{-1}(\pi(O))=O$, implying that $\pi(O)$ is open. One checks that $\varphi(U)=U_i\cap \pi(O)$, hence $\varphi(U)$ is open in $U_i$, hence $\varphi^{-1}$ is continuous. We thus conclude that $K^{n}$ is homeomorphic to $U_i$ for each $i$. Hence $\Pp^n$ is locally homeomorphic to $K^n$. 
+            \item Consider the map $\pi\mid_{S^n(\R)}: S^n(\R) \rightarrow \Pp^n(\R)$, $S^n(K)=\{v\in \R^{n+1} : \Vert v\Vert =1\}$. Then for $[v]\in \Pp^n(\R)$, $[v]=[1/\Vert v\Vert v]=\pi_{S^n(\R)}(1/\Vert v\Vert v)$, hence $\Pp^n(\R)$ is compact. Since $\C^n \simeq \R^{2n}$, it follows from functoriality that $\Pp^n(\C)\simeq \Pp^{2n+1}(\R)$. Moreover for every $[v]=[w]$ for $v,w\in S^n(\R)$, then $w=\lambda v$, hence  $1=\Vert\lambda v\Vert = \vert \lambda \vert \Vert v\Vert = \vert \lambda \vert$, hence $w = \pm v$. So $\Pp^n(\R)$ is homeomorphic to the northern hemisphere, i.e. $S^n(\R)/(x\sim -x)$.
+            \item Another thing to note is that $\Pp^n = U_i\sqcup H_{\infty,i}$
+        \end{enumerate}
+    \end{remark}
+    \subsubsection{The Projective Span}
+        \begin{definition}
+            For $[v_1],\dots,[v_m]\in\Pp^n$ we define 
+            $$\Span([v_1],\dots,[v_m]):=\left\{\left[\sum_1^m \lambda_iv_i\right] : (\lambda_1,\dots,\lambda_m)\in K^m\setminus 0 \right\}$$
+        \end{definition}
+        \begin{remark}
+            Of course one should ask if this is well-defined. Suppose we are given $\alpha_1,\dots,\alpha_m\in K\setminus 0$. Then for any $(\lambda_1,\dots,\lambda_m)\in K^m\setminus 0$,
+            $$\sum_1^m \lambda_i(\alpha_i v_i) = \sum_1^m (\lambda_i\alpha_i)v_i\in \left\{\left[\sum_1^m \lambda_iv_i\right] : (\lambda_1,\dots,\lambda_m)\in K^m\setminus 0 \right\} $$
+            and conversely 
+            $$\sum_1^m \lambda v_i = \sum_1^m (\lambda_i\alpha_i^{-1})\alpha_iv_i \in \left\{\left[\sum_1^m \lambda_i(\alpha_iv_i)\right] : (\lambda_1,\dots,\lambda_m)\in K^m\setminus 0 \right\}.$$
+            A further thing to note with this construction, is that if $v_1,\dots,v_m\in \A^{n+1}\setminus 0$ span $\A^{n+1}$ (this can only happen for $m\geq n+1$, then $\Span([v_1],\dots,[v_m])=\Pp^n.$
+        \end{remark}
+        \begin{lemma}\label{EquivalentDefinitionOfLinearlyIndependent}
+            $v_1,\dots,v_m\in \Pp^n$ are linearly independent if and only if $[v_i]\notin \Span([v_1],\dots,\widehat{[v_i]},\dots,[v_m])$ for any $i$.
+        \end{lemma}
+        \begin{proof}
+            "$\implies$": Suppose there is a $[v_i]\in \Span([v_1],\dots,\widehat{[v_i]},\dots,[v_m])$. Then for some $\lambda_1,\dots,\lambda_m\in K^m$ with $\lambda_i \neq 0$,
+            $$-\lambda_i v_i = \sum_{j\neq i} \lambda_jv_j \implies \sum_1^m \lambda_jv_j = 0,$$
+            hence $v_1,\dots,v_m$ are not linearly independent. 
+            "$\impliedby$": Suppose there are $(\lambda_1,\dots,\lambda_m)\in K^m\setminus 0$ such that $\sum_1^m \lambda_i v_i = 0$. Then for some $j\in\{1,\dots,m\}$, $\lambda_j\neq 0$, hence 
+            $$v_j = \lambda_j^{-1}\sum_{i\neq j} \lambda_i v_i \in \Span([v_1],\dots,\widehat{[v_j]},\dots, [v_m])$$
+        \end{proof}
+    \subsubsection{Normed Vector Spaces}
+        \begin{definition}
+            An \textit{ordered field} is a field $K$ together with a total ordering $\leq$ on $K$, satisfying, for every $a,b,c\in K$
+            \begin{enumerate}
+                \item $a\leq b \implies a+c \leq b+c$
+                \item $0\leq a, 0\leq b\implies 0\leq ab$
+            \end{enumerate}
+        \end{definition}
+        \begin{example}
+            In this example we endow $\Q$ with the structure of ordered field. For $\frac{a}{b},\frac{c}{d}\in \Q$ we define $\frac{a}{b} \leq \frac{c}{d}$ if $ad\leq cb$ and $b,d>0$. Note that we can always find a representative of a rational number whose numerator is greater than $0$. It is easy to check that this is a partial order on $\Q$. Given any two $\frac{a}{b},\frac{c}{d}\in\Q$ with $b,d>0$ we get that $bd>0$ and $ad\leq bc$ or $ad\geq bc$, since $(\Z,\leq)$ is totally ordered. It follows that $\leq$ is a total ordering. Suppose $\frac{x}{y},\frac{z}{w},\frac{v}{u}\in \Q$ with $y,w,u>0$ are given. Suppose $\frac{x}{y}\leq \frac{z}{w}$. Then $yu,wu>0$ and
+            \begin{align*}
+                wu(xu+vy) \leq u(yzu+vwy)=yu(zu+vw) \implies \frac{x}{y}+\frac{v}{u}=\frac{xu+vy}{yu} \leq \frac{zu+vw}{wu}=\frac{z}{w}+\frac{v}{u}.
+            \end{align*}
+            Suppose instead now that $0\leq \frac{x}{y}$ and $0\leq \frac{z}{w}$.  Then $0\leq x$ and $0\leq z$, hence $0\leq xz$, meaning $0\leq \frac{xz}{yw}$.
+        \end{example}
+        \begin{definition}
+            On an ordered field $K$, we define \textit{the absolute value} to be the function $\vert \cdot \vert : K \rightarrow K_{\geq 0} :=\{a\in K : a\geq 0\}$ to be given by 
+            $$\vert a \vert = \begin{cases}
+                a & \text{if } a\geq 0\\
+                -a & \text{if } a <0
+            \end{cases}$$
+        \end{definition}
+        \begin{definition}
+            A \textit{normed vector space} is a vector space $V$ over an ordered field $K$ with a map $\Vert \cdot \Vert : V\rightarrow K$ satisfying 
+            \begin{enumerate}
+                \item For every $v\in V$, $\Vert v\Vert \geq 0$.
+                \item For every $v\in V$, $\Vert v \Vert = 0\iff v = 0$.
+                \item For every $v\in V$, $a\in K$, $\Vert av\Vert = \vert a\vert \Vert v\Vert$.
+                \item For every $v,w\in V$, $\Vert v+ w\Vert \leq \Vert v\Vert +\Vert w\Vert.$
+            \end{enumerate}
+            We call such a function \textit{a norm on $V$ over $K$}.
+        \end{definition}
+        \begin{lemma}
+            On an ordered field $K$, the absolute value defines a norm on $K$ over $K$, making $K$ a normed vector space over $K$.
+        \end{lemma}
+        \begin{proof}
+            1. This is trivial, since if $a <0$, then $-a>0$.\\
+            2. Suppose $\vert a \vert =0$. Then $a\geq 0$, hence $a=\vert a\vert =0$.\\
+            3. Let $a,b\in K$. Then if $a,b\geq 0$ we have that $ab\geq 0$, hence $\vert ab\vert = ab=\vert a \vert \vert b\vert$. If $a,b <0$, then $-a,-b>0$, hence $ab=(-a)(-b)>0$. It follows that $\vert ab\vert=ab =(-a)(-b)=\vert a\vert \vert b\vert$. If $a\geq 0$ and $b<0$, then $ab\leq 0$, hence $\vert ab\vert = -ab=a(-b)=\vert a\vert \vert b\vert$. The case $a<0$ and $b\geq 0$ is symmetric.\\
+            4. Let $a,b\in K$. Observe that in any case $-c,c\leq \vert c \vert $ for any $c\in K$. If $a+b\geq 0$, then $\vert a+b\vert = a+b\leq \vert a \vert +\vert b\vert$. In the other case $\vert a+b\vert = -a-b\leq \vert a \vert + \vert b\vert $.
+        \end{proof}
+
 \subsection{Polynomial Rings \& Formal Power Series}
 In this subsection every ring will be commutative, unless we explicitly declare it to not (necessarily) be the case. Really the base ring for a polynomial ring need not be commutative, but for our purposes we do not need to explore the non-commutative case. A motivation to not be too general is that non-commutative polynomial rings do not admit a nice notion of evaluation.\\
  By a polynomial in $n$ variables over a ring $R$, we mean some expression of the form 
@@ -2910,7 +2927,7 @@ With this definition we already have that $R[\N^n]$ is a$R$-module, since it is 
     This means $\prod_{v\in \N^n} R$ is a ring with this multiplication. Note also that
     $$(a_v)(b_v) = \left( \sum_{v,w\in \N^n : v+w =u} a_vb_w \right) =\left( \sum_{v,w\in \N^n : v+w =u} b_va_w \right)=(b_v)(a_v).$$
     Hence $\prod_{v\in \N^n} R$ is a commutative ring with this multiplication.\\
-    To check that $R\left[\N^n\right]$ is a subring of $\prod_{v\in \N^n} R$, we need to check that $1\in R\left[\N^n\right]$ and that $R\left[\N^n\right]$ is closed under multiplication. Since $\delta_{\mathbf{0},v}=0$ for every $v\in \N^n \setminus \{\mathbf{0}\}$, it follows that $1\in R\left[\N^n\right]$. Let $(a_v),(b_v)\in R[\N^n]$. We note that for some $N,M\geq 0$, $a_v = 0$ for $v\in \N^n$ with $\vert v\vert \geq N$ and $b_w = 0$ for $w\in \N^n$ with $\vert w \vert \geq M$. Let $u\in \N^n$ with $\vert u\vert \geq N+M$. Consider then $v,w \in \N^n$ such that $v+w$. Then using {\LARGE LEMMA?}
+    To check that $R\left[\N^n\right]$ is a subring of $\prod_{v\in \N^n} R$, we need to check that $1\in R\left[\N^n\right]$ and that $R\left[\N^n\right]$ is closed under multiplication. Since $\delta_{\mathbf{0},v}=0$ for every $v\in \N^n \setminus \{\mathbf{0}\}$, it follows that $1\in R\left[\N^n\right]$. Let $(a_v),(b_v)\in R[\N^n]$. We note that for some $N,M\geq 0$, $a_v = 0$ for $v\in \N^n$ with $\vert v\vert \geq N$ and $b_w = 0$ for $w\in \N^n$ with $\vert w \vert \geq M$. Let $u\in \N^n$ with $\vert u\vert \geq N+M$. Consider then $v,w \in \N^n$ such that $v+w$. Then
     $$\vert v\vert + \vert w\vert = \vert v +w \vert = \vert u\vert \geq N+M \implies \vert v\vert \geq N \text{ or } \vert w \vert \geq M \implies a_vb_w = 0. $$
     Thus $\sum_{v,w\in \N^n : v+w = u} a_vb_w =  0$, meaning $(a_v)(b_v) \in R\left[\N^n\right]$.
 \end{proof}
@@ -2930,9 +2947,7 @@ With this definition we already have that $R[\N^n]$ is a$R$-module, since it is 
     $$\sum_{v\in \N^n} a_v\mathbf{x}^v,$$
 \end{lemma}
 \begin{proof}
-    This is just a matter of book keeping. Since $\{\mathbf{x}^v : v \in \N^n \}=\{e_v : v\in \N^n\}$ is a basis of $R\left[ \N^n\right]=\bigoplus_{v\in \N^n} R$, it follows that for some finite set $X\subset \N^n$, $a_v \neq 0$ for every $v\in \N^n$. Hence 
-    $$f = \sum_{v\in \N^n} a_v\mathbf{x}^v.$$
-    The uniqueness of this representation follows from $\{\mathbf{x}^v : v \in \N^n \}$ being a basis.
+    This is obvious since $\{\mathbf{x}^v : v\in \N^n\}$ form a basis of $R\left[\N^n\right]$.
 \end{proof}
 \begin{remark}
     A further consequence is that for $f=\sum_{v\in \N^n} a_v\mathbf{x}^v,g = \sum_{v\in \N^n} b_v\mathbf{x}^v\in R[\N^n]$
@@ -2973,7 +2988,7 @@ We collect all the data established about the polynomial ring in the following t
 \begin{theorem}\label{PolynomialRingActsLikePolynomialRing}
     The rings $R\llbracket x_1,\dots,x_n\rrbracket$ and
     $$R[x_1,\dots,x_n] = \left\{ \sum_{v\in \N^n} a_v\mathbf{x}^v : a_v\in R, a_v = 0 \text{ whenever } \vert v \vert > N \text{ for some } N \geq 0  \right\},$$
-    are rings containing $R$ as a subring. $R[x_1,\dots,x_n]$ is generated by $x_1,\dots,x_n$. Furthermore, $x_1,\dots,x_n$ are algebraically independent over $R$.
+    are rings containing $R$ as a subring. $R[x_1,\dots,x_n]$ is generated by $x_1,\dots,x_n$ as an $R$-algebra. Furthermore, $x_1,\dots,x_n$ are algebraically independent over $R$.
 \end{theorem}
 \subsubsection{Specializations of Polynomials}
 \begin{proposition}
@@ -2990,7 +3005,7 @@ We collect all the data established about the polynomial ring in the following t
     Consider arbitrary $\sum_{v\in \N^n} a_v\mathbf{x}^v, \sum_{v\in \N^n} b_v\mathbf{x}^v\in R[\mathbf{x}]$. Then 
     \begin{align*}
         \overline{\sigma}\left(\sum_{v\in \N^n} a_v\mathbf{x}^v + \sum_{v\in \N^n}b_v\mathbf{x}^v\right) &= \sum_{v\in \N^n} \sigma(a_v+b_v)\mathbf{x}^v = \sum_{v\in \N^n} \left(\sigma(a_v)+\sigma(b_v)\right) \mathbf{x}^v\\
-        &=\sum_{v\in \N^n} \sigma(a_v)\mathbf{x}^v + \sum_{v\in \N^n} \sigma(b_v)\mathbf{x}^v = \overline{\sigma}\left(\sum_{v\in\N^n} a_v\mathbf{x}^v\right)+\overline{\sigma}\left(\sum_{v\in\N^n} b_v\mathbf{x}^v\right)
+        &=\sum_{v\in \N^n} \sigma(a_v)\mathbf{x}^v + \sum_{v\in \N^n} \sigma(b_v)\mathbf{x}^v\\ &= \overline{\sigma}\left(\sum_{v\in\N^n} a_v\mathbf{x}^v\right)+\overline{\sigma}\left(\sum_{v\in\N^n} b_v\mathbf{x}^v\right)
     \end{align*}
     hence $\overline{\sigma}$ is additive. It also multiplicative. Indeed,
     \begin{align*}
@@ -3037,13 +3052,15 @@ We collect all the data established about the polynomial ring in the following t
     For an $f\in R[x_1,\dots,x_n]$ we define $f(s_1,\dots,s_n) := \ev_{s_1,\dots,s_n}(f)$.
 \end{definition}
 \begin{lemma}\label{EvaluationIsARingHomomorphism}
-    Evaluation is a well-defined map. Moreover, the map $\ev_{s_1,\dots,s_n}$ is a well-defined ring homomorphism such $\ev_{s_1,\dots,s_n}(r) = r$ for every $r\in R$, therefor it is also an $R$-module homomorphism. In other words, evaluation in an element is an $R$-algebra homomorphism. 
+    Evaluation is a well-defined map. Moreover, the map $\ev_{s_1,\dots,s_n}$ is a well-defined ring homomorphism such that $\ev_{s_1,\dots,s_n}(r) = r$ for every $r\in R$, therefore it is also an $R$-module homomorphism. In other words, evaluation in an element is an $R$-algebra homomorphism. 
 \end{lemma}
 \begin{proof}
     \textbf{The map is well-defined:} Let $(s_1,\dots,s_n):=(t_1,\dots,t_n)\in S^n$ and $f = \sum_{v\in \N^n} a_v \mathbf{x}^v$, $g = \sum_{v\in \N^n} b_v\mathbf{x}^v$ be polynomials in $R[x_1,\dots,x_n]$ such that $f=g$. Note that for a polynomial $h:=\sum_{v\in \N^n} c_v\mathbf{x}^v$ that 
     $$\ev((s_1,\dots,s_n),h)=\sum_{v\in\N^n} c_vs_1^{v_1}\cdots s_n^{v_n}= \sum_{v\in\N^n} c_vt_1^{v_1}\cdots t_n^{v_n} = \ev((t_1,\dots,t_n),h).$$
     By Theorem~\ref{PolynomialRingActsLikePolynomialRing} it follows that $a_v = b_v$ for every $v\in \N^n$. Thus in particular
-    $$\ev(s_1,\dots,s_n),f) = \sum_{v\in \N^n} a_v s_1^{v_1}\cdots s_n^{v_n} = \sum_{v\in \N^n} b_v s_1^{v_1}\cdots s_n^{v_n} = \ev((s_1,\dots,s_n),g) = \ev((t_1,\dots,t_n),g),$$
+    \begin{align*}
+        \ev(s_1,\dots,s_n),f) &= \sum_{v\in \N^n} a_v s_1^{v_1}\cdots s_n^{v_n} = \sum_{v\in \N^n} b_v s_1^{v_1}\cdots s_n^{v_n} = \ev((s_1,\dots,s_n),g)\\ &= \ev((t_1,\dots,t_n),g),
+    \end{align*}
     which means the evaluation map is well defined.\\
     \textbf{evaluation is a ring homomorphism:} Let $f = \sum_{v\in \N^n} a_v \mathbf{x}^v$ and $g = \sum_{v\in \N^n} b_v\mathbf{x}^v$ be polynomials in $R[x_1,\dots,x_n]$ and $s_1,\dots,s_n\in S$. The map is additive
     \begin{align*}
@@ -3187,7 +3204,11 @@ The above definitions are central to the classical treatment of algebraic geomet
     hence $(s_1,\dots, s_n)$ is a zero of $f$.
 \end{proof}
 \begin{corollary}\label{MaximalIdealsOfPolynomialRings}
-    Let $(r_1,\dots,r_n)\in R^n$. If $\ev_{r_1,\dots,r_n}$ is surjective, then $R[x_1,\dots,x_n]/\langle x_1-r_1,\dots,x_n-r_n\rangle \simeq R$. Hence if $R$ is a field, then $\langle x_1-r_1,\dots,x_n-r_n\rangle$ is maximal. 
+    Let $(r_1,\dots,r_n)\in R^n$. If $\ev_{r_1,\dots,r_n}$ is surjective, then 
+    $$
+        R[x_1,\dots,x_n]/\langle x_1-r_1,\dots,x_n-r_n\rangle \simeq R.
+    $$ 
+    Hence if $R$ is a field, then $\langle x_1-r_1,\dots,x_n-r_n\rangle$ is maximal. 
 \end{corollary}
 \begin{corollary}\label{RootIffMinimalPolynomialDivides}
     Let $S\supset R$ be a commutative ring extension and consider $f\in R[x]$ and $a \in S$. Then $a$ is a root of $f$ if and only if $x-a\mid f$ in $S[x]$. 
@@ -3235,12 +3256,14 @@ The following theorem is useful when one wants to eliminate certain variables in
         \deg \ M_v(x_1^{d_1},\dots,x_n^{d_n}) = \sum_1^n v_id_i = \sum_1^n \deg \ f_i^{v_i} = \deg f_1^{v_1}\cdots{f_n}^{v_n} = \deg \ M_v(f_1,\dots,f_n).
     \end{align*}
     Note that the map $(v_1,\dots,v_n)\mapsto (v_1d_1,\dots,v_nd_n)$ is injective hence,
-    $$\deg \ f(f_1,\dots,f_n)\leq \max_{v\in \N^n : a_v\neq 0}\ \deg \ M_v(f_1,\dots,f_n) = \max_{v\in \N^n :a_v\neq 0}\ \deg\ M_v(x_1^{d_1},\dots,x_n^{d_n}) = \deg \ f(x_1^{d_1},\dots,x_n^{d_n}).$$
+    \begin{align*}
+        \deg \ f(f_1,\dots,f_n) &\leq \max_{v\in \N^n : a_v\neq 0}\ \deg \ M_v(f_1,\dots,f_n) = \max_{v\in \N^n :a_v\neq 0}\ \deg\ M_v(x_1^{d_1},\dots,x_n^{d_n})\\ 
+        &= \deg \ f(x_1^{d_1},\dots,x_n^{d_n}).
+    \end{align*}
 \end{proof}
 \begin{remark}
     The above result doesn't always hold with equality. take for instance $f=x_1x_2-x_3$, take $f_1=y_1$, $f_2=y_2$ and $f_3=-y_1y_3$. Then $f(f_1,f_2,f_3)=0$, while $f(x_1,x_2,x_3^2)=x_1x_2-x_3^2$.
 \end{remark}
-\subsubsection{Some Results about Polynomials that I proper subsubsections for}
 \begin{lemma}\label{DimensionOfQuotientSpace}
     Let $f=\sum_0^d a_ix^i \in K[x]\setminus0$ and set $I=\langle f\rangle$. Then $K[x]/I$ is a vector space of dimension $d$ with basis $\left\{x^i+I : i\in\{0,\dots,d-1\}\right\}$.
 \end{lemma}
@@ -3254,7 +3277,7 @@ The following theorem is useful when one wants to eliminate certain variables in
     Let $R$ be an infinite integral domain an $f\in R[x_1,\dots,x_n]$. Then $f = 0$ if and only if $f(v)=0$ for every $v\in K^n$. 
 \end{proposition}
 \begin{proof}
-    "$\implies$": This is trivial
+    "$\implies$": This is trivial.\\
     "$\limplies$":We prove that if $f \neq 0$, then there is a $v\in R^n$ such that $f(v)\neq 0$. We prove this by induction in $n$.\\
     \textit{Base case:} Consider first the case $n = 1$. Since $f \neq 0$, the number of roots is bounded by the non-negative integer $\deg\ f$ by Proposition~\ref{InIDNumberOfRootsBoundedByDegree}. Then since $\#R=\infty$, there is an $a\in R$ such that $f(a)\neq 0$.\\ 
     \textit{Induction hypothesis:} Suppose that there is an $n \geq 1$ s.t. if $h\in R[x_1,\dots,x_n]\setminus 0 $, then there is a $v \in R^n$ such that $f(v)\neq 0$.\\
