@@ -3020,7 +3020,9 @@ We collect all the data established about the polynomial ring in the following t
     For a ring extension $R\supset K$ where $K$ is a field, given a ring map $\sigma : R \rightarrow K$, we call $\overline{\sigma}$ a \textit{specialization of $R$ in $K$}.
 \end{definition}
 \begin{lemma}
-    Let rings $R,S,T$ be given and consider $\sigma\in \Hom(R,S)$, $\tau\in \Hom(S,T)$. Then $\overline{\tau\circ \sigma} = \overline{\tau} \circ \overline{\sigma}$. We also have that $\overline{\text{id}_R}=\textit{id}_{R[x_1,\dots,x_n]}$. In other words $(R,\sigma)\mapsto (R[x_1,\dots,x_n],\overline{\sigma})$ is a covariant functor for every $n\geq 1$.  
+    Let rings $R,S,T$ be given and consider $\sigma\in \Hom(R,S)$, $\tau\in \Hom(S,T)$. Then $\overline{\tau\circ \sigma} = \overline{\tau} \circ \overline{\sigma}$. We also have that $\overline{\text{id}_R}=\textit{id}_{R[x_1,\dots,x_n]}$. In other words 
+    $$(R,\sigma)\mapsto (R[x_1,\dots,x_n],\overline{\sigma})$$
+    is a covariant endofunctor on $\mathrm{ComRing}$ for every $n\geq 1$.  
 \end{lemma}
 \begin{proof}
     Indeed, for $\sum_{v\in \N^n} a_v\mathbf{x}^v\in R[\mathbf{x}]$
@@ -3094,7 +3096,10 @@ We collect all the data established about the polynomial ring in the following t
 \end{proposition}
 \begin{proof}
     Let $f= \sum_{v\in \N^n} a_v\mathbf{x}^v\in R[x_1,\dots,x_n]$. Then using the multiplicativity and additivity of $\sigma$ we have that 
-    $$\sigma(f)= \sigma\left(\sum_{v\in \N^n} a_v\mathbf{x}^v\right) = \sum_{v\in \N^n} \sigma(a_v) \sigma\left(x_1^{v_1}\cdots x_n^{v_n}\right) = \sum_{v\in \N^n} a_v\sigma\left(x_1^{v_1}\right)\cdots\sigma\left(x_n^{v_n}\right)= \ev_{\sigma(x_1),\dots,\sigma(x_n)}(f)$$
+    \begin{align*}
+        \sigma(f) &= \sigma\left(\sum_{v\in \N^n} a_v\mathbf{x}^v\right) = \sum_{v\in \N^n} \sigma(a_v) \sigma\left(x_1^{v_1}\cdots x_n^{v_n}\right) = \sum_{v\in \N^n} a_v\sigma\left(x_1^{v_1}\right)\cdots\sigma\left(x_n^{v_n}\right)\\
+        &= \ev_{\sigma(x_1),\dots,\sigma(x_n)}(f)
+    \end{align*}
 \end{proof}
 \begin{corollary}\label{AlgebraHomomorphismFromPolynomialRingIsJustEvaluation}
     Let $S$ be a commutative $R$-algebra. Then 
@@ -3169,23 +3174,22 @@ Put $d = \deg \ f$ and $d' = \deg \ g$, and write $f = \sum_{v\in \N^n : \vert v
     2. From 1. we have that $\deg \ f +g \leq \max(d,d') = d$, hence it suffices to show that $a_v+b_v \neq 0$ for some $v\in \N^n$ with $\vert v \vert = d$. There exists a $v\in \N^n$ with $\vert v\vert = d$ and $a_v \neq 0$. Since $\vert v \vert = d > d'$, $b_v = 0$ hence $a_v+b_v = a_v \neq 0$.\\
     3. Let $u\in \N^n$ be given such that $\vert u\vert > d+d'$. Consider $v\in \N^n$ and $w\in \N^n$ with $v+w = u$. Then $\vert v\vert + \vert w\vert = \vert u \vert >d+d'$, hence $\vert v\vert > d$ or $\vert w\vert > d'$, implying $a_v = 0$ or $b_w = 0$, hence $\sum_{v,w\in \N^n: v+w = u} a_vb_w = 0$, implying 
     $$\deg \ fg = \max\left\{\vert u\vert : \sum_{v,w\in \N^n : v+w = u} a_vb_w\neq 0 \right\} \leq d+d' = \deg \ f + \deg \ g.$$\\
-    4. Let $f' = \sum_{v\in \N^n : \vert v \vert = d} a_v\mathbf{x}^v$ and $g' = \sum_{w\in \N^n : \vert w \vert = d'}b_w\mathbf{x}^w$. For some $v,w\in\N^n$ with $\vert v \vert = d$ and $\vert w\vert =d'$ we have that $a_v\neq 0$ and $b_w \neq 0$, hence $f' \neq 0$ and $g'\neq 0$ implying that $f'g'\neq 0$ by Lemma~\ref{PolynomialRingOverDomainIsDomain}. Furthermore $\deg \ f'g' = d+d'$. Let $r_f =  \sum_{v\in \N^n : \vert v \vert < d} a_v\mathbf{x}^v$ and $r_g = \sum_{w\in \N^n : \vert w \vert < d'}b_w\mathbf{x}^w$. Note that $\deg \ r_f < d$ and $\deg \ r_g < d'$, hence by 3. 
-    \begin{gather*}
-        \deg \ f'r_g \leq d + \deg\ r_g <d+d',\\
-        \deg \ g'r_f \leq d' + \deg\ r_f <d+d',\\
-        \deg \ r_fr_g \leq \deg \ r_f + \deg \ r_g < d+d'.
-    \end{gather*}
-    We thus get that 
-    $$\deg \  f'r_g + g'r_f+ r_fr_g \leq \max(f'r_g,g'r_f,r_f,r_g) < d+d' = \deg \ f'g'.$$
-    By 2. we get 
-    $$\deg \ fg = \deg \ (f'+r_f)(g'+r_g) = \deg \ f'g'+( f'r_g + g'r_f+ r_fr_g) = \deg \ f'g' = d+d'=\deg\  f + \deg \ g.$$
+    4. There is a $v$ such that $\vert v\vert = d$ and $a_v\neq 0$. Likewise there is a $w$ such that $\vert w\vert = d'$ and $b_w \neq 0$. Note that if $\vert \mu \vert < d$, then $b_{\nu} > d'$ in which case $b_\nu = 0$. If $\vert \nu\vert < d'$, then $a_\mu >d$, meaning $a_\mu =0$. It follows that 
+    $$
+        \sum_{\mu,\nu : \mu+\nu = v+w} a_\mu b_\nu = a_v b_w \neq 0.
+    $$
+    It follows that $\deg \ fg = \deg\ f + \deg \ g$. 
 \end{proof}
 \begin{definition}
-    Let $S\supset R$ be a commutative ring extension. Let $f\in R[x_1,\dots,x_n]$, we say that $(s_1,\dots, s_n)\in S^n$ is a \textit{zero (over $S$)} of $f$ if $f(s_1,\dots,s_n)= 0$. If $f\in R[x]$ and $s\in S$ is a zero of $f$ we call it a \textit{root (in $S$)}.\\  
+    Let $S\supset R$ be a commutative ring extension. Let $f\in R[x_1,\dots,x_n]$, we say that $(s_1,\dots, s_n)\in S^n$ is a \textit{zero (over $S$) of $f$} if $f(s_1,\dots,s_n)= 0$. If $f\in R[x]$ and $s\in S$ is a zero of $f$ we call it a \textit{root (in $S$)}.\\  
 \end{definition}
 \begin{definition}
     Let $S\supset R$ be a commutative ring extension. Given a polynomial $f\in R[x_1,\dots,x_n]$, we denote the set of zeroes over $S$ of $f$ by 
     $$V_S(f).$$
+    The zeroes over $R$ are denoted 
+    $$
+        V(f).
+    $$
 \end{definition}
 The above definitions are central to the classical treatment of algebraic geometry, since the geometric objects considered are build from set zeroes of polynomials over a field $K$. 
 \begin{proposition}\label{AZeroIffPolynomialIsInPointIdeal}
@@ -3195,7 +3199,8 @@ The above definitions are central to the classical treatment of algebraic geomet
     Write $f = \sum_{v\in \N^n} a_v \mathbf{x}^v$.
     "$\implies$": Suppose $(s_1,\dots,s_n)$ is a zero of $f$. Then, since $x_i + I = s_i + I$ for each $i$, 
     \begin{align*} 
-        f + I &= \left(\sum_{v\in \N^n} a_v \mathbf{x}^v\right) + I = \sum_{v\in \N^n} a_v(x_1+I)^{v_1}\cdots(x_n+I)^{v_n} = \sum_{v\in \N^n} a_v(s_1+I)^{v_1}\cdots(s_n+I)^{v_n}  \\ 
+        f + I &= \left(\sum_{v\in \N^n} a_v \mathbf{x}^v\right) + I = \sum_{v\in \N^n} a_v(x_1+I)^{v_1}\cdots(x_n+I)^{v_n}\\
+        & = \sum_{v\in \N^n} a_v(s_1+I)^{v_1}\cdots(s_n+I)^{v_n}  \\ 
         &= \left(\sum_{v\in \N^n} a_v s_1^{v_1}\cdots s_n^{v_n}\right) +I = f(s_1,\dots,s_n) + I = 0 + I,
     \end{align*}
     thus $f \in I$\\
@@ -3290,10 +3295,10 @@ The following theorem is useful when one wants to eliminate certain variables in
 \end{proof}
 \subsubsection{The Hilbert Basis Theorem}
 \begin{theorem}(Hilbert Basis Theorem)\label{EveryPolynomialIdealIsFinitelyGenerated}
-    Let $R$ be a left/right noetherian ring. Then $R[x]$ is left/right noetherian. Furthermore $R[x_1,\dots,x_n]$ is left/right noetherian. 
+    Let $R$ be a noetherian ring. Then $R[x]$ is  noetherian. Furthermore $R[x_1,\dots,x_n]$ is noetherian. 
 \end{theorem}
 \begin{proof}
-    We prove the contrapositive. Suppose That $R[x]$ is not noetherian, or equivalently by Theorem~\ref{NoetherianIffEverySubmoduleFinitelyGenerated} suppose there is an ideal $I\subset R[x]$ that is not finitely generated. Let $d_1 = \min\{\deg \ f : f \in I\}$. Let $f_1 \in I$ such that $\deg \ f_1 = d_1$. We then let $I_1 = R[x]f_1$ and recursively define $I_n = \sum_1^n R[x]f_i$, where $f_n \in I\setminus I_{n-1}$ where $\deg \ f_n = d_n = \min\{ \deg \ f: f \in I \setminus I_{n-1}\}$. Note that since $I\setminus I_n \supset I\setminus I_{n+1}$, $d_n\leq d_{n+1}$ for each $n\geq 1$. For each $n$ we can write 
+    We prove the contrapositive. Suppose That $R[x]$ is not noetherian, or equivalently by Theorem~\ref{NoetherianIffEverySubmoduleFinitelyGenerated} suppose there is an ideal $I\subset R[x]$ that is not finitely generated. Let $d_1 = \min\{\deg \ f : f \in I\}$. Let $f_1 \in I$ such that $\deg \ f_1 = d_1$. We then let $I_1 = R[x]f_1$ and recursively define $I_n = \sum_1^n R[x]f_i$, where $f_n \in I\setminus I_{n-1}$ where $\deg \ f_n = d_n = \min\{ \deg \ f: f \in I \setminus I_{n-1}\}$. Note that since $I\setminus I_n \supset I\setminus I_{n+1}$, we get $d_n\leq d_{n+1}$ for each $n\geq 1$. For each $n$ we can write 
     $$f_n = \sum_{i=0}^{d_n} a_i^{(n)}x^i,$$
     for suitable $a_i^{(n)}\in R$. Set $a(n) = a_{d_n}^{(n)}$
     We then have an ascending chain $J_1\subset J_2\subset\dots$ in $R$ where $J_n =\sum_1^n Ra(i)$.
@@ -3317,6 +3322,16 @@ The following theorem is useful when one wants to eliminate certain variables in
 \begin{definition}
     A field $K$ is called algebraically closed if every non-constant $f\in K[x]\setminus 0$ has a root $a\in K$. 
 \end{definition}
+\begin{lemma}
+    An algebraically closed field $K$ is infinite. 
+\end{lemma}
+\begin{proof}
+    Let $A:=\{\alpha_1,\dots,\alpha_n\}\subset K$. Consider the polynomial
+    $$
+        f:= 1+\prod_1^n (x-\alpha_i)\in K[x]  
+    $$
+    Then $f$ has a root $\beta \in K$. Note that $f(\alpha_i) = 1 \neq 0$, hence $\beta \notin A$. It follows that $K$ is not finite. 
+\end{proof}
 \begin{lemma}
     Let $K$ be a field. Then $K[x]$ is a PID. 
 \end{lemma}
@@ -3348,13 +3363,26 @@ The following theorem is useful when one wants to eliminate certain variables in
 \end{proof}
 \subsubsection{Formal Power Series \& DVRs}
 \begin{lemma}
-    Suppose $R$ is an integral domain. Then $$R\llbracket x \rrbracket ^\ast=  \left\{\sum_{i\in \N} a_i\in R\llbracket x\rrbracket : a_i \in R^\ast \right\}$$
+    Suppose $R$ is an integral domain. Then $$R\llbracket x \rrbracket ^\ast=  \left\{\sum_{i\in \N} a_ix^i\in R\llbracket x\rrbracket : a_i \in R^\ast \right\}$$
 \end{lemma}
 \begin{proof}
-    Let $s = \sum_{i\in\N}a_ix^i$  be an element of the right-hand side. Set $b_0 := a_0^{-1}$ and $b_k := -a_0^{-1}\sum_{j=1}^{k} a_jb_{k-j}$ for $k\geq 1$. Define $t =  \sum_{i\in \N^n} b_ix^i$. We prove by induction that $\sum_{j,k\in\N : j+k=i} a_jb_k=0$ for $i\geq 1$. For $i=1$ we have that 
-    $$\sum_{j,k\in\N : j+k=1} a_jb_k=0 = a_0b_1+a_1b_0 = -a_0a_0^{-1}\sum_{h=1}^1 a_hb_{1-h}+a_1a_0^{-1} = -a_1a_0^{-1}+a_1a_0^{-1}=0.$$
-    Then for $i\geq 0$,
-    $$\sum_{j,k\in\N : j+k=i+1}a_jb_k = \sum_{j,k\in\N : j+k=i+1}-a_ja_0^{-1}\sum_{h=1}^ka_hb_{k-h}$$
+    Note that 
+    $$
+        \left(\sum_{i\geq 0} \alpha_i x^i\right)\left(\sum_{i\geq 0} \beta_i x^i \right) = \sum_{i\geq 0} \sum_{j=0}^i a_{j}b_{i-j}
+    $$
+    Let $s = \sum_{i\in\N}a_ix^i$  be an element of the right-hand side. Set $b_0 := a_0^{-1}$ and $b_k := -a_0^{-1}\sum_{j=1}^{k} a_jb_{k-j}$ for $k\geq 1$. Define $t =  \sum_{i\in \N^n} b_ix^i$. We prove by induction that $\sum_0^n a_jb_{n-j}=0$. Indeed, 
+    $$
+        \sum_{j=0}^na_jb_{n-j} = -\left(a_0a_0^{-1}\sum_{j=1}^n a_{j}b_{n-j} \right)+\sum_{j=1}^n a_jb_{n-j} =0.
+    $$
+    It thus follows that 
+    $$
+        \left(\sum_{i\geq 0} a_i x^i\right)\left(\sum_{i\geq 0} b_i x^i \right) = 1.
+    $$
+    Conversely, if $\sum_{i\geq 0} a_ix^i\in R\llbracket x\rrbracket^ast$. Then 
+    $$
+         \left(\sum_{i\geq 0} a_i x^i\right)\left(\sum_{i\geq 0} b_i x^i \right)
+    $$
+    for some $\sum_{i\geq 0} b_i x^i \in R\llbracket x\rrbracket$. In particular, $a_0b_0 = 1$, hence $a_0\in R^\ast$. 
 \end{proof}
 \begin{lemma}
     For an integral domain $R$, $x\in R\llbracket x \rrbracket$ is irreducible.  
@@ -3393,13 +3421,12 @@ The following theorem is useful when one wants to eliminate certain variables in
 \subsubsection{Term Orders \& a Polynomial Division Algorithms}
 
 \begin{definition}
-    A \textit{term order} is total order $\leq$ on $\N^n$ such that 
+    A \textit{term order} is a total order $\leq$ on $\N^n$ such that 
     \begin{align*}
         &1. \quad 0\leq v \text{ for every } v\in \N^n,\\
         &2. \quad \text{for every } v_1,v_2,v\in \N^n, v_1\leq v_2\implies v_1+v\leq v_2+v.
     \end{align*}
 \end{definition}
-
 \begin{example}
     \begin{enumerate}
         \item A simple example of a term order is $\leq$ on $\N$. 
@@ -3415,13 +3442,13 @@ The following theorem is useful when one wants to eliminate certain variables in
     \end{enumerate} 
 \end{example}
 For $v\in \N^n$ define 
-$$v + \N^n = \left\{ v +w  : w\in \N^n\right\}.$$
+$$v + \N^n := \left\{ v +w  : w\in \N^n\right\}.$$
 \begin{theorem}\label{Dickson's lemma}(Dickson's Lemma)\\
     Let $S\subset \N^n$ be non-empty. Then there are vectors $v_1,\dots,v_m\in S$ such that 
     $$S\subset \bigcup_1^m \left(v_i +\N^n\right)$$
 \end{theorem}
 \begin{proof}
-    We proceed by induction in $n$. For $n=1$, $S$ has a minimal element $s$ by the well ordering of the natural numbers, hence any element of $S$ can be written as $s+t$ for some $t\in \N$. Suppose Dickson's lemma is true for some $n\geq 1$. Let $S$ be some non-empty subset of $\N^{n+1}$. Consider the canononical surjection 
+    We proceed by induction in $n$. For $n=1$, $S$ has a minimal element $s$ by the well ordering of the natural numbers, hence any element of $S$ can be written as $s+t$ for some $t\in \N$. Suppose Dickson's lemma is true for some $n\geq 1$. Let $S$ be some non-empty subset of $\N^{n+1}$. Consider the surjection 
     \begin{gather*}
         \pi : \N^{n+1}\rightarrow \N^n\\
         (v_1,\dots,v_n,v_{n+1})\mapsto (v_1,\dots,v_n)
@@ -3438,13 +3465,11 @@ $$v + \N^n = \left\{ v +w  : w\in \N^n\right\}.$$
     and put 
     $$S_\text{max} := \left\{ v=(v_1,\dots,v_{n+1}) \in S : v_{n+1} \geq s_\text{max}\right\}.$$
     Note that $S_{\max} \subset \bigcup_1^m\left(s_i+\N^{n+1}\right).$ Indeed, if $x\in S_{\max}$, then $(x_1,\dots,x_n)\in \bigcup_1^m \left(s_i'+\N^n\right)$. In particular, for some $i\in\{1,\dots,m\}$  $x = (s_{i1}+v_1,\dots,s_{in}+v_n)\in s_i'+\N^n$. Since $x_{n+1}\geq s_{\max}$, it follows that $x_{n+1} = s_{i,n+1}+v_{n+1}$, and thus that 
-    $$x = \left(s_{i1}+v_1,\dots,s_{in}+v_n,s_{i,n+1}+v_{n+1}\right)\in s_i+\N^{n+1}\subset \bigcup_1^m \left( s_j+\N^{n+1}\right).$$.
+    $$x = \left(s_{i1}+v_1,\dots,s_{in}+v_n,s_{i,n+1}+v_{n+1}\right)\in s_i+\N^{n+1}\subset \bigcup_1^m \left( s_j+\N^{n+1}\right).$$
     We furthermore have that $S = S_\text{max} \cup \bigcup_0^{s_\text{max}-1} S_i$. Again using induction there are $s_1^{(i)},\dots,s_{m_i}^{(i)}\in \pi(S_i)$ such that 
     $$\pi(S_i)\subset  \bigcup_{j=1}^{m_i} \left(s_j^{(i)} + \N^n\right)$$
     Then 
     $$S_i \subset \bigcup_{j=1}^{m_i} \left( \left(s_{j1}^{(i)},\dots,s_{jn}^{(i)},i\right) + \N^{n+1}\right).$$
-    We also have that 
-    $$S_{\max} \subset \bigcup_1^m \left(s_j + \N^{n+1}\right).$$
     It thus follows that 
     $$S \subset \bigcup_1^m \left(s_j + \N^{n+1}\right) \cup \bigcup_{i=0}^{s_{\max}} \bigcup_{j=1}^{m_i}\left( \left(s_{j1}^{(i)},\dots,s_{jn}^{(i)},i\right) + \N^{n+1}\right).$$
 \end{proof}
@@ -3548,7 +3573,7 @@ The upshot of introducing this tool of bookkeeping is that it allows to do polyn
     Note lastly that each $r^{(j)}$ is $0$ or a sum of terms not divisible by any $\inn\ f_i$, and hence $f^F$ is either $0$ or not divisible by any $\inn\ f_i$.
 \end{proof}
 \subsubsection{Gröbner Bases and Buchbergers Algorithm}
-For the exploration of Gröbner bases we fix a field $K$.
+For the exposition on Gröbner bases we fix a field $K$.
 \begin{definition}\label{GBDef}
     Let $I\subset K[x_1,\dots,x_n]$ be an ideal. Let $\leq$ be a term ordering on $K[\mathbf{x}]$. A finite set of polynomials $G\subset K[\mathbf{x}]\setminus 0$ is called a \textit{Gröbner basis} for $I$ with respect to $\leq$, if $G\subset I$ and for every $f\in I\setminus 0$ there is a $g\in G$ such that $\text{in}_\leq\ g \mid \text{in}_\leq \ f$.\\
     A finite set $G=\{f_1,\dots,f_m\}\subset K[\mathbf{x}]\setminus 0$ is called a Gröbner basis with respect to $\leq$ if it is a Gröbner basis for $\langle f_1,\dots,f_m\rangle$ with respect to $\leq$.
@@ -3598,13 +3623,13 @@ The machinery of Gröbner bases provides a way to perform the division algorithm
     Let $\lambda_1',\dots,\lambda_m',(f^G)'\in K[\mathbf{x}]$ be the 
     outcome of the division with respect to $\leq$ of $f$ with $f_{\omega(1)},\dots,f_{\omega(m)}$. Then by uniqueness of the remainder $f^G=(f^G)'$.
 \end{proof}
- We have now to some extend motivated the usefulness of Gröbner bases (even though we are yet to see the most impressive applications!). However, as a computational tool, they are unimpressive if there is no way to compute. The introduction of $S$-polynomials and Buchberger's $S$-criterion will lead us to Buchberger's algorithm for computing Gröbner bases.
+ We now seek a way to compute a Gröbner basis for a given ideal. The introduction of $S$-polynomials and Buchberger's $S$-criterion will lead us to Buchberger's algorithm for computing Gröbner bases.
 \begin{definition}
     Let $f\in K[x_1,\dots,x_n]$ and $F=\{f_1,\dots,f_m\}\subset K[\mathbf{x}]\setminus 0$. We say that \textit{$f$ reduces to zero modulo $F$} if there are $\lambda_1,\dots,\lambda_m\in K[\mathbf{x}]$ such that 
     $$f = \sum_1^m \lambda_if_i$$
     and $\inn\ \lambda_if_i \leq \inn\ f$ for $i\in\{1,\dots,m\}$ with $a_if_i\neq 0$. This will be denoted $f\to_F 0$.
 \end{definition}
-Note that this definition does not depend on a term order, however this definition leads us to the following reformulation of Proposition~\ref{GBCriterionForCheckingMembership}. Before formulating this consider the following lemmas 
+Note that this definition does not depend on a term order, however this definition leads us to a reformulation of Proposition~\ref{GBCriterionForCheckingMembership}. Before formulating this consider the following lemmas 
 \begin{lemma}\label{ConditionsForVanishingInitialTerms}
     Let $F=\{f_1,\dots,f_m\}\subset K[\mathbf{x}]\setminus 0$ and let $f \in I:=\langle F\rangle$ be non-zero with initial term $a_v\mathbf{x}^v$. Consider $\lambda_1,\dots,\lambda_m\in K[\mathbf{x}]$ such that 
     $$f=\sum_1^m \lambda_if_i.$$
@@ -3624,10 +3649,10 @@ Note that this definition does not depend on a term order, however this definiti
     For every $i\in\{1,\dots,m\}$ such that $\lambda_if_i\neq0 $ we have that
     $$b_ic_i\mathbf{x}^{v_i+w_i}=\inn \lambda_i \leq \inn\ f=a_v\mathbf{x}^v \iff \mathbf{x}^{v_i+w_i} \leq \mathbf{x}^v \iff v_i+w_i \leq v$$
     hence 
-    $$\kappa = v \iff \inn\ \lambda_if_i\leq.$$
+    $$\kappa = v \iff \inn\ \lambda_if_i\leq\inn\ f.$$
     2. Suppose $v = \kappa$. Then $v = v_i+w_i$and hence  $b_ic_i = a_v$ for some $i\in\{1,\dots,m\}$. WLOG we may then write 
-    $$\inn\ f = a_v\mathbf{x}^v = \left[\sum_1^l b_ic_i\right]\mathbf{x}^{v_1}\mathbf{x}^{w_1} = \left(\left[\sum_1^l b_i\frac{c_i}{c_1}\right]\mathbf{x}^{v_1}\right)c_1\mathbf{x}^{w_1} = \left(\left[\sum_1^l b_i\frac{c_i}{c_1}\right]\mathbf{x}^{v_1}\right)\inn\ f_i \implies \inn\ f_i \mid \inn f.$$
-    for some $l\leq m.$\\
+    $$\inn\ f = a_v\mathbf{x}^v = \left[\sum_1^l b_ic_i\right]\mathbf{x}^{v_1}\mathbf{x}^{w_1} = \left(\left[\sum_1^l b_i\frac{c_i}{c_1}\right]\mathbf{x}^{v_1}\right)c_1\mathbf{x}^{w_1} = \left(\left[\sum_1^l b_i\frac{c_i}{c_1}\right]\mathbf{x}^{v_1}\right)\inn\ f_1, $$
+    implying $\inn\ f_1 \mid \inn f$ for some $l\leq m.$
 \end{proof}
 \begin{lemma}\label{CriterionForCheckingSetBeingGB}
     Let $F=\{f_1,\dots,f_m\}\subset K[x_1,\dots,x_n]\setminus 0$ and set $I=\langle F\rangle$. The following statements hold
@@ -3670,7 +3695,7 @@ Note this simple fact about $S$-polynomials
     \end{align*}
     hence the result follows from Lemma~\ref{InitialTermProperties} 3.
 \end{proof}
-These polynomials will be make the criterion for checking that a generating set is a Gröbner basis that Lemma~\ref{CriterionForCheckingSetBeingGB} 1. provides more practical. To be precise, we can reduce this criterion to just check that a finite set of S-polynomials reduce to zero modulo $F$.
+These polynomials will be the backbone of the criterion for checking that a generating set is a Gröbner basis that Lemma~\ref{CriterionForCheckingSetBeingGB} 1. provides more practical. To be precise, we can reduce this criterion to just check that a finite set of S-polynomials reduce to zero modulo $F$.
 \begin{lemma}\label{TechnicalLemmaForBuchbergerCriterion}
     Let $F=\{f_1,\dots,f_m\}\subset K[x_1,\dots,x_n]\setminus 0$ and let $1\leq l \leq m$ and $\sum_1^m\lambda_if_i \in \langle F\rangle$ with 
     $b_{i}\mathbf{x}^{v_i}=\inn \lambda_i$, $c_{i} \mathbf{x}^{w_i}=\inn\ f_i$ be given such that $$b_ic_ix^{v_i+w_i}=\inn \ \lambda_if_i =\kappa := \max_{j\in\{1,\dots,m\}}\ \inn\ \lambda_jf_i$$
@@ -3784,7 +3809,7 @@ The below proposition will give an easy criterion for checking whether two polyn
     \textbf{Uniqueness:} Consider two reduced Gröbner bases $G=\{f_1,\dots,f_m\}$ and $G' = \{f_1',\dots,f_{m'}'\}$. We first check that the cardinality of these Gröbner bases match. Let $i\in\{1,\dots,m\}$, then for some $\tau(i)\in\{1,\dots,m'\}$, $\inn\ f'_{\tau(i)}\mid \inn\ f_i$. Let $j\in \{1,\dots,m'\}$ then for some $\omega(j)\in \{1,\dots,m\}$, $\inn \ f_{\omega(j)} \ \inn\ f'_{j}$. Then we have that  
     $$\inn\ f_{\omega(\tau(i))}\mid \inn\ f'_{\tau(i)} \text{ and }    \inn\ f'_{\tau(i)} \mid \inn\ f_{i} \implies \inn\ f_{\omega(\tau(i))} \mid \inn\ f_i$$
     by minimality of the Gröbner bases $i = \omega(\tau(i))$. A similar argument shows that $\tau(\omega(j))$ for every $j\in\{1,\dots,m'\}$, thus $\tau$ is a bijection, implying $m=m'$. We proceed by checking that the sets are equal. Note that the above argument also shows that $\inn\ f'_{\tau(i)} = \inn\ f_i$ for every $i\in\{1,\dots,m\}$ since the coefficient of every initial term is $1$.\\
-    Let $i\in\{1,\dots,m\}$. Since $\inn\ f_i=\inn\ f_{\tau(i)}'$, either $f_i=f_{\tau(i)}$ or $\inn\left( f_i-f_{\tau(i)}'\right)<\inn\ f_i$. We shall that the second case implies $f_i=f_{\tau(i)}$ as well. In this case no term in $f_i-f_{\tau(i)}'$ is divisible by $\inn\ f_i$. Any term in $f_i-f'_{\tau(i)}$ is a term in $f'_{\tau(i)}$ subtracted from $f_i$, where at least one of these terms in non-zero. Then by the Gröbner bases being reduced, $\inn\ f_j$ does not divide such a term for any $j\in\{1,\dots,m\}\setminus\{i\}$. Then $f_i-f_{\tau(i)}' = \left(f_i-f_{\tau(i)}'\right)^G$, but since $f_i-g_i \in I$, this must imply that $f_i=f_{\tau(i)}'$ by Proposition~\ref{GBCriterionForCheckingMembership}.\\ 
+    Let $i\in\{1,\dots,m\}$. Since $\inn\ f_i=\inn\ f_{\tau(i)}'$, either $f_i=f_{\tau(i)}$ or $\inn\left( f_i-f_{\tau(i)}'\right)<\inn\ f_i$. We will see that the second case implies $f_i=f_{\tau(i)}$ as well. In this case no term in $f_i-f_{\tau(i)}'$ is divisible by $\inn\ f_i$. Any term in $f_i-f'_{\tau(i)}$ is a term in $f'_{\tau(i)}$ subtracted from $f_i$, where at least one of these terms in non-zero. Then by the Gröbner bases being reduced, $\inn\ f_j$ does not divide such a term for any $j\in\{1,\dots,m\}\setminus\{i\}$. Then $f_i-f_{\tau(i)}' = \left(f_i-f_{\tau(i)}'\right)^G$, but since $f_i-g_i \in I$, this must imply that $f_i=f_{\tau(i)}'$ by Proposition~\ref{GBCriterionForCheckingMembership}.\\ 
     \textbf{Existence}:
     By the prior lemma there is a minimal for Gröbner basis $G=\{f_1,\dots,f_m\}$ for $I$. Define $g_i := f_i^{\{g_1,\dots,g_{i-1},f_i,\dots,f_m\}\setminus\{f_i\}}$ for every $i\in\{1,\dots,m\}$. Since $\inn\ f_i$ is divisible by any $\inn\ f_j$ for $j\in\{i+1,\dots,m-1\}$ we see that $g_i$ is of the form $\inn\ f_i+\dots$. Thus if $f\in I$, there is some $g_j$ such that $\inn\ g_j = \inn\ f_j\mid \inn\ f$, meaning that each set $\{g_1,\dots,g_\{k-1\},f_k,\dots,f_m\}$ and in particular $G' := \{g_1,\dots,g_m\}$ is a Gröbner basis. The $g_i$'s being residues following the division algorithm by a set of polynomials with initial terms coming from $\{f_1,\dots,f_m\}\setminus \{f_i\}$ implies that no term in $g_i$ is divisible by any $\inn\ f_j$ for $j\neq i$, thus $G'$ is a reduced Gröbner basis.    
 \end{proof}
@@ -3798,11 +3823,11 @@ The below proposition will give an easy criterion for checking whether two polyn
     Let $G'=G\cap K[x_1,\dots,x_i]$. Let $f\in I' = I\cap K[x_1,\dots,i]$.  For some $g\in G$, $\inn\ g \mid \inn \ f$. Let $t=a\mathbf{x}^v$ be a term of $g$ and write $b\mathbf{x}^w = \inn\ f$. Then 
     $a\mathbf{x}^v\leq b\mathbf{x}^w$, or in other words $v \leq w$. Let $u\in \N^n$. If $u_j \neq 0$ for $j\in\{i+1,\dots,m\}$, then $w<_\text{lex} u$. Hence we conclude that $v_j = 0$ for every $j\in\{i+1,\dots,m\}$, implying $t\in K[x_1,\dots,x_i]$ and ultimately that $g\in K[x_1,\dots,x_i]$.
 \end{proof}
-The above theorem is a great tool for computing solutions to complicated polynomial equations. 
+ 
 \subsubsection{Polynomials over UFD's}
 We aim to prove that polynomials over unique factorization domains are unique factorization domains. For this reason we fix a UFD $R$ (unless something else is explicitly stated). 
 \begin{lemma}\label{PrimeInRingImpliesPrimePolynomialRing}
-    Let $R$ be an integral domain. If $p\in R$ is prime then $p\in R[x_1]$ is prime. Therefor if $p\in R$ is prime, then $p\in R[x_1,\dots,x_n]$ is prime.  
+    Let $R$ be an integral domain. If $p\in R$ is prime then $p\in R[x]$ is prime. Therefor, by induction, if $p\in R$ is prime, then $p\in R[x_1,\dots,x_n]$ is prime.  
 \end{lemma}
 \begin{proof}
     $p\neq0$ and $p\notin R[x]^\ast = R^\ast$. Let $f=\sum_0^k a_ix^i,g=\sum_0^h b_ix^i\in R[x]$ such that $p\nmid f,g$. Set $s := \max\ \{i\in\{1,\dots,k\} : p\nmid a_i\}$ and $t:= \max\ \{i\in\{1,\dots,h\} : o\nmid b_i\}$. Note that if $i>s$ or $j>r$, then $p\mid a_i$ or $p\mid b_j$. This means that since $i+j = s+t$ implies $i\geq s$ or $j\geq t$, one finds that $p$ divides every term in $\sum_{i=1}^h\sum_{j=1}^k \sum_{i+j = s+t} a_ib_j$ other than $a_sb_t$, hence $$p\nmid \sum_{i=1,\dots,h,j=1,\dots,k i+j, = s+t} a_ib_j \implies p\nmid fg.$$  
@@ -3882,7 +3907,9 @@ In the following lemma we classify all the irreducible polynomials in $R[x]$.
 \begin{proof}
     1. Write $f=\sum_{v\in \N^n:\vert v\vert =d}a_v\mathbf{x}^v$ and $g=\sum_{w\in\N^n:\vert w \vert = e}b_w\mathbf{x}^w$. Then 
     $$fg=\sum_{v\in \N^n : \vert v\vert = d}\sum_{w\in \N^n : \vert w\vert =e} a_vb_w\mathbf{x}^{v+w}=\sum_{u\in \N^n : \vert u \vert = d+e}\left[\sum_{v,w\in \N^n : v+w=u} a_vb_w\right]\mathbf{x}^u.$$
-    Suppose $f$ is not homogeneous. Since $f$ is not homogeneous the set $\left\{l\geq 0 : \text{ there is a } u\in \N^n \text{ with } \vert u\vert =  l, a_u\neq0\right\}$ has at least $2$ elements. Let $m$ be the minimum of this set and $M$ the maximum. Note that $m\neq M$. Pick $u_m,u_M\in\N^n$ such that $\vert u_m\vert =m$ and $\vert u_M\vert = M$. Pick $b_{q_k}\mathbf{x}^{q_k}$, $b_{q_K}\mathbf{x}^{q_K}$ to be respectively a lowest degree term and a highest degree term of $g$. Then $\sum_{v,w\in \N^n : v+w = u_k + u_m} a_vb_w = a_{u_m}b_{u_k}\neq 0$ and $\sum_{v,w\in \N^n : v+w = u_K+u_M} a_vb_w =a_{u_M}b_{u_K} \neq 0$. $fg$ therefor has two non-zero monomial terms of different degree and therefor is not homogeneous.\\    
+    Suppose $f$ is not homogeneous. Then the set 
+    $$\left\{l\geq 0 : \text{ there is a } u\in \N^n \text{ with } \vert u\vert =  l, a_u\neq0\right\}$$
+    has at least $2$ elements. Let $m$ be the minimum of this set and $M$ the maximum. Note that $m\neq M$. Pick $u_m,u_M\in\N^n$ such that $\vert u_m\vert =m$ and $\vert u_M\vert = M$. Pick $b_{q_k}\mathbf{x}^{q_k}$, $b_{q_K}\mathbf{x}^{q_K}$ to be respectively a lowest degree term and a highest degree term of $g$. Then $\sum_{v,w\in \N^n : v+w = q_k + u_m} a_vb_w = a_{u_m}b_{q_k}\neq 0$ and $\sum_{v,w\in \N^n : v+w = q_K+u_M} a_vb_w =a_{u_M}b_{q_K} \neq 0$. Then $fg$ has two non-zero monomial terms of different degree and thus is not homogeneous.\\    
     2. We get that 
     $$f+g=\sum_{v\in \N^n:\vert v\vert=d} a_v\mathbf{x}^v + \sum_{v\in \N^n : \vert v\vert =d} b_v\mathbf{x}^v = \sum_{v\in \N^n : \vert v\vert =d} (a_v+b_v)\mathbf{x}^v.$$
 \end{proof}
@@ -3933,7 +3960,7 @@ We observe the following facts about homogenization and de-homogenization.
         x_{n+1}^{\deg\ f +\deg \ g - \deg( f+g)}(f+g)^\ast &=x_{n+1}^{\deg\ f +\deg \ g - \deg( f+g)+\deg(f+g)}\left[f\left(\frac{x_1}{x_{n+1}},\dots,\frac{x_n}{x_{n+1}}\right) + g\left(\frac{x_1}{x_{n+1}},\dots,\frac{x_n}{x_{n+1}}\right)\right]\\ &= x_{n+1}^{\deg\ g}\left[x_{n+1}^{\deg\ f}f\left(\frac{x_1}{x_{n+1}},\dots,\frac{x_n}{x_{n+1}}\right)\right] + x_{n+1}^{\deg\ f}\left[x_{n+1}^{\deg\ g}g\left(\frac{x_1}{x_{n+1}},\dots,\frac{x_n}{x_{n+1}}\right)\right]\\
         &= x_{n+1}^{\deg\ g}f^\ast+x_{n+1}^{\deg f}g^\ast.
     \end{align*}
-    For the second see that
+    For the second statement, see that
     \begin{align*}
         \left(fg\right)^\ast &= x_{n+1}^{\deg\ f+ \deg \ g} f\left(\frac{x_1}{x_{n+1}},\dots,\frac{x_n}{x_{n+1}}\right)g\left(\frac{x_1}{x_{n+1}},\dots,\frac{x_n}{x_{n+1}}\right)\\  &= x_{n+1}^{\deg \ f}f\left(\frac{x_1}{x_{n+1}},\dots,\frac{x_n}{x_{n+1}}\right)x_{n+1}^{\deg\ g}g\left(\frac{x_1}{x_{n+1}},\dots,\frac{x_n}{x_{n+1}}\right)=f^\ast g^\ast.
     \end{align*}
@@ -4004,7 +4031,7 @@ We observe the following facts about homogenization and de-homogenization.
     For a field $K$, the dimension of $V_K(d,n)$ is ${d+n-1 \choose n-1}$.
 \end{proposition}
 \begin{proof}
-    With the notation of the above lemma $\{ \mathbf{x}^v \in K[x_1,\dots,x_n] : v\in \Delta_{n,d}\}$ forms a basis of $V_K(d,n)$, hence by said lemma
+    With the notation of the above lemma $\{ \mathbf{x}^v \in K[x_1,\dots,x_n] : v\in \Delta_{n,d}\}$ forms a basis of $V_K(d,n)$, hence by the prior lemma
     $$\dim_K \ V_K(d,n) = \#\Delta_{n,d}= {d+n-1 \choose n-1}$$
 \end{proof}
 \begin{example}
@@ -4050,8 +4077,8 @@ We observe the following facts about homogenization and de-homogenization.
 \end{lemma}
 \begin{proof}
     "$\implies$":
-    Write $I=\langle f_1,\dots,f_m\rangle$ and $f_i=\sum_0^{d_i} f_{ij}$ with $f_ij$ being homogeneous of degree $j$. Then $I=\langle \{f_{ij} \}\rangle$. Indeed $I\subset \langle \{f_{ij} \}\rangle$ obviously and $\langle \{f_{ij} \}\rangle\subset I$ since $f_{ij}\in I$ by the assumption that $I$ is homogeneous.\\ 
-    "$\impliedby$": Suppose $I=\langle F_1,\dots,F_m\rangle$ for homogeneous $F_i$ of degree $d_i$. Write $f=\sum_0^d f_i\in I$ with $f_i$ homogeneous of degree $i$. Write also $f= \sum_1^m \lambda_iF_i$ for $\lambda_1,\dots,\lambda_m\in K[\mathbf{x}]$. If we consider $\lambda_i=\sum_0^{\delta_i} \lambda_{ij}$ with $\lambda_{ij}$ homogeneous of degree $j$. Then $f_d= \sum_1^m \lambda_{i,d-d_i}F_i\in I$. By induction in number of non-zero homogeneous $f_i$, it follows that $f_i\in I$, hence $I$ is homogeneous. 
+    Write $I=\langle f_1,\dots,f_m\rangle$ and $f_i=\sum_0^{d_i} f_{ij}$ with $f_{ij}$ being homogeneous of degree $j$. Then $I=\langle \{f_{ij} \}\rangle$. Indeed $I\subset \langle \{f_{ij} \}\rangle$ obviously and $\langle \{f_{ij} \}\rangle\subset I$ since $f_{ij}\in I$ by the assumption that $I$ is homogeneous.\\ 
+    "$\impliedby$": Suppose $I=\langle F_1,\dots,F_m\rangle$ for homogeneous $F_i$ of degree $d_i$. Write $f=\sum_0^d f_i\in I$ with $f_i$ homogeneous of degree $i$. Write also $f= \sum_1^m \lambda_iF_i$ for $\lambda_1,\dots,\lambda_m\in K[\mathbf{x}]$. If we consider $\lambda_i=\sum_0^{\delta_i} \lambda_{ij}$ with $\lambda_{ij}$ homogeneous of degree $j$. Then $f_d= \sum_1^m \lambda_{i,d-d_i}F_d\in I$. Then $f-f_d=\sum_1^{d-1} f_i$. By induction in the degree of $f$, it follows that $f_i\in I$, hence $I$ is homogeneous. 
 \end{proof}
 \begin{remark}
     Note that it's very clear that an ideal is homogeneous if and only if it is (not necessarily finitely) generated by a set of homogeneous polynomials. We therefor note that the homogenization of an ideal is a homogeneous ideal.
@@ -4067,13 +4094,13 @@ We observe the following facts about homogenization and de-homogenization.
     If $I\subset R[x_1,\dots,x_n]$ is prime, then $I^\ast\subset R[x_1,\dots,x_{n+1}]$ is prime
 \end{lemma}
 \begin{proof}
-    Let $a,b\in R[x_1,\dots,x_{n+1}]$ such that $ab\in I^\ast$. Then $a_\ast b_\ast = (ab)_\ast \in I$, hence $a_\ast \in I$ or $b_\ast\in I$. WLOG $a_\ast \in I$. Then $(a_\ast)^\ast\in I^\ast$, meaning for a suitable $r\geq 0$, $a=x_{n+1}^r(a_\ast)^\ast \in I^\ast$.
+    Let $a,b\in R[x_1,\dots,x_{n+1}]$ such that $ab\in I^\ast$. Then $a_\ast b_\ast = (ab)_\ast \in I$, hence $a_\ast \in I$ or $b_\ast\in I$. Suppose $a_\ast \in I$. Then $(a_\ast)^\ast\in I^\ast$, meaning for a suitable $r\geq 0$, $a=x_{n+1}^r(a_\ast)^\ast \in I^\ast$. The other case follows by symmetry.
 \end{proof}
 \begin{proposition}
     If $I\subset R[x_1,\dots,x_n]$ is homogeneous, then $\rad(I)$ is homogeneous.  
 \end{proposition}
 \begin{proof}
-    Let $f=\sum_0^d f_i \in \rad(I)$. We must prove that $f_i\in \rad(I)$. Note that $f^n = f_d^n + r\in I$ where $\deg \ r < dn$. Then $f_d^n\in I$, hence $f_d\in \rad(I)$. We thus have that $f - f_d \in \rad(I)$ by induction degree it follows that $f_i\in \rad(I)$ for the remaining $i$.
+    Let $f=\sum_0^d f_i \in \rad(I)$. We must prove that $f_i\in \rad(I)$. Note that $f^n = f_d^n + r\in I$ where $\deg \ r < dn$. Then $f_d^n\in I$, hence $f_d\in \rad(I)$. We thus have that $f - f_d \in \rad(I)$ by induction in degree it follows that $f\in \rad(I)$.
 \end{proof}
 
 \begin{lemma}
@@ -4103,7 +4130,7 @@ We observe the following facts about homogenization and de-homogenization.
     \textbf{Uniqueness:} Suppose we are given two such representations $\sum_0^d (f_i+I) = \sum_0^d (g_i +I)$ (we can always let $d$ be the largest of the two degrees obtained from each respective representation and then set undefined forms to be equal to $0$). Then $f_i-g_i$ is a form of degree $i$ for each $i$, hence $f_i-g_i\in I$ using the fact that $I$ is homogeneous. Consequently $f_i+I=g_i+I$ for each $i$. 
 \end{proof}
 \begin{remark}\label{VectorSpaceOfForms}
-    Consider $V_R(d,n,I)=\{ \alpha \in R[\mathbf{x}]/I : \alpha \text{ homogeneous of degree } d\}$ is an $R$-submodule of $R[\mathbf{x}]/I$ finitely generated by $\{\mathbf{x}^v + I:\vert v\vert =d\}.$ In particular $V_K(d,n,I)$ is a finite dimensional vector space for fields $K$. In general, it takes some work to say anything about the dimension of this vector space, below we give an example in the case $n=3$ and $d>n$ {\Large This is exercise 4.10}. 
+    Consider $V_R(d,n,I)=\{ \alpha \in R[\mathbf{x}]/I : \alpha \text{ homogeneous of degree } d\}$ is an $R$-submodule of $R[\mathbf{x}]/I$ finitely generated by $\{\mathbf{x}^v + I:\vert v\vert =d\}.$ In particular $V_K(d,n,I)$ is a finite dimensional vector space for fields $K$. In general, it takes some work to say anything about the dimension of this vector space, below we give an example in the case $n=3$ and $d>n$ {\Large This is exercise 4.10 in Fulton. Do at some point}. 
 \end{remark}
 \begin{example}
     
