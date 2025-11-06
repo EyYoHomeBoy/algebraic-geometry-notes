@@ -472,14 +472,14 @@ We shall later ammend this by only considering algebraically closed fields as ou
 We demonstrate the strength of the above theorem in the following example
 \begin{example}
     \begin{enumerate}
-        \item Let $f = y-x^2\in \C[x,y]$. Since $\deg_y\ f = 1$ and $f$ is monic with respect to $x$, $f$ is irreducible in $(\C[y])[x]\simeq \C[x,y]$ {\LARGE Result!!!}, hence since $\C[x,y]$ is a UFD {\LARGE Result!!!}, $f$ is prime, and thus $\langle f\rangle$ is prime. Suppose $a\in I(V(f))$. We aim to prove that $a(x,x^2) = 0$, which would imply
+        \item Let $f = y-x^2\in \C[x,y]$. Since $\deg_y\ f = 1$ and $f$ is monic with respect to $x$, $f$ is irreducible in $(\C[y])[x]\simeq \C[x,y]$, hence since $\C[x,y]$ is a UFD (cf. Corollary~\ref{PolyonmialRingOverFieldIsUFD}), $f$ is prime, and thus $\langle f\rangle$ is prime. Suppose $a\in I(V(f))$. We aim to prove that $a(x,x^2) = 0$, which would imply
         $$a(x,y) + \langle f\rangle = a(x,x^2) + \langle f \rangle =0 + \langle f \rangle \implies  a \in \langle f\rangle.$$
         Indeed every point in $V(f)$ is of the form $(\alpha,\alpha^2)\in \A^2(\C)$, hence upon putting $b = a(x,x^2) \in \C[x]$, we see that $b(\alpha) = 0$ for every $\alpha\in\C  $, implying $a(x,x^2)=b=0$. We thus conclude $I(V(f))=\langle f\rangle$, which means $V(f)\subset \A^2(\C)$ is irreducible by the above theorem. 
         \item Let $g = y^4 - x^2 \in \C[x,y]$ and $h = y^4 -x^2y^2+xy^2-x^3\in \C[x,y]$. Setting $g_1 = y^2-x$ and $g_2 = y^2+x$, then $g=g_1g_2$. We can thus write 
         $$V(g,h) = V(g)\cap V(h) = V(g_1g_2)\cap V(h)= (V(g_1)\cup V(g_2))\cap V(h) = V(g_1,h) \cup V(g_2,h).$$
         Note also that
         $$h=y^4 -x^2y^2+xy^2-x^3= y^2(y^2+x)-x^2(y^2-x) = -x^2g_1+y^2g_2\in \langle g_1,g_2\rangle.$$
-        We aim to prove that $V(g_i,h)=\{0\}$. Let $v\in V(g_1,h).$ Then $v_1 = v_2^2$. Then $h(v) = v_2^2g_2(v)$, hence $0=v_2^2 = v_1$, in which case $v=0$, or $g_2(v)=0$. Since $V(g_1)\cap V(g_2) =\{0\}$, it follows that in the second case $v = 0$. One proves $V(g_2,h)=\{0\}$ similarly. We may write $\{0\} = V(x,y)$. Trivially a singleton is irreducible, since if $\{0\} = V\cup W$, then $V=\{0\}$ or $W = \{0\}$.
+        We aim to prove that $V(g_i,h)=\{0\}$. Let $v\in V(g_1,h).$ Then $v_1 = v_2^2$. Then $h(v) = v_2^2g_2(v)$, hence $0=v_2^2 = v_1$, in which case $v=0$, or $g_2(v)=0$. Since $V(g_1)\cap V(g_2) =\{0\}$, it follows that in the second case $v = 0$. One proves $V(g_2,h)=\{0\}$ similarly. Hence $V(g,h)=\{0\}$ is irreducible.
         \item One should note that a polynomial being irreducible, does not imply that its vanishing set is irreducible. Take for instance, $f = y^2 + x^2(x-1)^2\in \R[x,y]$. Consider $f$ as a polynomial in $\C[x,y]$ we have that 
         $$f  = (y-ix(x-1))(y+ix(x-1)),$$
         hence since the prime factorization of $f$ is unique (since $\C[x,y]$ is a UFD) and $y-ix(x-1),y+ix(x-1)\in \C[x,y]\setminus \R[x,y]$, there is no non-trivial factors of $f$ in $\R[x,y]$, which means $f$ is irreducible in $\R[x,y]$. Note that 
@@ -505,7 +505,7 @@ We demonstrate the strength of the above theorem in the following example
 \begin{proof}
     \textbf{Existence:} Consider the set  
     $$\mathcal{A}:= \left\{ X\subset \A^n : X \text{ is algebraic and not a finite union of varieties} \right\}.$$
-    Suppose for a contradiction that $\mathcal{A} = \emptyset$. Then by Lemma~\ref{NonEmptyFamilyOfAlgebraicSetsHasMinimalElement}, there is a minimal element $X_0 \in \mathcal{A}$. On the one hand $X_0$ is not irreducible. Hence There are $Y,Z\subsetneq X_0$ such that $X_0 = Y \cup Z$. However, by minimality $Y,Z\notin \mathcal{A}$, hence $Y= \bigcup_1^k V_i$ and $Z = \bigcup_1^l W_i$ for varieties $V_1,\dots,V_k,W_1,\dots,W_l \subset \A^n$. But then 
+    Suppose for a contradiction that $\mathcal{A} = \emptyset$. {\Huge HERE!!!!} Then by Lemma~\ref{NonEmptyFamilyOfAlgebraicSetsHasMinimalElement}, there is a minimal element $X_0 \in \mathcal{A}$. On the one hand $X_0$ is not irreducible. Hence There are $Y,Z\subsetneq X_0$ such that $X_0 = Y \cup Z$. However, by minimality $Y,Z\notin \mathcal{A}$, hence $Y= \bigcup_1^k V_i$ and $Z = \bigcup_1^l W_i$ for varieties $V_1,\dots,V_k,W_1,\dots,W_l \subset \A^n$. But then 
     $$X_0 = Y\cup Z = \bigcup_1^k V_i \cup \bigcup_1^l W_i,$$
     leading to a contradiction. This means $\mathcal{A} = \emptyset$. Hence every algebraic set can be written as a union of varieties.\\
     Let $X\subset \A^n$ be an algebraic set, and pick varieties $V_1,\dots,V_m \subset \A^n$ whose union is equal to $X$. Let $V_{k_1},\dots,V_{k_l}$ be the maximal elements of $\{V_1,\dots,V_m\}$. Let $j\in \{1,\dots,m\}$. The set $S: = \{ V_i : V_j\subset V_i\}$ has a maximal element $V_k$. Let $h\in \{1,\dots,m\}$ and suppose $V_k \subset V_h$. Then in particular $V_j \subset V_h$, hence $V_h\in S$, implying $V_h = V_k$. This means $V_k$ is a maximal element of $\{V_1,\dots,V_m\}$. In other words $k=k_i$ for some $i$, hence $V_j \subset V_{k_i}$, implying 
