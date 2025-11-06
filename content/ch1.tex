@@ -1876,8 +1876,14 @@ Assuming the axiom of choice we get the following result.
     An left ideal $M\subsetneq R$ is called a \textit{left maximal} ideal, if for every left ideal $I\subset R$ with $M\subset I$, either $I=M$ or $I=R$. If $M$ is an ideal with aforementioned property it is called a \textit{maximal ideal}.  
 \end{definition}
 \begin{definition}
-    A ring $R$ is called \textit{simple} if the only ideals in $R$ are the trivial ones, i.e. $0$ and $R$.
+    A ring $R$ is called \textit{simple} if the only two-sided ideals in $R$ are the trivial ones, i.e. $0$ and $R$.
 \end{definition}
+\begin{lemma}
+    Let $S$ be a simple ring and $R$ any ring. Consider a ring homomorphism $\sigma : S\rightarrow R$. Then $\sigma$ is an embedding or $R$ is the zero ring. In particular, the only field morphisms are embeddings. 
+\end{lemma}
+\begin{proof}
+    Note that $\ker\ \sigma$ is a two-sided ideal in $S$. Since $S$ is simple, either $\ker\ \sigma=0$ or $\ker\ \sigma = S$. In the first case $\sigma$ is injective and in the second case $\sigma=0$, and the only case where $0$ can be a ring map is when $R=0$. 
+\end{proof}
 \begin{lemma}\label{DivisionRingsAreSimple}
     Any division ring is simple.
 \end{lemma}
@@ -1885,11 +1891,11 @@ Assuming the axiom of choice we get the following result.
     Let $D$ be a division ring and consider a non-zero ideal $I\subset R$. Then there is an $x\in I\setminus 0$. Since $D$ is a division ring, there exists $x^{-1}$ s.t. $1 = x^{-1}x\in I$, meaning $I = D$.
 \end{proof}
 \begin{lemma}\label{MaximalIdealIffQuotientRingSimple}
-    Let $R$ be a ring. Let $I\subset R$ be an ideal. Then $I$ is a maximal ideal if and only if $R/I$ is a simple.
+    Let $R$ be a ring. Let $I\subset R$ be a two-sided ideal. Then $I$ is a maximal ideal if and only if $R/I$ is a simple.
 \end{lemma}
 \begin{proof}
-    "$\implies$": Let $J/I\subset R/I$ be a non-zero ideal, i.e. assume $I\subsetneq J\subset R$ for some ideal $J$ in $R$. Then $J = R$, hence $J/I= R/I$, implying $R/I$ is simple.\\
-    "$\impliedby$": Conversely, consider and ideal $J\subset R$ such that $I\subsetneq J$. Then $0\neq J/I\subset R/I$, implying that $J/I = R/I$ and hence that $J=R$. 
+    "$\implies$": Let $J/I\subset R/I$ be a non-zero two-sided ideal, i.e. assume $I\subsetneq J\subset R$ for some two-sided ideal $J$ in $R$. Then $J = R$, hence $J/I= R/I$, implying $R/I$ is simple.\\
+    "$\impliedby$": Conversely, consider an ideal $J\subset R$ such that $I\subsetneq J$. Then $0\neq J/I\subset R/I$, implying that $J/I = R/I$ and hence that $J=R$. 
 \end{proof}
 \begin{lemma}\label{UnionOverChainOfSubmodulesIsSubmodule}
     Let $M$ be a left $R$-module. Consider a chain $C$ of submodules of $M$. Then 
@@ -1899,16 +1905,19 @@ Assuming the axiom of choice we get the following result.
 \begin{proof}
     Let $m_1,m_2\in \bigcup_{N\in C} N$. $m_1\in N_1$ and $m_2\in N_2$ for some $N_1,N_2\in C$. WLOG $N_1\subset N_2$, hence $m_1\in N_2$, which means $m_1+m_2\in N_2 \subset \bigcup_{N\in C} N$. Clearly $0\in \bigcup_{N\in C} N$. Let $r\in R$, clearly $rm_1\in \bigcup_{N\in C} N$.
 \end{proof} 
-\begin{proposition}
-    Assuming choice, any non-zero ring has a maximal ideal. 
+\begin{proposition}\label{AnyProperIdealIsContainedInMaximalIdeal}
+    Assuming choice, any proper left ideal in a non-zero ring is contained in left maximal ideal. 
 \end{proposition}
 \begin{proof}
-    Let $R$ be a non-zero ring and consider the family 
+    Let $R$ be a non-zero ring and $I\subset R$ a proper ideal. Consider the family 
     $$
-        X := \{I\subset R : I \text{ is a proper ideal}\},
+        X := \{I\subset J\subset R : J \text{ is a proper ideal}\},
     $$
-    partially ordered by inclusion. Every chain in $X$ has an upper bound, namely the union of the ideals in the chain (cf. the prior lemma). By Zorn's lemma, $X$ has a maximal element, and by definition such a maximal element is a maximal ideal in $R$. 
+    partially ordered by inclusion. Every chain in $X$ has an upper bound, namely the union of the ideals in the chain (cf. the prior lemma). Indeed note that $1$ is not an element of this union, making it a proper left ideal. By Zorn's lemma, $X$ has a maximal element, and by definition such a maximal element is a maximal ideal in $R$ containing $I$. 
 \end{proof}
+\begin{corollary}
+    Assuming choice, any non-zero ring has a maximal ideal. 
+\end{corollary}
 \begin{proposition}\label{InCommutativeRingMaximalIdealIffQuotientRingField}
     Let $R$ be a commutative ring. Let $I\subset R$ be an ideal. Then $I$ is a maximal ideal if and only if $R/I$ is a field.
 \end{proposition}
@@ -3954,8 +3963,8 @@ In the following lemma we classify all the irreducible polynomials in $R[x]$.
 \begin{proof}
     Every non-zero non-unit element is a product irreducible elements in $R[x]$ by Lemma~\ref{ClassificationOfIrreducibles} 2. Let $f$ be an irreducible element in $R[x]$. Then either $f$ is a prime in $R$ or is primitive in $R[x]$ and irreducible in $Q(R)[x]$ by Lemma~\ref{ClassificationOfIrreducibles} 3. In the second case $f$ is also prime by Lemma~\ref{ClassificationOfIrreducibles} 1. It follows by Proposition~\ref{EquivalentFormulationOfUFD} that $R[x]$ is a UFD. Since $R[x_1,\dots,x_{n}]\simeq (R[x_1,\dots,x_{n-1}])[x_n]$ it follows by induction that $R[x_1,\dots,x_n]$ is a UFD. 
 \end{proof}
-\begin{proposition}
-    Let $f\in R[x]$ such that $f$ is monic and $\deg\ f \in\{2,3\}$. Then $f$ is irreducible if and only if $f$ has not roots. 
+\begin{proposition}\label{MonicPolynomialOverUFDIrreducibleCriterion}
+    Let $f\in R[x]$ such that $f$ is monic and $\deg\ f \in\{2,3\}$. Then $f$ is irreducible if and only if $f$ has no roots. 
 \end{proposition}
 \begin{proof}
     "$\implies$": Suppose $f$ has a root $\alpha\in R$. Then $f\in \langle x-\alpha\rangle $, hence $f = (x-\alpha)g$ for some $g \in R[x]$. In either case of $\deg f = 2$ or $\deg \ f =3$, we have that $\deg \ g \geq 1$, implying $g$ is not a unit. This means $f$ is reducible.\\

@@ -497,6 +497,16 @@ We demonstrate the strength of the above theorem in the following example
 \begin{proof}
     The inclusion $\bigcup_{X \in \mathcal{X}} X \supset \bigcup_{X \in \mathcal{Z}} X $ is trivial. Let $x\in \bigcup_{X \in \mathcal{X}} X$. Then $x\in X$, for some $X\in \mathcal{X}$. To prove the inclusion, we need to show that $x\in Y$ for some $Y\in \mathcal{Z}$
 \end{proof}
+\begin{lemma}\label{NonEmptyFamilyOfAlgebraicSetsHasMinimalElement}
+    A non-empty family of algebraic elements in $\A^n$ has a minimal element.
+\end{lemma}
+\begin{proof}
+    Indeed, consider 
+    $$
+        \{V(I) : I\in \pazocal{I}\}
+    $$
+    were $\pazocal{I}$ is a non-empty family of ideals in $K[x_1,\dots,x_n]$. Then $\pazocal{I}$ has a maximal element $J$, since $K[x_1,\dots,x_n]$ is Noetherian. Then $V(I)\subset V(J)$ where $I\in\pazocal{I}$ implies $I\supset J$, hence $I=J$, meaning $V(I)=V(J)$. We thus conclude that $V(J)$ is a minimal element of $\{V(I) : I\in \pazocal{I}\}$. 
+\end{proof}
 \begin{theorem}
     Let $X\subset \A^n$ be an algebraic set. Then there is a finite sequence of varieties $V_1,\dots,V_n\subset \A^n$ unique (up to re-ordering) such that 
     $$X = \bigcup_1^n V_i$$
@@ -535,12 +545,10 @@ We demonstrate the strength of the above theorem in the following example
 \begin{proof}
     If $m=1$, then $\bigcup_{j\in\{1,\dots,m\}\setminus\{i\}} V_j = \emptyset$, hence clearly $V_i\not\subset \bigcup_{j\in\{1,\dots,m\}\setminus\{i\}} V_j$. Suppose $m\geq 2$, i.e. that $X$ is reducible. Note that $X\setminus V_i \subset \bigcup_{j\in\{1,\dots,m\}\setminus\{i\}} V_j$. Then since $V_i\subsetneq X$, there is a point $v\in X\setminus $...   
 \end{proof}
-\begin{proposition}
+\begin{example}
     For an infinite field $K$, $\A^n(K)$ is irreducible.
-\end{proposition}
-\begin{proof}
-    When $K$ is infinite, $I(\A^n(K)) = 0$ {\LARGE ref result!!!}, which is trivially prime, hence $\A^n(K)$ is prime by Theorem~\ref{VarietyIffCoordinateRingIsID}
-\end{proof}
+   Indeed,  $I(\A^n(K)) = 0$, which is trivially prime, hence $\A^n(K)$ is irreducible by Theorem~\ref{VarietyIffCoordinateRingIsID}
+\end{example}
 \subsubsection{Classifying Algebraic Subsets of the Plane}
 \begin{theorem}\label{BezoutForCurves}
     Let $f,g\in K[x,y]$ such that $\gcd(f,g)=1$. Then $\#V(f,g) < \infty$.
@@ -589,7 +597,7 @@ We demonstrate the strength of the above theorem in the following example
         where $\alpha, \beta > 0$
         This system of equations clearly cannot have any real solutions since using $a_1a_2 = 1$ and $ b_1b_2 = 1$, we get that
         $$(a_1b_2+a_2b_1) = 0\iff a_1b_2 = -a_2b_1 \iff a_1^2b_2^2 = -a_2a_1b_1b_2 = -1.$$
-        It thus follows that any polynomial in $\R[x,y]$ of the form $\alpha x^2+\beta y^2 + 0xy +\dots \in \R[x,y]$ where $\alpha,\beta$ cannot be a product of two degree $1$ polynomials in $\R[x,y]$ and therefor is irreducible in $\R[x]$. Alternatively one could also see this by applying the rational root theorem and {\Large result saying that second degree pol. over field is red. iff has roots} to $x^2+y^2+1\in \R(x)[y]$. \\
+        It thus follows that any polynomial in $\R[x,y]$ of the form $\alpha x^2+\beta y^2 + 0xy +\dots \in \R[x,y]$ where $\alpha,\beta$ cannot be a product of two degree $1$ polynomials in $\R[x,y]$ and therefor is irreducible in $\R[x]$. Alternatively one could also see this by applying the rational root theorem and Proposition~\ref{MonicPolynomialOverUFDIrreducibleCriterion} to $x^2+y^2+1\in \R(x)[y]$. \\
         The point in any case is that $I(V(I))\neq I$.
         \item Every algebraic subset of $\A^2(\R)$ can be written as $V(f)$ for some $f\in \R[x,y]$: If $P=\{(v_1,v_2)\}$, then $P=V(g)$, where $g = (x-v_2)^2+(y-v_1)^2$. Indeed, $g(v_1,v_2)=0$ and if $(w_1,w_2)\in V(g)$, then since $(w_1-v_1)^2,(w_2-v_2)^2\geq 0$ and $(w_1-v_1)^2+(w_2-v_2)^2 =0$, we have $w_1-v_1=0$ and $w_2-v_2=0$. Now if $V$ is an arbitrary algebraic subset of $\A^2(\R)$, it has a decomposition into irreducible components $V_1,\dots,V_l$. By Corollary~\ref{ClassificationOfAlgebraicSetsInThePlaneOverInfiniteFields} and the remark we made about points at the beginning, it follows that $V_i = V(f_i)$ for some $f_i\in \R[x,y]$, hence 
         $$V = \bigcup_1^l V(f_i) = V\left(\prod_1^l f_i\right).$$
@@ -598,8 +606,8 @@ We demonstrate the strength of the above theorem in the following example
 \begin{example}
     We have now classified the varieties of the plane over an infinite field $K$. Let's determine the irreducible decompositions of some algebraic subsets
     \begin{enumerate}
-        \item Let $f = y^2-xy-x^2y+x^3$. Set $f_1=x-y$ and $f_2 = y-x^2$. Then one sees that $f=f_1f_2$ and hence $V(f)=V(f_1)\cup V(f_2)$. Eisenstein's criterion {\Large write!!!} shows that $f_1\in K(x)[y]$, $f_2\in K(y)[x]$ are irreducible, since $x\nmid 1, x\mid x, x^2\nmid x$ and $y\nmid 1, y\mid y, y^2\nmid y$. We then have that (since $f_1,f_2$ are primitive {\LARGE Ref result}) that $f_1,f_2\in K[x,y]$ are irreducible (This is for any field $K$). Note that $V_\R(f_1) = \left\{(\lambda,\lambda)\in \R^2: \lambda \in \R\right\}$, which is infinite. Note also that $V_\R(f_2)= \left\{ \left(\lambda,\lambda^2\right)\in \R^2 : \lambda \in \R\right\}$, which is also infinite since it is the graph of the function $\lambda \mapsto \lambda^2$. We thus see that $V_\R(f_1),V_\R(f_2)$ and $V_\C(f_1),V_\C(f_2)$ are the irreducible components of $V_\R(f)$ resp. $V_\C(f)$ by Corollary~\ref{ClassificationOfAlgebraicSetsInThePlaneOverInfiniteFields}, since $V_\C(f_1)\cap V_\C(f_2) = \{(0,0),(1,1)\}$ implying that neither set is contained in the other.
-        \item Consider $f= y^2-x\left(x^2-1\right)$. The set $V(f)$ is an example of an elliptic curve (these are in general of the form $V\left(y^2-\left(ax^3+bx^2+cx+d\right)\right)$. Using Eisenstein's criterion for $f$ in $K[x][y]$ performing the testing the criterion against $x\in K[x]$, it follows that $f\in K[x,y]$ is irreducible. We aim to show that $V_\R(f)$ is infinite. Let $\lambda\in \R_{\geq 1}$. Then $\lambda^2-1\geq 0$, hence $\lambda\left(\lambda^2-1\right) \geq 0$. It thus follows that 
+        \item Let $f = y^2-xy-x^2y+x^3$. Set $f_1=x-y$ and $f_2 = y-x^2$. Then one sees that $f=f_1f_2$ and hence $V(f)=V(f_1)\cup V(f_2)$. Eisenstein's criterion shows that $f_1\in K(x)[y]$, $f_2\in K(y)[x]$ are irreducible, since $x\nmid 1, x\mid x, x^2\nmid x$ and $y\nmid 1, y\mid y, y^2\nmid y$. We then have that (since $f_1,f_2$ are primitive) that $f_1,f_2\in K[x,y]$ are irreducible (This is for any field $K$). Note that $V_\R(f_1) = \left\{(\lambda,\lambda)\in \R^2: \lambda \in \R\right\}$, which is infinite. Note also that $V_\R(f_2)= \left\{ \left(\lambda,\lambda^2\right)\in \R^2 : \lambda \in \R\right\}$, which is also infinite since it is the graph of the function $\lambda \mapsto \lambda^2$. We thus see that $V_\R(f_1),V_\R(f_2)$ and $V_\C(f_1),V_\C(f_2)$ are the irreducible components of $V_\R(f)$ resp. $V_\C(f)$ by Corollary~\ref{ClassificationOfAlgebraicSetsInThePlaneOverInfiniteFields}, since $V_\C(f_1)\cap V_\C(f_2) = \{(0,0),(1,1)\}$ implying that neither set is contained in the other.
+        \item Consider $f= y^2-x\left(x^2-1\right)$. The set $V(f)$ is an example of an elliptic curve (these are in general of the form $V\left(y^2-\left(ax^3+bx^2+cx+d\right)\right)$). Using Eisenstein's criterion for $f$ in $K[x][y]$ testing the criterion against $x\in K[x]$, it follows that $f\in K[x,y]$ is irreducible. We aim to show that $V_\R(f)$ is infinite. Let $\lambda\in \R_{\geq 1}$. Then $\lambda^2-1\geq 0$, hence $\lambda\left(\lambda^2-1\right) \geq 0$. It thus follows that 
         $$\left\{ \left(\lambda,\pm \sqrt{\lambda\left(\lambda^2-1\right)} \right)\in \R^2 :\lambda \in \R \right\}\subset V_\R(f)\subset V_\C(f).$$
         Since this subset is infinite, it follows that both $V_\R(f),V_\C(f)$ are irreducible by Corollary~\ref{ClassificationOfAlgebraicSetsInThePlaneOverInfiniteFields}.
         \item Consider $f= x^3+x-x^2y-y$. Put $f_1= x-y$, $f_2=x^2+1$. Then $f= f_1f_2$. We have already seen that $f_1$ is irreducible in $K[x,y]$ and that $V(f_1)$ is infinite. We also know that $V_\R(f_2)=\emptyset$. It thus follows that $V_\R(f)=V_\R(f_1)\cup V_\R(f_2) = V_\R(f_1)$, hence $V_\R(f_1)$ is the only irreducible component over $\R$. Note that $f_2=(x+i)(x-i)$ in $\C[x,y]$, and $f_2'=x+i$, and $f_2''$ are irreducible in $\C[x,y]$ being of degree $1$. Since $V_\C(f_2')=\left\{(-i,\lambda)\in \C^2 : \lambda \in \C\right\}$ and $V_\C(f_2'')=\left\{(i,\lambda)\in \C^2 : \lambda \in \C\right\}$ are infinite sets, it thus follows that $V_\C(f_2'),V_\C(f_2'')$ are also irreducible sets in $\A^2(\C)$. Clearly $V_\C(f_2')$ and $V_\C(f_2'')$ are disjoint. Furthermore, $V_\C(f_1)\cap V_\C(f_2') = \{(-i,-i)\}$ and $V_\C(f_1)\cap V_\C(f_2'') = \{(i,i)\}$, hence there is no containment of these sets in each other. It thus follows that the irreducible components of $V_\C(f)$ are $V_\C(f_1),V_\C(f_2'),V_\C(f_2'')$.
@@ -616,7 +624,7 @@ $$V(f_1,\dots,f_m) = \emptyset \iff \langle f_1,\dots,f_m\rangle = \langle 1 \ra
 \begin{proof}
     Set $I:=\langle f_1,\dots,f_m\rangle$.\\
     "$\impliedby$": If $I = \langle 1\rangle $, then $V(I) = V(1) = \emptyset$.\\
-    "$\implies$": Suppose $I\neq \langle 1 \rangle$, i.e. $I$ is a proper ideal. We aim to show $V(I)\neq \emptyset$. $I\subset I'$ for some maximal ideal {\large by reference to proper theorem}. Hence $V(I)\supset V(I')$. This means that if $V(I')\neq \emptyset$, then $V(I)\neq \emptyset$. It is then sufficient to prove the statement in the case where $I$ is maximal. It follows from Corollary~\ref{ClassificationOfMaximalPolynomialIdeals} that $I = \langle x_1-a_1,\dots,x_n-a_n\rangle$ for suitable $a_i\in K$. Hence $V(I) = \{(a_1,\dots,a_n)\}\neq \emptyset$.
+    "$\implies$": Suppose $I\neq \langle 1 \rangle$, i.e. $I$ is a proper ideal. We aim to show $V(I)\neq \emptyset$. $I\subset I'$ for some maximal ideal (cf. Proposition~\ref{AnyProperIdealIsContainedInMaximalIdeal}). Therefore $V(I)\supset V(I')$. This means that if $V(I')\neq \emptyset$, then $V(I)\neq \emptyset$. It is then sufficient to prove the statement in the case where $I$ is maximal. It follows from Corollary~\ref{ClassificationOfMaximalPolynomialIdeals} that $I = \langle x_1-a_1,\dots,x_n-a_n\rangle$ for suitable $a_i\in K$. Hence $V(I) = \{(a_1,\dots,a_n)\}\neq \emptyset$.
 \end{proof}
 \begin{remark}
     The equation
