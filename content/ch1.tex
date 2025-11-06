@@ -3293,6 +3293,22 @@ The following theorem is useful when one wants to eliminate certain variables in
     By the base case there is a $v_{n+1}\in R$ such that $f'(v_{n+1})\neq 0$. Hence upon putting $v= (v_1,\dots,v_n,v_{n+1})$ we get that 
     $$f(v) = f'(v_{n+1}) \neq 0.$$
 \end{proof}
+\begin{lemma}
+    Given an integral domain $R$, there are infinitely many irreducible polynomials in $R[x]$ and consequently this is also the case in $R[x_1,\dots,x_n]$. 
+\end{lemma}
+\begin{proof}
+    When $R$ is infinite, each $\alpha\in R$, uniquely corresponds to an irreducible polynomial $(x-\alpha)$.\\
+    Suppose $R$ is finite. Then $R$ is a finite field. Consider the polynomial 
+    $$
+        f := \prod_{\alpha\in R} (x-\alpha)
+    $$
+    Then 
+    $$
+        f^n +1
+    $$
+    has no roots in $R$, and is therefore irreducible for each $n\geq 0$. 
+\end{proof}
+
 \subsubsection{The Hilbert Basis Theorem}
 \begin{theorem}(Hilbert Basis Theorem)\label{EveryPolynomialIdealIsFinitelyGenerated}
     Let $R$ be a noetherian ring. Then $R[x]$ is  noetherian. Furthermore $R[x_1,\dots,x_n]$ is noetherian. 
@@ -4143,30 +4159,31 @@ We observe the following facts about homogenization and de-homogenization.
 \end{proof}
 \subsubsection{Multi- and Bihomogeneous Polynomials}
     \begin{definition}
-        Let $\{x_{ij} : 1\leq i\leq m, 1\leq j \leq n_i\}$ be algebraically independent variables over a ring $R$. A polynomial in $R[\mathbf{x}]$ is called an \textit{$m$-homogeneous polynomial} or an \textit{$m$-form} of \textit{$m$-degree} $(d_1,\dots,d_m)\in \Z_{\geq 0}^m$, if it is form of degree $d_i$ when seen as an element in $R[x_{kj} : k\neq i][x_{i1},\dots,x_{in_i}]$ for each $i$. When $m=2$ an $2$-form is called a \textit{bihomogeneous polynomial} or a \textit{biform} of \textit{bidegree} $(d_1,d_2)$.
+        Let $\{x_{ij} : 1\leq i\leq m, 1\leq j \leq n_i\}$ be algebraically independent variables over a ring $R$. A polynomial in $R[\mathbf{x}]$ is called an \emph{$m$-homogeneous polynomial} or an \textit{$m$-form} of \textit{$m$-degree} $(d_1,\dots,d_m)\in \N^m$, if it is a form of degree $d_i$ when seen as an element in $R[x_{kj} : k\neq i][x_{i1},\dots,x_{in_i}]$ for each $i\in\{1,\dots,m\}$. When $m=2$ a $2$-form is called a \textit{bihomogeneous polynomial} or a \textit{biform} of \textit{bidegree} $(d_1,d_2)$.
     \end{definition}
     \begin{lemma}
-        When the same notation as above a polynomial $f \in K[\mathbf{x}]\setminus 0$ of degree $d$ has unique decomposition
+        With the same notation as above a polynomial $f \in K[\mathbf{x}]\setminus 0$ of degree $d$ has a unique decomposition
         $$f = \sum_{(i_1,\dots,i_m): \sum_1^m i_j \leq d} f_{i_1,\dots,i_m},$$
-        where $f_{i_1,\dots,i_m}$ is an $m$-form of $m$-degree $(i_1,\dots,i_m)$ such that for some $(i_1,\dots,i_m)$ with $\sum_1^m i_j = d$, $f_{i_1,\dots,i_m}\neq 0$. 
+        where $f_{i_1,\dots,i_m}$ is an $m$-form of $m$-degree $(i_1,\dots,i_m)$ such that for some $(i_1,\dots,i_m)$ with $\sum_1^m i_j = d$, 
+        $$f_{i_1,\dots,i_m}\neq 0.$$ 
     \end{lemma}
     \begin{proof}
         Write 
         $$f = \sum_{\substack{(i_1,\dots,i_m):\sum_1^m i_j\leq d}} 
-        \underbrace{\sum_{\substack{\mathbf{v}\in\prod_1^m \N^{n_k} :\\ \forall k, \sum v_{kj} = i_k}} a_\mathbf{v} \mathbf{x_1}^{v_1}\cdots \mathbf{x_m}^{v_m}}_{f_{i_1,\dots,i_m}},$$
+        \underbrace{\sum_{\substack{\mathbf{v}\in\prod_{k=1}^m \N^{n_k} :\\ \forall k, \vert v_k\vert = i_k}} a_\mathbf{v} \mathbf{x_1}^{v_1}\cdots \mathbf{x_m}^{v_m}}_{f_{i_1,\dots,i_m}},$$
         each monomial in $f_{i_1,\dots,i_m}$ is a homogeneous of degree $i_k$ in $R[x_{kj} : k\neq i][x_{i1},\dots,x_{in_i}]$ for each $k$, hence $f_{i_1,\dots,i_m}$ is $m$-homogeneous of $m$-degree $(i_1,\dots,i_m)$. Uniqueness follows from $\{\mathbf{x}^\mathbf{v}\}$ being linearly independent over $R$.
     \end{proof}
     \begin{definition}
         For an $f\in R[\mathbf{x_1},\dots,\mathbf{x_m}]$ we say that $([v_1],\dots,[v_m])\in \Pp^{n_1}\times \Pp^{n_m}$ is \textit{a zero of $f$} if for every $(\lambda_1,\dots,\lambda_m)\in K^m$, $\lambda_i\neq 0$, $f(\lambda_1v_1,\dots,\lambda_mv_m) = 0$.
     \end{definition}
     \begin{remark}
-        If $f$ were an $m$-form of $m$-degree $(d_1,\dots,d_m)$ note that $f(\lambda_1v_1,\dots,\lambda_mv_m)=\left(\prod_1^m \lambda_i^{d_i}\right)f(v_1,\dots,v_m)$. Hence if $(v_1,\dots,v_m)$ is a zero of $f$, then so is $([v_1],\dots,[v_m])$.
+        If $f$ were an $m$-form of $m$-degree $(d_1,\dots,d_m)$ note that $f(\lambda_1v_1,\dots,\lambda_mv_m)=\left(\prod_1^m \lambda_i^{d_i}\right)f(v_1,\dots,v_m)$. Hence if $(v_1,\dots,v_m)$ is a zero of $f$, then so is $([v_1],\dots,[v_m])\in \Pp^{n_1}\times\cdots \times \Pp^{n_m}$.
     \end{remark}
     \begin{definition}
-        An ideal $I\subset R[\mathbf{x_1},\dots,\mathbf{x_m}]$ is called $m$-homogeneous if for each $f=\sum_{i_1,\dots,i_m} f_{i_1,\dots,i_m}\in I$, $f_{i_1,\dots,i_m}\in I$
+        An ideal $I\subset R[\mathbf{x_1},\dots,\mathbf{x_m}]$ is called $m$-homogeneous if for each $$f=\sum_{i_1,\dots,i_m} f_{i_1,\dots,i_m}\in I,$$ $f_{i_1,\dots,i_m}\in I$
     \end{definition}
     \begin{remark}\label{ImporatantRemarkForMultiprojectiveSpace}
-        The above is equivalent to $I$ being a homogeneous ideal in $R[\mathbf{x_1},\dots, \widehat{\mathbf{x_k}},\dots,\mathbf{x_m}]$ for each $k$. Any result proven about homogeneous ideals therefor naturally generalizes to $m$-homogeneous ideals. 
+        The above is equivalent to $I$ being a homogeneous ideal in \\$R[\mathbf{x_1},\dots, \widehat{\mathbf{x_k}},\dots,\mathbf{x_m}]$ for each $k$. Here $\widehat{\_}$ denotes removale of these variables. Any result proven about homogeneous ideals therefor naturally generalizes to $m$-homogeneous ideals. 
     \end{remark}
 \subsubsection{Differentiation of Polynomials}
 \begin{definition}
@@ -4179,12 +4196,12 @@ We observe the following facts about homogenization and de-homogenization.
 \begin{remark}
     One easily checks that $D_x fg = (D_xf)g+f(D_xg)$, i.e. that is satisfies the Leibniz rule. It also satisfies the chain rule, i.e. 
     $$D_x(f(g))=(D_xg)\cdot(D_xf)(g).$$
-    By definition {\large \textbf{over an integral domain of characteristic $0$}}, $\deg \ f' = \deg \ f -1$ when $\deg \ f\geq 1$. In positive characteristic this may not be the case. For instance, when $\Char\ R = p >0$, we get that $D_x x^p= px^{p-1}=0$. We can also come up with pathological examples over commutative rings of characteristic $0$. Indeed take $R=\Z/2\Z \times \Z$ with the usual structure of product ring. Then $D_x (1,0)x^2= (2,2)(1,0)x= (0,2)(1,0)x=0.$ 
+    By definition over an integral domain of characteristic $0$, $\deg \ f' = \deg \ f -1$ when $\deg \ f\geq 1$. In positive characteristic this may not be the case. For instance, when $\Char\ R = p >0$, we get that $D_x x^p= px^{p-1}=0$. We can also come up with pathological examples over commutative rings of characteristic $0$. Indeed take $R=\Z/2\Z \times \Z$ with the usual structure of product ring. Then $D_x (1,0)x^2= (2,2)(1,0)x= (0,2)(1,0)x=0.$ 
 \end{remark}
 \begin{definition}
-    In a polynomial ring $R[x_1,\dots,x_n]$, \textit{the partial derivative of $f$ with respect to $x_i$} is the polynomial $D_{x_i}f$, where 
-    $$D_{x_i}: R[x_1,\dots,x_n]=R[x_1,\dots, x_{i-1},\widehat{x_i},x_{i+1},x_{n}][x_i]\rightarrow R[x_1,\dots,x_n]=R[x_1,\dots, x_{i-1},\widehat{x_i},x_{i+1},x_{n}][x_i],$$
-'    is differentiation with respect to $x_i$. We sometimes denote it by $\frac{\partial f}{\partial x_i}:= \frac{\partial}{\partial x_i}f:= f_{x_i}$.
+    In a polynomial ring $R[x_1,\dots,x_n]$, \emph{the partial derivative of $f$ with respect to $x_i$} is the polynomial $D_{x_i}f$, where 
+    $$D_{x_i}: R[x_1,\dots, x_{i-1},\widehat{x_i},x_{i+1},x_{n}][x_i]\rightarrow R[x_1,\dots, x_{i-1},\widehat{x_i},x_{i+1},x_{n}][x_i],$$
+    is differentiation with respect to $x_i$. We sometimes denote it by $\frac{\partial f}{\partial x_i}:= \frac{\partial}{\partial x_i}f:= f_{x_i}$.
 \end{definition}
 \begin{lemma}\label{TranslationAndPartialDerivativesCommute}
     Let $T$ be translation of one variable, $x_1$ say, by some element $a\in K$. Then $D_{x_{i}}T=TD_{x_i}$. Hence in general translation commutes with partial derivatives.  
@@ -4230,7 +4247,14 @@ We proceed with considerations of the theory of algebras over rings in conjuncti
     for some $n\geq 1$ and some ideal $I\subset R[x_1,\dots,x_n]$.
 \end{proposition}
 \begin{proof}
-    For suitable $s_1,\dots,s_n\in S$, $S=R[s_1,\dots,s_n]$, hence $\ev_{s_1,\dots,s_n} : R[x_1,\dots,x_n]\rightarrow S$ is a surjective $R$-algebra homomorphism. Then by the first isomorphism theorem $S\simeq K[\mathbf{x}]/\ker \ \ev_{s_1,\dots,s_n}$. 
+    For suitable $s_1,\dots,s_n\in S$, $S=R[s_1,\dots,s_n]$, hence 
+    $$
+        \ev_{s_1,\dots,s_n} : R[x_1,\dots,x_n]\rightarrow S
+    $$ 
+    is a surjective $R$-algebra homomorphism. Then by the first isomorphism theorem 
+    $$
+        S\simeq K[\mathbf{x}]/\ker \ \ev_{s_1,\dots,s_n}.
+    $$ 
 \end{proof}
 \begin{proposition}\label{ModuleFiniteImpliesRingFinite}
     Let $S\supset R$ is a ring extension that is also a finitely generated $R$-module. Then $S$ is a finitely generated $R$-algebra.
@@ -4254,18 +4278,16 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     Let $K$ be a field. Consider $K[x_1,\dots,x_n]$ as a subring of $K[\mathbf{x},y_1,\dots,y_m]$ Then $K(x_1,\dots,x_n)(y_1,\dots,y_m) = K(x_1,\dots,x_n,y_1,\dots,y_m).$
 \end{lemma}
 \begin{proof}
-    Clearly $K(\mathbf{x})\subset K(\mathbf{x},\mathbf{y})$ and one easily verifies that this is a subfield of $K(\mathbf{x},\mathbf{y})$. To be very precise, this means $K(\mathbf{x},\mathbf{y})\supset K(\mathbf{x})$ is a ring extension. Hence $K(\mathbf{x},\mathbf{y})\supset K(\mathbf{x})[\mathbf{y}]$. This means
+    Clearly $K(\mathbf{x})\subset K(\mathbf{x},\mathbf{y})$.  To be very precise, this means $K(\mathbf{x},\mathbf{y})\supset K(\mathbf{x})$ is a ring extension. Hence $K(\mathbf{x},\mathbf{y})\supset K(\mathbf{x})[\mathbf{y}]$. This means
     $K(\mathbf{x},\mathbf{y})= Q(K(\mathbf{x},\mathbf{y}))\supset Q(K(\mathbf{x})[\mathbf{y}])=K(\mathbf{x})(\mathbf{y})$.
 \end{proof}
-\begin{remark}
-    Of course this statement {\Large What?}
-\end{remark}
 \begin{lemma}\label{CriterionForCheckingMembershipInAlgebra}
     Consider $L := K(x_1,\dots,x_n)$ and $R:= K\left[\frac{a_1}{b_1},\dots,\frac{a_m}{b_m}\right]$ for $\frac{a_1}{b_1},\dots,\frac{a_m}{b_m}\in K(\mathbf{x})$. Then there is a $b\in K[\mathbf{x}]$ such that $b^dz\in K[\mathbf{x}]$ for every $z\in R$ for some $d\geq 0$.
 \end{lemma}
 \begin{proof}
     If $\lcm(b_1,\dots,b_m)=1$ the statement is trivial. Set $b := \lcm(b_1,\dots,b_m)$ and assume $\deg b > 0$. Let $z\in R$. If $z=0$, then $b^0z\in K[\mathbf{x}]$. Suppose $z\neq 0$. For some $f\in K[y_1,\dots,y_m]\setminus 0$, $z = f\left(\frac{a_1}{b_1},\dots,\frac{a_m}{b_m}\right)$. Set $d := \deg \ f$. Let $v\in \N^m$ with $\vert v \vert \leq d$. Then 
-    $$\prod_1^m b_i^{v_i}\mid \prod_1^m b^{v_i}= b^{\vert v\vert } \ \mathrm{and}\ b^{\vert v\vert} \mid b^d \implies \prod_1^m b_i^{v_i}\mid b^d \implies b^d\prod_1^m \left(\frac{a_i}{b_i}\right)^{v_i} \in K[\mathbf{x}]\implies b^dz\in K[\mathbf{x}].$$
+    $$\prod_1^m b_i^{v_i}\mid \prod_1^m b^{v_i}= b^{\vert v\vert } \ \mathrm{and}\ b^{\vert v\vert} \mid b^d \implies \prod_1^m b_i^{v_i}\mid b^d \implies b^d\prod_1^m \left(\frac{a_i}{b_i}\right)^{v_i} \in K[\mathbf{x}],$$
+    which implies $ b^dz\in K[\mathbf{x}].$
 \end{proof}
 \begin{proposition}\label{PolynomialQuotientFieldIsFieldFiniteNotRingFinite}
     Consider $L:= K(x_1,\dots,x_n) \supset K$. Then $L$ is a finite field extension over $K$, but not a finitely generated $K$-algebra.
@@ -4333,7 +4355,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     $$s\begin{pmatrix} t_1\\ \vdots \\ t_n\end{pmatrix} = (a_{ij}) \begin{pmatrix} t_1\\ \vdots \\ t_n\end{pmatrix}.$$
     This implies that $s$ is a root of the characteristic polynomial 
     $$\det\left( x\mathbbm{1} - (a_{ij})\right) \in R[x]\setminus 0$$
-    which is monic{\LARGE ref.}. It thus follows that $s$ is integral over $R$. 
+    which is monic. It thus follows that $s$ is integral over $R$. 
 \end{proof}
 \begin{lemma}
     Consider a tower of ring extensions $T\supset S\supset R$ where $T$ is a domain. Suppose $T$ is integral over $S$ and $S$ is integral over $R$, then $T$ is integral over $R$. 
@@ -4417,7 +4439,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     We use induction in $n$. For $n=1$, suppose $L=K[a]$ for some $a\in L$. Consider $\rho = \ev_a : K[x]\rightarrow L$. Since $K[x]$ is a PID {\LARGE add result!}, we find that $\ker\ \rho = \langle g \rangle$ for some $g\in K[x]$. Then $K[x]/\langle g\rangle \simeq K[a] = L$. We claim that $g\neq 0$\\
     \textbf{Proof of the claim:} Suppose $K[x]\simeq K[a]$, then $K(x) \simeq K(a)$, but then $L$ is not ring-finite over $K$, by Proposition~\ref{PolynomialQuotientFieldIsFieldFiniteNotRingFinite} leading to a contradiction.\\
     So we may WLOG assume $g$ is monic. Then $a$ is algebraic over K.\\
-    Assume the statement is true for some $n\geq 1$. Suppose $L=K[a_1,\dots,a_n]$. Set $K' = K(a_1)$. Then by induction $L=K'[a_2,\dots,a_{n+1}]$ is algebraic. Suppose $a_1$ is algebraic over $K$. Then $K'\supset K$ is algebraic, hence $L\supset K$ is algebraic. Suppose for a contradiction that $a_1$ is not algebraic over $K$. We note that this implies that $K[a_1]\overset{\sigma}{\simeq} K[x]$ {\LARGE add reference!}. We have identities 
+    Assume the statement is true for some $n\geq 1$. Suppose $L=K[a_1,\dots,a_n]$. Set $K' = K(a_1)$. Then by induction $L=K'[a_2,\dots,a_{n+1}]$ is algebraic. Suppose $a_1$ is algebraic over $K$. Then $K'\supset K$ is algebraic, hence $L\supset K$ is algebraic. Suppose for a contradiction that $a_1$ is not algebraic over $K$. We note that this implies that $K[a_1]\overset{\sigma}{\simeq} K[x]$. We have identities 
     $$a_i^{n_i}+\sum_{j=0}^{n_i-1} \alpha_{ij}a_i^{j}=0,$$
     for each $i\geq 2$ for suitable $n_i\geq 1$, $\alpha_{ij}\in K'$. Let $\alpha\in K[a_1]$ be the common denominator of the $\alpha_{ij}$. Let $M\geq \max_{i\in\{2,\dots,n+1\}}\ n_i$. Then 
     $$\left(\alpha a_i\right)^{M}+\sum_{j=0}^{n_i-1} \alpha^{M-j}\alpha_{ij} \left(\alpha a_i\right)^j=0,$$
@@ -4565,7 +4587,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
 \end{theorem}
 \begin{proof}
     "$\implies$": 
-    \textbf{To prove this we make the following claim}: $L$ is algebraic over $K(b_1,\dots,b_{k}, a'_{k+1},\dots,a'_{d})$ for any $k\in \{0,\dots,d\}$ for some subset $\{a'_{k+1},\dots,a'_{d}\}\subset \{a_1,\dots,a_d\}$ with $d-k$ elements.  We prove this using induction in $r$. For $k=0$, we have that $L\supset K(a_1,\dots,a_d)$ is algebraic by the assumption that $\{a_1,\dots,a_d\}$ is a transcendence basis for $L$ over $K$. Suppose that we the statement holds for some $k\in\{0,\dots,d-1\}$. Then by induction hypothesis $L$ is algebraic over $M := K(b_1,\dots,b_k,a_{r+1}',\dots,a'_d)$ for a suitable subset $\{a_{k+1}',\dots,a_{d}'\}\subset \{a_1,\dots,a_d\}$. This means $b_{k+1}$ is algebraic over $M$, hence by Lemma~\ref{EquivalentDefinitionOfTranscendenceBasis} $b_1,\dots,b_{k+1},a_{r+1}',\dots,a_d$ are algebraically dependent over $K$. By Lemma~\ref{TechnicalTranscendenceBasisLemma} there is an integer $r\leq s<d$ and a subset $\{a''_{k+1},\dots,a''_{s+1}\}\subset \{a'_{k+1},\dots,a_{d}'\}$ such that $b_1,\dots,b_{k+1},a''_{k+2},\dots,a_{s+1}''$ are algebraically independent over $K$ and $b_1,\dots,b_{r+1},a''_{k+1},\dots,a_{s+1}''$ are algebraically dependent over $K$. Again by Lemma~\ref{EquivalentDefinitionOfTranscendenceBasis}, we have that $a''_{k+1}$ is algebraic over $M':= K(b_1,\dots,b_{k+1},a''_{k+2},\dots,a''_d)$. Now $L\supset M(b_{r+1})$ is algebraic and $M'(a''_{r+1})\supset M'$ is algebraic. Since $M(b_{r+1})=M'(a''_{r+1})$ we find that $L$ is algebraic over $M'$, finishing the proof of the claim.
+    \textbf{To prove this we make the following claim}: $L$ is algebraic over\\ $K(b_1,\dots,b_{k}, a'_{k+1},\dots,a'_{d})$ for any $k\in \{0,\dots,d\}$ for some subset $\{a'_{k+1},\dots,a'_{d}\}\subset \{a_1,\dots,a_d\}$ with $d-k$ elements.  We prove this using induction in $r$. For $k=0$, we have that $L\supset K(a_1,\dots,a_d)$ is algebraic by the assumption that $\{a_1,\dots,a_d\}$ is a transcendence basis for $L$ over $K$. Suppose that the claim holds for some $k\in\{0,\dots,d-1\}$. Then by induction hypothesis $L$ is algebraic over $M := K(b_1,\dots,b_k,a_{r+1}',\dots,a'_d)$ for a suitable subset $\{a_{k+1}',\dots,a_{d}'\}\subset \{a_1,\dots,a_d\}$. This means $b_{k+1}$ is algebraic over $M$, hence by Lemma~\ref{EquivalentDefinitionOfTranscendenceBasis} $b_1,\dots,b_{k+1},a_{r+1}',\dots,a_d$ are algebraically dependent over $K$. By Lemma~\ref{TechnicalTranscendenceBasisLemma} there is an integer $r\leq s<d$ and a subset $\{a''_{k+1},\dots,a''_{s+1}\}\subset \{a'_{k+1},\dots,a_{d}'\}$ such that $b_1,\dots,b_{k+1},a''_{k+2},\dots,a_{s+1}''$ are algebraically independent over $K$ and $b_1,\dots,b_{r+1},a''_{k+1},\dots,a_{s+1}''$ are algebraically dependent over $K$. Again by Lemma~\ref{EquivalentDefinitionOfTranscendenceBasis}, we have that $a''_{k+1}$ is algebraic over $M':= K(b_1,\dots,b_{k+1},a''_{k+2},\dots,a''_d)$. Now $L\supset M(b_{r+1})$ is algebraic and $M'(a''_{r+1})\supset M'$ is algebraic. Since $M(b_{r+1})=M'(a''_{r+1})$ we find that $L$ is algebraic over $M'$, finishing the proof of the claim.
     \textbf{Application of the claim:} Suppose for a contradiction that there are $b_1,\dots,b_{d+1}\in L$ that are algebraically independent over $K$. Then $b_1,\dots,b_d$ are algebraically independent over $K$. But then by the claim $L\supset K(b_1,\dots,b_d)$ is algebraic, hence $b_{d+1}$ is algebraic over $K(b_1,\dots,b_d)$, but then $b_1,\dots,b_{d+1}$ are algebraically dependent over $K$.\\ 
     "$\impliedby$": There are algebraically independent $a_1,\dots,a_d \in L$ and for every $a\in L$ $a,a_1,\dots,a_d$ are algebraically dependent, hence by Lemma~\ref{EquivalentDefinitionOfTranscendenceBasis} $\{a_1,\dots,a_d\}$ is a transcendence basis of $L$ over $K$.
 \end{proof}
@@ -4576,7 +4598,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     Two transcendence bases have the same cardinality. 
 \end{corollary}
 \begin{example}\label{TranscendenceDegreeOfQuotientFieldOfPolynomialRing}
-    Consider $L=K(x_1,\dots,x_n)=Q(K[x_1,\dots,x_n])$. The elements $x_1,\dots,x_n\in K[x_1,\dots,x_n]$ are algebraically independent over $K$, hence $x_1,\dots,x_n\in K(x_1,\dots,x_n)$ are algebraically independent over $K$. It follows that $\{x_1,\dots,x_n\}$ is a transcendence basis of $K(\mathbf{x})\supset K$, hence $\trdeg_K \ K(\mathbf{x}) = n$. 
+    Consider $L=K(x_1,\dots,x_n)=Q(K[x_1,\dots,x_n])$.\\ The elements $x_1,\dots,x_n\in K[x_1,\dots,x_n]$ are algebraically independent over $K$, hence $x_1,\dots,x_n\in K(x_1,\dots,x_n)$ are algebraically independent over $K$. It follows that\\ $\{x_1,\dots,x_n\}$ is a transcendence basis of $K(\mathbf{x})\supset K$, hence $\trdeg_K \ K(\mathbf{x}) = n$. 
 \end{example}
 \begin{corollary}\label{TrcBasisExtendsWhenExtFinGen}
     Consider a tower of field extensions $M\supset L\supset K$. Let $X=\{a_1,\dots,a_n\}\subset L$ be a transcendence basis for $L$ over $K$. Suppose $M$ is finitely generated $L$-module (in other words a finite dimensional vector space over $L$). Then $X$ is transcendence basis for $M$ over $K$ and hence $\text{trdeg}_K\ M = \text{trdeg}_K\ L$.
@@ -4653,7 +4675,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     \begin{proof}
         For some  $t_1,\dots,t_m\in T$ and $q_1,\dots,q_n\in Q$  we have $S=\sum_1^m \sigma(S)t_i$ and $Q=\sum_1^k \omega(T)q_i$. We Then get that 
         \begin{align*}
-            = \sum_1^k \omega(T)q_i = \sum_1^k \omega\left(\sum_1^m \sigma(S)t_j\right)q_i =\sum_1^k\sum_1^m (\omega\circ\sigma)\left(S\right)\omega(t_j)q_i,  
+            \sum_1^k \omega(T)q_i = \sum_1^k \omega\left(\sum_1^m \sigma(S)t_j\right)q_i =\sum_1^k\sum_1^m (\omega\circ\sigma)\left(S\right)\omega(t_j)q_i,  
         \end{align*}
         hence $Q$ is a finitely generated over $(\alpha\circ \beta)(R)$ with generators 
         $$\omega(t_j)q_i,\ (1\leq i\leq k, 1\leq j\leq m).$$
@@ -4793,7 +4815,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
             &\text{1. } Q(g_1,\dots,g_n,f_{n+1}) =0,\\
             &\text{2. } \deg \ Q(z_1^{d_1},\dots,z_{n+1}^{d_{n+1}}) \leq \prod_1^{n+1} d_i.
         \end{align*}
-        Set $G := \{g_1,\dots,g_n,f_{n+1}\}$. By {\Large small easy lemma} $\sigma(_BT_{B(G)}) = {_B}T_{B(F)}$. It thus follows that 
+        Set $G := \{g_1,\dots,g_n,f_{n+1}\}$. Then $\sigma(_BT_{B(G)}) = {_B}T_{B(F)}$. It thus follows that 
         $$\det \ {_B}T_{B(F)} = \det \ \sigma(_BT_{B(G)}) = \sigma(\det\ _BT_{B(G)})= \sigma(0)=0.$$ 
     \end{proof}
 \subsubsection{Noether Normalizations}
@@ -4849,7 +4871,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
         This means $y_n \mid \lambda^k$, implying $y_n \mid \lambda$. From this we conclude $I\cap K[y_1,\dots,y_n] =\langle y_n \rangle$.\\
 
         \noindent\textbf{Case 2:} We now prove the statement for $A = K[x_1,\dots,x_n]$ and an arbitrary ideal $I\subsetneq A$. For $I=0$, we are done after choosing $y_i = x_i$ and $\delta = n$. We prove the statement for $I\neq 0$ by induction in $n\geq 1$. For $n=1$, $A$ is a PID, so $I$ is generated by some non-zero polynomial. Then the statement follows from case 1.\\ 
-        Suppose now that $n>1$ and let $f\in I\setminus\{0\}$. Again using Lemma~\ref{MainTechnicalLemmaForNNT} we find $y_1,\dots,y_n\in A$ that are algebraically independent over $K$ with $y_n = f$. Then $y_1,\dots,y_{n-1}$ are also algebraically independent over $K$. By the induction hypothesis, we can find elements $t_1,\dots, t_{d-1} \in K[y_1,\dots, y_{n-1}]$ algebraically independent over $K$ such that $K[y_1,\dots,y_{n-1}]$ is a finitely generated $K[t_1,\dots,t_{d-1}]$-module and $I \cap K[t_1,\dots, t_{d-1}] = \left\langle t_{\delta+1},\dots, t_{d-1} \right\rangle$ for some $\delta <d$. We then get that $K[y_1,\dots, y_n]$ is a finitely generated $K[t_1,\dots, t_{d-1},y_n]$-module, and hence $A$ is a finitely generated $K[t_1,\dots, t_{d-1},y_n]$-module. Thus by a similar contradiction argument to that of case 1 {\Large I feel there is an argument that captures the fact better}, we conclude that $d=n$ and $t_1,\dots,t_{n-1},y_n$ are algebraically independent over $K$.\\ 
+        Suppose now that $n>1$ and let $f\in I\setminus\{0\}$. Again using Lemma~\ref{MainTechnicalLemmaForNNT} we find $y_1,\dots,y_n\in A$ that are algebraically independent over $K$ with $y_n = f$. Then $y_1,\dots,y_{n-1}$ are also algebraically independent over $K$. By the induction hypothesis, we can find elements $t_1,\dots, t_{d-1} \in K[y_1,\dots, y_{n-1}]$ algebraically independent over $K$ such that $K[y_1,\dots,y_{n-1}]$ is a finitely generated $K[t_1,\dots,t_{d-1}]$-module and $I \cap K[t_1,\dots, t_{d-1}] = \left\langle t_{\delta+1},\dots, t_{d-1} \right\rangle$ for some $\delta <d$. We then get that $K[y_1,\dots, y_n]$ is a finitely generated $K[t_1,\dots, t_{d-1},y_n]$-module, and hence $A$ is a finitely generated $K[t_1,\dots, t_{d-1},y_n]$-module. Thus by a similar contradiction argument to that of case 1, we conclude that $d=n$ and $t_1,\dots,t_{n-1},y_n$ are algebraically independent over $K$.\\ 
         Let $\lambda\in I\cap K[t_1,\dots,t_{n-1},y_n]$. Then $\lambda= g+hy_n$ for some $g\in I\cap K[t_1,\dots, t_{n-1}]=\langle t_{\delta+1},\dots,t_{n-1}\rangle$ and $h\in K[t_1,\dots, t_{n-1},y_n]$, then $I\cap K[t_1,\dots,t_{n-1},y_n]=\langle t_{\delta+1},\dots,t_{n-1},y_n\rangle$.\\
 
         \noindent \textbf{case 3:} We now generalize to the case where $A = K[x_1,\dots, x_n]/J$ and $I\subsetneq A$ for an ideal $J\subsetneq K[x_1,\dots,x_n]$. We apply case 2 to $J$ and find $y_1,\dots, y_n\in A$ algebraically independent over $K$ such that $K[x_1,\dots, x_n]$ is a finitely generated $K[y_1,\dots,y_n]$-module and $J\cap K[x_1,\dots,x_n]=\langle y_{d+1},\dots,y_{n}\rangle$ for some $d\leq n$. Consider the embedding $\iota : K[y_1,\dots, y_n] \hookrightarrow A$. By construction we have that $A$ is a finitely generated $\iota(K[y_1,\dots,y_n])$-module. It is easy to check that $$\iota(K[y_1,\dots,y_n])\simeq \frac{K[y_1,\dots,y_n]}{(J\cap K[y_1,\dots,y_n])} = \frac{K[y_1,\dots,y_n]}{\langle y_{d+1},\dots,y_n\rangle} \simeq K[y_1,\dots, y_d].$$  
