@@ -505,7 +505,7 @@ We demonstrate the strength of the above theorem in the following example
     $$
         \{V(I) : I\in \pazocal{I}\}
     $$
-    were $\pazocal{I}$ is a non-empty family of ideals in $K[x_1,\dots,x_n]$. Then $\pazocal{I}$ has a maximal element $J$, since $K[x_1,\dots,x_n]$ is Noetherian. Then $V(I)\subset V(J)$ where $I\in\pazocal{I}$ implies $I\supset J$, hence $I=J$, meaning $V(I)=V(J)$. We thus conclude that $V(J)$ is a minimal element of $\{V(I) : I\in \pazocal{I}\}$. 
+    where $\pazocal{I}$ is a non-empty family of ideals in $K[x_1,\dots,x_n]$. Then $\pazocal{I}$ has a maximal element $J$, since $K[x_1,\dots,x_n]$ is Noetherian. Then $V(I)\subset V(J)$ where $I\in\pazocal{I}$ implies $I\supset J$, hence $I=J$, meaning $V(I)=V(J)$. We thus conclude that $V(J)$ is a minimal element of $\{V(I) : I\in \pazocal{I}\}$. 
 \end{proof}
 \begin{theorem}
     Let $X\subset \A^n$ be an algebraic set. Then there is a finite sequence of varieties $V_1,\dots,V_n\subset \A^n$ unique (up to re-ordering) such that 
@@ -515,10 +515,10 @@ We demonstrate the strength of the above theorem in the following example
 \begin{proof}
     \textbf{Existence:} Consider the set  
     $$\mathcal{A}:= \left\{ X\subset \A^n : X \text{ is algebraic and not a finite union of varieties} \right\}.$$
-    Suppose for a contradiction that $\mathcal{A} = \emptyset$. {\Huge HERE!!!!} Then by Lemma~\ref{NonEmptyFamilyOfAlgebraicSetsHasMinimalElement}, there is a minimal element $X_0 \in \mathcal{A}$. On the one hand $X_0$ is not irreducible. Hence There are $Y,Z\subsetneq X_0$ such that $X_0 = Y \cup Z$. However, by minimality $Y,Z\notin \mathcal{A}$, hence $Y= \bigcup_1^k V_i$ and $Z = \bigcup_1^l W_i$ for varieties $V_1,\dots,V_k,W_1,\dots,W_l \subset \A^n$. But then 
+    Suppose for a contradiction that $\mathcal{A} = \emptyset$. Then by Lemma~\ref{NonEmptyFamilyOfAlgebraicSetsHasMinimalElement}, there is a minimal element $X_0 \in \mathcal{A}$. On the one hand $X_0$ is not irreducible. Hence There are $Y,Z\subsetneq X_0$ such that $X_0 = Y \cup Z$. However, by minimality $Y,Z\notin \mathcal{A}$, hence $Y= \bigcup_1^k V_i$ and $Z = \bigcup_1^l W_i$ for varieties $V_1,\dots,V_k,W_1,\dots,W_l \subset \A^n$. But then 
     $$X_0 = Y\cup Z = \bigcup_1^k V_i \cup \bigcup_1^l W_i,$$
     leading to a contradiction. This means $\mathcal{A} = \emptyset$. Hence every algebraic set can be written as a union of varieties.\\
-    Let $X\subset \A^n$ be an algebraic set, and pick varieties $V_1,\dots,V_m \subset \A^n$ whose union is equal to $X$. Let $V_{k_1},\dots,V_{k_l}$ be the maximal elements of $\{V_1,\dots,V_m\}$. Let $j\in \{1,\dots,m\}$. The set $S: = \{ V_i : V_j\subset V_i\}$ has a maximal element $V_k$. Let $h\in \{1,\dots,m\}$ and suppose $V_k \subset V_h$. Then in particular $V_j \subset V_h$, hence $V_h\in S$, implying $V_h = V_k$. This means $V_k$ is a maximal element of $\{V_1,\dots,V_m\}$. In other words $k=k_i$ for some $i$, hence $V_j \subset V_{k_i}$, implying 
+    Let $X\subset \A^n$ be an algebraic set, and pick varieties $V_1,\dots,V_m \subset \A^n$ whose union is equal to $X$. Let $\{V_{k_1},\dots,V_{k_l}\}$ be the maximal elements of $\{V_1,\dots,V_m\}$. Let $j\in \{1,\dots,m\}$. The set $S: = \{ V_i : V_j\subset V_i\}$ has a maximal element $V_k$. Let $h\in \{1,\dots,m\}$ and suppose $V_k \subset V_h$. Then in particular $V_j \subset V_h$, hence $V_h\in S$, implying $V_h = V_k$. This means $V_k$ is a maximal element of $\{V_1,\dots,V_m\}$. In other words $k=k_i$ for some $i$, hence $V_j \subset V_{k_i}$, implying 
     $$X= \bigcup_1^m V_i = \bigcup_1^l V_{k_i}$$
     \textbf{Uniqueness:}
     Suppose $X\subset \A^n$ be algebraic sets. Suppose there are varieties $V_1,\dots,V_l,W_1,\dots,W_m\subset \A^n$ such that 
@@ -526,7 +526,7 @@ We demonstrate the strength of the above theorem in the following example
     and $V_i \not\subset V_j$ for $j\neq i$ and $W_i\not\subset W_j$ for $i\neq j$.
     For each $i\in \{1,\dots,l\}$ we have that
     $$V_i = V_i \cap V = V_i \cap \bigcup_1^m W_j = \bigcup_1^m (V_i\cap W_j).$$
-    Then there is a $j(i)$ such that $V_i\subset W_{j(i)}$. By similar argument, $W_{i(j)}\subset V_k$ for some $k$ hence $i=k$, implying $V_i = W_{j(i)}$. similarly $W_j = V_{i(j)}$ for every $j$ some $i(j)$. Hence there is a one-to-one correspondence of $\{V_1,\dots,V_l\}$ and $\{W_1,\dots,W_m\}$.
+    Then there is a $j(i)$ such that $V_i\subset W_{j(i)}$. By similar argument, $W_{i(j)}\subset V_k$ for some $k$ hence $i=k$, implying $V_i = W_{j(i)}$. similarly $W_j = V_{i(j)}$ for every $j$ some $i(j)$. Hence there is a bijection of $\{V_1,\dots,V_l\}$ with $\{W_1,\dots,W_m\}$.
 \end{proof}
 \begin{definition}
     The varieties $V_1,\dots,V_m\subset \A^n$ involved in the \textit{decomposition}, described in the above theorem, of an algebraic set $X\subset \A^n$ are called the \textit{(irreducible) components} of $X$.     
@@ -534,16 +534,23 @@ We demonstrate the strength of the above theorem in the following example
 \begin{proposition}\label{IrreducibleComponentsContainedInIrreducibleComponentsOfSuperset} Let $X,Y\subset \A^n$ be algebraic subsets such that $X\subset Y$ with irreducible components $V_1,\dots,V_m$ respectively $W_1,\dots,W_l$. Then for each $i\in\{1,\dots,m\}$, $V_i$ is contained in $W_j$ for some $j\in\{1,\dots,l\}$. 
 \end{proposition}
 \begin{proof}
-    Let $v\in V_i$. Then since 
-    $$\bigcup_1^m V_i = X \subset Y = \bigcup_1^l W_j,$$
-    $v\in W_j$ for some $j\in\{1,\dots,l\}$, hence $V_i \subset W_j$.
+    Let $\{X_{ij}^{k_{ij}}\}$ be the components of $V_i\cap W_j$. Then 
+   \begin{align*}
+        \bigcup_1^m V_i = \bigcup_1^m\bigcup_1^l V_i\cap W_j= \bigcup_1^m \bigcup_1^l\bigcup X_{ij}^{(k_{ij})} = \bigcup_1^m X_{i_hj_h}^{(k_{i_hj_h})}
+   \end{align*}
+   for suitable $(i_h,j_h)$ such that $X_{i_hj_h}\not\subset X_{i_gj_g}$ for $h\neq g$. Given $i\in\{1,\dots,m\}$ for some $k_{i_hj_h}$,
+    $$
+        V_{i}=X_{i_hj_h}^{(k_{i_hj_h})}\subset V_{i_h}\cap W_{j_h}.   
+    $$
+    Then $V_i\subset W_{j_h}$.
+
 \end{proof}
 \begin{proposition}
     Let $X\subset \A^n$ be an algebraic subset with irreducible components $V_1,\dots,V_m$. Then for each $i\in \{1,\dots,m\}$, 
     $$V_i \not\subset \bigcup_{j\in\{1,\dots,m\}\setminus\{i\}} V_j.$$
 \end{proposition}
 \begin{proof}
-    If $m=1$, then $\bigcup_{j\in\{1,\dots,m\}\setminus\{i\}} V_j = \emptyset$, hence clearly $V_i\not\subset \bigcup_{j\in\{1,\dots,m\}\setminus\{i\}} V_j$. Suppose $m\geq 2$, i.e. that $X$ is reducible. Note that $X\setminus V_i \subset \bigcup_{j\in\{1,\dots,m\}\setminus\{i\}} V_j$. Then since $V_i\subsetneq X$, there is a point $v\in X\setminus $...   
+    Indeed, if a variety $V$ is a subset of $\bigcup_{1}^k W_i$, then $V\subset W_h$ for some $h$ by the prior proposition. Since $V_i\not\subset V_j$ for $i\neq j$, the result follows.    
 \end{proof}
 \begin{example}
     For an infinite field $K$, $\A^n(K)$ is irreducible.
@@ -571,7 +578,7 @@ We demonstrate the strength of the above theorem in the following example
     Suppose $K$ is infinite. The varieties in $\A^2$ are $\A^2$, $\emptyset$, points and plane curves $V(f)$ where $f\in K[x,y]$ is irreducible and $\#V(f)=\infty$.
 \end{corollary}
 \begin{proof}
-    Suppose $V\subset \A^2$ is a non-empty variety. By Proposition~\ref{FiniteNonEmptyVarietiesArePoints}, $V$ is finite if and only if $V$ is a point. Suppose $V$ is infinite. If $I(V) = 0$ then $V= \A^2$. So suppose $I(V)$ contains a non-constant $f$. Since $K[x,y]$ is a UFD, we can write $f$ as a product irreducible factors $f_1,\cdots, f_m\in K[x,y]$, since $I(V)$ is prime by Proposition~\ref{VarietyIffCoordinateRingIsID} it follows that $f_i\in I(V)$ for some $i$. Suppose for a contradiction {\LARGE Do without contradiction proof!} that there is a $g\in I(V)\setminus \langle f_i\rangle$, then $\langle g,f_i\rangle \subset I(V)$ and $f_i\nmid g$, hence $\gcd(g,f_i)=1$ and $V(g,f_i)\supset V(I(V))=V$, implying that $V$ would be finite by the above theorem. It thus follows that $I(V)=\langle f_i\rangle$, hence $V=V(I(V))=V(f_i)$. 
+    Suppose $V\subset \A^2$ is a non-empty variety. By Proposition~\ref{FiniteNonEmptyVarietiesArePoints}, $V$ is finite if and only if $V$ is a point. Suppose $V$ is infinite. If $I(V) = 0$ then $V= \A^2$. So suppose $I(V)$ contains a non-constant $f$. Since $K[x,y]$ is a UFD, we can write $f$ as a product irreducible factors $f_1,\cdots, f_m\in K[x,y]$, since $I(V)$ is prime by Proposition~\ref{VarietyIffCoordinateRingIsID} it follows that $f_i\in I(V)$ for some $i$. Suppose for a contradiction that there is a $g\in I(V)\setminus \langle f_i\rangle$, then $\langle g,f_i\rangle \subset I(V)$ and $f_i\nmid g$, hence $\gcd(g,f_i)=1$ and $V(g,f_i)\supset V(I(V))=V$, implying that $V$ would be finite by the above theorem. It thus follows that $I(V)=\langle f_i\rangle$, hence $V=V(I(V))=V(f_i)$. 
 \end{proof}
 \begin{corollary}
     Let $K$ be an algebraically closed field, $f\in K[x,y]$, $\deg \ f >0$. Let distinct irreducible polynomials $f_1,\dots,f_l\in K[x,y]$ and positive integers $r_1,\dots,r_l$ be given such that $f =  \prod_1^r f_i^{r_i}$. Then $V_i:= V(f_i)$ for $i=1,\dots,l$ are the irreducible components of $V:=V(f)$ and $V(f)=\left\langle \prod_1^l f_i \right\rangle$. 

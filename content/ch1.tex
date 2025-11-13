@@ -1,16 +1,5 @@
 % !TEX root = ../main.tex
 \section{Algebra}
-The field of abstract algebra can be defined as the study of sets with operations and the study of structure preserving maps between such objects. I.e. an object of study in algebra would be a set with some non-empty collection of functions, which somehow act upon elements in the set and a map of such objects is a map that commute with these operations. An example of such an operation would be a \textit{binary operation} on a set, $M$ say, i.e. a function taking a pair in $M\times M$ to an element in $M$. Such a pair of a set and a binary operation is called a \textit{magma}. Examples of magmas are $2^X$ (where $X$ is some set) with the binary operation
-\begin{gather*}
-    2^X\times 2^X \rightarrow 2^X\\
-    (A,B)\mapsto A\cup B
-\end{gather*}
-or $2^X$ with the binary operation
-\begin{gather*}
-    2^X \times 2^X \rightarrow 2^X\\
-    (A,B)\mapsto A\cap B
-\end{gather*}
- Another example example of another algebraic structure on a set could also be that another set $S$ acting on $M$, i.e. there is a function taking a pair of elements in $S\times M$/$M\times S$ to an element in $M$. When we ask that such operations or the overlying sets adhere to certain axioms we obtain a rich family of sub-classes of objects having a certain kind of algebraic structure which will be preserved by certain maps. For instance $(2^X, \cup)$ and $(2^X,\cap)$ have the property of having associative operations, making them semi-groups. Moreover $\emptyset$ resp. $X$ possess the property of being neutral with respect to the respective operation making them so-called monoids. The operations are even commutative, so these are examples of commutative monoids We will in the following be focusing broadly on the classes of rings and modules. However, it will be useful to also introduce groups and monoids in this context.
 \subsection{Monoids}
 
 \subsubsection{Definitions and Basic Properties}
@@ -1670,7 +1659,7 @@ Assuming the axiom of choice we get the following result.
     $$
 \end{proof}
     
-\subsection{Homological Algebra}
+\subsection{Diagram Lemmas}
 \subsubsection{Exact Sequences}
     \begin{definition}
         \textit{A sequence of left/right $R$-modules}, is a collection of pairs $$\{(M_i,\rho_i) : i\in \Z, M_i \text{ is a left/right } R\text{-module }, \rho_i\in \Hom(M_i,M_{i+1})\}.$$ A sequence is finite if $M_i=0$ for every but finitely many $i$. A sequence is in general denoted
