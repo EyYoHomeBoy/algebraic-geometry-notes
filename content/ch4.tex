@@ -1226,7 +1226,8 @@
         where $\tau: C\mapsto (GC,-FC)$, $\sigma: (A,B)\mapsto AF+BG$ and $\pi$ is the canonical surjection. It is clear that $\sigma \tau=0=\pi\sigma$ hence the sequence is exact. Note that $\tau$ restricts to a linear map from $R_{d-m-n}$ to $R_{d-m}\times R_{d-n}$, that $\sigma$ restricts to a linear map from $R_{d-m}\times R_{d-n}$ to $R_d$ and that $\pi$ restricts to linear map from $R_d$ to $\Gamma_d$. We thus get by exactness (due to Lemma~\ref{DimensionsOfExactSequence}) that 
         \begin{align*}
             &\dim\ \Gamma_d = \dim\ R_d-\dim\ R_{d-m}\times R_{d-n}+\dim\ R_{d-m-n}\\
-            &=\frac{(d+1)(d+2)+(-d+m-1)(d-m+2) +(-d+n-1)(d-n+1)+(d-m-n+1)(d-m-n+2)}{2}\\
+            &=\frac{(d+1)(d+2)+(-d+m-1)(d-m+2) +(-d+n-1)(d-n+1)}{2}\\
+            &+\frac{(d-m-n+1)(d-m-n+2)}{2}\\
             &= mn.
         \end{align*}
         Let $\overline{\bullet}$ denote $\bullet + \langle F,G\rangle$.\\
@@ -1271,7 +1272,14 @@
          Every non-singular projective curve $F$ is irreducible. 
      \end{proposition}
      \begin{proof}
-         Suppose $F$ is reducible with two components $G,H$. $G$ and $H$ have at least one point in common, since if they have a component in common, then they intersect at infinitely many points and if they have no components in common, then by Bezout $\sum_P I(P,G\cap H)=(\deg\ G) (\deg \ H)>1$, meaning they have at least one point in common. Let $P\in G\cap H\subset F$. Then $m_P(F)=m_P(GH)=m_P(G)+m_P(H)\geq 2$, hence $F$ is singular.
+         Suppose $F$ is reducible with two components $G,H$. $G$ and $H$ have at least one point in common, since if they have a component in common, then they intersect at infinitely many points and if they have no components in common, then by Bezout $$
+            \sum_P I(P,G\cap H)=(\deg\ G) (\deg \ H)>1,
+        $$ 
+        meaning they have at least one point in common. Let $P\in G\cap H\subset F$. Then 
+        $$
+            m_P(F)=m_P(GH)=m_P(G)+m_P(H)\geq 2,
+        $$ 
+        hence $F$ is singular.
      \end{proof}
      \begin{remark}
          It is not the case that the above is true in the affine case. Consider for example $f=y(y+1)$. The zeroes of this curve are $(\alpha,0)$ and $(\alpha,-1)$ where $\alpha\in K$. Since $f(x+\alpha,y+0)=f(x,y)=y^2+y$ and $f(x+\alpha,y-1)=y(y-1)=y^2-y$, hence $f$ is non-singular.
