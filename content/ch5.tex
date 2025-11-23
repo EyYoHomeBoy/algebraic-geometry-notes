@@ -1168,11 +1168,17 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         \begin{proof}
             Let $\{U_\alpha\}$ be a family non-empty subsets of $\mathrm{DVR}(C)$ such that the complement of $U_\alpha$ is finite. The Demorgan's law shows that the complement of $\bigcup U_\alpha$ is also finite. Let $U_1,U_2\subset \mathrm{DVR}(C)$ be non-empty subsets. Again by Demorgan's law the complement of $U_1\cap U_2$ is finite. So the family of subset is indeed a topology. Note that if $S$ is a closed subset of $\mathrm{DVR}(C)$ it is either all of $\mathrm{DVR}(C)$ or a finite set. In the first case $\pazocal{O}_\bullet^{-1}(S)=C$ and in the second $\pazocal{O}_\bullet^{-1}(S)$ is a finite union of points. In either case it is a closed subset of $C$. If $V\subset C$ is closed, it is either equal to $C$ or a finite subset. In either case $\pazocal{O}_\bullet$ maps it to a closed subset of $\mathrm{DVR}(C)$. We then conclude that $\pazocal{O}_\bullet$ is a homeomorphism. 
         \end{proof}
+        \begin{lemma}
+            Let $C\subset V$ be a curve and $Z$ a non-empty proper closed subset of $C$. Then $Z$ is a finite collection of points in $C$.  
+        \end{lemma}
+        \begin{proof}
+            Note that $Z = Y\cap C$ where $Y\subsetneq V$ is closed. Then $Y = Y_1\cup \dots \cup Y_m$ for irreducible closed sets $Y_i\subsetneq V$. Since $\dim\ V = \dim\ C = 1$, it follows that $Y_i = \{P_i\}$ for some $P_i\in V$ for each $i$. Then $Z$ is a collection of points. 
+        \end{proof}
         \begin{proposition}
             A curve $C$ has only finitely many multiple points.
         \end{proposition}
         \begin{proof}
-            $C$ is birationally equivalent to a plane curve which may be identified with an open subset of a projective plane curve $C'$. So there is a birational equivalence $\Phi : C \rightarrow C'$. $K(C)\subset K(C')$.
+            $C$ is birationally equivalent to a plane curve which may be identified with an open subset of a projective plane curve $C'$. So there is a birational equivalence $\Phi : C \rightarrow C'$. All simple points are contained in $U := \dom \ \Phi$ by Corollary~\ref{SetOfSimplePointsIsContainedInDomainOfRationalMapBetweenCurves}. The complement of $U$ in $C$ is a proper closed subset of $C$, which by the prior lemma is finite. We have an isomorphism $\Phi : U\rightarrow U'$ where $U'$ is open in $C'$. This isomorphism establishes a bijection of multiple points of $C'$ in $U'$ (of which there are finitely many) and multiple points of $C$ in $U$. It follows that $C$ has only finitely many multiple points.       
         \end{proof}
         \begin{definition}
             Let $C$ be a projective curve. \textit{A resolution of the singularities of $C$} is a non-singular projective curve $X$ with a birational map $\Phi : X\dottedarrow C$. 
@@ -1188,9 +1194,9 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             \end{gather*}
             In the section introducing algebraic groups we saw that multiplication and taking multiplicative inverese are morphisms and $\varphi$ is just the composition, $(a,b)\mapsto (a^{-1},b)\mapsto a^{-1}b$. Set $G:=G_\varphi\subset U\times \A^1\subset \A^3$ (the graph of $\varphi$). Then $G=\left\{(a,b,c)\in \A^3 : a\neq 0,b=ac\right\}$. Set $B:=\left\{ (a,b,c)\in \A^3 : b = ac \right\}.$ Define $\pi : B \rightarrow \A^2, (a,b,c)\mapsto (a,b)$. Note that $\pi(B) = U\cup \{P\}$. Set $L:= \pi^{-1}(P) = \left\{(0,0,c)\in \A^2: c\in K\right\}$ and note that $\pi^{-1}(U)=G$. Then $\left.\pi\right|_{\pi^{-1}(U)} : G\rightarrow U$, defines an isomorphism with inverse $(a,b)\mapsto (a,b,b/a)$. Futhermore, $G\subset \A^3$ is an open subvariety of $B$ which is an affine variety. Then $\cl(G)=B$. We also see that $L$ is a closed subvariety of $B$. Note that away from $P$, points in $C$ are in $U$, hence $\pi^{-1}(C\setminus \{P\})=\left\{(a,b,c)\in \A^3 : b^2=a^2(a+1), b=ac\right\}\setminus L$. Upon setting $C' = \cl_B\left(\pi^{-1}(C\setminus \{P\})\right)$ the hope is that $C'$ is a nonsingular curve with two points lying over $P$. Indeed, we can check that 
             $$
-                C' = \cl_B\left(V(y^2-x^2(x+1))\setminus L\cap B\right) =  V(z^2-(x+1))\cap B
+                C' = \cl_B\left(V(y^2-x^2(x+1))\setminus L\cap B\right) =  V(z^2-(x+1))\cap B = V(z^2-(x+1))\cap V(y-xz)
             $$
-            Suppose $(a,b,c)\in V(y^2-x^2(x+1))\cap B$ with $a\neq 0$. Then $c=\frac{b}{a}$, hence 
+            Call the right-hand side $V$. Suppose $(a,b,c)\in V$ with $a\neq 0$. Then $c=\frac{b}{a}$, hence 
             $$
                 c^2 = \frac{b^2}{a^2}=\frac{a^2(a+1)}{a^2}=a+1\implies (a,b,c)\in V(z^2-(x+1))\cap B.
             $$ 
@@ -1199,7 +1205,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
                 \phi : \A^2 \rightarrow B\\
                 (a,c)\mapsto (a,ac,c)
             \end{gather*}
-            this is an isomorphism with inverse $(a,b,c)\mapsto (a,c)$. Restricting $\phi$ to $V(z^2-(x+1))\subset \A^2$ we get that $V(z^2-(x+1))\cap B$ is a proper closed subvariety of $B$ of dimension $1$. Then given $W$, an arbitrary closed subvariety of $B$ contained in $V$, contaning $V(y^2-x^2(x+1))\setminus L\cap B$, we get $\dim\ = W = 1=\dim \ V$, since $V(y^2-x^2(x+1))\setminus L\cap B$ is an infinite set. Since the closed subvarities of $B$ form a closed basis for the Zariski topology on $B$, it follows that $V$ is the smallest closed set containing $V(y^2-x^2(x+1))\setminus L\cap B$, which means $C'=V$. We see that $C'$ intersects $L$ in $(0,0,\pm 1)$. It it is hard to show that $C'$ and $C$ are birationally equivalent, we will see this once we generalise the approach given in this example. The main take away from this example is that we have taken the double point $P$ and essentially "split" it into two points which we moved along $L$, taking $C$ with us in the process, in a birational way such that the resulting curve is algebraic.   
+            this is an isomorphism with inverse $(a,b,c)\mapsto (a,c)$. Restricting $\phi$ to $V(z^2-(x+1))\subset \A^2$ we get that $V(z^2-(x+1))\cap B$ is a proper closed subvariety of $B$ of dimension $1$. Then given $W$, an arbitrary closed subvariety of $B$ contained in $V$, contaning $V(y^2-x^2(x+1))\setminus L\cap B$, we get $\dim\ = W = 1=\dim \ V$, since $V(y^2-x^2(x+1))\setminus L\cap B$ is an infinite set. Since the closed subvarities of $B$ form a closed basis for the Zariski topology on $B$, it follows that $V$ is the smallest closed set containing $V(y^2-x^2(x+1))\setminus L\cap B$, which means $C'=V$. We see that $C'$ intersects $L$ in $(0,0,\pm 1)$. It is not hard to show that $C'$ and $C$ are birationally equivalent, we will see this once we generalise the approach given in this example. The main take away from this example is that we have taken the double point $P$ and essentially "split" it into two points which we moved along $L$, taking $C$ with us in the process, in a birational way such that the resulting curve is algebraic. The curve $C'$, however, is not a plane curve. We can resolve this projecting $C'$ onto the $(x,z)$ plane. The image of this projection is the irreducible algebraic set $V(z^2-(x+1))$. The inverse $V(z^2-(x+1))\rightarrow C'$ is given by $(v,u)\mapsto (v,vu,u)$. We thus get a birational equivalence of the elliptic curve $C$ to the non-singular parabola $V(z^2-(x+1))$. We have thus resolved the multiple point of $C$.   
         \end{example}
         To generalize the approach in the example, keep $B$, $P$,$\pi$, $U$, $L$ and $\phi$ as already defined. We set $C_0 := C\cap U$. We define a morphism
         \begin{gather*}
@@ -1215,19 +1221,30 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         \begin{lemma}
             Write $C=V(f)$, 
             $$f=\sum_r^n f_i$$
-            where $f_i\in K[x,y]$ a form of degree $i$, $r=m_P(C)$ and $n=\deg\ C$. Then $C=V(f')$ where
-            $$f' = \sum_r^n x^{r-i}f_i(1,z).$$ 
+            where $f_i\in K[x,y]$ a form of degree $i$, $r=m_P(C)$ and $n=\deg\ C$. Then $C'=V(f')$ is an affine plane curve, where
+            $$f' = \sum_r^n x^{i-r}f_i(1,z)\in K[z][x].$$ 
         \end{lemma}
         \begin{proof}
-            If $f'$ is reducible with $f'=gh$, then 
-            $$f(x,y)=\widetilde{\varphi}(f(x,xz))=\widetilde{\varphi}(x^rf')=x^rg(x,y/x)h(x,y/x)$$
-            but then $f$ would be reducible, leading to contradiction. We conclude that $f'$ is irreducible. Note that if $(a,c)\in C_0'$, then $(a,ac)=\varphi(a,c)\in C$, hence $a\neq 0$ and  
+            First note that 
+            $$
+                f(x,xz) = \sum_r^n x^if_r(1,z) = x^r \sum_r^n x^{i-r} f_r(1,z) = x^rf'. 
+            $$
+            Suppose for a contradiction that $f'= gh$ for non-units $g_1,g_2\in K[z][x]$ with $d_i := \deg_z \ g_i$. Note that in general for $\gamma \in R[t]$ that 
+            $$
+                x_1^{\deg \ \gamma}\gamma\left(x_1,\frac{x_2}{x_1}\right)\in K[x_1,x_2]\subset K(x_1,x_2) 
+            $$
+            It thus follows that $x^{d_i} g_i\left(\frac{y}{x}\right)\in K[x,y]$ are non units with 
+            $$
+                f = f\left(x,x\frac{y}{x}\right) = x^rf'\left(x,\frac{y}{x}\right) = \left(x^{d_1}g_1\left(x,\frac{y}{x}\right)\right)\left(x^{d_2}g_2\left(x,\frac{y}{x}\right)\right),
+            $$
+            which implies $f$ is reducible leading to a contradiction. We thus conclude that $f'$ is irreducible. 
+            Note that if $(a,c)\in C_0'$, then $(a,ac)=\varphi(a,c)\in C$, hence $a\neq 0$ and  
             $$
                 a^rf'(a,c) = f(a,c)=0.
             $$
             Therefore, $C_0'\subset V(f')$, hence $C'=V(f')$ by a dimension argument. 
         \end{proof}
-        We have thus produced an affine curve $C'$ birationally isomorphic to $C$. We it remains to check that the points of $\varphi^{-1}(P)$ are all simple. In other words, that the multiple point $P$ is blown up into $m_P(C)$ simple points.\\
+        We have thus produced an affine curve $C'$ birationally isomorphic to $C$. It remains for us to check that the points of $\varphi^{-1}(P)$ are all nice points. To be precise, that the multiple point $P$ is blown up into $m_P(C)$ multiple points with one tangent possibly counted with multiplicity.\\
         WLOG $x$ is not tangent to $f$ at $P$ and 
         $$
             f_r = \prod_1^s (y-\alpha_ix)^{r_i}.
@@ -1238,7 +1255,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             $$
                 m_{P_i}(C')=I(P_i,E\cap C') = r_i.
             $$
-            Moreover, if $P$ is an ordinary simple point, then each $P_i$ is a simple point of $C'$ and $\ord_{P_i}^{C'}(x)=1$ (cf. Proposition~\ref{WhenPointIsSimpleOnOneCurveIntersectionEqualsOrderWRTSaidCurveAtPoint})
+            Moreover, if $P$ is an ordinary multiple point, then each $P_i$ is a simple point of $C'$ and $\ord_{P_i}^{C'}(x)=1$ (cf. Proposition~\ref{WhenPointIsSimpleOnOneCurveIntersectionEqualsOrderWRTSaidCurveAtPoint})
         \end{lemma}
         \begin{proof}
             Indeed,
@@ -1248,9 +1265,16 @@ We have thus far been studying algebraic geometry by studying systems of polynom
            \end{align*}
            Moreover,
            \begin{align*}
-                m_{P_i}(C') &\leq I(P_i,C'\cap E) = I(P_i,\left(\prod_1^s (z-\alpha_j)^{r_j}\right) \cap x)\\ &= \sum_1^s r_j I(P_i,(z-\alpha_j)\cap x) = r_i.
+                m_{P_i}(C') &\leq I\left(P_i,C'\cap E\right) = I\left(P_i,\left(\prod_1^s (z-\alpha_j)^{r_j}\right) \cap x\right)\\ 
+                &= \sum_1^s r_j I(P_i,(z-\alpha_j)\cap x) = r_i.
            \end{align*}
            If $P$ is an ordinary multiple point, then $r_i=1$ for all $i$, hence $m_{P_i}(C')=1$, hence $P_i$ is simple.  
+        \end{proof}
+        \begin{lemma}
+            There is an open affine neighborhood $W$ of $P$ in $C$ such that $W':=\varphi^{-1}(W)$ is an affine open subvariety in $C'$, $\varphi(W')=W$, $\Gamma(W')$ is module finite over $\Gamma(W)$ and $x^{r-1}\Gamma(W')\subset \Gamma(W)$. 
+        \end{lemma}
+        \begin{proof}
+            
         \end{proof}
     \subsubsection{Blowing up Points in $\Pp^2$}
     \subsubsection{Quadratic Transformations}
