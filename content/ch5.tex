@@ -318,7 +318,13 @@ We have thus far been studying algebraic geometry by studying systems of polynom
     \begin{proof}
         One readily verifies that this is a subring of $K^\mathrm{Reg}(X)$. If $z\in \pazocal{O}_P(X)$, then since $z$ is defined at $P$, $P\in \dom \ z$, hence $[z]$ is an element of the subring. Let $[f]\in K^\mathrm{Reg}(X)$ such that $f\in \mathrm{Reg}(X)$ and $P\in \dom \ f$. Then $f$ agrees with a rational function $z$ in $K(X)$ on the domain of $f$. It follows that $[z]=[f]$.  
     \end{proof}
-    
+    \begin{remark}
+        For an open subset $U\subset X$, we thus have 
+        $$
+            \Gamma(U) = \left\{[f]\in K^\mathrm{Reg}(X) : f\in \mathrm{Reg}(X), f \text{ is regular on } U\right\}.
+        $$
+    \end{remark}
+    In the next section we introduce morphisms of varieties the above remark sets up the most straightforward way to verify that a map is a morphism.
     \subsubsection{Morphisms of Varieties}
     Consider the contravariant functor
     \begin{gather*}
@@ -336,7 +342,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         $$
             \Gamma(U)\rightarrow \Gamma(\varphi^{-1}(U)).
         $$ 
-        For $f\in \Gamma(U)$, when we write $\widetilde{\varphi}(f)$, we mean the restriction of $\varphi$ to $\varphi^{-1}(U)$ precomposed with $f$.  
+        For $f\in \Gamma(U)$, when we write $\widetilde{\varphi}(f)$, we mean the restriction of $\varphi$ to $\varphi^{-1}(U)$ precomposed with $f$. 
     \end{definition}
     \begin{remark}
         \begin{enumerate}
@@ -364,8 +370,11 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         is a morphism.
     \end{lemma}
     \begin{proof}
-        $Y$ is a variety in the closure of $Y$ in $X$, which we denote by $Z$.  Consider the map 
-         We already (from general topology) know that embeddings are continuous. Let $U\subset X$ be open.  Let $f\in \Gamma(U)$. This is a rational funtion defined at each $P\in U$, and in particular it is defined at each $P\in \iota^{-1}(U)=U\cap Y$. Since $\widetilde{\iota}(f)$ agrees with $f$ on each point in $Y\cap U$, it follows that $\widetilde{\iota}(f)\in \Gamma(\iota^{-1}(U))$, and consequently $\iota$ is a morphism.  
+         We already (from general topology) know that embeddings are continuous. Let $U\subset X$ be open.  Let $f\in \Gamma(U)$. This is a rational funtion defined at each $P\in U$, and in particular it is defined at each $P\in \iota^{-1}(U)=U\cap Y$. In other words $\left. f\right|_{\cl_X(Y)}\in K(Y)$ is regular on $Y\cap U$, and since for $P\in Y\cap U$
+         $$
+            \widetilde{\iota}(f)(P)=f\circ \iota(P)= f(P)=\left. f\right|_{\cl_X(Y)}(P)
+         $$
+         we get $\widetilde{\iota}(f)\in \Gamma(\iota^{-1}(U))$. 
     \end{proof}
     \begin{lemma}
         The functor 
@@ -424,16 +433,18 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         Consider a morphism $\varphi: X\rightarrow Y$ and open/closed subvarieties $X'\subset X$ and $Y'\subset Y$ such that $\varphi(X')\subset Y'$. Then $\left. \varphi\right|_{X'} : X'\rightarrow Y'$ is a morphism
     \end{lemma}
     \begin{proof}
-        Clearly $\left. \varphi\right|_{X'} : X'\rightarrow Y'$ is continuous. Let $U\cap Y'\subset Y'$ be open.  Let $f\in \Gamma(U\cap Y')$. To prove that $\widetilde{\left.\varphi\right|_{X'}}(f)\in \Gamma(\varphi^{-1}(U)\cap X')$, it is sufficient to find a rational function $z\in K(X)$ such that $z$ is defined on $U\cap Y'$ and $z(P)=\widetilde{\left.\varphi\right|_{X'}}(f)(P)$ for every $P\in U\cap Y'$. Letting $\iota : X'\hookrightarrow X$ denote the embedding of $X'$ in $X$, we find that $\widetilde{\varphi\iota}(f)$ is a such a rational function since it agrees with $\widetilde{\left.\varphi\right|_{X'}}$ on $U\cap Y'$. It follows that $\left.\varphi\right|_{X'}$ is a morphism  
+        Clearly $\left. \varphi\right|_{X'} : X'\rightarrow Y'$ is continuous. Let $U\cap Y'\subset Y'$ be open.  Let $f\in \Gamma(U\cap Y')$. To prove that $\widetilde{\left.\varphi\right|_{X'}}(f)\in \Gamma(\varphi^{-1}(U)\cap X')$, it is sufficient to find a rational function $z\in K(X)$ such that $z$ is defined on $U\cap Y'$ and $z(P)=\widetilde{\left.\varphi\right|_{X'}}(f)(P)$ for every $P\in U\cap Y'$. Letting $\iota : X'\hookrightarrow X$ denote the embedding of $X'$ in $X$, we find that $\widetilde{\varphi\iota}(f)$ is a such a rational function since it agrees with $\widetilde{\left.\varphi\right|_{X'}}$ on $U\cap Y'$. It follows that $\left.\varphi\right|_{X'}$ is a morphism.
     \end{proof}
     \begin{example}
         \begin{enumerate}
             \item If $V\subset \A^n$ and $W\subset \A^m$ are affine varieties, then a polynomial map $\varphi: V\rightarrow W$ is a morphism. The category of affine varieties over $K$ is thus a subcategory of $\mathrm{Var}_K$. 
-            \item Set $A:=\A^n\times \Pp^{n_1}\times \cdots \times \Pp^{n_k}$ and $B:= \A^m\times \Pp^{m_1}\times \cdots \times \Pp^{m_l}$. Consider the map $\pi : A\times B \rightarrow A, (v,w)\mapsto v$. Note that $\pi^{-1}(V)= V\times B$ for every closed $V\subset A$ and this set is clearly just given by $V(I(V))\subset A\times B$, meaning $\pi$ is continuous. Consider $K(A)$ canonically as a subring of $K(A\times B)$. Explicitly a multiform in $(K[x_1,\dots,x_n])[\mathbf{y}]$ is in particular an $(n_1,\dots,n_k,m_1,\dots,m_l)$-form in $(K[x_1,\dots,x_n,z_1,\dots,z_m])[\mathbf{y},\mathbf{w}]$, hence a rational function $a/b$ where $a,b\in K[\mathbf{x},\mathbf{y}]$ are same degree $(n_1,\dots,n_k)$-forms is canonically a rational function $a/b$ in $Q(K[\mathbf{x},\mathbf{y},\mathbf{z},\mathbf{w}])$. Denote this identification by $i$ Let $U\subset A$ be open. Note that $\pi^{-1}(U)=U\times B$. We can then canonically consider $K(U)=K(A)$ as a subring of $K(U\times B)=K(A\times B)$ via $i$. Given a point $P\in U$ and a rational function on $U$ defined at $P$, $f$ say, we may consider $f$ as a rational function on $U\times B$ defined at $(P,w)$ for every $w\in B$. In other words $i$ restricts to a one-to-one $K$-algebra homomorphism $\pazocal{O}_P(U) \rightarrow \bigcap_{w} \pazocal{O}_{(P,w)}(U\times B)$. Let 
-            $(P,w)\in U\times \Pp^m=\pi^{-1}(U)$. Then 
-            $$i(f)(P,w)=f(P)=f(\pi(P,w))=(f\circ \pi)(P,w)=\widetilde{\pi}(f)(P,w),$$
-            meaning $\widetilde{\pi} = i$. This, in particular, shows that $\widetilde{\pi}(f)\in \Gamma\left(\pi^{-1}(U)\right)$ for every $f\in \Gamma(U)$, hence $\pi$ is a morphism. 
-            \item Consider the map $\pi : \A^{n+1}\setminus 0 \rightarrow \Pp^n$. Let $V= V^\Pp(F_1,\dots,F_m)$ where $F_i$ are homogeneous. We claim that $\pi^{-1}(V)=V^\A(F_1,\dots,F_m)$. Indeed, for each $i$
+            \item Set $A:=\A^n\times \Pp^{n_1}\times \cdots \times \Pp^{n_k}$ and $B:= \A^m\times \Pp^{m_1}\times \cdots \times \Pp^{m_l}$. Consider the map $\pi : A\times B \rightarrow A, (v,w)\mapsto v$. Note that $\pi^{-1}(V)= V\times B$ for every closed $V\subset A$ and this set is equal to $V(I(V))\subset A\times B$, meaning $\pi$ is continuous. Consider $K(A)$ canonically as a subring of $K(A\times B)$.  Explicitly, a multiform in $(K[x_1,\dots,x_n])[\mathbf{y}]$ is in particular an $(n_1,\dots,n_k,m_1,\dots,m_l)$-form in $(K[x_1,\dots,x_n,z_1,\dots,z_m])[\mathbf{y},\mathbf{w}]$, hence a rational function $a/b$ where $a,b\in K[\mathbf{x},\mathbf{y}]$ are same degree $(n_1,\dots,n_k)$-forms is canonically a rational function $a/b$ in $Q(K[\mathbf{x},\mathbf{y},\mathbf{z},\mathbf{w}])$. Denote this identification by $\iota$ Let $U\subset A$ be open. Note that $\pi^{-1}(U)=U\times B$.
+            Let $f\in \Gamma(U)$. Let $Q\in U$. We may find suitable multiforms $a,b$ with $b(Q)\neq 0$, and $\frac{a(Q)}{b(Q)}=f(Q)$. It follows that $\iota(\frac{a}{b})$ is a function regular on $ U\times B$ and for each $P=(v,w)\in U\times B$, 
+            \begin{align*}
+                \widetilde{\pi}(f)(P)=f(v)= \iota(f)(P), 
+            \end{align*} 
+            hence $\widetilde{\pi}(f)\in \Gamma(\pi^{-1}(U))$.
+            \item Consider the quotient map $\pi : \A^{n+1}\setminus 0 \rightarrow \Pp^n$. Let $V= V^\Pp(F_1,\dots,F_m)$ where $F_i$ are homogeneous. We claim that $\pi^{-1}(V)=V^\A(F_1,\dots,F_m)$. Indeed, for each $i$
             \begin{align*}
                 v\in \pi^{-1}(V) \iff F_i([v])=0 \iff F_i(v)=0 \iff v\in V^\A(F_1,\dots,F_m).
             \end{align*}
@@ -442,16 +453,23 @@ We have thus far been studying algebraic geometry by studying systems of polynom
                 \alpha : K(\Pp^n)=\left\{\frac{f}{g}\in Q(K[\mathbf{x}]): f,g \text{ forms}, \deg\ f = \deg \ g \right\} \rightarrow K(V)=K\left(\A^{n+1}\right) = Q(K[\mathbf{x}])\\
                 f/g\mapsto f/g
             \end{gather*}
-            Let $v\in \pi^{-1}(U)$ and consider $f/g\in \Gamma(U)$. Then $[v]$ is not a zero of $g$, hence $g(\lambda v)\neq 0$ for every $\lambda \in K\setminus 0$, hence $g(v)\neq 0$. It follows that $\alpha$ restrict to a $K$-algebra map
+            Let $P\in \pi^{-1}(U)$ and consider $z\in \Gamma(U)$. There is a rational function $\frac{a}{b}\in K(\Pp^n)$ such that $\lambda P\notin V(b)$ for any $\lambda\in K\setminus 0$. In particular $b(P)\neq 0$. It follows that $\alpha$ restrict to a $K$-algebra map
             \begin{gather*}
                 \alpha : \Gamma(U)\rightarrow \Gamma\left( \pi^{-1}(U)\right)\\
                 \frac{f}{g}\mapsto \frac{f}{g}
             \end{gather*}
             and for each $v\in \pi^{-1}(U)$ and $z:=f/g\in \Gamma(U)$
             $$\alpha(z)(v)=z(v)=z([v])=(z\circ \pi)(v)=\widetilde{\pi}(z)(v)\implies \alpha = \widetilde{\pi},$$
-            hence $\pi$ is a morphism. Suppose $U\subset \Pp^n$ is open in the quotient topology on $\Pp^n$ induced by the Zariski topology on $\A^{n+1}\setminus 0$. We claim that $U$ is open, or in other words that the Zariski topology on $\Pp^n$ is the quotient topology on $\Pp^n$ induced by the Zariski topology on $\A^{n+1}\setminus0$. It is sufficient to check that $V:= \Pp^n\setminus U$ is closed. Note that the complement of $\pi^{-1}(U)$ in $\A^{n+1}\setminus 0$ is $\pi^{-1}(V)$. Let $v\in \pi^{-1}(V)$ and $\lambda \in K\setminus 0$. Then $[\lambda v]= [v]\in V$, hence $\lambda v\in \pi^{-1}(V)$. WLOG write $\pi^{-1}(V)=V^\A(f)\setminus 0$. We claim that $\pi^{-1}(V)=V^\Pp(f)$. Indeed, if $v\in \pi^{\A}(V)$, then $\lambda v\in V^\A(f)$ for every $\lambda \in K\setminus 0$, hence $[v]\in V^\Pp(f)$. The other inclusion is trivial. It then follows that $U= \Pp^n\setminus V^\Pp(f)$, meaning $U$ is open. The same argument also shows that $\pi(V)$ is closed for every closed $V\subset \A^{n+1}\setminus 0$, hence if $V$ is a variety, so is $\pi(V)$.
+            hence $\pi$ is a morphism. 
         \end{enumerate}
     \end{example}
+    \begin{lemma}
+        $U\subset \Pp^n$ is open if and only if $\pi^{-1}(U)\subset \A^{n+1}\setminus 0$ is open, where $\pi: \A^{n+1}\setminus 0\rightarrow \Pp^n$ is the quotient map. 
+    \end{lemma}
+    \begin{proof}
+        If $U\subset \Pp^n$ is open, then $\pi^{-1}(U)$ is open, since $\pi$ is continuous.\\
+        Suppose $\pi^{-1}(U)$ is open. Then the complement of $\pi^{-1}(U)$ is $V^\A(f_1,\dots,f_m)$ for some $f_1,\dots,f_m\in K[x_1,\dots,x_{n+1}]$. Let $[v]\in U$. Then $v\in \pi^{-1}(U)$, which means $f_i(v)\neq 0$ for some $i$. Then $[v]$ is not a zero of $f_i$, which means $[v]\notin V^\Pp(f_1,\dots,f_m)$. Conversely, if $[v]\notin V^\Pp(f_1,\dots,f_m)$, then there is a $\lambda \in K\setminus 0$ such that $f_i(\lambda v)\neq 0$ for some $i$. Then $\lambda v\in \pi^{-1}(U)$, hence $[v]=[\lambda v]\in U$. It follows that $U = \Pp^n\setminus V^\Pp(f_1,\dots,f_m)$, hence $U$ is open.  
+    \end{proof}
     \begin{example}\label{NonExampleOfAffineVariety}
         Consider $V:=\A^2\setminus\{(0,0)\}$ and the morphism $\iota: V\rightarrow \A^2$. By Example~\ref{RationalFunctionsOnAffinePlaneWithoutAPointIsTheSameAsRationalFunctionsOnAffinePlane} the map 
         \begin{gather*}
@@ -459,44 +477,61 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             f \rightarrow f
         \end{gather*}
         is an isomorphism.\\ 
-        In general, consider varieties $X$ and $Y$ and a morphism $\phi: X\rightarrow Y$. By the prior remark, if $X$ and $Y$ are affine, then either both $\phi$ and $\widetilde{\phi}$ are isomorphisms or both of the maps are not isomorphisms.\\
+        In general, consider varieties $X$ and $Y$ and a morphism $\phi: X\rightarrow Y$. If $X$ and $Y$ are affine, then either both $\phi$ and $\widetilde{\phi}$ are isomorphisms or both of the maps are not isomorphisms.\\
         So since since $\iota$ is not an isomorphism and $\widetilde{\iota}$ is an isomorphism, it follows that the domain or codomain is not affine. Since $\A^2$ is affine it follows that $\A^2\setminus \{(0,0)\}$ is not affine.    
      \end{example}
      \begin{lemma}
-        Let $X$ be a variety and $f=\frac{g}{h}\in \Gamma(X)$.
+        Let $X$ be a variety and $f\in \Gamma(X)$.
         \begin{enumerate}
-            \item Set $z:= \frac{1}{f-\lambda}\in K(X)$. For every $\lambda\in K$, $\pazocal{P}_X(z)=\ev_\bullet(f)^{-1}(\lambda)$.
-            \item $\ev_\bullet(f)$ is a morphism.
+            \item Set $z:= \frac{1}{f-\lambda}\in K(X)$. For every $\lambda\in K$, $\pazocal{P}_X(z)=f^{-1}(\lambda)$.
+            \item $f$ is a morphism. In other words a regular function $f:X\rightarrow K=\A^1$ is a morphism. 
         \end{enumerate}
     \end{lemma}
     \begin{proof}
-        1. Indeed, we have $z= \frac{h}{g-\lambda h}$, hence 
+        1. Let $P\in X$ and write $f=\frac{g}{h}\in K(X)$ with $h(P)\neq 0$. We then have $z= \frac{h}{g-\lambda h}$, hence 
         \begin{align*}
-            x\in \pazocal{P}_X(z) \iff g(x)=\lambda h(x) \iff \lambda= \frac{g(x)}{h(x)}=f(x) \iff x\in \ev_\bullet(f)^{-1}(\lambda).
+            P\in \pazocal{P}_X(z) \iff g(P)=\lambda h(P) \iff \lambda= \frac{g(P)}{h(P)}=f(P) \iff P\in f^{-1}(\lambda).
         \end{align*}
-        Here we use that $h(x)\neq 0$ for every $x\in X$.\\
-        2. $\ev_\bullet$ is continuous by Lemma~\ref{TrickToCheckZariskiContinuity}. Let $\gamma\in \Gamma(\A^1)=K[x]$. Then $\gamma(f)\in \Gamma(X)$. Let $U\subset \A^1$ be open. Note that $\ev_\bullet(f)^{-1}(U)\subset X$, meaning $\Gamma(X)\subset \Gamma\left(\ev_\bullet(f)^{-1}(U)\right)$. Suppose $\gamma(P)\neq 0$ for every $P\in U$. Then for every $Q\in \ev_\bullet(f)^{-1}(U)$,
-        $$\gamma(f)(P)=\gamma(f(P))\neq 0,$$
-        hence $\gamma(f)$ is a unit in $\Gamma\left(\ev_\bullet(f)^{-1}(U)\right)$. Note also that $\widetilde{\ev_\bullet(f)}(\gamma)=\gamma(f)\in \Gamma\left(\ev_\bullet(f)^{-1}(U)\right)$. It follows that 
-        \begin{gather*}
-            \widetilde{\ev_\bullet(f)}: \Gamma(\A^1)\rightarrow \Gamma\left(\ev_\bullet(f)^{-1}(U)\right)\\
-            \gamma \rightarrow \gamma \circ \ev_\bullet(f)
-        \end{gather*}
-        is a well-defined $K$-algebra homomorphism which extends to a well-defined $K$-algebra homomorphism
-        \begin{gather*}
-            \widetilde{\ev_\bullet(f)}: \Gamma(U)\rightarrow \Gamma\left(\ev_\bullet(f)^{-1}(U)\right)\\
-            \frac{\alpha}{\beta} \rightarrow \frac{\alpha \circ \ev_\bullet(f)}{\beta \circ \ev_\bullet(f)}
-        \end{gather*}
-        meaning $\ev_\bullet(f)$ is a morphism.
+        2. $f$ is continuous by Lemma~\ref{TrickToCheckZariskiContinuity} and 1. Let $U=\A^1\setminus\{\alpha_1,\dots,\alpha_n\}\subset \A^1$ (an arbitrary open subset).
+        Let $\gamma= \frac{a}{b}\in \Gamma(U)\subset K(x)$ with $\gcd(a,b)=1$. Then $b$ is polynomial whose roots can only be among $\{\alpha_1,\dots, \alpha_n\}$. Note $a(f),b(f)\in K(X)$ and that $b$ vanishes on no point in $f^{-1}(U)$, which implies $b(f)\neq 0$, hence $\frac{a(f)}{b(f)}\in K(X)$. Note also that $b(f(P))\neq 0$ for every $P\in U$. Let $P\in f^{-1}(U)$. Pick $\frac{g}{h}\in K(X)$ such that $h(P)\neq 0$. write $a=\sum_0^{d_1} a_ix^i$ and $b=\sum_0^{d_2} b_i x^i$. Then 
+        \begin{align*}
+            \frac{a(f)}{b(f)}= \frac{\sum_0^{d_1} a_i\frac{g^i}{h^i}}{\sum_0^{d_2}b_i\frac{g^i}{h^i}} = \frac{\left(\frac{\sum_0^{d_1}a_ig^ih^{d_1-i}}{h^{d_1}}\right)}{\left(\frac{\sum_0^{d_2}b_ig^ih^{d_2-i}}{h^{d_2}}\right)} = \frac{\sum_0^{d_1} a_ig^{i}h^{d_1+d_2-i}}{\sum_0^{d_2}b_ig^ih^{d_1+d_2-i}}.
+        \end{align*} 
+        Note that  
+        \begin{align*}
+            0\neq b(f(P)) = \frac{\sum_0^{d_2} b_i g(P)^i h(P)^{d_2-i}}{h(P)^{d_2}} \implies \sum_0^{d_2} b_i g(P)^i h(P)^{d_1+d_2-i}(P)\neq 0, 
+        \end{align*}
+        so $\frac{a(f)}{b(f)}$ is defined at $P$, hence and since $\gamma\circ f$ agrees with $\frac{a(f)}{b(f)}$ on $f^{-1}(U)$ it follows that $\widetilde{f}(\gamma)\in \Gamma(f^{-1}(U))$.   
     \end{proof}
     \begin{lemma}
-        $\A^n\times U_{i_1}\times \cdots\times U_{i_m}$ is an open subvariety of $\A^n\times \Pp^{n_1}\times \cdots \times \Pp^{n_m}$. Let $V$ be a closed subvariety of $\A^n\times \Pp^{n_1}\times \Pp^{n_m}$. Then $V_{n,i_1,\dots,i_m} := \varphi_{n,i_1,\dots,i_m}^{-1}(V)$ is a closed subvariety in $\A^{n+n_1+\dots+n_m}$ The map $\varphi_{n,i_1,\dots,i_m} : \A^{n+n_1+\dots+n_m} \rightarrow \A^n\times U_{i_1}\times \cdots \times U_{i_m}$ is an isomorphism. 
+        If $\varphi:X\rightarrow Y$ is a morphism and a homeomorphism, then $\varphi$ is an isomorphism. 
     \end{lemma}
     \begin{proof}
-        Indeed $\A^n\times U_{i_1}\times \cdots\times U_{i_m}$ is the complement of $\bigcap_1^m V(x_{ki_k})$. We see that $V_{n,i_1,\dots,i_m} = V_{\ast,n, i_1,\dots,i_m}$. If $V$ does not intersect $\A^n\times U_{i_1}\times\cdots \times U_{i_m}$, then $V_{n,i_1,\dots,i_m} = \emptyset$, which is a closed subvariety of $\A^{n+n_1+\dots+n_m}$. Otherwise if $V_{\ast,n,i_1,\dots,i_m}\cap \A^n\times U_{i_1}\times \cdots \times U_{i_m}\neq \emptyset$, due to Remark~\ref{WeMayReduceMultiprojectiveCaseToAffineCaseUsingAProperTransformationIfVarietiesDoNotContainCertainHyperplanesAtInfinity}, $V_{n,i_1,\dots,i_m}$ is an affine variety in $\A^{n+n_1+\dots+n_m}$, hence in particular it is a closed subvariety of $\A^{n+n_1+\dots+n_m}$. This shows that $\varphi_{n,i_1,\dots,i_n}^{-1}$ sends closed sets in $\A^n\times U_{i_1}\times \cdots \times U_{i_m}$ are mapped to closed sets in $\A^{n+n_1+\dots +n_m}$ and $\varphi_{n,i_1,\dots,i_m}$ maps closed sets in $\A^{n+n_1+\dots+n_m}$ to closed sets in $\A^n\times \Pp^{n_1}\times \Pp^{n_m}$ by the proper generalization of Lemma~\ref{Multiprojectiveclosure}, hence $\varphi_{n,i_1,\dots,i_m}$ is a continuous map. Let $U=U'\cap \A^n\times U_{i_1}\times \cdots \times U_{i_m}\subset \A^n\times U_{i_1}\times \cdots \times U_{i_m}$ be open and let $P\in U$. Consider $f\in \pazocal{O}_P(\A^n\times U_{i_1}\times \cdots \times U_{i_m})$. Then $f\circ \varphi = f\circ \ev_{x_{1i_1},\dots,x_{mi_m}\mapsto 1}=f_\ast$, hence $\widetilde{\varphi_{n,i_1,\dots,i_m}}$ is the isomorphism 
-        $$\pazocal{O}_P\left(\A^n\times U_{i_1}\times \cdots \times U_{i_m}\right)\simeq \pazocal{O}_{\varphi_{n,i_1,\dots,i_m}^{-1}}\left(\A^{n+n_1+\dots+n_m}\right)$$ and $\widetilde{\varphi_{n,i_1,\dots,i_m}^{-1}}$ is its inverse. It thus follows that $\widetilde{\varphi_{n,i_1,\dots,i_m}}(g)\in \Gamma\left(\varphi_{n,i_1,\dots,i_m}^{-1}(U)\right)$ for every $g\in \Gamma\left(\A^{n+n_1+\dots +n_m}\right)$. Similarly if $U\subset \A^{n+n_1+\dots+n_m}$ is open, then for every $f\in \Gamma(U)$, $\widetilde{\varphi_{n,i_1,\dots,i_m}}^{-1}(f)\in \Gamma(\varphi_{n,i_1,\dots,i_m}(U))$. 
+        It suffices to check that $\varphi^{-1}$ is a morphism. Let $U\subset X$ be open. Then 
+        \begin{gather*}
+            \widetilde{\varphi^{-1}} : \Gamma(U)\rightarrow \mathrm{Set}(\varphi(U),K)
+        \end{gather*}
+        is a well-defined $K$-algebra map, such that 
+        $$
+            \widetilde{\varphi^{-1}}\circ \varphi = \id_{\Gamma(\varphi^{-1}(U))}
+        $$ 
+        hence $\im \ \widetilde{\varphi^{-1}}=\Gamma(\varphi(U))$. 
     \end{proof}
-    
+    \begin{lemma}\label{IdentificationOfAffineCoverOfMultiprojectiveSpaceWithAffineSpaceIsIsomorphism}
+        $\A^n\times U_{i_1}\times \cdots\times U_{i_m}$ is an open subvariety of $\A^n\times \Pp^{n_1}\times \cdots \times \Pp^{n_m}$. Let $V$ be a closed subvariety of $\A^n\times \Pp^{n_1}\times \Pp^{n_m}$. Then $V_{n,i_1,\dots,i_m} := \varphi_{n,i_1,\dots,i_m}^{-1}(V)$ is a closed subvariety in $\A^{n+n_1+\dots+n_m}$. The map $\varphi_{n,i_1,\dots,i_m} : \A^{n+n_1+\dots+n_m} \rightarrow \A^n\times U_{i_1}\times \cdots \times U_{i_m}$ is an isomorphism, hence this maps restricts to an isomorphism of $V_{n,i_1,\dots,i_m}$ with $V\cap \A^n\times U_{i_1}\times \cdots \times U_{i_m}$ 
+    \end{lemma}
+    \begin{proof}
+        Indeed $\A^n\times U_{i_1}\times \cdots\times U_{i_m}$ is the complement of $\bigcap_1^m V(x_{ki_k})$. We see that $V_{n,i_1,\dots,i_m} = V_{\ast,n, i_1,\dots,i_m}$. If $V$ does not intersect $\A^n\times U_{i_1}\times\cdots \times U_{i_m}$, then $V_{n,i_1,\dots,i_m} = \emptyset$, which is a closed subvariety of $\A^{n+n_1+\dots+n_m}$. Otherwise if $V_{\ast,n,i_1,\dots,i_m}\cap \A^n\times U_{i_1}\times \cdots \times U_{i_m}\neq \emptyset$, due to Remark~\ref{WeMayReduceMultiprojectiveCaseToAffineCaseUsingAProperTransformationIfVarietiesDoNotContainCertainHyperplanesAtInfinity}, $V_{n,i_1,\dots,i_m}$ is an affine variety in $\A^{n+n_1+\dots+n_m}$, hence in particular it is a closed subvariety of $\A^{n+n_1+\dots+n_m}$. This shows that $\varphi_{n,i_1,\dots,i_n}^{-1}$ sends closed sets in $\A^n\times U_{i_1}\times \cdots \times U_{i_m}$ to closed sets in $\A^{n+n_1+\dots +n_m}$ and $\varphi_{n,i_1,\dots,i_m}$ maps closed sets in $\A^{n+n_1+\dots+n_m}$ to closed sets in $\A^n\times \Pp^{n_1}\times\cdots \times  \Pp^{n_m}$ by the proper generalization of Lemma~\ref{Multiprojectiveclosure}, hence $\varphi_{n,i_1,\dots,i_m}$ is a continuous map. To verify that it is a morphism it is sufficient to check that $\varphi:=\varphi_{n,n_1+1,\dots,n_{m}+1}$ is a morphism since permuation of coordinates is a morphism. Let 
+        $$
+            U=U'\cap \A^n\times U_{n_1+1}\times \cdots \times U_{n_m+1}\subset \A^n\times U_{n_1+1}\times \cdots \times U_{n_m+1}
+        $$ 
+        be open. Let $f\in\Gamma(U)$. Let $P=(v,v_1,\dots,v_m)\in \varphi^{-1}(U)$. Then 
+        $$
+            \widetilde{\varphi}(f)(P) = f(\varphi(P))=f(v,[v_1,1],\dots,[v_m,1]) = f_\ast(P)
+        $$ 
+        and since $f_\ast \in \pazocal{O}_{P}(A)$ it follows that $\varphi$ is a morphism.\\
+        Note that $\varphi^{-1}$ is also continuous, since if $W\subset \A^{n+n_1+\dots +n_m}$ is closed, then $\varphi(W)=(W)^\ast\cap U_{n,n_1+1,\dots,n_m+1}$ is closed in $U_{n,n_1+1,\dots,n_m+1}$. Then $\varphi$ is a homeomorphism, hence, by the prior lemma, $\varphi$ is an isomorphism.    
+    \end{proof}
     \begin{example}
         Set $A:=\A^n\times \Pp^{n_1}\times \cdots \times \Pp^{n_k}$ and $B:= \A^m\times \Pp^{m_1}\times \cdots \times \Pp^{m_l}$. Let $v\in B$. Consider the map 
         \begin{gather*}
@@ -511,23 +546,24 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         Let $X,Y$ be varieties $\varphi : X\simeq Y$ an isomorphism, $X'\subset X$ a closed subvariety. Then $\left.\varphi\right|_{X'}$ is an isomorphism onto its image. 
     \end{lemma}
     \begin{proof}
-        Indeed, by the prior lemma it suffices to show that $\varphi(X')$ is a closed subvariety in $Y$. Since $\varphi$ is a homeomorphism it and its inverse are closed maps, hence $\varphi(X')$ is closed. Write $\varphi(X')=A\cup B$ for closed subsets $A$ and $B$. Then $X' = \varphi^{-1}(A)\cup\varphi^{-1}(B)$, hence WLOG $X'=\varphi^{-1}(A)\implies \varphi(X')=A.$,  
+        Indeed, by a prior lemma it suffices to show that $\varphi(X')$ is a closed subvariety in $Y$. Since $\varphi$ is a homeomorphism it and its inverse are closed maps, hence $\varphi(X')$ is closed. Write $\varphi(X')=A\cup B$ for closed subsets $A$ and $B$. Then $X' = \varphi^{-1}(A)\cup\varphi^{-1}(B)$, hence WLOG $X'=\varphi^{-1}(A)\implies \varphi(X')=A.$,  
     \end{proof}
     \begin{proposition}
-        Let $V$ be a closed subvariety of $\A^n\times\Pp^{n_1}\times \cdots \times \Pp^{n_m}$. $\left.\varphi_{n,i_1,\dots,i_m}\right|_{V_i}:V_i\rightarrow V\cap \A^n\times U_{1i_1}\times \cdots \times U_{mi_m}$ is an isomorphism of varieties, hence $V\cup \A^n\times U_{1i_1}\times \cdots \times U_{mi_m}$ is an affine variety. A projective variety is therefor the union of a finite number of affine varieties. 
+        Let $V$ be a closed subvariety of $\A^n\times\Pp^{n_1}\times \cdots \times \Pp^{n_m}$. $\left.\varphi_{n,i_1,\dots,i_m}\right|_{V_i}:V_i\rightarrow V\cap \A^n\times U_{1i_1}\times \cdots \times U_{mi_m}$ is an isomorphism of varieties, hence $V\cap \A^n\times U_{1i_1}\times \cdots \times U_{mi_m}$ is an affine variety. A projective variety is therefor the union of a finite number of affine varieties. 
     \end{proposition}
     \begin{proof}
-        From the first of the prior lemmas $\left.\varphi_{n,i_1,\dots,i_m}\right|$ defines a morphism. Consider an open set $U\cap V\cap\A^n\times U_{1i_1}\times \cdots \times U_{mi_m}$. From the second of the prior lemmas a restriction of morphisms to a subvariety is again a morphism. Consider a closed multiprojective projective variety $V\subset \Pp^{n_1}\times\cdots\times\Pp^{n_m}$ and write
+        From Lemma~\ref{IdentificationOfAffineCoverOfMultiprojectiveSpaceWithAffineSpaceIsIsomorphism} $\left.\varphi_{n,i_1,\dots,i_m}\right|_{V}$ defines a morphism with image $V_\cap U_{n,i_1,\dots,i_m}$, which is a closed subvariety of $U_{n,i_1,\dots,i_m}$ by Lemma~\ref{RestrictionOfIsomorphismToClosedSubvarietyIsIsomorphism}. Then
         \begin{align*}
-            V= \bigsqcup_{i_1,\dots,i_m} V\cap U_{1i_1}\times \cdots \times U_{mi_m}.
+            V= \bigcup_{i_1,\dots,i_m} V\cap U_{1i_1}\times \cdots \times U_{mi_m}.
         \end{align*}
-        each of these $V\cap U_{1i_1}\times \cdots \times U_{mi_m}$ is an affine variety by the first part of this proposition.
+        is a finite cover of open affine varieties. 
     \end{proof}
     \begin{lemma}
-        The Segre embedding is an isomorphism of $\Pp^n\times \Pp^m$ with $V:=V(\left\{z_{ij}z_{kl} - z_{il}z_{kj} : i,k\in\{1,\dots, n_1+1\}\right\}).$ 
+        The Segre embedding is an isomorphism of $\Pp^n\times \Pp^m$ with 
+        $$V:=V(\left\{z_{ij}z_{kl} - z_{il}z_{kj} : i,k\in\{1,\dots, n_1+1\}\right\}).$$ 
     \end{lemma}
     \begin{proof}
-        By Lemma~\ref{SegreEmbeddingHasImageWhichIsVariety} is in bijection with $V$. We have a covering of $\Pp^n\times \Pp^m$ by $$\{ U_i\times U_j : 1\leq i\leq n+1, 1\leq j\leq m+1\}$$ 
+        By Lemma~\ref{SegreEmbeddingHasImageWhichIsVariety}. $\Pp^n\times \Pp^m$ is in bijection with $V$. We have a covering of $\Pp^n\times \Pp^m$ by $$\{ U_i\times U_j : 1\leq i\leq n+1, 1\leq j\leq m+1\}$$ 
         and a covering of $V$ by 
         $$\{U_{ij}\cap V : 1\leq i\leq n+1 , 1\leq j\leq m+1\}.$$
         By Lemma~\ref{LocalIsomorphismOnCoveringIsIsomorphism}, it suffices to show that $S_{ij}:=\left.S\right|_{U_i\times U_j}$ is an isomorphism for arbitrary $i$ and $j$. We have the following commutative diagram
@@ -546,7 +582,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         \begin{gather*}
             \sigma: K[\{z_{pi}\}\cup\{z_{jq}\}][z_{pq} : p\neq j, q\neq i]\rightarrow K[\{z_{pi}\}\cup \{z_{jq}\}]
         \end{gather*}
-        $z_{pq}$ to $z_{pi}z_{jq}$ for $q\neq j$, $p\neq i$. This is clearly surjective, so by Corollary~\ref{MaximalIdealsOfPolynomialRings}, 
+        $z_{pq}\mapsto z_{pi}z_{jq}$ for $q\neq j$, $p\neq i$. This is clearly surjective, so by Corollary~\ref{MaximalIdealsOfPolynomialRings}, 
         $$K[z_{pq}: (p,q)\neq (i,j)]/\langle \{z_{pq}-z_{pi}z_{jq} : p\neq i,q\neq j\}\rangle\simeq K[\{z_{pi}\}\cup \{z_{jq}\}]\simeq K[\mathbf{x},\mathbf{y}].$$
         Note that $\langle \{z_{pq}-z_{pi}z_{jq} : p\neq i,q\neq j\}\rangle = I(V_\ast)$ and that $\widetilde{S_\ast}$ is equal to the map given by $f+I(V_\ast)\mapsto \sigma(f)$, hence $S_\ast$ is an isomorphism.
     \end{proof}
@@ -579,7 +615,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         defines an isomorphism, hence by the first statement it is isomorphic to an open subvariety of $\Pp^{(n_1+1)\cdots(n_m+1)(n+1)-1}$. 
     \end{proof}
     \begin{remark}
-        If one knows that the cartesian product of two closed subvarieties is again a closed subvariety, then the above argument can be simplified.  
+        If one knows that the cartesian product of two closed subvarieties is again a closed subvariety, then the above argument can be simplified.
     \end{remark}
     \begin{lemma}\label{ImportantIsomorphismForOpenAffineVarieties}
         Let $R$ be an integral domain, with $K:=Q(R)$. Consider $f\in R\setminus 0$. Consider also a ring map $\sigma : R\rightarrow S$ such that $\sigma(f)$ is a unit in $S$. Then $\sigma$ uniquely extends to a ring map $R[1/f]\subset K \rightarrow S$. The map 
@@ -593,7 +629,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             \alpha: R[x] \rightarrow R\left[\frac{1}{f}\right]\\
             x\mapsto \frac{1}{f}
         \end{gather*}
-        is surjective. Suppose $g(1/f)=0$, then $g\in \langle x-\frac{1}{f}\rangle\subset R[1/f]$. Since $f$ is a unit in $R[1/f]$, it follows that $g\in (R[1/f])[x](fx-1)$. Then $g=a/f^k(fx-1)$ implying $f^kg\in R[x]\langle fx-1\rangle$ which is a prime ideal, and since $\deg \ f =0$, $f\notin \langle fx-1\rangle$, hence $g\in \langle fx-1\rangle$. One sees that $\ker \ \alpha = \langle fx-1\rangle$, and therefor that $\alpha$ is an isomorphism.
+        is surjective. Suppose $g(1/f)=0$, then $g\in \langle x-\frac{1}{f}\rangle\subset R[1/f][x]$. Since $f$ is a unit in $R[1/f]$, it follows that $g\in (R[1/f])[x](fx-1)$. Then $g=\frac{a}{f^k}(fx-1)$ implying $f^kg\in \langle fx-1\rangle\subset R[x]$ which is a prime ideal, and since $\deg \ f =0$, we have $f\notin \langle fx-1\rangle$, hence $g\in \langle fx-1\rangle$. One sees that $\ker \ \alpha = \langle fx-1\rangle$, and therefore that $\alpha$ is an isomorphism.
     \end{proof}
     \begin{proposition}\label{ConstructionOfAffineNeighborhood}
         Let $V$ be an affine variety and $f\in \Gamma(V)\setminus 0$. Set 
@@ -605,8 +641,8 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         \end{enumerate}
     \end{proposition}
     \begin{proof}
-        WLOG $V\subset \A^n$. Set $I:= I(V)$. Then $\Gamma(V) = K[x_1,\dots,x_n]/I$ and pick $F\in K[\mathbf{x}]$ such that $f=F+I$.\\
-        1. Let $z\in \Gamma(V_f)$. The pole set of $z$ is equal to $V(J)$ where $$J= \{ G\in K[\mathbf{x}] : GF+I\in \Gamma(V)\},$$
+        WLOG $V\subset \A^n$. Set $I:= I(V)$. Then $\Gamma(V) = K[x_1,\dots,x_n]/I$ and we thus pick $F\in K[\mathbf{x}]$ such that $f=F+I$.\\
+        1. Let $z\in \Gamma(V_f)$. The pole set of $z$ is equal to $V(J)$ where $$J= \{ G\in K[\mathbf{x}] : Gz\in \Gamma(V)\},$$
         (cf. Lemma~\ref{PoleSetIsAlgebraic}). Since $V(J)\subset V(F)$, by HNS there is an $N$ such that $F^N\in J$. Then $zf^N\in \Gamma(V)$, hence $z=(zf^N)\frac{1}{f^N}\in \Gamma(V)\left[\frac{1}{f}\right]$. Since $V_f\subset V$, $\Gamma(V_f)\supset \Gamma(V)$, hence $\Gamma(V)\left[\frac{1}{f}\right]\subset \Gamma(V_f)$.\\
         2. Set $I' := \langle I\cup \{x_{n+1}F-1\}\rangle\subset K[x_1,\dots,x_{n+1}]$. Set $V' := V(I')$. Consider 
         \begin{gather*}
@@ -642,35 +678,32 @@ We have thus far been studying algebraic geometry by studying systems of polynom
     \begin{proof}
         By Proposition~\ref{VarietiesAreProjective} $X$ is isomorphic to an open subvariety of a projective variety. I.e. WLOG $X\subset V\subset \Pp^n$. Suppose $P\in U_i$. WLOG we may replace $X$ with $V$. In other words we may assume that $X\subset \Pp^n$ is a projective variety. Then $U\cap U_i$ is an open neighborhood of $P$ sitting in $X\cap U_i$. If we can find an affine open neighborhood of $P$ contained in $U\cap U_i$, then we are done, since this will also be an open subset of $U$. I.e. WLOG we may assume that $X\subset \A^n$ is an affine variety. $X\setminus U$ is an algebraic set. By Proposition~\ref{KroneckerPolynomial} 1. we can find a polynomial $F\in K[x_1,\dots,x_n]$ such that $F(P)\neq 0$ and $F(Q)=0$ for every $Q\in X\setminus U$. Define $f:= F+I(X)\in \Gamma(X)$. Then $P\in X_f$ and $X_f\subset U$, by the construction of $F$. The prior proposition shows that $X_f$ is affine.    
     \end{proof}
-    \begin{proposition}
-        A variety is the union of a finite number of affine varieties. 
-    \end{proposition}
-    \begin{proof}
-        Let $X$ be a variety. By Corollary~\ref{ThereIsACoveringOfAffineVarieties} there is a covering of $X$, $\{U_P\}_{P \in X}$, where $U_P$ is an affine open neighborhood of $P$. Since varieties are quasi-projective, we may then find finite set of points $P_1,\dots,P_n$ such that $\{U_{P_i}\}_1^n$ is a covering of $X$.
-    \end{proof}
+    \begin{remark}
+        This provides an alternative way of showing that a variety has a finite open affine cover: Let $X$ be a variety. By Corollary~\ref{ThereIsACoveringOfAffineVarieties} there is a covering of $X$, $\{U_P\}_{P \in X}$, where $U_P$ is an affine open neighborhood of $P$. Since varieties are quasi-compact, we may then find finite set of points $P_1,\dots,P_n$ such that $\{U_{P_i}\}_1^n$ is a covering of $X$.
+    \end{remark}
     \begin{lemma}
         Let $X\subset \Pp^n$ be a projective variety and $H$ a hyperplane in $\Pp^n$ not containing $X$.
         \begin{enumerate}
-            \item There is an $X_\ast\subset \A^n$ isomorphic to $X\setminus (H\cap X)\setminus X$.
+            \item There is an $X_\ast\subset \A^n$ isomorphic to $X\setminus (H\cap X)$.
             \item if $L$ is a linear form defining $H$, then $\Gamma(X_\ast)\simeq K[x_1/L,\dots,x_{n+1}/L]\subset K(x_1,\dots,x_{n+1})$.
         \end{enumerate}
     \end{lemma}
     \begin{proof}
-        1. $X\cap H$ is closed in $\Pp^n$, hence $Y:=X\setminus (X\cap H)$ is a subvariety of $X$. Write $H=V\left(\sum_1^{n+1} a_ix_i\right)$ and let $A$ be the projective change of coordinates such that $H^A=H_\infty$. Then $Y\simeq Y':= X'\setminus(X'\cap H_\infty)$ for some $X'\subset \Pp^n$ projective variety not containing $H_\infty$. Note that $Y' = X'\cap U_{n+1}$, hence $X_\ast:= Y'_\ast \subset \A^n$ is an affine variety and $\phi:[v]\mapsto (v_1/v_{n+1},\dots,v_n/v_{n+1})$, defines an isomorphism of $Y'$ with $Y$, hence $\varphi := \phi\circ A^{-1}$ is an isomorphism of $Y$ with $X_\ast$.\\
-        2. Note that 
-        $$\varphi([v]) = (v_1/l(v),\dots,v_n/l(v))$$
+        1. $X\cap H$ is closed in $X$, hence $Y:=X\setminus (X\cap H)$ is an open subvariety of $X$. Write $H=V\left(\sum_1^{n+1} a_ix_i\right)$ and let $A$ be the projective change of coordinates such that $H^A=H_\infty$. Then $Y\simeq Y':= X'\setminus(X'\cap H_\infty)$ for some $X'\subset \Pp^n$ projective variety not containing $H_\infty$. Note that $Y' = X'\cap U_{n+1}$, hence $X_\ast:= \varphi_{n+1}^{-1}(Y') \subset \A^n$ is an affine variety and $\varphi_{n+1}$, defines an isomorphism of $Y'$ with $X_\ast$, hence $\phi:=\varphi_{n+1}\circ A^{-1}$ is an isomorphism of $Y$ with $X_\ast$.\\
+        2. Note that
+        $$\phi([v]) = (v_1/l(v),\dots,v_n/l(v))$$
         for every $[v]\in Y$. We thus get a $K$-algebra isomorphism
         \begin{gather*}
             \widetilde{\varphi}: \Gamma(X_\ast) \rightarrow \Gamma(Y)\\
-            z = \mapsto z\left(\frac{x_1}{L},\dots,\frac{x_n}{L}\right) 
+            z = \mapsto z\left(\frac{x_1}{l},\dots,\frac{x_n}{l}\right) 
         \end{gather*}
-        It thus follows that $\Gamma(X_\ast)\simeq \Gamma(Y)=K\left[\frac{x_1}{L},\dots,\frac{x_n}{L}\right]= K\left[\frac{x_1}{L},\dots,\frac{x_{n+1}}{L}\right]$, where the first equality is due to $\widetilde{\varphi}=\ev_{\frac{x_1}{L},\dots,\frac{x_n}{L}}$ being surjective. 
+        where $l$ is the image of $L$ in $\gamma_h(X)$. It thus follows that $\Gamma(X_\ast)\simeq \Gamma(Y)=K\left[\frac{x_1}{l},\dots,\frac{x_n}{l}\right]= K\left[\frac{x_1}{l},\dots,\frac{x_{n+1}}{l}\right]$. 
     \end{proof}
     \begin{lemma}
         Let $X$ be a variety and $P,Q$ points on $X$. There is an open affine subvariety in $X$ containing $P$ and $Q$.
     \end{lemma}
     \begin{proof}
-        As in Corollary~\ref{ThereIsACoveringOfAffineVarieties} assume WLOG $X\subset\A^n$ is affine. Let $U\ni P$, $U'\ni Q$ be open neighborhoods in $X$ and set $U'':= U\cup U'$. Then $X\setminus U''$ is algebraic, hence by Corollary~\ref{KroneckerPolynomial} 3. we can pick $G_1,G_2\in K[\mathbf{x}]$ such that $G_i(P),G_i(Q)= 1$ and $G_i$ vanishing on every point in $X\setminus U''$. Consider $g_i := G_i + I(X)$. Then $P,Q\in X_{g_1g_2} \subset U''$ and we are done.   
+        As in Corollary~\ref{ThereIsACoveringOfAffineVarieties} assume WLOG $X\subset\Pp^n$. By a change of coordinates we may arrange that $P,Q$ are in the same open affine patch in $\Pp^n$, so we may assume that $X\subset \A^n$ is affine. Let $U\ni P$, $U'\ni Q$ be open neighborhoods in $X$ and set $U'':= U\cup U'$. Then $X\setminus U''$ is algebraic, hence by Corollary~\ref{KroneckerPolynomial} 3. we can pick $G_1,G_2\in K[\mathbf{x}]$ such that $G_i(P),G_i(Q)= 1$ and $G_i$ vanishing on every point in $X\setminus U''$. Consider $g_i := G_i + I(X)$. Then $P,Q\in X_{g_1g_2} \subset U''$ and we are done.   
     \end{proof}
     \begin{remark}
         By induction we find that there is an open affine neighborhood containing $k$ distinct points. 
@@ -706,7 +739,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         $$\alpha: \im\ \widetilde{\pi}\subset \Gamma\left(\psi^{-1}(U)\right)=\Gamma\left(\pi^{-1}\left(\phi^{-1}(U)\right)\right)\rightarrow \Gamma\left(\phi^{-1}(U)\right)$$
         be the inverse of $\widetilde{\pi}$ as a function onto its image, which exists by the assumption that $\pi$ is surjective due to the prior lemma. Let $f\in \Gamma(U)$. Then 
         $$(\widetilde{\phi}(f))(P) = (\alpha\widetilde{\pi}\widetilde{\phi}(f))(P)= (\alpha\widetilde{\psi}(f))(P),$$
-        and since $\alpha\widetilde{\psi}(f)\subset \Gamma\left(\phi^{-1}(U)\right)$, the result follows. 
+        and since $\alpha\widetilde{\psi}(f)\in \Gamma\left(\phi^{-1}(U)\right)$, the result follows. 
     \end{proof}
     \begin{lemma}\label{WeMayAssumeProjectiveVarietyNotContainedInHyperPlane}
         The map $\varphi^{(n)}:= \varphi: H_\infty \subset \Pp^n \rightarrow \Pp^{n-1}, [v_1,\dots,v_n,0]\mapsto [v_1,\dots,v_n]$ is an isomorphism. If $V$ is a variety in $\Pp^n$ contained in $H_\infty$, then $\left.\varphi\right|_{V}$ is an isomorphism to it image, which is a variety in $\Pp^{n-1}$. As a consequence, any projective variety is isomorphic to some closed subvariety $V\subset \Pp^n$ not contained in a hyperplane. 
@@ -719,17 +752,17 @@ We have thus far been studying algebraic geometry by studying systems of polynom
                 H_\infty \arrow[r,"\varphi"] & \Pp^{n-1}
             \end{tikzcd}
         $$
-        where $\phi$ is the isomorphism $(v,0)\mapsto v$, and $\pi,\tau$ are the appropriate restrictions of the quotient maps, which we note are surjective, open morphisms. Checking that $\varphi$ is a bijection is easy. The prior lemma shows that $\varphi$ and $\varphi^{-1}$ are morphisms. We know that isomorphisms map varieties to varieties, hence the second statement follows. The third statement follows from any projective variety being isomorphic to some projective variety $V\subset\Pp^n$ for some $n$. $V$ can be contained in at most $n$ hyperplanes (cf. Lemma~\ref{IntersectionOfSuffManyHyperplanesIsAPoint}) call these $H_1,\dots,H_m$. Alternately applying an appropriate change of coordinates and an appropriate choice $\varphi^{(i)}$, we get that the image of $V$ under this composition is a closed subvariety of $\Pp^{n-m}$ isomorphic to $V$.
+        where $\phi$ is the isomorphism $(v,0)\mapsto v$, and $\pi,\tau$ are the appropriate restrictions of the quotient maps, which we note are surjective, open morphisms. Checking that $\varphi$ is a bijection is easy. The prior lemma shows that $\varphi$ and $\varphi^{-1}$ are morphisms. We know that isomorphisms map varieties to varieties, hence the second statement follows. The third statement follows from any projective variety being isomorphic to some projective variety $V\subset\Pp^n$ for some $n$. $V$ can be contained in at most $n$ hyperplanes (cf. Lemma~\ref{IntersectionOfSuffManyHyperplanesIsAPoint}) call these $H_1,\dots,H_m$. Alternately applying an appropriate change of coordinates and an appropriate choice of $\varphi^{(i)}$, we get that the image of $V$ under this composition is a closed subvariety of $\Pp^{n-m}$ isomorphic to $V$.
     \end{proof}
     \subsection{Developing Theory}
     \subsubsection{Products \& Graphs}
         \begin{proposition}
-            Let $V\subset A$ and $W\subset B$ be closed subvarieties of some mixed spaces $A$ and $B$. Then $V\times W\subset A\times B$ is a closed subvariety. 
+            Let $V\subset A$ and $W\subset B$ be closed subvarieties of some multispaces $A$ and $B$. Then $V\times W\subset A\times B$ is a closed subvariety. 
         \end{proposition}
         \begin{proof}
             That $V\times W$ is a closed set in $A\times B$ is obvious since it is just given by the vanishing set of the polynomials defining $V$ and $W$ considered as elements of a larger polynomial ring. Suppose $V\times W=X_1\cup X_2$ with $X_i\subset A\times B$ closed. Set 
             $$U_i := \left\{ w\in W: V\times \{w\}\not\subset X_i \right\}.$$
-            Note that in general if a closed set $Z$ is contained in the union of two closed sets $Z_1$ and $Z_2$ but not in either of the two sets by themselves, then $Z = (Z_1\cap Z) \cup (Z_2\cap Z)$ is a composition of $Z$ into the union of two non-trivial closed sets, meaning $Z$ is reducible. Since $V\times \{w\}$ is a closed variety for every $w\in W$, it follows that $U_1\cap U_2 = \emptyset$. Since $W$ is a variety and no points in a variety can be separated by open sets, it follows that if $U_1$ and $U_2$ are open, then $U_1$ or $U_2$ is empty, hence $V\times W =X_1$ or $V\times W = X_2$. To prove that $U_i$ is open, note that for $X_i = V(F_1,\dots,F_k)$, there is for each $w\in U_i$ a $j$ and a $v\in V$ such that $F_j(v,w)\neq 0$. Then setting $G_j:= F_j(v,y)$. Then $w\in \{ u\in W: G_j(u)\neq 0\}\subset U_i$, which is an open neighborhood of $w$ in $U_i$, hence $U_i$ is open.  
+            Note that in general if a closed set $Z$ is contained in the union of two closed sets $Z_1$ and $Z_2$ but not in either of the two sets by themselves, then $Z = (Z_1\cap Z) \cup (Z_2\cap Z)$ is a composition of $Z$ into the union of two non-trivial closed sets, meaning $Z$ is reducible. Since $V\times \{w\}$ is a closed variety for every $w\in W$, it follows that $U_1\cap U_2 = \emptyset$. Since $W$ is a variety and no points in a variety can be separated by open sets, it follows that if $U_1$ and $U_2$ are open, then $U_1$ or $U_2$ is empty, hence $V\times W =X_1$ or $V\times W = X_2$. To prove that $U_i$ is open, note that for $X_i = V(F_1,\dots,F_k)$, there is for each $w\in U_i$ a $j$ and a $v\in V$ such that $F_j(v,w)\neq 0$. Set $G_j:= F_j(v,y)$. Then $w\in \{ u\in W: G_j(u)\neq 0\}\subset U_i$, which is an open neighborhood of $w$ in $U_i$, hence $U_i$ is open.  
         \end{proof}
         \begin{remark}
             The product of open subvarieties $X\times Y \subset V\times W$ is an open subvariety in $A\times B$ since 
@@ -755,7 +788,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             3. In the case $X=\Pp^n$, $\Delta_X= V(x_iy_j-x_jy_i : 1\leq i,j\leq n+1)$. In the general case we may assume that $X\subset V\subset \Pp^n$ for some $n$ and some closed subvariety $V$, hence $X = V(x_iy_j-x_jy_i : 1\leq i,j\leq n+1) \cap V$ is closed. $\delta_X=(\id_X,\id_X)$ is a morphism whose inverse is $\pi_1$. It follows that $\Delta_X$ is irreducible.
         \end{proof}
         \begin{corollary}\label{SetOnWhichMorphismAgreeIsClosedAndIfMorphismsAgreeOnDenseSetThenTheyAgreeEverywhere}
-            If $\varphi,\phi: X\rightarrow Y $ are morphisms, then $\{ x\in X: f(x)=g(x)\}$ is closed in $X$. If $f$ and $g$ agree on a dense set, then $f=g$.
+            If $\varphi,\phi: X\rightarrow Y $ are morphisms, then $\{ x\in X: \varphi(x)=\phi(x)\}$ is closed in $X$. If $\varphi$ and $\phi$ agree on a dense set, then $\varphi=\phi$.
         \end{corollary}
         \begin{proof}
             The set in question is equal to $(\varphi,\phi)^{-1}(\Delta_Y)$. Let $A$ be a dense set on which $\varphi$ and $\phi$ agree. Then $A\subset \{x\in X: \varphi(x)=\phi(x)\}$, hence $X=\cl(A)=\cl(\{x\in X: \varphi(x)=\phi(x)\})=\{x\in X: \varphi(x)=\phi(x)\}.$
@@ -794,13 +827,14 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         \end{proposition}
         \begin{proof}
             1. Indeed, define $\iota_U: U\cap V\rightarrow U, u\mapsto u$ and $\iota_V: U\cap V\rightarrow V, v\mapsto v$. Note that $\iota_U(x)=\iota_V(x)$ for every $x\in U\cap V$, hence $(\iota_U,\iota_V)(x)\in \Delta_X$ and clearly $(\iota_U,\iota_V)(x)\in U\times V$. Define $\varphi := \left.\pi_1\right|_{U\times V\cap \Delta_X}$. This is easily seen to be the inverse of $(\iota_U,\iota_V)$.\\
-            2. Pick $V',W'\subset \A^n$ affine varieties such that $V\overset{\varphi}{\simeq}V'$ and $W\overset{\phi}{\simeq}$. The inverse of $\left.\varphi\times \phi\right|_{U\times V}\cap \Delta_X$ is $\left.\varphi^{-1}\times \phi^{-1}\right|_{U'\times V'\cap \Delta_{\A^{2n}}}$ By 1. $U\cap V\simeq U\times V\cap \Delta_X \simeq V'\times W'\cap \Delta_{\A^{2n}}$.
+            2. Pick $V',W'\subset \A^n$ affine varieties such that $V\overset{\varphi}{\simeq}V'$ and $W\overset{\phi}{\simeq} W'$. The inverse of $\left.\varphi\times \phi\right|_{U\times V}\cap \Delta_X$ is $\left.\varphi^{-1}\times \phi^{-1}\right|_{U'\times V'\cap \Delta_{\A^{2n}}}$ By 1. $U\cap V\simeq U\times V\cap \Delta_X \simeq V'\times W'\cap \Delta_{\A^{2n}}$.
         \end{proof}
         \begin{proposition}
-            Let $d\geq 1$ and set $N:=\frac{(d+1)(d+2)}{2}$ and let $M_1,\dots,M_d$ be the monomials generating $V(d,3)$. Consider $V:= V\left(\sum_1^N M_it_i\right)\subset \Pp^2\times\Pp^{N-1}$. Let $\pi$ denote the morphism given by restriction to $V$ of the projection onto the first coordinate. For each $[v]\in \Pp^{N-1}$, let $C_{[v]}:=V\left(\sum_1^N M_i\right)\subset \Pp^{N-1}$ denote the associated curve. Then $V$ is an irreducible algebraic set in $\Pp^{2}\times\Pp^{N-1}$ and $\pi^{-1}([v])=C_{[v]}\times \{[v]\}$, hence every curve can be identified with some fiber under $\pi$. 
+            Let $d\geq 1$ and set $N:=\frac{(d+1)(d+2)}{2}$ and let $M_1,\dots,M_d$ be the monomials generating $V(d,3)$. Consider $V:= V\left(\sum_1^N M_it_i\right)\subset \Pp^2\times\Pp^{N-1}$. Let $\pi$ denote the morphism given by restriction to $V$ of the projection onto the first coordinate. For each $[v]\in \Pp^{N-1}$, let $C_{[v]}:=V\left(\sum_1^N v_iM_i\right)\subset \Pp^{N-1}$ denote the associated curve. Then $V$ is an irreducible algebraic set in $\Pp^{2}\times\Pp^{N-1}$ and $\pi^{-1}([v])=C_{[v]}\times \{[v]\}$, hence every curve can be identified with some fiber under $\pi$. 
         \end{proposition}
         \begin{proof}
-            $V$ being irreducible follows from the polynomial in question being linear in $K[x,y,z][t_1,\dots,t_N]$. Suppose $(P,[v])\in \pi^{-1}([v])\subset V$. Then $P\in V\left(\sum_1^N v_iM_i\right)$. Conversely if $(P,[v])\in C_{[v]}\times \{[v]\}$, then $P\in V\left( \sum_1^N v_iM_i\right)$, hence $(P,[v])\in V$, hence $(P,[v])\in \pi^{-1}([v])$.
+            $V$ being irreducible follows from the polynomial in question being linear in\\ 
+            $K[x,y,z][t_1,\dots,t_N]$. Suppose $(P,[v])\in \pi^{-1}([v])\subset V$. Then $P\in V\left(\sum_1^N v_iM_i\right)$. Conversely if $(P,[v])\in C_{[v]}\times \{[v]\}$, then $P\in V\left( \sum_1^N v_iM_i\right)$, hence $(P,[v])\in V$, hence $(P,[v])\in \pi^{-1}([v])$.
         \end{proof}
         The following lemma is useful
         \begin{lemma}(Main Theorem of Elimination Theory)
@@ -857,7 +891,6 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             \Pp^{n} \arrow[r, "\phi"] & \Pp^m
         \end{tikzcd}$$
         where $\psi: v\mapsto \left(v_{n+1}f_1^\ast(v),\dots,v_{n+1}f_m^\ast(v)\right)$, due to Lemma~\ref{DescentingMorphismToMorphismViaOpenSurjectiveMorphism}.
-        
         For the next result we will need some notation. Let the Zariski closure in $\Pp^n(\C)$ and $\A^m(\C)$ be denoted by $\cl_{\pazocal{Z}}$ and the closure with respect to respectively the quotient topology on $\Pp^{n}(\C)$ induced by the Euclidean topology on $\A^{m+1}(\C)\setminus 0$ and the Euclidean topology on $\A^m(\C)$ be denoted by $\cl_{\pazocal{E}}$. We write $\cl_{\pazocal{Z},A}$, $\cl_{\pazocal{E},A}$ for the closure in some affine or projective subset $A$ with respect to respectively the Zariski and Euclidean topologies.
         \begin{lemma}
             Set $K=\C$ and let $f_1,\dots,f_m\in K[x_1,\dots,x_n]$. Then $\cl_{\pazocal{Z}}(\im \ \varphi) = \cl_{\pazocal{E}}(\im \ \varphi)$.
@@ -946,7 +979,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             Consider a function field $K(\alpha_1,\dots,\alpha_n)\supset K$ in $r$ variables. There is an affine variety $V\subset \A^n$ such that we may identify $K(\alpha_1,\dots,\alpha_n)$ with $K(V)$.
         \end{proposition}
         \begin{proof}
-            $K[\alpha_1,\dots,\alpha_n]\simeq K[x_1,\dots,x_n]/\ker \ \ev_{\alpha_1,\dots,\alpha_n}$, and since $K[\alpha_1,\dots,\alpha_n]$ is an integral domain, $\ker\ \ev_{\alpha_1,\dots,\alpha_n}$ is prime hence setting $V:=V(\ker \ \ev_{\alpha_1,\dots,\alpha_n})$ we are done. 
+            $K[\alpha_1,\dots,\alpha_n]\simeq K[x_1,\dots,x_n]/\ker \ \ev_{\alpha_1,\dots,\alpha_n}$, and since $K[\alpha_1,\dots,\alpha_n]$ is an integral domain, $\ker\ \ev_{\alpha_1,\dots,\alpha_n}$ is prime, so upon setting $V:=V(\ker \ \ev_{\alpha_1,\dots,\alpha_n})$, we are done. 
         \end{proof}
         \begin{proposition}\label{WeMayIdentifyAFuntionFieldWithFunctionFieldOverVariety}
             ($\Char \ K=0$). In the same setup as above, we may find an affine variety $V\subset \A^{r+1}$ such that $K(\alpha_1,\dots,\alpha_n)$ may be identified with $K(V)$.
@@ -962,6 +995,9 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         An equivalence class of such morphisms is called \textit{a rational map from $X$ to $Y$}.\\
         We define the \textit{domain} of a rational map $\Phi$ to be the union over the domain of all representatives of $\Phi$. We denote this by $\dom \ \Phi$
     \end{definition}
+    \begin{example}
+        A regular function is an example of a rational function. 
+    \end{example}
     \begin{remark}
         Given a rational map $\Phi=[\varphi_\alpha]$ with domain $U$ pick for each $P\in U$, an $\alpha_P$ such that $P\in U_{\alpha_P}$. We define 
         \begin{gather*}
@@ -1008,7 +1044,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         We define composition of two rational maps $\Phi: X\dottedarrow Y$ and $\Psi: Y\dottedarrow Z$ to be 
         $$\Psi\circ \Phi = [\Psi \circ \left.\Phi\right|_{\Phi^{-1}(\dom\ \Psi)}] : X\dottedarrow Z,$$
         where $\Phi^{-1}(\dom \ \Psi)$ is to be interpreted to be the preimage of $\dom\ Y$ under the map $\Phi: \dom \ \Phi \rightarrow Y$. One readily verifies that this operation is associative and that $[\id_A : A \rightarrow A]$ is the identity with respect to this composition. Note that since we consider dominant rational maps, $\dom \ \Psi \cap \Phi(\dom \ \Phi)\neq \emptyset$, hence composition is never the empty map, which is not always the case when we consider varieties with  rational maps. The functor is contravariant. Indeed, consider $\Phi: X\dottedarrow Y$, $\Psi: Y\dottedarrow Z$. Then
-        $$\widetilde{\Psi\circ \Phi}= \widetilde{ \Psi \circ \left.\Phi\right|_{\Phi^{-1}(\dom\ \Psi)}} = \widetilde{\left.\Phi\right|_{\Phi^{-1}(\dom\ \Psi)}}\circ \widetilde{\Psi} = \widetilde{\Phi}\circ \widetilde{\Psi}.$$
+        $$\widetilde{\Psi\circ \Phi}= \widetilde{\Psi \circ \left.\Phi\right|_{\Phi^{-1}(\dom\ \Psi)}} = \widetilde{\left.\Phi\right|_{\Phi^{-1}(\dom\ \Psi)}}\circ \widetilde{\Psi} = \widetilde{\Phi}\circ \widetilde{\Psi}.$$
         In the second to last equality, we use faithfulness of the functor $(R, \sigma : S\rightarrow T) \mapsto (Q(R),\sigma : Q(S)\rightarrow Q(T))$. It is obvious that $\widetilde{\id_A} = \id_{K(A)}$. It follows from Proposition~\ref{InducedMapFromDominantRationalMaps} 3. that this functor is fully faithful.
     \end{proof}
     \begin{corollary}
@@ -1037,7 +1073,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         $$\dim \ Y = \trdeg\ K(Y)\leq \trdeg\ K(X) = \dim \ X.$$
     \end{proof}
     \begin{proposition}
-        Ever $r$-dimensional variety $X$ over a characteristic $0$ field {\Large How to generalize to positive characteristic? Every function field being seperable would suffice} is birationally equivalent to a hypersurface in $\A^{n+1}$ or $\Pp^{n+1}$.
+        Every $r$-dimensional variety $X$ over a characteristic $0$ field {\Large How to generalize to positive characteristic? Every function field being seperable would suffice} is birationally equivalent to a hypersurface in $\A^{n+1}$ or $\Pp^{n+1}$.
     \end{proposition}
     \begin{proof}
         By definition $K(X)$ is a function field in $r$ variables. We proceed as in the proof of Proposition~\ref{WeMayIdentifyAFuntionFieldWithFunctionFieldOverVariety}. It follows that we just need to argue that $\ker \ \ev_\alpha$ is principal. Indeed let $f$ be the minimal irreducible monic polynomial in $K(y_1,\dots,y_r)[x]$ vanishing on $\alpha$. We may assume that the for each non-zero coefficient of $f$ the numerator and denominator are co-prime. We may find a $g=cf\in K[y_1,\dots,y_r,x]\setminus 0$ where $c$ is the least common multiple of the denominators and this is primitive in $K[y_1,\dots,y_r][x]$ (cf. Lemma~\ref{CanConstructPrimitivePolynomialOverUFDFromMonicPolynomialOverQuotientField}) and vanishes on $\alpha$, so $g\in \ker\ \ev_\alpha$. Let $h\in \ker\ \ev_\alpha$. Then $h$ is in the kernel of the map $K(y_1,\dots,y_r)[x]\rightarrow K(X), a\mapsto a(\alpha)$ which is generated by $f$, hence $f\mid h$, which implies that $g=cf \mid h$ in $K(y_1,\dots,y_n)[x]$ and so by Gauss' lemma (cf. Lemma~\ref{GaussLemma}) $g\mid h$ in  $K[y_1,\dots,y_n,x].$ We thus get that $\ker\ \ev_\alpha = \langle g\rangle$. So $K(X)\simeq K(V(g))$, hence $X\simeq V(g)$, since $(Y,\Phi : Z\dottedarrow W)\mapsto (K(Y), \widetilde{\Phi} : K(W) \hookrightarrow K(Z))$ is fully faithful. The projective version is accomplished by taking projective closure. 
@@ -1046,7 +1082,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         Suppose $X,Y$ are varieties, $P\in X, Q\in Y$ with $\pazocal{O}_P(X)$ is $K$-algebra isomorphic to $\pazocal{O}_Q(Y)$. Then there are open neighborhoods $U\ni P$ and $V\ni Q$ such that $U\simeq V$.
     \end{proposition}
     \begin{proof}
-        WLOG $X,Y$ are affine. First note that $\sigma:\pazocal{O}_Q(Y)\simeq \pazocal{O}_P(X)$ implies $\sigma: K(Y)\simeq K(X)$. Then there is a unique birational $\Phi : X\BE Y$ such that $\widetilde{\Phi}=\sigma$. Since $\pazocal{O}_P(X)$ dominates $\sigma(\pazocal{O}_Q(Y))$ it follows that $Q=\Phi(P)$ (cf. Proposition~\ref{InducedMapFromDominantRationalMaps} 2.). As in the proof of Proposition~\ref{InducedMapFromDominantRationalMaps} We may find $b\in \Gamma(X)$ and a $y\in \Gamma(Y)$ such that $\sigma(\Gamma(Y))\subset \Gamma(X_b)$ and $\sigma^{-1}(\Gamma(X))\subset \Gamma(Y_d)$. Then we also have that $\sigma(\Gamma(Y))\subset \Gamma((X_b)_{\sigma(d)})$ and that $\sigma^{-1}(\Gamma(X))\subset \Gamma((Y_d)_{\sigma^{-1}(b)})$. In general recall that $\Gamma(Z_\mu)=\Gamma(Z)[1/\mu]$ for $Z$ affine (cf. Proposition~\ref{ConstructionOfAffineNeighborhood}). Hence if $f=\frac{a}{d^n\sigma^{-1}(b)^m}\in \Gamma((Y_d)_{\sigma^{-1}(b)})$, then $\sigma(f)=\frac{\sigma(a)}{\sigma(d)^nb^m}\in \Gamma((X_b)_{\sigma(d)})$. Conversely, if $g=\frac{c}{\sigma(d)^nb^m}\in \Gamma((X_b)_{\sigma(d)})$, we get that $g=\sigma\left(\frac{\sigma^{-1}(c)}{d^n\sigma^{-1}(b)^m}\right).$ This means $\sigma : \Gamma((Y_d)_{sigma^{-1}(b)})\rightarrow \Gamma((X_b)_{\sigma(d)})$ is a $K$-algebra isomorphism, which is induced by a representative $\varphi: U:=(X_b)_{\sigma(d)}\overset{\sim}{\rightarrow} V:=(Y_d)_{\sigma^{-1}(b)}$ of $\Phi$. Note that by the construction of $b$, $b(P)\neq 0$ and $\sigma(d)(P)= \widetilde{\Phi}(d)(P)=d(\Phi(P))=d(Q)\neq 0$ by the construction of $d$, so $P\in U$. The fact that $Q=\Phi(P)=\varphi(Q)$ shows that $Q\in V$. 
+        WLOG $X,Y$ are affine. First note that $\sigma:\pazocal{O}_Q(Y)\simeq \pazocal{O}_P(X)$ implies $\sigma: K(Y)\simeq K(X)$. Then there is a unique birational $\Phi : X\BE Y$ such that $\widetilde{\Phi}=\sigma$. Since $\pazocal{O}_P(X)$ dominates $\sigma(\pazocal{O}_Q(Y))$ it follows that $Q=\Phi(P)$ (cf. Proposition~\ref{InducedMapFromDominantRationalMaps} 2.). As in the proof of Proposition~\ref{InducedMapFromDominantRationalMaps} We may find $b\in \Gamma(X)$ and a $y\in \Gamma(Y)$ such that $\sigma(\Gamma(Y))\subset \Gamma(X_b)$ and $\sigma^{-1}(\Gamma(X))\subset \Gamma(Y_d)$. Then we also have that $\sigma(\Gamma(Y))\subset \Gamma((X_b)_{\sigma(d)})$ and that $\sigma^{-1}(\Gamma(X))\subset \Gamma((Y_d)_{\sigma^{-1}(b)})$. In general recall that $\Gamma(Z_\mu)=\Gamma(Z)[1/\mu]$ for $Z$ affine (cf. Proposition~\ref{ConstructionOfAffineNeighborhood}). Hence if $f=\frac{a}{d^n\sigma^{-1}(b)^m}\in \Gamma((Y_d)_{\sigma^{-1}(b)})$, then $\sigma(f)=\frac{\sigma(a)}{\sigma(d)^nb^m}\in \Gamma((X_b)_{\sigma(d)})$. Conversely, if $g=\frac{c}{\sigma(d)^nb^m}\in \Gamma((X_b)_{\sigma(d)})$, we get that $g=\sigma\left(\frac{\sigma^{-1}(c)}{d^n\sigma^{-1}(b)^m}\right).$ This means $\sigma : \Gamma((Y_d)_{\sigma^{-1}(b)})\rightarrow \Gamma((X_b)_{\sigma(d)})$ is a $K$-algebra isomorphism, which is induced by a representative $\varphi: U:=(X_b)_{\sigma(d)}\overset{\sim}{\rightarrow} V:=(Y_d)_{\sigma^{-1}(b)}$ of $\Phi$. Note that by the construction of $b$, $b(P)\neq 0$ and $\sigma(d)(P)= \widetilde{\Phi}(d)(P)=d(\Phi(P))=d(Q)\neq 0$ by the construction of $d$, so $P\in U$. The fact that $Q=\Phi(P)=\varphi(Q)$ shows that $Q\in V$. 
     \end{proof}
     \begin{proposition}
         Let $C$ be a projective curve, $P\in C$. There is a birational map $\Phi: C \dottedarrow C'$ where $C'$ is projective plane curves such that $\Phi^{-1}(\Phi(P))=P$. 
@@ -1086,7 +1122,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         \begin{definition}
             A curve is called \textit{non-singular} if every point on it is simple.
         \end{definition}
-        {\Large Where goes this?}
+       
         \begin{definition}
             Let $L\supset K$ be a field extension, and $A$ a local ring. We say that $A$ is \textit{a local ring of $L$} if it is contained in $L$, $Q(A)=K$ and $A\supset K$. Similarly, \textit{a DVR of $L$} is a DVR that is a local ring of $L$.  
         \end{definition}

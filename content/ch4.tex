@@ -681,7 +681,7 @@
             which are polynomials in $K[\mathbf{x_1},\mathbf{x_2}]$. Then $$S^{-1}(W)= V(g_1,g_2,\dots,g_m).$$ 
         \end{lemma}
         \begin{proof}
-            Indeed, substituting $v$ into $g_i$ is the same as substituting $S(v)$ into $f_i$, hence 
+            Indeed, $g(v)=f(S(v))$, hence 
             $$v\in S^{-1}(W) \iff  g_i(v) = f_i(S(v))= 0 \iff v\in V(g_1,\dots,g_m).$$
         \end{proof}
         \begin{lemma}\label{SegreEmbeddingHasImageWhichIsVariety}
@@ -691,7 +691,9 @@
             Let $S(v)\in S(\Pp^{n_1}\times \Pp^{n_2})$. Then 
             $$\ev_{S(v)}(y_{ij}y_{kl}-y_{il}y_{kj})=v_{1i}v_{2j}v_{1k}v_{2l}-v_{1i}v_{2l}v_{1k}v_{2j}=0.$$
             Conversely, if $v\in V$, then $v_{ij}v_{kl}=v_{il}v_{kj}$. For some pair $k,l$, $v_{kl}\neq0$. Then for any $(i,j)\neq (k,l)$, 
-            $$v_{ij}=(v_{il}v_{kj})/v_{kl}$$. Define $w_{1i} = v_{il}/v_{kl}$ and $w_{2j}=v_{kj}/v_{kl}$. Define $w_1 = (w_{11},\dots,w_{1,n_1+1})$ and $w_2 = (w_{21},\dots,w_{2,n_2+1})$. Consider $\overline{S}: \A^{n_1}\setminus0\times \A^{n_2}\setminus0 \rightarrow \A^{n_1+n_2+n_1n_2}\setminus0, (u_1,u_2)\mapsto (u_{1i}u_{2j})$. Then 
+            $$
+                v_{ij}=(v_{il}v_{kj})/v_{kl}.
+            $$ Define $w_{1i} = v_{il}/v_{kl}$ and $w_{2j}=v_{kj}/v_{kl}$. Define $w_1 = (w_{11},\dots,w_{1,n_1+1})$ and $w_2 = (w_{21},\dots,w_{2,n_2+1})$. Consider $\overline{S}: \A^{n_1}\setminus0\times \A^{n_2}\setminus0 \rightarrow \A^{n_1+n_2+n_1n_2}\setminus0, (u_1,u_2)\mapsto (u_{1i}u_{2j})$. Then 
             $$\overline{S}(w_1,w_2)_{ij}= w_{1i}w_{2j}= v_{il}v_{kj}/v_{kl} = v_{ij}\implies S([w_1],[w_2])=[\overline{S}(w_1,w_2)] = [v].$$
             In particular if $([v_1],[v_2])\in U_i\times U_j$, then 
             $$\overline{S}(v_1,v_2)_{ij}=v_{1i}v_{2j}\neq 0 \implies S([v_1],[v_2])=[\overline{S}(v_1,v_2)]\in U_{ij}.$$
