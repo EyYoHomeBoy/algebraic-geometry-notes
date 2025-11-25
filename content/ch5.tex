@@ -1187,27 +1187,52 @@ We have thus far been studying algebraic geometry by studying systems of polynom
     \subsubsection{Blowing up Points in $\A^2$}
         We start by working through an example to sketch the idea. 
         \begin{example}
-            Consider the curve $C:=V(y^2-x^2(x+1))$, $P:=(0,0)\in \A^2$, $U:=\{(a,b)\in \A^2: a\neq 0\}$. Consider a morphism 
+            Consider the curve $C:=V(y^2-x^2(x+1))$, $P:=(0,0)\in \A^2$, $U:=\{(a,b)\in \A^2: a\neq 0\}=\A^2\setminus V(x)$. Consider a morphism 
             \begin{gather*}
                 \varphi: U \rightarrow \A^1\\
                 (a,b)\mapsto \frac{b}{a}
             \end{gather*}
-            In the section introducing algebraic groups we saw that multiplication and taking multiplicative inverese are morphisms and $\varphi$ is just the composition, $(a,b)\mapsto (a^{-1},b)\mapsto a^{-1}b$. Set $G:=G_\varphi\subset U\times \A^1\subset \A^3$ (the graph of $\varphi$). Then $G=\left\{(a,b,c)\in \A^3 : a\neq 0,b=ac\right\}$. Set $B:=\left\{ (a,b,c)\in \A^3 : b = ac \right\}.$ Define $\pi : B \rightarrow \A^2, (a,b,c)\mapsto (a,b)$. Note that $\pi(B) = U\cup \{P\}$. Set $L:= \pi^{-1}(P) = \left\{(0,0,c)\in \A^2: c\in K\right\}$ and note that $\pi^{-1}(U)=G$. Then $\left.\pi\right|_{\pi^{-1}(U)} : G\rightarrow U$, defines an isomorphism with inverse $(a,b)\mapsto (a,b,b/a)$. Futhermore, $G\subset \A^3$ is an open subvariety of $B$ which is an affine variety. Then $\cl(G)=B$. We also see that $L$ is a closed subvariety of $B$. Note that away from $P$, points in $C$ are in $U$, hence $\pi^{-1}(C\setminus \{P\})=\left\{(a,b,c)\in \A^3 : b^2=a^2(a+1), b=ac\right\}\setminus L$. Upon setting $C' = \cl_B\left(\pi^{-1}(C\setminus \{P\})\right)$ the hope is that $C'$ is a nonsingular curve with two points lying over $P$. Indeed, we can check that 
+            In the section introducing algebraic groups we saw that multiplication and taking multiplicative inverese are morphisms and $\varphi$ is just the composition, $(a,b)\mapsto (a^{-1},b)\mapsto a^{-1}b$. Set 
+            $$
+                G:=G_\varphi\subset U\times \A^1\subset \A^3
+            $$ 
+            (the graph of $\varphi$). Then 
+            $$
+                G=\left\{(a,b,c)\in \A^3 : a\neq 0,b=ac\right\}.
+            $$ 
+            Set 
+            $$
+                B:=\left\{ (a,b,c)\in \A^3 : b = ac \right\}.
+            $$ 
+            Then $G=B\setminus V(x)$. Define 
+            \begin{gather*} 
+                \pi : B \rightarrow \A^2\\
+                (a,b,c)\mapsto (a,b)
+            \end{gather*} 
+            We see that for $(a,c)\in \A^2$ that $(a,ac)\in U$ when $a\neq 0$ and $(a,ac)=P$ when $a=0$, hence  
+            $$
+                \pi(B) = U\cup \{P\}.
+            $$ 
+            Set $L:= \pi^{-1}(P) = \left\{(0,0,c)\in \A^2: c\in K\right\}$ and note that $\pi^{-1}(U)=G$. Then 
+            $$
+                \left.\pi\right|_{\pi^{-1}(U)} : G\rightarrow U
+            $$ 
+            defines an isomorphism with inverse $(a,b)\mapsto (a,b,b/a)$. Futhermore, $G\subset \A^3$ is an open subvariety of $B$ which is an affine variety. Then 
+            $$
+                \cl(G)=B.
+            $$ 
+            We also see that $L$ is a closed subvariety of $B$. Note that away from $P$, points in $C$ are in $U$, hence $\pi^{-1}(C\setminus \{P\})=\left\{(a,b,c)\in \A^3 : b^2=a^2(a+1), b=ac\right\}\setminus L$. Upon setting $C' = \cl_B\left(\pi^{-1}(C\setminus \{P\})\right)$ the hope is that $C'$ is a nonsingular curve with two points lying over $P$. Indeed, we can check that 
             $$
                 C' = \cl_B\left(V(y^2-x^2(x+1))\setminus L\cap B\right) =  V(z^2-(x+1))\cap B = V(z^2-(x+1))\cap V(y-xz)
             $$
-            Call the right-hand side $V$. Suppose $(a,b,c)\in V$ with $a\neq 0$. Then $c=\frac{b}{a}$, hence 
-            $$
-                c^2 = \frac{b^2}{a^2}=\frac{a^2(a+1)}{a^2}=a+1\implies (a,b,c)\in V(z^2-(x+1))\cap B.
-            $$ 
-            So $V:= V(z^2-(x+1))\cap B$ is closed set in $B$. Consider the morphism 
+            Call the right-hand side $V$.
             \begin{gather*}
                 \phi : \A^2 \rightarrow B\\
                 (a,c)\mapsto (a,ac,c)
             \end{gather*}
-            this is an isomorphism with inverse $(a,b,c)\mapsto (a,c)$. Restricting $\phi$ to $V(z^2-(x+1))\subset \A^2$ we get that $V(z^2-(x+1))\cap B$ is a proper closed subvariety of $B$ of dimension $1$. Then given $W$, an arbitrary closed subvariety of $B$ contained in $V$, contaning $V(y^2-x^2(x+1))\setminus L\cap B$, we get $\dim\ = W = 1=\dim \ V$, since $V(y^2-x^2(x+1))\setminus L\cap B$ is an infinite set. Since the closed subvarities of $B$ form a closed basis for the Zariski topology on $B$, it follows that $V$ is the smallest closed set containing $V(y^2-x^2(x+1))\setminus L\cap B$, which means $C'=V$. We see that $C'$ intersects $L$ in $(0,0,\pm 1)$. It is not hard to show that $C'$ and $C$ are birationally equivalent, we will see this once we generalise the approach given in this example. The main take away from this example is that we have taken the double point $P$ and essentially "split" it into two points which we moved along $L$, taking $C$ with us in the process, in a birational way such that the resulting curve is algebraic. The curve $C'$, however, is not a plane curve. We can resolve this projecting $C'$ onto the $(x,z)$ plane. The image of this projection is the irreducible algebraic set $V(z^2-(x+1))$. The inverse $V(z^2-(x+1))\rightarrow C'$ is given by $(v,u)\mapsto (v,vu,u)$. We thus get a birational equivalence of the elliptic curve $C$ to the non-singular parabola $V(z^2-(x+1))$. We have thus resolved the multiple point of $C$.   
+            this is an isomorphism with inverse $(a,b,c)\mapsto (a,c)$. Restricting $\phi$ to $V(z^2-(x+1))\subset \A^2$ we get that $V(z^2-(x+1))\cap B$ is a proper closed subvariety of $B$ of dimension $1$. Then given $W$, an arbitrary closed subvariety of $B$ contained in $V$, contaning $V(y^2-x^2(x+1))\setminus L\cap B$, we get $\dim\ = W = 1=\dim \ V$, since $V(y^2-x^2(x+1))\setminus L\cap B$ is an infinite set. Since the closed subvarities of $B$ form a closed basis for the Zariski topology on $B$, it follows that $V$ is the smallest closed set containing $V(y^2-x^2(x+1))\setminus L\cap B$, which means $C'=V$. We see that $C'$ intersects $L$ in $(0,0,\pm 1)$. The main take away from this example is that we have taken the double point $P$ and essentially "split" it into two points which we moved along $L$, taking $C$ with us in the process, in a birational way such that the resulting curve is algebraic. Moreover, $C'$ is isomorphic to the non-singular curve $V(z^2-(x+1))$, so $C$ is birationally equivalent to this curve since $\pi : \pi^{-1}(C\setminus \{P\})\rightarrow C\setminus \{P\}$ defines an isomorphims and hence a birational map $C' \dottedarrow C$. Moreover,  $\phi: V(z^2-(x+1))\rightarrow C'$ defines an isomorphism. Then $ \pi\phi : V(z^2-(x+1))\dottedarrow C$ is a birational equivalence.   
         \end{example}
-        To generalize the approach in the example, keep $B$, $P$,$\pi$, $U$, $L$ and $\phi$ as already defined. We set $C_0 := C\cap U$. We define a morphism
+        To generalize the approach in the example, Let $C=V(f)\subset \A^2$ be some affine plane curve, keep $B$, $P$,$\pi$, $U$, $L$ and $\phi$ as already defined. We set $C_0 := C\cap U$. We define a morphism
         \begin{gather*}
             \psi := \pi\phi : \A^2 \rightarrow \A^2\\
             (a,c) \mapsto (a,ac,c)\mapsto (a,ac)
@@ -1217,7 +1242,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             \varphi := \left.\psi\right|_{C'} : C'\rightarrow C 
         $$
         This is well-defined by continuity of $\psi$.
-        Then $\varphi$ is a birational morphism of $C'$ with $C$ by restricting it to $C'\setminus E$. Note $\varphi$ induces an automorphism $K(x,y)=K(C)\simeq K(C')=K(x,z)$, where $y$ is identified with $xz$, i.e $z:= \overline{y}/\overline{x}\in K(C)$
+        Then $\varphi$ is a birational equivalence of $C'$ with $C$ by restricting it to $C'\setminus E$. Note $\varphi$ induces an automorphism $K(x,y)=K(C)\simeq K(C')=K(x,z)$, where $y$ is identified with $xz$, i.e $z:= y/x\in K(C)$. We need to prove two things: Firstly, that $C'$ is actually an affine plane curve. Secondly: that $C'$ has nicer multiple points. The phrasing "nicer" is of course informal. One could hope for $C'$ to be non-singular. This however is not the case, but each point in preimage of $P$ under $\varphi$ will have only one tangent counted with multiplicity. 
         \begin{lemma}
             Write $C=V(f)$, 
             $$f=\sum_r^n f_i$$
@@ -1271,10 +1296,95 @@ We have thus far been studying algebraic geometry by studying systems of polynom
            If $P$ is an ordinary multiple point, then $r_i=1$ for all $i$, hence $m_{P_i}(C')=1$, hence $P_i$ is simple.  
         \end{proof}
         \begin{lemma}
-            There is an open affine neighborhood $W$ of $P$ in $C$ such that $W':=\varphi^{-1}(W)$ is an affine open subvariety in $C'$, $\varphi(W')=W$, $\Gamma(W')$ is module finite over $\Gamma(W)$ and $x^{r-1}\Gamma(W')\subset \Gamma(W)$. 
+            There is an open affine neighborhood $W$ of $P$ in $C$ such that $W':=\varphi^{-1}(W)$ is an affine open subvariety in $C'$, $\varphi(W')=W$, $\Gamma(W')$ is module finite over $\Gamma(W)$ and $x^{r-1}\Gamma(W')\subset \Gamma(W)$. Here we have implicitly made the identification of $\Gamma(W)$ as a subring of $K(C)$. 
         \end{lemma}
         \begin{proof}
-            
+            Write 
+            $$
+                f = \sum_{(i,j) : i+j\geq r} a_{ij}x^i y^j.
+            $$
+            Set
+            $$
+                h := \sum_{j\geq r} a_{0j} y^{j-r}
+            $$ 
+            and denote the image of $h$ in $\Gamma(C)$ by $\overline{h}$. Note that 
+            $$
+                h(P)=h(0,0) = a_{0r}= 1\neq 0,
+            $$
+            hence $P\in C_{\overline{h}}$. Set $W := C_{\overline{h}}$. We claim that $W'=C'_{\overline{h}}$. Indeed, if $Q=(v_1,v_2)\in \varphi^{-1}(W)$. $h(v_1,v_1v_2)\neq 0$. Upon thinking of $\overline{h}$ as an element of $K(C')$, it follows that $Q\in C'_{\overline{h}}$. If $Q=(v_1,v_2)\in C'_{\overline{h}}$, then $\overline{h}(v_1,v_2)=h(v_1,v_1v_2)\neq 0$, note then $\widetilde{\varphi}(\overline{h})\in K(C)$ does not vanish on $Q$, hence $Q\in \varphi^{-1}(W)$.\\
+            Note that from the $K$-algebra map 
+            \begin{gather*}
+                \widetilde{\varphi}: \Gamma(W')\rightarrow \Gamma(W)\\
+            \end{gather*}
+            takes a rational function $f\in \Gamma(W')$ to the rational function $f(x,xz)\in \Gamma(W)[z]$. Conversely, for $f = \sum_0^d f_i(x,y)z^i\in \Gamma(W)[z]$ consider $g= \sum_0^d f_i(x,z) \left(\frac{z}{x}\right)^i$. Then 
+            $$
+                \widetilde{\varphi}(g)=g(x,xz) = \sum_0^d f_i(x,xz) \frac{x^iz^i}{x^i} = \sum_0^d f_i(x,y) z^i = f
+            $$
+            It is then sufficient to prove that $z$ is integral over $\Gamma(W)$. Note that 
+            $$
+                f'(x,z)= \frac{f(x,xz)}{x^r} = \sum_{(i,j): i+j\geq r} a_{ij} x^{i+j-r}z^j = \sum_{(i,j) : i+j=r} a_{ij}y^{i+j-r}z^{r-i}.
+            $$
+            For $0<i<r$ set $b_i := \left(\sum_{j\geq r} a_{ij}y^{i+j-r}\right)/\overline{h}$ and $b_r = \left(\sum_{i,j\geq r} a_{ij} x^{i-r}y^j\right)/\overline{h}$. Note that for each $0<i<r$, 
+            $$
+                z^{r-i}b_i = \left(\sum_{j\geq r} a_{ij} x^{i+j-r}z^j \right)/\overline{h} 
+            $$
+            and that 
+            $$
+                b_r = \sum_{i,j\geq r} a_{ij} x^{i+j-r}z^j
+            $$
+            and lastly that 
+            $$
+                z^r\overline{h} = z^r\sum_{j\geq 0} a_{0j} y^{j-r} = z^r \sum_{j\geq 0} x^{0+j-r} z^j.
+            $$
+            It follows that 
+            $$
+                z^r + \sum_1^r b_i z^{r-i} = \frac{f'(x,z)}{\overline{h}} = 0. 
+            $$
+            Note in particular that this also shows that $\Gamma(W')$ is a finitely generated $\Gamma(W)$ module with generators $1,z,\dots,z^{r-1}$. Since for $i\leq r-1$, 
+            $$
+                x^{r-1}z^i = x^{r-1}\frac{y^i}{x^i}= x^{r-1-i}y^i\in \Gamma(W),
+            $$
+            it follows that $x^{r-1}\Gamma(W')\subset \Gamma(W)$.
+        \end{proof}
+        \begin{remark}
+            In general, if $U$ is an open neighborhood and $U'$ is an open set in $C'$ containing $\{P_1,\dots,P_s\}$. Construct $W$ as in the above proof and take $g\in \Gamma(W)$ such that $g(P)\neq 0$ and $g(Q)=0$ whenever $Q\in W\setminus U\cup \varphi(W'\setminus U')$. Then $W_g$ is an affine open neihborhood of $P$ contained in $U$ and $W'_g= \varphi^{-1}(W_g)$ is an affine open set contained in $U'$. We can thus choose $W$ and $W'$ in the above lemma arbitrarily small. 
+        \end{remark}
+        \begin{remark}
+            We can make it so that $W$ includes any finite set of points on $C$. First note that if $Q\in C_0\setminus v(h)$, this is already achieved in the lemma. When this is not the case, the idea is to apply a change of coordinates $T$ that fixes $P$, but moves $Q$ to $T(Q)$ in such a way that we can apply the lemma to $f^T$, we to an open affine variety $W^\#$ that contains both $P$ and $T(Q)$, pulling back via $T$ then gives us the desired affine open neighborhood containing both $P$ and $Q$.\\
+            Consider first the case, where $Q\in C\setminus C_0$. I.e. $Q\in V(x)$. Consider $T_\alpha : (v_1,v_2) \mapsto (v_1+\alpha v_2,v_2)$ for $\alpha\in K\setminus 0$. This fixes $P$ and $T_\alpha(Q)\notin V(x)$.\\
+            Consider then the case where $Q\in C_0$ but where the $h$ obtained in the proof of the lemma vanishes on $Q$. Consider a coordinate change $T_\beta: (v_1,v_2)\mapsto (v_1,v_2+\beta v_1)$ such that $h(T_\beta(Q))\neq 0$ ($V(h)\cap C_0$ is finite so we are spoiled for choice). By construction $T_\beta(Q)\notin V(x)$ and $T_\beta(Q)\in f^{T_\beta}$, we are thus in a position to apply the lemma to obtain an affine open set $V(f^{T_\beta})_h$ that will result in the desired affine open set when pulling back via $T_\beta$.\\
+            Given $Q_1,\dots,Q_{k+1}\in C$, we may by induction assume that $Q_1,\dots,Q_k\in C_0 \setminus V(h)$ via a series of coordinate changes. If $Q_{k+1}\in C_0$ we are done. If $Q_{k+1}\in V(x)$, we first apply a change of coordinates of type $T_\alpha$ to $Q_{k+1}$ taking care to pick $\alpha$ such that $T_\alpha(Q_i)\in V(x)\cap V(h)$ for $i\leq k$. We can clearly do this since there are only finitely many choices of $\alpha$ where this fails. We can thus reduce to the case $Q_{k+1}\in V(h)$. Here we apply a change of coordinates of $T_\beta$, taking care to pick $\beta$ such that $T_\beta(Q_i)\notin V(x)\cap h$. We construct an affine open set and pullback via the composition of all the change of coordinates made to obtain the desired $W$.
+        \end{remark}
+        \begin{proposition}
+            Suppose $P$ is an ordinary multiple point on $C$ and that $\varphi^{-1}(P)=\{P_1,\dots,P_r\}$, with $P_i=(0,\alpha_i)$.
+            \begin{enumerate}
+                \item $f_y = \sum_i \prod_{j\neq i} (y-\alpha_i x) +\sum_{r+1}^n (f_k)_y$.
+                \item For $\overline{x},\overline{y}\in K(C)$,
+                $$
+                    f_y(\overline{x},\overline{y}) = \overline{x}^{r-1}\left(\sum_{i}\prod_{j\neq i}(z-\alpha_j)+a_{r1}\overline{x}+\dots \right).
+                $$
+                \item $\ord^{C'}_{P_i}(F(x,y))=r-1$. 
+            \end{enumerate}
+        \end{proposition}
+        \begin{proof}
+            1. This just follows by induction an Leibniz' rule applied to $f_r$.\\
+            2. Indeed,
+            \begin{align*}
+                (f_r)_y(\overline{x},\overline{y}) &= \sum_{i}\prod_{j\neq i}(\overline{y}-\alpha_j\overline{x}) = \sum_{i}\prod_{j\neq i}(\overline{x}z-\alpha_j\overline{x}) = \sum_{i}\prod_{j\neq i}\overline{x}(z-\alpha_j)\\  &= \sum_{i}\overline{x}^{r-1}\prod_{j\neq i}(z-\alpha_j)  = \overline{x}^{r-1}\sum_{i}\prod_{j\neq i}(z-\alpha_j) 
+            \end{align*}
+            a term in $f_{r+k}$ for $k\geq 1$ is of the form $a_{i,j}x^i y^j$ where $i+j=r+k$. In case $i=r+k$, $D_y(a_{i,j}x^i y^j)=0$. Otherwise
+            $$
+                \overline{D_y(a_{ij}x^i y^j)}= ja_{ij}\overline{x}^{i+j-1}z^{j-1} = \overline{r-1} ja_{ij}\overline{x}^{i+j-r}z^{j-1},
+            $$ 
+            so 
+            $$
+                f_y(\overline{x},\overline{y}) = \overline{x}^{r-1}\left(\sum_{i}\prod_{j\neq i}(z-\alpha_j)+a_{r1}\overline{x}+\text{ some other terms} \right).
+            $$
+            3. Since $x$ is not tangent to $C'$ at $P_i$ and since each $P_i$ is simple, $\overline{x}$ is the uniformizing parameter for the DVR $\pazocal{O}_{P_i}(C')$. In 2. we found that 
+            $$
+                f_y(\overline{x},\overline{y}) = \overline{x}^{r-1}u
+            $$ 
+            where $u$ is a unit in $\pazocal{O}_{P_i}(C')$, hence $\ord(f_y(\overline{x},\overline{y}))=r-1$. {\Large remember refs}.
         \end{proof}
     \subsubsection{Blowing up Points in $\Pp^2$}
     \subsubsection{Quadratic Transformations}
