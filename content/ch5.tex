@@ -96,7 +96,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
     \begin{definition}
         A an set $Y\subset X\subset V$ that is irreducible and closed in $X$ is called \textit{a closed subvariety of $X$}
     \end{definition}
-    \begin{lemma}
+    \begin{lemma}\label{ClosedSubvarietyIsVarietyInClosure}
         A closed subvariety $Y\subset X\subset V$ is a variety in $\cl_V(Y)$.
     \end{lemma}
     \begin{proof}
@@ -104,8 +104,8 @@ We have thus far been studying algebraic geometry by studying systems of polynom
        $$Y=\cl_X(Y)=X\cap \cl_V(Y),$$ hence $Y$ is a variety in $\cl_V(Y)$. 
     \end{proof}
     More generally,
-    \begin{lemma}
-        if $U$ is an open subvariety of a variety $X$ and $Y$ is a closed subvariety, setting $Z:= \cl_X(Y)$,
+    \begin{lemma}\label{ClosureOfClosedSubvarietyIsClosedSubvariety}
+        if $U$ is an open subvariety of a variety $X$ and $Y$ is a closed subvariety of $U$, setting $Z:= \cl_X(Y)$,
         \begin{enumerate}
             \item $Z$ is a closed subvariety of $X$.
             \item $Y$ is an open subvariety of $Z$.
@@ -1363,7 +1363,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
                 $$
                     f_y(\overline{x},\overline{y}) = \overline{x}^{r-1}\left(\sum_{i}\prod_{j\neq i}(z-\alpha_j)+a_{r1}\overline{x}+\dots \right).
                 $$
-                \item $\ord^{C'}_{P_i}(F(x,y))=r-1$. 
+                \item $\ord^{C'}_{P_i}(f_y(x,y))=r-1$. 
             \end{enumerate}
         \end{proposition}
         \begin{proof}
@@ -1380,13 +1380,101 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             $$
                 f_y(\overline{x},\overline{y}) = \overline{x}^{r-1}\left(\sum_{i}\prod_{j\neq i}(z-\alpha_j)+a_{r1}\overline{x}+\text{ some other terms} \right).
             $$
-            3. Since $x$ is not tangent to $C'$ at $P_i$ and since each $P_i$ is simple, $\overline{x}$ is the uniformizing parameter for the DVR $\pazocal{O}_{P_i}(C')$. In 2. we found that 
+            3. Since $x$ is not tangent to $C'$ at $P_i$ and since each $P_i$ is simple, $\overline{x}$ is the uniformizing parameter for the DVR $\pazocal{O}_{P_i}(C')$ (cf. Theorem~\ref{SimplePointIffLocalRingDVR}). In 2. we found that 
             $$
                 f_y(\overline{x},\overline{y}) = \overline{x}^{r-1}u
             $$ 
-            where $u$ is a unit in $\pazocal{O}_{P_i}(C')$, hence $\ord(f_y(\overline{x},\overline{y}))=r-1$. {\Large remember refs}.
+            where $u$ is a unit in $\pazocal{O}_{P_i}(C')$, hence $\ord(f_y(\overline{x},\overline{y}))=r-1$.
+        \end{proof}
+        \begin{proposition}
+            Let $P$ be an ordinary multiple point on $C$, $\varphi^{-1}(P)=\{P_1,\dots,P_r\}$ with $P_i = (0,\alpha_i)$ and $f_r = \prod_1^r l_i$ with $l_i = y-\alpha_i x$. Let $g$ be a plane curve and denote the image of $g$ in $\Gamma(C')\subset \Gamma(C)$ by $\overline{g}$. 
+            \begin{enumerate}
+                \item $\ord_{P_i}(\overline{g})\geq m_{P}(g)$ with equality if $L_i$ is not tangent to $g$ at $P$.
+                \item If $s\leq r$, and $\ord_{P_i}^{C'}(\overline{g})\geq s$ for each $i=1,\dots,s$, then $m_P(g)\geq s$.
+            \end{enumerate}
+        \end{proposition}
+        \begin{proof}
+            1. In case $m_P(g)=0$ we are done. Write 
+            $$
+                g = \sum_{m_P(g)}^d g_i.
+            $$
+            Then 
+            $$
+                \overline{g} = g(\overline{x},\overline{x}z) = x^{m_P(g)}\underbrace{\left( \sum_{m_p(g)}^r \overline{x}^ig_i(1,z)\right)}_{\theta}.
+            $$ 
+            Then 
+            $$
+                \ord_{P_i}(\overline{g})=\ord_{P_i}^{C'}(\overline{x}^{m_P(g)})+\ord_{P_i}^{C'}(\theta) \geq m_{P}(g).
+            $$
+            Suppose $L_i=y-\alpha_i x$ is not tangent to $P$. Write $g_{m_P(g)} = \prod_1^{m_P(g)} \Lambda_j:= \gamma_j y-\beta_j x$. Assume first $\gamma_j\neq 0$ for each $j$. Then WLOG $\Lambda_j = y-\beta_jx$. Then $\beta_j\neq \alpha_i$. When $\beta_j\neq 0$,  
+            $$
+                \Lambda_j(z,1)(P_i) = \alpha_j-\beta_j\neq 0
+            $$
+            and when $\beta_j=0$, this evaluates to $\alpha_i\neq 0$. When $\gamma_j=0$, we have that $\beta_j\neq 0$, hence 
+            $$
+                \Lambda_j(z,1)(P_i)=\beta_j\neq 0.
+            $$ 
+            It follows that 
+            $$
+               \theta(P_i) = g_{m_P(g)}(1,z)(P_i)\neq 0\implies \theta\notin \mathfrak{m}_{P_i}(C')
+            $$
+            which means $\theta$ is a unit in $\pazocal{O}_{P_i}(C')$, so $\ord_{P_i}^{C'}(\overline{g})=m_{P}(g)$.\\
+            2. Suppose for a contradiction that $m_P(g)=k$ for some $k<s$. Then for each $i=1,\dots,s$ we have $\ord_{P_i}^C(\overline{g})>k$, hence $L_i$ is a tangent of $g$ at $P$. But then $m_P(g)\geq r$, leading to a contradiction. 
         \end{proof}
     \subsubsection{Blowing up Points in $\Pp^2$}
+    We proceed to describe the process of blowing up any finite sequence of points on a projective plane curve. Fix points $P_1,\dots,P_t\in \Pp^2$. Assume that $P_i=[a_{i1},a_{i2},1]\in U_3$ for each $i$. We set 
+    $$
+        U := \Pp^2 \setminus \{P_1,\dots,P_t\}
+    $$
+    We define a morphism for each $i$,
+    \begin{gather*}
+        f_i : U \rightarrow \Pp^1\\
+        [v_1,v_2,v_3]\mapsto [v_1-a_{i1}v_3,v_2-a_{i2}v_3]
+    \end{gather*}
+    We set 
+    $$
+        f:= (f_1,\dots,f_t): U\rightarrow \prod_1^t \Pp^1, u\mapsto (f_1(u),\dots,f_t(u)) 
+    $$
+    Let $G\subset U\times \prod_1^t \Pp^1$ denote the graph of this morphism. We set 
+    $$
+        B := V\left.\left(\left\{y_{1i}(x_2-a_{i2}x_3)-y_{2i}(x_1-a_{i1}x_3)\right|i=1,\dots,t\right\}\right),
+    $$ 
+    where $x_1,x_2,x_3$ are the homogeneous coordinates for $\Pp^2$ and $y_{i1},y_{i2}$ are homogeneous coordinates for the $i$'th copy of $\Pp^1$. Note that each polynomials that define $B$ are $t+1$-forms of $t+1$-degree $(1,0,\dots,0,1,0,\dots,0)$ where $1$ is in the $i$'th position in $K[\mathbf{x},\mathbf{y}_1,\dots,\mathbf{y}_t]$. For now we assume that $B=\cl(G)$ (we later see that this true) so that $B$ is a closed subvariety of $\Pp^2 \times (\Pp^1)^t$ (cf. Proposition~\ref{GraphIsAClosedSubvariety} and Lemma~\ref{ClosureOfClosedSubvarietyIsClosedSubvariety} 1.). Let $\pi: B\rightarrow$, be defined by 
+    $$
+        \pi(R,Q_1,\dots,Q_t) = R \quad \left((R,Q_1,\dots,Q_t)\in \Pp^2\times (\Pp^1)^t\right)
+    $$ 
+    So $\pi$ is the restriction to $B$ of the projection of $\Pp^2\times \left(\Pp^1\right)^t$ onto $\Pp^2$. Set $E_i := \pi^{-1}(P_i)$. Note that 
+    $$
+        E_i = \{P_i\}\times \{f_1(P_i)\} \times \cdots \times \{f_{i-1}(P_i)\} \times \Pp^1 \times \{f_{i+1}(P_i)\}\times \cdots \times \{f_t(P_i)\}.
+    $$
+    Indeed, $R=(P_i,f_1(P_i),\dots,Q,\dots,f_t(P_i))\in B$ since for $j\neq i$
+    $$
+        \ev_R(y_{1j}(x_2-a_{j2}x_3)-y_{2j}(x_1-a_{j1}x_3))=
+            (a_{i1}-a_{j1})(a_{i2}-a_{j2})-(a_{i2}-a_{j2})(a_{1i}-a_{j1})=0,
+    $$
+    when $j=i$
+    $$
+        \ev_R(y_{1j}(x_2-a_{j2}x_3)-y_{2j}(x_1-a_{j1}x_3))= Q_1(a_{i2}-a_{i2})-Q_2(a_{i1}-a_{i1})=0.
+    $$
+    Conversely, if $(P_1,[b_{11},b_{21}],\dots,[b_{t1},b_{t2}])\in \Pp^2\times \left(\Pp^1\right)^t$ is given with
+    $$
+        b_{1j}(a_{i2}-a_{j2}) = b_{2j}(a_{1j}-a_{i1})
+    $$
+    for each $j=1,\dots,t$. For each $i\neq j$, since either $b_{kj}\neq 0$ for some $k=1,2$ we may assume 
+    $$
+        a_{1j}-a_{i1} = \frac{b_{1j}}{b_{2j}}(a_{i2}-a_{j2})
+    $$ 
+    Then 
+    $$f_i(P_j)=[a_{j1}-a_{i1},a_{j2}-a_{i2}]=\left[\frac{b_{1j}}{b_{2j}}(a_{i2}-a_{j2}),a_{j2}-a_{i2}\right]=[b_{1j},b_{2j}].$$
+    \begin{lemma}
+        $$
+            B\setminus \bigcup_1^t E_i = B\cap \left(U\times \left(\Pp^1\right)^t\right) = G
+        $$
+        So $\left.\pi\right|_{B\setminus \bigcup_1^t E_i} : B\setminus \bigcup_1^t E_i \rightarrow U$ is an isomorphism.
+    \end{lemma}
+    \begin{proof}
+        
+    \end{proof}
     \subsubsection{Quadratic Transformations}
     \subsubsection{Non-singular Models of Curves}
     \subsection{Riemann-Roch}
