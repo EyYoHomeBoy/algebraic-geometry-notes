@@ -1473,7 +1473,122 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         So $\left.\pi\right|_{B\setminus \bigcup_1^t E_i} : B\setminus \bigcup_1^t E_i \rightarrow U$ is an isomorphism.
     \end{lemma}
     \begin{proof}
-        
+        "$\subset$" is obvious for the first inclusion. If $P\in B$ is not in $U\times (\Pp^1)^t$, then $P=\{P_i\}\times Q$ for some $i$ and some $Q\in (\Pp^1)^t$, hence $P\in E_i$. Clearly each point in $G$ vanish on 
+        $$
+            y_{1j}(x_2-a_{j2}x_3)-y_{2j}(x_1-a_{j1}x_3)
+        $$
+        Note additionally that $P_i$ is not in $U$, and is therefore not a point on the graph of $f$, hence any point in $G$ must be on the form $(Q,f_1(Q),\dots,f_t(Q))\in U\times (\Pp^1)^t$. If $(Q,Q_1,\dots,Q_t)\in B\cap \left(U\times \left(\Pp^1\right)^t\right)$, then 
+        $$
+            Q_{i1}(Q_2-a_{i2}Q_3)=Q_{i2}(Q_1-a_{i1}Q_3)
+        $$ 
+        hence 
+        $$
+            Q_1-a_{i1}Q_3 = \frac{Q_2-a_{i2}Q_3}{Q_{i2}} Q_{i1}
+        $$
+        so 
+        $$
+            f_i(Q)=[Q_1-a_i1Q_3,Q_2-a_{12}Q_3]= \left[\frac{Q_2-a_{i2}Q_3}{Q_{i2}} Q_{i1},Q_2-a_{12}Q_3\right] = [Q_{i1},Q_{i2}],  
+        $$
+        hence $(Q,Q_1,\dots,Q_t)\in G$.  
+    \end{proof}
+    \begin{lemma}
+        Consider a projective change of coordinates on $\Pp^2$. Set $P_i' = T(P_i)$, $U=\Pp^2\setminus \{P_1',\dots,P_t'\}$. Define 
+        \begin{gather*}
+            f_i': U'\rightarrow \Pp^1\\
+            [v_1,v_2,v_3]\mapsto \left[v_1-a_{1i}'v_3,v_2-a_{i2}'v_3\right]
+        \end{gather*}
+        with $P_i' = [a_{i1}',a_{i2}',a_{i3}']$. Set $f=(f_1',\dots,f_t')$. For each $i$ there is a unique projective change of coordinates on $\Pp^1$, $T_i$ say, such that 
+        $$
+            \begin{tikzcd}
+                U \arrow[r,"f_i"] \arrow[d,"T",swap] & \Pp^1 \arrow[d,"T_i"]\\
+                U' \arrow[r,"f_i'",swap] & \Pp^1
+            \end{tikzcd}
+        $$
+        commutes. In other words 
+        $$
+            \begin{tikzcd}
+                U \arrow[r,"f"] \arrow[d,"T",swap] & \left(\Pp^1\right)^t \arrow[d,"T_1\times\cdots \times T_t"]\\
+                U' \arrow[r,"f'",swap] & \left(\Pp^1\right)^t
+            \end{tikzcd}
+        $$
+        commmutes. Setting $G':= G_{f'}$, $B':= \cl(G')$ and $E_i' := pi^{-1}(P_i')$, we see that $T\times T_1\times \cdots \times T_t$ define isomorphism of these varieties with respectively $G,B$ and $E$.
+    \end{lemma}
+    \begin{proof}
+        Consider first $Q=[0,0,1]$ and $Q' = SQ$ for some change of coordinates $S$ on $\Pp^2$ and write
+        $$
+            S = (ax+by+b_{11}z,cx+dy+b_{12}z,ex+fy+z)
+        $$
+        We first prove the following claim: 
+        $$
+            S_i := ((a-b_{11}e)x+(b-b_{11}f)y,(c-b_{12}e)x+(d-b_{12}f)y)
+        $$
+        satisfies $S_1f_Q = f_{Q'}S$. We see this from direct computation: 
+        \begin{align*}
+            S_1f_Q([v_1,v_2,v_3]) &=S_1([v_1,v_2])\\
+            &= [(a-b_{11}e)v_1+(b-b_{11}f)v_2,(c-b_{12}e)v_1+(d-b_{12}f)v_2]\\
+            &= [av_1+bv_2+b_11v_3-b_{11}(e v_1+fv_2+v_3),\\ & cv_1+dv_2+b_{12}v_3- b_{12}(ev_1+fv_2+v_3)]\\
+            &= f_{Q'}([av_1+b v_2+b_{11}v_3, cv_1+dv_2+b_{12}v_3,ev_1+fv_2+v_3])\\
+            &= f_{Q'}T([v_1,v_2,v_3]).
+        \end{align*}
+        Consider the $3\times 3$ matrix 
+        $$
+           A:= \begin{pmatrix}
+                1 & 0 & -a_{i1}\\
+                0 & 1 & -a_{i2}\\
+                0 & 0 & 1
+            \end{pmatrix}
+        $$
+        Note that $A P_i =Q$ and $f_i = f_Q A$. Setting $S= TA^{-1}$ we thus get a change of coordinates satisfying,
+        $$
+            T_if_i = T_i f_QA=f_i'S A= f_i'T.
+        $$
+        For uniqueness, note that $T_i^{(1)}f_i = f_i'T=T_i^{(2)} f_i$, if and only if 
+        $$
+            T_i^{(1)}f_Q = T_i^{(2)}f_Q
+        $$
+        which is equivalent
+        $$
+            T_i^{(1)}v = T_i^{(2)}v
+        $$
+        for each $v\in \A^2$, hence $T_i^{(1)}=T_i^{(2)}$. This shows that $T\times T_1\times \cdots \times T_t$ maps $G,B$ and $E_i$ onto $G',B'$ and $E_i'$. 
+    \end{proof}
+    \begin{lemma}
+        For an $i$ if $T_i$ is a projective change of coordinates on $\Pp^1$ then there is a projective change of coordinates $T$ on $\Pp^2$ such that $T(P_i)=P_i$ and 
+        $$
+            \begin{tikzcd}
+                U \arrow[r,"f_i"]\arrow[d,"T",swap] & \Pp^1\arrow[d,"T_i"] \\
+                U \arrow[r,"f_i",swap] & \Pp^1
+            \end{tikzcd}
+        $$
+        commutes.
+    \end{lemma}
+    \begin{proof}
+        Consider first $Q=[0,0,1]$ and a projective change of coordinates $A$ on $\Pp^1$. Write 
+        $$
+            A = (ax+by,cx+dy).
+        $$
+        Then 
+        $$
+            \Lambda = (ax+by,cx+dy,z)
+        $$
+        satisfies 
+        $$
+            \Lambda(Q)=Q
+        $$
+        and 
+        \begin{align*}
+            A f_Q([v_1,v_2,v_3]) &= A([v_1,v_2]) = [av_1+bv_2,cv_1+dv_2]\\
+             &= f_Q([av_1+bv_2,cv_1+dv_2,v_3])= f_Q \Lambda([v_1,v_2,v_3]) 
+        \end{align*}
+        hence 
+        $$
+            T_i f_Q = f_Q T.  
+        $$
+        Then (see proof of the prior lemma for definition of $A$)
+        $$
+            T_i f_i= T_i f_Q A= f_Q TA = f_Q A (A^{-1}TA)= f_i (A^{-1}TA).
+        $$ 
+        Note that $A^{-1}TA(P_i)=A^{-1}T(Q)=A^{-1}(Q)=P_i$.
     \end{proof}
     \subsubsection{Quadratic Transformations}
     \subsubsection{Non-singular Models of Curves}
