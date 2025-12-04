@@ -1590,6 +1590,54 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         $$ 
         Note that $A^{-1}TA(P_i)=A^{-1}T(Q)=A^{-1}(Q)=P_i$.
     \end{proof}
+    Assume $P_1 = [0,0,1]$ and fix $Q\in E_i$. We may assume $Q=[\lambda,1]$ for $\lambda\in K$ {\Large Check validity of these assumptions using prior lemmas}. Let $\varphi_3$ denote the identification of $\A^2$ with $U_3\subset \Pp^2$. Set $V=U_3\setminus\{P_2,\dots,P_t\}$, $W:= \varphi_3^{-1}(W)$ and $W' := \psi^{-1}(W) = (\psi\circ \varphi_3)^{-1}(V)$. Consider also the morphism
+    \begin{gather*}
+        W' \rightarrow \Pp^2\times \left(\Pp^1\right)^{t}\\
+        (x,z) \mapsto ([x,xz,1], [1,z],f_2([x,xz,1]),\dots,f_t([x,xz,1]))
+    \end{gather*}
+    Note that $\psi\circ \varphi_3 =\pi \circ \varphi$. Set $V':= \varphi(W')$. Note that 
+    $$
+        V' = B\setminus\left(\bigcup_{i\geq 2} E_i\cup V(x_3)\cup V(y_{12}) \right).
+    $$
+    {\Large Check at some point} We thus conclude that $V'$ is an open neighborhood of $Q$. 
+    \begin{lemma}
+        $$
+            B = \cl(G),
+        $$
+        hence $B$ is a variety. 
+    \end{lemma}
+    \begin{proof}
+        
+    \end{proof}
+    \begin{lemma}
+        Consider the morphism
+        \begin{gather*}
+            \phi: \Pp^2\times \left(\Pp^1\right)^t\setminus V(x_3y_{12})\rightarrow \A^2\\
+            ([x_1,x_2,x_3],[y_{11},y_{12}],\dots,[y_{t1},y_{t2}])\mapsto \left(\frac{x_1}{x_3},\frac{y_{11}}{y_{12}}\right)
+        \end{gather*}
+        This morphism restricted to $V'$ is the inverse of $\varphi$. We thus have the following diagram 
+        
+
+        $\pi$ thus locally (i.e. in some open neighborhood around each point in $B$) looks like $\psi$.
+    \end{lemma}
+    \begin{proof}
+
+    \end{proof}
+    \begin{lemma}
+        Let $C$ be an irreducible projective curve in $\Pp^2$. Set $C_0:= C\cap U$, $C_0':=\pi^{-1}(U)$ and $C':=\cl_B(C_0')$. $\pi$ restricts to a birational morphism $C'\rightarrow C$, which is an isomorphism from $C_0'$ to $C_0$. Locally this looks like $\pi$ from the affine case. 
+    \end{lemma}
+    \begin{proof}
+        
+    \end{proof}
+    \begin{theorem}
+        Let $C$ be an irreducible projective plane curve with all multiple points ordinary. There is a non-singular projective curve $C'$ birationally equivalent to $C$. This answers the question of resolution of singularities in this case. 
+    \end{theorem}
+    \begin{proof}
+        
+    \end{proof}
+    \begin{remark}
+        While this is indeed an answer to the original goal of this section, note that $C'$ is not a plane curve. This means we cannot apply theorems about plane curves to argue about $C'$ and transfer these findings to results about $C$, which is the reason to resolve singularities in the first place.  
+    \end{remark}
     \subsubsection{Quadratic Transformations}
     \subsubsection{Non-singular Models of Curves}
     \subsection{Riemann-Roch}

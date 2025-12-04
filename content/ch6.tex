@@ -366,10 +366,13 @@ Given a ring $R$ and prime ideal $\mathfrak{p}$ in $R$. We denote the localizati
 \begin{definition}
     Given a ring $R$, we define a presheaf on $\Spec \ R$ by, 
     \begin{gather*}
-        \pazocal{O}:(\Spec\ R, \tau_{\Spec\ R})\op\rightarrow \mathrm{Ring}\\
-        U \mapsto \prod_{\mathfrak{p}\in U} R_\mathfrak{p}\\
-        U\subset V \mapsto (\prod_{\mathfrak{p}\in V} R_\mathfrak{p}\rightarrow \prod_{\mathfrak{p}\in U} R_\mathfrak{p}, s\mapsto \left. s\right|_U) 
+        \pazocal{O}:(\Spec\ R, \tau_{\Spec\ R})\op\rightarrow \mathrm{Ring} 
     \end{gather*}
+    that takes an open subset $U$ of $\Spec\ R$ to the subring of $\prod_{\mathfrak{p}\in U} R_\mathfrak{p}$, 
+    $$
+        \pazocal{O}(U) := \left\{ s\in \prod_{\mathfrak{p}\in U}  R_\mathfrak{p} : \forall\mathfrak{p}\in U \exists  V \text{ op. ngh. } \text{ of } \mathfrak{p} \text{ s.t. } \left.s\right|_V = \frac{a}{f}   \text{ w/ } f\notin \mathfrak{q} \text{ for each } \mathfrak{q}\in V \right\}.
+    $$  
+    Moreover, $V\subset U$ is mapped to the restriction map $\pazocal{O}(U)\rightarrow \pazocal{O}(V), s\mapsto \left. s\right|_V$.
 \end{definition}
 \begin{remark}
     Clearly this presheaf is a sheaf, since the elements of $\pazocal{O}(U)$ are functions and restriction is just set function restriction in the same we saw in the example discussing the presheaf $\Gamma$. 
@@ -408,7 +411,17 @@ Given a ring $R$ and prime ideal $\mathfrak{p}$ in $R$. We denote the localizati
     \end{enumerate}    
 \end{lemma}
 \begin{proof}
-    
+    1. Consider the ring map
+    \begin{gather*}
+        \sigma:\pazocal{O}_\mathfrak{p} \rightarrow R_\mathfrak{p}\\
+        s\mapsto s(\mathfrak{p})
+    \end{gather*}
+    To check surjectivity, let $\frac{a}{f}\in R_\mathfrak{p}$ be given. By definition $f\notin \mathfrak{p}$, hence $\mathfrak{p}\not\supset \langle f\rangle$. We thus get that $D(f)$ is an open neighborhood of $\mathfrak{p}$. Let $\frac{a}{f}: D(f)\rightarrow \prod_{\mathfrak{q}\in D(f)} R_\mathfrak{q}$ denote the constant function on $D(f)$ taking $\mathfrak{q}$ to $\frac{a}{f}$. Then this is an element of $\pazocal{O}_\mathfrak{p}$ and 
+    $$
+        \sigma\left(\frac{a}{f}\right) = \frac{a}{f}.
+    $$
+    To check injectivity, consider $s,t\in \pazocal{O}_\mathfrak{p}$ with $s(\mathfrak{p})=r(\mathfrak{p})$. On a sufficiently small neighborhood $U$ of $\mathfrak{p}$, we have that $\left. s\right|_U = \frac{a}{f}\in R_\mathfrak{q}$ and $\left. t\right|_U = \frac{b}{g}\in R_\mathfrak{q}$ for each $q\in U$. There is some $h\in R\setminus \mathfrak{p}$ such that $h(ag-bf)=0$, hence on $D(f)\cap D(g)\cap D(h)$, $s$ and $t$ agree. This implies $s=t$. We conclude that $\sigma$ is an isomorphism of rings.\\
+    2.  
 \end{proof}
 \begin{definition}
     A \emph{ringed space} is a topological space $X$ together with a sheaf 
