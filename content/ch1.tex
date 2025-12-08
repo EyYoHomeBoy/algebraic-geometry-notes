@@ -2246,130 +2246,122 @@ In our exploration of unique factorization domains and Euclidean Domains we will
     A Euclidean domain is a PID, which is a UFD. 
 \end{proof}
 \subsubsection{Local Rings of Commutative Rings}
+    \begin{definition}
+        Given a ring $R$, a subset $X$ of $R$ is called \emph{multiplicative} if it is a submonoid of $(R,\cdot)$ 
+    \end{definition}
+    \begin{definition}
+        Let $R$ be a commutative ring and $X$ a multiplicative set in $R$. Given $(a,x),(b,y)\in R\times X$ we write $(a,x)\sim (b,y)$ if and only if there exists a $c\in X$ such that 
+        $$
+            c(ay-bx)=0
+        $$
+    \end{definition}
+    \begin{remark}
+        This defines an equivalence relation on $R\times X$.
+    \end{remark}
+    \begin{definition}
+        Let $R$ be a commutative ring and $X$ a multiplicative set. We define the \emph{localization of $R$ with respect to $X$} to be the set 
+        $$
+            X^{-1}R := (R\times X)/\sim. 
+        $$
+        an element $[(a,x)]\in X^{-1}R$ is denoted $\frac{a}{x}$.
+    \end{definition}
+    \begin{example}
+        \begin{enumerate}
+            \item  An example of a multiplicative set is $X_x:=\{x^n : n\geq 0\}$ for some $x\in R$. We define
+            $$
+                R_x := X_x^{-1}R.
+            $$
+            This construction is referred to as \emph{the localization of $R$ with respect $x$}
+            \item Another example of a multiplicative set is $X_\mathfrak{p}:= R\setminus \mathfrak{p}$ where $\mathfrak{p}\subset R $ is a prime ideal. Indeed, if $a,b\in R\setminus \mathfrak{p}$, then $ab\notin \mathfrak{p}$, by the contrapositive of the definition of being a prime ideal. We define the \emph{localization of $R$ with respect to $\mathfrak{p}$} to be 
+            $$
+                R_\mathfrak{p} := X_\mathfrak{p}^{-1}R
+            $$
+        \end{enumerate}
+    \end{example}
+    \begin{lemma}
+        Let $R$ be a commutative ring and $X$ a multiplicative set. We define addition on $X^{-1}R$ by
+        $$
+            \frac{a}{x}+\frac{b}{y} := \frac{ay+bx}{xy}\quad \left(\frac{a}{x},\frac{b}{y}\in X^{-1}R\right).
+        $$
+        We define multiplication on $X^{-1}R$ by 
+        $$
+            \frac{a}{x}\frac{b}{y} := \frac{ab}{xy} \quad \left(\frac{a}{x},\frac{b}{y}\in X^{-1}R\right).
+        $$
+        We set $1 := 1_{X^{-1}R}:= \frac{1}{1}$ and $0 := 0_{X^{-1}R}:= \frac{0}{1}$. Then $(R,+,\cdot,0,1)$ is a commutative ring. Furthermore,
+        $$
+            \left\{\frac{a}{1} : a\in R \right\}
+        $$
+        defines a subring of $X^{-1}R$ isomorphic to $R$. 
+    \end{lemma}
+    \begin{proof}
+        We first check that addition and multiplication are well-defined. Let $\frac{a}{x},\frac{b}{y},\frac{c}{z},\frac{d}{w}\in X^{-1}R$ be given with $\frac{a}{x}=\frac{c}{z}$ and $\frac{b}{y}=\frac{d}{w}$. Then there are $f,g\in R$ such that 
+        $$
+            f(az-cx)=0 \text{ and } g(bw-dy)=0.
+        $$
 
-\subsubsection{Local Rings of integral domains, Localizations \& Field of Fractions}
-\begin{definition}\label{LocalRingDefinition}
-    A ring $R$ is called \textit{local} if it has unique maximal left ideal, $\mathfrak{m}_R$. A homomorphism of local rings is a homomorphism of rings $f : R\rightarrow S$ if $f^{-1}(\mathfrak{m}_S)=\mathfrak{m}_R$. 
-\end{definition}
-\begin{proposition}\label{EquivalentFormulationOfRingBeingLocal}
-    Let $R$ be ring. $R$ is local if and only if $\mathfrak{m}:=R\setminus R^\ast$ is a left ideal.
-\end{proposition}
-\begin{proof}
-    "$\implies$": Let $I$ be the unique maximal left ideal of $R$. Then since $I$ is proper, $I\subset \mathfrak{m}$. Note that for every $x\in \mathfrak{m}$, $\langle x\rangle$ is a proper ideal in $R$, hence $x\in I$. Therefor $\mathfrak{m} = I$, hence $\mathfrak{m}$ is an ideal.\\
-    "$\impliedby$": Let $I\subsetneq R$ be an ideal. Then every element of $I$ is a non-unit, hence $I\subset \mathfrak{m}$, thus $\mathfrak{m}$ is the unique maximal left ideal in $R$.
-\end{proof}
-\begin{definition}
-    Let $R$ be a commutative ring and $X\subset R$ a subset that is a submonoid of $(R,\cdot)$. For $(r,x),(r',x')\in R\times X$ we define a relation that $(r,x)\sim (r',x')$ if $rx' = r'x$. We define $X^{-1}R := R/\sim$ and denote an $(r,x)\in X^{-1}R$ by $\frac{r}{x}$. Hence 
-    $$X^{-1}R = \left\{\frac{r}{x} : r \in R, x\in X \right\}.$$
-    This is called the \textit{localization of $R$ with respect to $X$}. For an $x\in X$, if 
-    $$X:= \left\{x^n : n\geq 0\right\},$$
-    we define $R_x := X^{-1}R$. When $X = R\setminus \{0\}$, we define $Q(R) := X^{-1}R$. In this case, when $R$ is an integral domain, $Q(R)$ is called the \textit{field of fractions} of $R$.
-\end{definition}
-\begin{remark}
-    We give some properties of this construction. Note that every $x,y \in X$
-    $$0y = 0x \implies \frac{0}{x} = \frac{0}{y}$$
-    and that for every $r,r'\in R$
-    $$r = r' \implies \frac{r}{1} = \frac{r'}{1},$$
-    thus we may regard $R$ as a subset of $X^{-1}R$ via the map $r \mapsto \frac{r}{1}$. We also have that  
-    $$xy = yx \implies \frac{x}{x} = \frac{y}{y}.$$
-    Furthermore,
-    $$(rx)x= rx^2  \implies \frac{rx}{x^2} = \frac{r}{x}$$
-\end{remark}
-\begin{definition}
-    Let $R$ be a commutative ring and $\mathfrak{p}\subset R$ a prime ideal. Then we define the \emph{localization with respect to $\mathfrak{p}$} to be 
-    $$
-        R_\mathfrak{p} := (R\setminus \mathfrak{p})^{-1}R
-    $$
-\end{definition}
-\begin{remark}
-    Note that $X:=R\setminus \mathfrak{p}$ is a submonoid of $(R,\cdot)$. Indeed, take $x,y\in X$. Then $xy\notin \mathfrak{p}$ since otherwise $x$ or $y$ would be in $\mathfrak{p}$. Moreover, $X$ does not contain $0$ since $0\in \mathfrak{p}$. It does contain $1$ since $\mathfrak{p}$ is a proper ideal. 
-\end{remark}
-\begin{lemma}
-    Let $R$ be a commutative ring and $\mathfrak{p}\subset R$ a prime ideal. $R_\mathfrak{p}$ is a commutative ring. The ring structure is given by 
-    $$
-        \frac{r}{x}+\frac{s}{y} := \frac{ry+sx}{xy} \quad \left(\frac{r}{x},\frac{s}{y} \in R_\mathfrak{p}\right)$$
-    and 
-    $$
-        \frac{r}{x}\frac{s}{y} := \frac{rs}{xy} \quad \left(\frac{r}{x},\frac{s}{y} \in R_\mathfrak{p}\right)
-    $$
-    with $1 := \frac{1}{1}$ and $ 0 := \frac{0}{1}$. The set 
-    $$
-        \{ \frac{r}{1}\in R_\mathfrak{p}: r\in R\}
-    $$
-    is a subring of $R_\mathfrak{p}$ isomorphic to $R$. 
-\end{lemma}
-\begin{proof}
-    We first check that addition and multiplication are well-defined. :et $\frac{r_1}{x_1}=\frac{r_1'}{x_1'}\in R_\mathfrak{p}$ and $\frac{r_2}{x_2}=\frac{r_2'}{x_2'}\in R_\mathfrak{p}$. Then $r_1x_1' = r_1'x_1$ and $r_2x_2'=r_2'x_2$, which means
-    \begin{align*}
-        (r_1x_2+r_2x_1)x_1'x_2' &= r_1x_1'x_2x_2'+r_2x_2'x_1x_1' = r_1'x_1x_2x_2'+r_2'x_2x_1x_1'=\left(r_1'x_2'+r_2'x_1'\right)x_1x_2,
-    \end{align*}
-    implying 
-    $$\frac{r_1}{x_1}+\frac{r_2}{x_2} = \frac{r_1x_2+r_2x_1}{x_1x_2} = \frac{r_1'x_2'+r_2'x_1'}{x_1'x_2'} =\frac{r_1'}{x_1'}+\frac{r_2'}{x_2'},$$ hence addition is well-defined. In the same vein 
-    $$r_1r_2x_1'x_2' = r_1x_2'r_2x_1' = r_1'x_2r_2'x_1 = r_1'r_2'x_1x_2,$$
-    implies 
-    $$\frac{r_1}{x_1}\frac{r_2}{x_2} = \frac{r_1r_2}{x_1x_2} = \frac{r_1'r_2'}{x_1'x_2'} = \frac{r_1'}{x_1'}\frac{r_2'}{x_2'}.$$
-    We proceed to check the ring axioms. Let, in addition, $\frac{r_3}{x_3}\in R_\mathfrak{p}$ be given. Then 
-    \begin{align*}
-        \frac{r_1}{x_1}+\left(\frac{r_2}{x_2}+\frac{r_3}{x_3}\right) &= \frac{r_1}{x_1} + \frac{r_2x_3+r_3x_2}{x_2x_3} = \frac{r_1x_2x_3+r_2x_3x_1+r_3x_2x_1}{x_1x_2x_3} = \frac{(r_1x_2+r_2x_1)x_3+r_3x_2x_1}{x_1x_2x_3} \\
-        &= \frac{r_1x_2+r_2x_1}{x_1x_2}+\frac{r_3}{x_3} = \left(\frac{r_1}{x_1}+\frac{r_2}{x_2}\right) + \frac{r_3}{x_3}.
-    \end{align*}
-    We get
-    $$0+\frac{r_1}{x_1} = \frac{0x_1+r_1\cdot 1}{1x_1} = \frac{r_1}{x_1}.$$
-    One should note that for any $x\in X$ $x\cdot 0 = 1\cdot 0$, hence
-    $$\frac{0}{1} = \frac{0}{x}.$$
-    We define $-\frac{r_1}{x_1}:= \frac{-r_1}{x_1}$ with which we get 
-    $$\frac{r_1}{x_1}-\frac{r_1}{x_1}=\frac{r_1x_1-r_1x_1}{x_1x_1} = \frac{0}{x_1x_1}= 0.$$
-    Lastly 
-    $$\frac{r_1}{x_1}+\frac{r_2}{x_2} = \frac{r_1x_2+r_2x_1}{x_1x_2} = \frac{r_2x_1+r_1x_2}{x_2x_1} = \frac{r_2}{x_2}+\frac{r_1}{x_1},$$
-    hence $(R_\mathfrak{p},+)$ is an additive group. We also have that 
-    \begin{align*}
-        \frac{r_1}{x_1}\left(\frac{r_2}{x_2}\frac{r_3}{x_3}\right) &= \frac{r_1}{x_1}\frac{r_2r_3}{x_2x_3} = \frac{r_1(r_2r_3)}{x_1(x_2x_3)} = \frac{(r_1r_2)r_3}{(x_1x_2)x_3} = \left(\frac{r_1r_2}{x_1x_2}\right)\frac{r_3}{x_3} = \left(\frac{r_1}{x_1}\frac{r_2}{x_2} \right)\frac{r_3}{x_3}.
-    \end{align*}
-    $1$ is the identity with respect to multiplication since 
-    $$1 \frac{r_1}{x_1} = \frac{1r_1}{1x_1} = \frac{r_1\cdot 1}{x_1\cdot 1} = \frac{r_1}{x_1}.$$
-    Furthermore,
-    \begin{align*}
-        \frac{r_1}{x_1}\left(\frac{r_2}{x_2}+\frac{r_3}{x_3}\right) &= \frac{r_1}{x_1}\frac{r_2x_3+r_3x_2}{x_2x_3} = \frac{r_1r_2x_3+r_1r_3x_2}{x_1x_2x_3} = \frac{r_1r_2x_3x_1+r_1r_3x_2x_1}{x_1x_2x_1x_3} = \frac{r_1r_2}{x_1x_2} + \frac{r_1r_3}{x_1x_3}\\
-        &= \frac{r_1}{x_1}\frac{r_2}{x_2}+\frac{r_1}{x_1}\frac{r_3}{x_3}.
-    \end{align*}
-    Thus $(R_\mathfrak{p},+,\cdot)$ is a ring. We check that it is commutative. Indeed
-    $$\frac{r_1}{x_1}\frac{r_2}{x_2} = \frac{r_1r_2}{x_1x_2}= \frac{r_2r_1}{x_2x_1}=\frac{r_2}{x_2}\frac{r_1}{x_1}.$$
-    Let $r,r'\in R$. Then 
-    \begin{align*} 
-        &r + r' = \frac{r}{1}+ \frac{r'}{1} = \frac{r+r'}{1}\in R,\\
-        &-r = \frac{-r}{1}\in R\\
-        &0 = \frac{0}{1}\in R\\
-        &rr' = \frac{r}{1}\frac{r'}{1}= \frac{rr'}{1}\in R\\
-        & 1 = \frac{1}{1}\in R.
-    \end{align*}
-    These computations prove that $\text{im}\ R\hookrightarrow X^{-1}R$ is a subring of $X^{-1}R$ (or that $R\hookrightarrow X^{-1}R$ is a ring homomorphism), hence $\text{im}\ R\hookrightarrow X^{-1}R\simeq R$.
-\end{proof}
-\begin{definition}
-    Let $R$ be an integral domain. Let $X$ be a submonoid of $(R\setminus \{0\}, \cdot)$. We define the \textit{saturation} of $X$ to be the set
+        $$
+            gf((ay+bx)zw-(cw+dz)xy)= wyg(f(az-cx))+zxf(g(bw-dy))= 0,
+        $$
+        which implies 
+        $$
+            \frac{a}{x}+\frac{b}{y}=\frac{ay+bx}{xy} = \frac{cw+dz}{zw} = \frac{c}{z}+\frac{d}{w}.
+        $$
+        Moreover,
+        $$
+            fg(abzw-cdxy)= fg(abzw-cdxy-bcxw+bcxw) =  gbwf(az-cx) + fcxg(bw-dy) = 0, 
+        $$ 
+        hence 
+        $$
+            \frac{a}{x}\frac{b}{y}=\frac{ab}{xy} = \frac{cd}{zw}= \frac{c}{z}\frac{d}{w}.
+        $$
+        Let $\frac{a_1}{x_1},\frac{a_2}{x_2},\frac{a_3}{x_3}\in X^{-1}R$ be given. Then
+        \begin{align*}
+            \frac{a_1}{x_1}+\left(\frac{a_2}{x_2}+\frac{a_3}{x_3}\right) &= \frac{a_1}{x_1}+\frac{a_2x_3+a_3x_2}{x_2x_3} = \frac{a_1x_2x_3+a_2x_1x_3+a_3x_1x_2}{x_1x_2x_3}\\
+            &= \frac{(a_1x_2+a_2x_1)x_3+ a_3x_1x_2}{x_1x_2x_3} = \frac{a_1x_2+a_2x_1}{x_1x_2}+\frac{a_3}{x_3}\\
+            &= \left(\frac{a_1}{x_1}+\frac{a_2}{x_2} \right)+\frac{a_3}{x_3},
+        \end{align*}
+        and 
+        $$
+            \frac{a}{x}+0 = \frac{a}{x}+\frac{0}{1}=\frac{a\cdot 1+0x}{1x}= \frac{a}{x}.
+        $$  
+        For an $\frac{a}{x}\in X^{-1}R$, we define $-\frac{a}{x}:= \frac{-a}{x}$
+        $$
+            \frac{a}{x}-\frac{a}{x}= \frac{a}{x}+\frac{-a}{x}= \frac{ax-ax}{x^2}=0.
+        $$
+        Commutativity of addition on $X^{-1}R$ follows readily from the commutativity of addition on $R$. Checking that multiplication on $X^{-1}R$ gives it the structure of a commutative monoid is also readily verifiable. multiplication being distributive over addition is also easy to verify. 
+        We define a ring homomorphism 
+        \begin{gather*}
+            \iota_X : R \rightarrow \left\{\frac{a}{1}:a\in R\right\}\\
+            a \mapsto \frac{a}{1}
+        \end{gather*} 
+        This is clearly surjective and injective, hence the target of this function may be identified with $R$. 
+    \end{proof}
+    \begin{definition}
+    Let $R$ be a commutative ring. Let $X$ be a multiplicative set. We define the \textit{saturation} of $X$ to be the set
     \begin{align*}
         \widehat{X} := \left\{ r\in R : \exists r'\in R, r'r \in X \right\}.
     \end{align*}
-    A submonoid $X \subset R\setminus \{0\}$ is \textit{saturated}, if 
+    $X$ is \textit{saturated}, if 
     $$\widehat{X} = X.$$
 \end{definition}
 \begin{remark}
-    Let $x\in X$, then $1x\in X$, hence $x\in \widehat{X}$. We thus have $X\subset \widehat{X}$. Let $r,s\in \widehat{X}$, then for some $r',s'\in R$, $r'r\in X$ and $s's\in X$. Then $r's'rs\in X$, hence $rs \in \widehat{X}$. Clearly $1\in \widehat{X}$. Thus $\widehat{X}$ is a submonoid of $R\setminus\{0\}$. The saturation of $X$ is clearly saturated. Let $Y$ be a saturated submonoid of $R\setminus \{0\}$ containing $X$. Let $r \in \widehat{X}$. Then for some $r'\in R$, $r'r\in X\subset Y$. Thus $\widehat{X}\subset Y$, hence $\widehat{X}$ is the smallest saturated submonoid of $R\setminus\{0\}$ containing $X$.
+    Let $x\in X$, then $1x\in X$, hence $x\in \widehat{X}$. We thus have $X\subset \widehat{X}$. Let $r,s\in \widehat{X}$, then for some $r',s'\in R$, $r'r\in X$ and $s's\in X$. Then $r's'rs\in X$, hence $rs \in \widehat{X}$. Clearly $1\in \widehat{X}$. Thus $\widehat{X}$ is a multiplicative set. The saturation of $X$ is clearly saturated. Let $Y$ be a saturated multiplicative set containing $X$. Let $r \in \widehat{X}$. Then for some $r'\in R$, $r'r\in X\subset Y$. Thus $\widehat{X}\subset Y$, hence $\widehat{X}$ is the smallest saturated multiplicative set containing $X$.
 \end{remark}
-\begin{lemma}
-    Let $R$ be an integral domain and $X\subset R\setminus \{0\}$ a subset that is a submonoid of $(R\setminus \{0\},\cdot)$. Then $X$ is saturated if and only if for every $x,y\in R$ s.t. $xy \in X$, $x,y\in X$
+\begin{lemma}\label{EquivalentDescriptionOfBeingSaturated}
+    Let $R$ be a commutative ring and $X$ a multiplicative set in $R$. Then $X$ is saturated if and only if for every $x,y\in R$ s.t. $xy \in X$, $x,y\in X$
 \end{lemma}
 \begin{proof}
     "$\implies$": Suppose $X$ is saturated. Let $x,y\in R$ s.t. $xy\in X$. Then $y\in \widehat{X}=X$ and since $yx = xy \in X$, $x\in \widehat{X} = X$.\\
     "$\impliedby$": Let $r\in \widehat{X}$, then for some $r'\in R$, $r'r\in X$, which by assumption means $r\in X$. 
 \end{proof}
 \begin{lemma}\label{UnitsOfLocalization}
-     Let $R$ be an integral domain and $X\subset R\setminus \{0\}$ a subset that is a submonoid of $(R\setminus \{0\},\cdot)$. Consider the map 
+     Let $R$ be a commutative ring and $X$ a multiplicative set. Consider the map 
      \begin{gather*}
-         \iota : R \hookrightarrow X^{-1}R\\
+         \iota_X : R \hookrightarrow X^{-1}R\\
          r \mapsto \frac{r}{1}
      \end{gather*}
      Let $\frac{r}{x}\in X^{-1}R$. Then 
-     $$\frac{r}{x}\in \left(X^{-1}R\right)^\ast \iff r \in Y:= \iota^{-1}\left(\left(X^{-1}R\right)^\ast\right).$$
+     $$\frac{r}{x}\in \left(X^{-1}R\right)^\ast \iff r \in Y:= \iota_X^{-1}\left(\left(X^{-1}R\right)^\ast\right).$$
      Furthermore, $\widehat{X} = Y$. Thus 
      $$\left( X^{-1}R \right)^\ast = \left\{ \frac{r}{x}\in X^{-1}R : r \in \widehat{X}\right\}.$$
 \end{lemma}
@@ -2383,72 +2375,140 @@ In our exploration of unique factorization domains and Euclidean Domains we will
     Let $r \in Y$. Then for some $\frac{s}{y}\in X^{-1}S$, $r\frac{s}{y}=1$, meaning
     $$sr = sr \frac{1}{y}y = r\frac{s}{y}y= y \in X \implies r \in \widehat{X}.$$
 \end{proof}
-\begin{corollary}
-    When $R$ is an integral domain, and $X$ is a multiplicative submonoid of $R$ not containing $0$, we have that $Q(R)$ is a field and $X^{-1}R$ is a subring of $Q(R)$. Moreover $Q(R)$ is the smallest field containing $R$.
-\end{corollary}
+For this subsection $\pazocal{C}$ denotes the category whose objects are pairs consisting of a commutative ring and a multiplicative set in that ring. A morphism of such objects, $(R,X)\rightarrow (S,Y)$ is ring map, mapping every element in $X$ to an element in $Y$. Let $\pazocal{D}$ be the subcategory of $\pazocal{C}$ where an object in $\pazocal{D}$ is a pair $(R,X)\in \pazocal{C}$ with $X\subset R^\ast$.
+    \begin{lemma}
+        Let $\sigma:(R,R^\ast)\rightarrow (S,S^\ast)$ be a morphism in $\pazocal{C}$. There is a unique ring homomorphism $\overline{\sigma}: X^{-1}R\rightarrow S$ such that 
+        $$
+            \begin{tikzcd}
+                R \arrow[d,"\iota_X"']\arrow[rd, "\sigma"]\\
+                X^{-1}R \arrow[r,"\overline{\sigma}"'] & S
+            \end{tikzcd}
+        $$
+        commutes. 
+    \end{lemma}  
+    \begin{proof}
+        We define 
+        \begin{gather*}
+            \overline{\sigma}:X^{-1}R\rightarrow S\\
+            \frac{a}{x}\mapsto \sigma(a)\sigma(x)^{-1}
+        \end{gather*}
+        Suppose $\frac{a}{x}=\frac{b}{y}$. Then there is a $z\in X$ such that $z(ay-bx)=0$. Then $\sigma(z),\sigma(y),\sigma(x)\in S^\ast$ and 
+        $$
+            \sigma(z)\sigma(y)\sigma(a) = \sigma(z)\sigma(x)\sigma(b)\implies \overline{\sigma}\left(\frac{a}{x}\right)=\sigma(a)\sigma(x)^{-1}=\sigma(b)\sigma(y)^{-1}=\overline{\sigma}\left(\frac{b}{y}\right).
+        $$ 
+        One readily verifies that this is a ring map. Let $a\in R$. Then 
+        $$
+            \overline{\sigma}\iota_X(a)=\overline{\sigma}\left(\frac{a}{1}\right)=\sigma(a)\sigma(1)^{-1}=\sigma(a).
+        $$
+        Note that since $\sigma(x)\in S^\ast$ for every $x\in X$ we cannot have $0\in X$. Suppose $\tau: X^{-1}R\rightarrow S$ is another ring map satisfying $\sigma = \tau\iota_X$. For every $x\in X$ note that 
+        $$
+            1 = \tau\left(\frac{1}{1}\right) = \tau\left(\frac{x}{1}\frac{1}{x}\right)=\tau\left(\frac{x}{1}\right)\tau\left(\frac{1}{x}\right)=\tau\iota_X(x)\tau\left(\frac{1}{x}\right)=\sigma(x)\tau\left(\frac{1}{x}\right),
+        $$
+        hence $\tau\left(\frac{1}{x}\right)=\sigma(x)^{-1}$. It thus follows for every $\frac{a}{x}\in X^{-1}R$ that 
+        $$
+            \tau\left(\frac{a}{x}\right)=\tau\left(\frac{a}{1}\right)\tau\left(\frac{x}{1}\right)=\tau\iota(a)\sigma(x)^{-1}=\sigma(a)\sigma(x)^{-1}=\overline{\sigma}\left(\frac{a}{x}\right).
+        $$ 
+        Thus we conclude $\overline{\sigma}=\tau$.
+    \end{proof}
+    \begin{remark}
+        The contents of this lemma is that the functor
+        \begin{gather*}
+            \mathrm{Loc}: \pazocal{C}\rightarrow \pazocal{D}\\
+            (R,X)\mapsto (X^{-1}R,\iota_X(X))\\
+            (\sigma : (R,X)\rightarrow (S,Y))\mapsto (\overline{\sigma}: X^{-1}R\rightarrow Y^{-1}S,\frac{a}{x}\mapsto \sigma(a)\sigma(x)^{-1})
+        \end{gather*}
+        is left adjoint to the forgetful functor $\pazocal{F}: \pazocal{D}\rightarrow \pazocal{C}$. Since for each $(R,X)\in \pazocal{C}$ and $(S,Y)\in \pazocal{D}$ 
+        \begin{gather*}
+            \Hom_\pazocal{C}((R,X),\pazocal{F}(S,Y))\rightarrow \Hom_\pazocal{D}((X^{-1}R,\iota_X(X)),(S,Y))\\
+            \sigma \mapsto \overline{\sigma} 
+        \end{gather*}
+        defines a bijection. Indeed, given a morphism $\tau\in \Hom_\pazocal{D}((X^{-1}R,\iota_X(X)),(S,Y))$, and setting $\sigma:=\left.\tau\right|_{R}\in \Hom_\pazocal{C}((R,X),\pazocal{F}((S,Y)))$, we have $\overline{\sigma}=\tau$. This shows (using Yoneda) that the functor
+        $$
+            \Hom_\pazocal{C}((R,X),\_) : \pazocal{D}\rightarrow \mathrm{Set}
+        $$
+        is represented by $(X^{-1}R,\iota_X(X))$, hence $X^{-1}$ is unique up to unique isomorphism among rings in $\pazocal{D}$ with this property. 
+    \end{remark}
+    As a gift of this functorial description of localization we get
+    \begin{corollary}
+        If $\sigma: R\simeq S$ and $X$ is a multiplicative set in $R$, then 
+        $$
+            X^{-1}R\simeq \sigma(X)^{-1}S.
+        $$
+    \end{corollary}
+\subsubsection{Local Rings, Localizations of Integral Domains \& Field of Fractions}
+\begin{definition}\label{LocalRingDefinition}
+    A ring $R$ is called \textit{local} if it has unique maximal left ideal, $\mathfrak{m}_R$. A homomorphism of local rings is a homomorphism of rings $f : R\rightarrow S$ if $f^{-1}(\mathfrak{m}_S)=\mathfrak{m}_R$. 
+\end{definition}
+\begin{proposition}\label{EquivalentFormulationOfRingBeingLocal}
+    Let $R$ be ring. $R$ is local if and only if $\mathfrak{m}:=R\setminus R^\ast$ is a left ideal.
+\end{proposition}
 \begin{proof}
-    By the assumption that $R$ is an integral domain, $0$ i a prime ideal, hence $Q(R)$ is a commutative ring. The monoid $(R\setminus0, \cdot)$ is obviously saturated. Hence, by the above lemma,
-    $$Q(R)^\ast = \left\{ \frac{r}{s}\in Q(R) : r\in R\setminus\{0\} \right\} = Q(R)\setminus\{0\}.$$
-    This means $Q(R)$ is a field. Let $K$ be a field containing $R$ as a subring. Let $\frac{r}{s}\in Q(R)$. Then $r \in K$ and $\frac{1}{s}=s^{-1} \in K$, hence $\frac{r}{s} = r \frac{1}{s} \in K$. This means $Q(R) \subset K$, hence $Q(R)$ is the smallest field containing $R$ as a subring. If $\frac{x}{r},\frac{y}{s}\in X^{-1}R$, then since $sr\in X$, $\frac{x}{r}+\frac{y}{s}\in X^{-1}R$. The same argument show $\frac{x}{r}\frac{y}{s}\in X^{-1}R$. Clearly $1,0\in X^{-1}R$.
+    "$\implies$": Let $I$ be the unique maximal left ideal of $R$. Then since $I$ is proper, $I\subset \mathfrak{m}$. Note that for every $x\in \mathfrak{m}$, $\langle x\rangle$ is a proper ideal in $R$, hence $x\in I$. Therefor $\mathfrak{m} = I$, hence $\mathfrak{m}$ is an ideal.\\
+    "$\impliedby$": Let $I\subsetneq R$ be an ideal. Then every element of $I$ is a non-unit, hence $I\subset \mathfrak{m}$, thus $\mathfrak{m}$ is the unique maximal left ideal in $R$.
+\end{proof}
+\begin{lemma}
+    Given a prime ideal $\mathfrak{p}\subset R$ of a commutative ring $R$, the multiplicative set $X=R\setminus \mathfrak{p}$ is saturated.
+\end{lemma}
+\begin{proof}
+    This follows from Lemma~\ref{EquivalentDescriptionOfBeingSaturated}, since if $a\in \mathfrak{p}$ or $b\in \mathfrak{p}$, then $ab\in \mathfrak{p}$.  
+\end{proof}
+\begin{lemma}
+    Given a prime ideal $\mathfrak{p}\subset R$ of a commutative ring $R$, the ring $R_\mathfrak{p}$ is a local ring. 
+\end{lemma}
+\begin{proof}
+    Let $\frac{a}{x},\frac{b}{y}\in R_\mathfrak{p}$ be non-units, then $a,b\in \mathfrak{p}$, hence $ay+bx\in \mathfrak{p}$, which means $\frac{a}{x}+\frac{b}{x}$ is not a unit in $R_\mathfrak{p}$ (cf. the prior lemma and Lemma~\ref{UnitsOfLocalization}). If $\frac{c}{z}\in R_\mathfrak{p}$, then $ca\in \mathfrak{p}$, hence $\frac{c}{z}\frac{a}{x}$ is a non-unit in $R_\mathfrak{p}$. We conclude that the non-units of $R_\mathfrak{p}$ is an ideal, hence $R_\mathfrak{p}$ is local.\\
+    Let $\frac{a}{x},\frac{b}{y}\in R_\mathfrak{p}\setminus 0$.     
+\end{proof}
+\begin{proposition}
+    When $R$ is an integral domain and $X\subset R\setminus 0$ is a multiplicative set, then for every $\frac{a}{x},\frac{b}{y}\in X^{-1}R$,
+    $$
+        \frac{a}{x}=\frac{b}{y} \iff ay=bx
+    $$
+\end{proposition}
+\begin{proof}
+    "$\impliedby$": trivial.\\
+    "$\implies$": There is an $h\in X$, such that $h(ay-bx)=0$. Then $ay-bx=0$. 
 \end{proof}
 \begin{corollary}
     When $R$ is an integral domain, for a prime ideal $\mathfrak{p}\subset R$,  $R_\mathfrak{p}$ is an integral domain. 
 \end{corollary}
+\begin{theorem}
+    When $R$ is an integral domain, and $X$ is a multiplicative set of $R$ not containing $0$, we have that $Q(R):= (R\setminus 0)^{-1}R$ is a field and $X^{-1}R$ can be identified with a subring of $Q(R)$. Moreover $Q(R)$ is the smallest field containing $R$.
+\end{theorem}
+\begin{proof}
+    By the assumption that $R$ is an integral domain, $0$ i a prime ideal, hence $Q(R)$ is a commutative ring and $R\setminus 0$ is saturated, so 
+    $$Q(R)^\ast = \left\{ \frac{r}{s}\in Q(R) : r\in R\setminus\{0\} \right\} = Q(R)\setminus\{0\}.$$
+    This means $Q(R)$ is a field. Let $K$ be a field containing $R$ as a subring. Let $\frac{r}{s}\in Q(R)$. Then $r \in K$ and $\frac{1}{s}=s^{-1} \in K$, hence $\frac{r}{s} = r \frac{1}{s} \in K$. This means $Q(R) \subset K$, hence $Q(R)$ is the smallest field containing $R$ as a subring. Consider the subring 
+    $$
+        \left\{\frac{a}{x}\in Q(R) : x\in X \right\}\subset Q(R).
+    $$
+    Set $Y := R\setminus 0$ and consider the commutative diagram
+    $$
+        \begin{tikzcd}
+            R \arrow[r,"\id"]\arrow[d,"\iota_X"]\arrow[rd,"\overline{\id}"] & R \arrow[d,"\iota_Y"]\\
+            X^{-1}R \arrow[r,dashrightarrow] & Q(R)
+        \end{tikzcd}
+    $$
+    where the dashed arrow takes $\frac{a}{x}\mapsto \frac{a}{x}$. The diagram tells us that this defines an isomorphism onto its image, which is the subring discussed earlier.
+\end{proof}
 \begin{remark}
-    From the above we conclude that if $K$ is a field then we can canonically (to be shown) make the identification $K = Q(K)$, and in general $Q(R) =  Q(Q(R))$.
+    From the above we conclude that if $K$ is a field then we can canonically (to be shown) make the identification $K = Q(K)$, and in general $Q(R) =  Q(Q(R))=Q(Q(Q(R)))...$ and so on.
 \end{remark}
+\begin{corollary}
+    If $R\simeq S$, then 
+    $$
+        Q(R)\simeq Q(S).
+    $$
+\end{corollary}
 \begin{definition}
     We define the \textit{rational numbers} to be the field $\Q := Q(\Z)$.
 \end{definition}
-
-\begin{lemma}\label{ExtendingRingHomomorphismToLocalization}
-    Let $R$ and $S$ be integral domains. Let $X\subset R\setminus 0$ be a submonoid of $(R,\cdot)$. Let $\sigma: R\rightarrow S$ such that $\sigma(X)\subset S\setminus 0$. Then 
-    \begin{gather*}
-        \overline{\sigma}: X^{-1}R \rightarrow \sigma(X)^{-1}S\\
-        \frac{a}{b}\mapsto \frac{\sigma(a)}{\sigma(b)}
-    \end{gather*}
-    is unique well-defined ring homomorphism such that $\overline{\sigma}\mid_R = \sigma$
-\end{lemma}
-\begin{proof}
-    By assumption $\sigma(X)$ is a submonoid of $(S,\cdot)$ not containing $0$. Let $\frac{a}{b}=\frac{c}{d}\in X^{-1}R$. Then $ad = bc$, hence $$\sigma(a)\sigma(d) = \sigma(ad)=\sigma(bc)=\sigma(b)\sigma(c)\implies \overline{\sigma}\left(\frac{a}{b}\right)=\frac{\sigma(a)}{\sigma(b)}=\frac{\sigma(c)}{\sigma(d)} = \overline{\sigma}\left(\frac{c}{d}\right).$$
-    Let $\frac{a}{b},\frac{c}{d}\in X^{-1}R$ be arbitrary. Then 
-    $$\overline{\sigma}\left(\frac{a}{b}+\frac{c}{d}\right) = \frac{\sigma(ad+bc)}{\sigma(bd)}=\frac{\sigma(a)\sigma(d)+\sigma(b)\sigma(c)}{\sigma(b)\sigma(d)}= \frac{\sigma(a)}{\sigma(b)}+\frac{\sigma(c)}{\sigma(d)}=\overline{\sigma}\left(\frac{a}{b}\right)+\overline{\sigma}\left(\frac{c}{d}\right),$$
-    and 
-    $$\overline{\sigma}\left(\frac{a}{b}\frac{c}{d}\right) = \frac{\sigma(ac)}{\sigma(bd)} = \frac{\sigma(a)\sigma(c)}{\sigma(b)\sigma(d)}= \frac{\sigma(a)}{\sigma(b)}\frac{\sigma(c)}{\sigma(d)}=\overline{\sigma}\left(\frac{a}{b}\right)\overline{\sigma}\left(\frac{c}{d}\right).$$
-    Lastly, let $r\in R$. Then 
-    $$\overline{\sigma}(r)=\overline{\sigma}\left(\frac{r}{1}\right) = \frac{\sigma(r)}{\sigma(1)}=\frac{\sigma(r)}{1}=\sigma(r),$$
-    hence in particular $\overline{\sigma}(1)=\sigma(1)=1$.
-    Let $\sigma': X^{-1}R\mapsto \sigma(X)^{-1}S$ be another homomorphism with the property that $\sigma'\mid_R = \sigma.$ Let $a,b\in R$ with $b\neq0$. Then 
-    $$\sigma'\left(\frac{1}{b}\right) =\sigma'\left(\frac{b}{1}\right)^{-1} = \sigma'(b)^{-1}= \frac{1}{\sigma(b)}.$$
-    One then sees that 
-    $$\sigma'\left(\frac{a}{b}\right) = \sigma'(a)\sigma'\left(\frac{1}{b}\right)= \sigma(a)\frac{1}{\sigma(b)}=\frac{\sigma(a)}{\sigma(b)}=\overline{\sigma}\left(\frac{a}{b}\right)\implies \sigma'=\sigma.$$
-    
-\end{proof}
-\begin{lemma}
-    The collection of pairs $(R,X)$ where $R$ is an integral domain $X\subset R\setminus 0$ a multiplicative submonoid of $R$ with morphisms being ring homomorphisms $\sigma:(R,X)\rightarrow (S,Y)$ with $\sigma(X)\subset Y\subset R\setminus 0$, $X$ defines a category. 
-\end{lemma}
-\begin{proof}
-    If $\sigma \in \Hom((R,X),(S,Y))$ and $\tau \in \Hom((S,Y),(T,Z))$, then $\sigma(X)\subset Y$ hence $$\tau\circ \sigma(X)=\tau(\sigma(X))\subset \tau(Y)\subset Z\subset T\setminus 0.$$
-    Clearly $\mathbbm{1}_{(R,X)}:= \mathrm{id}_R \in \Hom((R,X),(R,X)).$
-\end{proof}
-\begin{proposition}
-    Call the category described in the above lemma $\mathcal{C}$. The assignment of a pair $((R,X),\sigma)$ in $(\text{Ob}(\mathcal{C}),\Hom(\mathcal{C}))$ to $(X^{-1}R,\overline{\sigma})$ in the category of integral domains defines a covariant functor. 
-\end{proposition}
-\begin{proof}
-    Let $\tau\in \Hom((S,Y),(T,Z))$, $\sigma\in \Hom((R,X),(S,Y))$ and $\frac{a}{b}\in X^{-1}R$. Then
-    $$\overline{\tau\circ\sigma}\left(\frac{a}{b}\right)=\frac{(\tau\circ\sigma)(a)}{(\tau\circ\sigma)(b)}=\frac{\tau(\sigma(a))}{\tau(\sigma(b))} = \overline{\tau}\left(\frac{\sigma(a)}{\sigma(b)}\right)=\overline{\tau}\left(\overline{\sigma}\left(\frac{a}{b}\right)\right)=(\overline{\tau}\circ\overline{\sigma})\left(\frac{a}{b}\right),$$
-    hence $\overline{\tau\circ\sigma} = \overline{\tau}\circ\overline{\sigma}.$ Lastly 
-    $$\overline{\mathbbm{1}_{(R,X)}}\left(\frac{a}{b}\right)=\frac{a}{b}=\mathrm{id}_{X^{-1}R}\left(\frac{a}{b}\right)=\mathbbm{1}_{X^{-1}R}\left(\frac{a}{b}\right).$$
-\end{proof}
-\begin{corollary}\label{LocalizationFunctorGivesIso}
-    Let $R$ and $S$ be integral domains and $X\subset R\setminus 0$ a submonoid. Then $R\overset{\sigma}{\simeq} S \implies X^{-1}R\simeq \sigma(X)^{-1}R$.
-\end{corollary}
 \begin{definition}
-    Let $R$ be an integral domain and $X\subset R\setminus 0$ a multiplicative submonoid of $R$. Consider an ideal $I\subset R$. We define the \textit{localization ideal of $I$ in $X^{-1}R$}. To be the set 
+    Let $R$ be an integral domain and $X\subset R\setminus 0$ a multiplicative set in $R$. Consider an ideal $I\subset R$. We define the \textit{localization ideal of $I$ in $X^{-1}R$}. To be the set 
     $$X^{-1}I:=\left\{\frac{a}{x}\in X^{-1}R: a\in I, x\in X\right\}$$
 \end{definition}
 \begin{lemma}\label{LocalizationIdealsDescribeIdealsGeneratedFromIdealsInSubring}
-    Let $R$ be an integral domain and $X\subset R\setminus 0$ a multiplicative submonoid of $R$. Let $I\subset R$ be an ideal. Then $(X^{-1}R)I = X^{-1}I$. Consequentially, $X^{-1}I$ is an ideal.
+    Let $R$ be an integral domain and $X\subset R\setminus 0$ a multiplicative submonoid of $R$. Let $I\subset R$ be an ideal. Then $(X^{-1}R)I = X^{-1}I$. Consequently, $X^{-1}I$ is an ideal.
 \end{lemma}
 \begin{proof}
     Let $\sum_1^n \frac{r_i}{x_i}a_i\in (X^{-1}R)I$ where $\frac{r_i}{x_i}\in X^{-1}R$ and $a_i\in I$. Then 
@@ -2462,16 +2522,6 @@ In our exploration of unique factorization domains and Euclidean Domains we will
     Let $\frac{a}{x}\in X^{-1}(I\cap R)$, where $a\in I$, $x\in X$.Then 
     $$\frac{a}{x}=\frac{1}{x}a\in I.$$
     Conversely, let $\frac{a}{x}\in I$. Then $a=x\frac{a}{x}\in I$, hence $\frac{a}{x}\in X^{-1}(I\cap R)$.
-\end{proof}
-\begin{proposition}
-    Given a commutative ring $R$ and a prime ideal $\mathfrak{p}$ of $R$, $R_\mathfrak{p}$ is local ring. 
-\end{proposition}
-\begin{proof}
-    We check that $R\setminus \mathfrak{p}$ is saturated. Suppose $x\in R$ such that there is some $x'\in R$ such that $xx'\notin \mathfrak{p}$. Then $x\notin \mathfrak{p}$ for otherwise $xx'\in \mathfrak{p}$. It follows that $\widehat{R\setminus\mathfrak{p}} = R\setminus \mathfrak{p}$. The units of $R_\mathfrak{p}$ are thus those elements $\frac{x}{r}$ where $x\notin \mathfrak{p}$. Hence 
-    $$
-        R_\mathfrak{p}\setminus \left(R_\mathfrak{p}\right)^\ast = \left\{\frac{x}{r}\in R_\mathfrak{p} : x\in \mathfrak{p}\right\}
-    $$
-    is an ideal, which means $R_\mathfrak{p}$ is local by Proposition~\ref{EquivalentFormulationOfRingBeingLocal}.
 \end{proof}
 \begin{lemma}
     A local ring $R$ with principal maximal ideal is Noetherian 
