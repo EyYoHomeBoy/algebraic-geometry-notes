@@ -296,7 +296,7 @@ With the above in mind we can make the following definition
     \end{gather*}
 \end{definition}
 \begin{definition}
-    Consider a topological space $X$, a subspace $Z\subset X$ and a sheaf $\pazocal{F}$ on $X$. Let $iota$ denote the inclusion map $Z\hookrightarrow X$. We define \emph{the restriction of $\pazocal{F}$ to $Z$} to be the sheaf $\left.\pazocal{F}\right|_{Z}:= \iota^{-1}\pazocal{F}$.
+    Consider a topological space $X$, a subspace $Z\subset X$ and a sheaf $\pazocal{F}$ on $X$. Let $\iota$ denote the inclusion map $Z\hookrightarrow X$. We define \emph{the restriction of $\pazocal{F}$ to $Z$} to be the sheaf $\left.\pazocal{F}\right|_{Z}:= \iota^{-1}\pazocal{F}$.
 \end{definition}
 \begin{remark}
     Fix a point $P\in Z$. Let $(U,s)\in \left(\left. \pazocal{F}\right|_Z\right)_P$... {\Large Do!}
@@ -325,11 +325,11 @@ We adopt the convention that all rings are commutative.
     $$V(IJ) = V(I)\cup V(J).$$
 \end{lemma}
 \begin{proof}
-    Consider a prime ideal $\mathfrak{P}\in \Spec \ R$ containing $IJ$. Then given $ab\in IJ$ with $a\in I$ and $b\in J$ we have that $a \in \mathfrak{P}$ or $b\in \mathfrak{P}$, hence $\mathfrak{P}\in V(I)\cup V(J)$. The converse inclusion follows from $I,J\supset IJ$ by the prior lemma. 
+    Consider a prime ideal $\mathfrak{p}\in \Spec \ R$ containing $IJ$. Then given $ab\in IJ$ with $a\in I$ and $b\in J$ we have that $a \in \mathfrak{p}$ or $b\in \mathfrak{p}$, hence $\mathfrak{p}\in V(I)\cup V(J)$. The converse inclusion follows from $I,J\supset IJ$ by the prior lemma. 
 \end{proof}
 \begin{lemma}
     For a family of ideals $\{I_\mu\}$ in $R$, 
-    $$V(\sum_\mu I_\mu) = \bigcap_\mu V(I_\mu).$$ 
+    $$V\left(\sum_\mu I_\mu\right) = \bigcap_\mu V(I_\mu).$$ 
 \end{lemma}
 \begin{proof}
     Again one inclusion follows from $I_\nu\subset \sum_\mu I_\mu$. Suppose conversely that $\mathfrak{P}\in \Spec \ R$ is given such that it contains every $I_\mu$, then since ideals are closed under addition it contains $\sum_\mu I_\mu$.  
@@ -393,7 +393,38 @@ Given a ring $R$ and prime ideal $\mathfrak{p}$ in $R$. We denote the localizati
 \begin{proof}
     Indeed, for $\mathfrak{p}\notin V(I)$, there is an $f\in I$ not in $\mathfrak{p}$, hence $\mathfrak{p}\notin V(\langle f\rangle)$, meaning $\mathfrak{p}\in D(f)$. Then $V(I)\cap D(f) = \emptyset$. This means that every point in an open subset $U$ in $\Spec \ R$ has an open neighborhood contained in $U$. It follows that the collection in question forms an open basis for the Zariski topology. 
 \end{proof}
-\begin{lemma}
+\begin{lemma}\label{FiniteNumberOfRepresentationsOfSection}
+    Consider a ring $R$, an element $f\in R$ and a section $s\in \pazocal{O}(D(f))$. There are $a_1,\dots,a_m,h_1,\dots,h_m\in R$ such that 
+    $$
+        D(f) = \bigcup_1^m D(h_i)
+    $$
+    and 
+    $$
+        s(\mathfrak{p}) = \frac{a_i}{h_i}\in R_\mathfrak{p}
+    $$
+    for every $\mathfrak{p}\in D(h_i)$ for each $i$. 
+\end{lemma}
+\begin{proof}
+    First of all, there are $\{\lambda_\alpha\}$ in $R$ such that 
+    $$
+        D(f) = \bigcup_\alpha D(\lambda_\alpha)
+    $$
+    and $s(\mathfrak{p})=\frac{a_\alpha'}{g_\alpha}$ for some $a_\alpha',g_\alpha \in R$ with $g_\alpha\notin \mathfrak{p}$ for each $\mathfrak{p}\in D(\lambda_\alpha)$. Since $D(\lambda_\alpha)\subset D(g_\alpha)$, it follows that $\rad(\langle \lambda_\alpha \rangle)\subset \rad(\langle g_\alpha\rangle)$, hence for some $k_\alpha \geq 1$, 
+    $$
+        \lambda_\alpha^{k_\alpha} = l_\alpha g_\alpha \implies \frac{l_\alpha a_\alpha'}{\lambda_\alpha^{k_\alpha}} = \frac{a_\alpha'}{g_\alpha}.
+    $$
+    Setting $h_\alpha := \lambda_\alpha^{k_\alpha}$ and $a_\alpha := l_\alpha a_\alpha'$. We get, upon noting that $D\left(h_\alpha^{k_\alpha}\right) = D(\lambda_\alpha)$, a cover $\{h_\alpha\}$ of $D(f)$ with 
+    $$
+        s(\mathfrak{p})= \frac{a_\alpha}{h_\alpha}
+    $$
+    with $h_\alpha\notin \mathfrak{p}$.
+    Note that 
+    $$
+        D(f) \subset \bigcup_\alpha D(h_\alpha) \iff V(\langle f\rangle) \supset \bigcap_\alpha D(h_\alpha) \iff \rad(\langle f\rangle)\subset \rad\left(\sum_\alpha \langle h_\alpha\rangle\right).
+    $$
+    The last of these statements is equivalent to $f^n = \sum_1^m b_ih_i$ for some $n\geq 1$, $b_1,\dots,b_m\in R$ and $\{h_1,\dots,h_m\}\subset \{h_\alpha\}$. So it follows that $D(f) = \bigcup_1^m D(h_i)$.
+\end{proof}
+\begin{lemma}\label{StalkCorrespondToPrimeLocalizationSheafOnBasisSetCorrespondToLocalization}
     Consider a ring $R$. Then 
     \begin{enumerate}
         \item For every point $\mathfrak{p}\in \Spec\ R$
@@ -406,7 +437,7 @@ Given a ring $R$ and prime ideal $\mathfrak{p}$ in $R$. We denote the localizati
         $$
         \item In particular,
         $$
-            \Gamma(\Spec\ R,\pazocal{O}):= \pazocal{O}(\Spec\ R) = D(1) \simeq R_1 = R.
+            \Gamma(\Spec\ R,\pazocal{O}):= \pazocal{O}(\Spec\ R) = \pazocal{O}(D(1)) \simeq R_1 = R.
         $$
     \end{enumerate}    
 \end{lemma}
@@ -421,7 +452,46 @@ Given a ring $R$ and prime ideal $\mathfrak{p}$ in $R$. We denote the localizati
         \sigma\left(\frac{a}{f}\right) = \frac{a}{f}.
     $$
     To check injectivity, consider $s,t\in \pazocal{O}_\mathfrak{p}$ with $s(\mathfrak{p})=r(\mathfrak{p})$. On a sufficiently small neighborhood $U$ of $\mathfrak{p}$, we have that $\left. s\right|_U = \frac{a}{f}\in R_\mathfrak{q}$ and $\left. t\right|_U = \frac{b}{g}\in R_\mathfrak{q}$ for each $q\in U$. There is some $h\in R\setminus \mathfrak{p}$ such that $h(ag-bf)=0$, hence on $D(f)\cap D(g)\cap D(h)$, $s$ and $t$ agree. This implies $s=t$. We conclude that $\sigma$ is an isomorphism of rings.\\
-    2.  
+    2. We define a homomorphism 
+    \begin{gather*}
+        \tau: R_f \rightarrow \pazocal{O}_P
+    \end{gather*} 
+    That takes $\frac{a}{f^n}\in R_f$ to the function $s\in \prod_{\mathfrak{p}\in D(f)}$ that takes $\mathfrak{p}\in D(f)$ to $\frac{a}{f^n}$, which is well-defined since $\mathfrak{p}\not\supset  \langle f^n\rangle $ for every $n\geq 0$. We claim that this is an isomorphism.\\
+    To show injectivity, suppose 
+    $$
+        \tau\left(\frac{a}{f^n}\right) = \tau\left(\frac{b}{f^m} \right)
+    $$
+    for a pair $\frac{a}{f^n},\frac{b}{f^m}\in R_f$. Then for every $\mathfrak{p}\in D(f)$  
+    $$
+        h_\mathfrak{p}\left(af^m-bf^n\right) = 0
+    $$
+    for some $h_\mathfrak{p}\in R\setminus \mathfrak{p}$. Set $\mathfrak{a}:= \mathrm{Ann}(af^m-bf^n)$. Note then that $\mathfrak{p}\not\supset \mathfrak{a}$, since $h_\mathfrak{p}\in \mathfrak{a}$. We get that $V(\mathfrak{a})\cap D(f)=\emptyset$, hence $V(\mathfrak{a})\subset V(\langle f\rangle)$, which is equivalent to $\langle f\rangle \subset \rad(\mathfrak{a})$. Then $f^l(af^m-bf^n)=0 $ for some $l\geq0$. It thus follows that $\frac{a}{f^n}=\frac{b}{f^m}$ in $R_f$.\\
+    To show surjectivity, note first that $D(f)$ has a finite cover $\{D(h_i)\}_1^m$ with $s(\mathfrak{p})=\frac{a_i}{h_i}\in R_\mathfrak{p}$ for some $a_i\in R$ for each $\mathfrak{p}\in D(h_i)$ for each $i$. Consider a pair of indeces $i$ and $j$ and note that under 
+    $$
+        \tau' : R_{h_ih_j} \rightarrow \pazocal{O}(D(h_ih_j))=\pazocal{O}(D(h_i)\cap D(h_j)), 
+    $$
+    which takes a fraction to its associated constant section on $D(h_ih_j)$, $\frac{a_i}{h_i}$ and $\frac{a_j}{h_j}$ agree, then $\frac{a_i}{h_i}=\frac{a_j}{h_j}$ in $R_{h_ih_j}$. Then for some $k\geq 0$
+    $$
+        \left(h_ih_j\right)^k(a_ih_j-a_jh_i)=0 \iff h_j^{k+1}\left(h_i^ka_i\right)= h_i^{k+1}\left(h_j^ka_j\right).
+    $$
+    Note that $D(f)=\bigcup_1^m D(h_i^{k+1})$ and $s(\mathfrak{p})=\frac{a_i}{h_i}=\frac{h_i^ka_i}{h_i^{k+1}}$ for each $\mathfrak{p}\in D(h_i)=D(h_i^{k+1})$. For the sake of simplifying notation set $\lambda_i := h_i^{k+1}$ and $c_i := h_i^ka_i$. With this notation we find $\lambda_jc_i = \lambda_ic_j$ for each $i$ and $j$. Since $f\in \rad\left(\sum_1^m \lambda_i\right)$, there is an $n\geq 1$ and $b_1,\dots,b_m\in R$ with 
+    $$
+        f^n = \sum_1^m b_i\lambda_i. 
+    $$ 
+    Set 
+    $$
+        a:= \sum_1^m b_ic_i.
+    $$
+    Then we find  
+    $$
+        \lambda_j a= \sum_1^m \lambda_j b_i c_i = c_j\sum_1^m \lambda_ib_i = c_jf
+    $$
+    Then on each $D(h_i)$ for each $\mathfrak{p}\in D(h_i)$,
+    $$
+        \tau\left(\frac{a}{f^n}\right)(\mathfrak{p})=\frac{c_i}{\lambda_i} = s(\mathfrak{p}) \implies \tau\left(\frac{a}{f^n}\right) = s,
+    $$
+    hence $\tau$ is also surjective. We thus conclude that $\tau$ is a ring isomorphism.\\
+    3. Follows immediately from 2.
 \end{proof}
 \begin{definition}
     A \emph{ringed space} is a topological space $X$ together with a sheaf 
@@ -462,7 +532,13 @@ We denote this composition by $f^\#_P$.
     is fully faithful. Here $\mathrm{LRS}$ denotes the category of locally ringed spaces. 
 \end{lemma}
 \begin{proof}
-    
+    1. Follows from Lemma~\ref{StalkCorrespondToPrimeLocalizationSheafOnBasisSetCorrespondToLocalization} 1.\\
+    We define 
+    \begin{gather*}
+        f : \Spec\ B\rightarrow \Spec \ A\\
+        \mathfrak{p} \mapsto \sigma^{-1}(\mathfrak{p})
+    \end{gather*}
+    which is well-defined by Proposition~\ref{PreImageOfPrimeIdealUnderRingMapIsPrime}. For an ideal $I\subset A$ one readily verifies that $f^{-1}(V(I))=V(\sigma(I))$ {\Large I haven't actually defined what this means: DO!}, which shows that $f$ is continuous. For an open set $U\subset \Spec \ A $... 
 \end{proof}
 \begin{definition}
     An \emph{affine scheme} is a locally ringed space $(X,\pazocal{O}_X)$ isomorphic to $(\Spec \ R, \pazocal{O})$ for some ring $R$ as locally ringed spaces. 

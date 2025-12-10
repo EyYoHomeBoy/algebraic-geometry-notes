@@ -2037,6 +2037,12 @@ Assuming the axiom of choice we get the following result.
     $$
     This is a non-empty family of sets, since it contains $I$ and it is partially ordered by inclusion. By Lemma~\ref{UnionOverChainOfSubmodulesIsSubmodule} every chain in $X$ has an upper bound, hence it contains a maximal element $\mathfrak{p}\supset I$ by Zorn's Lemma. Take a pair of elements $x,y\in R$ such that $x,y\notin \mathfrak{p}$. Then by maximality $\langle x\rangle +\mathfrak{p},\langle y\rangle +\mathfrak{p}\notin X$, hence $a\in \rad(\langle x\rangle +\mathfrak{p}), \rad(\langle y\rangle +\mathfrak{p})$, hence $a$ is in the intersection of the radicals of $\langle x\rangle + \mathfrak{p}$ and $\langle y\rangle +\mathfrak{p}$, which is just $\langle xy\rangle + \mathfrak{p}$. This ideal is then not in $X$, hence $xy\notin \mathfrak{p}$. This proves that $\mathfrak{p}$ is prime and therefor that $a$ is not in the intersection of all prime ideals containing $I$.   
 \end{proof}
+\begin{proposition}\label{PreImageOfPrimeIdealUnderRingMapIsPrime}
+    Given a prime ideal $\mathfrak{p}\subset S$ and a ring map $\sigma : R\rightarrow S$, then $\sigma^{-1}(\mathfrak{p})\subset R$ is a prime ideal.
+\end{proposition}
+\begin{proof}
+    Suppose $xy\in\sigma^{-1}(\mathfrak{p})$. Then $\sigma(x)\sigma(y)=\sigma(xy)\in \mathfrak{p}$, hence $\sigma(x)\in \mathfrak{p}$ or $\sigma(y)\in\mathfrak{p}$; stated equivalently $x\in \sigma^{-1}(\mathfrak{p})$ or $y\in \sigma^{-1}(\mathfrak{p})$.   
+\end{proof}
 The following definition will be important way later on. 
 \begin{definition}
     Let $R$ be a commutative ring. We define the \textit{spectrum of $R$} to be the set 
@@ -2245,7 +2251,7 @@ In our exploration of unique factorization domains and Euclidean Domains we will
 \begin{proof}
     A Euclidean domain is a PID, which is a UFD. 
 \end{proof}
-\subsubsection{Local Rings of Commutative Rings}
+\subsubsection{Localizations                           of Commutative Rings}
     \begin{definition}
         Given a ring $R$, a subset $X$ of $R$ is called \emph{multiplicative} if it is a submonoid of $(R,\cdot)$ 
     \end{definition}
@@ -2348,7 +2354,7 @@ In our exploration of unique factorization domains and Euclidean Domains we will
     Let $x\in X$, then $1x\in X$, hence $x\in \widehat{X}$. We thus have $X\subset \widehat{X}$. Let $r,s\in \widehat{X}$, then for some $r',s'\in R$, $r'r\in X$ and $s's\in X$. Then $r's'rs\in X$, hence $rs \in \widehat{X}$. Clearly $1\in \widehat{X}$. Thus $\widehat{X}$ is a multiplicative set. The saturation of $X$ is clearly saturated. Let $Y$ be a saturated multiplicative set containing $X$. Let $r \in \widehat{X}$. Then for some $r'\in R$, $r'r\in X\subset Y$. Thus $\widehat{X}\subset Y$, hence $\widehat{X}$ is the smallest saturated multiplicative set containing $X$.
 \end{remark}
 \begin{lemma}\label{EquivalentDescriptionOfBeingSaturated}
-    Let $R$ be a commutative ring and $X$ a multiplicative set in $R$. Then $X$ is saturated if and only if for every $x,y\in R$ s.t. $xy \in X$, $x,y\in X$
+    Let $R$ be a commutative ring and $X$ a multiplicative set in $R$. Then $X$ is saturated if and only if for every $x,y\in R$ when $xy \in X$ then $x,y\in X$
 \end{lemma}
 \begin{proof}
     "$\implies$": Suppose $X$ is saturated. Let $x,y\in R$ s.t. $xy\in X$. Then $y\in \widehat{X}=X$ and since $yx = xy \in X$, $x\in \widehat{X} = X$.\\
@@ -2424,7 +2430,7 @@ For this subsection $\pazocal{C}$ denotes the category whose objects are pairs c
         \end{gather*}
         defines a bijection. Indeed, given a morphism $\tau\in \Hom_\pazocal{D}((X^{-1}R,\iota_X(X)),(S,Y))$, and setting $\sigma:=\left.\tau\right|_{R}\in \Hom_\pazocal{C}((R,X),\pazocal{F}((S,Y)))$, we have $\overline{\sigma}=\tau$. This shows (using Yoneda) that the functor
         $$
-            \Hom_\pazocal{C}((R,X),\_) : \pazocal{D}\rightarrow \mathrm{Set}
+            \left.\Hom_\pazocal{C}((R,X),\_)\right|_\pazocal{D} : \pazocal{D}\rightarrow \mathrm{Set}
         $$
         is represented by $(X^{-1}R,\iota_X(X))$, hence $X^{-1}$ is unique up to unique isomorphism among rings in $\pazocal{D}$ with this property. 
     \end{remark}
@@ -2492,7 +2498,7 @@ For this subsection $\pazocal{C}$ denotes the category whose objects are pairs c
     where the dashed arrow takes $\frac{a}{x}\mapsto \frac{a}{x}$. The diagram tells us that this defines an isomorphism onto its image, which is the subring discussed earlier.
 \end{proof}
 \begin{remark}
-    From the above we conclude that if $K$ is a field then we can canonically (to be shown) make the identification $K = Q(K)$, and in general $Q(R) =  Q(Q(R))=Q(Q(Q(R)))...$ and so on.
+    We call $Q(R)$ \emph{the field of fractions of $R$}.  From the above we conclude that if $K$ is a field then we can canonically make the identification $K = Q(K)$, and in general $Q(R) =  Q(Q(R))=Q(Q(Q(R)))...$ and so on.
 \end{remark}
 \begin{corollary}
     If $R\simeq S$, then 
@@ -2645,7 +2651,31 @@ For this subsection $\pazocal{C}$ denotes the category whose objects are pairs c
         Then $\sum_0^n (\lambda_i-\mu_i)t^i + (z_n-w_n)t^{n+1}=0,$
         hence $\ord((\lambda_i-\mu_i)t^i)=\ord((\lambda_j-\mu_j)t^j)$ for every $i,j$ hence $(\lambda_i-\mu_i)t^i=0$ for every $i$, implying $\lambda_i=\mu_i$. Similarly one can conclude that $z_n=w_n$.  
     \end{proof}
-    
+\subsubsection{Torsion \& Annihilators}
+\begin{definition}
+    An element of a ring $R$ is \emph{regular} if it is both not a left and right zero divisor.
+\end{definition}
+\begin{definition}
+    Consider a left $R$-module $M$. $m\in M$ is a \emph{torsion element} if there is a regular element $r\in R$ such that 
+    $$
+        rm = 0.
+    $$
+\end{definition}
+\begin{definition}
+    We define the \emph{annihilator} of a subset $X$ of a left $R$-module $M$ to be the set 
+    $$
+        \mathrm{Ann}(X):=\mathrm{Ann}_R(X) := \left\{ r\in R : rx = 0 \text{ for all } x\in X \right\}
+    $$ 
+\end{definition}
+\begin{lemma}
+    The annihilator of subset $X\subset {_RM}$ is a left ideal in $R$. 
+\end{lemma}
+\begin{proof}
+    Indeed, if $r_1,r_2\in \mathrm{Ann}(X)$ and $a\in R$, then given $x\in X$,
+    $$
+        (r_1+ar_2)x= r_1x+ar_2x = 0.
+    $$
+\end{proof}
 \subsection{Vector Spaces}
 \begin{definition}
     A \emph{vector space} is a module over a field $K$.
