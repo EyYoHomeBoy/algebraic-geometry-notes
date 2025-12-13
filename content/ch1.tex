@@ -2465,6 +2465,16 @@ For this subsection $\pazocal{C}$ denotes the category whose objects are pairs c
     Let $\frac{a}{x},\frac{b}{y}\in R_\mathfrak{p}$ be non-units, then $a,b\in \mathfrak{p}$, hence $ay+bx\in \mathfrak{p}$, which means $\frac{a}{x}+\frac{b}{x}$ is not a unit in $R_\mathfrak{p}$ (cf. the prior lemma and Lemma~\ref{UnitsOfLocalization}). If $\frac{c}{z}\in R_\mathfrak{p}$, then $ca\in \mathfrak{p}$, hence $\frac{c}{z}\frac{a}{x}$ is a non-unit in $R_\mathfrak{p}$. We conclude that the non-units of $R_\mathfrak{p}$ is an ideal, hence $R_\mathfrak{p}$ is local.\\
     Let $\frac{a}{x},\frac{b}{y}\in R_\mathfrak{p}\setminus 0$.     
 \end{proof}
+\begin{lemma}
+    Consider a ring map $\sigma: R\rightarrow S$ and $\mathfrak{p}\subset R$ and $\mathfrak{q}\subset S$ prime ideals with $\sigma^{-1}(\mathfrak{q})=\mathfrak{p}$. Then the localization $\sigma_\mathfrak{p}: R_\mathfrak{p}\rightarrow S_\mathfrak{q}$ is a local ring homomorphism.
+\end{lemma}
+\begin{proof}
+    The maximal ideals $\mathfrak{m}_\mathfrak{p}\subset R$ and $\mathfrak{m}_\mathfrak{q}\subset S$ is the set of quotients with numerator in $\mathfrak{p}$ respectively $\mathfrak{q}$. If $\frac{a}{x}\in \sigma_\mathfrak{p}^{-1}(\mathfrak{m}_\mathfrak{q})$, then 
+    $$
+        \frac{\sigma(a)}{\sigma(x)}=\sigma_\mathfrak{p}\left(\frac{a}{x}\right)\in \mathfrak{m}_\mathfrak{q},
+    $$
+    hence $\sigma(a)\notin \mathfrak{q}$. This implies $a\notin \sigma^{-1}(\mathfrak{q})=\mathfrak{p}$, hence $\frac{a}{x}\in \mathfrak{m}_\mathfrak{p}$. If $\frac{a}{x}\in \mathfrak{m}_\mathfrak{p}$, then $a\notin \mathfrak{p}=\sigma^{-1}(\mathfrak{q})$, hence $\frac{a}{x}\in \sigma_\mathfrak{p}^{-1}(\mathfrak{m}_\mathfrak{q})$. We thus conclude that $\mathfrak{m}_\mathfrak{p}=\sigma_\mathfrak{p}^{-1}(\mathfrak{m}_\mathfrak{q})$. 
+\end{proof}
 \begin{proposition}
     When $R$ is an integral domain and $X\subset R\setminus 0$ is a multiplicative set, then for every $\frac{a}{x},\frac{b}{y}\in X^{-1}R$,
     $$

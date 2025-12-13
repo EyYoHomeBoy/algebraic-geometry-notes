@@ -509,10 +509,13 @@ $$
 $$
 Composing this with 
 $$
-    \varinjlim_{f^{-1}(U)\ni P} \pazocal{O}_X\left(f^{-1}(U)\right)\hookrightarrow \varinjlim_{W\ni P} \pazocal{O}_X(W) = \pazocal{O}_{X,P}
+    \varinjlim_{f^{-1}(U)\ni P} \pazocal{O}_X\left(f^{-1}(U)\right)\hookrightarrow \varinjlim_{W\ni P} \pazocal{O}_X(W) = \pazocal{O}_{X,P},
 $$
-We denote this composition by $f^\#_P$.
-\begin{definition}
+we obtain a map 
+\begin{gather*}
+    f^\#_P : \pazocal{O}_{Y,f(P)}\rightarrow \pazocal{O}_{X,P}
+\end{gather*}
+\begin{definition}\label{MorphismOfRingedSpaces}
     A morphism of locally ringed spaces is a morphism of ringed spaces $(f,f^\#):(X,\pazocal{O}_X)\rightarrow (Y,\pazocal{O}_Y)$ such that $f^\#_P$ is local ring homomorphism (cf. Definition~\ref{LocalRingDefinition}) for each $P\in X$. 
 \end{definition}
 \begin{lemma}
@@ -538,13 +541,51 @@ We denote this composition by $f^\#_P$.
         f : \Spec\ B\rightarrow \Spec \ A\\
         \mathfrak{p} \mapsto \sigma^{-1}(\mathfrak{p})
     \end{gather*}
-    which is well-defined by Proposition~\ref{PreImageOfPrimeIdealUnderRingMapIsPrime}. For an ideal $I\subset A$ one readily verifies that $f^{-1}(V(I))=V(\sigma(I))$ {\Large I haven't actually defined what this means: DO!}, which shows that $f$ is continuous. For an open set $U\subset \Spec \ A $... 
+    which is well-defined by Proposition~\ref{PreImageOfPrimeIdealUnderRingMapIsPrime}. For an ideal $I\subset A$ one readily verifies that $f^{-1}(V(I))=V(\sigma(I))$ {\Large I haven't actually defined what this means: DO!}, which shows that $f$ is continuous. For an open set $U\subset \Spec \ A $, we take 
+    $$
+        f^\#_U :\pazocal{O}_{\Spec \ A}(U)\rightarrow \left(f_\star\pazocal{O}_{\Spec\ B}\right)(U)= \pazocal{O}_{\Spec\ B}\left(f^{-1}(U)\right)
+    $$
+    to be ring map taking a section $s\in \pazocal{O}_{\Spec\ A}$ to the section
+    \begin{gather*}
+        f^{-1}(U) \rightarrow \bigcup_{\mathfrak{p}\in f^{-1}(U)} B_\mathfrak{p}\\
+        \mathfrak{p} \mapsto \sigma_\mathfrak{p}(s\circ \varphi)(\mathfrak{p})
+    \end{gather*}
+    where $\sigma_\mathfrak{p}: A_\mathfrak{p}\rightarrow B_{f^{-1}(\mathfrak{p})}$ is the localization of $\sigma$ with respect to $\mathfrak{p}$. We check the naturality condition: Suppose $U\subset V$. Then for $s\in \pazocal{O}_{\Spec\ A}(U)$ and $\mathfrak{p}\in f^{-1}(V)$, 
+    \begin{align*}
+        \left.f^\#_U\right|(s)_{f^{-1}(V)}(\mathfrak{p})=\sigma_\mathfrak{p}((s\circ f)(\mathfrak{p}))= \sigma_\mathfrak{p}\left(\left(\left.s\right|_V\circ f\right)(\mathfrak{p})\right)=f^\#_V\left(\left.s\right|_V\right)(\mathfrak{p}).
+    \end{align*}
+    Let $\mathfrak{p}\in \Spec \ B $ and $(U,s)\in \pazocal{O}_{\Spec A,\mathfrak{p}}$. Then 
+    $$
+        \left(f^\#_{f(\mathfrak{p})}(s)\right)(\mathfrak{p})= f^\#_U(s)(\mathfrak{p})= \sigma_\mathfrak{p}(s(f(\mathfrak{p}))) =  \sigma\left(s\left(\sigma^{-1}(\mathfrak{p})\right)\right),
+    $$
+    hence the square
+    $$
+        \begin{tikzcd}
+            \pazocal{O}_{\Spec\ A, f(\mathfrak{p})} \arrow[r,"f^\#_{\mathfrak{p}}"]\arrow[d,"\ev_{f(\mathfrak{p})}"] & \pazocal{O}_{\Spec\ B, \mathfrak{p}} \arrow[d,"\ev_{\mathfrak{p}}"]\\
+            A_{\sigma^{-1}(\mathfrak{p})} \arrow[r,"\sigma_\mathfrak{p}"] & B_\mathfrak{p}
+        \end{tikzcd}
+    $$
+    commutes. Since $\ev_{f(\mathfrak{p})}$ and $\ev_\mathfrak{p}$ are isomorphisms, it follows that $f^\#_\mathfrak{p}$ is a local ring homomorphism. We thus conclude that $(f,f^\#)_\sigma$ is a morphism of locally ringed spaces.\\
+    3. Let a morphism of locally ringed spaces $(f,f^\#): (\Spec\ B,\pazocal{O}_{\Spec \ B})\rightarrow (\Spec \ A, \pazocal{O}_{\Spec\ A})$. Then there is a ring map 
+    $$
+        \sigma:=f^\#_{\Spec\ A} : A\simeq \Gamma(\Spec\ A, \pazocal{O}_{\Spec\ A})\rightarrow \Gamma(\Spec \ A, \pazocal{O}_{\Spec\ B})\simeq B
+    $$
+    We check that $(g, g^\#)_{\sigma}=(f,f^\#)$. 
+    For a $\mathfrak{p}\in \Spec\ B$, consider the local ring homomorphism (cf. Definition~{MorphismOfRingedSpaces})
+    $$
+        \sigma_\mathfrak{p} : A_{f(\mathfrak{p})} \rightarrow B_\mathfrak{p}
+    $$
+    Note that
+    $$
+        \sigma^{-1}(\mathfrak{p})=\sigma_\mathfrak{p}^{-1}(\mathfrak{m}_\mathfrak{p}\cap B) = \mathfrak{m}_{f(\mathfrak{p})}\cap A = f(\mathfrak{p})
+    $$
+    hence $g$ and $f$ agree.  
 \end{proof}
 \begin{definition}
     An \emph{affine scheme} is a locally ringed space $(X,\pazocal{O}_X)$ isomorphic to $(\Spec \ R, \pazocal{O})$ for some ring $R$ as locally ringed spaces. 
 \end{definition}
 \subsubsection{Schemes}
 \begin{definition}
-    A \emph{scheme} is a locally ringed space $(X,\pazocal{O}_X)$ where for each $P\in X$ there is an open neighborhood of $P$ such that $(U,\left.\pazocal{O}_X\right|_U)$ is an affine scheme. I.e. there is an open covering of $X$ where each open set in the covering is an affine scheme. 
+    A \emph{scheme} is a locally ringed space $(X,\pazocal{O}_X)$ where for each $P\in X$ there is an open neighborhood $U$ of $P$ such that $(U,\left.\pazocal{O}_X\right|_U)$ is an affine scheme. I.e. there is an open covering of $X$ where each open set in the covering is an affine scheme. 
 \end{definition}
 
