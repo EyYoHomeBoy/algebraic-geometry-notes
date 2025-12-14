@@ -393,6 +393,23 @@ Given a ring $R$ and prime ideal $\mathfrak{p}$ in $R$. We denote the localizati
 \begin{proof}
     Indeed, for $\mathfrak{p}\notin V(I)$, there is an $f\in I$ not in $\mathfrak{p}$, hence $\mathfrak{p}\notin V(\langle f\rangle)$, meaning $\mathfrak{p}\in D(f)$. Then $V(I)\cap D(f) = \emptyset$. This means that every point in an open subset $U$ in $\Spec \ R$ has an open neighborhood contained in $U$. It follows that the collection in question forms an open basis for the Zariski topology. 
 \end{proof}
+\begin{lemma}
+    Given a ring $R$ and an element $f\in R$, $D(f)$ is quasi-compact with respect to the Zariski subspace topology.
+\end{lemma}
+\begin{proof}
+    Let $\{V_\alpha\}$ be an open cover of $\Spec\ R$. WLOG $V_\alpha=D(h_\alpha)$ for some $h_\alpha\in R$ for each $\alpha$. Then 
+    $$
+        V(\langle f\rangle)=\bigcap_\alpha V(\langle h_\alpha\rangle)=V\left(\sum_\alpha \langle h_\alpha\rangle\right),
+    $$ 
+    which implies $\rad(\langle f\rangle)= \rad\left(\sum_\alpha\langle h_\alpha\rangle\right).$
+    Then $f^n = \sum_1^m h_i$ for some $n\geq 1$ and $\{h_1,\dots,h_m\}\subset \{h_\alpha\}$, hence 
+    $$
+        D(f)=D(f^n)= \bigcup_1^m D(h_i).
+    $$  
+\end{proof}
+\begin{corollary}
+    $\Spec\ R$ is quasi-compact.
+\end{corollary}
 \begin{lemma}\label{FiniteNumberOfRepresentationsOfSection}
     Consider a ring $R$, an element $f\in R$ and a section $s\in \pazocal{O}(D(f))$. There are $a_1,\dots,a_m,h_1,\dots,h_m\in R$ such that 
     $$
@@ -418,12 +435,10 @@ Given a ring $R$ and prime ideal $\mathfrak{p}$ in $R$. We denote the localizati
         s(\mathfrak{p})= \frac{a_\alpha}{h_\alpha}
     $$
     with $h_\alpha\notin \mathfrak{p}$.
-    Note that 
-    $$
-        D(f) \subset \bigcup_\alpha D(h_\alpha) \iff V(\langle f\rangle) \supset \bigcap_\alpha D(h_\alpha) \iff \rad(\langle f\rangle)\subset \rad\left(\sum_\alpha \langle h_\alpha\rangle\right).
-    $$
-    The last of these statements is equivalent to $f^n = \sum_1^m b_ih_i$ for some $n\geq 1$, $b_1,\dots,b_m\in R$ and $\{h_1,\dots,h_m\}\subset \{h_\alpha\}$. So it follows that $D(f) = \bigcup_1^m D(h_i)$.
+    Since $D(f)$ is quasi-compact we obtain a finite cover of such $D(h_\alpha)$.
 \end{proof}
+
+
 \begin{lemma}\label{StalkCorrespondToPrimeLocalizationSheafOnBasisSetCorrespondToLocalization}
     Consider a ring $R$. Then 
     \begin{enumerate}
@@ -548,7 +563,7 @@ we obtain a map
     to be ring map taking a section $s\in \pazocal{O}_{\Spec\ A}$ to the section
     \begin{gather*}
         f^{-1}(U) \rightarrow \bigcup_{\mathfrak{p}\in f^{-1}(U)} B_\mathfrak{p}\\
-        \mathfrak{p} \mapsto \sigma_\mathfrak{p}(s\circ \varphi)(\mathfrak{p})
+        \mathfrak{p} \mapsto \sigma_\mathfrak{p}(s\circ f)(\mathfrak{p})
     \end{gather*}
     where $\sigma_\mathfrak{p}: A_\mathfrak{p}\rightarrow B_{f^{-1}(\mathfrak{p})}$ is the localization of $\sigma$ with respect to $\mathfrak{p}$. We check the naturality condition: Suppose $U\subset V$. Then for $s\in \pazocal{O}_{\Spec\ A}(U)$ and $\mathfrak{p}\in f^{-1}(V)$, 
     \begin{align*}
@@ -579,11 +594,71 @@ we obtain a map
     $$
         \sigma^{-1}(\mathfrak{p})=\sigma_\mathfrak{p}^{-1}(\mathfrak{m}_\mathfrak{p}\cap B) = \mathfrak{m}_{f(\mathfrak{p})}\cap A = f(\mathfrak{p})
     $$
-    hence $g$ and $f$ agree.  
+    hence $g$ and $f$ agree. Now note that given a global section $s$ on $\Spec \ A$ and a point $\mathfrak{p}\in \Spec\ B$,
+    $$
+        g^\#_{\Spec A}(s)(p)= \sigma_\mathfrak{p}(s\circ f(\mathfrak{p})) = f^\#_\mathfrak{p}(s)(\mathfrak{p})= f^\#_\mathfrak{p}(s)(\mathfrak{p})
+    $$
+    hence by naturality $f^\#_U = g^\#_U$ for every open subset $U$ of $\Spec \ A$. We thus conclude 
+    $$
+        (f,f^\#)=(g,g^\#)_\sigma.
+    $$
 \end{proof}
+\begin{example}
+    Consider a field $K$. The spectrum contains only one point, namely $0$. The sections over $\Spec \ K=\{\ast\}$ are thus the constant functions $\{\ast\}\rightarrow K$, hence the structure sheaf of $\Spec \ K$ is $K$ itself.  
+\end{example}
+\begin{example}
+    Consider a DVR $R$. This two prime ideals: $0$ and the maximal ideal $\langle t\rangle\subset R$, where $t$ is the uniformizing parameter of $R$. Note that $0\notin V(\langle t\rangle)$, which implies $D(t)=\{0\}$. It follows that $0$ is an \emph{open point} (i.e. a point that is Zariski open), hence $\langle t\rangle$ is a closed point in $\Spec\ R$. Moreover $0$ is a dense point, since $V(0)=\Spec \ R$ is the only smallest closed set containing $0$, since any other closed set is of the form $V(\langle t^k\rangle)$ and no such set contains $0$. The local ring of $0$ is $Q(R)$ and the local ring of $\langle t\rangle$ is just $R$, since points away from $\langle t\rangle$ are just the units of $R$.\\
+    The map 
+    $$
+       \iota: R\hookrightarrow Q(R)
+    $$  
+    induces a morphism of ringed spaces $(f,f^\#)_\iota$ with
+    \begin{gather*}
+        f: \Spec \ Q(R) \rightarrow \Spec \ R\\
+        0 \mapsto 0
+    \end{gather*}  
+    Note that $(g,f^\#_\iota)$ with 
+    \begin{gather*}
+        g: \Spec \ Q(R) \rightarrow \Spec \ R\\
+        0 \mapsto \langle t\rangle
+    \end{gather*}
+    is another morphism of ringed spaces. Since $f^\#_{0} : R\rightarrow Q(R)$ corresponds to $\iota$ and $\iota^{-1}(0)=0\neq \langle t\rangle = g(0)$, it follows that $(g,f^\#_\iota)$ is not a morphism of locally ringed spaces. It is thus not induced by any ring map $R\rightarrow Q(R)$, since any ring map would induce a morphism of locally ringed spaces.  
+\end{example}
+The above example shows the necessity of morphisms of locally ringed spaces having induced maps on stalks that are local ring homomorphisms.
+\begin{example}
+    For a field $K$, we define \emph{the affine line over $K$}, denoted $\A^1_K$ to be $\Spec\ K[x]$. We denote the zero ideal in $\A^1_K$ by $\xi$. This (as with DVR's) is a dense point, since $\xi \notin V(f)$ for any $f\in K[x]$ of degree$>0$, which is equivalent to $\{x\}\cap D(f) \neq \emptyset $ for any $f\in K[x]$ with $\deg\ f>0$. In particular, $\xi$ is not a closed point. All other points of $\A_K^1$ are the maximal ideals of $K[x]$ which are in one-to-one correspondence with monic irreducible polynomials in $K[x]$. The points in $\mathfrak{p}\in\A^1_K\setminus \{\xi\}$ are thus all closed since $\mathfrak{p}=\langle f\rangle$ is a maximal ideal for some monic irreducible $f\in K[x]$, which implies $\{p\} = V(\langle f\rangle)$.    
+\end{example}
+\begin{example}
+    When $K$ is algebraically closed, closed points in $\A_K^1$ correspond to points in $K$. It is then apparent that $\A^1(K)$ and $\A^1_K$ are different constructions, since all points $\A^1(K)$ are closed, which means there is no dense point in $A^1(K)$.  
+\end{example}
+\begin{definition}
+    In general, we define \emph{affine space over $K$} to be
+    $$
+        \A^n_K := \Spec\ K[x_1,\dots,x_n]
+    $$
+\end{definition}
+\begin{definition}
+    For a topological space $X$, \emph{a generic point} is point $x$ with 
+    $$
+        \overline{(\{x\})}=X.
+    $$
+    I.e. a point whose singleton set is dense in $X$.
+\end{definition}
+\begin{example}
+    Let $K$ be an algebraically closed field. Then the maximal ideals of $K[x_1,x_2]$ correspond to points in $\A^2(K)$. The closed points of $\A^2_K$ thus correspond to the points of $\A^2(K)$ (cf. Hilbert's Nullstellensatz). Denote these by 
+    $$
+        \mathfrak{m}_{a,b} \quad \left((a,b)\in \A^2(K)\right)
+    $$  
+    Secondly, again the point $\xi\in \A^2_K$, the zero ideal in $K[x_1,x_2]$, is a generic point.\\
+    Thirdly, an irreducible polynomial $f\in K[x_1,x_2]$, corresponds to $\eta_f:=\langle f\rangle\in \A^2_K$. Suppose $(a,b)\in f$, Then $\mathfrak{m}_{a,b}\supset $...   
+\end{example}
+We have now seen some examples of the geometric objects that we are interested in studying, namely schemes, which are locally ringed spaces that locally look the spectrum of a ring. To give a precise definition we will first give a definition of affine schemes.
 \begin{definition}
     An \emph{affine scheme} is a locally ringed space $(X,\pazocal{O}_X)$ isomorphic to $(\Spec \ R, \pazocal{O})$ for some ring $R$ as locally ringed spaces. 
 \end{definition}
+\begin{example}
+    $\Spec \ R$ is trivially an example of an affine scheme. 
+\end{example}
 \subsubsection{Schemes}
 \begin{definition}
     A \emph{scheme} is a locally ringed space $(X,\pazocal{O}_X)$ where for each $P\in X$ there is an open neighborhood $U$ of $P$ such that $(U,\left.\pazocal{O}_X\right|_U)$ is an affine scheme. I.e. there is an open covering of $X$ where each open set in the covering is an affine scheme. 

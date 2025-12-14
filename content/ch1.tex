@@ -168,7 +168,7 @@ The data specifying a monoid is often written as the tuple $(M,\circ)$ or $(M,\c
     Since $\rho(L)\subset N$ is a submonoid, it is a monoid. Let $\rho(l_1),\rho(l_2)\in \rho(L)$. Then since $L$ is a commutative by Lemma~\ref{SubmonoidOfCommutativeMonoidIsCommutativeMonoid} it follows that  
     $$\rho(l_1)\rho(l_2) = \rho(l_1l_2) = \rho(l_2l_1) = \rho(l_2)\rho(l_1).$$
 \end{proof}
-\subsubsection{Product Monoids \& Restricted Product of Monoids}
+\subsubsection{Product Monoids \& Finitely Supported Product of Monoids}
 \begin{theorem}\label{DirectProductOfMonoidsIsAMonoid}
     Let $A$ be a set and $\{M_\alpha\}_{\alpha\in A}$ a family of monoids. We define a binary operation on the product $\prod_{\alpha\in A} M_\alpha$ by $(m_\alpha)(m_\alpha') = (m_\alpha m_\alpha')$ for $(m_\alpha),(m_\alpha')\in \prod_{\alpha\in A} M_\alpha$. With this operation $\prod_{\alpha\in A} M_\alpha$ becomes a monoid. If $M_\alpha$ is commutative for every $\alpha \in A$ so is $\prod_{\alpha\in A} M_\alpha$.
 \end{theorem}
@@ -4878,7 +4878,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
         This means $_\pazocal{V}T_B$ is invertible in $M_D(L)$, hence $B$ is a basis by Theorem~\ref{BasisTransformationTheorem}.
     \end{proof}
     \begin{remark}
-        In the above setup we can therefor given any $f\in K[\mathbf{x}]$ find a family of polynomials 
+        In the above setup we can therefore given any $f\in K[\mathbf{x}]$ find a family of polynomials 
         $$f_{r_1,\dots,r_n}\in L[z_1,\dots,z_n] \quad (0\leq r_i < d_i),$$
         such that
         \begin{align*}
@@ -4928,8 +4928,12 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
             \end{pmatrix}, 
         $$
         I.e. $g_{n+1}$ is an eigenvalue of $(P_{ij}(g_1,\dots,g_n))$, hence by Cramer's rule,  
-        $$\det(P_{ij}(g_1,\dots,g_n)-\delta_{ij}g_{n+1}) =  0$$. Then $P: = (-1)^d\det(P_{ij}-\delta_{ij}g_{n+1})= \sum_{\pi\in S_d} \prod_1^d (P_{i\pi(i)}-\delta_{ij}g_{n+1})\in L[\mathbf{x}]\setminus 0$ satisfies $P(g_1,\dots,g_{n+1})=0.$ From b. we find that 
-        $$\deg \ P_{ij}(z_1^{d_1},\dots,z_n^{d_n}) - \delta_{ij}z_{n+1}^{d_{n+1}}\leq d_{n+1}+\deg \ M_i - \deg \ M_j.$$
+        $$
+            \det(P_{ij}(g_1,\dots,g_n)-\delta_{ij}g_{n+1}) =  0.$$ 
+        Then $P: = (-1)^d\det(P_{ij}-\delta_{ij}g_{n+1})= \sum_{\pi\in S_d} \prod_1^d (P_{i\pi(i)}-\delta_{ij}g_{n+1})\in L[\mathbf{x}]\setminus 0$ satisfies $P(g_1,\dots,g_{n+1})=0.$ From b. we find that 
+        $$
+            \deg \ P_{ij}(z_1^{d_1},\dots,z_n^{d_n}) - \delta_{ij}z_{n+1}^{d_{n+1}}\leq d_{n+1}+\deg \ M_i - \deg \ M_j.
+        $$
         For an arbitrary permutation $\pi \in S_d$,
         \begin{align*}
             \deg \ \prod_1^d (P_{i\pi(i)}(z_1^{d_1},\dots,z_d^{d_n})-\delta_{i\pi(i)}z_{n+1}^{d_{n+1}})&\leq \sum_1^d (d_{n+1} + \deg\ M_{\pi(i)}-\deg \ M_{i})\\
@@ -4956,7 +4960,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
         First a slight reformulation. Let $M$ be some field and consider $H=\{h_1,\dots,h_{n+1}\} \subset M[x_1,\dots,x_n]$, $\delta_i:=\deg\ h_i$. Set $$\Delta_{\delta_1,\dots,\delta_{n+1}}:=\left\{ v\in \N^{n+1} : \sum_1^{n+1} v_i\delta_i \leq \prod_1^{n+1} \delta_i\right\}.$$
         Then define 
         $$B(H) := \left\{ h_1^{q_1}\cdots h_{n+1}^{q_{n+1}} : (q_1,\dots,q_{n+1})\in \Delta_{\delta_1,\dots,\delta_{n+1}}\right\}.$$
-        And let $\pazocal{V}$ be the standard basis of $\{\mathbf{z}^v : v\in \Delta_{\delta_1,\dots,\delta_n}$. If $_\pazocal{V}T_{B(H)}$ is not invertible if and only if for suitable $a_v\in M$
+        And let $\pazocal{V}$ be the standard basis of $\{\mathbf{z}^v : v\in \Delta_{\delta_1,\dots,\delta_n}\}$. The matrix $_\pazocal{V}T_{B(H)}$ is not invertible if and only if for suitable $a_v\in M$
         $$\sum_{v\in \Delta } a_vh_1^{v_1}\cdots h_{n+1}^{v_{n+1}} = \ev_{h_1,\dots,h_{n+1}}\underbrace{\left(\sum_{v\in\Delta} a_v\mathbf{z}^v\right)}_{P_H},$$
         where 
         \begin{align*}
