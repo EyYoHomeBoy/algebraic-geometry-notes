@@ -314,6 +314,9 @@ We adopt the convention that all rings are commutative.
         V(I) := \{ J\in \Spec \ R : I\subset J\}
     $$
 \end{definition}
+\begin{remark}
+    In the special case of $R=K[x_1,\dots,x_n]$ for a field $K$, we denote the vanishing set of an ideal $I\subset K[x_1,\dots,x_n]$ by $Z(I)$ instead of $V(I)$ to avoid confusion.
+\end{remark}
 \begin{lemma}
     If $I\subset J\subset R$ are ideals, then $V(I)\supset V(J)$.
 \end{lemma}
@@ -650,17 +653,119 @@ The above example shows the necessity of morphisms of locally ringed spaces havi
         \mathfrak{m}_{a,b} \quad \left((a,b)\in \A^2(K)\right)
     $$  
     Secondly, again the point $\xi\in \A^2_K$, the zero ideal in $K[x_1,x_2]$, is a generic point.\\
-    Thirdly, an irreducible polynomial $f\in K[x_1,x_2]$, corresponds to $\eta_f:=\langle f\rangle\in \A^2_K$. Suppose $(a,b)\in f$, Then $\mathfrak{m}_{a,b}\supset $...   
+    Thirdly, an irreducible polynomial $f\in K[x_1,x_2]$, corresponds to $\eta_f:=\langle f\rangle\in \A^2_K$. Suppose $(a,b)\in f$ and let $D(g)\ni \mathfrak{m}_{a,b}$ be given. Then $g(a,b)\neq 0$ for otherwise $\mathfrak{a,b}\supset \langle g\rangle$. Then $Z(g)\not\supset Z(f)$ hence $\eta_f \not\supset \langle g\rangle$. We thus conclude that $\eta_f\in D(f)$, hence $\mathfrak{m}_{a,b}$ is a point of closure of $\{\eta_f\}$. On the other hand consider a point $\mathfrak{p}\in \A^2_K$ with $Z(\mathfrak{p})\not\subset f$. Then $\eta_f\not\supset \mathfrak{p}$, hence there is a $g\in \eta_f\setminus \mathfrak{p}$. Then $\mathfrak{p}\in D(g)$ while $\eta_f\notin D(g)$, implying $\mathfrak{p}$ is not a point of closure of $\{\eta_f\}$. It follows that 
+    $$
+        \overline{\{\eta_f\}}= \{\eta_f\}\cup \{\mathfrak{m}_{a,b} : (a,b)\in f\}.
+    $$   
+    A point of $\A^2_K$ is thus the generic point $\xi$, a closed point $\mathfrak{m}_{a,b}$ or a generic point of an affine curve $f\subset \A^2(K)$. The map
+    \begin{gather*}
+        \Phi:\A^2(K)\rightarrow \mathrm{Specm}\ K[x_1,x_2]:= \{m_{a,b} : (a,b)\in \A^2(K)\}\subset \A^2_K\\
+        (a,b)\mapsto \mathfrak{m}_{a,b}        
+    \end{gather*}
+    thus defines a homeomorphism onto its image: bijection is ensured by points in $\A^2(K)$ being in bijection with maximal ideals in $K[x_1,x_2]$ (cf. HNS). To check continuity it is sufficient to check that $\Phi^{-1}(V(f))$ is closed in $\A^2$ when $f$ is an affine plane curve over $K$. Note that 
+    $$
+        V(f) = \overline{\{\eta_f\}} = \{\eta_f\} \cup \{\mathrm{m}_{a,b}: (a,b)\in Z(f)\},
+    $$
+    hence $\Phi^{-1}(V(f))=Z(f)$. Moreover $\Phi$ takes an affine plane curve $f$ to its closed points in $\A^2_K$, i.e. 
+    $$ 
+        \Phi(Z(f))= V(f)\cap \mathrm{Specm}\ K[x_1,x_2],
+    $$
+    which means $\Phi$ is bicontinuous. So while the notion of affine plane discussed here and the classical notion are not the same they are at least related.
 \end{example}
 We have now seen some examples of the geometric objects that we are interested in studying, namely schemes, which are locally ringed spaces that locally look the spectrum of a ring. To give a precise definition we will first give a definition of affine schemes.
 \begin{definition}
     An \emph{affine scheme} is a locally ringed space $(X,\pazocal{O}_X)$ isomorphic to $(\Spec \ R, \pazocal{O})$ for some ring $R$ as locally ringed spaces. 
 \end{definition}
 \begin{example}
-    $\Spec \ R$ is trivially an example of an affine scheme. 
+    $\Spec \ R$ is trivially an example of an affine scheme, so $\A^n_K$ are all examples of affine schemes.
 \end{example}
 \subsubsection{Schemes}
 \begin{definition}
     A \emph{scheme} is a locally ringed space $(X,\pazocal{O}_X)$ where for each $P\in X$ there is an open neighborhood $U$ of $P$ such that $(U,\left.\pazocal{O}_X\right|_U)$ is an affine scheme. I.e. there is an open covering of $X$ where each open set in the covering is an affine scheme. 
 \end{definition}
-
+\begin{definition}
+    A morphism of schemes is a morphism of local rings between schemes 
+\end{definition}
+\begin{example}
+    Consider schemes $X_1$ and $X_2$ with open subsets $U_1\subset X_1$ and $U_2\subset X_2$ and an isomorphism of schemes 
+    $$
+        \varphi: (U_1, \left.\pazocal{O}_{X_1}\right|_{U_1})\Rightarrow (U_2,\left.\pazocal{O}_{X_2}\right|_{U_2})
+    $$
+    The homeomorphism
+    $$
+        \varphi: U_1\rightarrow U_2
+    $$
+    gives rise to an equivalent relation on the disjoint union of $U_1$ with $U_2$: For $x,y\in X_1\sqcup X_2$, $x\sim_\varphi y$ if $x=y$ or $x\in U_1$ and $y=\varphi(x)$. We define the scheme obtained by \emph{gluing} $X_1$ and $X_2$ along $U_1$ and $U_2$ via $\varphi$ to be 
+    $$
+        (X_1\sqcup X_2)/\sim.
+    $$
+    For the purposes of this example denote this space by $X$. Consider the maps 
+    \begin{gather*}
+        \iota_k : X_k\rightarrow X\\
+        x \mapsto [x]_{\sim_\varphi}
+    \end{gather*}
+    for $k=1,2$. Let $U\subset X$. Then $U$ is open if and only if $\iota_k^{-1}(U)$ is open for each $k$. Indeed if $U$ is open if and only if $q^{-1}(U)\subset X_1\sqcup X_2$ is open which is the case if and only if 
+    $$
+        \iota_k^{-1}(U)=\left(q\circ i_k\right)^{-1}(U)=i_k^{-1}\left(q^{-1}(U)\right)
+    $$
+    is open. Here $q$ denotes the quotient map with respect to $\sim_\varphi$ and $i_k$ is the canonical embedding of $X_k$ in $X_1\sqcup X_2$ for $k=1,2$. Recall that $X_1\sqcup X_2$ is equipped with the final topology of $\{i_k : k=1,2\}$. We define a sheaf 
+    \begin{gather*}
+        \pazocal{O}_{X}: X\rightarrow \mathrm{CRing}
+    \end{gather*}
+    that takes an open set $U\subset X$ to 
+    $$
+        \left.\Big\{(s_1,s_2)\in \pazocal{O}_{X_1}\left(\iota_1^{-1}(U)\right)\times \pazocal{O}_{X_2}\left(\iota_2^{-1}(U)\right)\ \right| \ \varphi^\#_{\iota_2^{-1}(U)\cap U_2}\left(\left.s_2\right|_{\iota_2^{-1}(U)\cap U_2}\right)=\left.s_1\right|_{\iota_1^{-1}(U)\cap U_1}\Big\}.
+    $$
+    For $U\subset V$, we define restriction of a pair of sections on $\iota_1^{-1(V)}$ and $\iota_2^{-1}(U)$ to a pair of sections on $\iota_1^{-1}(U)$ respectively $\iota_2^{-1}(U)$ by
+    \begin{gather*}
+        \left.\bullet\right|_{U}:\pazocal{O}_{X_1}(\iota^{-1}_1(V))\times \pazocal{O}_{X_2}(\iota_2^{-1}(V))\rightarrow \pazocal{O}_{X_1}(\iota^{-1}_1(U))\times \pazocal{O}_{X_2}(\iota_2^{-1}(U))\\
+        (s_1,s_2)\mapsto \left(\left.s_1\right|_{\iota_1^{-1}(U)\cap U_1},\left.s_2\right|_{\iota_2^{-1}(U)\cap U_2}\right).
+    \end{gather*}
+    Suppose $(s_1,s_2)\in \pazocal{O}_X(V)$. Set $t_1: = \left.s_1\right|_{\iota_1^{-1}(V)\cap U_1}$ and $t_2:=\left.s_2\right|_{\iota_2^{-1}(V)\cap U_2}$. Then 
+    \begin{align*}
+        \left.s_1\right|_{\iota_1^{-1}(U)\cap U} &= \left.t_1\right|_{\iota_1^{-1}(U)\cap U_1} = \left.\left(\varphi^\#_{\iota_2^{-1}(V)\cap U_2}(t_2)\right)\right|_{\iota_1^{-1}(U)\cap U_1}\\
+        &=  \varphi^\#_{\iota_2^{-1}(U)\cap U_2}\left(\left. t_2\right|_{\iota_2^{-1}(U)\cap U_2} \right) = \varphi^\#_{\iota_2^{-1}(U)\cap U_2}\left(\left.s_2\right|_{\iota_2^{-1}(U)\cap U_2}\right),
+    \end{align*}
+    hence $\left.\left(s_1,s_2\right)\right|_{U}\in \pazocal{O}_X(U)$. This assignment is obviously functorial. One also readily verifies that $\pazocal{O}_X$ is a sheaf using the that an open cover of $X$ or more generally an open subset of $X$ gives rise to open covers on $X_k$ or $\iota_k^{-1}(U)$, together with the structure sheaf on $X_k$ for $k=1,2$.\\
+    \textbf{$X$ is a scheme:} Let $[x]\in X$. Then $x=\iota_k^{-1}([x])$ for some $k=1,2$. There is an open neighborhood $U\ni x$ in $X_k$ with $\phi:U\simeq \Spec \ A $ for some ring $A$. Note that $\iota_k : X_k\rightarrow X$ defines an injective morphism of locally ringed spaces with 
+    \begin{gather*}
+        {(\iota_k)}^\#_V : \pazocal{O}_X(V) \rightarrow \pazocal{O}_{X_1}\left(\iota_k^{-1}(V)\right)\\
+        (s_1,s_2)\mapsto s_k
+    \end{gather*}  
+    $\left.\iota_k\right|_{U}: U\rightarrow \iota_k(U)$ defines an isomorphism of locally ringed spaces. Hence there is a commutative diagram
+    $$
+        \begin{tikzcd}
+            U \arrow[r,"\phi"] \arrow[d,"\left.\iota_k\right|_U"'] & \Spec \ A\\
+            \iota_k(U) \arrow[ur, dashrightarrow]
+        \end{tikzcd}
+    $$
+    hence $\iota_k(U)\simeq \Spec \ A$.\\
+\end{example}
+\begin{example}
+    We use the prior example to construct a scheme that is not affine. Set $X_1=X_2=\A^1_K$ and $U_1=U_2=\A^1_K\setminus\{\mathfrak{p}\}$ with $\mathfrak{p}=\langle x\rangle$, $\varphi = \id_{\A^1_K\setminus \{\mathfrak{p}\}}$. Consider a morphism $\phi: X\rightarrow \Spec \ A$. Then we have a commutative diagram 
+    $$
+        \begin{tikzcd}
+            X_1 \arrow[dr]\arrow[ddr,"\iota_1",bend right=25]\arrow[rr, "\id"] && X_2\arrow[dl]\arrow[ddl,"\iota_2",bend left=25]\\
+            & \Spec \ A\\
+            & X \arrow[u,"\phi"]
+        \end{tikzcd}
+    $$
+    Denote $\mathfrak{p}_1:= \iota_1(\mathfrak{p})$ and $\mathfrak{p}_2:=\iota_2(\mathfrak{p})$. Then  
+    $$
+        \phi(\mathfrak{p}_1)= \phi(\iota_1(\mathfrak{p}))=\phi(\iota_2(\mathfrak{p}))=\phi(\mathfrak{p}_2)
+    $$
+    and since $\mathfrak{p}_1\neq \mathfrak{p}_2$ it follows that $\phi$ cannot be an isomorphism of locally ringed spaces. 
+\end{example}
+\subsubsection{Projective Schemes}
+\begin{definition}
+    Let $R$ be a graded (commutative) ring. We define the \emph{projective spectrum of $R$} to be 
+    $$
+        \Proj\ R := \left\{ \mathfrak{p}\in \Spec\ R : \mathfrak{p} \text{ and homogeneous}, R_{+}\not\subset\mathfrak{p} \right\}.
+    $$ 
+\end{definition}
+\begin{definition}
+    Given an ideal $I$ in a graded ring $R$, we define 
+    $$
+        V^\Pp(I) := \{\mathfrak{p}\in \Proj\ R: \mathfrak{p}\supset I\}.
+    $$
+\end{definition}
