@@ -339,13 +339,16 @@
     A category $\pazocal{C}$ is \emph{discrete}, if for each morphism $f:X\rightarrow Y$, $Y=X$ and $f=\id_X$.
 \end{definition}
 \begin{example}\label{SetIsDiscreteCategory}
-    Take any non-empty set $X$. We then have a category whose objects are $X$ and whose morphisms are 
-    $$\Delta_X := \{ (x,x) \in X\times X : x\in X\}.$$
-    Upon defining $(x,x)(y,y)= (x,x)$, we thus have that 
+    Take any non-empty set $X$ as objects and the relation 
     $$
-        ((x,x)(y,y))(z,z)=(x,x)(z,z)= (x,x) = (x,x)(y,y)=(x,x)((y,y)(z,z)).
+        = := \{(x,y)\in X: x=y\}
     $$
-    We define $\fone_x = (x,x)$. Clearly this is neutral with respect to composition. Any morphism is by definition the identity morphism, so this is an example of a discrete category. 
+    to be morphisms. A composition of a morphism $x=y$ and a morphism $y=z$ is the morphism $x=z$ which exists by transitivity. The identity morphism is $x=x$ for each $x\in X$. For a triple of composable morphisms we have 
+    \begin{align*}
+        (x=y)((y=z)(z=w))&=(x=y)(y=w) = (x=w) = (x=z)(z=w)\\ &=((x=y)(y=z))(z=w).    
+    \end{align*}
+    Note that given a morphism $x=y$, then $(x,x)=(x,y)$,hence $x=x$ and $x=y$ are the same morphism. It follows that $(X,=)$ is a discrete category.\\
+    In general, given a set $X$ and an equivalence relation $\sim$, the pair $(X,\sim)$ defines a groupoid.   
 \end{example}
 \begin{definition}
     Let $\pazocal{C}$ be a category and $A$ an object in $\pazocal{C}$. \textit{The slice category of $\pazocal{C}$ under $A$} denoted $A/\pazocal{C}$ is the category whose objects are morphisms in $\Hom(\pazocal{C})$ with domain $A$ and where a morphism from $f: A \rightarrow X$ and $g : A \rightarrow Y $ is a map $h : X\rightarrow Y$ such that 

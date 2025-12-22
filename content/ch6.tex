@@ -328,7 +328,7 @@ We adopt the convention that all rings are commutative.
     $$V(IJ) = V(I)\cup V(J).$$
 \end{lemma}
 \begin{proof}
-    Consider a prime ideal $\mathfrak{p}\in \Spec \ R$ containing $IJ$. Then given $ab\in IJ$ with $a\in I$ and $b\in J$ we have that $a \in \mathfrak{p}$ or $b\in \mathfrak{p}$, hence $\mathfrak{p}\in V(I)\cup V(J)$. The converse inclusion follows from $I,J\supset IJ$ by the prior lemma. 
+    Consider a prime ideal $\mathfrak{p}\in \Spec \ R$ containing $IJ$. If $\mathfrak{p}\supset J$ we are done. Otherwise given any $a\in I$ and choosing $b\in J\setminus \mathfrak{p}$ we have that $a \in \mathfrak{p}$ hence $\mathfrak{p}\in V(I)$. The converse inclusion follows from $I,J\supset IJ$ by the prior lemma. 
 \end{proof}
 \begin{lemma}
     For a family of ideals $\{I_\mu\}$ in $R$, 
@@ -741,6 +741,7 @@ We have now seen some examples of the geometric objects that we are interested i
     $$
     hence $\iota_k(U)\simeq \Spec \ A$.\\
 \end{example}
+We use the above example to construct a scheme that is not affine 
 \begin{example}
     We use the prior example to construct a scheme that is not affine. Set $X_1=X_2=\A^1_K$ and $U_1=U_2=\A^1_K\setminus\{\mathfrak{p}\}$ with $\mathfrak{p}=\langle x\rangle$, $\varphi = \id_{\A^1_K\setminus \{\mathfrak{p}\}}$. Consider a morphism $\phi: X\rightarrow \Spec \ A$. Then we have a commutative diagram 
     $$
@@ -764,8 +765,67 @@ We have now seen some examples of the geometric objects that we are interested i
     $$ 
 \end{definition}
 \begin{definition}
-    Given an ideal $I$ in a graded ring $R$, we define 
+    Given a homogeneous ideal $I$ in a graded ring $R$, we define 
     $$
-        V^\Pp(I) := \{\mathfrak{p}\in \Proj\ R: \mathfrak{p}\supset I\}.
+        V(I):=V^\Pp(I) := \{\mathfrak{p}\in \Proj\ R: \mathfrak{p}\supset I\}.
     $$
 \end{definition}
+\begin{lemma}
+    Let $R$ be a graded ring, then for each pair of homogeneous ideals $I,J$ in $R$
+    $$
+        V^\Pp(IJ)=V^\Pp(I)\cup V^\Pp(J) 
+    $$
+\end{lemma}
+\begin{proof}
+    The proof is the exact same as for $\Spec$ (keeping in mind that the product of homogeneous ideals is homogeneous)
+\end{proof}
+\begin{lemma}
+    Let $R$ be a graded ring and $\{I_\mu\}$ a family of homogeneous ideals then 
+    $$
+        V\left(\sum_{\mu} I_\mu\right) = \bigcap_\mu V(I_\mu)
+    $$
+\end{lemma}
+\begin{proof}
+    Again, the proof is the same as for the affine case.
+\end{proof}
+\begin{corollary}
+    For a graded ring $R$, the family of sets  
+    $$\{V(I) : I\subset R, \text{ homogeneous}\}$$
+    defines a closed basis for a topology on $\Proj\ R$.
+\end{corollary}
+There are "strengthenings" of these two statements
+\begin{lemma}
+    Let $\mathfrak{p}\in \Proj\ R$ and homogeneous ideals $I$ and $J$ in $R$ be given. The following are equivalent
+    \begin{enumerate}
+        \item $\mathfrak{p}\in V(IJ)$.
+        \item For every pair of homogeneous elements $a,b\in R$, if $a\in I$ and $b\in J$ then $ab\in \mathfrak{p}$.
+        \item $\mathfrak{p}\in V(I)\cup V(J)$. 
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    obviously 1. is equivalent to 3. and clearly 2. implies 3. We also have that 2. implies 3.  by Lemma~\ref{EquivalentPrimeHomogeneousIdealCondition}
+\end{proof}
+\begin{lemma}
+    Let $\mathfrak{p}\in \Proj\ R$ and a family of homogeneous ideals $\{I_\mu\}$ be given. The following are equivalent
+    \begin{enumerate}
+        \item $\mathfrak{p}\in V\left(\sum_{\mu}I_\mu\right)$.
+        \item For every $(a_\mu)\in \bigoplus_\mu I_\mu$ with $a_\mu$ homogeneous for each $\mu$, we have $\sum_\mu a_\mu \in \mathfrak{p}$.
+        \item $\mathfrak{p}\in \bigcap_\mu V(I_\mu)$. 
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    The argument is parallel to the one given in the prior lemma. 
+\end{proof}
+Fix a graded ring $R$. Let a prime ideal $\mathfrak{p}\in \Proj\ R$ 
+$$
+    H_\mathfrak{p} := \{x \in R : x \text{ homogeneous, } x\notin \mathfrak{p}\}.
+$$
+This is a multiplicative set in $R$. Let $R_{(\mathfrak{p})}\subset H_\mathfrak{p}^{-1}R$ denote the ring of degree zero elements (cf. Lemma~\ref{LocalizationOfGradedRing}). For an open subset $U\subset \Proj \ R$ we define $\pazocal{O}_{\Proj\ R}(U)$ to be the set of function $s\in \prod_{\mathfrak{p}\in U} R_{(\mathfrak{p})}$ such that for each $\mathfrak{p}\in U$ there is an open neighborhood $V$ of $\mathfrak{p}$ such that for some homogeneous $a,f\in R$ for every $\mathfrak{q}\in V$, $f\notin \mathfrak{q}$ and
+$$
+    s(\mathfrak{q}) = \frac{f}{a}\in S_{(\mathfrak{q})}.
+$$
+Then we get a sheaf 
+\begin{gather*}
+    \pazocal{O}_{\Proj\ R} : \Proj \ R \rightarrow \mathfrak{CRing}
+\end{gather*}
+where $\pazocal{O}_{\Proj\ R}(U)\rightarrow \pazocal{O}_{\Proj\ R}(V)$ induced by $U\supset V$ is given by function restriction to $V$.
