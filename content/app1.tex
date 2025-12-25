@@ -702,7 +702,7 @@ A simple induction argument shows that each term constant $\tau$ shows up in at 
     $$   
     We now allow $\sigma$ to contain variables and prove the statement by induction in the number of variables used in $\sigma$. We covered the base case above. So assume that $\sigma$ is not variable free and suppose that $\sigma'\in \widetilde{T} \metaimplies M\vDash\sigma'$ for every sentence with less variables than $\sigma$. By construction every element in $\widetilde{T}$ not in $T^\ast_{\sigma_0}(c)$ is a variable free $\mathcal{L}_c$-sentence. Then $\sigma\in T^\ast_{\sigma_0}(c)$. WLOG $\sigma$ is in sPNF. There is a $\widetilde{\sigma}\in T_{\sigma_0}^\ast(c)$ in special prenex normal form,
     $$\widetilde{\sigma} \equiv \quantifs_0 x_0\quantifs_1 x_1\dots\quantifs_n x_n \sigma_{i,n}(x_0,\dots,x_n)$$
-    such that for some $k\leq k$ and term constants $\tau_0,\dots,\tau_{k-1}$,
+    such that for some $k\leq n$ and term constants $\tau_0,\dots,\tau_{k-1}$,
     $$
         \sigma\equiv \quantifs_k x_k\dots \quantifs_n x_n \sigma_{i,n}(x_0/\tau_0,\dots, x_{k-1}/\tau_{k-1},x_k,\dots,x_n)
     $$   

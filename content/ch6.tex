@@ -465,7 +465,7 @@ Given a ring $R$ and prime ideal $\mathfrak{p}$ in $R$. We denote the localizati
         \sigma:\pazocal{O}_\mathfrak{p} \rightarrow R_\mathfrak{p}\\
         s\mapsto s(\mathfrak{p})
     \end{gather*}
-    To check surjectivity, let $\frac{a}{f}\in R_\mathfrak{p}$ be given. By definition $f\notin \mathfrak{p}$, hence $\mathfrak{p}\not\supset \langle f\rangle$. We thus get that $D(f)$ is an open neighborhood of $\mathfrak{p}$. Let $\frac{a}{f}: D(f)\rightarrow \prod_{\mathfrak{q}\in D(f)} R_\mathfrak{q}$ denote the constant function on $D(f)$ taking $\mathfrak{q}$ to $\frac{a}{f}$. Then this is an element of $\pazocal{O}_\mathfrak{p}$ and 
+    To check surjectivity, let $\frac{a}{f}\in R_\mathfrak{p}$ be given. By definition $f\notin \mathfrak{p}$, hence $\mathfrak{p}\not\supset \langle f\rangle$. We thus get that $D(f)$ is an open neighborhood of $\mathfrak{p}$. Let $\frac{a}{f}: D(f)\rightarrow \bigcup_{\mathfrak{q}\in D(f)} R_\mathfrak{q}$ denote the constant function on $D(f)$ taking $\mathfrak{q}$ to $\frac{a}{f}$. Note that $\mathfrak{q}\not\supset \langle f\rangle$ for each $\mathfrak{q}\in D(f)$, so $\frac{a}{f}$ is a section in $\pazocal{O}(D(f))$. In particular this is an element of $\pazocal{O}_\mathfrak{p}$ and 
     $$
         \sigma\left(\frac{a}{f}\right) = \frac{a}{f}.
     $$
@@ -554,7 +554,7 @@ we obtain a map
 \end{lemma}
 \begin{proof}
     1. Follows from Lemma~\ref{StalkCorrespondToPrimeLocalizationSheafOnBasisSetCorrespondToLocalization} 1.\\
-    We define 
+    2. We define 
     \begin{gather*}
         f : \Spec\ B\rightarrow \Spec \ A\\
         \mathfrak{p} \mapsto \sigma^{-1}(\mathfrak{p})
@@ -568,7 +568,7 @@ we obtain a map
         f^{-1}(U) \rightarrow \bigcup_{\mathfrak{p}\in f^{-1}(U)} B_\mathfrak{p}\\
         \mathfrak{p} \mapsto \sigma_\mathfrak{p}(s\circ f)(\mathfrak{p})
     \end{gather*}
-    where $\sigma_\mathfrak{p}: A_\mathfrak{p}\rightarrow B_{f^{-1}(\mathfrak{p})}$ is the localization of $\sigma$ with respect to $\mathfrak{p}$. We check the naturality condition: Suppose $U\subset V$. Then for $s\in \pazocal{O}_{\Spec\ A}(U)$ and $\mathfrak{p}\in f^{-1}(V)$, 
+    where $\sigma_\mathfrak{p}: A_{f(\mathfrak{p})}\rightarrow B_{\mathfrak{p}}$ is the localization of $\sigma$ with respect to $\mathfrak{p}$. We check the naturality condition: Suppose $U\subset V$. Then for $s\in \pazocal{O}_{\Spec\ A}(U)$ and $\mathfrak{p}\in f^{-1}(V)$, 
     \begin{align*}
         \left.f^\#_U\right|(s)_{f^{-1}(V)}(\mathfrak{p})=\sigma_\mathfrak{p}((s\circ f)(\mathfrak{p}))= \sigma_\mathfrak{p}\left(\left(\left.s\right|_V\circ f\right)(\mathfrak{p})\right)=f^\#_V\left(\left.s\right|_V\right)(\mathfrak{p}).
     \end{align*}
@@ -606,6 +606,9 @@ we obtain a map
         (f,f^\#)=(g,g^\#)_\sigma.
     $$
 \end{proof}
+\begin{remark}\label{ConstructionOfNaturalTransformationOfSheavesFrom}
+    Note that the construction of $f^\#$ only relies on the existence of local ring maps $A_{f(\mathfrak{p})}\rightarrow B_\mathfrak{p}$
+\end{remark}
 \begin{example}
     Consider a field $K$. The spectrum contains only one point, namely $0$. The sections over $\Spec \ K=\{\ast\}$ are thus the constant functions $\{\ast\}\rightarrow K$, hence the structure sheaf of $\Spec \ K$ is $K$ itself.  
 \end{example}
@@ -826,6 +829,68 @@ $$
 $$
 Then we get a sheaf 
 \begin{gather*}
-    \pazocal{O}_{\Proj\ R} : \Proj \ R \rightarrow \mathfrak{CRing}
+    \pazocal{O}_{\Proj\ R} : \Proj \ R \rightarrow \mathrm{CRing}
 \end{gather*}
 where $\pazocal{O}_{\Proj\ R}(U)\rightarrow \pazocal{O}_{\Proj\ R}(V)$ induced by $U\supset V$ is given by function restriction to $V$.
+\begin{lemma}
+    For a graded ring $R$, $\Proj \ R$ is a locally ringed space
+\end{lemma}
+\begin{proof}
+    Consider a point $\mathfrak{p}\in \Proj \ R$. We prove that 
+    $$
+        \pazocal{O}_\mathfrak{p} \simeq R_{(p)}.
+    $$
+    We check that 
+    \begin{gather*}
+        \ev_\mathfrak{p} : \pazocal{O}_\mathfrak{p} \rightarrow R_{(\mathfrak{p})}\\
+        s\mapsto s(\mathfrak{p})
+    \end{gather*}
+    defines an isomorphism. The prove of this fact is almost identical to the affine case. One just replace $R_\mathfrak{p}$ with $R_{(\mathfrak{p})}$ in the proof.   
+\end{proof}
+\begin{definition}
+    Let $R$ be a graded ring and $f\in R_{+}$ a homogeneous element. Let $D_{+}(f)$ denote $\Proj\ R\setminus V(\langle f\rangle)$.
+\end{definition}
+\begin{lemma}
+    Let $R$ be a graded ring and $f\in R_{+}$ a homogeneous element. $D_{+}(f)$ is an open set in $\Proj \ R$ and 
+    $$
+        \{D_{+}(f) : f\in R_{+}\}
+    $$
+    is a cover of $\Proj\ R$.
+    Furthermore, $(D_{+}(f),\left.\pazocal{O}\right|_{D_{+}(f)})$ is isomorphic to $\Spec\ R_{(f)}$ as locally ringed spaces. Here $R_{(f)}$ is the subring of degree $0$ elements in $R_{f}$. It follows that $(\Proj\ R,\pazocal{O}_{\Proj\ R})$ is an affine scheme. 
+\end{lemma}
+\begin{proof}
+    By definition $D_{+}(f)$ is open since it is the complement of a closed set in $\Proj\ R$. Let $\mathfrak{p}\in \Proj\ R$. Then, since $\mathfrak{p}\not\supset R_{+}$, we can pick an $g\in R_{+}$ not in $\mathfrak{p}$, hence $\mathfrak{p}\in D_{+}(g)$, hence the sets $D_{+}(f)$, for $f\in R_{+}$ homogeneous, define an open cover of $\Proj\ R$.\\ 
+    Fix an $f\in R_{+}$. We define 
+    \begin{gather*}
+        \varphi : D_{+}(f)\rightarrow \Spec \ R_{(f)}\\
+        \mathfrak{p} \mapsto R_f\mathfrak{p}\cap R_{(f)}
+    \end{gather*}  
+    This is trivially well-defined, once one recognizes that the operations we apply to $\mathfrak{p}$ all preserve being a prime (see e.g. Corollary~\ref{LocalizationPreservePrimeness}).This map has an inverse given by 
+    \begin{gather*}
+        \varphi^{-1} : \Spec\ R_{(f)}\rightarrow D_{+}(f) \\
+        \mathfrak{p} \mapsto R_f \mathfrak{p} \cap R
+    \end{gather*}
+    We can extend these maps to maps from all homogeneous ideals in $R$ and all (homogeneous) ideals in $R_{(f)}$ and vice versa. Note that both these maps are order preserving with respect to inclusion hence
+    $$
+        \varphi(V(I)) = V(\varphi(I)) \text{ and } \varphi^{-1}(V(J))=V(\varphi^{-1}(J))
+    $$
+    for homogeneous ideals $I$ in $R$ and ideals $J$ in $R_{(f)}$, which proves that $\varphi$ is a homeomorphism. Canonically, $R_{(f)}\subset R_{(\mathfrak{p})}$ hence $\sigma_{\mathfrak{p}}:\left(R_{(f)}\right)_{\varphi(\mathfrak{p})} \simeq R_{(\mathfrak{p})}$, since any element in $\left(R_{(f)}\right)_{\varphi(\mathfrak{p})}$ are of the form 
+    $$
+        \frac{\frac{a}{f^n}}{\frac{x}{f^m}}
+    $$
+    with appropriate restrictions on degrees (i.e. that $\deg \ a -\deg \ f^n = \deg \ x -\deg \ f^m$) and in $R_{(\mathfrak{p})}$ this is equal to 
+    $$
+        \frac{af^m}{xf^n},
+    $$
+    and trivially any element in $R_{(\mathfrak{p})}$ can be written on this form. We can then define a natural isomorphism $\varphi^\#: \pazocal{O}_{\Spec\ R_{(f)}}\Rightarrow \varphi_\star \left.\pazocal{O}_{\Proj\ R}\right|_{D_{+}(f)}$. Indeed, for $U\subset \Spec \ R{(f)}$ open we let the component $\varphi^\#_U$ be given by 
+    $$
+        \varphi^\#_U(s): \mathfrak{p}\mapsto \sigma_\mathfrak{p}(s\circ \varphi)(\mathfrak{p})\in R_{(p)},
+    $$ 
+    whose inverse is given by 
+    $$
+        \left(\varphi^\#_U\right)^{-1}(s) : \mathfrak{p}\mapsto \sigma_{\mathfrak{p}}^{-1}(s\circ\varphi^{-1})(\mathfrak{p}).
+    $$ 
+    Note that this construction is same as mentioned in Remark~\ref{ConstructionOfNaturalTransformationOfSheavesFrom} so naturally follows. We thus conclude that $D_{+}(f)\simeq \Spec\ R_{(f)}$.
+\end{proof}
+
+\subsubsection{Varieties \& Schemes}

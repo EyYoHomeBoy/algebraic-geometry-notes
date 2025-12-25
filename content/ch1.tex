@@ -2441,6 +2441,33 @@ For this subsection $\pazocal{C}$ denotes the category whose objects are pairs c
             X^{-1}R\simeq \sigma(X)^{-1}S.
         $$
     \end{corollary}
+    \begin{definition}
+        Let $R$ be a commutatitive ring and $X$ a multiplicative subset of $R$. Consider an ideal $I\subset R$. We define the \textit{localization ideal of $I$ in $X^{-1}R$} to be the set 
+        $$X^{-1}I:=\left\{\frac{a}{x}\in X^{-1}R: a\in I, x\in X\right\}$$
+    \end{definition}
+\begin{lemma}\label{LocalizationIdealsDescribeIdealsGeneratedFromIdealsInSubring}
+    Let $R$ be a commutative ring and $X\subset R$ a multiplicative subset of $R$. Let $I\subset R$ be an ideal. Then $(X^{-1}R)I = X^{-1}I$. Consequently, $X^{-1}I$ is an ideal.
+\end{lemma}
+\begin{proof}
+    Let $\sum_1^n \frac{r_i}{x_i}a_i\in (X^{-1}R)I$ where $\frac{r_i}{x_i}\in X^{-1}R$ and $a_i\in I$. Then 
+    $$\sum_1^n \frac{r_i}{x_i}a_i= \frac{\sum_{i=1}^n\left(\prod_{j\in \{1,\dots,n\}, j\neq i} x_j\right) r_ia_i}{\prod_{j=1}^n x_i}\in X^{-1}I.$$
+    (In other words we just compute the sum of these fractions and see that the numerator is in $I$)
+    The converse inclusion is trivial. 
+\end{proof}
+\begin{lemma}\label{LocalizationOfEliminationIdealGenerateOriginalIdeal}
+    Let $R$ be a commutative ring and $X$ a multiplicative subset of $R$. Let $I\subset X^{-1}R$ be an ideal. Then $X^{-1}(I\cap R) = I$.
+\end{lemma}
+\begin{proof}
+    Let $\frac{a}{x}\in X^{-1}(I\cap R)$, where $a\in I$, $x\in X$.Then 
+    $$\frac{a}{x}=\frac{1}{x}a\in I.$$
+    Conversely, let $\frac{a}{x}\in I$. Then $a=x\frac{a}{x}\in I$, hence $\frac{a}{x}\in X^{-1}(I\cap R)$.
+\end{proof}
+\begin{corollary}\label{LocalizationPreservePrimeness}
+    If $I\subset R$ is a prime ideal, then $X^{-1}I$ is prime. 
+\end{corollary}
+\begin{proof}
+    Let $\frac{a}{x}\frac{b}{y}\in X^{-1}I$ then $ab\in I$, hence $a\in I$ or $b\in I$, so $\frac{a}{x}\in X^{-1}I$ or $\frac{b}{y}\in X^{-1}I$
+\end{proof}
 \subsubsection{Local Rings, Localizations of Integral Domains \& Field of Fractions}
 \begin{definition}\label{LocalRingDefinition}
     A ring $R$ is called \textit{local} if it has unique maximal left ideal, $\mathfrak{m}_R$. A homomorphism of local rings is a homomorphism of rings $f : R\rightarrow S$ if $f^{-1}(\mathfrak{m}_S)=\mathfrak{m}_R$. 
@@ -2519,29 +2546,6 @@ For this subsection $\pazocal{C}$ denotes the category whose objects are pairs c
 \begin{definition}
     We define the \textit{rational numbers} to be the field $\Q := Q(\Z)$.
 \end{definition}
-\begin{definition}
-    Let $R$ be an integral domain and $X\subset R\setminus 0$ a multiplicative set in $R$. Consider an ideal $I\subset R$. We define the \textit{localization ideal of $I$ in $X^{-1}R$}. To be the set 
-    $$X^{-1}I:=\left\{\frac{a}{x}\in X^{-1}R: a\in I, x\in X\right\}$$
-\end{definition}
-\begin{lemma}\label{LocalizationIdealsDescribeIdealsGeneratedFromIdealsInSubring}
-    Let $R$ be an integral domain and $X\subset R\setminus 0$ a multiplicative submonoid of $R$. Let $I\subset R$ be an ideal. Then $(X^{-1}R)I = X^{-1}I$. Consequently, $X^{-1}I$ is an ideal.
-\end{lemma}
-\begin{proof}
-    Let $\sum_1^n \frac{r_i}{x_i}a_i\in (X^{-1}R)I$ where $\frac{r_i}{x_i}\in X^{-1}R$ and $a_i\in I$. Then 
-    $$\sum_1^n \frac{r_i}{x_i}a_i= \frac{\sum_{i=1}^n\left(\prod_{j\in \{1,\dots,n\}, j\neq i} x_j\right) r_ia_i}{\prod_{j=1}^n x_i}\in X^{-1}I.$$
-    The converse inclusion is trivial. 
-\end{proof}
-\begin{lemma}\label{LocalizationOfEliminationIdealGenerateOriginalIdeal}
-    Let $R$ be an integral domain and $X\subset R\setminus 0$ a multiplicative submonoid of $R$. Let $I\subset X^{-1}R$ be an ideal. Then $X^{-1}(I\cap R) = I$.
-\end{lemma}
-\begin{proof}
-    Let $\frac{a}{x}\in X^{-1}(I\cap R)$, where $a\in I$, $x\in X$.Then 
-    $$\frac{a}{x}=\frac{1}{x}a\in I.$$
-    Conversely, let $\frac{a}{x}\in I$. Then $a=x\frac{a}{x}\in I$, hence $\frac{a}{x}\in X^{-1}(I\cap R)$.
-\end{proof}
-\begin{lemma}
-    A local ring $R$ with principal maximal ideal is Noetherian 
-\end{lemma}
 \subsubsection{Discrete Valuation Rings}
     \begin{definition}
         Let $R$ be a non-field integral domain. $R$ is a \textit{discrete valuation ring (DVR)} if it is noetherian and local with the maximal ideal is principal. 
