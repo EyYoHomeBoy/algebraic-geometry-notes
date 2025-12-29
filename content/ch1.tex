@@ -2069,6 +2069,49 @@ The following definition will be important way later on.
      $$\prod_1^{n} \left(\sum_1^{m} \lambda_{i,j}a_i\right) = \sum_{v\in \N^m} \mu_v a_1^{v_1}\cdots a_m^{v_m}.$$
      A simple induction argument shows that if $v_i< n_i$ for some $i$ then $v_j>n_j$ for some $j$, hence $a_i^{v_1}\cdots a_m^{v_m}\in J$ for each $v\in \N^m$ with $\sum_1^m v_i = n$. It follows that $\prod_1^{n} \left(\sum_1^{m} \lambda_{i,j}a_i\right)\in J$, hence $I^n\subset J$.
 \end{proof}
+\subsubsection{Nilpotent Elements}
+    \begin{definition}
+        An element $x$ in a ring $R$ is called \emph{nilpotent} if $x^n=0$ for some $n\geq 1$. 
+    \end{definition}
+    \begin{definition}
+        An left ideal $I\subset R$ is \emph{nil}, if every element in $I$ is nilpotent. $I$ is \emph{nilpotent} if $I^n=0$ for some $n\geq 1$.
+    \end{definition}
+    \begin{remark}
+        If $I$ is nilpotent, then it is nil. 
+    \end{remark}
+    \begin{lemma}
+        For a commutative ring $R$ the set of nilpotent elements in $R$, $\mathrm{nil}(R)$ is a two-sided ideal
+    \end{lemma}
+    \begin{proof}
+        Clearly, $0$ is nilpotent. Let $x,y\in \mathrm{nil}(R)$. Then $x^n=0$ and $y^m=0$ for some $n,m\geq 1$. We claim that $(x+y)^{n+m}=0$. This is a consequence of the binomial theorem. Lastly, for any $a\in R$, $(ax)^n= a^nx^n =0$.
+    \end{proof}
+    \begin{lemma}
+        In a commutative ring $R$,  
+        $$
+            \mathrm{nil}(R) = \bigcap_{\mathfrak{p}\leq R : \mathfrak{p}\ \mathrm{prime}} \mathfrak{p}
+        $$
+    \end{lemma}
+    \begin{proof}
+        Indeed, using Lemma~\ref{RadicalOfIdealIsIntersectionOfAllPrimeIdealsContainingIt}, 
+        $$
+            \mathrm{nil}(R) = \rad(0) = \bigcap_{0\subset \mathfrak{p}\leq R : \mathfrak{p} \text{ prime}} \mathfrak{p}
+        $$
+    \end{proof}
+    \begin{definition}
+        A ring is called \emph{reduced} if it has not nilpotent elements. 
+    \end{definition}
+    \begin{definition}
+        Given a commutative ring $R$, we form the \emph{reduced ring of $R$} defined by 
+        $$
+            R_\mathrm{red} := R/\mathrm{nil}(R).
+        $$
+    \end{definition}
+    \begin{lemma}
+        For a commutative ring $R$, $R_\mathrm{red}$ is reduced. 
+    \end{lemma}
+    \begin{proof}
+        Indeed, if $x^n+\mathrm{nil}(R)=0$ for some $n\geq 1$, then $x^n\in \mathrm{nil}(R)$, hence $x^n$ is contained in every prime ideal in $R$, which implies $x$ is contained in every prime ideal in $R$, so $x\in \mathrm{nil}(R)$.
+    \end{proof}
 \subsubsection{Comaximal ideals}
 In this subsection every ring will be assumed commutative. 
 \begin{definition}
@@ -2441,6 +2484,23 @@ For this subsection $\pazocal{C}$ denotes the category whose objects are pairs c
             X^{-1}R\simeq \sigma(X)^{-1}S.
         $$
     \end{corollary}
+    \begin{lemma}\label{CanonicalOfLocalizations}
+        Consider a multiplicative set $X$ in a commutatitive ring $R$ and a saturated multiplicative set $Y\subset X^{-1}R$ with $Y\cap R\supset X$. Then 
+        $$
+            (Y\cap R)^{-1}R \simeq Y^{-1}(X^{-1}R).
+        $$
+    \end{lemma}
+    \begin{proof}
+        We have the canonical injection $R\hookrightarrow X^{-1}R$ from which we obtain the injective map 
+        \begin{gather*}
+            \sigma : (Y\cap R)^{-1}R \rightarrow Y^{-1}(X^{-1}R)\\
+            \frac{a}{y}\mapsto \frac{\frac{a}{1}}{y}
+        \end{gather*}
+        It suffices to show that this map is surjective. Let $\frac{\frac{a}{x}}{\frac{b}{y}}\in Y^{-1}(X^{-1}R)$. Note that since $Y$ is saturated $b\in Y$ and $\frac{1}{y}\in Y$. Since $y\frac{1}{y} = 1\in Y$ it follows that $y\in Y$. Then 
+        $$
+            \frac{\frac{a}{x}}{\frac{b}{y}} = \frac{a}{x}\frac{1}{\frac{b}{y}} = \frac{a}{x}\frac{y}{b} = \frac{ay}{bx} = \sigma\left(\frac{ay}{bx}\right).
+        $$
+    \end{proof}
     \begin{definition}
         Let $R$ be a commutatitive ring and $X$ a multiplicative subset of $R$. Consider an ideal $I\subset R$. We define the \textit{localization ideal of $I$ in $X^{-1}R$} to be the set 
         $$X^{-1}I:=\left\{\frac{a}{x}\in X^{-1}R: a\in I, x\in X\right\}$$

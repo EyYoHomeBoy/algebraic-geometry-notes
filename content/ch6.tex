@@ -21,7 +21,7 @@
 \end{definition}
 \subsubsection{Sheaves}
 \begin{definition}
-    Consider a topological space $X$. Let $\pazocal{F}$ be a presheaf on a category $\pazocal{T}(X)$. $\pazocal{F}$ is called a \emph{sheaf on $X$} if moreover, 
+    Consider a topological space $X$. Let $\pazocal{F}$ be a presheaf on the category $(\tau_X,\subset)$ where $\tau_X$ denotes the topology on $X$. $\pazocal{F}$ is called a \emph{sheaf on $X$} if in addition, 
     \begin{enumerate}
         \item For every open $U\subset X$ and every open cover $\{U_i\}$ of $U$ and every $\phi,\varphi\in \pazocal{F}(U)$, if $\left.\varphi\right|_{U_i}= \left.\phi\right|_{U_i}$ for every $i$, then $\varphi=\phi$.
         \item For every open $U\subset X$ and every open covering $\{U_i\}$ and for every collection of elements (functions) 
@@ -57,6 +57,28 @@
 \end{example}
 Recall the following definition
 Recall from \ref{DirectLimits} the definition of a direct limit. We shall construct the direct limit in the category of groups
+\begin{lemma}
+    Let $\pazocal{F} : X\rightarrow \mathrm{Set}$ be a sheaf. Let $U\subset X$ be an open subset. Then we define 
+    \begin{gather*}
+        \left.\pazocal{F}\right|_U : U \rightarrow \mathrm{ab}\\
+    \end{gather*}
+    to be the presheaf given by $\pazocal{F}$ restricted to the subspace topology on $U$ of open sets in $X$. This is a sheaf on $U$.
+\end{lemma}
+\begin{proof}
+    Let $V\subset U$ be open and $\{V_i\}$ an open cover of $V$. Consider $\varphi,\phi\in \left.\pazocal{F}\right|_U(V)=\pazocal{F}(V)$ with 
+    $$
+        \left.\varphi\right|{V_i}=\left.\pazocal{F}\right|_{U}(V_i\subset V)(\varphi)=\left.\pazocal{F}\right|_{U}(V_i\subset V)(\phi)=\left.\phi\right|_{V_i}
+    $$ 
+    for each $i$. Then since $\pazocal{F}$ is a sheaf, we get $\varphi = \phi$, hence $\left.\pazocal{F}\right|_{V}$ satisfies the first condition for being a sheaf.\\
+    Let $V\subset U$ be open with an open covering $\{V_i\}$ and consider a collection of elements $\{s_i\in \left.\pazocal{F}\right|_{U}(V_i)\}$ with 
+    $$
+        \left. s_i\right|_{V_i\cap V_j} = \left.\pazocal{F}\right|_{U}(V_i\cap V_j\subset V)(s_i) = \left.\pazocal{F}\right|_{U}(V_i\cap V_j\subset V)(s_j)= \left. s_j\right|_{V_i\cap V_j}
+    $$ for each $i$ and $j$. Then there is an $s\in \pazocal{F}(V)=\left.\pazocal{F}\right|_U(V)$ such that 
+    $$
+        \left.\pazocal{F}\right|_{U}(V_i \subset V)(s) = \left. s\right|_{V_i} = s_i. 
+    $$
+    We thus conclude that $\left.\pazocal{F}\right|_{U}$ is a sheaf. 
+\end{proof}
 \begin{definition}
     Let $G_\bullet: (I,\leq) \rightarrow \mathrm{grp}$ be a direct system and the associated collections of objects and morphisms $(\{G_i\},\{f_{ij}\})$. Given elements $(x_i,i),(x_j,j)$ in  
     $$
@@ -68,7 +90,7 @@ Recall from \ref{DirectLimits} the definition of a direct limit. We shall constr
     $$
     The \emph{direct limit of $G_\bullet$} is defined to be the set 
     $$
-        \varinjlim G_i := \bigcup_{i\in I} G_i/\sim.
+        \varinjlim G_i := \bigsqcup_{i\in I} G_i/\sim.
     $$
     Given a pair of elements $[x_i],[x_j]\in \varinjlim G_i$ we define 
     $$
@@ -148,7 +170,7 @@ Recall from \ref{DirectLimits} the definition of a direct limit. We shall constr
 \begin{remark}
     Alternatively, we can describe the above map as taking a germ $[s]_P$ to $[\Phi_U(s)]_P$ where $U$ is any open neighborhood of $P$. 
 \end{remark}
-\begin{proposition}
+\begin{proposition}\label{EquivalentFormulationOfNaturalIsoInTermsOfStalkMorphisms}
     Consider a parallel pair of sheaves $\pazocal{F},\pazocal{G}: X\rightarrow \mathrm{ab}$ and morphism of sheaves $\Phi: \pazocal{F}\Rightarrow \pazocal{G}$. Then $\Phi$ is an isomorphism if and only if $\Phi_P:\pazocal{F}_P\rightarrow \pazocal{G}_P$ is an isomorphism for each $P\in X$.  
 \end{proposition}
 \begin{proof}    
@@ -689,12 +711,65 @@ We have now seen some examples of the geometric objects that we are interested i
 \begin{definition}
     A morphism of schemes is a morphism of local rings between schemes 
 \end{definition}
+\begin{lemma}\label{RestrictionOfLocallyRingedSpaceIsLocallyRingedSpace}
+    Let $(X,\pazocal{O})$ be a locally ringed space. Let $U$ be an open set in $X$. Then $(U,\left.\pazocal{O}\right|_U)$ is a locally ringed space.  
+\end{lemma}
+\begin{proof}
+    We already proved that $\left.\pazocal{O}\right|_{U}$ is a sheaf in an earlier lemma. It thus suffices to prove that for each $P\in U$, $\left(\left.\pazocal{O}\right|_U\right)_P$ is local. Note that the set of open neighborhoods of $P$ contained in $U$ is coinitial in the set of open neighborhoods of $P$. It thus follows that 
+    $$
+        \left(\left.\pazocal{O}\right|_{U}\right)_P \simeq \pazocal{O}_P,
+    $$
+    hence $\left(\left.\pazocal{O}\right|_{U}\right)_P$ is local.
+\end{proof}
+\begin{lemma}
+    Let $R$ be a ring and consider $f\in R$. Then 
+    $$
+        (D(f),\left.\pazocal{O}_{\Spec\ R}\right|_{D(f)})\simeq \Spec \ R_f,
+    $$
+    Hence $D(f)$ is an affine scheme.
+\end{lemma}
+\begin{proof}
+    The canonical injection $R\hookrightarrow R_f$ induces a continuous map 
+    \begin{gather*}
+        \varphi: \Spec \ R_f\rightarrow \Spec \ R\\
+        \mathfrak{p}\mapsto \mathfrak{p}\cap R
+    \end{gather*}
+    Note that the image of $\varphi$ is $D(f)$. Indeed, if $I$ is an ideal containing $f$, then $\frac{f}{1}\in R_fI$, which is a unit, hence $R_f I$ is not prime. We thus conclude that if $\mathfrak{p}\subset R_f$ is prime, then $\mathfrak{p}$ does not contain $f$. Note that $\varphi$ is injective by properties of localizations of ideals. Note then that
+    \begin{gather*}
+        \phi : \Spec \ R_f \rightarrow D(f)\\
+        \mathfrak{p}\mapsto \varphi(\mathfrak{p})
+    \end{gather*}
+    is a continuous, bijection that is closed. Indeed, $\phi(V(I))=V(I\cap R)$. It follows that $\phi$ is a homeomorphism. Restricting $\varphi^\#$ to $\left.\pazocal{O}_{\Spec\ R}\right|_{D(f)}$ we obtain a natural transformation
+    $$
+        \phi^\# : \left.\pazocal{O}_{\Spec\ R}\right|_{D(f)}\Rightarrow \phi_\star\pazocal{O}_{\Spec \ R_f}
+    $$
+    Let $\mathfrak{p}\in \Spec \ R_f$. Note that 
+    $$
+        \left(\left.\pazocal{O}_{\Spec\ R}\right|_{D(f)}\right)_{\phi(\mathfrak{p})} = \left(\left.\pazocal{O}_{\Spec\ R}\right|_{D(f)}\right)_{\varphi(\mathfrak{p})} \simeq \pazocal{O}_{\Spec\ R, \mathfrak{p}}\simeq R_{\varphi(\mathfrak{p})}=R_{\phi(\mathfrak{p})}.
+    $$
+    Here the first isomorphism follows from the proof of Lemma~\ref{CofinalSubsetRestrictionDirectLimitIsLimitOfDirectSystemOfSuperSet}. The commutative diagram 
+    $$
+        \begin{tikzcd} 
+            \left(\left.\pazocal{O}_{\Spec\ R}\right|_{D(f)}\right)_{\phi(\mathfrak{p})} \arrow[r, "\phi^\#_\mathfrak{p}"]\arrow[d,"\ev_{\phi(\mathfrak{p})}"] & \pazocal{O}_{\Spec\ R_f,\mathfrak{p}}\arrow[d, "\ev_\mathfrak{p}"]\\
+            R_{\phi(\mathfrak{p})} \arrow[r,"\sigma_\mathfrak{p}"] & (R_f)_\mathfrak{p}
+        \end{tikzcd}
+    $$
+    where $\sigma_\mathfrak{p}$ is the canonical isomorphism $R_{\phi(\mathfrak{p})}\simeq (R_f)_\mathfrak{p}$, shows that $\phi^\#_\mathfrak{p}$ is an isomorphism of local rings. Then $\phi^\#$ is a natural isomorphism (cf. Proposition~\ref{EquivalentFormulationOfNaturalIsoInTermsOfStalkMorphisms}). 
+\end{proof}
+\begin{lemma}
+    Let $(X,\pazocal{O})$ be a scheme and $U\subset X$ an open set. Then $(U,\left.\pazocal{O}\right|_U)$ is a scheme. 
+\end{lemma}
+\begin{proof}
+    It remains to find an open cover of affine schemes on $U$. Let $P\in U$. There is an open neighborhood $V$ of $P$ in $X$ with $\varphi: V\simeq \Spec R$ for some ring $R$. Then $\varphi(U\cap V)$ is an open neighborhood of $\varphi(P)$ in $\Spec \R$. We can find an open cover of $\varphi(U\cap V)$ consisting of sets $D(f)$. Pick an $f\in R$ with $\varphi(P)\in D(f)\subset \varphi(U\cap V)$. Then 
+    $$(\varphi^{-1}(D(f)),\left.\pazocal{O}\right|_{\varphi^{-1}(D(f))})\simeq (D(f),\left. \pazocal{O}_{\Spec\ R}\right|_{D(f)})\simeq (\Spec\ R_f, \pazocal{O}_{\Spec\ R_f}). $$
+    For the last isomorphism we use the prior lemma.
+\end{proof}
 \begin{example}
     Consider schemes $X_1$ and $X_2$ with open subsets $U_1\subset X_1$ and $U_2\subset X_2$ and an isomorphism of schemes 
     $$
         \varphi: (U_1, \left.\pazocal{O}_{X_1}\right|_{U_1})\Rightarrow (U_2,\left.\pazocal{O}_{X_2}\right|_{U_2})
     $$
-    The homeomorphism
+    A homeomorphism
     $$
         \varphi: U_1\rightarrow U_2
     $$
@@ -856,7 +931,7 @@ where $\pazocal{O}_{\Proj\ R}(U)\rightarrow \pazocal{O}_{\Proj\ R}(V)$ induced b
         \{D_{+}(f) : f\in R_{+}\}
     $$
     is a cover of $\Proj\ R$.
-    Furthermore, $(D_{+}(f),\left.\pazocal{O}\right|_{D_{+}(f)})$ is isomorphic to $\Spec\ R_{(f)}$ as locally ringed spaces. Here $R_{(f)}$ is the subring of degree $0$ elements in $R_{f}$. It follows that $(\Proj\ R,\pazocal{O}_{\Proj\ R})$ is an affine scheme. 
+    Furthermore, $(D_{+}(f),\left.\pazocal{O}\right|_{D_{+}(f)})$ is isomorphic to $\Spec\ R_{(f)}$ as locally ringed spaces. Here $R_{(f)}$ is the subring of degree $0$ elements in $R_{f}$. It follows that $(\Proj\ R,\pazocal{O}_{\Proj\ R})$ is a scheme. 
 \end{lemma}
 \begin{proof}
     By definition $D_{+}(f)$ is open since it is the complement of a closed set in $\Proj\ R$. Let $\mathfrak{p}\in \Proj\ R$. Then, since $\mathfrak{p}\not\supset R_{+}$, we can pick an $g\in R_{+}$ not in $\mathfrak{p}$, hence $\mathfrak{p}\in D_{+}(g)$, hence the sets $D_{+}(f)$, for $f\in R_{+}$ homogeneous, define an open cover of $\Proj\ R$.\\ 
@@ -890,7 +965,17 @@ where $\pazocal{O}_{\Proj\ R}(U)\rightarrow \pazocal{O}_{\Proj\ R}(V)$ induced b
     $$
         \left(\varphi^\#_U\right)^{-1}(s) : \mathfrak{p}\mapsto \sigma_{\mathfrak{p}}^{-1}(s\circ\varphi^{-1})(\mathfrak{p}).
     $$ 
-    Note that this construction is same as mentioned in Remark~\ref{ConstructionOfNaturalTransformationOfSheavesFrom} so naturally follows. We thus conclude that $D_{+}(f)\simeq \Spec\ R_{(f)}$.
+    Note that this construction is same as mentioned in Remark~\ref{ConstructionOfNaturalTransformationOfSheavesFrom} so naturality follows. We thus conclude that $D_{+}(f)\simeq \Spec\ R_{(f)}$.
 \end{proof}
-
+\subsubsection{Reduced Schemes}
 \subsubsection{Varieties \& Schemes}
+\begin{definition}
+    Given a scheme $S$, \emph{scheme over $S$} is a scheme $X$ together with a morphism $X\rightarrow S$. A morphism of schemes over $S$ from $X$ to $Y$ is a morphism of schemes $X\rightarrow Y$ such that 
+    $$
+        \begin{tikzcd}
+            X \arrow[r]\arrow[rd] & Y\arrow[d]\\
+            & S 
+        \end{tikzcd}
+    $$ 
+    commutes. We denote the category of schemes over $S$ by $\mathfrak{Sch}(S)$. And the category of schemes over the spectrum of a ring $R$ by $\mathfrak{Sch}(R)$.
+\end{definition}

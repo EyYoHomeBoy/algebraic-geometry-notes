@@ -2387,6 +2387,42 @@ $$
     \end{tikzcd}
 $$
 commutes for each $i,j\in I$ with $i\leq j$. When we get to describing sheafs valued in the category of groups, we will give an explicit construction of such an object in the category of groups. 
-
+\begin{definition}
+    Consider a preordered set $(I,\leq)$. A subset $J\subset I$ is \emph{cofinal (in $I$)}, if for each $i\in I$ there is a $j\in J$ with $i\leq j$. If $J\op \subset I\op$ is cofinal, we say that \emph{$J$ is coinitial in $I$}.
+\end{definition}
+\begin{remark}
+    If $I$ is a directed set, then $J$ is also a directed set. Indeed, given $a,b\in J$, there is an $x\in I$ with $a\leq x$ and $b\leq x$. Since $J$ is cofinal in $I$ there is a $c\in J$ with $x\leq c$. It thus follows that $a\leq c$ and $b\leq c$.    
+\end{remark}
+\begin{lemma}\label{CofinalSubsetRestrictionDirectLimitIsLimitOfDirectSystemOfSuperSet}
+    Consider a directed set $(I,\leq)$ and subset $J$ cofinal in $I$. Let $X_\bullet : I\rightarrow \pazocal{C}$ be a direct system and suppose $\pazocal{C}$ admits colimits. Let $X_{\bullet,J}$ denote the restriction of $X_\bullet$ to $J$. Then $\varinjlim X_{k,J} \simeq \varinjlim X_k$.
+\end{lemma}
+\begin{proof}
+    Consider a cocone $(X,\lambda)$ of the direct system $X_{\bullet,J}$. We claim that this can be extended to a cocone $(X,\overline{\lambda})$ of the direct system $(X_\bullet)$. Indeed, given $i\in I$ pick $j\in J$ and factor through $X_j$ to get a morphism $\overline{\lambda}_i : X_i\rightarrow X$ making sure to factor through $X_i$ when $i\in I$. To check naturality, note that given $i\leq k$, with $i\leq j$ for $j\in J$ and $k\leq l$ for $l\in J$ we may find an $h\in J$ with $j,l\leq h$, giving us the commutative diagram
+    $$
+        \begin{tikzcd}
+            X_i \arrow[r,"f_{ij}"]\arrow[rd,"f_{ih}"]\arrow[dd,"f_{ik}"] & X_{j,J}\arrow[d, "f_{jh}"] \arrow[rd,"\lambda_j"]\\
+            & X_{h,J}\arrow[r,"\lambda_h"] & X\\
+            X_k \arrow[ru,"f_{kh}"]\arrow[r,"f_{kl}"] & X_l \arrow[u,"f_{lh}"] \arrow[ru,"\lambda_l"]
+        \end{tikzcd}
+    $$ 
+    shows the naturality of $\overline{\lambda}$.\\
+    Now let an arbitrary cocone $(X,\lambda)$ of $X_{\bullet,J}$ be given. Then 
+    $$
+        \begin{tikzcd}
+            X_i \arrow[rr,"f_{ij}"] \arrow[rd, "\mu_i"]\arrow[rdd, "\overline{\lambda}_i",bend right = 20] && X_j \arrow[ld,"\mu_j"]\arrow[ldd,"\overline{\lambda}_j",bend left = 20]\\
+            & \varinjlim X_k \arrow[d,dashrightarrow,"\exists! u"]\\
+            & X
+        \end{tikzcd}
+    $$
+    commutes for each $i,j\in I$ with $i\leq j$. It thus follows that $u: \varinjlim X_k \rightarrow X$ is the unique morphism such that 
+    $$
+        \begin{tikzcd}
+            X_i \arrow[rr,"f_{ij}"] \arrow[rd, "\mu_i"]\arrow[rdd, "\lambda_i",bend right = 20] && X_j \arrow[ld,"\mu_j"]\arrow[ldd,"\lambda_j",bend left = 20]\\
+            & \varinjlim X_k \arrow[d,rightarrow,"u"]\\
+            & X
+        \end{tikzcd}
+    $$ 
+    commutes for each $i,j\in J$ with $i\leq j$, thus $\varinjlim X_k$ is a direct limit of $X_{\bullet,J}$. In other words $\varinjlim X_k$ is the initial object in the category of cocones of $X_{\bullet,J}$, hence it must be isomorphic to $\varinjlim X_{\bullet,J}$.
+\end{proof}
 \subsection{Abelian Categories}
 
