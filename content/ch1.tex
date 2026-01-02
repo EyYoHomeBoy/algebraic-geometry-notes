@@ -2069,7 +2069,7 @@ The following definition will be important way later on.
      $$\prod_1^{n} \left(\sum_1^{m} \lambda_{i,j}a_i\right) = \sum_{v\in \N^m} \mu_v a_1^{v_1}\cdots a_m^{v_m}.$$
      A simple induction argument shows that if $v_i< n_i$ for some $i$ then $v_j>n_j$ for some $j$, hence $a_i^{v_1}\cdots a_m^{v_m}\in J$ for each $v\in \N^m$ with $\sum_1^m v_i = n$. It follows that $\prod_1^{n} \left(\sum_1^{m} \lambda_{i,j}a_i\right)\in J$, hence $I^n\subset J$.
 \end{proof}
-\subsubsection{Nilpotent Elements}
+\subsubsection{Reduced Rings}
     \begin{definition}
         An element $x$ in a ring $R$ is called \emph{nilpotent} if $x^n=0$ for some $n\geq 1$. 
     \end{definition}
@@ -2325,8 +2325,17 @@ In our exploration of unique factorization domains and Euclidean Domains we will
             $$
                 R_\mathfrak{p} := X_\mathfrak{p}^{-1}R
             $$
+            Note that $R\setminus\mathfrak{p}$ contains no zero divisors. We may therefore identify $R$ with the subring of elements of the form $\frac{a}{1}\in R_\mathfrak{p}$.
+            \item Let $X$ be the set of elements in $R$ that are not zero divisors. Then $X^{-1}R$ is called the \emph{total ring of fractions of $R$}. $X$ is the largest multiplicative subset such that $\iota_X$ is injective. Indeed, if $X\subsetneq Y$ for another multiplicative set $Y$ in $R$, then $Y$ must contain a zero divisor, hence $\iota_Y$ is not injective.
         \end{enumerate}
     \end{example}
+    \begin{lemma}
+        Given a commutative ring $R$ and a multiplicative set $X$. Then $X^{-1}R$ is the zero ring $\{\frac{0}{1}\}$ if and only if $0\in X$.
+    \end{lemma}
+    \begin{proof}
+        Suppose $0\in X$. Then for each $\frac{a}{x}\in X^{-1}R$, $0(a\cdot 1-x\cdot 0)=0$, hence $\frac{a}{x}=\frac{0}{1}$.\\
+        Suppose $X^{-1}R=\{\frac{0}{1}\}$. Then $\frac{1}{1}=\frac{0}{1}$, hence for some $f\in X$, $f =f(1\cdot 1-1\cdot 0)=0$.     
+    \end{proof}
     \begin{lemma}
         Let $R$ be a commutative ring and $X$ a multiplicative set. We define addition on $X^{-1}R$ by
         $$
@@ -2336,11 +2345,7 @@ In our exploration of unique factorization domains and Euclidean Domains we will
         $$
             \frac{a}{x}\frac{b}{y} := \frac{ab}{xy} \quad \left(\frac{a}{x},\frac{b}{y}\in X^{-1}R\right).
         $$
-        We set $1 := 1_{X^{-1}R}:= \frac{1}{1}$ and $0 := 0_{X^{-1}R}:= \frac{0}{1}$. Then $(R,+,\cdot,0,1)$ is a commutative ring. Furthermore,
-        $$
-            \left\{\frac{a}{1} : a\in R \right\}
-        $$
-        defines a subring of $X^{-1}R$ isomorphic to $R$. 
+        We set $1 := 1_{X^{-1}R}:= \frac{1}{1}$ and $0 := 0_{X^{-1}R}:= \frac{0}{1}$. Then $(R,+,\cdot,0,1)$ is a commutative ring.  
     \end{lemma}
     \begin{proof}
         We first check that addition and multiplication are well-defined. Let $\frac{a}{x},\frac{b}{y},\frac{c}{z},\frac{d}{w}\in X^{-1}R$ be given with $\frac{a}{x}=\frac{c}{z}$ and $\frac{b}{y}=\frac{d}{w}$. Then there are $f,g\in R$ such that 
@@ -2377,13 +2382,30 @@ In our exploration of unique factorization domains and Euclidean Domains we will
         $$
             \frac{a}{x}-\frac{a}{x}= \frac{a}{x}+\frac{-a}{x}= \frac{ax-ax}{x^2}=0.
         $$
-        Commutativity of addition on $X^{-1}R$ follows readily from the commutativity of addition on $R$. Checking that multiplication on $X^{-1}R$ gives it the structure of a commutative monoid is also readily verifiable. multiplication being distributive over addition is also easy to verify. 
-        We define a ring homomorphism 
+        Commutativity of addition on $X^{-1}R$ follows readily from the commutativity of addition on $R$. Checking that multiplication on $X^{-1}R$ gives it the structure of a commutative monoid is also readily verifiable. multiplication being distributive over addition is also easy to verify.
+    \end{proof}
+    \begin{lemma}
+        Let $X$ be a multiplicative set of a commutative ring $R$. The ring map 
         \begin{gather*}
             \iota_X : R \rightarrow \left\{\frac{a}{1}:a\in R\right\}\\
             a \mapsto \frac{a}{1}
         \end{gather*} 
-        This is clearly surjective and injective, hence the target of this function may be identified with $R$. 
+        has image
+        $$
+            \left\{\frac{a}{1} : a\in R \right\}.
+        $$
+        Furthermore, $\iota_X$ is injective if and only if $X$ contains no zero-divisors. 
+    \end{lemma}
+    \begin{proof}
+        The first statement is trivial. Suppose $X$ contains no zero-divisors. If $\frac{a}{1}=0$, then there is an $x\in X$ with 
+        $$
+            xa= 0,
+        $$
+        hence $a=0$. Conversely, if $X$ contains a zero divisor $x$, we may find $a\in R\setminus 0$ with $xa = 0$, implying 
+        $$
+            \iota_X(a)=\frac{a}{1}=0,
+        $$ 
+        hence $\iota_X$ cannot be injective. 
     \end{proof}
     \begin{definition}
     Let $R$ be a commutative ring. Let $X$ be a multiplicative set. We define the \textit{saturation} of $X$ to be the set
@@ -2426,7 +2448,7 @@ In our exploration of unique factorization domains and Euclidean Domains we will
 \end{proof}
 For this subsection $\pazocal{C}$ denotes the category whose objects are pairs consisting of a commutative ring and a multiplicative set in that ring. A morphism of such objects, $(R,X)\rightarrow (S,Y)$ is ring map, mapping every element in $X$ to an element in $Y$. Let $\pazocal{D}$ be the subcategory of $\pazocal{C}$ where an object in $\pazocal{D}$ is a pair $(R,X)\in \pazocal{C}$ with $X\subset R^\ast$.
     \begin{lemma}
-        Let $\sigma:(R,R^\ast)\rightarrow (S,S^\ast)$ be a morphism in $\pazocal{C}$. There is a unique ring homomorphism $\overline{\sigma}: X^{-1}R\rightarrow S$ such that 
+        Let $\sigma:(R,X)\rightarrow (S,S^\ast)$ be a morphism in $\pazocal{C}$. There is a unique ring homomorphism $\overline{\sigma}: X^{-1}R\rightarrow S$ such that 
         $$
             \begin{tikzcd}
                 R \arrow[d,"\iota_X"']\arrow[rd, "\sigma"]\\
@@ -2505,6 +2527,12 @@ For this subsection $\pazocal{C}$ denotes the category whose objects are pairs c
         Let $R$ be a commutatitive ring and $X$ a multiplicative subset of $R$. Consider an ideal $I\subset R$. We define the \textit{localization ideal of $I$ in $X^{-1}R$} to be the set 
         $$X^{-1}I:=\left\{\frac{a}{x}\in X^{-1}R: a\in I, x\in X\right\}$$
     \end{definition}
+    \begin{lemma}
+        Let $R$ be a commutatitive ring and $X$ a multiplicative subset of $R$. Consider an ideal $I\subset R$. Then $X^{-1}I$ is a proper ideal in $X^{-1}R$ if and only if $X\cap I=\emptyset$.
+    \end{lemma}
+    \begin{proof}
+        If $X^{-1}I=X^{-1}R$, then $\frac{a}{x}=1$ for some $a\in I$ and $x\in I$. Then $\frac{a}{x}$ is a unit, hence $ab\in X$ for some $b\in R$. It follows that $\frac{ab}{xb}\in X^{-1}I$ with $ab\in X\cap I$. Conversely, if there is an $a\in X\cap I$, then $1=\frac{a}{a}\in X^{-1}I$.
+    \end{proof}
 \begin{lemma}\label{LocalizationIdealsDescribeIdealsGeneratedFromIdealsInSubring}
     Let $R$ be a commutative ring and $X\subset R$ a multiplicative subset of $R$. Let $I\subset R$ be an ideal. Then $(X^{-1}R)I = X^{-1}I$. Consequently, $X^{-1}I$ is an ideal.
 \end{lemma}
@@ -2527,6 +2555,44 @@ For this subsection $\pazocal{C}$ denotes the category whose objects are pairs c
 \end{corollary}
 \begin{proof}
     Let $\frac{a}{x}\frac{b}{y}\in X^{-1}I$ then $ab\in I$, hence $a\in I$ or $b\in I$, so $\frac{a}{x}\in X^{-1}I$ or $\frac{b}{y}\in X^{-1}I$
+\end{proof}
+\begin{definition}
+    If $R$ is a commutative ring and $X$ is a multiplicative set in $R$, then given an ideal $I\subset R$, we define $X/I := \{x+I:x\in X\}$.
+\end{definition}
+\begin{remark}
+    One readily verifies that $X/I$ is a multiplicative set in $R/I$. 
+\end{remark}
+\begin{lemma}\label{QuotientRingsAndTakingLocalization}
+    If $R$ is a commutative ring and $X$ is a multiplicative set in $R$, then for any ideal $I\subset R$,
+    $$
+        (X/I)^{-1}R/I \simeq (X^{-1}R)/(X^{-1}I)
+    $$
+\end{lemma}
+\begin{proof}
+    We have a surjective map of rings 
+    \begin{gather*}
+        \sigma X^{-1}R \rightarrow (X/I)^{-1}R/I\\
+        \frac{a}{x}\mapsto \frac{a+I}{x+I}
+    \end{gather*}
+    induced by $R\twoheadrightarrow R/I$. We check that $\ker\ \sigma = X^{-1}I$. Let $\frac{a+I}{x+I}=0+I$. Then $fa\in I$ for some. Then 
+    $$\frac{a}{x}=\frac{af}{ax} \in X^{-1}I.$$ 
+\end{proof}
+\begin{lemma}
+    Let $R$ be a commutative ring and $X$ a multiplicative set. 
+    \begin{enumerate}
+        \item $\mathrm{nil}(X^{-1}R)=\{\frac{a}{x}: a\in \mathrm{nil}(R)\}$
+        \item $R$ is reduced if and only if $X^{-1}R$ is reduced.\\
+        \item Set $X_\mathrm{red}=\{x+\mathrm{nil}(R):x\in X\}$. Then 
+        $$
+            \left(X^{-1}R\right)_\mathrm{red}\simeq X_\mathrm{red}^{-1}R_\mathrm{red}.
+        $$
+    \end{enumerate} 
+\end{lemma}
+\begin{proof}
+    1. If  $\frac{a}{x}\in X^{-1}R$ with $\frac{a^n}{x^n}=0$ for some $n\geq1$. Then $a^n=0$, hence $a\in \mathrm{nil}(R)$. If $\frac{a}{x}\in X^{-1}R$ is given such that $a^n=0$ for some $n\geq 1$, then $\frac{a^n}{x^n}=0$, hence $\frac{a}{x}\in \mathrm{nil}(X^{-1}R)$. \\
+    2. If $R$ is not reduced, then trivially $X^{-1}R$ is not reduced, since $R$ is a subring of $X^{-1}R$. Suppose $X^{-1}R$ is not reduced, then there is a non-zero element $\frac{a}{x}\in \mathrm{nil}(X^{-1}R)$, hence $a$ is a non-zero element in $\mathrm{nil}(R)$, implying $R$ is not reduced.\\
+    3. 
+    Follows directly from Lemma~\ref{QuotientRingsAndTakingLocalization}
 \end{proof}
 \subsubsection{Local Rings, Localizations of Integral Domains \& Field of Fractions}
 \begin{definition}\label{LocalRingDefinition}

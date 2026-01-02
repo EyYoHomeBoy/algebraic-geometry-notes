@@ -19,9 +19,32 @@
 \begin{definition}\label{RestrictionInImageOfPresheaf}
     For objects $U,V$ in $\pazocal{C}$ and a morphism $\varphi: V\rightarrow U$, for an  $s\in \pazocal{F}(U)$, we define \emph{restriction of $s$ to $V$} to be $$\left. s\right|_{V}:= \varphi_{UV}.$$
 \end{definition}
+\begin{lemma}\label{PresheafFromQuotientGroups}
+    Consider a presheaf on a topological space $\pazocal{F}:X\rightarrow \mathrm{grp}$ (more precisely on the topology of $X$). Consider moreover a collection of ideals $\{I_U\trianglelefteq\pazocal{F}(U) : U\in \tau_X\}$ with $\varphi_{UV}(I_U) \subset I_V$ for each $U\supset V$. For each $U\subset X$ open, set $\pazocal{F}'(U):=\pazocal{F}(U)/I_U$. We have a well-defined map of groups
+    \begin{gather*}
+        \varphi'_{UV} : \pazocal{F}'(U)\rightarrow \pazocal{F}'(V)\\
+        s + I_U \mapsto \left.s\right|_V + I_V
+    \end{gather*}
+    for $U\supset V$. Then 
+    \begin{gather*}
+        \pazocal{F}': X\rightarrow \mathrm{grp}\\
+        U \mapsto \pazocal{F}'(U)\\
+        U\supset V \mapsto \varphi'_{UV}
+    \end{gather*}
+\end{lemma}
+\begin{proof}
+    Indeed, for $U\supset V\supset W$,
+    $$
+        \varphi_{VW}'\varphi_{UV}'(s+I_U) = \varphi_{VW}\varphi_{UV}(s)+I_W=\varphi_{UW}(s)+I_W = \varphi'_{UW}(s+I_U),
+    $$
+    for each $s+I_U\in \pazocal{F}'(U)$. Moreover,
+    $$
+        \varphi_{UU}'(s+I_U)=\varphi_{UU}(s)+I_U = s+I_U.
+    $$
+\end{proof}
 \subsubsection{Sheaves}
 \begin{definition}
-    Consider a topological space $X$. Let $\pazocal{F}$ be a presheaf on the category $(\tau_X,\subset)$ where $\tau_X$ denotes the topology on $X$. $\pazocal{F}$ is called a \emph{sheaf on $X$} if in addition, 
+    Consider a topological space $X$. Let $\pazocal{F}: X\rightarrow \mathrm{Set}$ be a presheaf on the category $(\tau_X,\subset)$ where $\tau_X$ denotes the topology on $X$. $\pazocal{F}$ is called a \emph{sheaf on $X$} if in addition, 
     \begin{enumerate}
         \item For every open $U\subset X$ and every open cover $\{U_i\}$ of $U$ and every $\phi,\varphi\in \pazocal{F}(U)$, if $\left.\varphi\right|_{U_i}= \left.\phi\right|_{U_i}$ for every $i$, then $\varphi=\phi$.
         \item For every open $U\subset X$ and every open covering $\{U_i\}$ and for every collection of elements (functions) 
@@ -485,9 +508,9 @@ Given a ring $R$ and prime ideal $\mathfrak{p}$ in $R$. We denote the localizati
     1. Consider the ring map
     \begin{gather*}
         \sigma:\pazocal{O}_\mathfrak{p} \rightarrow R_\mathfrak{p}\\
-        s\mapsto s(\mathfrak{p})
+        [s_U]\mapsto s_U(\mathfrak{p})
     \end{gather*}
-    To check surjectivity, let $\frac{a}{f}\in R_\mathfrak{p}$ be given. By definition $f\notin \mathfrak{p}$, hence $\mathfrak{p}\not\supset \langle f\rangle$. We thus get that $D(f)$ is an open neighborhood of $\mathfrak{p}$. Let $\frac{a}{f}: D(f)\rightarrow \bigcup_{\mathfrak{q}\in D(f)} R_\mathfrak{q}$ denote the constant function on $D(f)$ taking $\mathfrak{q}$ to $\frac{a}{f}$. Note that $\mathfrak{q}\not\supset \langle f\rangle$ for each $\mathfrak{q}\in D(f)$, so $\frac{a}{f}$ is a section in $\pazocal{O}(D(f))$. In particular this is an element of $\pazocal{O}_\mathfrak{p}$ and 
+    Which exists upon applying the universal property for $\pazocal{O}_\mathfrak{p}$ on $\ev_\mathfrak{p} : \pazocal{O}\Rightarrow R_\mathfrak{p}$. To check surjectivity, let $\frac{a}{f}\in R_\mathfrak{p}$ be given. By definition $f\notin \mathfrak{p}$, hence $\mathfrak{p}\not\supset \langle f\rangle$. We thus get that $D(f)$ is an open neighborhood of $\mathfrak{p}$. Let $\frac{a}{f}: D(f)\rightarrow \bigcup_{\mathfrak{q}\in D(f)} R_\mathfrak{q}$ denote the constant function on $D(f)$ taking $\mathfrak{q}$ to $\frac{a}{f}$. Note that $\mathfrak{q}\not\supset \langle f\rangle$ for each $\mathfrak{q}\in D(f)$, so $\frac{a}{f}$ is a section in $\pazocal{O}(D(f))$. In particular this is an element of $\pazocal{O}_\mathfrak{p}$ and 
     $$
         \sigma\left(\frac{a}{f}\right) = \frac{a}{f}.
     $$
@@ -695,7 +718,7 @@ The above example shows the necessity of morphisms of locally ringed spaces havi
     $$ 
         \Phi(Z(f))= V(f)\cap \mathrm{Specm}\ K[x_1,x_2],
     $$
-    which means $\Phi$ is bicontinuous. So while the notion of affine plane discussed here and the classical notion are not the same they are at least related.
+    which means $\Phi$ is bicontinuous. So while the notion of affine plane discussed here and the classical notion are not the same they are at least related. The relation between varieties $V$ and $\Spec\ \Gamma(V)$ will be made precise later.  
 \end{example}
 We have now seen some examples of the geometric objects that we are interested in studying, namely schemes, which are locally ringed spaces that locally look the spectrum of a ring. To give a precise definition we will first give a definition of affine schemes.
 \begin{definition}
@@ -763,6 +786,32 @@ We have now seen some examples of the geometric objects that we are interested i
     It remains to find an open cover of affine schemes on $U$. Let $P\in U$. There is an open neighborhood $V$ of $P$ in $X$ with $\varphi: V\simeq \Spec R$ for some ring $R$. Then $\varphi(U\cap V)$ is an open neighborhood of $\varphi(P)$ in $\Spec \R$. We can find an open cover of $\varphi(U\cap V)$ consisting of sets $D(f)$. Pick an $f\in R$ with $\varphi(P)\in D(f)\subset \varphi(U\cap V)$. Then 
     $$(\varphi^{-1}(D(f)),\left.\pazocal{O}\right|_{\varphi^{-1}(D(f))})\simeq (D(f),\left. \pazocal{O}_{\Spec\ R}\right|_{D(f)})\simeq (\Spec\ R_f, \pazocal{O}_{\Spec\ R_f}). $$
     For the last isomorphism we use the prior lemma.
+\end{proof}
+\begin{example}
+    The scheme $\Spec\ \Z$ consists of a generic point corresponding to the zero ideal in $\Z$ and the remaining point are closed points corresponding to ideals generated by a prime. Note that $\Spec \ \Z$ has cofinite topology. Indeed, given an ideal $I=\langle p_1^{r_1}\cdots p_n^{r_n}\rangle \subset \Z$, 
+    $$
+        V(\langle I \rangle) = \{\langle p_1\rangle ,\dots,\langle p_n\rangle \}
+    $$   
+\end{example}
+\begin{lemma}
+    $\Spec\ \Z$ is the terminal object in the category of affine schemes. 
+\end{lemma}
+\begin{proof}
+    Since $R\mapsto \Spec \ R$ defines an equivalence of categories $\mathrm{CRing}\rightarrow \mathrm{AffSch}\op$ and $\Z$ is the initial object in $\mathrm{CRing}$, it follows that $\Spec\ \Z$ is the terminal object in $\mathrm{AffSch}$
+\end{proof}
+\begin{remark}
+    Note that $\Spec \ R\rightarrow \Spec \ \Z$ is the morphism induced by $\Z\rightarrow R$.  
+\end{remark}
+\begin{proposition}
+    The scheme $(\Spec\ \Z, \pazocal{O}_{\Spec\ Z})$ is the final object for the category of schemes.
+\end{proposition}
+\begin{proof}
+    Let $(X,\pazocal{O})$ be a scheme. Let $\{U_i\}$ denote an affine cover of $X$. There are morphisms of affine schemes $\varphi_i : (U_i,\left.\pazocal{O}\right|_{U_i})\rightarrow \Spec \ \Z$. Now we check that $\varphi_i$ and $\varphi_j$ agree on the domains of there intersection (when these are non-empty). To check that $\left. \varphi_i\right|_{U_i\cap U_j}= \left. \varphi_j\right|_{U_i\cap U_j}$ it suffices to check that it agrees on each open affine set $W\subset U_i\cap U_j$. Now note that $\left.\varphi_i\right|_W,\left.\varphi_j\right|_W$ is a pair of morphisms of affine schemes, hence they must be equal since $\Spec \ Z$ is the terminal object in the category of affine schemes. It follows that 
+    \begin{gather*}
+        \varphi : X\rightarrow \Spec \ Z
+    \end{gather*}  
+    where $\varphi(P)=\varphi_i(P)$ if $P\in U_i$ is a well-defined morphism of schemes.\\
+    Now consider a morphism of schemes $\phi: X\rightarrow \Spec \ \Z$. Since for each $i$, $\left.\phi\right|_{U_i}: U_i\rightarrow \Spec \ \Z$ defines a morphism of affine schemes it must be equal to $\varphi_i$, hence $\phi=\varphi$.  
 \end{proof}
 \begin{example}
     Consider schemes $X_1$ and $X_2$ with open subsets $U_1\subset X_1$ and $U_2\subset X_2$ and an isomorphism of schemes 
@@ -968,6 +1017,109 @@ where $\pazocal{O}_{\Proj\ R}(U)\rightarrow \pazocal{O}_{\Proj\ R}(V)$ induced b
     Note that this construction is same as mentioned in Remark~\ref{ConstructionOfNaturalTransformationOfSheavesFrom} so naturality follows. We thus conclude that $D_{+}(f)\simeq \Spec\ R_{(f)}$.
 \end{proof}
 \subsubsection{Reduced Schemes}
+\begin{definition}
+    A scheme $(X,\pazocal{O})$ is \emph{reduced} if for each $U\subset X$ open, $\pazocal{O}(U)$ is reduced. 
+\end{definition}
+\begin{definition}
+    Given a scheme $(X,\pazocal{O})$, we can form the \emph{reduced scheme induced by $X$}, to be the pair $X_\mathrm{red}:=(X,\pazocal{O}_\mathrm{red})$ where (cf. Lemma~\ref{PresheafFromQuotientGroups})
+    \begin{gather*}
+        \pazocal{O}_\mathrm{red}: X\rightarrow \mathrm{CRing}
+    \end{gather*}
+    is the presheaf induced by $\pazocal{O}$ and $\{\mathrm{nil}(\pazocal{O}(U)) : U\subset X\}$. 
+\end{definition}
+\begin{remark}
+    Note that $\pazocal{O}_\mathrm{red}$ defines a sheaf of rings, since it is just the quotient sheaf of $\pazocal{O}$, with $U\mapsto \mathrm{nil}(\pazocal{O}(U))$, hence $X_\mathrm{red}$ is a ringed space. It is a locally ringed space since for each $P$ by {\Large more general lemma about locally ringed spaces}.
+\end{remark}
+\begin{lemma}
+    A scheme $(X,\pazocal{O})$ is reduced if and only if $\pazocal{O}_P$ is reduced for each $P\in X$.
+\end{lemma}
+\begin{proof}
+    Suppose $(X,\pazocal{O})$ is reduced. Let $P\in X$ and  $[s_U]\in \pazocal{O}_P\setminus 0$. For any open neighborhood $V$ of $P$, $\left. s_U\right|_{U\cap V}^n \neq 0$ for any $n\geq 1$, hence $[s_U]\neq 0\in \pazocal{O}_p$. It thus follows that $\pazocal{O}_P$ is reduced.\\
+    Suppose conversely that $(X,\pazocal{O})$ is not reduced. Then there is a point $P$ in an open set $U$ with $\pazocal{O}(U)$ not reduced. I.e. there is a section $s\in \pazocal{O}(U)\setminus 0$ and an $n\geq 1$ with $s^n = 0$. Then $[s]^n = 0\in \pazocal{O}_P$, hence $\pazocal{O}_P$ is not reduced.   
+\end{proof}
+\begin{lemma}
+    Let $R$ be a ring. Then 
+    \begin{enumerate}
+        \item $\Spec\ R$ is reduced if and only if $R$ is reduced.
+        \item $\Spec\ R_{\mathrm{red}}\simeq (\Spec\ R)_\mathrm{red}$
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    1. If $\Spec\ R$ is reduced, then $\pazocal{O}(\Spec\ R)\simeq R$ is reduced. Conversely, suppose $R$ is reduced. Then $\pazocal{O}_{\mathfrak{p}}\simeq R_\mathfrak{p}$ is reduced for each $\mathfrak{p}\in\Spec\ R$.\\
+    2. Consider the map $R\rightarrow R_\mathrm{red}$. It induces a homeomorphism $\varphi:\Spec\ R_\mathrm{red}\rightarrow \Spec \ R$ taking prime ideal $\mathfrak{p}/\mathrm{nil}(R)$ to its corresponding prime ideal $\mathfrak{p}$ in $\Spec\ R$ and a natural transformation $\varphi^\#: \pazocal{O}_{\Spec \ R}\Rightarrow \varphi_\star\pazocal{O}_{\Spec \ R_{\mathrm{red}}}$. Consider the canonical natural transformation $\pi : \pazocal{O}_{\Spec \ R}\Rightarrow (\pazocal{O}_{\Spec \ R})_{red}$ defined by $\pazocal{O}_{\Spec\ R}(U)\twoheadrightarrow (\pazocal{O}_{\Spec\ R})_\mathrm{red}(U)$. Then we get a natural transformation 
+    $$
+        \overline{\varphi^\#}:(\pazocal{O}_{\Spec\ R})_\mathrm{red} \Rightarrow \varphi_\star\pazocal{O}_{\Spec \ R_\mathrm{red}}
+    $$  
+    Explicitly for $U\subset \Spec \ R$, $s +\mathrm{nil}(\pazocal{O}_{\Spec\ R}(U))\mapsto \varphi^\#_U(s).$ under $\overline{\varphi^\#}_U$. From $\sigma_{\mathfrak{p}}:R_{\varphi(\mathfrak{p})}\twoheadrightarrow (R_\mathrm{red})_{\mathfrak{p}}$ we get the isomorphism $\widetilde{\sigma_\mathfrak{p}} : R_\mathfrak{\varphi(p)}/\mathrm{nil}(R_\mathfrak{\varphi(p)})\rightarrow (R_\mathrm{red})_\mathfrak{p}$. Consider the map
+    \begin{gather*}
+        \overline{\ev_\mathfrak{q}}:\pazocal{O}_{\Spec\ R,\mathfrak{q}}\rightarrow (R_\mathfrak{q})_\mathrm{red}\\
+        [s_U]\mapsto s_U(\mathfrak{q})+\mathrm{nil}(R_\mathfrak{q})  
+    \end{gather*}
+    Note that if $s_U(\mathfrak{q})=\frac{a}{f}\in \mathrm{nil}(R_\mathfrak{q})$, then since $s$ is equal to the constant section $\frac{a}{f}$ in a sufficiently small neighborhood around $\mathfrak{q}$, it follows that $[s_U]\in \mathrm{nil}(\pazocal{O}_{\Spec\ R,\mathfrak{q}})$, hence 
+    \begin{gather*}
+        \widetilde{\ev_\mathfrak{q}} : ((\pazocal{O}_{\Spec\ R})_{\mathrm{red}})_\mathfrak{q}\simeq \pazocal{O}_{\Spec\ R,\mathfrak{q}}/\mathrm{nil}(\pazocal{O}_{\Spec\ R,\mathfrak{q}})\rightarrow (R_\mathfrak{q})_\mathrm{red}\\
+        [s_U] + \mathrm{nil}(\pazocal{O}_{\Spec\ R,\mathfrak{q}}) \mapsto s_U(\mathfrak{q})+ \mathrm{nil}(R_\mathfrak{q})
+    \end{gather*}
+    The implicit isomorphism given in the domain of this map is readily verified. Indeed, we know it to be a fact in general that $(\pazocal{F}/\pazocal{G})_P \simeq \pazocal{F}_P/\pazocal{G}_P$. It is also clear that $\mathrm{nil}(\pazocal{O}_{\Spec \ R})_\mathfrak{q}=\mathrm{nil}(\pazocal{O}_{\Spec\ R, \mathfrak{q}})$. One then readily verfies that the square 
+    $$
+        \begin{tikzcd}
+            \pazocal{O}_{\Spec \ R,\varphi(\mathfrak{p})}/\mathrm{nil}(\pazocal{O}_{\Spec\ R, \varphi(\mathfrak{p})}) \arrow[r,"\overline{\varphi^\#}_\mathfrak{p}"]\arrow[d,"\widetilde{\ev_{\varphi(\mathfrak{p})}}"] & \pazocal{O}_{\Spec\ R_\mathrm{red},\mathfrak{p}}\arrow[d,"\ev_{\mathfrak{p}}"]\\
+            (R_{\varphi(\mathfrak{p})})_\mathrm{red}\arrow[r,"\widetilde{\sigma_\mathfrak{p}}"] & (R_\mathrm{red})_\mathfrak{p}
+        \end{tikzcd}
+    $$
+    commutes. Then $\overline{\varphi^\#}_\mathfrak{p}$ is an isomorphism for each $\mathfrak{p}\in \Spec \ R_\mathrm{red}$, hence $\overline{\varphi^\#}$ is a natural isomorphism, hence $(\varphi, \overline{\varphi^\#}): (\Spec\ R)_\mathrm{red} \rightarrow \Spec \ R_\mathrm{red}$ defines an isomorphism of locally ringed spaces.  
+\end{proof}
+\begin{lemma}
+    The assignment
+    $$
+        (X,\pazocal{O})\mapsto (X,\pazocal{O}_\mathrm{red})
+    $$
+    is functorial in the category of ringed spaces, hence if $(X,\pazocal{O}_X)\simeq (Y,\pazocal{O}_Y)$, then 
+    $$
+        X_\mathrm{red} \simeq Y_\mathrm{red}.
+    $$ 
+\end{lemma}
+\begin{proof}
+    Let a morphism of locally ringed spaces $\varphi: (X,\pazocal{O}_X)\rightarrow (Y,\pazocal{O}_Y)$ be given. Since the assignment $R\mapsto R_\mathrm{red}$ is functorial it follows readily that the assignment, 
+    $$
+        \varphi^\#_U\mapsto (s+\mathrm{nil}(\pazocal{O}_Y(U))\mapsto \varphi^\#_U(s)+\mathrm{nil}(\varphi_\star\pazocal{O}_X(U)))
+    $$
+    defines a natural transformation $(\pazocal{O}_Y)_\mathrm{red}\Rightarrow \varphi_\star(\pazocal{O}_X)\mathrm{red}$ and this assignment is functorial.  
+\end{proof}
+\begin{lemma}
+    Given a scheme $(X,\pazocal{O})$, $X_\mathrm{red}$ is a reduced scheme. 
+\end{lemma}
+\begin{proof}
+    It remains to check that $X_\mathrm{red}$ admits a cover of affine schemes. $(X,\pazocal{O})$ admits a cover of affine schemes. Let $U$ be such an open set. Then $(U,\left.\pazocal{O}\right|_{U})\simeq \Spec \ R$ for some ring $R$. Hence 
+    $$
+        (U,\left.\pazocal{O}_\mathrm{red}\right|_{U})=(U,\left.\pazocal{O}\right|_{U})_\mathrm{red}\simeq (\Spec\ R)_\mathrm{red}=\Spec\ R_\mathrm{red}.
+    $$
+    Thus $X_\mathrm{red}$ is a scheme. 
+\end{proof}
+Consider a scheme $(X,\pazocal{O})$. Let $\pi_{X_\mathrm{red}} :X_\mathrm{red}\rightarrow (X,\pazocal{O})$ be the morphism of schemes, whose underlying continuous function is the identity map and whose natural transformation has components 
+\begin{gather*}
+    (\pi_{X_\mathrm{red}})^\#_U : \pazocal{O}(U)\twoheadrightarrow \pazocal{O}_\mathrm{red}(U)\\
+    s\mapsto s+ \mathrm{nil}(\pazocal{O}(U))
+\end{gather*}
+\begin{proposition}
+     Consider a morphism of schemes $\varphi : X\rightarrow Y$ and suppose $X$ is reduced. Then there is a unique morphism of schemes $\phi : X\rightarrow Y_\mathrm{red}$ such that 
+     $$
+        \begin{tikzcd}
+            X \arrow[r,"\phi"]\arrow[rd,"\varphi"] & Y_\mathrm{red}\arrow[d,"\pi_{Y_{\mathrm{red}}}"]\\
+            & Y
+        \end{tikzcd}
+     $$
+\end{proposition}
+\begin{proof}
+    Let $U\subset Y$ be open, then, using that $\mathrm{nil}(\pazocal{O}_{X}(U))=0$, we get a unique $\phi^\#_U: \pazocal{O}_{Y,\mathrm{red}}(U)\rightarrow \varphi_\star\pazocal{O}_X(U)$ such that 
+    $$
+        \begin{tikzcd}
+            \pazocal{O}_{Y,\mathrm{red}}(U) & \varphi_\star\pazocal{O}_{X}(U)\arrow[l,"\phi^\#_U"']\\
+            & \pazocal{O}_Y(U)\arrow[u, "(\pi_{Y_\mathrm{red}})^\#_U"']\arrow[ul,"\varphi^\#_U"]
+        \end{tikzcd}
+    $$
+    commutes. One easily checks that these form the components of a natural transformation satisfying the condition. Uniqueness follows from using the uniqueness on the components of $\phi^\#$.  
+\end{proof}
 \subsubsection{Varieties \& Schemes}
 \begin{definition}
     Given a scheme $S$, \emph{scheme over $S$} is a scheme $X$ together with a morphism $X\rightarrow S$. A morphism of schemes over $S$ from $X$ to $Y$ is a morphism of schemes $X\rightarrow Y$ such that 
