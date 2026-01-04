@@ -582,6 +582,37 @@ we obtain a map
     A morphism of locally ringed spaces is a morphism of ringed spaces $(f,f^\#):(X,\pazocal{O}_X)\rightarrow (Y,\pazocal{O}_Y)$ such that $f^\#_P$ is local ring homomorphism (cf. Definition~\ref{LocalRingDefinition}) for each $P\in X$. 
 \end{definition}
 \begin{lemma}
+    Consider a ringed space $(X,\pazocal{O})$ and an open subset $U\subset X$. Denote the from $X$ inherited sheaf by $\pazocal{O}_U$. The map $\iota : U\subset X$ together with 
+    $$
+        \iota^\#: \iota_\star\pazocal{O} \rightarrow \pazocal{O}_U
+    $$
+    given by 
+    $$
+        \left\{ \varphi_{U U\cap V} : \pazocal{O}(V) \rightarrow  \pazocal{O}_U(U\cap V)=\pazocal{O}(U\cap V) : V\subset Y \text{ open}\right\}.
+    $$
+    defines a morphism of ringed spaces. If $(X,\pazocal{O})$ is a locally ringed space, then this morphism is a morphism of locally ringed spaces.
+\end{lemma}
+\begin{proof}
+    $\iota$ is a continuous map and the naturality of $\iota^\#$ follows immediately from the functorialty of $\pazocal{O}$. The map $\iota^\#_P$ is just the identity map for each $P\in U$, $(\iota,\iota^\#)$ defines a morphism of locally ringed spaces
+\end{proof}
+\begin{lemma}
+    Consider a morphism of ringed spaces $\varphi: (X,\pazocal{O}_X)\rightarrow (Y,\pazocal{O}_Y)$. Let $U\subset X$ and $U'\subset Y$ open be given with $\varphi(U)\subset U'$. Consider $\iota: U\hookrightarrow X$. Then $\left.\varphi\right|_U$ together with
+    $$
+        \iota^\#\left.\varphi^\#\right|_{\left.\pazocal{O}_Y\right|_{U'}} : \left.\pazocal{O}_Y\right|_{U'} \Rightarrow \left(\left.\varphi\right|_{U}\right)_\star \left.\pazocal{O}_X\right|_U
+    $$
+    is a morphism of ringed spaces. If ringed spaces in question are locally ringed spaces, then this morphism is a morphism of locally ringed spaces. 
+\end{lemma}
+\begin{proof}
+    We already know that $\left.\varphi\right|_{U}$ is a continuous map. $\iota^\#\left.\varphi^\#\right|_{\left.\pazocal{O}_Y\right|_{U'}}$ is a natural transformation. With the assumption of locally ringed spaces, note that the square  
+    $$
+        \begin{tikzcd}
+            \left(\pazocal{O}_Y\right)_{\varphi(P)}\arrow[d]\arrow[rr,"\varphi^\#_P"]&& \left(\pazocal{O}_X\right)_{P} \arrow[d]\\
+            \left(\left.\pazocal{O}_Y\right|_{U'}\right)_{\left.\varphi\right|_{U}(P)} \arrow[rr,"\left(\iota^\#\left.\varphi^\#\right|_{\left.\pazocal{O}_Y\right|_{U'}}\right)_{P}"] && \left(\left.\pazocal{O}_X\right|_U\right)_{P}
+        \end{tikzcd}
+    $$  
+    where the vertical arrows are isomorphisms, commutes. It thus follows that $\left(\iota^\#\left.\varphi^\#\right|_{\left.\pazocal{O}_Y\right|_{U'}}\right)_{P}$ is a local homomorphism for each $P\in U$.
+\end{proof}
+\begin{lemma}
     \begin{enumerate}
         \item $\Spec \ R$ is a locally ringed space for each ring $R$.
         \item If $\sigma: A\rightarrow B$ is a map of rings, then it induces a morphism of locally ringed spaces

@@ -112,9 +112,9 @@ Fix a field $K$
 \end{proof}
 We now give an example of a countable family of algebraic subsets whose union is not algebraic. 
 \begin{example}\label{ExampleOfCountableUnionOfAlgebraicSubsetsWhichIsNotAlgebraic}
-    Let $K=\Q$ and let and consider the family of algebraic sets $\{ \{i\}\}_{i\in \N}$. The only algebraic subset of $\A^1$ are $\A^1$ it self and the finite subsets of $\A^1$ (cf. Proposition~\ref{AlgebraicSubsetsOfAffine1SpaceAreFiniteSetsAndTheWholeSpace}), but $\bigcup_{i\in \Z} \{i\} = \Z$, which is neither finite or equal to $\A^1=\Q$. 
+    Let $K=\Q$ and let and consider the family of algebraic sets $\{ \{n\}\}_{n\in \Z}$. The only algebraic subset of $\A^1(\Q)$ are $\A^1(\Q)$ itself and the finite subsets of $\A^1(\Q)$ (cf. Proposition~\ref{AlgebraicSubsetsOfAffine1SpaceAreFiniteSetsAndTheWholeSpace}), but $\bigcup_{n\in \Z} \{n\} = \Z$. 
 \end{example}
-Here are some examples of algebraic subsets
+Here are some examples of algebraic subsets (all from exercises in Fulton)
 \begin{example}\label{ExamplesOfAlgebraicSets}
     \begin{enumerate}
         \item Let $X=\left\{\left(t,t^2,t^3\right)\in \A^3 : t\in K\right\}$. We prove that $X= V\left(f_1,f_2\right)$, where $f_1=x^2-y,f_2=x^3-z\in K[x,y,z]$. Let $v\in X$. Then $v=(t,t^2,t^3)$ for some $t\in K$. Note that 
@@ -158,7 +158,7 @@ Here are some examples of algebraic subsets
 \begin{remark}
     Consider a line $V(f)\subset \A^2$, where $f=ax+by+c$, for $a,b,c\in K$ where $a$ or $b$ are non-zero. Without loss of generality we may assume that $b\neq 0$. Thus 
     $$V(f)= V(f)\cup \emptyset = V(f)\cup V\left(b^{-1}\right) = V\left(b^{-1}(ax+by+c)\right)=V\left(y+ab^{-1}x+cb^{-1}\right).$$
-    This means that any can be expressed as the vanishing set of some polynomial of the form 
+    This means that any line can be expressed as the vanishing set of some polynomial of the form 
     $$y-Ax+B,$$
     for some $A,B\in K.$
 \end{remark}
@@ -170,7 +170,9 @@ Here are some examples of algebraic subsets
     The case where $\#K < \infty$ is trivial. Suppose then that $\#K = \infty$.
     Set
     $$X := \{(t,at+b)\in \A^2 : f(t,at+b)=0\}.$$
-    Note that $t \in V(f(x,ax+b))$ if and only if $(t,at+b)\in X$ and thus that there is a $t \in \A^1\setminus V(f(x,ax+b)$, since $L\not\subset C$. This then implies that  $\#V(f(x,ax+b))\leq n$ (cf. Example~\ref{AlgebraicSubsetsOfAffine1SpaceAreFiniteSetsAndTheWholeSpace}), and hence $\#X \leq n$. It is then sufficient to prove that $C\cap L = X$. Let $v=(v_1,v_2)\in C\cap L$. Since $v\in L$ we have that 
+    Note that 
+    $$t \in V(f(x,ax+b)) \iff (t,at+b)\in X$$ 
+    and thus that there is a $t \in \A^1\setminus V(f(x,ax+b)$, since $L\not\subset C$. This then implies that  $\#V(f(x,ax+b))\leq n$ (cf. Example~\ref{AlgebraicSubsetsOfAffine1SpaceAreFiniteSetsAndTheWholeSpace}), and hence $\#X \leq n$. It is then sufficient to prove that $C\cap L = X$. Let $v=(v_1,v_2)\in C\cap L$. Since $v\in L$ we have that 
     $$v_2 = av_1+b,$$
     meaning $v=(v_1,v_2)=(v_1,av_1+b)\in X$. Conversely, let $v=(t,at+b)\in X$. Then 
     $$l(v) = at+b-(at+b) = 0,$$
@@ -245,7 +247,7 @@ We use this result to give some non-examples of algebraic subsets
 \end{proof}
 The intersection of a proper configuration of $n-1$ hyperplanes is a line for $n\geq 2$.
 \begin{proposition}
-    Conside hyperplanes $V(p_1+b_i),\dots,V(p_{n-1}+c_{n-1})$, with $p_i = \sum_1^n a_{ij}x_j\in K[x_1,\dots,x_n]$, $b_i\in K$ such that the vectors 
+    Consider hyperplanes $V(p_1+b_i),\dots,V(p_{n-1}+c_{n-1})$, with $p_i = \sum_1^n a_{ij}x_j\in K[x_1,\dots,x_n]$, $b_i\in K$ such that the vectors 
         $$a_i:=\begin{pmatrix}
             a_{i1}\\
             \vdots\\
@@ -309,10 +311,10 @@ A later strengthening of above results (cf. Theorem~\ref{BezoutTheorem}), genera
     $$f = \sum_0^d f_ix_n^{i},$$
     for a $d\geq 1$ and for suitable $f_i\in K[x_1,\dots,x_{n-1}]$ with $f_j \neq0$ for some $j\in \{1,\dots,d\}$. By Proposition~\ref{OnInfiniteIDPolynomialVanishesEverywhereIfAndOnlyIfIsZero} there is a point $v\in \A^{n-1}$ such that $f_j(v)\neq 0$. Hence 
     $$f' := \sum_0^d f_i(v)x_n^i\in K[x_n]$$
-    is a non-zero polynomial in one variable, implying there are every infinitely many $v_n\in K$ such that $f'(v_n)=f(v_1,\dots,v_n)\neq 0$, hence $\A^n\setminus V(f)$ is infinite.\\
+    is a non-zero polynomial in one variable, implying there are infinitely many $v_n\in K$ such that $f'(v_n)=f(v_1,\dots,v_n)\neq 0$, hence $\A^n\setminus V(f)$ is infinite.\\
     2. We again write $f=\sum_0^d f_ix_n^i$, for suitable $f_i\in K[x_1,\dots,x_{n-1}]$, with $f_j\neq 0$ for some $j\in\{1,\dots,d\}$. If every non-zero $f_i$ is constant, then for any choice of $v\in \A^n$, there exists $a_v\in K$ such that for $f_v = \sum_0^d f_i(v)x_n^i$, 
     $$0 = f_v(a_v) = f(v_1,\dots,v_{n-1},a_v).$$
-    If $\deg \ f_j >0$ for some $j$. Then there are infinitely many $v\in \A^{n-1}$ such $f_j(v)\neq 0$. For such a $v$ there is at least one $a_v\in K$ that is a root in $f(v_1,\dots,v_{n-1},x_n)$. Thus in any case $f$ has infinitely many zeroes, i.e. $V(f)$ is infinite.
+    If $\deg \ f_j >0$ for some $j$. Then there are infinitely many $v\in \A^{n-1}$ such $f_j(v)\neq 0$. For such a $v$ there is at least one $a_v\in K$ that is a root in $f(v_1,\dots,v_{n-1},x_n)$. Thus in any case $f$ has infinitely many zeroes.
 \end{proof}
 We present a way of constructing algebraic sets via Cartesian product
 \begin{proposition}
@@ -440,8 +442,15 @@ We shall later ammend this by only considering algebraically closed fields as ou
     An algebraic subset $X\subset \A^n$ is said to be \textit{reducible} if there are algebraic subsets $Y,Z\subsetneq X$ such that $X = Y \cup Z$. An algebraic subset $V\subset \A^n$ that is not reducible is said to be \textit{irreducible}. An irreducible algebraic subset is also called an \textit{(affine) variety}.  
 \end{definition}
 \begin{remark}
-    If $f\in K[x_1,\dots,x_n]$ is a reducible polynomial, then $V(f)$ is reducible. Indeed, $f=gh$ for some non-constant $g,h\in K[\mathbf{x}]$, hence $V(f)=V(gh)=V(g)\cup V(h)$. We also have that $\langle f\rangle \subsetneq \langle g\rangle$ and $\langle f\rangle \subsetneq \langle h \rangle$, since $g,h\mid f$ and $\deg \ g,\deg \ h <\deg \ f$. We shall later see an example of a variety $V(f)$ where $f$ is not irreducible.
+    If $f\in K[x_1,\dots,x_n]$ is a reducible polynomial, then $V(f)$ is reducible. Indeed, $f=gh$ for some non-constant $g,h\in K[\mathbf{x}]$, hence $V(f)=V(gh)=V(g)\cup V(h)$. We also have that $\langle f\rangle \subsetneq \langle g\rangle$ and $\langle f\rangle \subsetneq \langle h \rangle$, since $g,h\mid f$ and $\deg \ g,\deg \ h <\deg \ f$. Later we will see an example of a variety $V(f)$ where $f$ is not irreducible.
 \end{remark}
+\begin{example}
+    For an infinite field $K$, $\A^n(K)$ is irreducible.
+   Indeed,  $I(\A^n(K)) = 0$, which is trivially prime, hence $\A^n(K)$ is irreducible by Theorem~\ref{VarietyIffCoordinateRingIsID}. One thus concludes that 
+   $$
+        \A^n(K) \text{ is irreducible} \iff \#K=\infty
+   $$
+\end{example}
 \begin{proposition}\label{FiniteNonEmptyVarietiesArePoints}
     Let $V\subset \A^n$ be a finite non-empty algebraic set. Then $V$ is a variety if and only if $V$ is a point 
 \end{proposition}
@@ -488,15 +497,6 @@ We demonstrate the strength of the above theorem in the following example
         $$V(f) = V(x-1,y)\cup V(x,y).$$
         \end{enumerate}
 \end{example}
-\begin{lemma}\label{WeCanThrowAwaySmallSets}
-    Let $X$ be a set and $\mathcal{X}\subset 2^X$ be a non-empty family of subsets of $X$. Set 
-    $$\mathcal{Y} := \left\{ X\in \mathcal{X} : X \subset Y \text{ for some } Y\in \mathcal{X} \right\}$$
-    and $\mathcal{Z} := \mathcal{X}\setminus \mathcal{Y}$. Then 
-    $$\bigcup_{X \in \mathcal{X}} X = \bigcup_{X \in \mathcal{Z}} X.$$
-\end{lemma}
-\begin{proof}
-    The inclusion $\bigcup_{X \in \mathcal{X}} X \supset \bigcup_{X \in \mathcal{Z}} X $ is trivial. Let $x\in \bigcup_{X \in \mathcal{X}} X$. Then $x\in X$, for some $X\in \mathcal{X}$. To prove the inclusion, we need to show that $x\in Y$ for some $Y\in \mathcal{Z}$
-\end{proof}
 \begin{lemma}\label{NonEmptyFamilyOfAlgebraicSetsHasMinimalElement}
     A non-empty family of algebraic sets in $\A^n$ has a minimal element.
 \end{lemma}
@@ -552,11 +552,8 @@ We demonstrate the strength of the above theorem in the following example
 \begin{proof}
     Indeed, if a variety $V$ is a subset of $\bigcup_{1}^k W_i$, then $V\subset W_h$ for some $h$ by the prior proposition. Since $V_i\not\subset V_j$ for $i\neq j$, the result follows.    
 \end{proof}
-\begin{example}
-    For an infinite field $K$, $\A^n(K)$ is irreducible.
-   Indeed,  $I(\A^n(K)) = 0$, which is trivially prime, hence $\A^n(K)$ is irreducible by Theorem~\ref{VarietyIffCoordinateRingIsID}
-\end{example}
-\subsubsection{Classifying Algebraic Subsets of the Plane}
+
+\subsubsection{The Three Types of Algebraic Subsets of the Plane}
 \begin{theorem}\label{BezoutForCurves}
     Let $f,g\in K[x,y]$ such that $\gcd(f,g)=1$. Then $\#V(f,g) < \infty$.
 \end{theorem}
@@ -572,7 +569,7 @@ We demonstrate the strength of the above theorem in the following example
     Let $f\in K[x,y]$ be irreducible such that $\#V(f)=\infty$. Then $I(V(f))=\langle f\rangle$ and $V(f)$ is irreducible. 
 \end{corollary}
 \begin{proof}
-    If $g\in I(V(f))$ then $V(f,g)\supset V(f)$, hence $\#V(f,g) = \infty$. Then $f$ and $g$ has a non-trivial common factor by the above theorem. Then since $f$ is assumed irreducible this means $f\mid g$ or equivalently that $g\in \langle f\rangle$, hence $I(V(f))\subset \langle f\rangle$, implying $I(V(f)) = \langle f\rangle$ by Lemma~\ref{IdealVanishingSets}, this implies that $I(V(f))$ is prime by Lemma~\ref{PrimeElementsGeneratePrimeIdeals} and the fact that $K[x,y]$ is a UFD. This implies that $V(f)$ is irreducible by Proposition~\ref{VarietyIffCoordinateRingIsID}.
+    If $g\in I(V(f))$ then $V(f,g)\supset V(f)$, hence $\#V(f,g) = \infty$. Then $f$ and $g$ has a non-trivial common factor by the above theorem. Then since $f$ is assumed irreducible this means $f\mid g$ or equivalently that $g\in \langle f\rangle$, hence $I(V(f))\subset \langle f\rangle$, implying $I(V(f)) = \langle f\rangle$ by Lemma~\ref{IdealVanishingSets}. This implies that $I(V(f))$ is prime by Lemma~\ref{PrimeElementsGeneratePrimeIdeals} and the fact that $K[x,y]$ is a UFD. This implies that $V(f)$ is irreducible by Proposition~\ref{VarietyIffCoordinateRingIsID}.
 \end{proof}
 \begin{corollary}\label{ClassificationOfAlgebraicSetsInThePlaneOverInfiniteFields}
     Suppose $K$ is infinite. The varieties in $\A^2$ are $\A^2$, $\emptyset$, points and plane curves $V(f)$ where $f\in K[x,y]$ is irreducible and $\#V(f)=\infty$.
@@ -584,12 +581,12 @@ We demonstrate the strength of the above theorem in the following example
     Let $K$ be an algebraically closed field, $f\in K[x,y]$, $\deg \ f >0$. Let distinct irreducible polynomials $f_1,\dots,f_l\in K[x,y]$ and positive integers $r_1,\dots,r_l$ be given such that $f =  \prod_1^r f_i^{r_i}$. Then $V_i:= V(f_i)$ for $i=1,\dots,l$ are the irreducible components of $V:=V(f)$ and $V(f)=\left\langle \prod_1^l f_i \right\rangle$. 
 \end{corollary}
 \begin{proof}
-    Proposition~\ref{AlgebraicSetsOverInfiniteFieldsAndAlgClosedFields} 2. shows that $V(f_i)$ is an infinite set for each $i$. Hence by Corollary~\ref{InfiniteVanishingSetOfIrredublePolynomialIsVariety} $V_i$ is irreducible and $I(V_i)=\langle f_i\rangle$ for each $i$. Furthermore, for each $i$, $V\left(f_i^{r_i}\right)= V\left(\rad\left(f_i^{r_i}\right)\right) = V(f_i)$, hence $V = \bigcup_1^l V_i$. Since $f_i\nmid f_j$ for $i\neq j$, $\langle f_j\rangle \not\subset \langle f_i\rangle$, hence $V_i\not\subset V_j$. Note that 
-    $$I\left(\bigcup_1^l V_i\right) = \bigcap_1^l I(V_i)= \bigcap_1^l \langle f_i\rangle.$$
-    It follows from {\Large Reference small lemma from algebra section} that $\bigcap_1^l \langle f_i\rangle = \left\langle \prod_1^l f_i\right\rangle$.
+    Proposition~\ref{AlgebraicSetsOverInfiniteFieldsAndAlgClosedFields} 2. shows that $V(f_i)$ is an infinite set for each $i$. Hence by Corollary~\ref{InfiniteVanishingSetOfIrredublePolynomialIsVariety} $V_i$ is irreducible and $I(V_i)=\langle f_i\rangle$ for each $i$. Furthermore, for each $i$, $V\left(f_i^{r_i}\right)= V\left(\rad\left(f_i^{r_i}\right)\right) = V(f_i)$, hence $V = \bigcup_1^l V_i$. Since $f_i\nmid f_j$ for $i\neq j$, $\langle f_j\rangle \not\subset \langle f_i\rangle$, hence $V_i\not\subset V_j$. It follows that 
+    $$I\left(\bigcup_1^l V_i\right) = \bigcap_1^l I(V_i)= \bigcap_1^l \langle f_i\rangle = \left\langle\prod_1^l f_i\right\rangle.$$
+
 \end{proof}
 \begin{example}
-    We give some examples of why it's not too much fun to work over non-algebraically closed field
+    We give some examples of why we will want to assume that we work over non-algebraically closed field. The main reason though, is that Hilbert's Nullstellensatz holds for algebraically cloesed fields.  
     \begin{enumerate}
     \item
         Let $f = x^2+y^2+1\in \R[x,y]$, $I=\langle f\rangle$.
@@ -621,7 +618,7 @@ We demonstrate the strength of the above theorem in the following example
     \end{enumerate}
 \end{example}
 \subsubsection{Hilbert's Nullstellensatz}
-In the discussion involving Hilbert's Nullstellensatz, we shall assume that $K$ is algebraically closed. Before presenting the full Hilbert Nullstellensatz we prove a weak version, which we shall see implies Hilbert's Nullstellensatz. 
+In the discussion involving Hilbert's Nullstellensatz, we shall assume that $K$ is algebraically closed.  Before presenting the full Hilbert Nullstellensatz we prove a weak version, which we shall see implies Hilbert's Nullstellensatz. 
 \begin{theorem}(The Weak Nullstellensatz/WNS)\\
 Let $K$ be an algebraically closed field and consider $f_1,\dots,f_m\in K[x_1,\dots,x_n]$. Then $V(f_1,\dots,f_m)=\emptyset$ if and only if there are polynomials $\lambda_1,\dots,\lambda_m\in K[\mathbf{x}]$ such that 
 $$\sum_1^m \lambda_if_i = 1.$$
@@ -670,7 +667,7 @@ We give a few corollaries the first of which is apparent.
     hence by Proposition~\ref{VarietyIffCoordinateRingIsID}, $V(I)$ is indeed irreducible. Given a variety $V\subset \A^n$, also by Proposition~\ref{VarietyIffCoordinateRingIsID}, $I(V)$ is prime. Furthermore, $V(I(V))=V$ by Lemma~\ref{IdealVanishingSets}. This with (\ref{EstablishesVanishingSetOfAlgebraicSetsIsIrreducible}) shows the mappings are mutual inverses. 
 \end{proof}
 \begin{corollary}
-    The mapping taking a maximal ideal $I\subset K[x_1,\dots,x_n]$ to $V(I)\subset \A^n$ and the mapping taking a point $P=\{(a_1,\dots,a_n)\}=V(x_1-a_1,\dots,x_n-a_n)\subset \A^n$ to $I(P)=\rad(x_1-a_1,\dots,x_n-a_n)$ establishes a one-to-one correspondence between and polynomial maximal ideals for each $n\geq 1$.
+    The mapping taking a maximal ideal $I\subset K[x_1,\dots,x_n]$ to $V(I)\subset \A^n$ and the mapping taking a point $P=\{(a_1,\dots,a_n)\}=V(x_1-a_1,\dots,x_n-a_n)\subset \A^n$ to $I(P)=\rad(x_1-a_1,\dots,x_n-a_n)$ establishes a one-to-one correspondence between and polynomial maximal ideals in $K[x_1,\dots,x_n]$ and points in $\A^n$ for each $n\geq 1$.
 \end{corollary}
 \begin{proof}
     Let $I\subset K[\mathbf{x}]$ be a maximal ideal. Then $I=\langle x_1-a_1,\dots,x_n-a_n\rangle$, hence $V(I)=\{(a_1,\dots,a_n)\}$. Since $I$ is maximal, it is prime, hence radical, and thus $I(V(I))=I$ by HNS. Let $P = \{(a_1,\dots,a_n)\}\subset \A^n$. Then $I(P)=I(V(\langle x_1-a_1,\dots,x_n-a_n\rangle))= \langle x_1-a_1,\dots,x_n-a_n\rangle$, which is maximal, and of course we know $V(I(P))=P$.   
@@ -692,7 +689,7 @@ HNS establishes a hands-on way of decomposing ANY hypersurface into its irreduci
     $$0+I=F_j^N+I = \left[X_j^{lN} + \sum_0^{lN-1}\lambda_{ij}X_j^{i} \right] + I \implies X_j^{lN} + I = \left[-\sum_0^{lN-1}\lambda_{ij}X_j^{i}\right]+ I.$$
     For each $s\geq 0$, we thus find that $X_j^s+I$ is a linear combination of $1+I,X_j+I,\dots,X_j^{rN-1}+I$. This means $$K[\mathbf{x}]/I=\mathrm{Span}_K\left(\left\{ x_j^{k}+I : j\in\{1,\dots,n\}, k\in \{0,\dots, lN\} \right\}\right),$$
     hence $K[\mathbf{x}]/I$ is finite dimensional.\\
-   "$\impliedby$": Set $d:= \dim_K\ K[\mathbf{x}]/I$ and let distinct points $p_1,\dots,p_l \in V(I)$ be given. There are polynomials $g_1,\dots,g_l\in K[\mathbf{x}]$ such that $g_i(p_i)=1$ and $g_i(p_j)=0$ for $i\neq j$ (which exist by {\Large Some result. Insert ref!}). Let $\lambda_1,\dots,\lambda_l\in K$ be given such that 
+   "$\impliedby$": Set $d:= \dim_K\ K[\mathbf{x}]/I$ and let distinct points $p_1,\dots,p_l \in V(I)$ be given. There are polynomials $g_1,\dots,g_l\in K[\mathbf{x}]$ such that $g_i(p_i)=1$ and $g_i(p_j)=0$ for $i\neq j$ by an earlier result. Let $\lambda_1,\dots,\lambda_l\in K$ be given such that 
    $$\left[\sum_1^l \lambda_ig_i\right]+ I = 0+I.$$
    Then $\left[\sum_1^l \lambda_ig_i\right]\in I$, so for each $i$,
    $$\lambda_i = \lambda_ig_i(p_i) =\sum_1^m \lambda_jf_j(p_i) = 0,$$
@@ -737,9 +734,9 @@ HNS establishes a hands-on way of decomposing ANY hypersurface into its irreduci
     \begin{align*}
         V&=(V(x+y)\cup V(x-y))\cap(V(x+iy)\cup V(x-iy))\\ &=V(x+y,x+iy)\cup V(x+y,x-iy)\cup V(x-y,x+iy)\cup V(x-y,x-iy).
     \end{align*}
-    We can thus decompose $V$ into $4$ linear equations all of which has $\{(0,0)\}$ as there only solution, hence $V=\{(0,0)\}$.\\ One can be more smarter: Note that $1/2(f_1+f_2) = x^2$ and $1/2(f_2-f_1)=y^2$, hence $I = J := \langle x^2,y^2\rangle$, hence clearly if $v\in V(I)$, $v=(0,0)$. Note now that 
+    We can thus decompose $V$ into $4$ linear equations all of which has $\{(0,0)\}$ as there only solution, hence $V=\{(0,0)\}$.\\ One can be smarter: Note that $1/2(f_1+f_2) = x^2$ and $1/2(f_2-f_1)=y^2$, hence $I = J := \langle x^2,y^2\rangle$, hence clearly if $v\in V(I)$, $v=(0,0)$. Note now that 
     $$\C[x,y]/I=\C[x,y]/J = \left\{ ax+by+cxy+d + J : a,b,c,d\in\C \right\},$$
-    and hence is isomorphic to the 4 dimensional vector space $\mathrm{Span}_\C(1,x,y,xy)\subset \C[x,y]$. So the inequality from Corollary~\ref{DimensionOfCoordinateRing} doesn't always hold with equality. One notes, however that when decomposing $V$ into a system of linear equations, we get $4$ "copies" of the point $(0,0)$, hence it seems that the dimension of the vector space $\C[x,y]/I$ matches the number of points in $V(I)$ with some sort of multiplicity.    
+    and hence is isomorphic to the 4 dimensional vector space $\mathrm{Span}_\C(1,x,y,xy)\subset \C[x,y]$. So the inequality from Corollary~\ref{DimensionOfCoordinateRing} doesn't always hold with equality. One notes, however that when decomposing $V$ into a system of linear equations, we get $4$ "copies" of the point $(0,0)$, hence it seems that the dimension of the vector space $\C[x,y]/I$ matches the number of points in $V(I)$ counted with some sort of multiplicity.    
 \end{example}
 \begin{corollary}
     If a variety $V\subset \A^n$ is a hypersurface. It is either $\A^n$, $\emptyset$ or $V(f)$ where $f$ is irreducible. As a consequence, such a hypersurface is of the third type, it contains no variety $W$.  
@@ -768,7 +765,7 @@ HNS establishes a hands-on way of decomposing ANY hypersurface into its irreduci
     Let $V\subset \A^n$ be a variety and $W\subset V$ a subvariety. Then $\Gamma(W)\simeq \Gamma(V)/I_V(W)$
 \end{lemma}
 \begin{proof}
-    This follows from {\Large Is written} since 
+    This follows from an isomorphism theorem:  
     $$\Gamma(V)/I_V(W) = \frac{K[\mathbf{x}]/I(V)}{I(W)/I(V)}\simeq K[\mathbf{x}]/I(W) = \Gamma(W).$$
 \end{proof}
 \begin{proposition}
@@ -782,7 +779,7 @@ HNS establishes a hands-on way of decomposing ANY hypersurface into its irreduci
 \begin{proof}
     "1.$\implies$2.": By HNS, $\Gamma(V)$ is a field, and $K[x]\rightarrow \Gamma(V), f\mapsto f+I(V)$ is surjective $K$-algebra homomorphism hence by Corollary~\ref{IfExistsSurjectiveAlgHomThenFieldExtOverAlgClosedFieldIsTrivial}, $\Gamma(V) = K$.\\
     "2.$\implies$3.": In this case $\dim_K\ \Gamma(V) = \dim_K\ K = 1<\infty$.\\
-    "3.$\implies$1.": Since $\dim_K\ \Gamma(V)<\infty$, $V$ is finite by Corollary~\ref{DimensionOfCoordinateRing}, and since $V$ it cannot consist of multiple points.  
+    "3.$\implies$1.": Since $\dim_K\ \Gamma(V)<\infty$, $V$ is finite by Corollary~\ref{DimensionOfCoordinateRing}, and since $V$ is irreducible it cannot consist of multiple points.  
 \end{proof}
 \begin{example}\label{OneToOneButNotIso}
     Set $f:=x^2-y^3$,$g:=y^2-z^3$ and $I:=\langle f,g\rangle$. Consider the $K$-algebra homomorphism
@@ -984,7 +981,7 @@ The above result can be used to determine wether an algebraic set is a variety.
     A polynomial map is continuous in the Zariski topology.
 \end{proposition}
 \begin{proof}
-    Let varieties $V\subset \A^n$ and $W\subset \A^m$ be given. Consider a polynomial map $\varphi : V\rightarrow W$ defined by $f_1,\dots,f_m\in K[x_1,\dots,x_n]$. Consider a Zariski closed subset $U\subset W$. Then by Proposition~\ref{PreimageOfPolMapIsAlgebraic} 1. $\varphi^{-1}(U)$ is Zariski closed, hence it is know from topology that $\varphi$ is continuous. 
+    Let varieties $V\subset \A^n$ and $W\subset \A^m$ be given. Consider a polynomial map $\varphi : V\rightarrow W$ defined by $f_1,\dots,f_m\in K[x_1,\dots,x_n]$. Consider a Zariski closed subset $U\subset W$. Then by Proposition~\ref{PreimageOfPolMapIsAlgebraic} 1. $\varphi^{-1}(U)$ is Zariski closed, hence it is known from topology that $\varphi$ is continuous. 
 \end{proof}
 \begin{definition}
     A polynomial map $\varphi: V\rightarrow W$, where $V\subset \A^n$ and $W\subset \A^m$ are affine varieties is called an \textit{isomorphism (of affine varieties)} if it is bijective and $\varphi^{-1} : W \rightarrow V$ is a polynomial map. In other words an isomorphism of affine varieties is a \textit{bi-polynomial map}.
@@ -992,7 +989,7 @@ The above result can be used to determine wether an algebraic set is a variety.
 
 \begin{proposition}\label{RingPolynomialFunctionsIsIsomorphicToCoordinateRing}
     Let $V\subset \A^n$ be an affine variety. Then 
-    $$\Gamma(V) \simeq \text{Pol}(V,K).$$
+    $$\Gamma(V) \simeq \mathrm{Pol}(V,K).$$
 \end{proposition}
 \begin{proof}
     Consider the ring homomorphism
@@ -1056,7 +1053,6 @@ The above result can be used to determine wether an algebraic set is a variety.
         v\mapsto (f_1(v),\dots,f_m(v))
     \end{gather*}
     which is a polynomial map. Note that for $f\in I(W)$
-    {\LARGE Some lemmas on polynomial commuting with homomorphism need to be added}
     \begin{align*}
         \widetilde{\psi_{\sigma}}(f) + I(V) &= f(f_1,\dots,f_m) + I(V) = f(f_1+I(V),\dots,f_m+I(V))\\ 
         &= f(\sigma(y_1+I(W)),\dots,\sigma(y_m+I(W))) = \sigma\left(f\left(y_1+I\left(W\right),\dots,y_m+I\left(W\right)\right)\right)\\ 
@@ -1081,6 +1077,17 @@ The above result can be used to determine wether an algebraic set is a variety.
 \end{proof}
 \begin{remark}
     We thus have a contravariant functor $(\Gamma(\bullet),\widetilde{\bullet})$ between the category of affine varieties over $K$ with polynomial maps and integral finitely generated $K$-algebras mapping a variety $V$ to $\Gamma(V)$ and a polynomial map $\varphi \in \Pol(V,W)$ to $\widetilde{\varphi}\in \Hom(\Gamma(W),\Gamma(V))$. The above theorem shows that this functor is fully faithful. The functor is also essentially surjective on objects. Indeed, if $A$ is a finitely generated $K$-algebra that is also an integral domain, then $A\simeq K[x_1,\dots,x_n]/I$ for some prime ideal $I\subset K[x_1,\dots,x_n]$, hence $A\simeq K[x_1,\dots,x_n]/I(V(I))= \Gamma(V(I))$. We can thus conclude that $\Gamma(\bullet)$ defines an equivalence of categories. 
+\end{remark}
+\begin{remark}
+    With the above in mind, we can reformulate Proposition~\ref{RingPolynomialFunctionsIsIsomorphicToCoordinateRing} in the following way: There is a natural isomorphism
+    $$
+        \Gamma \equiv \mathrm{Pol}(\_,K)
+    $$
+    whose components are 
+    \begin{gather*}
+        \Gamma(V)=K[\mathrm{x}]/I(V) \rightarrow \mathrm{Pol}(V,K)\\
+        f + I(v)\mapsto (v\mapsto f(v))
+    \end{gather*}
 \end{remark}
 \begin{corollary}\label{FunctorialityOfInducedAlgebraHomomorphism}
     Let $V\subset \A^n, W\subset \A^m$ be varieties. Then 
