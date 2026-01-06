@@ -1162,3 +1162,42 @@ Consider a scheme $(X,\pazocal{O})$. Let $\pi_{X_\mathrm{red}} :X_\mathrm{red}\r
     $$ 
     commutes. We denote the category of schemes over $S$ by $\mathfrak{Sch}(S)$. And the category of schemes over the spectrum of a ring $R$ by $\mathfrak{Sch}(R)$.
 \end{definition}
+\begin{theorem}
+    Fix an algebraically closed field $K$. Then there is fully faithful functor 
+    $$
+        t : \mathrm{Var}_K \rightarrow \mathfrak{Sch}(K)
+    $$
+    such that each variety $V$ is homeomorphic to the closed points of the underlying space of $t(V)$, $\mathrm{sp}(t(V))$.
+\end{theorem}
+\begin{proof}
+    We first construct an endofunctor $t$ on $\mathrm{Top}$ and that this restricts to a fully faithful functor $t: \mathrm{Var}_K\rightarrow \mathfrak{Sch}(K)$. For a space $X$, let $t(X)$ denote the irreducible closed subsets of $X$. Note that if $Y\subset X$ is closed then $t(Y)\subset t(X)$, if $Y_1,Y_2\subset X$ are closed, then $t(Y_1\cup Y_2) = t(Y_1)\cup t(Y_2)$ and if $\{Y_\alpha\}$ is a family of closed subsets of $X$, then $t\left(\bigcap_\alpha Y_\alpha\right) = \bigcap_\alpha t(Y_\alpha)$. It follows that the sets of the form $t(Y)$ form the closed sets of a topology on $t(X)$. Consider a continuous map $f: X_1\rightarrow X_2$. Then we define
+    \begin{gather*}
+        t(f) : t(X_1)\rightarrow t(X_2)\\
+        Y \mapsto \mathrm{cl}(f(Y))
+    \end{gather*}
+    Let $t(Z)\subset t(X_2)$. Then $t(f)^{-1}(t(Z))= t(f^{-1}(Z))$, which implies $t(f)$ is continuous. Indeed, if $\mathrm{cl}(f(V))\in t(Z)$, then $f(V)\subset \cl(f(V))\subset Z$, hence $V\subset f^{-1}(f(V))\subset f^{-1}(Z)$, hence $V\in t(f^{-1})$. Conversely, if $V\subset f^{-1}(Z)$ is irreducible, then $V\subset X$ is irreducible and $f(V)\subset Z$, hence $t(V)=\cl(f(V))\subset Z$, so $V\in t(f)^{-1}(t(Z))$. The assignment, $f\mapsto t(f)$ is clearly functorial, since for a continuous function $g$, $\cl(g(A))=\cl(g(\cl(A)))$ for any subset $A$ of $\dom \ g$. \\
+    Consider the map 
+    \begin{gather*}
+        \alpha: X\rightarrow t(X)\\
+        P\mapsto \cl(\{P\})
+    \end{gather*}
+    This is clearly continuous, since for $t(Y)\subset t(X)$ closed, 
+    $$
+        \alpha^{-1}(t(Y))=Y.
+    $$
+    There is a bijection between the closed sets in $X$ and the closed sets in $t(X)$, given by 
+    $$
+        Y\subset X \mapsto t(Y)
+    $$
+    with inverse 
+    $$
+        t(Y)\mapsto \alpha^{-1}(t(Y))=Y.
+    $$
+    Thus there is a bijection between open sets of $X$ and open sets of $t(X)$.\\
+    Consider a variety $V$ over $K$ as a locally ringed space with the usual sheaf of regular functions $\Gamma$. We claim that $(t(V),\alpha_\star\Gamma)$ is a schemes. Since any variety has an open cover of affine subvarieties, it suffices to prove the claim for $V$ affine {\Large cf. trivial lemma not yet written}. Now not that the maximal ideals of $\Gamma(V)$ are in one-to-one correspondence with the points $V$. Note moreover that $\mathfrak{m}_P(V)\cap \Gamma(V)$ is a maximal ideal in $\Gamma(V)$ distinct from every other maximal ideal in $\Gamma(V)$ (reference to some lemmas). It thus follows that 
+    \begin{gather*}
+        \beta: V\rightarrow \mathrm{Specm}\ \Gamma(V)\\
+        P\mapsto \mathfrak{m}_P(V)
+    \end{gather*}  
+    is a bijection of $V$ with the maximal ideals of $\Gamma(V)$, which we denote $\mathrm{Specm}\ \Gamma(V)$. Now note that $\beta^{-1}(V(I)\cap \mathrm{Specm}\ \Gamma(V)) = Z(I)\subset V$ for each closed set $V(I)\cap \mathrm{Specm}\ \Gamma(V)\subset\mathrm{Specm}\ \Gamma(V)$. One also easily sees that $\beta$ is a closed map, hence it follows that $\beta$ is a homeomorphism.  
+\end{proof}

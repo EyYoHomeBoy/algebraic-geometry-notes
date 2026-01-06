@@ -1246,7 +1246,7 @@ The above result can be used to determine wether an algebraic set is a variety.
     \begin{align*}
         g(f_1,\dots,f_n)&=b+\sum_1^n a_if_i = b + \sum_1^{n-1} a_ia_nx_i -\left[\sum_1^{n-1}a_ia_nx_i\right]+a_na_n^{-1}x_n-a_na_n^{-1}b = x_n.
     \end{align*}
-    Choosing $\varphi: \A^n\rightarrow \A^n, v\mapsto (f_1(v),\dots,f_n(v))$, one finds that $V^\varphi = V(g(f_1,\dots,f_n))=V(x_n)=V(x_{n-1+1})$. It remains to check that $\varphi$ is invertible. Note that for each $v\in\A^n$, that $\varphi = (a_{ij})v+be_n$, where $a_{ii}=a_n$, $a_{ni} = -a_i$ for $i\in\{1,\dots,n-1\}$, $a_{nn}=a_n^{-1}$. $A$ is a lower triangular matrix, hence $\det \ A = \prod_1^n a_{ii}= a_n^{n-2}\neq 0$ {\LARGE MULTIPLE LINEAR ALGEBRA THEOREMS NEED TO BE ADDED}, meaning $A$ is invertible.\\
+    Choosing $\varphi: \A^n\rightarrow \A^n, v\mapsto (f_1(v),\dots,f_n(v))$, one finds that $V^\varphi = V(g(f_1,\dots,f_n))=V(x_n)=V(x_{n-1+1})$. It remains to check that $\varphi$ is invertible. Note that for each $v\in\A^n$, that $\varphi = (a_{ij})v+be_n$, where $a_{ii}=a_n$, $a_{ni} = -a_i$ for $i\in\{1,\dots,n-1\}$, $a_{nn}=a_n^{-1}$. $A$ is a lower triangular matrix, hence $\det \ A = \prod_1^n a_{ii}= a_n^{n-2}\neq 0$, meaning $A$ is invertible.\\
     Suppose the statement is true for some $m\geq 1$. Consider $V=V(g_1,\dots,g_{m+1})$ for degree $1$ polynomials $g_1,\dots,g_{m+1}\in K[\mathbf{x}]\setminus 0$. Consider $W= V(g_1,\dots,g_m)$. There is an affine change of coordinates $\varphi: \A^n \rightarrow \A^n$ such that $W^\varphi = V(x_{d+1},\dots,x_n)$ for some $1\leq d\leq n$. Then 
     $$V^\varphi = V(x_{d+1},\dots,x_n)\cap V(g_{m+1}\circ \varphi)) = V(x_{d+1},\dots,x_n)\cap V(\underbrace{(g_{m+1}\circ \varphi)(x_1,\dots,x_d,\mathbf{0})}_{h}).$$
     If $h = 0$, $V^\varphi = V(x_1,\dots,x_d)$. Otherwise $\deg\ h = 1$, since if not $V(h)=\emptyset$, hence $V^\varphi =\emptyset$, hence $V=\emptyset$leading to a contradiction (here we only rely on the fact that $\varphi$ is bijective). In this case there following the same procedure as for $m=1$ is a polynomial map $\psi: \A^d \rightarrow \A^d$, such that $V(h) =V(x_d)$. Setting $\phi: \A^n\rightarrow \A^n, v\mapsto (\psi(v_1,\dots,v_d),v_{d+1},\dots,v_n)$, it follows that 
@@ -1255,8 +1255,8 @@ The above result can be used to determine wether an algebraic set is a variety.
     3. Suppose there are affine change of coordinates $\varphi,\phi$ such that $V^\varphi = V(x_{d+1},\dots,x_n)$ and $V^\phi = V(x_{\delta+1},\dots,x_n)$. Hence setting $\psi:= \varphi^{-1}\circ \phi$, one gets $\left(V^\varphi\right)^\psi = V^\phi$.\\
     One observation that could make now is that since $\psi$ is an isomorphism,\\ $V^\varphi \simeq V^\phi$. Then 
     $$K[x_1,\dots,x_d]\simeq \Gamma\left(V^\varphi\right)\simeq \Gamma\left(V^\phi\right)\simeq K[x_1,\dots,x_\delta].$$
-    This then implies that $\delta=d$ by {\LARGE result about transcendence degrees}.\\
-    Here we are invoking a lot of theory. One can take a more elementary approach to arguing $d=e$ only using linear algebra. WLOG $ d\leq \delta$. Pick $f_1,\dots,f_n\in K[\mathbf{x}]$ such that $\psi(v)=(f_1(v),\dots,f_n(v))$. Write $f_i=b_i + \sum_{j=1}^n a_{ij}x_j$. Then 
+    This then implies that $\delta=d$ using that transcendence degrees must agree.\\
+    Here we are invoking a lot of theory. One can take a more elementary approach to arguing $d=\delta$ only using linear algebra. WLOG $ d\leq \delta$. Pick $f_1,\dots,f_n\in K[\mathbf{x}]$ such that $\psi(v)=(f_1(v),\dots,f_n(v))$. Write $f_i=b_i + \sum_{j=1}^n a_{ij}x_j$. Then 
     $$\psi(v) = \begin{pmatrix}
         a_{11}& \cdots & a_{1n}\\
         \vdots & \ddots & \vdots\\
@@ -1286,7 +1286,7 @@ The above result can be used to determine wether an algebraic set is a variety.
      a_{j1}\\ \vdots \\ a_{j n}   
     \end{pmatrix}= \mathbf{b}.$$
     This implies that $A(e_d-e_{d+1}) = \mathbf{b}-\mathbf{b}=0,$
-    which contradicts the fact that $\ker\ A = 0$, since $e_d\neq e_{d+1}$.
+    which contradicts the fact that $\ker\ A = 0$, since $e_d\neq e_{d+1}$. We conclude that $d=\delta$.
 \end{proof}
 \begin{remark}\label{MayConsiderPreimageAsImage}
     A further note on $V^\varphi$, is that since the pre-image is equal to the image of the inverse of $\varphi$, we have that if $V^\varphi = W$ for some variety $W$, then $V = \varphi(W) = W^{\varphi^{-1}}$. 
@@ -1295,7 +1295,7 @@ The above result can be used to determine wether an algebraic set is a variety.
     The integer $k$ above is called the \textit{dimension} of $V$, denoted $\dim\ V$. 
 \end{definition}
 \begin{remark}
-    One easily sees that the concept of dimension defined above generalizes the concept of dimension of finite dimensional vector spaces. We shall see later {\Large reference} that the above notion of dimension can be generalized to any non-empty variety, through the concept of transcendence degree or equivalently Krull-dimension {\Large Give reference once these sections are written}. 
+    One easily sees that the concept of dimension defined above generalizes the concept of dimension of finite dimensional vector spaces. We shall see later that the above notion of dimension can be generalized to any non-empty variety, through the concept of transcendence degree or equivalently Krull-dimension. 
 \end{remark}
 \begin{lemma}
     Consider linear subvarieties $V,W\subset \A^n$ such that there exists an affine change of coordinates $\varphi: \A^n \rightarrow \A^n$ with $\varphi(V)=W$. Then $V\overset{\varphi}{\simeq} W$ and $\dim\ V=\dim\ W$.
