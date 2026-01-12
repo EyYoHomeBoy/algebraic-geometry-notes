@@ -10,17 +10,31 @@
     For a subcategory $\mathcal{C}'$ of $\mathrm{Set}$, a \emph{$\mathcal{C}'$-valued presheaf} on $\mathcal{C}$ is a contravariant functor $\pazocal{F} : \mathcal{C}\rightarrow \mathcal{C}'$. We denote the image of a morphism $\varphi: V \rightarrow U$ under $\pazocal{F}$ by $\varphi_{UV}$.
 \end{definition}
 \begin{remark}
-    We will mainly be interested in the case of $\mathcal{C}$ being obtained from a topological space: Consider a topological space $(X,\tau_X)$. We consider the category $\pazocal{T}(X)$ induced by the preorder on $\tau_X$. This will be called a \emph{presheaf on $X$}. Moreover we will mainly be interested in presheaves valued in algebraic categories such as $\mathrm{Group},\mathrm{AbGroup},\mathrm{Ring}$, etc.\\  
+    We will mainly be interested in the case of $\mathcal{C}$ being obtained from a topological space: Consider a topological space $(X,\tau_X)$. We consider the category $(X,\tau_X)$ induced by the preorder on $(\tau_X,\subset)$. This will be called a \emph{presheaf on $X$} and denoted $X\rightarrow \mathrm{Set}$. Moreover we will mainly be interested in presheaves valued in algebraic categories such as $\mathrm{Group},\mathrm{AbGroup},\mathrm{Ring}$, etc.\\  
 \end{remark}
 \begin{example}
-    Let $X$ be a variety. Then $$\Gamma: (\tau_X,\subset) \rightarrow \mathrm{FinAlg}_K, (U, W\subset V)\mapsto (\Gamma(U), \widetilde{\varphi}: \Gamma(V)\rightarrow \Gamma(W), f \mapsto \left.f\right|_{W})$$
-    defines a presheaf on $\pazocal{T}(X)$ respect to the Zariski topology. 
+    Let $X$ be a variety. For an open subvariety $U\subset X$, set 
+    $$
+        \pazocal{O}(U) := \{ f\in K(X) : f \text{ is regular on some open subset } U'\subset U\},
+    $$ 
+    which is readily verified to be a subring of $K(X)$. Consider open subsets $V\subset U\subset X$, we define a ring homomorphism (in fact a $K$-algebra homomorphism)
+    \begin{gather*}
+        \pazocal{O}(U) \rightarrow \pazocal{O}(V)\\
+        f\mapsto \left. f \right|_V
+    \end{gather*}
+    Indeed, if $f$ is regular on some $U'\subset U$, then $\left.f\right|_V$ is regular on $U'\cap V$. Then 
+    \begin{gather*}
+        \pazocal{O} : X \rightarrow \mathrm{CRing}\op\\
+        U \mapsto \pazocal{O}(U)\\
+        V\subset U \mapsto \pazocal{O}(U)\rightarrow \pazocal{O}(V) 
+    \end{gather*} 
+    defines a presheaf on $X$ valued in the category of commutative rings. 
 \end{example}
 \begin{definition}\label{RestrictionInImageOfPresheaf}
     For objects $U,V$ in $\pazocal{C}$ and a morphism $\varphi: V\rightarrow U$, for an  $s\in \pazocal{F}(U)$, we define \emph{restriction of $s$ to $V$} to be $$\left. s\right|_{V}:= \varphi_{UV}.$$
 \end{definition}
 \begin{lemma}\label{PresheafFromQuotientGroups}
-    Consider a presheaf on a topological space $\pazocal{F}:X\rightarrow \mathrm{grp}$ (more precisely on the topology of $X$). Consider moreover a collection of ideals $\{I_U\trianglelefteq\pazocal{F}(U) : U\in \tau_X\}$ with $\varphi_{UV}(I_U) \subset I_V$ for each $U\supset V$. For each $U\subset X$ open, set $\pazocal{F}'(U):=\pazocal{F}(U)/I_U$. We have a well-defined map of groups
+    Consider a presheaf on a topological space $\pazocal{F}:X\rightarrow \mathrm{grp}$. Consider moreover a collection of ideals $\{I_U\trianglelefteq\pazocal{F}(U) : U\in \tau_X\}$ with $\varphi_{UV}(I_U) \subset I_V$ for each $U\supset V$. For each $U\subset X$ open, set $\pazocal{F}'(U):=\pazocal{F}(U)/I_U$. We have a well-defined map of groups
     \begin{gather*}
         \varphi'_{UV} : \pazocal{F}'(U)\rightarrow \pazocal{F}'(V)\\
         s + I_U \mapsto \left.s\right|_V + I_V
@@ -44,7 +58,7 @@
 \end{proof}
 \subsubsection{Sheaves}
 \begin{definition}
-    Consider a topological space $X$. Let $\pazocal{F}: X\rightarrow \mathrm{Set}$ be a presheaf on the category $(\tau_X,\subset)$ where $\tau_X$ denotes the topology on $X$. $\pazocal{F}$ is called a \emph{sheaf on $X$} if in addition, 
+    Consider a topological space $X$. consider a presheaf $\pazocal{F}: X\rightarrow \mathrm{Set}$ on $X$. $\pazocal{F}$ is called a \emph{sheaf on $X$} if 
     \begin{enumerate}
         \item For every open $U\subset X$ and every open cover $\{U_i\}$ of $U$ and every $\phi,\varphi\in \pazocal{F}(U)$, if $\left.\varphi\right|_{U_i}= \left.\phi\right|_{U_i}$ for every $i$, then $\varphi=\phi$.
         \item For every open $U\subset X$ and every open covering $\{U_i\}$ and for every collection of elements (functions) 
@@ -67,19 +81,17 @@
     for every $i$, which by assumption means $s-t=0$. 
 \end{proof}
 \begin{example}
-    The presheaf $\Gamma$ on a variety $X$ seen as a space equipped with the Zariski topology is a sheaf. Consider an subvariety $U\subset X$ and open covering $\{U_i\}$ of $U$ and suppose there is a regular function $f\in \Gamma(U)$ such that $\left. f\right|_{U_i}=0$ for every $i$. Viewing $f$ as a function $U$ it follows that given a point $x\in U$ since $x\in U_i$ for some $i$, 
+    The presheaf $\pazocal{O}$ on a variety $X$ is a sheaf: Consider an open subvariety $U\subset X$ and an open covering $\{U_i\}$ of $U$ and suppose there is a rational function $f\in \pazocal{O}(U)$ such that $\left. f\right|_{U_i}=0$ for every $i$. Viewing $f$ as a partial function on $U$ it follows that given a point $x\in \dom\ f$, since $x\in \dom\ f \cap U_i$ for some $i$, 
     $$f(x)=\left.f\right|_{U_i}(x)= 0 \implies f = 0.$$
-    Consider an open covering, $\{U_i\}$ of a subvariety $U\subset X$ and a collection of regular functions 
-    $$\left\{f_i\in \Gamma(U_i): \left.f_i\right|_{U_i\cap U_j}= \left. f_j\right|_{U_i\cap U_j} \right\}_i,$$
+    Consider an open covering, $\{U_i\}$ of a subvariety $U\subset X$ and a collection of rational functions 
+    $$\left\{f_i\in \pazocal{O}(U_i): \left.f_i\right|_{U_i\cap U_j}= \left. f_j\right|_{U_i\cap U_j} \right\}_i,$$
     then the function 
     \begin{gather*}
         f : U \rightarrow K \\
          x\mapsto f_i(x) \quad \text{if } x\in U_i
     \end{gather*} 
-    is a regular function on $U$ such that $\left. f\right|_{U_i} = f_i$. Indeed, restriction in the sense of Definition~\ref{RestrictionInImageOfPresheaf} is in this instance literally restriction in the usual sence, so the definition of $f$ is indenpendent of the choice of $U_i$.
+    is a rational function on $U$ such that $\left. f\right|_{U_i} = f_i$. Indeed, restriction in the sense of Definition~\ref{RestrictionInImageOfPresheaf} is in this instance literally restriction of partial functions in the usual sence, so the definition of $f$ is indenpendent of the choice of $U_i$.
 \end{example}
-Recall the following definition
-Recall from \ref{DirectLimits} the definition of a direct limit. We shall construct the direct limit in the category of groups
 \begin{lemma}
     Let $\pazocal{F} : X\rightarrow \mathrm{Set}$ be a sheaf. Let $U\subset X$ be an open subset. Then we define 
     \begin{gather*}
@@ -102,8 +114,9 @@ Recall from \ref{DirectLimits} the definition of a direct limit. We shall constr
     $$
     We thus conclude that $\left.\pazocal{F}\right|_{U}$ is a sheaf. 
 \end{proof}
+Recall from \ref{DirectLimits} the definition of a direct limit. We shall explicitly construct the direct limit in the category of groups
 \begin{definition}
-    Let $G_\bullet: (I,\leq) \rightarrow \mathrm{grp}$ be a direct system and the associated collections of objects and morphisms $(\{G_i\},\{f_{ij}\})$. Given elements $(x_i,i),(x_j,j)$ in  
+    Let $G_\bullet: (I,\leq) \rightarrow \mathrm{grp}$ be a direct system with associated collection of objects and morphisms $(\{G_i\},\{f_{ij}\})$. Given elements $(x_i,i),(x_j,j)$ in  
     $$
         \bigsqcup_{i\in I} G_i
     $$
@@ -120,7 +133,9 @@ Recall from \ref{DirectLimits} the definition of a direct limit. We shall constr
         [x_i][x_j] := [f_{ik}(x_i)f_{jk}(x_j)]
     $$
     where $k\in I$ is an element such that $i,j\leq k$. There is a canonical natural transformation $\phi: G_\bullet \Rightarrow \varinjlim G_i$ given by
-    $$\{G_i \rightarrow \varinjlim G_i, x_i \mapsto [x_i]\}$$
+    $$
+        \{G_i \rightarrow \varinjlim G_i, x_i \mapsto [x_i]\}
+    $$
 \end{definition}
 \begin{remark}
     By functioriality the definition of the binary operation of the direct limit of $\{G_i\}$ is independent of the choice of $k$. Since for $i\leq l$, 
@@ -144,7 +159,7 @@ Recall from \ref{DirectLimits} the definition of a direct limit. We shall constr
     Note that since each $f_{ij}$ is a group homomorphism, the identity of each $G_i$ is in the same equivalence class and one sees that $e:=[e_i]$ is neutral with respect to the binary operation in $\varinjlim G_i$. Lastly defining $[x_i]^{-1} = [x_i^{-1}]$, one readily verifies that this is independent of the choice of representative and that it is inverse element of $[x_i]$.
 \end{proof}
 \begin{lemma}
-    Consider a direct system $(\{G_i\},\{f_{ij}\})$ of groups. Then $\varinjlim G_i$ with $\phi: G_\bullet \Rightarrow \varinjlim G_i$ is the direct limit in the category theoretic sense.
+    Consider a direct system $(\{G_i\},\{f_{ij}\})$ of groups. Then $\varinjlim G_i$ with $\phi: G_\bullet \Rightarrow \varinjlim G_i$ is the direct limit in the category of groups.
 \end{lemma}
 \begin{proof}
     Let a cocone $(G,\lambda)$ of the direct system be given. We define 
@@ -162,41 +177,76 @@ Recall from \ref{DirectLimits} the definition of a direct limit. We shall constr
     $$    
     commute. We thus conclude that our construction is indeed the direct limit in the categorical sense. 
 \end{proof}
+\begin{remark}
+    One can extend this result to direct systems in subcategories of $\mathrm{grp}$ such as $\mathrm{ab}$, $\mathrm{CRing}$ and $\mathrm{Mod}_R$. 
+\end{remark}
 \begin{definition}
     Consider a topological space $X$ and a presheaf $\pazocal{F}$ on $X$ valued in $\mathrm{ab}$. Let $P\in X$. We define the \emph{stalk of $\pazocal{F}$ at $P$} to be  
     $$
         \pazocal{F}_P := \varinjlim_{U\ni P} \pazocal{F}\in \mathrm{ab}. 
     $$
-    given an element $s\in \pazocal{F}(U)$ we call $[s]_P := [s]$ a \emph{germ} of $f$ at $P$. 
+    To be precise, $N_P(X)$ denote the directed set (wrt. $\supset$) of open neighborhoods of $P$. $\pazocal{F}_P$ is then the direct limit of the direct system given by $\pazocal{F}$ restricted to $N_P(X)$ Given an element $s\in \pazocal{F}(U)$ we call $[s]_P := [s]$ a \emph{germ} of $f$ at $P$. 
 \end{definition}
 \begin{remark}
-    Note that by construction $(U,s),(V,t)\in \pazocal{F}_P$ are equal if and only if there is some open neighborhood of $P$,  $W\subset U\cap V$ with 
-    $$\left. s\right|_{W} = \left. t\right|_W.$$
+    Note that by construction $[s_U],[t_V]\in \pazocal{F}_P$ are equal if and only if there is some open neighborhood of $P$,  $W\subset U\cap V$ say, with 
+    $$ 
+        \left. s\right|_{W} = \left. t\right|_W.
+    $$
     There is a natural transformation 
     \begin{gather*}
         \phi : \pazocal{F}(U) \Rightarrow \pazocal{F}_p\\
-        s\mapsto (U,s)
+        s\mapsto [(s,U)]_P
     \end{gather*}
 \end{remark}
+\begin{example}
+    Given a variety $X$ over a field $K$, $\pazocal{O}_P$ consists exactly of rational functions that are regular on some open neighborhood of $P$, i.e. 
+    $$
+        \pazocal{O}_P = \pazocal{O}_P(X).
+    $$
+\end{example}
 \begin{definition}
     Given a category $\pazocal{C}$ \emph{a morphism of presheaves} is just a morphism in the functor category $\mathrm{Set}^{\pazocal{C}\op}$, i.e. a morphism $\Phi: \pazocal{F} \rightarrow \pazocal{G}$ of parallel presheaves on $\pazocal{C}$ is just a natural transformation $\Phi : \pazocal{F}\Rightarrow \pazocal{G}$.\\
     An isomorphism of presheaves is therefor just a natural isomorphism of presheaves. \\
     \emph{A morphism of sheaves} is just a morphism of presheaves in the category of sheaves, $\mathrm{Sh}(X)$, which is a subcategory of $\mathrm{Set}^{\pazocal{T}(X)\op}$.   
 \end{definition}
 \begin{definition}
-    Consider a parallel pair of presheaves $\pazocal{F},\pazocal{G}: X\rightarrow \mathrm{ab}$ and fix a point $P\in X$. For a morphism of presheaves $\Phi : \pazocal{F}\Rightarrow \pazocal{G}$, there is an induced morphism of stalks at $P$ given by
+    Consider a parallel pair of presheaves $\pazocal{F},\pazocal{G}: X\rightarrow \mathrm{ab}$ and fix a point $P\in X$. For a morphism of presheaves $\Phi : \pazocal{F}\Rightarrow \pazocal{G}$, there is a unique induced morphism of stalks at $P$ given by
     \begin{gather*}
         \Phi_P : \pazocal{F}_P \rightarrow \pazocal{G}_P\\
         (U,s)\mapsto (U,\Phi_U(s))
     \end{gather*}
 \end{definition}
 \begin{remark}
-    Alternatively, we can describe the above map as taking a germ $[s]_P$ to $[\Phi_U(s)]_P$ where $U$ is any open neighborhood of $P$. 
+    Explicitly, we can describe the above map as taking a germ $[s_U]_P$ to $[\Phi_U(s)]_P$ where $U$ is any open neighborhood of $P$. 
 \end{remark}
 \begin{proposition}\label{EquivalentFormulationOfNaturalIsoInTermsOfStalkMorphisms}
     Consider a parallel pair of sheaves $\pazocal{F},\pazocal{G}: X\rightarrow \mathrm{ab}$ and morphism of sheaves $\Phi: \pazocal{F}\Rightarrow \pazocal{G}$. Then $\Phi$ is an isomorphism if and only if $\Phi_P:\pazocal{F}_P\rightarrow \pazocal{G}_P$ is an isomorphism for each $P\in X$.  
 \end{proposition}
 \begin{proof}    
+    Suppose $\Phi$ is an isomorphism. Then $\Phi_P$ is an isomorphism for each $P$ by functoriality of the assignment $\pazocal{D}\mapsto \lim \ \pazocal{D}$ for diagrams indexed by some category $\pazocal{I}$ in a category that admits limits of such diagrams.\\
+    Conversely suppose $\Phi_P$ is an isomorphism for each $P$. It suffices to show that each component of $\Phi$ is an isomorphism of abelian groups. Fix an open set $U$ in $X$.\\
+    \textbf{Injectivity:} Suppose $s\in \pazocal{F}(U)$ is a section with $\Phi_U(s)=0$. Then in particular for each $P\in U$,
+    $$
+        \Phi_P([(s,U)]_P) = [(\Phi_U(s),U)]_P = [0]_P.
+    $$
+    Then on some open neighborhood $U_P$ of $P$, $\left. s\right|_{U_p} =0$. This with the fact that $\{U_P\}$ defines an open cover of $U$, implies $s = 0$ by the first sheaf property.\\
+    \textbf{Surjectivity:} Consider a section $t\in \pazocal{G}(U)$. Let $P\in U$. Then 
+    $$
+        [\Phi_{W_P}(s_{W_P})]_P=\Phi_P([s_{W_P}]_P) = [(t,U)]_P
+    $$
+    for a suitable section $s_{W_P}\in\pazocal{F}(W_P)$ for some open neighborhood $W_P\subset U$ of $P$. We may assume that $\Phi_{W_P}(s_{W_P}) = \left. t\right|_{W_P}$. For pairs of points $P,Q\in U$, by naturality,
+    $$
+        \Phi_{W_P\cap W_Q}\left(\left.s_{W_P}\right|_{W_P\cap W_Q}\right)=\left. t\right|_{W_P\cap W_Q} = \Phi_{W_P\cap W_Q}\left(\left.s_{W_Q}\right|_{W_P\cap W_Q}\right),
+    $$  
+    and since $\Phi_{W_P\cap W_Q}$ is injective,
+    $$
+        \left.s_{W_P}\right|_{W_P\cap W_Q} = \left.s_{W_Q}\right|_{W_P\cap W_Q}.
+    $$
+    The second sheaf property implies the existence of a section $s\in\pazocal{F}(U)$ with $\left. s\right|_{W_P} = s_{W_P}$ for each $P\in U$. We aim to show that $\Phi_U(s)=t$. Again by naturality,
+    $$
+        \left.\Phi_{U}(s)\right|_{W_P} = \Phi_{W_P}\left(s_{W_P}\right) = \left. t\right|_{W_P} \implies \left.\left(\Phi_U(s)-t\right)\right|_{W_P} =0 
+    $$
+    for each $P\in U$. Then by the first sheaf property $\Phi_U(s)-t=0$.
 \end{proof}
 
 \begin{definition}
@@ -226,11 +276,18 @@ Recall from \ref{DirectLimits} the definition of a direct limit. We shall constr
     Unsurprisingly, the welldefinedness of the above presheaves are ensured by naturality. Functorialty follows from the functioriality of $\pazocal{F}$ and $\pazocal{G}$.
 \end{remark}
 \begin{lemma}
-    The presheaf kernel of a morphism of presheaves is a sheaf.
+    The presheaf kernel of a morphism of sheaves is a sheaf.
 \end{lemma}
 \begin{proof}
-    
+    Consider presheaves $\pazocal{F},\pazocal{G}:X\rightarrow \mathrm{ab}$ and a morphism of presheaves $\Phi:\pazocal{F}\Rightarrow \pazocal{G}$. Let $U\subset X$ be an open subset and let $s\in \ker\ \Phi(U)$ be given with an open covering $\{U_i\}$ of $U$ such that $\left. s\right|_{U_i}=0$ for each $i$, then since $s\in \pazocal{F}(U)$ and $\left. s \right|_{U_i}\in \pazocal{F}(U_i)$, it follows that $s=0$. Suppose $\{s_i\in\ker\ \Phi(U_i)\}$ is a family of sections with $\left. s_i\right|_{U_i\cap U_j} = \left. s_j\right|_{U_i\cap U_j}$. Then there is an $s\in \pazocal{F}(U)$ with $\left.s\right|_{U_i} = s_i$ for each $i$. We claim that $s \in \ker\ \Phi(U)$. Indeed, note that 
+    $$
+        \left.\Phi_U(s)\right|_{U_i}= \Phi_{U_i}\left(s_i\right)=0 
+    $$
+    for each $i$, hence $\Phi_U(s)=0$ by the first sheaf property. 
 \end{proof}
+\begin{remark}
+    The same result cannot be attained. The failure of the image presheaf to be a sheaf comes from the fact that while we can paste local sections $\Phi_{U_i}(s)$ together to form some global section $t$ in $\pazocal{G}(U)$, it may be that the image of $\Phi_U$ does not contain $t$ {\Large Example?} {\Large Why does cokernel presheaf fail}
+\end{remark}
 \begin{lemma}
     Consider a presheaf $\pazocal{F}:X\rightarrow \mathrm{ab}$ on topological space $X$. There is a sheaf $\pazocal{F}^{+}: X\rightarrow \mathrm{ab}$ and morphism of presheaves $\Theta : \pazocal{F}\Rightarrow\pazocal{F}^{+}$ such that for any sheaf $\pazocal{G}:X\rightarrow \mathrm{ab}$ and any morphism of presheaves $\Phi : \pazocal{F} \Rightarrow \pazocal{G}$ there is a unique morphism of sheaves $\Psi : \pazocal{F}^{+}\Rightarrow \pazocal{G}$ such that $\Phi = \Psi \Theta$. Furthermore $(\pazocal{F}^{+},\Theta)$ is unique up to unique isomorphism. 
 \end{lemma}
@@ -1153,7 +1210,7 @@ Consider a scheme $(X,\pazocal{O})$. Let $\pi_{X_\mathrm{red}} :X_\mathrm{red}\r
 \end{proof}
 \subsubsection{Varieties \& Schemes}
 \begin{definition}
-    Given a scheme $S$, \emph{scheme over $S$} is a scheme $X$ together with a morphism $X\rightarrow S$. A morphism of schemes over $S$ from $X$ to $Y$ is a morphism of schemes $X\rightarrow Y$ such that 
+    Given a scheme $S$, \emph{a scheme over $S$} is a scheme $X$ together with a morphism $X\rightarrow S$. A morphism of schemes over $S$ from $X$ to $Y$ is a morphism of schemes $X\rightarrow Y$ such that 
     $$
         \begin{tikzcd}
             X \arrow[r]\arrow[rd] & Y\arrow[d]\\
@@ -1194,10 +1251,57 @@ Consider a scheme $(X,\pazocal{O})$. Let $\pi_{X_\mathrm{red}} :X_\mathrm{red}\r
         t(Y)\mapsto \alpha^{-1}(t(Y))=Y.
     $$
     Thus there is a bijection between open sets of $X$ and open sets of $t(X)$.\\
-    Consider a variety $V$ over $K$ as a locally ringed space with the usual sheaf of regular functions $\Gamma$. We claim that $(t(V),\alpha_\star\Gamma)$ is a schemes. Since any variety has an open cover of affine subvarieties, it suffices to prove the claim for $V$ affine {\Large cf. trivial lemma not yet written}. Now not that the maximal ideals of $\Gamma(V)$ are in one-to-one correspondence with the points $V$. Note moreover that $\mathfrak{m}_P(V)\cap \Gamma(V)$ is a maximal ideal in $\Gamma(V)$ distinct from every other maximal ideal in $\Gamma(V)$ (reference to some lemmas). It thus follows that 
+    Consider a variety $V$ over $K$ as a locally ringed space with the usual sheaf of regular functions $\pazocal{O}$. We claim that $(t(V),\alpha_\star\Gamma)$ is a schemes. Since any variety has an open cover of affine subvarieties, it suffices to prove the claim for $V$ affine {\Large cf. trivial lemma not yet written}. Now not that the maximal ideals of $\Gamma(V)$ are in one-to-one correspondence with the points $V$. Note moreover that $I_P(V) := \{f\in \Gamma(V): f(P)=0\}\subset \Gamma(V)$ is a maximal ideal in $\Gamma(V)$ distinct from every other maximal ideal in $\Gamma(V)$ (reference to some lemmas). It thus follows that 
     \begin{gather*}
         \beta: V\rightarrow \mathrm{Specm}\ \Gamma(V)\\
-        P\mapsto \mathfrak{m}_P(V)
+        P\mapsto I_P(V)
     \end{gather*}  
-    is a bijection of $V$ with the maximal ideals of $\Gamma(V)$, which we denote $\mathrm{Specm}\ \Gamma(V)$. Now note that $\beta^{-1}(V(I)\cap \mathrm{Specm}\ \Gamma(V)) = Z(I)\subset V$ for each closed set $V(I)\cap \mathrm{Specm}\ \Gamma(V)\subset\mathrm{Specm}\ \Gamma(V)$. One also easily sees that $\beta$ is a closed map, hence it follows that $\beta$ is a homeomorphism.  
+    is a bijection of $V$ with the maximal ideals of $\Gamma(V)$, which we denote $\mathrm{Specm}\ \Gamma(V)$. Now note that $\beta^{-1}(V(I)\cap \mathrm{Specm}\ \Gamma(V)) = Z(I)\subset V$ for each closed set $V(I)\cap \mathrm{Specm}\ \Gamma(V)\subset\mathrm{Specm}\ \Gamma(V)$. One also easily sees that $\beta$ is a closed map, hence it follows that $\beta$ is a homeomorphism. Now note that stalk of $\Spec \ \Gamma(V)$ of one these maximal ideals $I_P(V)$ is isomorphic to the local ring at $P$, $\pazocal{O}_P(V)$. Let $U\subset \Spec \ \Gamma(V)$ be open. Consider a section $s\in \pazocal{O}_{\Spec\ \Gamma(V)}(U)$. Let $P\in \beta^{-1}(U)$. Then we can map $s$ to some regular function $\overline{s}\in \pazocal{O}_P(V)$. It follows that 
+    \begin{gather*}
+        \beta_U^\#: \pazocal{O}_{\Spec\ \Gamma(V)}(U)\rightarrow \beta_\star\pazocal{O}(U)\\
+        s\mapsto \overline{s}
+    \end{gather*}
+    Consider some regular function $z$ in $\pazocal{O}(\beta^{-1}(U))$. On some open set $W$. This can be represented as some rational function $\frac{a}{f}$ on $V$ defined on $W$, i.e. with $f\notin I_Q(V)$ for each $Q\in W$. Then $\beta(W)\subset U$ is an open set with $\frac{a}{f}\in \pazocal{O}_{\Spec \ \Gamma(V)}(U)$ (i.e. the constant map $\mathfrak{p}\mapsto \frac{a}{f}$) being a section that maps to $z$, hence $\beta_U^\#$ is surjective. Suppose $\overline{s}=0$. For some open subset $W\subset U$, $s$ is represented by a rational function $\frac{a}{f}$ defined at each $Q\in W$. Shrinking $W$ sufficiently, we see that $a\in \Gamma(V)$ agrees with $0\in \Gamma(V)$ on $W$. Since $W$ is dense in $V$ it follows that $a = 0$. We thus conclude that $s = 0$, hence $\beta_U^\#$ is injective. We thus get a natural isomorphism $\pazocal{O}_X \cong \beta_\star\pazocal{O}$. Consider the bijective map 
+    \begin{gather*}
+        \gamma : t(V)\rightarrow \Spec \ \Gamma(V)\\
+        W\mapsto I_V(W)
+    \end{gather*} 
+    one readily verifies that this is in fact a homeomorphism. Note that 
+    $$
+        \begin{tikzcd}
+            V\arrow [r,"\beta"]\arrow[d,"\alpha"] & \Spec \ \Gamma(V)\\
+            t(V)\arrow[ur,"\gamma"]
+        \end{tikzcd}
+    $$
+    commutes. Hence $\pazocal{O}_{\Spec\ \Gamma(V)}\simeq \beta_\star\pazocal{O} = (\gamma\alpha)_\star \pazocal{O}= \alpha_\star \gamma_\star \pazocal{O}$. Thus setting $\pazocal{O}_{t(V)} := \alpha_\star\pazocal{O}$, we thus get an isomorphism of ringed spaces $\Spec \ \Gamma(V)\simeq (t(V),\pazocal{O}_{t(V)})$. It follows that $(t(V),\pazocal{O}_{t(V)})$ is an affine scheme. There is a canonical ring map $K\rightarrow \Gamma(V)$, hence we get a morphism of schemes $(t(V),\pazocal{O}_{t(V)})\cong \Spec\ \Gamma(V)\rightarrow \Spec \ K$, hence $(t(V),\pazocal{O}_{t(v)})$ is a scheme over $K$.\\
+    Let $V$ and $W$ be varieties over $K$. We show that 
+    \begin{gather*}
+        t : \mathrm{Var}_K(V,W) \rightarrow \mathfrak{Sch}(K)(t(V),t(W))\\
+        \varphi \mapsto t(\varphi)
+    \end{gather*}  
+    is bijective 
 \end{proof}
+
+\section*{Research statement Bristol}
+
+{\Large Intro/Big Picture}\\
+My main interest is in algebraic geometry, particularly in computational algebraic geometry. In first introductions to algebraic geometry and commutative one is presented with results, which shows the existence of objects and in a lot of cases it is not explicitly made clear if and how this can be computed explicitly. I am interested in how with going into detail about how to compute these objects.  
+
+{\Large master's Thesis Talk}\\
+My master's thesis, \emph{Two approaches to an effective Nullstellensatz} studied constructive versions of the weak Nullstellensatz. The weak Nullstellensatz, asserts that if $f_1,\dots,f_m\in K[x_1,\dots,x_n]$ have no common zeroes over an algebraically closed field $K$, then there are $g_1,\dots,g_m\in K[x_1,\dots,x_n]$ so that 
+$$
+    g_1f_1+\dots + g_mf_m = 1.
+$$
+The effective Nullstellensatz concerns finding an algorithm for computing the polynomials $g_1,\dots,g_m$. As the title of my thesis suggests, I presented two approaches to solving this problem.
+
+One way to make the Nullstellensatz effective is to bound the degrees of the
+polynomials $g_i$ in such a representation. If the input polynomials $f_i$ have degree at most $d$, an upper bound $B(d)$ on the degrees of the $g_i$ turns the problem, into solving a system of linear equations. In my thesis I followed an approach due to Jelonek {\Large ref}, which uses methods from classical algebraic geometry to find a bound of $d^n$.
+
+What I appreciated in this part of the project was that it relied on concrete and rather elementary results. I found the way that these results  
+
+The second approach in my thesis is based on Gröbner basis theory. The effective Nullstellensatz can be reformulated in terms of
+so-called final polynomials. A result of Sturmfels {\Large ref} claims that such a final polynomial appears as an element of a Gröbner basis of a certain ideal with respect to a suitable term order. During this work it became clear that the statement is not correct as stated, since counterexamples were identified. This led to a augmented version of the result, which I proved and which does yield a Gröbner basis construction of final polynomials. A joint preprint on this work is available on arXiv~{\Large Ref.}
+
+This part of the project was formative for me as forced me to reflect on what made the original approach fail and how to mend this failure. I see this as an essential aspect of doing original mathematical research.
+{\Large Wishes for future research }
+For
