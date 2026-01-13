@@ -286,7 +286,7 @@ Recall from \ref{DirectLimits} the definition of a direct limit. We shall explic
     for each $i$, hence $\Phi_U(s)=0$ by the first sheaf property. 
 \end{proof}
 \begin{remark}
-    The same result cannot be attained. The failure of the image presheaf to be a sheaf comes from the fact that while we can paste local sections $\Phi_{U_i}(s)$ together to form some global section $t$ in $\pazocal{G}(U)$, it may be that the image of $\Phi_U$ does not contain $t$ {\Large Example?} {\Large Why does cokernel presheaf fail}
+    The same result cannot be attained. The failure of the image presheaf to be a sheaf comes from the fact that while we can paste local sections $\Phi_{U_i}(s)$ together to form some global section $t$ in $\pazocal{G}(U)$, it may be that the image of $\Phi_U$ does not contain $t$ {\Large Example?} {\Large Why does cokernel presheaf fail?}
 \end{remark}
 \begin{lemma}
     Consider a presheaf $\pazocal{F}:X\rightarrow \mathrm{ab}$ on topological space $X$. There is a sheaf $\pazocal{F}^{+}: X\rightarrow \mathrm{ab}$ and morphism of presheaves $\Theta : \pazocal{F}\Rightarrow\pazocal{F}^{+}$ such that for any sheaf $\pazocal{G}:X\rightarrow \mathrm{ab}$ and any morphism of presheaves $\Phi : \pazocal{F} \Rightarrow \pazocal{G}$ there is a unique morphism of sheaves $\Psi : \pazocal{F}^{+}\Rightarrow \pazocal{G}$ such that $\Phi = \Psi \Theta$. Furthermore $(\pazocal{F}^{+},\Theta)$ is unique up to unique isomorphism. 
@@ -1281,27 +1281,3 @@ Consider a scheme $(X,\pazocal{O})$. Let $\pi_{X_\mathrm{red}} :X_\mathrm{red}\r
     \end{gather*}  
     is bijective 
 \end{proof}
-
-\section*{Research statement Bristol}
-
-{\Large Intro/Big Picture}\\
-My main interest is in algebraic geometry, particularly in computational algebraic geometry. In first introductions to algebraic geometry and commutative one is presented with results, which shows the existence of objects and in a lot of cases it is not explicitly made clear if and how this can be computed explicitly. I am interested in how with going into detail about how to compute these objects.  
-
-{\Large master's Thesis Talk}\\
-My master's thesis, \emph{Two approaches to an effective Nullstellensatz} studied constructive versions of the weak Nullstellensatz. The weak Nullstellensatz, asserts that if $f_1,\dots,f_m\in K[x_1,\dots,x_n]$ have no common zeroes over an algebraically closed field $K$, then there are $g_1,\dots,g_m\in K[x_1,\dots,x_n]$ so that 
-$$
-    g_1f_1+\dots + g_mf_m = 1.
-$$
-The effective Nullstellensatz concerns finding an algorithm for computing the polynomials $g_1,\dots,g_m$. As the title of my thesis suggests, I presented two approaches to solving this problem.
-
-One way to make the Nullstellensatz effective is to bound the degrees of the
-polynomials $g_i$ in such a representation. If the input polynomials $f_i$ have degree at most $d$, an upper bound $B(d)$ on the degrees of the $g_i$ turns the problem, into solving a system of linear equations. In my thesis I followed an approach due to Jelonek {\Large ref}, which uses methods from classical algebraic geometry to find a bound of $d^n$.
-
-What I appreciated in this part of the project was that it relied on concrete and rather elementary results. I found the way that these results  
-
-The second approach in my thesis is based on Gröbner basis theory. The effective Nullstellensatz can be reformulated in terms of
-so-called final polynomials. A result of Sturmfels {\Large ref} claims that such a final polynomial appears as an element of a Gröbner basis of a certain ideal with respect to a suitable term order. During this work it became clear that the statement is not correct as stated, since counterexamples were identified. This led to a augmented version of the result, which I proved and which does yield a Gröbner basis construction of final polynomials. A joint preprint on this work is available on arXiv~{\Large Ref.}
-
-This part of the project was formative for me as forced me to reflect on what made the original approach fail and how to mend this failure. I see this as an essential aspect of doing original mathematical research.
-{\Large Wishes for future research }
-For
