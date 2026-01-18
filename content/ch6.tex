@@ -292,35 +292,35 @@ Recall from \ref{DirectLimits} the definition of a direct limit. We shall explic
     Consider a presheaf $\pazocal{F}:X\rightarrow \mathrm{ab}$ on topological space $X$. There is a sheaf $\pazocal{F}^{+}: X\rightarrow \mathrm{ab}$ and morphism of presheaves $\Theta : \pazocal{F}\Rightarrow\pazocal{F}^{+}$ such that for any sheaf $\pazocal{G}:X\rightarrow \mathrm{ab}$ and any morphism of presheaves $\Phi : \pazocal{F} \Rightarrow \pazocal{G}$ there is a unique morphism of sheaves $\Psi : \pazocal{F}^{+}\Rightarrow \pazocal{G}$ such that $\Phi = \Psi \Theta$. Furthermore $(\pazocal{F}^{+},\Theta)$ is unique up to unique isomorphism. 
 \end{lemma}
 \begin{proof}
-    We construct a presheaf
+    We construct a sheaf
     \begin{gather*}
         X\rightarrow \mathrm{ab}
     \end{gather*}
-    Given an open subset $U$ in $X$, we define $\pazocal{F}^{+}(U)$ to be the group of elements $([s]_P)$ in 
+    Given an open subset $U$ in $X$, we define $\pazocal{F}^{+}(U)$ to be the group of elements $([s_{W_P}]_P)$ in 
     $$\prod_{P\in U} \pazocal{F}_P$$
-    such that for each $P\in U$ there is an open neighborhood of $P$, $W\subset U$ with an element $t\in \pazocal{F}(W)$ such that for each $Q\in V$ the germ $[t]_Q\in \pazocal{F}_Q$ of $t$ at $Q$ satisfies
-    $$([s]_P)(Q) = [t]_Q.$$
-    Given $U\subset V$ we define $\varphi_UV : \pazocal{F}^{+}(V)\rightarrow \pazocal{F}^{+}(U)$ to be given by restriction. It thus readily follows that $\pazocal{F}^{+}$ is a sheaf. We have a natural transformation
+    such that for each $P\in U$ there is an open neighborhood of $P$, $V_P\subset W_P\subset U$ with an element $t\in \pazocal{F}(V_P)$ such that for each $Q\in V_P$ the germ $[t]_Q\in \pazocal{F}_Q$ of $t$ at $Q$ satisfies
+    $$[s_{W_Q}] = [t]_Q.$$
+    Given $U\supset V$ we define $\varphi_{UV} : \pazocal{F}^{+}(U)\rightarrow \pazocal{F}^{+}(V)$ to be given by restriction. It thus readily follows that $\pazocal{F}^{+}$ is a sheaf. We have a natural transformation
     \begin{gather*}
         \Theta : \pazocal{F}\Rightarrow \pazocal{F}^{+}\\
         \{\Theta_U : \pazocal{F}(U)\rightarrow \pazocal{F}^{+}(U), s \mapsto ([s]_P)\}.
     \end{gather*}
-    Indeed, $(U,s)$ is a pair witnessing the fact that $[s]_P\in \pazocal{F}^{+}$, so this is well-defined. Let a natural transformation of presheaves $\Phi : \pazocal{F}\Rightarrow \pazocal{G}$ be given. We define a natural transformation of sheaves 
+    Let a natural transformation of presheaves $\Phi : \pazocal{F}\Rightarrow \pazocal{G}$ be given. We define a natural transformation of sheaves 
     \begin{gather*}
         \Psi: \pazocal{F}^{+} \Rightarrow \pazocal{G}
     \end{gather*}
     defined by the collection of morphisms  
     $$
-        \left.\left\{ \Psi_U: \pazocal{F}^{+}(U) \rightarrow \pazocal{G}(U), ([s]_P)\mapsto \Psi_U(s) \ \right| \   U\subset X \text{ open}\right\}
+        \left.\left\{ \Psi_U: \pazocal{F}^{+}(U) \rightarrow \pazocal{G}(U), ([s]_P)\mapsto \Theta_U(s) \ \right| \   U\subset X \text{ open}\right\}
     $$
-    This is well-defined since $\pazocal{G} \cong \pazocal{G}^{+}$ or in other words since $\pazocal{G}(U)\simeq \pazocal{G}^{+}(U)$. $\Psi$ is the unique morphism of sheaves making the diagram
+    This is well-defined since $\pazocal{G} \cong \pazocal{G}^{+}$ or in other words since $\pazocal{G}(U)\simeq \pazocal{G}^{+}(U)$ for each $U$. $\Psi$ is the unique morphism of sheaves making the diagram
     $$
         \begin{tikzcd}
             \pazocal{F} \arrow[rd,Rightarrow, "\Phi"] \arrow[d,"\Theta",Rightarrow]\\
             \pazocal{F}^{+} \arrow[r, dashrightarrow] & \pazocal{G}
         \end{tikzcd}
     $$
-    commute. Note that $(\pazocal{F}^{+},\Theta)$ is thus the coequalizer two copies of the identity transformation of $\pazocal{F}$ (cf. Example~\ref{EqualisersAndCoequalisers}) which means it is unique up to unique isomorphism.
+    commute. Note that $(\pazocal{F}^{+},\Theta)$ is thus the coequalizer of two copies of the identity transformation of $\pazocal{F}$ (cf. Example~\ref{EqualisersAndCoequalisers}) which means it is unique up to unique isomorphism.
 \end{proof}
 \begin{remark}
     We call $\pazocal{F}^{+}$ \emph{the sheaf associated with $\pazocal{F}$}
@@ -638,6 +638,16 @@ we obtain a map
 \begin{definition}\label{MorphismOfRingedSpaces}
     A morphism of locally ringed spaces is a morphism of ringed spaces $(f,f^\#):(X,\pazocal{O}_X)\rightarrow (Y,\pazocal{O}_Y)$ such that $f^\#_P$ is local ring homomorphism (cf. Definition~\ref{LocalRingDefinition}) for each $P\in X$. 
 \end{definition}
+\begin{lemma}\label{RestrictionOfLocallyRingedSpaceIsLocallyRingedSpace}
+    Let $(X,\pazocal{O})$ be a locally ringed space. Let $U$ be an open set in $X$. Then $(U,\left.\pazocal{O}\right|_U)$ is a locally ringed space.  
+\end{lemma}
+\begin{proof}
+    We already proved that $\left.\pazocal{O}\right|_{U}$ is a sheaf in an earlier lemma. It thus suffices to prove that for each $P\in U$, $\left(\left.\pazocal{O}\right|_U\right)_P$ is local. Note that the set of open neighborhoods of $P$ contained in $U$ is coinitial in the set of open neighborhoods of $P$. It thus follows that 
+    $$
+        \left(\left.\pazocal{O}\right|_{U}\right)_P \simeq \pazocal{O}_P,
+    $$
+    hence $\left(\left.\pazocal{O}\right|_{U}\right)_P$ is local.
+\end{proof}
 \begin{lemma}
     Consider a ringed space $(X,\pazocal{O})$ and an open subset $U\subset X$. Denote the from $X$ inherited sheaf by $\pazocal{O}_U$. The map $\iota : U\subset X$ together with 
     $$
@@ -822,16 +832,7 @@ We have now seen some examples of the geometric objects that we are interested i
 \begin{definition}
     A morphism of schemes is a morphism of local rings between schemes 
 \end{definition}
-\begin{lemma}\label{RestrictionOfLocallyRingedSpaceIsLocallyRingedSpace}
-    Let $(X,\pazocal{O})$ be a locally ringed space. Let $U$ be an open set in $X$. Then $(U,\left.\pazocal{O}\right|_U)$ is a locally ringed space.  
-\end{lemma}
-\begin{proof}
-    We already proved that $\left.\pazocal{O}\right|_{U}$ is a sheaf in an earlier lemma. It thus suffices to prove that for each $P\in U$, $\left(\left.\pazocal{O}\right|_U\right)_P$ is local. Note that the set of open neighborhoods of $P$ contained in $U$ is coinitial in the set of open neighborhoods of $P$. It thus follows that 
-    $$
-        \left(\left.\pazocal{O}\right|_{U}\right)_P \simeq \pazocal{O}_P,
-    $$
-    hence $\left(\left.\pazocal{O}\right|_{U}\right)_P$ is local.
-\end{proof}
+
 \begin{lemma}
     Let $R$ be a ring and consider $f\in R$. Then 
     $$
@@ -890,7 +891,7 @@ We have now seen some examples of the geometric objects that we are interested i
 \begin{remark}
     Note that $\Spec \ R\rightarrow \Spec \ \Z$ is the morphism induced by $\Z\rightarrow R$.  
 \end{remark}
-\begin{proposition}
+\begin{proposition}\label{SpecOfIntegersIsInitialInCategoryOfSchemes}
     The scheme $(\Spec\ \Z, \pazocal{O}_{\Spec\ Z})$ is the final object for the category of schemes.
 \end{proposition}
 \begin{proof}
@@ -900,6 +901,15 @@ We have now seen some examples of the geometric objects that we are interested i
     \end{gather*}  
     where $\varphi(P)=\varphi_i(P)$ if $P\in U_i$ is a well-defined morphism of schemes.\\
     Now consider a morphism of schemes $\phi: X\rightarrow \Spec \ \Z$. Since for each $i$, $\left.\phi\right|_{U_i}: U_i\rightarrow \Spec \ \Z$ defines a morphism of affine schemes it must be equal to $\varphi_i$, hence $\phi=\varphi$.  
+\end{proof}
+\begin{example}
+    The spectrum of the zero ring is the empty set since any prime ideal must be proper and $0$ has no proper ideals. 
+\end{example}
+\begin{proposition}
+    $0$ is the initial object in the category of schemes. 
+\end{proposition}
+\begin{proof}
+    Indeed, $0$ is the terminal object in the category of commutative rings and thus the initial object in the category of affine schemes. We extend the result to an arbitrary scheme, as in the proof of Proposition~\ref{SpecOfIntegersIsInitialInCategoryOfSchemes}, by constructing a unique family of compatible local maps on an affine cover of said scheme. 
 \end{proof}
 \begin{example}
     Consider schemes $X_1$ and $X_2$ with open subsets $U_1\subset X_1$ and $U_2\subset X_2$ and an isomorphism of schemes 
@@ -972,6 +982,25 @@ We use the above example to construct a scheme that is not affine
     $$
     and since $\mathfrak{p}_1\neq \mathfrak{p}_2$ it follows that $\phi$ cannot be an isomorphism of locally ringed spaces. 
 \end{example}
+\begin{proposition}
+    Let $(X,\pazocal{O})$ be a scheme and $A$ a ring. The map 
+    \begin{gather*}
+        \alpha: \Hom(X,\Spec \ A)\rightarrow \Hom(A,\Gamma(X,\pazocal{O}))\\
+        (f,f^\#) \mapsto f^\#_{\Spec \ A}
+    \end{gather*}
+    is bijective.
+\end{proposition}
+\begin{proof}
+    Let $\sigma : A \rightarrow \Gamma(X,\pazocal{O})$ be a ring map. Let $U\subset X$ be any open subset of $X$. Then we define $\sigma_U : A \rightarrow \pazocal{O}(U)$ to be given by $\varphi_{XU}\sigma$. When $U$ is affine this induces a unique morphism of locally ringed spaces $(f_U,f_U^\#): U \rightarrow \Spec \ A$. Let $W\subset U$ be an open affine subset and note that 
+    $$
+        \sigma_W = \varphi_{XW}\sigma = \varphi_{UW}\varphi_{XU}\sigma= \left(\sigma_{U}\right)_W.
+    $$
+    Note also that $\left.f_U\right|_W$ is a morphism of affine schemes induced by 
+    $$
+        \left(\left.f_U\right|_W\right)^\#_W = \iota^\#_W \left( f_U^\#\right)_U = \varphi_{UW}\sigma_U = (\sigma_U)_W
+    $$
+    hence $\left. f_U\right|_W = f_W$. Thus if $V$ is another open affine subset of $X$, then $f_U$ and $f_V$ will agree on $U\cap V$. {\Large check gluing condition on natural transformations}. We thus obtain a morphism of schemes $f: X\rightarrow \Spec \ A$ where $f^\#_U = \left.\sigma_{f^{-1}(U)}\right|_{\pazocal{O}}$. The claim is that $f^\#_{\Spec\ A} = \sigma$
+\end{proof}
 \subsubsection{Projective Schemes}
 \begin{definition}
     Let $R$ be a graded (commutative) ring. We define the \emph{projective spectrum of $R$} to be 
@@ -1208,6 +1237,38 @@ Consider a scheme $(X,\pazocal{O})$. Let $\pi_{X_\mathrm{red}} :X_\mathrm{red}\r
     $$
     commutes. One easily checks that these form the components of a natural transformation satisfying the condition. Uniqueness follows from using the uniqueness on the components of $\phi^\#$.  
 \end{proof}
+\subsubsection{The Residue Field at a Point}
+    \begin{definition}
+        Let $(X,\pazocal{O})$ be a scheme and $x$ a point in $X$. Then \emph{the residue field at $x$} is the field 
+        $$
+            K(x) := \pazocal{O}_x/\mathfrak{m}_x,
+        $$
+        where $\mathfrak{m}_x$ is the maximal ideal in $\pazocal{O}_x$.
+    \end{definition}
+    \begin{proposition}
+        Let $(X,\pazocal{O})$ be a scheme and $x$ a point in $X$. Consider a field $L$. There is a 1-1 correspondence of morphisms of schemes $\Spec \ L \rightarrow X$ and pairs $(x,\iota_x)$ where $x\in X$ and $\iota_x$ is an embedding $K(x)\hookrightarrow L$.
+    \end{proposition}
+    \begin{proof}
+        Suppose $\varphi: \Spec \ L\rightarrow X$ is a morphism of schemes. Note that $\Spec\ L = \{\ast\}$, hence $\varphi$ is given by mapping the one point of $\Spec \ L$ to some $x\in X$. Since $\varphi$ is a morphism of locally ringed spaces, it follows that $\varphi_P : \pazocal{O}_x\rightarrow L$ is a local ring map, meaning $\ker\ \varphi_P=\varphi_P^{-1}(0)=\mathfrak{m}_x$. We thus get an embedding $K(x) = \pazocal{O}_x/\mathfrak{m}_x\hookrightarrow L$. Note that if $U\subset X$ is an open neighborhood around $x$, then the diagram 
+        $$
+            \begin{tikzcd}
+                \pazocal{O}(U)\arrow[r]\arrow[rd] & L\\
+                & K(x)\arrow[u]
+            \end{tikzcd}
+        $$
+        commutes.\\
+        Conversely, suppose we are given a point $x$ and an embedding $\iota_x : K(x)\hookrightarrow L$. Let $\varphi: \Spec\ L \rightarrow X$, be given by $\ast\mapsto x$. The structure sheaf of $\Spec L$ consists of $L$ itself. We define a natural transformation 
+        $$
+            \pazocal{O}\Rightarrow L
+        $$ 
+        in the following way: When $x\in U\subset X$, define $\pazocal{O}(U)\rightarrow \pazocal{O}_{\Spec K}(\varphi^{-1}(U))=L$ to be the composite of $\pazocal{O}(U)\rightarrow K(x)$ and $K(x)\hookrightarrow L$. When $x\notin U$, note that $\pazocal{O}_{\Spec \  K}(\varphi^{-1}(U))=\pazocal{O}_{\Spec \ K}(\emptyset)=0$, which is the terminal object in the category of rings. The map $\pazocal{O}(U)\rightarrow \varphi_\ast\pazocal{O}_{\Spec \ K}(U)$ is then obvious. It is clear that this assignment is natural.
+    \end{proof}
+    \begin{proposition}
+        Let $X$ be a scheme. Every closed irreducible set $Y$ in $X$ has a unique generic point $\zeta_Y\in Y$.
+    \end{proposition}
+    \begin{proof}
+        
+    \end{proof}
 \subsubsection{Varieties \& Schemes}
 \begin{definition}
     Given a scheme $S$, \emph{a scheme over $S$} is a scheme $X$ together with a morphism $X\rightarrow S$. A morphism of schemes over $S$ from $X$ to $Y$ is a morphism of schemes $X\rightarrow Y$ such that 

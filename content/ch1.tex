@@ -3242,7 +3242,105 @@ For a field $K$, we define $\mathrm{Vect}_K:=\mathrm{Mod}_K$.
         We prove the result by induction in $n$. The base case is trivial. By Lemma~\ref{NoetherSecondIsoForModules} and Lemma~\ref{DimensionsOfExactSequence} and the induction hypothesis it follows that 
         $$\dim\ R/\mathfrak{m}^{n+1} = \dim\ \mathfrak{m}^n/\mathfrak{m}^{n+1}+\dim\ R/\mathfrak{m}^n = n+1,$$
         where we also use the prior lemma. We now that $z = \lambda t^{\ord(z)}$, hence $\langle z \rangle = \langle t\rangle^{\ord(z)} = \mathfrak{m}^{\ord(z)},$ hence $\ord(z) = \dim \ R/\mathfrak{m}^{\ord(z)}.$
-    \end{proof}    
+    \end{proof}
+\subsubsection{Dual Vector Spaces}
+    \begin{definition}
+        Let $V$ be a vector space over a field $K$. The \emph{dual vector space of $V$ (over $K$)} is 
+        $$
+            \mathrm{Dual}(V):=V' := \mathrm{Vect}_K(V,K)
+        $$
+    \end{definition}   
+    \begin{remark}
+        Note that this assignment is functorial. In particular, it is a contravariant endofunctor on $\mathrm{Vect}_K$. 
+    \end{remark} 
+    \begin{lemma}
+        Suppose $V$ is a finite dimensional vector space over $K$. Then 
+        $$
+            V\simeq V'
+        $$
+    \end{lemma}
+    \begin{proof}
+        WLOG $V\simeq K^n$ for some $n$, so it suffices to prove that $K^n\simeq \mathrm{Vect}_K(K^n,K)$. $K^n$ is equipped with a bilinear map 
+        \begin{gather*}
+            \langle \cdot,\cdot\rangle : K^n\times K^n \rightarrow K\\
+            (v,w)\mapsto \sum_1^n v_iw_i
+        \end{gather*} 
+        For each $v\in K^n$ we thus have a $K$-linear map
+        \begin{gather*}
+            l_v : K^n \rightarrow K\\
+            w\mapsto \langle v,w\rangle 
+        \end{gather*}
+        We thus define a $K$-linear map 
+        \begin{gather*}
+            L : V\rightarrow V'\\
+            v\mapsto l_v
+        \end{gather*}
+        with inverse 
+        \begin{gather*}
+            L^{-1}: V'\rightarrow V\\
+            l\mapsto (l(e_1),\dots,l(e_n))
+        \end{gather*}
+        where $e_i$ is the $i$'th standard basis vector of $K^n$.
+    \end{proof}
+    \begin{proof}
+        Pick a basis $\{v_1,\dots,v_n\}$ of $V$. Define for each $i\in \{1,\dots,n\}$,
+        $$
+            l_{v_i} : V\rightarrow K
+        $$
+        by 
+        $$
+            l_{v_i}(v_j) := 
+            \begin{cases}
+                1 & \text{if } i=j\\
+                0 & \text{otherwise}
+            \end{cases}
+        $$
+        we verify that $\{l_{v_1},\dots,l_{v_n}\}$ defines a basis for $V'$ which would show that $\dim\ V' = n$, implying $V\simeq V'$. Suppose
+        $$
+            \sum_1^n b_il_{v_i} = 0, 
+        $$
+        then 
+        $$
+            \sum_1^n b_iv_i = \sum_1^n\left(\sum_1^n b_jl_{v_j}(v_i)\right)v_i = 0 
+        $$
+        hence $b_i=0$ for each $i$. Consider an arbitrary linear map $l\in V'$. Then for each $w=\sum_1^n a_iv_i\in V$
+        $$
+            l(v)= \sum_1^n a_il(v_i)= \sum_1^n l(v_i)l_{v_i}(w) = \left(\sum_1^n l(v_i)l_{v_i}\right)(w)
+        $$
+    \end{proof}
+    \begin{remark}
+        The basis constructed on $V'$ in the second proof, is called the \emph{dual basis on $V$ (with respect to the basis $\{v_1,\dots,v_n\}$)}.
+    \end{remark}
+    \begin{proposition}
+        Given a field $K$ and denoting the identity functor on $\mathrm{Vect}_K^{\mathrm{fd}}$ by $\mathrm{Id}$, 
+        $$
+            \mathrm{Dual} \cong \mathrm{Id}
+        $$
+    \end{proposition}
+    \begin{proof}
+        Initially, we do not need the assumption of working with only finite dimensional vector spaces to define a natural transformation with injective components. We define a natural transformation $\ev:\mathrm{Id}\Rightarrow \mathrm{Dual}$ to have components
+        $$
+            \{ev^V : V\rightarrow V'', v\mapsto ev_v\}
+        $$
+        consider a linear map $L: V\rightarrow W$. Let $v\in V$ and $l\in W''$. Then 
+        \begin{align*}
+            \left(\left(\left(L^\ast\right)\right)^\ast \ev^V(v)\right)(l) &=\left(\left(L^\ast\right)^\ast(\ev_v)\right)(l) = \left(\ev_vL^\ast\right)(l)= \ev_v(lL)= l(L(v))\\
+            &= \ev_{L(v)}(l)=\left(\ev^W L(v)\right)(l).
+        \end{align*}
+        In other words the square 
+        $$
+            \begin{tikzcd}
+                V \arrow[d,"L"]\arrow[r,"\ev^V"] & V''\arrow[d,"\left(L^\ast\right)^\ast"]\\
+                W \arrow[r,"\ev^W"] & W''
+            \end{tikzcd}
+        $$
+        commutes, hence $\ev $ is a natural transformation. Suppose $V\neq 0$. Then $V$ is not the zero object in $\mathrm{Vect}_K$, hence $V'\neq 0$. Then if $v\neq 0$, then $l(v)\neq 0$ for some $l\in V'$, hence $\ev^V$ is injective for an arbitrary vector space $V$.\\
+        Suppose $V$ is a finite dimensional vector space and consider a $K$-linear map $\epsilon\in V''$. When $\epsilon(l)=0$ for every $l\in V'$, then $\epsilon = \ev_0$. Suppose this is not the case. Then there is some $l\in V'\setminus 0$ for which $\epsilon(l)\neq 0$. Moreover, there is a $v\in V$  with $l(v)=\epsilon(l)\neq 0$. $\dim \ \ker \ \epsilon = \dim \ V' -1$. So if $\lambda\in V'$ is another functional on $V$ with $\epsilon(\lambda)\neq 0$, then $\lambda = \alpha l$ for some $\alpha\in K$. It thus follows that
+        $$
+            \epsilon(\lambda)=\epsilon(\alpha l)=\alpha\epsilon(l)=\alpha l(v)= (\alpha l)(v)=\lambda(v).
+        $$      
+        It thus follows that $\epsilon = \ev_v$. Then each component of $\ev$ is an isomorphism, hence $\ev$ is natural isomorphism. 
+    \end{proof}
 \subsubsection{Projective Space}
     \begin{definition}\label{ProjectiveEquivalence}
         Let $V$ be a vector space over some field $K$. For $v,w\in V\setminus 0$ we write $v\sim w$ if there exists a $\lambda\in K\setminus 0$ such that $w = \lambda v$
