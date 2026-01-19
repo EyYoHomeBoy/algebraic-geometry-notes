@@ -80,6 +80,20 @@
     $$0=\left. s\right|_{U_i} - \left. t\right|_{U_i} = \left. s-t\right|_{U_i}$$
     for every $i$, which by assumption means $s-t=0$. 
 \end{proof}
+\begin{lemma}
+    Let $X$ be a topological space with a presheaf $\pazocal{O}$ of abelian groups. Then $\pazocal{O}$ is a sheaf if and only if for each open set $U\subset X$ and each open covering $\{U_i\}$ of $U$ we may identify $\pazocal{O}(U)$ with the subring of $\prod_{i} \pazocal{O}(U_i)$,
+    $$
+        \pazocal{O}^{\{U_i\}}(U):=\left\{(s_i)\in \prod_{i}\pazocal{O}(U_i) : \left.s_i\right|_{U_i\cap U_j} = \left.s_j\right|_{U_i\cap U_j}\right\}
+    $$ 
+\end{lemma}
+\begin{proof}
+    Let an open set $U\subset X$ and open covering $\{U_i\}$ of $U$ be given. Then 
+    \begin{gather*}
+        \pazocal{O}(U)\rightarrow \pazocal{O}^{\{U_i\}}(U)\\
+        s \mapsto \left(\left.s\right|_{U_i}\right)
+    \end{gather*}
+    is injective if and only if the first sheaf property is fulfilled and Surjective if and only if the second sheaf property is fulfilled.
+\end{proof}
 \begin{example}
     The presheaf $\pazocal{O}$ on a variety $X$ is a sheaf: Consider an open subvariety $U\subset X$ and an open covering $\{U_i\}$ of $U$ and suppose there is a rational function $f\in \pazocal{O}(U)$ such that $\left. f\right|_{U_i}=0$ for every $i$. Viewing $f$ as a partial function on $U$ it follows that given a point $x\in \dom\ f$, since $x\in \dom\ f \cap U_i$ for some $i$, 
     $$f(x)=\left.f\right|_{U_i}(x)= 0 \implies f = 0.$$
@@ -215,6 +229,14 @@ Recall from \ref{DirectLimits} the definition of a direct limit. We shall explic
         \Phi_P : \pazocal{F}_P \rightarrow \pazocal{G}_P\\
         (U,s)\mapsto (U,\Phi_U(s))
     \end{gather*}
+    such that 
+    $$
+        \begin{tikzcd}
+            \pazocal{F}(U) \arrow[r,"\Phi_U"] \arrow[d] & \pazocal{G}(U)\arrow[d]\\
+            \pazocal{F}_P \arrow[r,"\Phi_P"] & \pazocal{G}_P
+        \end{tikzcd}
+    $$
+    for each open neighborhood $U$ of $P$.
 \end{definition}
 \begin{remark}
     Explicitly, we can describe the above map as taking a germ $[s_U]_P$ to $[\Phi_U(s)]_P$ where $U$ is any open neighborhood of $P$. 
@@ -678,6 +700,26 @@ we obtain a map
         \end{tikzcd}
     $$  
     where the vertical arrows are isomorphisms, commutes. It thus follows that $\left(\iota^\#\left.\varphi^\#\right|_{\left.\pazocal{O}_Y\right|_{U'}}\right)_{P}$ is a local homomorphism for each $P\in U$.
+\end{proof}
+\begin{lemma}
+    Let $(X,\pazocal{O}_X)$ and $(Y,\pazocal{O}_Y)$. Let open coverings $\{U_i\}$ and $\{V_i\}$ of respectively $X$ and $Y$ be given. Consider a family of morphisms of ringed spaces $\{f_i : U_i\rightarrow V_i\}$ such that 
+    \begin{enumerate}
+        \item $\left. f_i\right|_{U_i\cap U_j} = \left. f_j\right|_{U_i\cap U_j}$ for each $i,j$.
+        \item $\left. f_i^\#\right|_{\left.\pazocal{O_Y}\right|_{V_i\cap V_j}} = \left. f_j^\#\right|_{\left.\pazocal{O_Y}\right|_{V_i\cap V_j}}$ for each $i,j$.  
+    \end{enumerate} 
+    Then there is a unique morphism of ringed spaces $f:X\rightarrow Y$ such that $\left. f\right|_{U_i} : U_i\rightarrow V_i$ agrees with $f_i$ for each $i$.
+\end{lemma}
+\begin{proof}
+    It's a basic fact of topology that the map 
+    $$
+        f : X\rightarrow Y
+    $$
+    defined by $f(P)=f_i(P)$ for $P\in U_i$, is the unique continuous map that agrees with $f_i$ when restricted to $U_i$. Let $V\subset Y$ be an open set. We define 
+    \begin{gather*}
+        f^\#_V : \pazocal{O}_Y(V) \rightarrow f_\ast\pazocal{O}_X(U)\\
+        (\left. s\right|_{V_i\cap V})\mapsto \left( (f_i^\#)_{f_i^{-1}(V_i)\cap f^{-1}(V)}(\left.s\right|_{V_i\cap V})\right)
+    \end{gather*} 
+    Note that 
 \end{proof}
 \begin{lemma}
     \begin{enumerate}
