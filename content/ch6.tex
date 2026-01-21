@@ -673,7 +673,7 @@ we obtain a map
 \begin{lemma}
     Consider a ringed space $(X,\pazocal{O})$ and an open subset $U\subset X$. Denote the from $X$ inherited sheaf by $\pazocal{O}_U$. The map $\iota : U\subset X$ together with 
     $$
-        \iota^\#: \iota_\star\pazocal{O} \rightarrow \pazocal{O}_U
+        \iota^\#: \pazocal{O} \rightarrow \iota_\star\pazocal{O}_U
     $$
     given by 
     $$
@@ -705,7 +705,7 @@ we obtain a map
     Let $(X,\pazocal{O}_X)$ and $(Y,\pazocal{O}_Y)$. Let open coverings $\{U_i\}$ and $\{V_i\}$ of respectively $X$ and $Y$ be given. Consider a family of morphisms of ringed spaces $\{f_i : U_i\rightarrow V_i\}$ such that 
     \begin{enumerate}
         \item $\left. f_i\right|_{U_i\cap U_j} = \left. f_j\right|_{U_i\cap U_j}$ for each $i,j$.
-        \item $\left. f_i^\#\right|_{\left.\pazocal{O_Y}\right|_{V_i\cap V_j}} = \left. f_j^\#\right|_{\left.\pazocal{O_Y}\right|_{V_i\cap V_j}}$ for each $i,j$.  
+        \item $\left. f_i\right|_{U_i\cap U_j}^\#= \left. f_j\right|_{U_i\cap U_j}^\#$ for each $i,j$.  
     \end{enumerate} 
     Then there is a unique morphism of ringed spaces $f:X\rightarrow Y$ such that $\left. f\right|_{U_i} : U_i\rightarrow V_i$ agrees with $f_i$ for each $i$.
 \end{lemma}
@@ -716,11 +716,34 @@ we obtain a map
     $$
     defined by $f(P)=f_i(P)$ for $P\in U_i$, is the unique continuous map that agrees with $f_i$ when restricted to $U_i$. Let $V\subset Y$ be an open set. We define 
     \begin{gather*}
-        f^\#_V : \pazocal{O}_Y(V) \rightarrow f_\ast\pazocal{O}_X(U)\\
-        (\left. s\right|_{V_i\cap V})\mapsto \left( (f_i^\#)_{f_i^{-1}(V_i)\cap f^{-1}(V)}(\left.s\right|_{V_i\cap V})\right)
+        f^\#_V : \pazocal{O}_Y(V) \rightarrow f_\ast\pazocal{O}_X(V)\\
+        (\left. s\right|_{V_i\cap V})\mapsto \left( (f_i^\#)_{V_i\cap V}(\left.s\right|_{V_i\cap V})\right)
     \end{gather*} 
     Note that 
+    \begin{align*}
+        \left.(f_i^\#)_{V_i\cap V}(\left.s\right|_{V_i\cap V})\right|_{f_i^{-1}(V_i\cap V_j\cap V)} &= \left(\left.f_i^\#\right|_{\left.\pazocal{O}_Y\right|_{V_i\cap V_j}}\right)_{V\cap V_i}(\left. s\right|_{V_i\cap V_j\cap V})\\ &= \left(\left.f_j^\#\right|_{\left.\pazocal{O}_Y\right|_{V_i\cap V_j}}\right)_{V\cap V_i}(\left. s\right|_{V_i\cap V_j\cap V})\\ 
+        &= \left.(f_j^\#)_{V_i\cap V}(\left.s\right|_{V_i\cap V})\right|_{f_i^{-1}(V_i\cap V_j\cap V)},
+    \end{align*}
+    hence this is a well-defined ring map. Naturality follows from each $f_i^\#$ being a natural transformation for each $i$. We thus conclude that $(f,f^\#): X\rightarrow Y$ defines a morphism of ringed spaces. Note that for $V\subset V_i$ and $s=(\left. s\right|_{V\cap V_j})\in \pazocal{O}_Y(V)$, we have  
+    \begin{align*}
+        \left(\left.f\right|_{U_i}^\#\right)_{V}(s) &= \iota^\#_{f^{-1}(V)\cap U_i} \left. f^\#_{V}\right|_{\left.\pazocal{O}_Y\right|_{V_i}}(s) = \varphi_{f^{-1}(V)U_i}((f_j^\#)_{V\cap V_j}(\left. s\right|_{V\cap  V_j}))\\ 
+        &= \left(\left.\left(f^\#_i\right)_{V\cap V_i}(\left. s\right|_{V\cap V_i})\right|_{f_i^{-1}(V_i\cap V)}\right)\\
+        &= ((f_i^\#)_{V\cap V_i}(\left. s\right|_{V\cap V_i})) = \left(f_i^\#\right)_{V}(s).
+    \end{align*}  
+    If $(g,g^\#): X\rightarrow Y$ is another morphism of ringed spaces with $\left.(g,g^\#)\right|_{U_i} = f_i$ for each $i$, then $g=f$ and
+    \begin{align*}
+        g^\#_V(s) &= (\left.g^\#_{V\cap V_i}(\left.s\right|_{V\cap V_i})\right|_{U_i}) = (\varphi_{f^{-1}(V\cap V_i) U_i}g^\#_{V\cap V_i}(\left.s\right|_{V\cap V_i})) = ((f^\#_i)_{V\cap V_i}(\left.s\right|_{V_i\cap V}))\\ 
+        &= f^\#_V(s).  
+    \end{align*}
+    for each $V\subset Y$ and $s\in \pazocal{O}_Y(V)$
 \end{proof}
+\begin{remark}
+    When $(X,\pazocal{O}_X)$ and $(Y,\pazocal{O}_Y)$ are locally ringed spaces and $\{f_i\}$ is a family of morphisms of locally ringed spaces, it follows readily that for $P\in U_i$,
+    $$
+        f^\#_P = (f_i^\#)_P,
+    $$
+    hence the prior upgrades to one about locally ringed spaces.
+\end{remark}
 \begin{lemma}
     \begin{enumerate}
         \item $\Spec \ R$ is a locally ringed space for each ring $R$.
@@ -1041,7 +1064,7 @@ We use the above example to construct a scheme that is not affine
     $$
         \left(\left.f_U\right|_W\right)^\#_W = \iota^\#_W \left( f_U^\#\right)_U = \varphi_{UW}\sigma_U = (\sigma_U)_W
     $$
-    hence $\left. f_U\right|_W = f_W$. Thus if $V$ is another open affine subset of $X$, then $f_U$ and $f_V$ will agree on $U\cap V$. {\Large check gluing condition on natural transformations}. We thus obtain a morphism of schemes $f: X\rightarrow \Spec \ A$ where $f^\#_U = \left.\sigma_{f^{-1}(U)}\right|_{\pazocal{O}}$. The claim is that $f^\#_{\Spec\ A} = \sigma$
+    hence $\left. f_U\right|_W = f_W$. Thus if $V$ is another open affine subset of $X$, then $f_U$ and $f_V$ will agree on $U\cap V$ and  We thus obtain a morphism of schemes $f: X\rightarrow \Spec \ A$ where $f^\#_U = \left.\sigma_{f^{-1}(U)}\right|_{\pazocal{O}}$. The claim is that $f^\#_{\Spec\ A} = \sigma$
 \end{proof}
 \subsubsection{Projective Schemes}
 \begin{definition}
