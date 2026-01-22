@@ -1064,7 +1064,32 @@ We use the above example to construct a scheme that is not affine
     $$
         \left(\left.f_U\right|_W\right)^\#_W = \iota^\#_W \left( f_U^\#\right)_U = \varphi_{UW}\sigma_U = (\sigma_U)_W
     $$
-    hence $\left. f_U\right|_W = f_W$. Thus if $V$ is another open affine subset of $X$, then $f_U$ and $f_V$ will agree on $U\cap V$ and  We thus obtain a morphism of schemes $f: X\rightarrow \Spec \ A$ where $f^\#_U = \left.\sigma_{f^{-1}(U)}\right|_{\pazocal{O}}$. The claim is that $f^\#_{\Spec\ A} = \sigma$
+    hence $\left. f_U\right|_W = f_W$. Thus if $V$ is another open affine subset of $X$, then $f_U$ and $f_V$ will agree on $U\cap V$. Given an open affine cover $\{U_i\}$ of $X$, we thus obtain a morphism of schemes $f_\sigma: X\rightarrow \Spec \ A$ where 
+    \begin{gather*}
+        (f_\sigma)^\#_U : \pazocal{O}_{\Spec\ A}(U)\rightarrow (f_\sigma)_\ast\pazocal{O}(U)\\
+        s\mapsto \left((f_i^\#)_{U}(s)\right) 
+    \end{gather*}
+    The claim now is that $(f_\sigma)^\#_{\Spec\ A} = \sigma$. Indeed, for each $s\in A$
+    \begin{align*}
+        (f_\sigma)^\#_{\Spec \ A}(s) = \left((f^\#_i)_{\Spec \ A}(s)\right) = (\sigma_{U_i}(s)) = (\left.\sigma(s)\right|_{U_i}) = \sigma(s).
+    \end{align*}
+    We thus have a well-defined map
+    \begin{gather*}
+        \alpha^{-1} : \Hom(X,\Spec\ A) \rightarrow \Hom(A,\Gamma(X,\pazocal{O}))\\
+        \sigma \mapsto f_\sigma
+    \end{gather*}
+    with left inverse $\alpha$. Consider a morphism of schemes $f:X\rightarrow \Spec \ A $. Let an open affine cover $\{U_i\}$ of $X$ be given. Note that $\left. f\right|_{U_i}$ is induced by $\left(\left. f\right|_{U_i}^\#\right)_{\Spec \ A} = (f_{\Spec\ A}^\#)_{U_i}$, hence $\left. f\right|_{U_i} = f_{(f^\#_{\Spec\ A})_{U_i}}$, so
+    $$
+        f = f_{f^\#_{\Spec\ A}}.
+    $$
+    It remains to prove that $f^\#=f_{f_{\Spec\ A}^\#}^\#$. Note that    
+    $$
+        f_{f_{\Spec\ A}^\#,i}^\# = \left.f_{f_{\Spec\ A}^\#}\right|_{U_i}^\# = \left.f\right|_{U_i}^\#.
+    $$
+    Let $s\in \pazocal{O}_{\Spec\ A}(U)$, then 
+    \begin{align*}
+        \left(f_{f_{\Spec \ A}^\#}^\#\right)_{U}(s) = \left(\left( f_{f_{\Spec \ A}^\#,i}^\#\right)_U(s)\right) = \left(\left(\left.f\right|_{U_i}^\#\right)_U(s) \right)=f^\#_U(s).
+    \end{align*}
 \end{proof}
 \subsubsection{Projective Schemes}
 \begin{definition}
