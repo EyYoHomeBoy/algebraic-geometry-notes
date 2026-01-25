@@ -28,7 +28,7 @@ Sometimes we need to strengthen our metatheory with \emph{the law of excluded mi
 \subsubsection*{The Logical Symbols}
 \verb|FOL| is a framework for formalizing different theories. It therefore has to flexible enough to be augmented to work in a large variety of contexts and domains. We therefor make the following distinction between the role symbols that comprising \verb|FOL| play: The \emph{logical symbols} in the language of \verb|FOL| are those symbols that are not context specific. These are 
 \begin{enumerate}
-    \item \textbf{Variables}: These are play the role of placeholders for objects in the domain to which we want to apply \verb|FOL|. Eg. $x$ might be a placeholder for a set in Zermol-Fraenkel set theory or $n$ might be a placeholder for a natural number in the standard model of Peano arithemetic or $\mathcal{C}$ could be a placeholder for a category in Category Theory. We presuppose a potentially infinite list of such symbols. That is we may always generate sufficiently large number of distinct variables.
+    \item \textbf{Variables}: These are play the role of placeholders for objects in the domain to which we want to apply \verb|FOL|. Eg. $x$ might be a placeholder for a set in Zermol-Fraenkel set theory or $n$ might be a placeholder for a natural number in Peano arithemetic or $\mathcal{C}$ could be a placeholder for a category in Category Theory. We presuppose a potentially infinite list of such symbols. That is we may always generate sufficiently large number of distinct variables.
     \item \textbf{Logical operators:} $\neg$ (not), $\wedge$ (and), $\vee$ (or), $\to$ (implies).
     \item \textbf{Logical quantifiers:} $\forall$ (universal quantifier, to be read as "for all" or "for every") and $\exists$ (existential quantifier, to be read as "exists" or "there is").
     \item \textbf{Equality symbol:} $=$ a \emph{relational symbol} (scroll down a little for a definition) which is not context specific.    
@@ -37,10 +37,10 @@ Sometimes we need to strengthen our metatheory with \emph{the law of excluded mi
 Those symbols that are introduced in some context to use \verb|FOL| to talk about some domain. these are 
 \begin{enumerate}
     \item \textbf{Constant symbols:} These are symbols that signify a specific object in a specific domain. Examples are $\emptyset$ in for example Zermelo-Fraenkel set theory or $0$ in Peano arithmetic.
-    \item \textbf{Function symbols:} A symbol that is a placeholder for an object that depends on finite list of objects in a domain called arguments. For instance if $F$ is a function symbol that takes $n$ arguments, then given variables $x_1,\dots, x_n$, $F(x_1,\dots,x_n)$ is some object. A function symbol has a natural number attached to them called an \emph{arity}. A function symbol that takes $n$ arguments is an $n$-ary function. Examples are $+$ in Peano Arithmetic or $\cup$ in Zermelo-fraenkel set theory. 
+    \item \textbf{Function symbols:} A symbol that is a placeholder for an object that depends on finite list of objects in a domain called arguments. For instance if $F$ is a function symbol that takes $n$ arguments, then given variables $x_1,\dots, x_n$, $F(x_1,\dots,x_n)$ is to be thought of as a placeholder of some object. A function symbol has a natural number attached to them called an \emph{arity}. A function symbol that takes $n$ arguments is an $n$-ary function. Examples are $+$ in Peano Arithmetic or $\cup$ in Zermelo-fraenkel set theory. In particular, these are examples of \emph{binary} functions.  
     \item \textbf{Relation symbols:} Symbol that signify relations of objects. Like function symbols, these have a natural number arity attached to them; and given a relation symbol $R$ and objects $x_1,\dots, x_n$, $R(x_1,\dots,x_n)$ signifies that $x_1,\dots,x_n$ are in relation by $R$.  
 \end{enumerate}
-To actually give these syntactical meaning, we need to define rules for building well-formed formulae in $\verb|FOL|$. I.e. we need to define what strings of symbols, we are allowed to write in the language. A set potentially infinite list of non-logical symbols is called a \textit{signature} often denoted $\mathcal{L}$. 
+To actually give these syntactical meaning, we need to define rules for building well-formed formulae in $\verb|FOL|$. I.e. we need to define what strings of symbols, we are allowed to write in the language. A set of potentially infinite list of non-logical symbols is called a \textit{signature} often denoted $\mathcal{L}$. 
 \subsubsection{Terms and Formulae}
 For a signature $\mathcal{L}$, a string of symbols is an \emph{$\mathcal{L}$-term} if it is a result of finitely applying these rules in some order
 \begin{align*}
@@ -289,7 +289,7 @@ We now give following notion of checking that two models are essentially the sam
     1. Indeed, $M$ is a model of the empty set (of formulae), hence by an application of the above theorem the result follows.\\
     2. Indeed, given a formula $\varphi\in\Phi$, 
     $$M\not\vDash \varphi \wedge \neg\varphi,$$
-    means $\Phi \not\vdash \varphi\wedge \neg\varphi$ by the soundness theorem {\large note to self: write something about contraposition in metatheory}.\\
+    means $\Phi \not\vdash \varphi\wedge \neg\varphi$ by the soundness theorem.\\
     3. Any model of a set of formulae is a model of any instance of logical axiom, hence by 2. such an instance is consistent.\\
     4. This is just a special case of the contrapositive of the soundness theorem. 
 \end{proof}

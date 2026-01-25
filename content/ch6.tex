@@ -94,6 +94,13 @@
     \end{gather*}
     is injective if and only if the first sheaf property is fulfilled and Surjective if and only if the second sheaf property is fulfilled.
 \end{proof}
+\begin{corollary}
+    If $X$ is a topological space, $\pazocal{O}$ is a sheaf valued in the category of abelian groups and $\{U_i\}$ is an open covering of affine, disjoint subsets of $X$. It follows that 
+    $$
+        \pazocal{O}(U)\simeq \prod_{i} \pazocal{O}(U\cap U_i)
+    $$
+    for each open subset $U\subset X$.
+\end{corollary}
 \begin{example}
     The presheaf $\pazocal{O}$ on a variety $X$ is a sheaf: Consider an open subvariety $U\subset X$ and an open covering $\{U_i\}$ of $U$ and suppose there is a rational function $f\in \pazocal{O}(U)$ such that $\left. f\right|_{U_i}=0$ for every $i$. Viewing $f$ as a partial function on $U$ it follows that given a point $x\in \dom\ f$, since $x\in \dom\ f \cap U_i$ for some $i$, 
     $$f(x)=\left.f\right|_{U_i}(x)= 0 \implies f = 0.$$
@@ -858,6 +865,42 @@ The above example shows the necessity of morphisms of locally ringed spaces havi
     $$
     I.e. a point whose singleton set is dense in $X$.
 \end{definition}
+\begin{lemma}
+    Let $X$ be a topological and $x\in X$. Then $\overline{\{x\}}$ is irreducible. 
+\end{lemma}
+\begin{proof}
+    Suppose $\overline{\{x\}} = Y\cup Z$ for closed sets $Y,Z$ in $X$. Then $x\in Y$ or $x\in Z$, hence $\overline{\{x\}}=Y$ or $\overline{\{x\}}=Z$.
+\end{proof}
+\begin{lemma}\label{IrreducibleSetsInAffineSchemesHaveGenericPoints}
+    Let $A$ be a ring. Then $Y\subset \Spec \ A $ is irreducible if and only if $Y$ contains a unique point that is generic in $Y$.
+\end{lemma}
+\begin{proof}
+    If $Y$ has a generic point, then it is clearly irreducible by the prior lemma. Suppose $Y$ is irreducible. Set 
+    $$
+        \mathfrak{p} = \bigcap_{\mathfrak{q}\in Y} \mathfrak{q}.
+    $$ 
+    We claim that this is a prime ideal. Indeed, if $xy\in \mathfrak{p}$, then $x\in \mathfrak{q}$ for every $\mathfrak{q}\in Y$ or $y\in \mathfrak{q}$ for every $\mathfrak{q}\in Y$, for if there were $\mathfrak{q}_1,\mathfrak{q}_2$ with $x\in \mathfrak{q}_1$, $y\notin \mathfrak{q}_1$, $y\in \mathfrak{q}_2$, $x\notin \mathfrak{q}_2$, then $Y\cap V(\langle x\rangle)$ and $Y\cap V(\langle y\rangle)$ would be proper closed components of $Y$. We now claim that $\overline{\{\mathfrak{p}\}}= V(\mathfrak{p})= Y$. Clearly $V(p)\supset Y$. Let $\mathfrak{q}\in Y$ and let $D(f)$ be an open neighborhood of $\mathfrak{q}$. Then $f\notin \mathfrak{q}$, hence clearly $f\notin \mathfrak{p}$. hence $\mathfrak{q}\in \overline{\{\mathfrak{p}\}}$.\\
+    Uniqueness of this $\mathfrak{p}$ follows from the fact that for prime ideals $\mathfrak{p}_1,\mathfrak{p}_2\subset A$, 
+    $$
+        V(\mathfrak{p}_1) = V(\mathfrak{p}_2) \iff \mathfrak{p}_1 = \mathfrak{p}_2.
+    $$
+\end{proof}
+\begin{lemma}
+    Consider a topological space $X$ with an open covering $\{U_i\}$. If $X$ is irreducible, then $X=U_i$ for some $i$.
+\end{lemma}
+\begin{proof}
+    Indeed, 
+    $$
+        X = X\setminus U_i \cup X\setminus \left( \bigcup_{j\neq i} U_j\right).
+    $$
+    Then $X= U_i$ or $X= X\setminus U_i$. Picking $U_i$ with $X\cap U_i\neq \emptyset$ it follows that $X= U_i$.
+\end{proof}
+\begin{proposition}
+    Let $X$ be a scheme. $Y\subset X$ is irreducible if and only if it contains a unique generic point $\eta$. 
+\end{proposition}
+\begin{proof}
+    Again if it contains a generic point it is irreducible. Suppose $Y$ is irreducible. By the prior lemma, $Y$ must be contained in an open affine set in $X$. By Lemma~\ref{IrreducibleSetsInAffineSchemesHaveGenericPoints} it follows that $Y$ has a unique generic point. 
+\end{proof}
 \begin{example}
     Let $K$ be an algebraically closed field. Then the maximal ideals of $K[x_1,x_2]$ correspond to points in $\A^2(K)$. The closed points of $\A^2_K$ thus correspond to the points of $\A^2(K)$ (cf. Hilbert's Nullstellensatz). Denote these by 
     $$
@@ -1069,7 +1112,7 @@ We use the above example to construct a scheme that is not affine
         (f_\sigma)^\#_U : \pazocal{O}_{\Spec\ A}(U)\rightarrow (f_\sigma)_\ast\pazocal{O}(U)\\
         s\mapsto \left((f_i^\#)_{U}(s)\right) 
     \end{gather*}
-    The claim now is that $(f_\sigma)^\#_{\Spec\ A} = \sigma$. Indeed, for each $s\in A$
+    Here $f_i$ is equal to $f_U$. The claim now is that $(f_\sigma)^\#_{\Spec\ A} = \sigma$. Indeed, for each $s\in A$
     \begin{align*}
         (f_\sigma)^\#_{\Spec \ A}(s) = \left((f^\#_i)_{\Spec \ A}(s)\right) = (\sigma_{U_i}(s)) = (\left.\sigma(s)\right|_{U_i}) = \sigma(s).
     \end{align*}
@@ -1098,6 +1141,25 @@ We use the above example to construct a scheme that is not affine
         \Proj\ R := \left\{ \mathfrak{p}\in \Spec\ R : \mathfrak{p} \text{ and homogeneous}, R_{+}\not\subset\mathfrak{p} \right\}.
     $$ 
 \end{definition}
+\begin{lemma}
+    Let $R$ be a graded ring. Then 
+    $$
+        \Proj\ R = \emptyset \iff \rad(0)\supset R_{+}.
+    $$
+    Note that the second condition is equivalent to every element in $R_{+}$ being nilpotent
+\end{lemma}
+\begin{proof}
+    "$\implies$": Let $\mathfrak{p}\subset R$ be a homogeneous prime ideal. Then $\mathfrak{p}\supset R_{+}$. It follows that 
+    $$
+        R_{+}\subset \bigcap_{\mathfrak{p} \text{ homogeneous, prime }, \mathfrak{p}\supset R_{+}} \mathfrak{p} = \rad(0).
+    $$
+    Here we use a strengthened version of Lemma~\ref{RadicalOfIdealIsIntersectionOfAllPrimeIdealsContainingIt} for homogenous ideal in graded rings. The proof of this version is the same except for the fact that we consider 
+    $$
+        X := \{J\subset R: J\supset I \text{ is a homogeneous ideal}, a^n\notin J \text{ for all } n\geq 0\}
+    $$
+    for $a\notin \rad(I)$, to find a homogeneous prime $\mathfrak{p}$ not containing $a$.\\
+    "$\impliedby$": Suppose all elements of $R_{+}$ are nilpotent. Consider an ideal $\mathfrak{a}$ not containing all of $R_{+}$. Then there is an element $a\in R_{+}\setminus\mathfrak{a}$. hence $aa^{n-1} = a^n =0\in \mathfrak{a}$ for some $n>0$. It follows that, $\mathfrak{a}$ is not prime, hence $\Proj\ R = \emptyset.$
+\end{proof}
 \begin{definition}
     Given a homogeneous ideal $I$ in a graded ring $R$, we define 
     $$
@@ -1222,6 +1284,31 @@ where $\pazocal{O}_{\Proj\ R}(U)\rightarrow \pazocal{O}_{\Proj\ R}(V)$ induced b
         \left(\varphi^\#_U\right)^{-1}(s) : \mathfrak{p}\mapsto \sigma_{\mathfrak{p}}^{-1}(s\circ\varphi^{-1})(\mathfrak{p}).
     $$ 
     Note that this construction is same as mentioned in Remark~\ref{ConstructionOfNaturalTransformationOfSheavesFrom} so naturality follows. We thus conclude that $D_{+}(f)\simeq \Spec\ R_{(f)}$.
+\end{proof}
+\begin{lemma}
+    Consider a map of graded rings $\sigma : R\rightarrow S$. Then $U=\{\mathfrak{p}\in \Proj \ S : \mathfrak{p}\not\subset \sigma(R_{+})\}$ is an open set
+\end{lemma}
+\begin{proof}
+    Let $\mathfrak{p}\in U$. Then there is an $f\in R_{+}$ not in  $\sigma^{-1}(\mathfrak{p})$. Then $\sigma(f)$ is not in $\mathfrak{p}$. Let $\mathfrak{q}\in D_{+}(\sigma(f))$. Then $\sigma(f)\notin \mathfrak{q}$, hence $\mathfrak{q}\not\supset  \sigma(R_{+})$. It follows that $D_{+}(\sigma(f))\subset U$, hence $U$ is open. 
+\end{proof}
+The above gives rise to a morphism of schemes, 
+\begin{gather*}
+    f : U \rightarrow \Spec \ R
+\end{gather*}
+whose underlying continuous map is given by 
+$$
+    \mathfrak{p} \mapsto \sigma^{-1}(\mathfrak{p})
+$$
+and where a component of $f^\#$ takes a section $s\in \pazocal{O}_{\Proj \ R}(V)$ and maps it to the section 
+$$
+    \mathfrak{p}\mapsto \sigma_{(\mathfrak{p})}(s\circ f(\mathfrak{p}))
+$$
+where $\sigma_{(\mathfrak{p})}: S_{(f(\mathfrak{p}))} \rightarrow R_{(\mathfrak{p})}$ is the canonical map induced by $\sigma$.
+\begin{proposition}
+Consider a map of graded rings $\sigma: R\rightarrow S$ with $\sigma_d: R_d\rightarrow S_d$ being an isomorphism for each $d\geq d_0$ for some $d_0\geq 0$. Then $U = \Proj \ S$ and $f : \Proj\ S\rightarrow \Proj\ R$ is an isomorphism. 
+\end{proposition}
+\begin{proof}
+    
 \end{proof}
 \subsubsection{Reduced Schemes}
 \begin{definition}
@@ -1351,7 +1438,7 @@ Consider a scheme $(X,\pazocal{O})$. Let $\pi_{X_\mathrm{red}} :X_\mathrm{red}\r
         $$
             \pazocal{O}\Rightarrow L
         $$ 
-        in the following way: When $x\in U\subset X$, define $\pazocal{O}(U)\rightarrow \pazocal{O}_{\Spec K}(\varphi^{-1}(U))=L$ to be the composite of $\pazocal{O}(U)\rightarrow K(x)$ and $K(x)\hookrightarrow L$. When $x\notin U$, note that $\pazocal{O}_{\Spec \  K}(\varphi^{-1}(U))=\pazocal{O}_{\Spec \ K}(\emptyset)=0$, which is the terminal object in the category of rings. The map $\pazocal{O}(U)\rightarrow \varphi_\ast\pazocal{O}_{\Spec \ K}(U)$ is then obvious. It is clear that this assignment is natural.
+        in the following way: When $x\in U\subset X$, define $\pazocal{O}(U)\rightarrow \pazocal{O}_{\Spec\ L}(\varphi^{-1}(U))=L$ to be the composite of $\pazocal{O}(U)\rightarrow K(x)$ and $K(x)\hookrightarrow L$. When $x\notin U$, note that $\pazocal{O}_{\Spec \  L}(\varphi^{-1}(U))=\pazocal{O}_{\Spec \ L}(\emptyset)=0$, which is the terminal object in the category of rings. The map $\pazocal{O}(U)\rightarrow \varphi_\ast\pazocal{O}_{\Spec \ L}(U)$ is then obvious. It is clear that this assignment is natural.
     \end{proof}
     \begin{proposition}
         Let $X$ be a scheme. Every closed irreducible set $Y$ in $X$ has a unique generic point $\zeta_Y\in Y$.
@@ -1432,3 +1519,88 @@ Consider a scheme $(X,\pazocal{O})$. Let $\pi_{X_\mathrm{red}} :X_\mathrm{red}\r
     \end{gather*}  
     is bijective 
 \end{proof}
+\begin{proposition}
+    Consider a projective varierty $V$ with homogeneous coordinate ring $\Gamma^\Pp(V)$. Then 
+    $$
+        t(V)\simeq \Gamma^\Pp(V).
+    $$
+\end{proposition}
+\begin{proof}
+    
+\end{proof}
+\begin{definition}
+    Given a field $K$, \emph{the dual ring of $K$} is the ring 
+    $$
+        K[\epsilon]/\langle \epsilon^2\rangle.
+    $$
+\end{definition}
+\begin{remark}
+    The dual ring is a finitely generated $K$-algebra generated by $\epsilon+\langle \epsilon^2\rangle$. We denote this generator by $\epsilon$ for simplicity (when this does not cause confusion). The dual ring is also a two dimensional vector space over $K$
+\end{remark}
+\begin{lemma}
+    There is one prime ideal of the dual ring of a field $K$, namely the one generated by $\epsilon$.
+\end{lemma}
+\begin{proof}
+    Note that the zero ideal is not prime, since $K[\epsilon]/\langle \epsilon^2\rangle$ has a nilpotent. The only other proper ideals are of the form $\langle \epsilon+\alpha\rangle$ for $\alpha\in K$. Note that for $\alpha\neg 0$,
+    $$
+        \alpha^{-1}\epsilon(\epsilon+\alpha)=\epsilon.
+    $$
+    Moreover, 
+    $$
+        \alpha\epsilon = \alpha\epsilon+\epsilon^2 = \epsilon(\alpha+\epsilon).
+    $$
+    It follows that $\langle \epsilon\rangle$ is the only prime ideal in the dual ring.  
+\end{proof}
+\begin{definition}
+    Given a scheme $X$, \emph{Zariski tangent space at a point $x\in X$}, is the vector space over $K(x)$, 
+    $$
+        T_x := \mathrm{Dual}_{K(x)}(\mathfrak{m}_x/\mathfrak{m}_x^2),
+    $$
+    where $\mathfrak{m}_x$ is the maximal ideal of $\pazocal{O}_{X,x}$.
+\end{definition}
+\begin{lemma}
+    Let $x$ be an element of a scheme $X$ over a field $K$ such that $K(x)\simeq K$. Then 
+    $$
+        \pazocal{O}_{X,x} \simeq K \oplus \mathfrak{m}_x 
+    $$
+\end{lemma}
+\begin{proof}
+    Consider the short exact sequence
+    $$
+        \begin{tikzcd}
+            0 \arrow[r] & \mathfrak{m}_x\arrow[r] & \pazocal{O}_{X,x} \arrow[r] & K(x)=K \arrow[r] & 0
+        \end{tikzcd}
+    $$
+    since $X$ is a scheme over $K$ there is a morphism $K\hookrightarrow \pazocal{O}_{X,x}$, so we can apply the splitting lemma to obtain an isomorphism $\pazocal{O}_{X,x}\simeq K\oplus \mathfrak{m}_x $
+\end{proof}
+\begin{proposition}
+    Let $K$ be a ring and $X$ a scheme over $K$ and denote the dual numbers of $K$ by $A$. There is a one-to-one correspondence of $K$-morphisms from $\Spec \ A $ to $X$ and points in $X$ whose residue field is isomorphic to $K$ together with an element of $T_x$.
+\end{proposition}
+\begin{proof}
+    Let $f : \Spec \ A \rightarrow X$ be a $K$-morphism. Note that $\Spec \ A = \{\langle \epsilon\rangle\}$. Then the map $f$ takes $\langle \epsilon \rangle$ to some point $x\in X$. Since $A_{\langle \epsilon\rangle}/\mathfrak{m}\simeq K$, in addition, we have a commutative diagram
+    $$
+        \begin{tikzcd}
+            K(x)\arrow[rr,hookrightarrow, "\widetilde{f^\#_x}"] && K\\
+            & K \arrow[ul,hookrightarrow] \arrow[ur,"\id"]
+        \end{tikzcd}
+    $$ 
+    Since $\id$ is surjective, it follows that $K(x)\simeq K$. Note that $f^\#_x$ induces a map $\mathfrak{m}_x/\mathfrak{m}_x^2\rightarrow \langle\epsilon\rangle/\langle \epsilon\rangle^2\simeq K$ which is an element of $T_x$. 
+    \\
+    Conversely, consider a point $x\in X$ such that $K(x)\simeq K$ and a linear map $l: \mathfrak{m}_x/\mathfrak{m}_x^2\rightarrow K(x)=K$. We define 
+    \begin{gather*}
+        f : \Spec\ A\rightarrow X\\
+        \epsilon \mapsto x
+    \end{gather*} 
+    the structure sheaf of $\Spec\ A$ consists of $A$ itself. When $U\subset X$ is an open set not containing $x$, we see that $f^{-1}(U)=\emptyset$, hence $\pazocal{O}_X(U)\rightarrow f_\star\pazocal{O}_{\Spec\ A }(U)$ has to be the zero map. Suppose $U$ is an open neighborhood of $x$. We define $K$ linear map
+    \begin{gather*}
+        \beta : \pazocal{O}_{X,x} = K\oplus \mathfrak{m}_x\rightarrow A = K\oplus \langle \epsilon\rangle\\
+        a + b \mapsto a + l(b+\mathfrak{m}_x^2)\epsilon 
+    \end{gather*}
+    One readily verfies by direct computation that this is a multiplicative map and therefor a ring map. Thus upon precomposing this map with $\pazocal{O}(U)\rightarrow \pazocal{O}_{X,x}$ we obtain a natural transformation $\pazocal{O}_X\Rightarrow \pazocal{O}_{\Spec\ A}$.\\
+     It remains to check that the above assignments are mutual inverses: Consider a morphim $f: \Spec \ A \rightarrow X$. Denote the point in the image of $f$ by $x$ and the associated $K$-linear map by $l$. Denote the morphism of schemes associated with this pair by $f_{x,l}$. Clearly the underlying continuous maps agree. Consider $a+b\in \pazocal{O}_{X,x}=K\oplus \mathfrak{m}_x$. Note that $f^\#_x$ is a $K$-algebra map, hence it fixes $K$. Note also that if $b\in\mathfrak{m}_x$, then $f^\#_x(b)=\beta \epsilon$ for some $\beta \in K$, hence $l(b+\mathfrak{m}_x^2)= \beta$. Then 
+     $$
+        f^\#_x(a+b) = a + f^\#_x(b) = a + l(b+\mathfrak{m}_x)\epsilon.
+     $$
+     Let $U$ be an open neighborhood of $x$. It readily follows that $f^\#_U = \left(f_{x,l}^\#\right)_U$. Checking that $f_{x,l}$ induces $x$ and $l$, for a point $x\in X$ rational over $K$ and an element $l\in T_x$, is a trivial task.    
+\end{proof}
+
