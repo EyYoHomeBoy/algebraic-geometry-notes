@@ -1776,9 +1776,73 @@ Assuming the axiom of choice we get the following result.
     $$\rho'\mid_{\im\ \rho}(n+N\cap L) = \rho' (n+N\cap L)= n +N=0 \implies \rho'\mid_{\im\ \rho} = 0.$$
     It follows that $\im \ \overline{\rho} = \ker\ \rho'\mid_{\im\ \rho} = \ker \ 0 = (N+L)/N$, hence $\rho$ is surjective. By exactness $\rho$ is also injective hence $N/(N\cap L) \overset{\rho}{\simeq} (N+L)/N$.
 \end{proof}
+\subsubsection{The Splitting Lemma}
+\begin{lemma}(The Splitting Lemma)
+    Let $R$ be a ring and $A,B,C$ be left $R$-modules and 
+    $$
+        \begin{tikzcd}
+            0 \arrow[r] & A \arrow[r,"\alpha"] & B\arrow[r,"\beta"] & C \arrow[r] & 0
+        \end{tikzcd}
+    $$
+    a short exact sequence. The following are equivalent,
+    \begin{enumerate}
+        \item $\beta$ is split epi.
+        \item $\alpha$ is split mono.
+        \item $\gamma: B\simeq A\oplus C$, $\beta\gamma=\pi_2$ and $\gamma^{-1}\alpha=\iota_1$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    "3.$\implies$ 1. and 2.": There are maps 
+    \begin{gather*}
+        \iota: C\rightarrow B\\
+        x\mapsto \gamma((0,x))
+    \end{gather*}
+    and 
+    \begin{gather*}
+        \mu : B\rightarrow A\\
+        y\mapsto \pi_1(\gamma^{-1}(y))
+    \end{gather*}
+    Then 
+    $$
+        \beta\iota(x)= \beta\gamma(0,x) = \pi_1(0,x)=x = \id_C(x)
+    $$
+    for each $x\in C$. We also have that 
+    $$
+        \mu\alpha(y)=\pi_1\gamma^{-1}\alpha(y) = \pi_1\iota_1(y) = y = \id_A(y) 
+    $$
+    for each $y\in A$.\\ 
+    "1.$\implies$ 3.": Suppose $\beta$ is split epi. Then there is a $\iota$ which is a section of $\beta$. Note that if  $b\in \ker \ \beta \cap \im \ \iota$, then $b=\iota(c)$ for some $c\in C$, hence $c=\beta(\iota(c)) =0$, implying $b=0$. Moreover 
+    $$
+        b= (b-\iota\beta(b))+\iota\beta(b)\in \ker\ \beta + \im\ \iota 
+    $$
+    for each $b\in B$, hence $B=\ker\beta \oplus \im \ \iota$.
+    Note that 
+    $$
+        A\simeq \im\ \alpha  =\ker\ \beta 
+    $$ 
+    via $\alpha$, since $\alpha$ is injective (since it is in particular a monomorphism) and that 
+    $$
+        C\simeq \im \ \iota 
+    $$
+    via $\iota$ since this is a section and therefore an injective map. We thus get that 
+    $$
+        B = \ker \beta \oplus \im\ \iota \simeq A \oplus C.
+    $$ 
+    Here we use functiorality of the bifunctor $\_\oplus\_ : \mod_R \times \mod_R \rightarrow \mod_R$.\\
+    By construction, 
+    $$
+        \beta\gamma(a,c)= \beta(\alpha(a)+\overline{\iota}(c)) = \beta\alpha(a)+\beta\iota(c)= c = \pi_2(a,c).
+    $$
+    Secondly 
+    $$
+        \gamma^{-1}\alpha(a)= (\overline{\alpha}^{-1}\alpha(a),\beta\alpha(a))= (a,0) = \iota_1(a).
+    $$
+    Here $\overline{\alpha}$ denotes $\alpha$ when seen as a function onto its image.\\ 
+    "2.$\implies$ 3.": this is dual to 1.$\implies$ 3.   
+\end{proof}
 \subsubsection{Free Modules}
 \begin{lemma}
-    For a non-empty set $X$, the free additive group $R[X]$, where $R$ is a ring, is an $(R,R)$-bimodule with generating set $\{\delta_{yx}: X\rightarrow R \ \| \ x\in X\}$
+    For a non-empty set $X$, the free additive group $R[X]$, where $R$ is a ring, is an $(R,R)$-bimodule with generating set $\{\delta_{yx}: X\rightarrow R \ | \ x\in X\}$
 \end{lemma}
 \begin{proof}
     This is just a reformulation of Lemma~\ref{BasisOfDirectSum}.
@@ -2674,14 +2738,14 @@ For this subsection $\pazocal{C}$ denotes the category whose objects are pairs c
 \end{definition}
 \subsubsection{Discrete Valuation Rings}
     \begin{definition}
-        Let $R$ be a non-field integral domain. $R$ is a \textit{discrete valuation ring (DVR)} if it is noetherian and local with the maximal ideal is principal. 
+        Let $R$ be a non-field integral domain. $R$ is a \textit{discrete valuation ring (DVR)} if it is noetherian and local with principal maximal ideal. 
     \end{definition}
     \begin{proposition}\label{EquivalentDefinitionOfDVR}
         Let $R$ be a non-field integral domain. Then $R$ is a DVR if and only if there is an irreducible element $t\in R$ such that for every $z\in R\setminus 0$ there are unique $u\in R^\ast$ and $n\geq 1$ satisfying $z=ut^n$
     \end{proposition}
     \begin{proof}
-        "$\implies $": Let $\mathfrak{m}=\langle t\rangle$ be the maximal ideal of $R$. Then $t$ is prime hence irreducible by the maximality. Let $z\in R\setminus0$. Then either $z$ is a unit in which case $z\notin \mathfrak{m}$ or $z$ is not a unit hence $z\in\mathfrak{m}$. There is a $u\in R\setminus 0$ with $t\nmid u$ and a maximal $n$ such that $z=ut^n$. Since $u\notin \langle t\rangle$ it is a unit by maximality. Suppose $u'\in R^\ast $ and $n'\geq0$ are given such that $ut^n = u't^{n'}$. Then $n=n'$, since otherwise $t\mid u'$, hence $u=u'$.\\
-        "$\impliedby$": Let $\mathfrak{m}=\langle t\rangle$. Every non-unit is of the form $ut^n$, where $n\geq 1$, hence $R\setminus R^\ast = \mathfrak{m}$, hence $R$ is local by Proposition~\ref{EquivalentFormulationOfRingBeingLocal}. Let $I\subsetneq R$ be an ideal, then $I\subset \mathfrak{m}$. Then $I=\langle t^r\rangle$, where $r=\min \{n\geq 0: t^n\in I\rangle.$ Indeed if $a\in I$, then $a=ut^n$ for some $n\geq r$, hence $a=ut^{n-r}t^{r}\in I$. Then $R$ is a PID, and hence Noetherian.   
+        "$\implies $": Let $\mathfrak{m}=\langle t\rangle$ be the maximal ideal of $R$. Then $t$ is prime hence irreducible by maximality. Let $z\in R\setminus0$. Then either $z$ is a unit in which case $z\notin \mathfrak{m}$ or $z$ is not a unit hence $z\in\mathfrak{m}$. There is a $u\in R\setminus 0$ with $t\nmid u$ and a maximal $n$ such that $z=ut^n$. Since $u\notin \langle t\rangle$, it is a unit by maximality. Suppose $u'\in R^\ast $ and $n'\geq0$ are given such that $ut^n = u't^{n'}$. Then $n=n'$, since otherwise $t\mid u'$, hence $u=u'$.\\
+        "$\impliedby$": Let $\mathfrak{m}=\langle t\rangle$. Every non-unit is of the form $ut^n$, where $n\geq 1$, hence $R\setminus R^\ast = \mathfrak{m}$, hence $R$ is local by Proposition~\ref{EquivalentFormulationOfRingBeingLocal}. Let $I\subsetneq R$ be an ideal, then $I\subset \mathfrak{m}$. Then $I=\langle t^r\rangle$, where $r=\min \{n\geq 0: t^n\in I\}.$ Indeed if $a\in I$, then $a=ut^n$ for some $n\geq r$, hence $a=ut^{n-r}t^{r}\in I$. Then $R$ is a PID, and hence Noetherian.   
     \end{proof}
     \begin{remark}
         We refer to an element such as $t$ as an \textit{uniformizing parameter}.The uniformizing parameters of a DVR are of the form $ut$ where $u$ is a unit and $t$ is a uniformizing parameter. Set $K=Q(R)$. Then every $z\in K\setminus0$ can be written uniquely on the form $z=ut^{n}$ for a unit $u\in R$ and an integer $n$. The integer $n$ is called \textit{the order of $z$} denoted $\ord(z)$. We set $\ord(0)=\infty$. One sees that $R=\ord^{-1}(\Z_{\geq 0}\cup\{\infty\})$ and $\mathfrak{m}=\ord^{-1}(\Z_{\geq 1}\cup\{\infty\})$. The order is independent of uniformizing parameter. Since if $t$ is a uniformizing parameter and $z = ut^n$ for unique $u\in R^\ast$, $n\in \Z$, then for a unit $s\in R$, $z= \frac{a}{b} = \frac{vst^l}{yst^k} = \frac{v}{y}t^{l-k}$ for suitable units $v,y$, $l,k\geq 0$, hence by uniqueness $\frac{v}{y}=u$ and $l-k=n$.   
@@ -2775,7 +2839,9 @@ For this subsection $\pazocal{C}$ denotes the category whose objects are pairs c
         Let $R$ be a DVR with maximal ideal $\mathfrak{m}$, $L:=Q(R)$ and a subring $K$ that is a field. Suppose that the composition $\sigma: K \hookrightarrow R \twoheadrightarrow L$ is an isomorphism. Then for any $z\in R$ there is a unique $\lambda \in K$ such that $z-\lambda\in \mathfrak{m}$. 
     \end{lemma}
     \begin{proof}
-        \textbf{The case $z\in \mathfrak{m}$:} Pick $\lambda =0$. By the prior lemma for any $\mu\in K\setminus0$ $\ord(z-\mu)=\ord(\mu)=0$, hence $z-\mu\notin \mathfrak{m}$.\\
+        \textbf{The case $z\in \mathfrak{m}$:} Pick $\lambda =0$. By the prior lemma for any $\mu\in K\setminus0$ 
+        $$\ord(z-\mu)=\ord(\mu)=0,$$
+         hence $z-\mu\notin \mathfrak{m}$.\\
         \textbf{The case $z\notin \mathfrak{m}$:} Then $z$ is a unit in $R$. Clear $\sigma$ fixes $K$, hence it is a $K$-algebra isomorphism. For some $\lambda \setminus 0$, $\lambda =\sigma(\lambda)=z$, hence $z-\lambda =0\in \mathfrak{m}$. Since $\sigma$ is injective it follows that $\lambda$ is unique. 
     \end{proof}
     \begin{proposition}\label{PropositionTowardsPowerSeriesDescriptionOfCerationDVRs}
@@ -3071,11 +3137,16 @@ For a field $K$, we define $\mathrm{Vect}_K:=\mathrm{Mod}_K$.
         v_1,\dots,v_n\in \bigcup_{\pazocal{V}\in C} \pazocal{V}
     $$
     Then for each $i$, $v_i \in \pazocal{V}_i$ for some $\pazocal{V_i}\in C$. Then for each $i$, $\pazocal{V_i}\subset \pazocal{V}_m$ for some $m\in \{1,\dots,n\}$. It thus follows that $a_i = 0$ for every $i$. Then 
-    $\bigcup_{\pazocal{V}\in C}\pazocal{V}\in X$ and is an upper bound of $C$. Then $X$ has a maximal element. A maximally linear independent set is a basis, hence $V$ has a basis.  
+    $\bigcup_{\pazocal{V}\in C}\pazocal{V}\in X$ and is an upper bound of $C$. Then $X$ has a maximal element $\pazocal{V}$. A maximally linear independent set is a basis, hence $V$ has a basis. Indeed, given any $v\in V$ either $v\in \pazocal{V}$ or there are $a_1,\dots,a_{n+1}\in K$ with $a_{n+1}\in K\setminus0$ and $v_1,\dots,v_n$ such that 
+    $$
+        a_{n+1}v+ \sum_1^n a_i v_i = 0
+    $$
+    since otherwise $\pazocal{V}\cup \{v\}\supsetneq \pazocal{V}$ would be linearly independent over $K$, contradicting maximality. We thus have  
+    $$
+        v = \sum_1^n -a_{n+1}^{-1}a_iv_i.
+    $$
+    This means $\pazocal{V}$ generates $V$, so $\pazocal{V}$ is a basis. 
 \end{proof}
-\begin{lemma}
-    Given a vector space $V$ over a field $K$, if $\pazocal{V},\pazocal{V}'$ are bases for $V$ over $K$, then they have the same cardinality.
-\end{lemma}
 \begin{lemma}
     Consider a vector space $V$ over a field $K$, if $\{v_1,\dots,v_n\}\subset V$ are linearly independent over $K$ and $\{w_1,\dots,w_m\}$ generates $V$ over $K$, then 
     $$
@@ -3148,6 +3219,28 @@ For a field $K$, we define $\mathrm{Vect}_K:=\mathrm{Mod}_K$.
     Note that 
     $$_\pazocal{V}T_\pazocal{W} v_i= \sum_1^n\left(\sum_1^n a_{kj}\delta_{ki}\right)v_j = \sum_1^n a_{ij}v_j = w_i $$
 \end{remark}
+\begin{lemma}
+    Let $V$ be a vector space over a field $K$. Let $\pazocal{V}$ be a basis of $V$ and $l\in \mathrm{Aut}_K(V)$. Then $l(\pazocal{V})$ is basis of $V$
+\end{lemma}
+\begin{proof}
+    Let $v\in V$. Then 
+    $$
+        l^{-1}(v) = \sum_1^n a_iv_i
+    $$
+    for some $v_1,\dots,v_n\in \pazocal{V}$ and $a_1,\dots,a_n\in K$. It follows that 
+    $$
+        v = \sum_1^n a_il(v_i).
+    $$
+    Suppose $l(v_1),\dots,l(v_n)\in l(\pazocal{V})$ are given with $a_1,\dots,a_n\in K$ such that 
+    $$
+        \sum_1^n a_il(v_i)=0.
+    $$
+    Then 
+    $$
+        \sum_1^n a_iv_i = l^{-1}\left(\sum_1^n a_il(v_i) \right)=0,
+    $$
+    hence $a_i = 0$ for each $i$.
+\end{proof}
 \begin{theorem}\label{BasisTransformationTheorem}
     Let $V$ be an $n$-dimensional vector space over a field $K$ with basis $\pazocal{V}=\{v_1,\dots,v_n\}$. Consider $\pazocal{W}=\{w_1,\dots,w_n\}\subset V$. Then $\pazocal{W}$ is a basis of $V$ over $K$ if and only if $_\pazocal{V}T_\pazocal{W}$ is invertible.  
 \end{theorem}
@@ -3158,18 +3251,41 @@ For a field $K$, we define $\mathrm{Vect}_K:=\mathrm{Mod}_K$.
         _\pazocal{V}T_\pazocal{W} {_\pazocal{W}}T_\pazocal{V} = _\pazocal{W}T_\pazocal{V} {_\pazocal{V}}T_\pazocal{W} = I_n,
     $$ 
     hence ${_\pazocal{V}}T_\pazocal{W}$ is invertible with inverse ${_\pazocal{W}}T_\pazocal{V}$.\\
-    "$\impliedby$": by {\large An invertible linear map, maps a basis to a basis}, hence $\pazocal{W} = _\pazocal{V}T_\pazocal{W}(\pazocal{V})$ is a basis of $V$.
+    "$\impliedby$": by the prior lemma, $\pazocal{W} = _\pazocal{V}T_\pazocal{W}(\pazocal{V})$ is a basis of $V$.
+\end{proof}
+\begin{lemma}(Rank-Nullity)
+    Let $V$ be a finite dimensional vector space and $W$ any vector space. Then for a linear map $l : V\rightarrow W$,
+    $$
+        V \simeq \ker \ l \oplus \im \ l.
+    $$
+    In particular,
+    $$
+        \dim \ V = \dim \ \ker\ l + \dim \im \ l. 
+    $$ 
+\end{lemma}
+\begin{proof}
+    We have a short exact sequence 
+    $$
+        \begin{tikzcd}
+            0 \arrow[r] & \ker \ l \arrow[r,hookrightarrow] & V \arrow[r, twoheadrightarrow] & \im \ V \arrow[r] & 0
+        \end{tikzcd}
+    $$
+    with $\id_V$ being a retraction of $\ker\ l \hookrightarrow V$. By the splitting lemma, We are done
 \end{proof}
 \begin{lemma}\label{DimensionsOfExactSequence}
-        Given an exact sequence of vector spaces
+        Given a short exact sequence of vector spaces
          $$\begin{tikzcd}
             0 \arrow[r] &V \arrow[r,"\rho"] & V' \arrow[r,"\rho'"] & V'' \arrow[r] & 0
         \end{tikzcd}$$
         we have that 
-        $$\dim\ V= \dim \ V' + \dim \ V''$$
+        $$\dim\ V'= \dim \ V + \dim \ V''$$
     \end{lemma}
     \begin{proof}
-        This follows from the above Lemma~\ref{ExactnessIsEquivalentToInjFirstSESSurjSecondSES} and {\LARGE theorem not yet written about finite dimensional vector spaces}.
+        This follows from Lemma~\ref{ExactnessIsEquivalentToInjFirstSESSurjSecondSES} and rank-nullity. Indeed, 
+        $$
+            V' = \ker\ \rho' \oplus \im \ \rho' = \im \ \rho\oplus V'' \simeq V\oplus V''  
+        $$
+        where the isomorphism is induced by $\rho$ considered as a map onto its image.
     \end{proof}
     \begin{proposition}
         For sequence of vector spaces
@@ -3994,7 +4110,7 @@ The following theorem is useful when one wants to eliminate certain variables in
         &= a(n+1)x^{d_{n+1}}-\left(\sum_{i=1}^n\alpha_ia(i) \right)x^{d_{n+1}}+r'+r =a(n+1)x^{d_{n+1}}-a(n+1)x^{d_{n+1}} +r'+r\\ &= \sum_{i=1}^{n+1}\sum_{j=1}^{d_i-1}a_j^{(i)}x^{i}.
     \end{align*}
     Thus $\deg \ g = \max\{d_1-1,\dots,d_{n+1}-1\} = d_{n+1}-1< d_{n+1} =\min\{ \deg \ f : f \in I\setminus I_n\}$, leading to a contradiction. This means that $J_1\subset J_2\subset \dots$ is a non-stabilizing ascending chain hence $R$ is not noetherian.\\
-    Suppose that $R$ is noetherian. Then by induction $R[x_1,\dots,x_n]\simeq \left(R[x_1,\dots,x_{n-1}]\right)[x_n]$ is noetherian.
+    By induction $R[x_1,\dots,x_n]\simeq \left(R[x_1,\dots,x_{n-1}]\right)[x_n]$ is noetherian.
 \end{proof}
 \begin{corollary}\label{PolynomialIdealOverFieldIsFinitelyGenerated}
     Let $K$ be a field. Then $K[x_1,\dots,x_n]$ is noetherian.
@@ -4740,7 +4856,18 @@ We observe the following facts about homogenization and de-homogenization.
         each monomial in $f_{i_1,\dots,i_m}$ is a homogeneous of degree $i_k$ in $R[x_{kj} : k\neq i][x_{i1},\dots,x_{in_i}]$ for each $k$, hence $f_{i_1,\dots,i_m}$ is $m$-homogeneous of $m$-degree $(i_1,\dots,i_m)$. Uniqueness follows from $\{\mathbf{x}^\mathbf{v}\}$ being linearly independent over $R$.
     \end{proof}
     \begin{definition}
-        For an $f\in R[\mathbf{x_1},\dots,\mathbf{x_m}]$ we say that $([v_1],\dots,[v_m])\in \Pp^{n_1}\times \Pp^{n_m}$ is \textit{a zero of $f$} if for every $(\lambda_1,\dots,\lambda_m)\in K^m$, $\lambda_i\neq 0$, $f(\lambda_1v_1,\dots,\lambda_mv_m) = 0$.
+        For an $f\in K[\mathbf{x_1},\dots,\mathbf{x_m}]$, where $K$ is a field, we say that $([v_1],\dots,[v_m])\in \Pp^{n_1}\times \Pp^{n_m}$ is \textit{a zero of $f$} if for every $(\lambda_1,\dots,\lambda_m)\in K^m$ with $\lambda_i\neq 0$, 
+        $$
+            f(\lambda_1v_1,\dots,\lambda_mv_m) = 0.
+        $$
+        When $([v_1],\dots,[v_m])$ is a zero of $f$. We write 
+        $$
+            f([v_1],\dots,[v_m]) = 0,
+        $$
+        otherwise we write 
+        $$
+            f([v_1],\dots,[v_m]) \neq 0
+        $$
     \end{definition}
     \begin{remark}
         If $f$ were an $m$-form of $m$-degree $(d_1,\dots,d_m)$ note that $f(\lambda_1v_1,\dots,\lambda_mv_m)=\left(\prod_1^m \lambda_i^{d_i}\right)f(v_1,\dots,v_m)$. Hence if $(v_1,\dots,v_m)$ is a zero of $f$, then so is $([v_1],\dots,[v_m])\in \Pp^{n_1}\times\cdots \times \Pp^{n_m}$.
@@ -4760,7 +4887,7 @@ We observe the following facts about homogenization and de-homogenization.
     mapping $1$ to $0$ and $x^n$ to $x^{n-1}$ for $n\geq 1$.For a polynomial $f\in R[x]$, we call the polynomial $D_xf$ the \textit{derivative of $f$ (with respect to $x$)}, which we may denote by $f'$.
 \end{definition}
 \begin{remark}
-    One easily checks that $D_x fg = (D_xf)g+f(D_xg)$, i.e. that is satisfies the Leibniz rule. It also satisfies the chain rule, i.e. 
+    One easily checks that $D_x fg = (D_xf)g+f(D_xg)$, i.e. that the Leibniz rule is satisfied. It also satisfies the chain rule, i.e. 
     $$D_x(f(g))=(D_xg)\cdot(D_xf)(g).$$
     By definition over an integral domain of characteristic $0$, $\deg \ f' = \deg \ f -1$ when $\deg \ f\geq 1$. In positive characteristic this may not be the case. For instance, when $\Char\ R = p >0$, we get that $D_x x^p= px^{p-1}=0$. We can also come up with pathological examples over commutative rings of characteristic $0$. Indeed take $R=\Z/2\Z \times \Z$ with the usual structure of product ring. Then $D_x (1,0)x^2= (2,2)(1,0)x= (0,2)(1,0)x=0.$ 
 \end{remark}
