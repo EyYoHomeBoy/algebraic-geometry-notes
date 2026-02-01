@@ -1387,6 +1387,46 @@ Another result that one could note that is that
     $$
     So $D$ is linearly independent over $R$. 
 \end{proof}
+The following gives an argument for why we get to define a module map by only defining a map on a basis.
+\begin{lemma}
+    Let $M$ and $N$ be left $R$-modules with a left basis $\pazocal{B}$ of $M$ over $R$. Consider a function $\rho : \pazocal{B}\rightarrow N$. Then there is a unique extension of $\rho$ to a left $R$-module map $\rho: M\rightarrow N$. 
+\end{lemma}
+\begin{proof}
+    We define 
+    \begin{gather*}
+        \rho : \sum_{v\in \pazocal{B}} a_v v = M \rightarrow N \\
+        \sum_{v} a_v v \mapsto \sum_v a_v\rho(v)
+    \end{gather*}
+    Note that the left linear independence of $\pazocal{B}$ over $R$, ensures that the representation of $v$ in terms of $\pazocal{B}$ is unique, so this is well-defined. Let $a,b\in R$ and $\sum_{v} a_v v,\sum_{v} b_v v\in M$. Then 
+    \begin{align*}
+        \rho\left(\left[a\sum_{v}a_v\right] +\left[b\sum_v b_vv \right]\right) &= \rho\left( \sum_v (aa_v+bb_v) v\right)\\ &= \sum_v (aa_v+bb_v)\rho(v)\\ &= a\sum_v a_v \rho(v) + b\sum_v b_v\rho(v)\\ 
+        &= a\rho\left(\sum_v a_v v\right)+b\rho\left(\sum_v b_v v\right). 
+    \end{align*}
+    so this is indeed a linear map. Suppose $\rho' : M\rightarrow N$ is a linear map that restricts to $\rho: \pazocal{B} \rightarrow N$. Then 
+    $$
+        \rho'\left(\sum_v a_v v\right) = \sum_va_v \rho'(v)=\sum_v a_v \rho(v)= \rho\left(\sum_va_vv\right),
+    $$
+    which proves the uniqueness of $\rho$.
+\end{proof}
+We denote category of left $R$-modules with finite left bases by 
+$$
+    \mathrm{mod}_R^{\mathrm{fb}}
+$$
+\begin{lemma}
+        Fix a ring $R$ and consider the set 
+        $$
+            \{R^n : n\in \N\}
+        $$
+        This together with left $R$-linear maps restricted to this set, define the skeleton of $\mathrm{mod}_R^{\mathrm{fb}}$.
+    \end{lemma}
+    \begin{proof}
+        Let $M$ be a left $R$-module with basis $\pazocal{V}:=\{v_1,\dots,v_n\}$. Consider the left $R$-linear map 
+        \begin{gather*}
+            R^n \rightarrow M\\
+            (a_1,\dots,a_n) \mapsto \sum_1^n a_iv_i
+        \end{gather*}
+        This is surjective since $\pazocal{V}$ generates $M$ over $R$ and injective since $\pazocal{V}$ is left linearly independent over $R$. 
+    \end{proof}
 \begin{proposition}
     Let $S$ be a ring and $R\subset S$ a subring. Consider $(M,\cdot,+)$, a left $S$-module, then $rm:= r\cdot m$, for $r\in R$, defines a structure of left $R$-modules. If in addition $Q$ is a subring of a ring $T$ and $M$ is an $(S,T)$-bimodule, then $M$ is an $(R,Q)$-bimodule.  
 \end{proposition}
@@ -1908,6 +1948,35 @@ Assuming the axiom of choice we get the following result.
 \begin{example}
     A matrix ring is never a commutative ring: Take $(a_{ij})\in M_n(R)$ where $a_{11}= 1$ and $a_{ij} = 0$ when $a_{ij} =0$ for $i\neq 1$ or $j\neq 1$. Take $(b_{ij})\in M_n(R)$ where $b_{1m} =1$ and $b_{ij}=0$ when $i \neq 1$ or $j \neq m$. Then it is easy to check that $(a_{ij})(b_{ij}) = (b_{ij})$ while $(b_{ij})(a_{ij}) = 0$.
 \end{example}
+Given a ring $R$ and matrix $(a_{ij})\in M_{n\times m}(R)$ induces a left $R$-linear map 
+\begin{gather*}
+    (a_{ij}) : R^m\rightarrow R^n\\
+    v\mapsto (a_{ij})v
+\end{gather*}
+In general for left $R$-modules $M$ and $N$ with bases $\{m_1,\dots,m_k\}$ respectively $\{n_1,\dots,n_l\}$ we get a left $R$-linear map
+\begin{gather*}
+    (a_{ij}) : M\rightarrow N\\
+\end{gather*}
+defined by $m_i\mapsto \sum_{j=1}^l a_{ij} n_j$. This is the unique left $R$-module map making the diagram 
+$$
+    \begin{tikzcd}
+        M \arrow[d] \arrow[r]& N \arrow[d]\\
+        R^k \arrow[r] & R^l
+    \end{tikzcd}
+$$
+commute, where the vertical maps denote the canonical isomorphism induced by the respective bases.
+This leads to a canonical description of the morphisms of $\mathrm{Mod}_R^{\mathrm{fb}}$.
+\begin{lemma}
+    Let $\rho : M\rightarrow N$ be a left $R$-linear map of left $R$-modules with finite bases $\pazocal{M}=\{m_1,\dots,m_k\}$ for $M$ respectively $\pazocal{N}=\{n_1,\dots n_l\}$. Then $\rho = (a_{ij})$ for some $(a_{ij})\in M_{k\times l}(R)$.
+\end{lemma}
+\begin{proof}
+    For each $i$ there are unique $a_{i1},\dots,a_{il}\in R$ with 
+    $$
+        \rho(m_i) = \sum_{j=1}^l a_{ij}n_j
+    $$
+    since an $R$-linear map is completely determined by its behavior on basis elements, it follows that $(a_{ij})=\rho$ as left $R$-linear maps. 
+\end{proof}
+
 \subsubsection{Fields, Integral Domains \& some Important Ideals}
 \begin{definition}
     Let $R$ be a ring. An element $r\in R$ is called a \textit{unit} if there is an element $r'\in R$ such that $rr'=r'r = 1$. We denote the set of units of $R$ by $R^\ast$.
@@ -2132,6 +2201,60 @@ The following definition will be important way later on.
      Then 
      $$\prod_1^{n} \left(\sum_1^{m} \lambda_{i,j}a_i\right) = \sum_{v\in \N^m} \mu_v a_1^{v_1}\cdots a_m^{v_m}.$$
      A simple induction argument shows that if $v_i< n_i$ for some $i$ then $v_j>n_j$ for some $j$, hence $a_i^{v_1}\cdots a_m^{v_m}\in J$ for each $v\in \N^m$ with $\sum_1^m v_i = n$. It follows that $\prod_1^{n} \left(\sum_1^{m} \lambda_{i,j}a_i\right)\in J$, hence $I^n\subset J$.
+\end{proof}
+\subsubsection{The IBN Property}
+\begin{definition}
+    A ring $R$ has the \emph{invariant basis number (IBN) property} if for each $n,m\geq 0$, $R^n\simeq R^m$ (as left $R$-modules) implies $n=m$.
+\end{definition}
+\begin{definition}
+    Let $R$ be an arbitrary ring, we define $\mathbb{CFM}_\N(R)$, \emph{the column finite matrices over $\N$} to be the set 
+    $$
+        \left\{(a_{ij})\in \prod_{(i,j)\in \N^2} R : \text{ for each } j \text{ there exists } N \text{ such that } a_{ij}=0 \text{ for all } i\geq N\right\}.
+    $$
+    We define 
+    $$
+        (a_{ij})(b_{ij})= \left(\sum_{k\in \N}a_{ik}b_{kj}\right)
+    $$
+    for $(a_{ij})(b_{ij})\in \mathbb{CFM}_\N(R)$.
+\end{definition}
+\begin{proposition}
+    The above multiplication is well-defined and with it $\mathbb{CFM}_\N(R)$ becomes a ring.
+\end{proposition}
+\begin{proof}
+    Note that for $(a_{ij}),(b_{ij})\in \mathbb{CFM}_\N(R)$, first of all that $\sum_{k\in \N}a_{ik}b_{kj} = \sum_{1}^N a_{ik}b_{kj}$ for a suitably large $N$, since $b_{kj}=0$ for $k$ greater than a suitably large $N$. secondly when $i$ is large, $a_{ij} = 0$, hence $\sum_{k\in \N} a_{ik}b_{kj}=0$, which shows $(a_{ij})(b_{ij})\in \mathbb{CFM}_\N(R)$. Checking the ring axioms is a task completely analogous to doing the same matrix rings of $R$. 
+\end{proof}
+The above is a simple example of a ring without the IBN property. 
+\begin{example}
+    We define a $\mathbb{CFM}_\N(R)$-linear map 
+    \begin{gather*}
+        \mathbb{CFM}_\N(R) \rightarrow \mathbb{CFM}_\N(R)^2\\
+        (a_{ij})\mapsto ((a_{i,2j}),(a_{i,2j+1}))
+    \end{gather*}
+    which has inverse 
+    \begin{gather*}
+        \mathbb{CFM}_\N(R)^2 \rightarrow \mathbb{CFM}_\N(R)
+    \end{gather*}
+    taking a pair $((b_{ij}),(c_{ij}))$ "weaving" them row wise, i.e. mapping it to $(a_{ij})$ with $a_{i,2j}=b_{ij}$ and $a_{i,2j+1}=c_{ij}$. Then $\mathbb{CFM}_\N(R)\simeq \mathbb{CFM}_\N(R)^2$. In fact recursively using this argument, $\mathbb{CFM}_\N(R)^m\simeq \mathbb{CFM}_\N(R)^n$ for $n,m$. 
+\end{example}
+\begin{lemma}
+    A field $K$ has the IBN property.
+\end{lemma} 
+\begin{proof}
+    This is an immediate consequence of dimension being an integer invariant of finite basis vector spaces, which we will see later. 
+\end{proof}
+\begin{proposition}
+    Assuming axiom of choice, a commutative ring has the IBN property.
+\end{proposition}
+\begin{proof}
+    Suppose $f: R^n\simeq R^m$. Let $I$ be a maximal ideal. Then $f$ restrict to a $R$-module homomorphism
+    $$
+        \left. f\right|_{\prod_1^n I} : \prod_1^n I\rightarrow \prod_1^n I
+    $$
+    We thus get an induced $R/I$-linear map
+    \begin{gather*}
+        g : (R/I)^n\simeq R^n/I^n \rightarrow R^m/I^m (R/I)^m\\
+    \end{gather*}
+    following the same construction for the inverse of $f$ we get an inverse of $g$, hence $g$ defines an isomorphim of $R/I$ vector space it follows that $n=m$, since $R/I$ has the IBN property.  
 \end{proof}
 \subsubsection{Reduced Rings}
     \begin{definition}
@@ -2857,6 +2980,28 @@ For this subsection $\pazocal{C}$ denotes the category whose objects are pairs c
         Then $\sum_0^n (\lambda_i-\mu_i)t^i + (z_n-w_n)t^{n+1}=0,$
         hence $\ord((\lambda_i-\mu_i)t^i)=\ord((\lambda_j-\mu_j)t^j)$ for every $i,j$ hence $(\lambda_i-\mu_i)t^i=0$ for every $i$, implying $\lambda_i=\mu_i$. Similarly one can conclude that $z_n=w_n$.  
     \end{proof}
+    For what follows we assume some easy linear algebra that will be covered later
+    \begin{lemma}
+        We keep the same setup as the above two results. Then $\dim_K\ \mathfrak{m}^n/\mathfrak{m}^{n+1} = 1$ for every $n\geq 0$. 
+    \end{lemma}
+    \begin{proof}
+        We use induction in $n\geq 0$. We first prove that 
+        $$\mathfrak{m}^n/\mathfrak{m}^{n+1} = \{ \lambda t^n + \mathfrak{m}^{n+1} : \lambda\in K\}.$$
+        This is clear since any element in $\mathfrak{m}^n$, is equal to $\lambda t^n + zt^{n+1}$ for some $\lambda\in K$, $z\in R$ as by Lemma~\ref{TechnicalDVRLemma} $\ord(\sum_0^n\lambda_it^i) = l$ where $l$ is the smallest index such that $\lambda_l\neq 0$. Hence in the image of $\mathfrak{m}^n/\mathfrak{m}^{n+1}$ such an element is given by $\lambda t^n + zt^{n+1} + \mathfrak{m}^{n+1} = \lambda t^n + \mathfrak{m}^{n+1}$. It follows that 
+        \begin{gather*}
+            \sigma : K \rightarrow \mathfrak{m}^n/\mathfrak{m}^{n+1}\\
+            \lambda \mapsto \lambda t^n+\mathfrak{m}^{n+1}
+        \end{gather*}
+        is a surjective $K$-algebra map. Suppose $\lambda t^n \in \mathfrak{m}^{n+1}$. Then $\ord(\lambda)>0$, hence $\lambda = 0$. We thus conclude that $\mathfrak{m}^n/\mathfrak{m}^{n+1} \simeq K$, meaning $\dim \ \mathfrak{m}^n/\mathfrak{m}^{n+1} = \dim\ K = 1.$
+    \end{proof}
+    \begin{lemma}\label{OrderIsDimensionOfQuotientKAlg}
+        We keep the setup from the prior results. For each $n\geq 0$, $\dim\ R/\mathfrak{m}^n = n$. It follows that $\ord(z) = \dim\ R/\langle z\rangle =  \dim\ R/\mathfrak{m}^{\ord(z)}$ for each $z\in R$.
+    \end{lemma}
+    \begin{proof}
+        We prove the result by induction in $n$. The base case is trivial. By Lemma~\ref{NoetherSecondIsoForModules} and Lemma~\ref{DimensionsOfExactSequence} and the induction hypothesis it follows that 
+        $$\dim\ R/\mathfrak{m}^{n+1} = \dim\ \mathfrak{m}^n/\mathfrak{m}^{n+1}+\dim\ R/\mathfrak{m}^n = n+1,$$
+        where we also use the prior lemma. We now that $z = \lambda t^{\ord(z)}$, hence $\langle z \rangle = \langle t\rangle^{\ord(z)} = \mathfrak{m}^{\ord(z)},$ hence $\ord(z) = \dim \ R/\mathfrak{m}^{\ord(z)}.$
+    \end{proof}
 \subsubsection{Torsion \& Annihilators}
 \begin{definition}
     An element of a ring $R$ is \emph{regular} if it is both not a left and right zero divisor.
@@ -3178,7 +3323,7 @@ For a field $K$, we define $\mathrm{Vect}_K:=\mathrm{Mod}_K$.
     which means $n+1\leq m$.
 \end{proof}
 \begin{corollary}
-    If $\pazocal{V},\pazocal{V}'$ are finite bases of a vector space, then 
+    If $\pazocal{V},\pazocal{V}'$ are finite bases of the same vector space, then 
     $$
         \#\pazocal{V}=\#\pazocal{V}'.
     $$
@@ -3188,7 +3333,7 @@ For a field $K$, we define $\mathrm{Vect}_K:=\mathrm{Mod}_K$.
     $$
         \dim\ V:=\dim_K\ V := \#\pazocal{V}.
     $$
-    Such a vector space is called a \emph{finite dimensional vector space}. When $V$ does not have a finite basis we define
+    Such a vector space is called a \emph{finite dimensional vector space}. The category of such vector spaces is denoted $\mathrm{Vect}^{\mathrm{fd}}_K$. When $V$ does not have a finite basis we define
     $$
         \dim\ V := \infty
     $$
@@ -3272,7 +3417,7 @@ For a field $K$, we define $\mathrm{Vect}_K:=\mathrm{Mod}_K$.
     $$
     with $\id_V$ being a retraction of $\ker\ l \hookrightarrow V$. By the splitting lemma, We are done
 \end{proof}
-\begin{lemma}\label{DimensionsOfExactSequence}
+\begin{lemma}\label{DimensionsOfExactSequence}(Generalized Rank-Nullity)
         Given a short exact sequence of vector spaces
          $$\begin{tikzcd}
             0 \arrow[r] &V \arrow[r,"\rho"] & V' \arrow[r,"\rho'"] & V'' \arrow[r] & 0
@@ -3330,6 +3475,28 @@ For a field $K$, we define $\mathrm{Vect}_K:=\mathrm{Mod}_K$.
             \sum_1^n (-1)^i\dim\ V_i &= \sum_1^n (-1)^i(a_{i-1}+a_i)= -a_0 + (-1)^na_n = -\dim\ \im \ \rho_0 +(-1)^n \dim\ \im \ \rho_n\\ &= -\dim\ \im \ 0 +(-1)^n \dim\ \im \ 0 = 0.
         \end{align*}
     \end{proof}
+    \begin{definition}
+        Consider a vector space $V$ and subspace $W\subset V$. We define the \emph{codimension of $W$ in $V$} to be 
+        $$
+            \codim^V \ W := \codim\ W = \dim \ V - \dim \ W.
+        $$
+    \end{definition}
+    \begin{remark}
+        Given a basis $\pazocal{V}$ of $V$, there is a basis $\pazocal{W}\subset \pazocal{V}$ of $W$. It thus follows that we can express $\codim\ W$ as the cardinality of the set $\pazocal{V}\setminus \pazocal{W}$.
+    \end{remark}
+    
+    \begin{lemma}
+        Given a vector space $V$ with subspaces $W'\subset W\subset V$. Then 
+        $$
+            \codim\ W\leq \codim\ W'.
+        $$
+    \end{lemma}
+    \begin{proof}
+        Indeed since $\dim \ W\geq \dim \ W'$, one sees that 
+        $$
+            \codim \ W = \dim \ V - \dim \ W \leq \dim\ V- \dim \ W' = \codim\ W'. 
+        $$
+    \end{proof}
     \begin{lemma}\label{CodimensionOfIntersectionIsBoundedBySumOfCodimensions}
         Let $V$ be a finite dimensional vector space and $V_1,\dots,V_n$ be subspaces. Then 
         $$\codim \ \bigcap_1^n V_i \leq \sum_1^n \codim \ V_i.$$
@@ -3338,27 +3505,7 @@ For a field $K$, we define $\mathrm{Vect}_K:=\mathrm{Mod}_K$.
         Pick a basis of $V$, $B$ and bases of $V_1,\dots,V_n,\bigcap_1^n V_i$, denoted respectively $\pazocal{V}_1,\dots,\pazocal{V}_n,\pazocal{V}\subset B$. Then 
         $$\codim\ \bigcap_1^n V_i = \#\left( B\setminus \pazocal{V}\right)= \#\left(\bigcup_1^n B\setminus \pazocal{V}_i \right)\leq \sum_1^n \#\left(B\setminus \pazocal{V}_i\right)=\sum_1^n \codim\ V_i.$$
     \end{proof}
-    \begin{lemma}
-        We keep the same setup as the above two results. Then $\dim_K\ \mathfrak{m}^n/\mathfrak{m}^{n+1} = 1$ for every $n\geq 0$. 
-    \end{lemma}
-    \begin{proof}
-        We use induction in $n\geq 0$. We first prove that 
-        $$\mathfrak{m}^n/\mathfrak{m}^{n+1} = \{ \lambda t^n + \mathfrak{m}^{n+1} : \lambda\in K\}.$$
-        This is clear since any element in $\mathfrak{m}^n$, is equal to $\lambda t^n + zt^{n+1}$ for some $\lambda\in K$, $z\in R$ as by Lemma~\ref{TechnicalDVRLemma} $\ord(\sum_0^n\lambda_it^i) = l$ where $l$ is the smallest index such that $\lambda_l\neq 0$. Hence in the image of $\mathfrak{m}^n/\mathfrak{m}^{n+1}$ such an element is given by $\lambda t^n + zt^{n+1} + \mathfrak{m}^{n+1} = \lambda t^n + \mathfrak{m}^{n+1}$. It follows that 
-        \begin{gather*}
-            \sigma : K \rightarrow \mathfrak{m}^n/\mathfrak{m}^{n+1}\\
-            \lambda \mapsto \lambda t^n+\mathfrak{m}^{n+1}
-        \end{gather*}
-        is a surjective $K$-algebra. Suppose $\lambda t^n \in \mathfrak{m}^{n+1}$. Then $\ord(\lambda)>0$, hence $\lambda = 0$. We thus conclude that $\mathfrak{m}^n/\mathfrak{m}^{n+1} \simeq K$, meaning $\dim \ \mathfrak{m}^n/\mathfrak{m}^{n+1} = \dim\ K = 1.$
-    \end{proof}
-    \begin{lemma}\label{OrderIsDimensionOfQuotientKAlg}
-        We keep the setup from the prior results. For each $n\geq 0$, $\dim\ R/\mathfrak{m}^n = n$. It follows that $\ord(z) = \dim\ R/\langle z\rangle =  \dim\ R/\mathfrak{m}^{\ord(z)}$ for each $z\in R$.
-    \end{lemma}
-    \begin{proof}
-        We prove the result by induction in $n$. The base case is trivial. By Lemma~\ref{NoetherSecondIsoForModules} and Lemma~\ref{DimensionsOfExactSequence} and the induction hypothesis it follows that 
-        $$\dim\ R/\mathfrak{m}^{n+1} = \dim\ \mathfrak{m}^n/\mathfrak{m}^{n+1}+\dim\ R/\mathfrak{m}^n = n+1,$$
-        where we also use the prior lemma. We now that $z = \lambda t^{\ord(z)}$, hence $\langle z \rangle = \langle t\rangle^{\ord(z)} = \mathfrak{m}^{\ord(z)},$ hence $\ord(z) = \dim \ R/\mathfrak{m}^{\ord(z)}.$
-    \end{proof}
+    
 \subsubsection{Dual Vector Spaces}
     \begin{definition}
         Let $V$ be a vector space over a field $K$. The \emph{dual vector space of $V$ (over $K$)} is 
@@ -3462,7 +3609,7 @@ For a field $K$, we define $\mathrm{Vect}_K:=\mathrm{Mod}_K$.
         Let $V$ be a vector space over some field $K$. For $v,w\in V\setminus 0$ we write $v\sim w$ if there exists a $\lambda\in K\setminus 0$ such that $w = \lambda v$
     \end{definition}
     \begin{remark}
-        This an equivalence relation. Indeed $v = 1\cdot v$, hence $v\sim v$. If $v\sim w$, then $w =\lambda v$, hence $v= \lambda^{-1}w$, meaning $w\sim v$. Suppose $v\sim w$ and $w\sim u$. Then $w=\lambda v$ and $u = \mu w$, hence $u = \mu\lambda v$, implying $v\sim u$. 
+        This is an equivalence relation. Indeed $v = 1\cdot v$, hence $v\sim v$. If $v\sim w$, then $w =\lambda v$, hence $v= \lambda^{-1}w$, meaning $w\sim v$. Suppose $v\sim w$ and $w\sim u$. Then $w=\lambda v$ and $u = \mu w$, hence $u = \mu\lambda v$, implying $v\sim u$. 
     \end{remark}
     \begin{definition}
         We define \textit{the projective space of $V$ over $K$} to be the set 
@@ -3471,7 +3618,7 @@ For a field $K$, we define $\mathrm{Vect}_K:=\mathrm{Mod}_K$.
     \end{definition}
     \begin{remark}
         Note that $[\lambda v]=[v]$ for every $\lambda\in K\setminus 0$ and $[v]\in \Pp(V)$, hence $[\lambda v_1,\dots,\lambda v_{n+1}]=[v_1,\dots,v_{n+1}]$ for every $[v_1,\dots,v_{n+1}]\in\Pp^n$.\\
-        Consider the category of Vector Spaces with morphism being maps that are homogeneous of degree $1$. Consider also category of sets $P$ with a $(K^\ast,\cdot)$-action, satisfying $p=\lambda p$ for every $p\in P$, with morphisms being maps that are homogeneous of degree $1$ with respect to this $K^\ast$-action. Then $V\mapsto \Pp(V)$ and $f: V\rightarrow W\mapsto \widehat{f} : \Pp(V)\rightarrow \Pp(W), [v]\mapsto [f(v)]$, defines a functor. Restricting all sets to be topological spaces (with vector spaces being topological vector spaces) and all maps to be continuous, we get two subcategories of category of topological spaces such that the functor $(V,f)\mapsto (\Pp(f),\widehat{f})$ restricts to a functor between these categories. Indeed if $f: X\rightarrow Y$ is continuous and $\pi: X\rightarrow X/\sim_X$, $\tau: Y\rightarrow Y/\sim_Y$, denotes quotient maps to some quotient spaces and $\widehat{f}: X/\sim_X \rightarrow Y/\sim_Y, [x]\mapsto [f(x)]$ is well-defined, then $\widehat{f}\pi = \tau f $, hence $\widehat{f}$ is continuous, by the universal property of quotient space {\large perhaps write some point set topology?}.    
+        Consider the category of Vector Spaces with morphism being maps that are homogeneous of degree $1$. Consider also category of sets $P$ with a $(K^\ast,\cdot)$-action, satisfying $p=\lambda p$ for every $p\in P$, with morphisms being maps that are homogeneous of degree $1$ with respect to this $K^\ast$-action. Then $V\mapsto \Pp(V)$ and $f: V\rightarrow W\mapsto \widehat{f} : \Pp(V)\rightarrow \Pp(W), [v]\mapsto [f(v)]$, defines a functor. Restricting all sets to be topological spaces (with vector spaces being topological vector spaces) and all maps to be continuous, we get two subcategories of category of topological spaces such that the functor $(V,f)\mapsto (\Pp(f),\widehat{f})$ restricts to a functor between these categories. Indeed if $f: X\rightarrow Y$ is continuous and $\pi: X\rightarrow X/\sim_X$, $\tau: Y\rightarrow Y/\sim_Y$, denotes quotient maps to some quotient spaces and $\widehat{f}: X/\sim_X \rightarrow Y/\sim_Y, [x]\mapsto [f(x)]$ is well-defined, then $\widehat{f}\pi = \tau f $, hence $\widehat{f}$ is continuous, by the universal property of quotient space.    
     \end{remark}
     \begin{definition}
         For each $i\in\{1,\dots,n+1\}$ we define \textit{the $i$'th copy of $K^n$ in $\Pp^n$} to be the set 
@@ -3498,20 +3645,23 @@ For a field $K$, we define $\mathrm{Vect}_K:=\mathrm{Mod}_K$.
         \end{definition}
         \begin{remark}
             Of course one should ask if this is well-defined. Suppose we are given $\alpha_1,\dots,\alpha_m\in K\setminus 0$. Then for any $(\lambda_1,\dots,\lambda_m)\in K^m\setminus 0$,
-            $$\sum_1^m \lambda_i(\alpha_i v_i) = \sum_1^m (\lambda_i\alpha_i)v_i\in \left\{\left[\sum_1^m \lambda_iv_i\right] : (\lambda_1,\dots,\lambda_m)\in K^m\setminus 0 \right\} $$
+            $$
+                \left[\sum_1^m \lambda_i(\alpha_i v_i)\right] = \left[\sum_1^m (\lambda_i\alpha_i)v_i\right]\in \left\{\left[\sum_1^m \lambda_iv_i\right] : (\lambda_1,\dots,\lambda_m)\in K^m\setminus 0 \right\} 
+            $$
             and conversely 
-            $$\sum_1^m \lambda v_i = \sum_1^m (\lambda_i\alpha_i^{-1})\alpha_iv_i \in \left\{\left[\sum_1^m \lambda_i(\alpha_iv_i)\right] : (\lambda_1,\dots,\lambda_m)\in K^m\setminus 0 \right\}.$$
-            A further thing to note with this construction, is that if $v_1,\dots,v_m\in \A^{n+1}\setminus 0$ span $\A^{n+1}$ (this can only happen for $m\geq n+1$, then $\Span([v_1],\dots,[v_m])=\Pp^n.$
+            $$\left[\sum_1^m \lambda v_i\right] = \left[\sum_1^m (\lambda_i\alpha_i^{-1})\alpha_iv_i\right] \in \left\{\left[\sum_1^m \lambda_i(\alpha_iv_i)\right] : (\lambda_1,\dots,\lambda_m)\in K^m\setminus 0 \right\}.$$
+            A further thing to note with this construction, is that if $v_1,\dots,v_m\in \A^{n+1}\setminus 0$ span $\A^{n+1}$ (this can only happen for $m\geq n+1$), then $\Span([v_1],\dots,[v_m])=\Pp^n.$
         \end{remark}
         \begin{lemma}\label{EquivalentDefinitionOfLinearlyIndependent}
-            $v_1,\dots,v_m\in \Pp^n$ are linearly independent if and only if $[v_i]\notin \Span([v_1],\dots,\widehat{[v_i]},\dots,[v_m])$ for any $i$.
+            $v_1,\dots,v_m\in K^n$ are linearly independent if and only if\\ 
+            $[v_i]\notin \Span([v_1],\dots,\widehat{[v_i]},\dots,[v_m])$ for any $i$.
         \end{lemma}
         \begin{proof}
             "$\implies$": Suppose there is a $[v_i]\in \Span([v_1],\dots,\widehat{[v_i]},\dots,[v_m])$. Then for some $\lambda_1,\dots,\lambda_m\in K^m$ with $\lambda_i \neq 0$,
             $$-\lambda_i v_i = \sum_{j\neq i} \lambda_jv_j \implies \sum_1^m \lambda_jv_j = 0,$$
             hence $v_1,\dots,v_m$ are not linearly independent. 
             "$\impliedby$": Suppose there are $(\lambda_1,\dots,\lambda_m)\in K^m\setminus 0$ such that $\sum_1^m \lambda_i v_i = 0$. Then for some $j\in\{1,\dots,m\}$, $\lambda_j\neq 0$, hence 
-            $$v_j = \lambda_j^{-1}\sum_{i\neq j} \lambda_i v_i \in \Span([v_1],\dots,\widehat{[v_j]},\dots, [v_m])$$
+            $$[v_j] = \left[\lambda_j^{-1}\sum_{i\neq j} \lambda_i v_i\right] \in \Span([v_1],\dots,\widehat{[v_j]},\dots, [v_m])$$
         \end{proof}
     \subsubsection{Normed Vector Spaces}
         \begin{definition}
@@ -3620,7 +3770,7 @@ With this definition we already have that $R[\N^n]$ is a$R$-module, since it is 
     \begin{align*}
         (a_v)\left(((b_v)+(c_v)\right) &= \left(\sum_{v,w\in \N^n : v+w = u} a_v(b_w + c_w) \right) = \left(\sum_{v,w\in \N^n : v+w = u} a_vb_w + a_vc_w \right)\\ 
         &= \left(\sum_{v,w\in \N^n : v+w = u} a_vb_w + \sum_{v,w\in \N^n : v+w = u}a_vc_w \right)\\
-        &= \left(\sum_{v,w\in \N^n : v+w = u} a_vb_w\right) + \left(\sum_{v,w\in \N^n : v+w = u}a_vc_w \right) = (a_v)(b_v)+(a_v)(c_v).
+        &= \left(\sum_{v,w\in \N^n : v+w = u} a_vb_w\right) + \left(\sum_{v,w\in \N^n : v+w = u}a_vc_w \right)\\ &= (a_v)(b_v)+(a_v)(c_v).
     \end{align*}
     This means $\prod_{v\in \N^n} R$ is a ring with this multiplication. Note also that
     $$(a_v)(b_v) = \left( \sum_{v,w\in \N^n : v+w =u} a_vb_w \right) =\left( \sum_{v,w\in \N^n : v+w =u} b_va_w \right)=(b_v)(a_v).$$
@@ -3720,7 +3870,7 @@ We collect all the data established about the polynomial ring in the following t
 \begin{lemma}
     Let rings $R,S,T$ be given and consider $\sigma\in \Hom(R,S)$, $\tau\in \Hom(S,T)$. Then $\overline{\tau\circ \sigma} = \overline{\tau} \circ \overline{\sigma}$. We also have that $\overline{\text{id}_R}=\textit{id}_{R[x_1,\dots,x_n]}$. In other words 
     $$(R,\sigma)\mapsto (R[x_1,\dots,x_n],\overline{\sigma})$$
-    is a covariant endofunctor on $\mathrm{ComRing}$ for every $n\geq 1$.  
+    is a covariant endofunctor on $\mathrm{CRSing}$ for every $n\geq 1$.  
 \end{lemma}
 \begin{proof}
     Indeed, for $\sum_{v\in \N^n} a_v\mathbf{x}^v\in R[\mathbf{x}]$
@@ -3911,7 +4061,7 @@ We collect all the data established about the polynomial ring in the following t
      Given a commutative $R$-algebra $S$ and elements $s_1,\dots,s_n\in S$, we note that the $R$-algebra generated by these elements, i.e. $R[s_1,\dots,s_n]$ is given as the image of $\ev_{s_1,\dots,s_n}: R[x_1,\dots,x_n]\rightarrow S$.
 \end{remark}
 \begin{lemma}\label{EvaluationCommutesWithTakingQuotient}
-    Let $R$ be a ring and $J\subset R[y_1,\dots,y_m]$ be an ideal. Consider $\overline{f_1}:=f_1+J,\dots,\overline{f_n}:=f_n+J\in R[\mathbf{y}]/J$. Then for each $f\in R[\mathbf{x}]$
+    Let $R$ be a ring and $J\subset R[y_1,\dots,y_m]$ be an ideal. Consider $\overline{f_i}:=f_i+J\in R[\mathbf{y}]/J$. Then for each $f\in R[\mathbf{x}]$
     $$\ev_{\overline{f_1},\dots,\overline{f_n}}(f) = \ev_{f_1,\dots,f_n}(f)+J$$
 \end{lemma}
 \begin{proof}
@@ -3936,24 +4086,17 @@ We collect all the data established about the polynomial ring in the following t
     $$\Hom^{R-\text{Alg}}(R[x_1,\dots,x_n],S) = \left\{ \ev_{s_1,\dots,s_n} : (s_1,\dots,s_n)\in S^n \right\}.$$
 \end{corollary}
 \begin{corollary}
-    Let $I\subset R[x_1,\dots,x_n]$, $J\subset R[y_1,\dots,y_n]$ be ideals. Then $\Hom^{R-\text{Alg}}(R[\mathbf{x}]/I,R[\mathbf{y}]/J)$ is equal to  
-    $$\left\{ f+I\mapsto \ev_{f_1,\dots,f_n}(f)+J : f_1,\dots,f_n\in R[\mathbf{y}], \ev_{f_1,\dots,f_n}(f)=0 \text{ for every } f\in I \right\} =: F$$
+    Let $I\subset R[x_1,\dots,x_n]$, $J\subset R[y_1,\dots,y_n]$ be ideals. Then an $R$-algebra map $\sigma:R[x_1,\dots,x_n]/I\rightarrow R[y_1,\dots,y_m]/J$, is induced by some $\ev_{a_1,\dots,a_n}$ with $\ev_{a_1,\dots,a_n}(I)\subset J$. 
 \end{corollary}
-\begin{proof}
-    It is easy to check that $F\subset \Hom^{K-\text{Alg}}(R[\mathbf{x}]/I,R[\mathbf{y}]/J)$. Indeed, consider such a map $\sigma$ for given $f_1,\dots,f_n\in R[\mathbf{y}]$. Consider $$\sigma' : R[\mathbf{x}] \rightarrow R[\mathbf{y}]/J, f \mapsto \ev_{f_1+J,\dots,f_n+J}(f) = \ev_{f_1,\dots,f_n}(f)+J,$$
-    is clearly a ring homomorphism satisfying $\sigma'(r)=r$ for $r\in R$, since it is equal to $\pi\circ\ev_{f_1,\dots,f_n}$, where $\pi: R[\mathbf{y}\rightarrow R[y]/J$ is the canonical surjection. Since $\ev_{f_1,\dots,f_n}(f)=0$ for every $f\in I$, it thus follows that $\sigma$ is a well-defined ring homomorphism satisfying $\sigma(r)=r$ for every $r\in R$ and hence an $R$-algebra homomorphism.\\
-    Let $\sigma \in\Hom^{R-\text{Alg}}(R[\mathbf{x}]/I,R[\mathbf{y}]/J)$. Then $\sigma\circ \pi \in \Hom^{R-\text{Alg}}(R[\mathbf{x}],R[\mathbf{y}]/J)$, where $\pi: R[\mathbf{x}]\rightarrow R[\mathbf{x}]/I$ is the canonical surjection. Hence by the prior corollary, $\sigma \circ \pi = \ev_{f_1+J,\dots,f_n+J}$ for suitable $f_1+J,\dots,f_n+J\in R[\mathbf{y}]/J$. Let $f+I \in R[\mathbf{x}]/I$. Then by Lemma~\ref{EvaluationCommutesWithTakingQuotient}
-    \begin{align*}
-        \sigma(f+I)=\sigma\circ \pi (f) = \ev_{f_1+J,\dots,f_n+J}(f) = \ev_{f_1,\dots,f_n}(f) + J,
-    \end{align*}
-    hence $\sigma \in F$.
-\end{proof}
 \begin{lemma}
     Let $S\supset R$ be a ring extension and $s_1,\dots,s_n$ be algebraically independent over $R$. When $R[x_1,\dots,x_n]$ denotes the polynomial over $R$ in $n$ variables then $R[s_1,\dots,s_n]\simeq R[\mathbf{x}]$.
 \end{lemma}
 \begin{proof}
     $\ev_{s_1,\dots,s_n} : R[\mathbf{x}]\rightarrow R[s_1,\dots,s_n]$ defines a surjective ring homomorphism. Let $f\in R[\mathbf{x}]$. By the definition of algebraic independence 
-    $$\ev_{s_1,\dots,s_n}(f)=0 \iff f = 0.$$. $\ev_{s_1,\dots,s_n}$ is therefor injective, implying $R[s_1,\dots,s_n]\simeq R[\mathbf{x}]$
+    $$
+        \ev_{s_1,\dots,s_n}(f)=0 \iff f = 0.
+    $$ 
+    $\ev_{s_1,\dots,s_n}$ is therefor injective, implying $R[s_1,\dots,s_n]\simeq R[\mathbf{x}]$
 \end{proof}
 \begin{corollary}
     Consider the ring extension $R[x_1,\dots,x_n,y_1,\dots,y_m]\supset R$. Then the subring of $R[\mathbf{x},\mathbf{y}]$ generated by $x_1,\dots,x_n$ is isomorphic to the polynomial ring in $n$ variables. 
@@ -3972,7 +4115,7 @@ We collect all the data established about the polynomial ring in the following t
         V(f).
     $$
 \end{definition}
-The above definitions are central to the classical treatment of algebraic geometry, since the geometric objects considered are build from set zeroes of polynomials over a field $K$. 
+The above definitions are central to the classical treatment of algebraic geometry, since the geometric objects considered are build from zero sets of polynomials over a field $K$. 
 \begin{proposition}\label{AZeroIffPolynomialIsInPointIdeal}
     Let $S$ be an $R$-algebra. Let $f\in R[x_1,\dots,x_n]\subset S[x_1,\dots,x_n]$ and $(s_1,\dots,s_n)\in S^n $, set $I :=\langle x_1-s_1,\dots,x_n-s_n\rangle\subset S[x_1,\dots,x_n] $. Then $(s_1,\dots,s_n)$ is a zero of $f$ if and only if $f\in I$. We call $I$ the \textbf{point ideal of $(s_1,\dots,s_n)$}.
 \end{proposition}
@@ -3990,11 +4133,11 @@ The above definitions are central to the classical treatment of algebraic geomet
     hence $(s_1,\dots, s_n)$ is a zero of $f$.
 \end{proof}
 \begin{corollary}\label{MaximalIdealsOfPolynomialRings}
-    Let $(r_1,\dots,r_n)\in R^n$. If $\ev_{r_1,\dots,r_n}$ is surjective, then 
+    Let $(r_1,\dots,r_n)\in R^n$. Then 
     $$
         R[x_1,\dots,x_n]/\langle x_1-r_1,\dots,x_n-r_n\rangle \simeq R.
     $$ 
-    Hence if $R$ is a field, then $\langle x_1-r_1,\dots,x_n-r_n\rangle$ is maximal. 
+    Explicitly, this isomorpism is induced by $\ev_{r_1,\dots,r_n}$. In particular, $\langle x_1-r_1,\dots,x_n-r_n\rangle$ is maximal if and only if $R$ is a field. 
 \end{corollary}
 \begin{corollary}\label{RootIffMinimalPolynomialDivides}
     Let $S\supset R$ be a commutative ring extension and consider $f\in R[x]$ and $a \in S$. Then $a$ is a root of $f$ if and only if $x-a\mid f$ in $S[x]$. 
@@ -4133,7 +4276,7 @@ The following theorem is useful when one wants to eliminate certain variables in
     Let $K$ be a field and $f=\sum_0^d a_ix^i\in K[x]$ an irreducible polynomial. Set $I:=\langle f\rangle$. Then $F:=K[x]/I$ is a field and $x+I$ is a root of $g:= \sum_0^d a_iy^i\in F[y]$.
 \end{lemma}
 \begin{proof}
-    Lemma~\ref{InPIDPrimeIdealsAreMaximal} and Lemma~\ref{InPIDIrreduciblesArePrimes} shows that $I$ is maximal. Then $K[x]/I$ is a field by Proposition~\ref{InCommutativeRingMaximalIdealIffQuotientRingField}. Secondly, 
+    Corollary~\ref{PolynomialRingOverFieldIsPID} (a later result), Lemma~\ref{InPIDPrimeIdealsAreMaximal} and Lemma~\ref{InPIDIrreduciblesArePrimes} shows that $I$ is maximal. Then $K[x]/I$ is a field by Proposition~\ref{InCommutativeRingMaximalIdealIffQuotientRingField}. Secondly, 
     $$g(x+I)=\sum_0^d a_i(x+I)=\left(\sum_0^d a_ix\right)+I=0+I.$$
 \end{proof}
 \subsubsection{More on Power Series}
@@ -4185,7 +4328,7 @@ The following theorem is useful when one wants to eliminate certain variables in
     The ring of power series $K\llbracket x\rrbracket$ is a DVR with uniformizing parameter $x$ when $K$ is a field.
 \end{proposition}
 \begin{proof}
-    $x$ is irreducible by the above lemma. Let $t\in K\llbracket x\rrbracket$. Put $n := \max (\{k\geq 1: x^k\mid t\}).$ Note for $h\in K\llbracket x\rrbracket$, $x\mid h $ if and only if $h$ is not a unit, hence $t = sx^n$, where $s$ a unit. uniqueness of this representation follows from the maximality of $n$ and the irreducibility of $x$. It thus follows that $K\llbracket x\rrbracket$ is a DVR with uniformizing parameter $x$ by Proposition~\ref{EquivalentDefinitionOfDVR}.
+    $x$ is irreducible by the above lemma. Let $t\in K\llbracket x\rrbracket$. Put\\ $n := \max (\{k\geq 1: x^k\mid t\}).$ Note for $h\in K\llbracket x\rrbracket$, $x\mid h $ if and only if $h$ is not a unit, hence $t = sx^n$, where $s$ a unit. uniqueness of this representation follows from the maximality of $n$ and the irreducibility of $x$. It thus follows that $K\llbracket x\rrbracket$ is a DVR with uniformizing parameter $x$ by Proposition~\ref{EquivalentDefinitionOfDVR}.
 \end{proof}
 \begin{definition}
     For an integral domain $R$, we take $R\llparenthesis x_1,\dots,x_n\rrparenthesis$ to mean $Q(R\llbracket x_1,\dots,x_n\rrbracket)$. 
@@ -4645,7 +4788,7 @@ The below proposition will give an easy criterion for checking whether two polyn
     By the prior lemma there is a minimal for Gröbner basis $G=\{f_1,\dots,f_m\}$ for $I$. Define $g_i := f_i^{\{g_1,\dots,g_{i-1},f_i,\dots,f_m\}\setminus\{f_i\}}$ for every $i\in\{1,\dots,m\}$. Since $\inn\ f_i$ is divisible by any $\inn\ f_j$ for $j\in\{i+1,\dots,m-1\}$ we see that $g_i$ is of the form $\inn\ f_i+\dots$. Thus if $f\in I$, there is some $g_j$ such that $\inn\ g_j = \inn\ f_j\mid \inn\ f$, meaning that each set $\{g_1,\dots,g_\{k-1\},f_k,\dots,f_m\}$ and in particular $G' := \{g_1,\dots,g_m\}$ is a Gröbner basis. The $g_i$'s being residues following the division algorithm by a set of polynomials with initial terms coming from $\{f_1,\dots,f_m\}\setminus \{f_i\}$ implies that no term in $g_i$ is divisible by any $\inn\ f_j$ for $j\neq i$, thus $G'$ is a reduced Gröbner basis.    
 \end{proof}
 \begin{remark}
-    Note that the existence proof above is of an algorithmic nature. I.e. given an ideal, use Buchberger's algorithm to produce a Gröbner basis, then use the already presented algorithm for producing a minimal gröbner basis, then apply the division algorithmic in the way we described above to produce the elements of the reduced Gröbner basis. 
+    Note that the existence proof above is of an algorithmic nature. I.e. given an ideal, use Buchberger's algorithm to produce a Gröbner basis. Then use the already presented algorithm for producing a minimal gröbner basis. Then apply the division algorithmic in the way we described above to produce the elements of the reduced Gröbner basis. 
 \end{remark}
 \begin{theorem}\label{GBElimTheorem}
     Let $G$ be a Gröbner basis for an ideal $I\subset K[x_1,\dots,x_n]$ with respect to the lexicographic term order with $x_1<\dots<x_n$. Then $G\cap K[x_1,\dots,x_i]\subset K[x_1,\dots,x_i]$ is a Gröbner basis for the ideal $I\cap K[x_1,\dots,x_i]\subset K[x_1,\dots,x_i]$ with respect to the lexicographic term order with $x_1<\dots< x_i$ for every $i\in\{1,\dots,i\}$.

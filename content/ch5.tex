@@ -1111,6 +1111,56 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         1. Note that $\cl(\Phi(\dom \ \Phi))$ is a closed subvariety of $C$ and thus is either equal to $C$ or, due to Lemma~\ref{SomeDimensionResults}, a point.\\
         2.  Since $K(C')\supset K$ is field finite, then so is $K(C')\supset \widetilde{\Phi}(K(C))$. Let $f\in K(C)\setminus K$, then $\widetilde{\Phi}(f)\in K(C)\setminus K$, hence $K(C')\supset K(\widetilde{\Phi}(f))$ is algebraic by Lemma~\ref{AlgebraicFuntionFieldsInOneVariable} 1. hence $K(C')\supset \widetilde{\Phi}(K(C)) = \widetilde{\Phi}(K(C))(\widetilde{\Phi}(f))$ is algebraic. It follows that $K(C')\supset \widetilde{\Phi}(K(C))$ is module-finite, hence $\Phi$ is finite.  
     \end{proof}
+    \subsubsection{Dimension of Topological Spaces}
+    \begin{definition}
+        Let $X$ be a topological space. We define for $n\in \N$,
+        $$
+            \mathrm{IrrChain}_n(X)
+        $$
+        to be the set of strictly increasing chains $\{Z_i\}_{i=0}^n$ of irreducible closed sets in $X$.
+        Then the \emph{dimension of $X$} is
+        $$
+            \dim\ X := \sup(\{n \in \N \cup\{\infty\}: \mathrm{IrrChain}_n(X)\neq \emptyset\}).
+        $$
+    \end{definition}
+    \begin{definition}
+        A topological space $X$ is called \emph{Noetherian} if every descending chain of closed sets in $X$ stabilizes. 
+    \end{definition}
+    \begin{lemma}\label{TopologicalSpaceIsNoetherianIfCoveredByNoetherianSubsets}
+        Let $X$ be topological space covered by a family of subsets $\{Y_i\}$ such that each $Y_i$ with the trace topology with respect to $X$ is Noetherian. Then $X$ is Noetherian. 
+    \end{lemma}
+    \begin{proof}
+        Consider a descending chain $Z_1\supset Z_2\supset \dots$ of closed sets in $X$. Then for each $i$, $Y_i\cap Z_1\supset Y_i\cap Z_2\supset \dots$ is a descending chain of closed sets $Y_i$, hence it stabilizes. Then since $Z_j = \bigcup Y_i\cap Z_j$, it follows that $Z_1\supset Z_2\supset \dots$ stabilizes. 
+    \end{proof}
+    \begin{lemma}
+        Let $X$ be a Noetherian topological space, then any subspace $Y\subset X$, where $Y$ is closed in $X$ is Noetherian.
+    \end{lemma}
+    \begin{proof}
+        Let $Z_1 \supset Z_2\supset \dots$ be a descending chain of closed sets in $Y$. This is also a descending chain of closed sets in $X$, hence it stabilizes.
+    \end{proof}
+    \begin{lemma}
+        A variety is Noetherian. 
+    \end{lemma}
+    \begin{proof}
+        We first prove that $\A^n$ is Noetherian for each $n$. Consider a descending chain of closed sets in $\A^n$, $Z_1\supset Z_2\supset \dots$. Then 
+        $$
+            I(Z_1)\subset I(Z_2)\subset \dots
+        $$
+        is an ascending chain of ideals in $K[x_1,\dots,x_n]$ which is a Noetherian ring, hence it stabilizes. Since $Z_i=V(I(Z_i))$, it follows that $Z_1\supset Z_2\supset \dots$ stabilizes.\\
+        Any algebraic set is Noetherian by the prior lemma. In particular, an affine variety is thus Noetherian.\\  
+        Consider an arbitrary variety $X$. This is covered by open affine varieties $\{U_i\}$. It thus follows from Lemma~\ref{TopologicalSpaceIsNoetherianIfCoveredByNoetherianSubsets} that $X$ is Noetherian.  
+    \end{proof}
+    \begin{proposition}
+        A noetherian topological space can be written uniquely as a finite union of irreducible subsets 
+        $$
+            \bigcup_1^n Y_i,
+        $$
+        with $Y_i\not\supset Y_j$
+    \end{proposition}
+    \begin{proof}
+        
+    \end{proof}
+    
 \subsection{The Study of Curves \& Resolution of Singularities}
     \subsubsection{Rational Maps of Curves}
         \begin{definition}

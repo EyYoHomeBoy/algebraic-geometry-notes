@@ -1286,7 +1286,11 @@ where $\pazocal{O}_{\Proj\ R}(U)\rightarrow \pazocal{O}_{\Proj\ R}(V)$ induced b
     Note that this construction is same as mentioned in Remark~\ref{ConstructionOfNaturalTransformationOfSheavesFrom} so naturality follows. We thus conclude that $D_{+}(f)\simeq \Spec\ R_{(f)}$.
 \end{proof}
 \begin{lemma}
-    Consider a map of graded rings $\sigma : R\rightarrow S$. Then $U=\{\mathfrak{p}\in \Proj \ S : \mathfrak{p}\not\subset \sigma(R_{+})\}$ is an open set
+    Consider a map of graded rings $\sigma : R\rightarrow S$. Then 
+    $$
+        U=\{\mathfrak{p}\in \Proj \ S : \mathfrak{p}\not\supset \sigma(R_{+})\}
+    $$ 
+    is an open set.
 \end{lemma}
 \begin{proof}
     Let $\mathfrak{p}\in U$. Then there is an $f\in R_{+}$ not in  $\sigma^{-1}(\mathfrak{p})$. Then $\sigma(f)$ is not in $\mathfrak{p}$. Let $\mathfrak{q}\in D_{+}(\sigma(f))$. Then $\sigma(f)\notin \mathfrak{q}$, hence $\mathfrak{q}\not\supset  \sigma(R_{+})$. It follows that $D_{+}(\sigma(f))\subset U$, hence $U$ is open. 
@@ -1308,7 +1312,7 @@ where $\sigma_{(\mathfrak{p})}: S_{(f(\mathfrak{p}))} \rightarrow R_{(\mathfrak{
 Consider a map of graded rings $\sigma: R\rightarrow S$ with $\sigma_d: R_d\rightarrow S_d$ being an isomorphism for each $d\geq d_0$ for some $d_0\geq 0$. Then $U = \Proj \ S$ and $f : \Proj\ S\rightarrow \Proj\ R$ is an isomorphism. 
 \end{proposition}
 \begin{proof}
-    
+    Let $\mathfrak{p}\in \Proj\ S$.  Then there is a homogeneous $f\in S_d$ for $d>1$ such that $f\notin \mathfrak{p}$. Then $f^{d'}\notin \mathfrak{p}$ for some $d'\geq d_0$. Note that $f^{d'}=\sigma(g)$ for some $g\in R_{dd'}$, hence $\sigma(g)\notin \mathfrak{p}$, which implies $\mathfrak{p}\in U$.
 \end{proof}
 \subsubsection{Reduced Schemes}
 \begin{definition}
@@ -1439,12 +1443,6 @@ Consider a scheme $(X,\pazocal{O})$. Let $\pi_{X_\mathrm{red}} :X_\mathrm{red}\r
             \pazocal{O}\Rightarrow L
         $$ 
         in the following way: When $x\in U\subset X$, define $\pazocal{O}(U)\rightarrow \pazocal{O}_{\Spec\ L}(\varphi^{-1}(U))=L$ to be the composite of $\pazocal{O}(U)\rightarrow K(x)$ and $K(x)\hookrightarrow L$. When $x\notin U$, note that $\pazocal{O}_{\Spec \  L}(\varphi^{-1}(U))=\pazocal{O}_{\Spec \ L}(\emptyset)=0$, which is the terminal object in the category of rings. The map $\pazocal{O}(U)\rightarrow \varphi_\ast\pazocal{O}_{\Spec \ L}(U)$ is then obvious. It is clear that this assignment is natural.
-    \end{proof}
-    \begin{proposition}
-        Let $X$ be a scheme. Every closed irreducible set $Y$ in $X$ has a unique generic point $\zeta_Y\in Y$.
-    \end{proposition}
-    \begin{proof}
-        
     \end{proof}
 \subsubsection{Varieties \& Schemes}
 \begin{definition}
