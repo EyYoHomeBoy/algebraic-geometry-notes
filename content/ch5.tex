@@ -1127,7 +1127,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         A topological space $X$ is called \emph{Noetherian} if every descending chain of closed sets in $X$ stabilizes. 
     \end{definition}
     \begin{lemma}\label{TopologicalSpaceIsNoetherianIfCoveredByNoetherianSubsets}
-        Let $X$ be topological space covered by a family of subsets $\{Y_i\}$ such that each $Y_i$ with the trace topology with respect to $X$ is Noetherian. Then $X$ is Noetherian. 
+        Let $X$ be topological space covered by a family of subsets $\{Y_i\}_1^n$ such that each $Y_i$ with the trace topology with respect to $X$ is Noetherian. Then $X$ is Noetherian. 
     \end{lemma}
     \begin{proof}
         Consider a descending chain $Z_1\supset Z_2\supset \dots$ of closed sets in $X$. Then for each $i$, $Y_i\cap Z_1\supset Y_i\cap Z_2\supset \dots$ is a descending chain of closed sets $Y_i$, hence it stabilizes. Then since $Z_j = \bigcup Y_i\cap Z_j$, it follows that $Z_1\supset Z_2\supset \dots$ stabilizes. 
@@ -1148,7 +1148,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         $$
         is an ascending chain of ideals in $K[x_1,\dots,x_n]$ which is a Noetherian ring, hence it stabilizes. Since $Z_i=V(I(Z_i))$, it follows that $Z_1\supset Z_2\supset \dots$ stabilizes.\\
         Any algebraic set is Noetherian by the prior lemma. In particular, an affine variety is thus Noetherian.\\  
-        Consider an arbitrary variety $X$. This is covered by open affine varieties $\{U_i\}$. It thus follows from Lemma~\ref{TopologicalSpaceIsNoetherianIfCoveredByNoetherianSubsets} that $X$ is Noetherian.  
+        Consider an arbitrary variety $X$. This is covered by open affine varieties $\{U_i\}1^n$. It thus follows from Lemma~\ref{TopologicalSpaceIsNoetherianIfCoveredByNoetherianSubsets} that $X$ is Noetherian.  
     \end{proof}
     \begin{proposition}
         A noetherian topological space can be written uniquely as a finite union of irreducible subsets 
@@ -1158,9 +1158,17 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         with $Y_i\not\supset Y_j$
     \end{proposition}
     \begin{proof}
-        
+        {\Large Not really necessary but can be used to prove the decomposition of algebraic sets into irreducibles}
     \end{proof}
+    \begin{theorem}
+        Let $V$ be a variety. Then the dimension of $V$ is equal to the Krull dimension of $\Gamma(V)$.
+    \end{theorem}
+    \begin{proof}
     
+    \end{proof}
+    \begin{corollary}
+        The topological dimension of varieties described here corresponds to the algebro geometric described earlier. 
+    \end{corollary}
 \subsection{The Study of Curves \& Resolution of Singularities}
     \subsubsection{Rational Maps of Curves}
         \begin{definition}

@@ -168,6 +168,91 @@
     \begin{proof}
         Let $K,L$ be two such fields. There is a canonical isomorphism between the rational numbers in $K$ and the rational numbers in $L$. each copy of $\Q$ is a dense subset of the respective fields. It is easy to show that any point in a metric space over a complete metric space can be approximated by a Cauchy sequence in a dense subset. The isomorphism $\sigma : \Q\subset K \rightarrow \Q\subset L, q \mapsto q$ is clearly uniformly continuous and can therefor by the prior lemma be extended to an isomorphism $\sigma : \cl(\Q)=K \rightarrow\cl(\Q)=L$.
     \end{proof}
+    \subsubsection{The Geometric Series, $n$-ary representation of Real Numbers and the Uncountability of $\R$}
+    \begin{definition}
+        Let $r\in [0,1)$. We define the \emph{geometric with common ratio $r$} to be the series
+        $$
+            \sum_0^\infty r^i
+        $$ 
+    \end{definition}
+    \begin{lemma}
+        The geometric series common ratio $r\in [0,1)$ converges to 
+        $$
+            \frac{1}{r-1}
+        $$ 
+    \end{lemma}
+    \begin{proof}
+        It is easily seen by induction that 
+        $$
+            \sum_0^n r^i = \frac{1-r^{n+1}}{1-r}\to_{n\to \infty} \frac{1}{1-r}
+        $$
+    \end{proof}
+    \begin{lemma}
+        Fix an integer $n\geq 2$. Given a sequence $(a_i)$ in $\{0,\dots,n-1\}$ the series 
+        $$
+            \sum_1^\infty a_i \frac{1}{n^i}
+        $$
+        converges to some real number in $[0,1)$
+    \end{lemma}
+    \begin{proof}
+        Indeed, the $i$'th term in this series is dominated by $\frac{n-1}{n^i}$. Since $n-1\sum_1^\infty \frac{1}{n^i}$ which is just the tail of a geometric series with common ratio $\frac{1}{n}$ scaled by a constant. 
+    \end{proof}
+    \begin{lemma}
+        Every $x\in [0,1)$ can be written as $\sum_1^\infty a_i\frac{1}{n^i}$ for some sequence $(a_i)$ in $\{0,\dots, n-1\}$. 
+    \end{lemma}
+    \begin{proof}
+        We define this sequence recursively. Note that $0\leq nx<n$. Pick $a_1$ to be the smallest integer such that $a_1\leq nx$ set $x_1:= nx-a_1$. Given $a_i$ and $x_i$, let $a_{i+1}$ be the small integer with $a_{i+1}\leq nx_i$ and set $x_{i+1}:= nx_i-a_{i+1}$. One sees that $x_i\in [0,1)$ for each $i$ and thus that $0\leq a_{i+1}< n-1$. We check that $x = \sum_1^\infty a_i \frac{1}{n^i}$. Indeed, one sees readily by induction that 
+        $$
+            n^ix - \sum_{j=1}^i n^{i-j+1}a_j < 1 
+        $$ 
+        which is equivalent to 
+        $$
+            x- \sum_1^i a_j \frac{1}{n^j}
+        $$ 
+        hence 
+        $$
+            \sum_1^\infty a_i\frac{1}{n^i} = x.
+        $$     
+    \end{proof}
+    \begin{remark}
+        Such representation of a real number is called the \emph{base $n$ expansion}. We can extend this definition to every real number $x$ by computing the base $n$ expansion $n^{-k}x$ for the smallest $k$ such that $\vert n^{-k}x\vert <1$. Multiplying this series by $n^k$ thus yields a sequence $(a_i)_{i=-N}^\infty$ in $\{0,\dots,n-1\}$ with 
+        $$
+            \sum_{-N}^\infty a_i\frac{1}{n^i}
+        $$ 
+        for some positive integer $N$.
+    \end{remark}
+    One should note that the base $n$ expansion of a real number is not always unique. For instance, the sequence 
+    $$
+        1,\overline{0}
+    $$
+    and 
+    $$
+        0, \overline{n-1}
+    $$
+    both yield a base $n$ expansion of $1$. It is true however that this expansion is unique for \emph{irrational numbers}, i.e. for $\R\setminus \Q$.  
+    \begin{lemma}
+        The $n$-ary expansion is unique for irrational numbers.
+    \end{lemma}
+    \begin{proof}
+        It suffices to prove the statement for irrationals in $(0,1)$. Let $(a_i),(b_i)$ be distinct sequences  in $\{0,\dots,n\}$. Let $k\geq 0 $ be the smallest index with $a_k\neq b_k$. We may assume $a_k>b_k$. Then 
+        $$
+            n^k\left(\sum_1^\infty a_in^{-i}-\sum_1^\infty b_in^{-i}\right) = a_k-b_k + {\sum_1^\infty a_i n^{-1}}_{t}-\sum_1^\infty b_in^{-1}> 1+t-1=t>0.
+        $$ 
+    \end{proof}
+    We are now ready to prove that $\R$ is an example of an uncountable set. 
+    \begin{theorem}
+        $\R$ is uncountable
+    \end{theorem}
+    \begin{proof}
+        Let $X=\{a_1,a_2,\dots\}\subset (0,1)\setminus \Q$ be a countable set in $(0,1)\setminus \Q$ with $a_i = \sum_1^\infty a_{ij}2^{-j}$. For each $i$ set 
+        $$
+            b_i = \begin{cases}
+                1 &\text{if } a_{ii} = 0\\
+                0 & \text{otherwise}
+            \end{cases}
+        $$
+        Set $b:= \sum_1^\infty b_i2^{-i}$. If $b$ is rational, $b\notin X$. Suppose $b$ is irrational. By the prior lemma it follows that $b\neq a_i$ for any $i$, hence $b\notin X$. Then any countable subset of $(0,1)\setminus \Q$ is proper, hence $(0,1)\setminus \Q$ is not countable. $\R\simeq (0,1)\simeq (0,1)\setminus \Q$ is uncountable.
+    \end{proof}
 \subsection{From $\R^2$ to $\C$}
     Note that $(\R^2,+,\vert \cdot\vert)$ is a normed topological vector space. We seek to endow this vector space with a multiplication such that it becomes a topological field, containing $\R$ as a topological subfield. We will call this field \textit{the complex numbers} and denote it $\C$. 
     \begin{definition}

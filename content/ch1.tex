@@ -5658,6 +5658,62 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
         Set $G := \{g_1,\dots,g_n,f_{n+1}\}$. Then $\sigma(_BT_{B(G)}) = {_B}T_{B(F)}$. It thus follows that 
         $$\det \ {_B}T_{B(F)} = \det \ \sigma(_BT_{B(G)}) = \sigma(\det\ _BT_{B(G)})= \sigma(0)=0.$$ 
     \end{proof}
+\subsubsection{Krull Dimension}
+\begin{definition}
+    Let $R$ be a commutative ring and $\mathfrak{p}$ a prime ideal in $R$. We define the \emph{height} of $\mathfrak{p}$ to be the supremum of natural numbers (including infinity) $n$ such that there is an ascending chain 
+    $$
+        \mathfrak{p}_0\subsetneq \mathfrak{p}_1\subsetneq\dots \subsetneq \mathfrak{p}_n = \mathfrak{p}.
+    $$
+    We denote the height of $\mathfrak{p}$ by 
+    $$
+        \height\ \mathfrak{p}.
+    $$
+\end{definition}
+\begin{definition}
+    Given a commutative ring $R$. The \emph{Krull dimension} of $R$, denoted $\dim \ R$ is the quantity
+    $$
+        \sup 
+    $$
+\end{definition}
+\begin{lemma}
+    When $R$ is an integral domain, $0$ has height $0$. 
+\end{lemma}
+\begin{proof}
+    Indeed, the only chain of distinct primes contained in $0$ is the trivial one, hence $\height \ 0 = 0$. 
+\end{proof}
+\begin{corollary}
+    The Krull dimension of a field is $0$. 
+\end{corollary}
+\begin{lemma}
+    The Krull dimension of PID that is not a field is $1$
+\end{lemma}
+\begin{proof}
+    Let $R$ be a non-field PID. Then there is a non-trivial prime ideal $\langle p\rangle$. Suppose $\langle q\rangle \subset \langle p\rangle$ is a non-zero prime. Then $q=pd$ for some $d$. Since $q$ is in particular irreducible, hence $d$ is a unit. It follows that $\langle q\rangle =\langle p\rangle$, hence the height of any non-zero prime is $1$. It thus follows that $\dim \ R = 1$. 
+\end{proof}
+\begin{corollary}
+    $\Z$, $K[x]$ where $K$ is a field, and DVRs have Krull dimension $1$.
+\end{corollary}
+\begin{lemma}\label{TranscendenceDegreeAndKrullDimensionCorrespond}
+    Let $R:= K[x_1,\dots,x_n]/\mathfrak{p}$ where $\mathfrak{p}\subset K[x_1,\dots,x_n]$ is a prime ideal. Then 
+    $$
+        \dim \ R = \trdeg\ \mathrm{Frac}(R)
+    $$
+\end{lemma}
+\begin{proof}
+    {\Large That's gonna take some work}
+\end{proof}
+\begin{corollary}
+    The Krull dimension of $K[x_1,\dots,x_n]$ is $n$
+\end{corollary}
+\begin{lemma}
+    The Krull dimension of $R[x_1,dots,x_n]$ where $R$ is noetherian is 
+    $$
+        \dim \ R + n
+    $$
+\end{lemma}
+\begin{proof}
+    {\Large Is also gonna take some work to do} 
+\end{proof}
 \subsubsection{Noether Normalizations}
     \begin{lemma}\label{MainTechnicalLemmaForNNT}
         Let $K$ be a field and let $f=\sum_{v\in \N^n} a_v\mathbf{x}^v\in K[x_1,\dots,x_n]$ be given with $d :=\deg \ f >0$. Then we have the following
