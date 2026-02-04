@@ -1164,7 +1164,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         Let $V$ be a variety. Then the dimension of $V$ is equal to the Krull dimension of $\Gamma(V)$.
     \end{theorem}
     \begin{proof}
-    
+        
     \end{proof}
     \begin{corollary}
         The topological dimension of varieties described here corresponds to the algebro geometric described earlier. 
@@ -1304,7 +1304,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         \begin{lemma}
             Write $C=V(f)$, 
             $$f=\sum_r^n f_i$$
-            where $f_i\in K[x,y]$ a form of degree $i$, $r=m_P(C)$ and $n=\deg\ C$. Then $C'=V(f')$ is an affine plane curve, where
+            where $f_i\in K[x,y]$ is a form of degree $i$, $r=m_P(C)$ and $n=\deg\ C$. Then $C'=V(f')$ is an affine plane curve, where
             $$f' = \sum_r^n x^{i-r}f_i(1,z)\in K[z][x].$$ 
         \end{lemma}
         \begin{proof}
@@ -1497,7 +1497,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
     $$
         B := V\left.\left(\left\{y_{1i}(x_2-a_{i2}x_3)-y_{2i}(x_1-a_{i1}x_3)\right|i=1,\dots,t\right\}\right),
     $$ 
-    where $x_1,x_2,x_3$ are the homogeneous coordinates for $\Pp^2$ and $y_{i1},y_{i2}$ are homogeneous coordinates for the $i$'th copy of $\Pp^1$. Note that each polynomials that define $B$ are $t+1$-forms of $t+1$-degree $(1,0,\dots,0,1,0,\dots,0)$ where $1$ is in the $i$'th position in $K[\mathbf{x},\mathbf{y}_1,\dots,\mathbf{y}_t]$. For now we assume that $B=\cl(G)$ (we later see that this true) so that $B$ is a closed subvariety of $\Pp^2 \times (\Pp^1)^t$ (cf. Proposition~\ref{GraphIsAClosedSubvariety} and Lemma~\ref{ClosureOfClosedSubvarietyIsClosedSubvariety} 1.). Let $\pi: B\rightarrow$, be defined by 
+    where $x_1,x_2,x_3$ are the homogeneous coordinates for $\Pp^2$ and $y_{i1},y_{i2}$ are homogeneous coordinates for the $i$'th copy of $\Pp^1$. Note that each polynomials that define $B$ are $t+1$-forms of $t+1$-degree $(1,0,\dots,0,1,0,\dots,0)$ where $1$ is in the $i$'th position in $K[\mathbf{x},\mathbf{y}_1,\dots,\mathbf{y}_t]$. For now we assume that $B=\cl(G)$ (we later see that this true) so that $B$ is a closed subvariety of $\Pp^2 \times (\Pp^1)^t$ (cf. Proposition~\ref{GraphIsAClosedSubvariety} and Lemma~\ref{ClosureOfClosedSubvarietyIsClosedSubvariety} 1.). Let $\pi: B\rightarrow \Pp^2$, be defined by 
     $$
         \pi(R,Q_1,\dots,Q_t) = R \quad \left((R,Q_1,\dots,Q_t)\in \Pp^2\times (\Pp^1)^t\right)
     $$ 
@@ -1697,6 +1697,47 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         While this is indeed an answer to the original goal of this section, note that $C'$ is not a plane curve. This means we cannot apply theorems about plane curves to argue about $C'$ and transfer these findings to results about $C$, which is the reason to resolve singularities in the first place.  
     \end{remark}
     \subsubsection{Quadratic Transformations}
+    \begin{definition}
+        The \emph{fundamental points in $\Pp^2$} are 
+        $$
+            P := [0,0,1],\quad  P' := [0,1,0],\quad  P'' := [1,0,0].
+        $$
+        The \emph{exceptional lines in $\Pp^2$} are 
+        $$
+            l := V(z),\quad l' := V(y),\quad l'' := V(x)
+        $$
+    \end{definition}
+    \begin{remark}
+        $l'$ and $l''$ intersect in $P$, and $l$ passes through $P'$ and $P''$. 
+    \end{remark}
+    For this section, we set
+    $$
+        U := \Pp^2\setminus (l\cup l'\cup l'')=\Pp^2\setminus V(xyz)
+    $$
+    We define a morphism 
+    \begin{gather*}
+        Q: \Pp^2\setminus\{P,P',P''\} \rightarrow \Pp^2\\
+        [v_1,v_2,v_3]\mapsto [v_2v_3,v_1v_3,v_1v_2]
+    \end{gather*}
+    The image of $Q$ is $U\cup\{P,P',P''\}$. Indeed, when $[v]\neq P,P',P''$, then $v_i,v_j\neq 0$ for $i\neq j$. If $v_k\neq 0$ for each $k$, then $[v]$ does not vanish on $xyz$. If $v_k=0$ for some $k$, then $v_kv_i=0$ and $v_kv_j = 0$, hence $Q([v])\in \{P,P',P''\}$. Conversely, if $[v]=[v_1,v_2,v_3]\in U$, then $v_i\neq 0$ for each $i=1,2,3$. Then  
+    $$
+        [v] = Q(Q([v])).
+    $$
+    Note that $P=Q([1,1,0])$, $P' =Q([1,0,1])$ and $P''=Q([0,1,1])$. Moreover, 
+    $$
+        Q^{-1}(P)=l\setminus\{P',P''\}, Q^{-1}(P') =l'\setminus\{P,P''\}, Q^{-1}(P'')=l''\setminus\{P,P'\}.
+    $$
+    Note that the following lemma is true
+    \begin{lemma}
+        $Q$ is an automorphism of $U$. It induces a birational map $Q:\Pp^2 \dottedarrow \Pp^2$.
+    \end{lemma}
+    \begin{remark}
+        $Q$ is called the \emph{standard quadratic transformation} or the \emph{standard Cremona transformation}.
+    \end{remark}
+    We fix a projective plane curve $C$ that is not an exceptional line. $ C\cap U$ is an open set in $C$ and a closed in $U$. Note that $Q(C\cap U)$ is then a closed curve in $U$. Define 
+    $$
+        C' := \cl\left(Q^{-1}(U\cap C)\right)= \cl\left(Q(U\cap C)\right)
+    $$
     \subsubsection{Non-singular Models of Curves}
     \subsection{Riemann-Roch}
     \subsubsection{Divisors}
