@@ -1297,10 +1297,10 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         \end{gather*}   
         Set $E:= \psi^{-1}(P)=\phi^{-1}(L)=V(x)$. Then the restriction $\psi$ to $\A^2\setminus E=U$ is an ismorphism of $U$ with $U$. Then $\psi$ defines a birational morphism of $\A^2$ with itself. Set $C_0' := \psi^{-1}(C_0)$ and $C' := \cl_{\A^2}(C_0')$. Define 
         $$
-            \varphi := \left.\psi\right|_{C'} : C'\rightarrow C 
+            \theta := \left.\psi\right|_{C'} : C'\rightarrow C 
         $$
         This is well-defined by continuity of $\psi$.
-        Then $\varphi$ is a birational equivalence of $C'$ with $C$ by restricting it to $C'\setminus E$. Note $\varphi$ induces an automorphism $K(x,y)=K(C)\simeq K(C')=K(x,z)$, where $y$ is identified with $xz$, i.e $z:= y/x\in K(C)$. We need to prove two things: Firstly, that $C'$ is actually an affine plane curve. Secondly: that $C'$ has nicer multiple points. The phrasing "nicer" is of course informal. One could hope for $C'$ to be non-singular. This however is not the case, but each point in preimage of $P$ under $\varphi$ will have only one tangent counted with multiplicity. 
+        Then $\theta$ is a birational equivalence of $C'$ with $C$ by restricting it to $C'\setminus E$. Note $\theta$ induces an automorphism $K(x,y)=K(C)\simeq K(C')=K(x,z)$, where $y$ is identified with $xz$, i.e $z:= y/x\in K(C)$. We need to prove two things: Firstly, that $C'$ is actually an affine plane curve. Secondly: that $C'$ has nicer multiple points. The phrasing "nicer" is of course informal. One could hope for $C'$ to be non-singular. This however is not the case, but each point in preimage of $P$ under $\theta$ will have only one tangent counted with multiplicity. 
         \begin{lemma}
             Write $C=V(f)$, 
             $$f=\sum_r^n f_i$$
@@ -1327,14 +1327,14 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             $$
             Therefore, $C_0'\subset V(f')$, hence $C'=V(f')$ by a dimension argument. 
         \end{proof}
-        We have thus produced an affine curve $C'$ birationally isomorphic to $C$. It remains for us to check that the points of $\varphi^{-1}(P)$ are all nice points. To be precise, that the multiple point $P$ is blown up into $m_P(C)$ multiple points with one tangent possibly counted with multiplicity.\\
+        We have thus produced an affine curve $C'$ birationally isomorphic to $C$. It remains for us to check that the points of $\theta^{-1}(P)$ are all nice points. To be precise, that the multiple point $P$ is blown up into $m_P(C)$ points with one tangent each possibly counted with multiplicity.\\
         WLOG $x$ is not tangent to $f$ at $P$ and 
         $$
             f_r = \prod_1^s (y-\alpha_ix)^{r_i}.
         $$
         With the above assumption we have that following lemma 
-        \begin{lemma}
-            $\varphi^{-1}(P)=\{P_1,\dots,P_s\}$ where $P_i = (0,\alpha_i)$ and 
+        \begin{lemma}\label{BlowupTurnsMultiplePointsToSimplePoints}
+            $\theta^{-1}(P)=\{P_1,\dots,P_s\}$ where $P_i = (0,\alpha_i)$ and 
             $$
                 m_{P_i}(C')=I(P_i,E\cap C') = r_i.
             $$
@@ -1343,7 +1343,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         \begin{proof}
             Indeed,
            \begin{align*}
-                \varphi^{-1}(P) &= \{(a,b)\in C' : a=0\}= \{(a,b)\in \A^2 : f'(0,b)=0\}\\
+                \theta^{-1}(P) &= \{(a,b)\in C' : a=0\}= \{(a,b)\in \A^2 : f'(0,b)=0\}\\
                  &= \{(a,b)\in \A^2 : f_r(1,b)=0\}=  E \cap C' = \{P_1,\dots,P_s\}.
            \end{align*}
            Moreover,
@@ -1354,7 +1354,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
            If $P$ is an ordinary multiple point, then $r_i=1$ for all $i$, hence $m_{P_i}(C')=1$, hence $P_i$ is simple.  
         \end{proof}
         \begin{lemma}
-            There is an open affine neighborhood $W$ of $P$ in $C$ such that $W':=\varphi^{-1}(W)$ is an affine open subvariety in $C'$, $\varphi(W')=W$, $\Gamma(W')$ is module finite over $\Gamma(W)$ and $x^{r-1}\Gamma(W')\subset \Gamma(W)$. Here we have implicitly made the identification of $\Gamma(W)$ as a subring of $K(C)$. 
+            There is an open affine neighborhood $W$ of $P$ in $C$ such that $W':=\theta^{-1}(W)$ is an affine open subvariety in $C'$, $\theta(W')=W$, $\Gamma(W')$ is module finite over $\Gamma(W)$ and $x^{r-1}\Gamma(W')\subset \Gamma(W)$. Here we have implicitly made the identification of $\Gamma(W)$ as a subring of $K(C)$. 
         \end{lemma}
         \begin{proof}
             Write 
@@ -1369,14 +1369,14 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             $$
                 h(P)=h(0,0) = a_{0r}= 1\neq 0,
             $$
-            hence $P\in C_{\overline{h}}$. Set $W := C_{\overline{h}}$. We claim that $W'=C'_{\overline{h}}$. Indeed, if $Q=(v_1,v_2)\in \varphi^{-1}(W)$. $h(v_1,v_1v_2)\neq 0$. Upon thinking of $\overline{h}$ as an element of $K(C')$, it follows that $Q\in C'_{\overline{h}}$. If $Q=(v_1,v_2)\in C'_{\overline{h}}$, then $\overline{h}(v_1,v_2)=h(v_1,v_1v_2)\neq 0$, note then $\widetilde{\varphi}(\overline{h})\in K(C)$ does not vanish on $Q$, hence $Q\in \varphi^{-1}(W)$.\\
+            hence $P\in C_{\overline{h}}$. Set $W := C_{\overline{h}}$. We claim that $W'=C'_{\overline{h}}$. Indeed, if $Q=(v_1,v_2)\in \theta^{-1}(W)$. $h(v_1,v_1v_2)\neq 0$. Upon thinking of $\overline{h}$ as an element of $K(C')$, it follows that $Q\in C'_{\overline{h}}$. If $Q=(v_1,v_2)\in C'_{\overline{h}}$, then $\overline{h}(v_1,v_2)=h(v_1,v_1v_2)\neq 0$, note then $\widetilde{\theta}(\overline{h})\in K(C)$ does not vanish on $Q$, hence $Q\in \theta^{-1}(W)$.\\
             Note that from the $K$-algebra map 
             \begin{gather*}
-                \widetilde{\varphi}: \Gamma(W')\rightarrow \Gamma(W)\\
+                \widetilde{\theta}: \Gamma(W')\rightarrow \Gamma(W)\\
             \end{gather*}
             takes a rational function $f\in \Gamma(W')$ to the rational function $f(x,xz)\in \Gamma(W)[z]$. Conversely, for $f = \sum_0^d f_i(x,y)z^i\in \Gamma(W)[z]$ consider $g= \sum_0^d f_i(x,z) \left(\frac{z}{x}\right)^i$. Then 
             $$
-                \widetilde{\varphi}(g)=g(x,xz) = \sum_0^d f_i(x,xz) \frac{x^iz^i}{x^i} = \sum_0^d f_i(x,y) z^i = f
+                \widetilde{\theta}(g)=g(x,xz) = \sum_0^d f_i(x,xz) \frac{x^iz^i}{x^i} = \sum_0^d f_i(x,y) z^i = f
             $$
             It is then sufficient to prove that $z$ is integral over $\Gamma(W)$. Note that 
             $$
@@ -1405,7 +1405,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             it follows that $x^{r-1}\Gamma(W')\subset \Gamma(W)$.
         \end{proof}
         \begin{remark}
-            In general, if $U$ is an open neighborhood and $U'$ is an open set in $C'$ containing $\{P_1,\dots,P_s\}$. Construct $W$ as in the above proof and take $g\in \Gamma(W)$ such that $g(P)\neq 0$ and $g(Q)=0$ whenever $Q\in W\setminus U\cup \varphi(W'\setminus U')$. Then $W_g$ is an affine open neihborhood of $P$ contained in $U$ and $W'_g= \varphi^{-1}(W_g)$ is an affine open set contained in $U'$. We can thus choose $W$ and $W'$ in the above lemma arbitrarily small. 
+            In general, if $U$ is an open neighborhood and $U'$ is an open set in $C'$ containing $\{P_1,\dots,P_s\}$. Construct $W$ as in the above proof and take $g\in \Gamma(W)$ such that $g(P)\neq 0$ and $g(Q)=0$ whenever $Q\in W\setminus U\cup \theta(W'\setminus U')$. Then $W_g$ is an affine open neihborhood of $P$ contained in $U$ and $W'_g= \theta^{-1}(W_g)$ is an affine open set contained in $U'$. We can thus choose $W$ and $W'$ in the above lemma arbitrarily small. 
         \end{remark}
         \begin{remark}
             We can make it so that $W$ includes any finite set of points on $C$. First note that if $Q\in C_0\setminus v(h)$, this is already achieved in the lemma. When this is not the case, the idea is to apply a change of coordinates $T$ that fixes $P$, but moves $Q$ to $T(Q)$ in such a way that we can apply the lemma to $f^T$, we to an open affine variety $W^\#$ that contains both $P$ and $T(Q)$, pulling back via $T$ then gives us the desired affine open neighborhood containing both $P$ and $Q$.\\
@@ -1414,7 +1414,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             Given $Q_1,\dots,Q_{k+1}\in C$, we may by induction assume that $Q_1,\dots,Q_k\in C_0 \setminus V(h)$ via a series of coordinate changes. If $Q_{k+1}\in C_0$ we are done. If $Q_{k+1}\in V(x)$, we first apply a change of coordinates of type $T_\alpha$ to $Q_{k+1}$ taking care to pick $\alpha$ such that $T_\alpha(Q_i)\in V(x)\cap V(h)$ for $i\leq k$. We can clearly do this since there are only finitely many choices of $\alpha$ where this fails. We can thus reduce to the case $Q_{k+1}\in V(h)$. Here we apply a change of coordinates of $T_\beta$, taking care to pick $\beta$ such that $T_\beta(Q_i)\notin V(x)\cap h$. We construct an affine open set and pullback via the composition of all the change of coordinates made to obtain the desired $W$.
         \end{remark}
         \begin{proposition}
-            Suppose $P$ is an ordinary multiple point on $C$ and that $\varphi^{-1}(P)=\{P_1,\dots,P_r\}$, with $P_i=(0,\alpha_i)$.
+            Suppose $P$ is an ordinary multiple point on $C$ and that $\theta^{-1}(P)=\{P_1,\dots,P_r\}$, with $P_i=(0,\alpha_i)$.
             \begin{enumerate}
                 \item $f_y = \sum_i \prod_{j\neq i} (y-\alpha_i x) +\sum_{r+1}^n (f_k)_y$.
                 \item For $\overline{x},\overline{y}\in K(C)$,
@@ -1445,7 +1445,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             where $u$ is a unit in $\pazocal{O}_{P_i}(C')$, hence $\ord(f_y(\overline{x},\overline{y}))=r-1$.
         \end{proof}
         \begin{proposition}
-            Let $P$ be an ordinary multiple point on $C$, $\varphi^{-1}(P)=\{P_1,\dots,P_r\}$ with $P_i = (0,\alpha_i)$ and $f_r = \prod_1^r l_i$ with $l_i = y-\alpha_i x$. Let $g$ be a plane curve and denote the image of $g$ in $\Gamma(C')\subset \Gamma(C)$ by $\overline{g}$. 
+            Let $P$ be an ordinary multiple point on $C$, $\theta^{-1}(P)=\{P_1,\dots,P_r\}$ with $P_i = (0,\alpha_i)$ and $f_r = \prod_1^r l_i$ with $l_i = y-\alpha_i x$. Let $g$ be a plane curve and denote the image of $g$ in $\Gamma(C')\subset \Gamma(C)$ by $\overline{g}$. 
             \begin{enumerate}
                 \item $\ord_{P_i}(\overline{g})\geq m_{P}(g)$ with equality if $L_i$ is not tangent to $g$ at $P$.
                 \item If $s\leq r$, and $\ord_{P_i}^{C'}(\overline{g})\geq s$ for each $i=1,\dots,s$, then $m_P(g)\geq s$.
@@ -1480,7 +1480,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             2. Suppose for a contradiction that $m_P(g)=k$ for some $k<s$. Then for each $i=1,\dots,s$ we have $\ord_{P_i}^C(\overline{g})>k$, hence $L_i$ is a tangent of $g$ at $P$. But then $m_P(g)\geq r$, leading to a contradiction. 
         \end{proof}
     \subsubsection{Blowing up Points in $\Pp^2$}
-    We proceed to describe the process of blowing up any finite sequence of points on a projective plane curve. Fix points $P_1,\dots,P_t\in \Pp^2$. Assume that $P_i=[a_{i1},a_{i2},1]\in U_3$ for each $i$. We set 
+    We proceed to describe the process of blowing up any finite sequence of points on a projective plane curve. Fix points $P_1,\dots,P_t\in \Pp^2$. Assume that $P_i=[a_{i1},a_{i2},1]\in U_3$ for each $i$. We do not lose any generality with this assumption since given any $t$ distinct points there is a change of coordinates moving these points to $t$ distinct points in $U_3$. We set 
     $$
         U := \Pp^2 \setminus \{P_1,\dots,P_t\}
     $$
@@ -1489,13 +1489,13 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         f_i : U \rightarrow \Pp^1\\
         [v_1,v_2,v_3]\mapsto [v_1-a_{i1}v_3,v_2-a_{i2}v_3]
     \end{gather*}
-    We set 
+    and set
     $$
         f:= (f_1,\dots,f_t): U\rightarrow \prod_1^t \Pp^1, u\mapsto (f_1(u),\dots,f_t(u)) 
     $$
     Let $G\subset U\times \prod_1^t \Pp^1$ denote the graph of this morphism. We set 
     $$
-        B := V\left.\left(\left\{y_{1i}(x_2-a_{i2}x_3)-y_{2i}(x_1-a_{i1}x_3)\right|i=1,\dots,t\right\}\right),
+        B := V\left(\left\{ \left.y_{i1}(x_2-a_{i2}x_3)-y_{i2}(x_1-a_{i1}x_3)\right|i=1,\dots,t\right\}\right),
     $$ 
     where $x_1,x_2,x_3$ are the homogeneous coordinates for $\Pp^2$ and $y_{i1},y_{i2}$ are homogeneous coordinates for the $i$'th copy of $\Pp^1$. Note that each polynomials that define $B$ are $t+1$-forms of $t+1$-degree $(1,0,\dots,0,1,0,\dots,0)$ where $1$ is in the $i$'th position in $K[\mathbf{x},\mathbf{y}_1,\dots,\mathbf{y}_t]$. For now we assume that $B=\cl(G)$ (we later see that this true) so that $B$ is a closed subvariety of $\Pp^2 \times (\Pp^1)^t$ (cf. Proposition~\ref{GraphIsAClosedSubvariety} and Lemma~\ref{ClosureOfClosedSubvarietyIsClosedSubvariety} 1.). Let $\pi: B\rightarrow \Pp^2$, be defined by 
     $$
@@ -1505,7 +1505,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
     $$
         E_i = \{P_i\}\times \{f_1(P_i)\} \times \cdots \times \{f_{i-1}(P_i)\} \times \Pp^1 \times \{f_{i+1}(P_i)\}\times \cdots \times \{f_t(P_i)\}.
     $$
-    Indeed, $R=(P_i,f_1(P_i),\dots,Q,\dots,f_t(P_i))\in B$ since for $j\neq i$
+    Indeed, $R=(P_i,f_1(P_i),\dots,Q,\dots,f_t(P_i))\in B$, since for $j\neq i$
     $$
         \ev_R(y_{1j}(x_2-a_{j2}x_3)-y_{2j}(x_1-a_{j1}x_3))=
             (a_{i1}-a_{j1})(a_{i2}-a_{j2})-(a_{i2}-a_{j2})(a_{1i}-a_{j1})=0,
@@ -1648,16 +1648,17 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         $$ 
         Note that $A^{-1}TA(P_i)=A^{-1}T(Q)=A^{-1}(Q)=P_i$.
     \end{proof}
-    Assume $P_1 = [0,0,1]$ and fix $Q\in E_i$. We may assume $Q=[\lambda,1]$ for $\lambda\in K$ {\Large Check validity of these assumptions using prior lemmas}. Let $\varphi_3$ denote the identification of $\A^2$ with $U_3\subset \Pp^2$. Set $V=U_3\setminus\{P_2,\dots,P_t\}$, $W:= \varphi_3^{-1}(W)$ and $W' := \psi^{-1}(W) = (\psi\circ \varphi_3)^{-1}(V)$. Consider also the morphism
+    Apply a change of coordinates so that $P_1 = [0,0,1]$ and the remaining $P_i$'s remain unchanged. This is possible by the two lemmas above. Fix $Q\in E_1$. Assume $Q=[\lambda,1]$ for $\lambda\in K$.  We lose no generality with this assumption, since we can always apply a suitable change of coordinates to generalize to this case.\\ 
+    What we aim to do now is construct a specific neighborhood of a point in an $E_1$.  Let $\varphi_3$ denote the identification of $\A^2$ with $U_3\subset \Pp^2$. Set $V=U_3\setminus\{P_2,\dots,P_t\}$, $W:= \varphi_3^{-1}(V)$ and $W' := \psi^{-1}(W) = (\psi\circ \varphi_3)^{-1}(V)$. Consider also the morphism
     \begin{gather*}
-        W' \rightarrow \Pp^2\times \left(\Pp^1\right)^{t}\\
-        (x,z) \mapsto ([x,xz,1], [1,z],f_2([x,xz,1]),\dots,f_t([x,xz,1]))
+        \varphi : W' \rightarrow \Pp^2\times \left(\Pp^1\right)^{t}\\
+        (x,z) \mapsto ([x,xz,1], [z,1],f_2([x,xz,1]),\dots,f_t([x,xz,1]))
     \end{gather*}
-    Note that $\psi\circ \varphi_3 =\pi \circ \varphi$. Set $V':= \varphi(W')$. Note that 
+    Note that $\psi\circ \varphi_3 =\pi \circ \varphi$. Recall that $\psi$ is the map $(a,c)\mapsto (a,ac)$ Set $V':= \varphi(W')$. We immediately see that 
     $$
         V' = B\setminus\left(\bigcup_{i\geq 2} E_i\cup V(x_3)\cup V(y_{12}) \right).
     $$
-    {\Large Check at some point} We thus conclude that $V'$ is an open neighborhood of $Q$. 
+    We thus conclude that $V'$ is an open neighborhood of $Q$ in $B$ since $\varphi(0,\lambda)=Q$. This shows the case $i=1$. To produce open neighborhoods for points in the other $E_i$, we first move $P_1$ back to its original position via a change of coordinates, and follow the same constuction for $i=2$, $i=3$ and so on. We move on to prove the claim that $B$ is the closure of $G$.
     \begin{lemma}
         $$
             B = \cl(G),
@@ -1665,33 +1666,62 @@ We have thus far been studying algebraic geometry by studying systems of polynom
         hence $B$ is a variety. 
     \end{lemma}
     \begin{proof}
-        
+        Let $S\supset G$ be a closed set in $\Pp^2\times (\Pp^1)^t$. Then $\varphi^{-1}(S)$ is closed in $W'$, containing $\varphi^{-1}(G)$, which is easily checked to be equal to $W'\setminus V(x)$, hence $\varphi^{-1}(G)$ is open in $W'$ and thus dense in $W'$. We then find that $\varphi^{-1}(S)=W'$, implying $S=V'$. 
     \end{proof}
     \begin{lemma}
         Consider the morphism
         \begin{gather*}
             \phi: \Pp^2\times \left(\Pp^1\right)^t\setminus V(x_3y_{12})\rightarrow \A^2\\
-            ([x_1,x_2,x_3],[y_{11},y_{12}],\dots,[y_{t1},y_{t2}])\mapsto \left(\frac{x_1}{x_3},\frac{y_{11}}{y_{12}}\right)
+            ([x_1,x_2,x_3],[y_{11},y_{12}],\dots,[y_{t1},y_{t2}])\mapsto \left(\frac{x_1}{x_3},\frac{y_{12}}{y_{11}}\right)
         \end{gather*}
-        This morphism restricted to $V'$ is the inverse of $\varphi$. We thus have the following diagram 
-        
-
-        $\pi$ thus locally (i.e. in some open neighborhood around each point in $B$) looks like $\psi$.
+         This morphism restricted to $V'$ is the inverse of $\varphi$. We thus have the following diagram 
+\[
+\begin{tikzcd}
+A^{2} \arrow[r, phantom, "\mathrel{\supset}"] \arrow[d, "\psi"'] &
+  [-2em] % <--- gap between col 1 and 2 (shrinks the phantom)
+W' \arrow[r, "\varphi"] \arrow[d] &
+   % <--- gap between col 2 and 3 (leave this “normal”)
+V' \arrow[r, phantom, "\mathrel{\subset}"] \arrow[d] &
+  [-2em] % <--- gap between col 3 and 4 (shrinks the phantom)
+B \arrow[d, "\pi"] \\
+A^{2} \arrow[r, phantom, "\mathrel{\supset}"] &
+  [-2em]
+W \arrow[r, "\varphi_{3}"] &
+  V \arrow[r, phantom, "\mathrel{\subset}"] &
+  [-2em]
+\mathbb{P}^{2}
+\end{tikzcd}
+\]
+    $\pi$ thus locally looks like $\psi$
     \end{lemma}
     \begin{proof}
-
+        Indeed, for $P=([x,xz,1],[1,z],f_{2}([x,xz,1]),\dots, f_t([x,xz,1]))\in V'$,
+        \begin{align*}
+            \varphi\phi(P)= \varphi(\frac{x}{1},\frac{z}{1})= P
+        \end{align*}
+        and for $(x,z)\in \A^2$,
+        $$
+            \phi\varphi(x,z)=\phi([x,xz,1],[1,z],f_{2}([x,xz,1]),\dots, f_t([x,xz,1]))=(x,z).
+        $$
+        Fix a point $Q\in B$. When $Q$ sits in some $E_i$ the commutativity of the diagram shows that in a suitable neighborhood around $Q$, $\pi$ corresponds to $\psi$. When $Q\in G\cap \pi^{-1}(U_3)$, set $W:= \varphi_3^{-1}(U\cap U_3)$ and $W'=\psi^{-1}(W)$ define 
+        \begin{gather*}
+            \varphi: W' \rightarrow B\\
+            (x,z)\mapsto ([x,xz,1],(f_1,\dots,f_t)(x,z))
+        \end{gather*}  
+        Setting $V' := \varphi(W')$ we obtain local description of $\pi$ at $Q$ as something that looks like $\psi$ in an affine chart. 
     \end{proof}
     \begin{lemma}
-        Let $C$ be an irreducible projective curve in $\Pp^2$. Set $C_0:= C\cap U$, $C_0':=\pi^{-1}(U)$ and $C':=\cl_B(C_0')$. $\pi$ restricts to a birational morphism $C'\rightarrow C$, which is an isomorphism from $C_0'$ to $C_0$. Locally this looks like $\pi$ from the affine case. 
+        Let $C$ be an irreducible projective curve in $\Pp^2$. Set $C_0:= C\cap U$, $C_0':=\pi^{-1}(C_0)$ and $C':=\cl_B(C_0')$. $\pi$ restricts to a birational morphism $\Psi:C'\rightarrow C$, given by the restriction of $\pi$ to $C'$, birationality given via the isomorphism from $C_0'$ to $C_0$. Locally this looks like the map $\theta$ from the affine case. 
     \end{lemma}
     \begin{proof}
-        
+        Indeed, $U$ and $\pi^{-1}(U)$ are isomorphic via $\pi$, so this is also the case for $C_0$ and $C_0'$. Let $Q\in C_0$ in some neighborhood $V'\cap C_0$ around $Q$, $\Psi$ looks like $f$ by the prior lemma. 
     \end{proof}
     \begin{theorem}
-        Let $C$ be an irreducible projective plane curve with all multiple points ordinary. There is a non-singular projective curve $C'$ birationally equivalent to $C$. This answers the question of resolution of singularities in this case. 
+        Let $C$ be an irreducible projective plane curve with all multiple points ordinary. There is a non-singular projective curve $C'$ birationally equivalent to $C$. 
     \end{theorem}
     \begin{proof}
-        
+        Pick $P_1,\dots,P_t$ to be the multiple points of $C$ and construct $C_0,C_0'$ and $C'$ as in the above lemma. We want to investigate the behavior of $P\in \pi^{-1}(P_i)\cap C' = E_i\cap C'$.
+    Note that $\varphi_3^{-1}(P_i)$ is a multiple point of $C_\ast$. Thus $\theta^{-1}\varphi_3^{-1}(P_i)$ contain only simple points by Lemma~\ref{BlowupTurnsMultiplePointsToSimplePoints} on a suitable curve $C_\ast'$. On some suitable open neighborhood $V'$ of $P$ in $C'$, $\varphi_3\theta = \pi \varphi$, where $\varphi: W'\rightarrow V'$ is an isomorphism for some open set $W'\subset C_\ast'$. Thus $\varphi^{-1}(P)$ is a simple point in $\theta^{-1}\varphi_3^{-1}(P_i)$ contained in $W'$. Now note $\pazocal{O}_{\varphi^{-1}(P)}(C_\ast') = \pazocal{O}_{\varphi^{-1}(P)}(W') \simeq\pazocal{O}_P(V')= \pazocal{O}_P(C')$, which means $P$ is simple. 
     \end{proof}
     \begin{remark}
         While this is indeed an answer to the original goal of this section, note that $C'$ is not a plane curve. This means we cannot apply theorems about plane curves to argue about $C'$ and transfer these findings to results about $C$, which is the reason to resolve singularities in the first place.  
@@ -1736,11 +1766,150 @@ We have thus far been studying algebraic geometry by studying systems of polynom
     \end{remark}
     We fix a projective plane curve $C$ that is not an exceptional line. $ C\cap U$ is an open set in $C$ and a closed in $U$. Note that $Q(C\cap U)$ is then a closed curve in $U$. Define 
     $$
-        C' := \cl\left(Q^{-1}(U\cap C)\right)= \cl\left(Q(U\cap C)\right)
+        C' := \cl\left(Q^{-1}(U\cap C)\right)= \cl\left(Q(U\cap C)\right). 
     $$
+    With this definition $Q$ restricts to a birational morphism $C'\setminus\{P,P',P''\}\dottedarrow C$. 
+    \begin{lemma}
+        $$
+            C'' = C
+        $$
+    \end{lemma}
+    \begin{proof}
+        First note, that 
+        $C\cap U \subset \cl(Q(\cl(Q(C\cap U)))) = C''\implies C=\cl(C\cap U) \subset C''$. Conversely, by continuity, 
+        $$
+            C'' \subset \cl(QQ(C\cap U )) = \cl(C\cap U)=C.
+        $$
+    \end{proof}
+    Fix an irreducible, homogeneous $f\in K[x,y,z]$ with $C=V(f)$ and set $n:= \deg \ f$. We define the \emph{algebraic transform of $f$} to be 
+    $$
+        f^Q = f(yz,xz,xy),
+    $$ 
+    which is homogeneous of degree $2n$. Set $r := m_P(f)$.
+    \begin{lemma}
+        $r$ is the largest natural number such that $z^r\mid f^Q$. 
+    \end{lemma}
+    \begin{proof}
+        For suitable forms $f_r,\dots, f_n\in K[x,y]$ with $f_r\neq 0$, we may write 
+        $$
+            f = \sum_{i=r}^n f_i z^{n-i},
+        $$
+        hence 
+        $$
+            f^Q =\sum_{i=r}^n f_i(yz,xz)(xy)^{n-i} = z^r \sum_{i=r}^n z^{r-i}f_i(y,x)(xy)^{n-i},
+        $$
+        and since $z\nmid f_r(y,x)$ and $z\mid f^{r-i}f_i(y,x)$ for every other $i$ the result follows. 
+    \end{proof}
+    Setting $r' := m_{P'}(f)$ and $r'' := m_{P''}(f)$, we get analogous results for these quantities. I.e., $r'$ is the largest number such that $y^{r'}\mid f^Q$ and $r''$ the largest numbers such that $x^{r''}\mid f^Q$. We can thus write 
+        $$
+            f^Q = x^{r''}y^{r'}z^rf'
+        $$
+        where $f'\in K[x,y,z]$ is form not divisible by $x$, $y$ or $z$. This polynomial is called the \emph{proper transform of $f$}. 
+    \begin{lemma}
+        The proper transform of $f$ has degree $2n-(r+r'+r'')$, $(f')'=f$ and $f'$ is an irreducible polynomial such that $C' = V(f')$. 
+    \end{lemma}
+    \begin{proof}
+        That $\deg\ f' = 2n-(r+r'+r'')$ is apparent from the definition of $f'$. Note that 
+        $$
+            (f^Q)^Q = (f(yz,xz,xy))^Q= f(xyzx,xyzx,xyzx)=(xyz)^nf,   
+        $$
+        hence $(f')^Q = x^{n-(r+r')}y^{n-(r+r'')}z^{n-(r'+r'')}f$, implying $(f')' = f^Q$. Consider an irreducible factor $p$ of $f'$. Then $f\mid p^Q$, hence $x^{r''}y^{r'}z^rf'\mid (xyz)^{\deg \ p} p$. It follows that $f'\mid p$, hence $f' = p$. Let $v=[v_1,v_2,v_3]\in Q^{-1}(C\cap U)$. Then $f^Q(v)= 0$, and since $x,y$ and $z$ do not vanish at $v$, we get $f'(v)=0$, hence $V(f')\supset Q^{-1}(C\cap U)=Q(C\cap U)$, so by the typical dimension argument, $V(f')=\cl(Q(C\cap U))=C'$ 
+    \end{proof}
+    \begin{lemma}
+        $$
+            m_{P}(f') = n - (r'+r''), \quad m_{P'}(f') = n-(r+r''),\quad m_{P''}(f')=n-(r+r').
+        $$
+    \end{lemma}
+    \begin{proof}
+        Note that 
+        $$
+            f' = \sum_{i=0}^{n-r} f_{r+i}(y,x)x^{n-(r+r'+i)}y^{n-(r+r''+i)}z^i
+        $$
+        The lowest degree term in the homogeneous decomposition of $f'_\ast$ is thus $f_n(y,x)x^{-r'}y^{-r''}$, which is of degree $n-(r'+r'')$, hence $m_{P}(f')=n-(r'+r'')$. The other cases follow completely analogously.  
+    \end{proof}
+    \begin{definition}
+        A projective plane curve $C$ is at a \emph{good position} if no excepetional line is tangent to $C$ at an exceptional point. 
+    \end{definition}
+    \begin{lemma}
+        If $C$ is in good position, so is $C'$
+    \end{lemma}
+    \begin{proof}
+        We prove only that $L$ is not tangent to $C'$ at $P'$. The proof for $L$ through $P''$ follows by symmetry. Proofs for $L'$ with $P$ and $P''$, and $L''$ with $P$ and $P'$ can also be found by symmetry.\\
+        $L$ is tangent at $P'$ if and only if $I(P',f'\cap z)>m_{P'}(f')=n-(r+r'')$ or equivalently 
+        $$
+            I\left(P',f_r(y,x)x^{n-(r+r')}y^{n-(r+r'')}\cap z\right) > n-(r+r'')
+        $$ 
+        or equivalently (since $I(P',y^{n-(r+r'')}\cap z)=0$ and $I(P',x^{n-(r+r')}\cap z)=n-(r+r')$)
+        $$
+            I\left(P',f_r(y,x)\cap z\right)>0,
+        $$ 
+        and this only happens when $P\in f_r(y,x)\cap z$, or when $f_r(1,0)=0$. Since $C$ is in good position, $y$ is not tangent to $f$ at $P$, hence by a similar string of arguments to the above, $f_r(1,0) \neq 0$, so we conclude that $z$ is not a tangent of $C'$ at $P'$.
+    \end{proof}
+    We now assume that $C$ is in good position and that $P\in C$. Set 
+    $$
+        C_0 := (C\cap U)\cup\{P\}.
+    $$
+    Define 
+    $$
+        f_\ast' := f(x,xz,1)x^{-r},\quad C_\ast' = V(f_\ast').
+    $$
+    Consider the morphism 
+    \begin{gather*}
+        \psi_\ast : \A^2\supset C_\ast'\rightarrow C_\ast\subset \A^2 \\
+        (x,z)\mapsto f_\ast(x,xz)
+    \end{gather*}
+    We further define $\eta := \left. Q\right|_{C_0'} : C_0'\rightarrow C_0$.
+    \begin{lemma}
+        There is a neighborhood $W\subset C^\ast$ of $(0,0)$ and isomorphisms $\varphi: W\rightarrow C_0$ and $\varphi'  : W':= \eta^{-1}(W)\rightarrow C_0'$ such that the diagram
+        $$
+            \begin{tikzcd}
+                C_\ast' \arrow[r, phantom, "\mathrel{\supset}"] \arrow[d, "\psi"'] &
+                [-2em] % <--- gap between col 1 and 2 (shrinks the phantom)
+                W' \arrow[r, "\varphi'"] \arrow[d] &
+                % <--- gap between col 2 and 3 (leave this “normal”)
+                C_0' \arrow[r, phantom, "\mathrel{\subset}"] \arrow[d,"\eta"] &
+                [-2em] % <--- gap between col 3 and 4 (shrinks the phantom)
+                C' \\
+                C_\ast \arrow[r, phantom, "\mathrel{\supset}"] &
+                [-2em]
+                W \arrow[r, "\varphi"] &
+                C_0 \arrow[r, phantom, "\mathrel{\subset}"] &
+                [-2em]
+                C
+            \end{tikzcd}
+        $$
+    \end{lemma}
+    \begin{proof}
+        
+    \end{proof}
+    \begin{lemma}
+        Suppose $P_1,\dots,P_s\in C'\cap L$ are not fundamental points. Then 
+        $$m_{P_i}(C')\leq I(P_i,C'\cap L) \text{ and } \sum_{i}I(P_i,f'\cap z) = \sum_i I(P_i,f_r(y,x)\cap z)=r.$$
+    \end{lemma}
+    \begin{proof}
+        
+    \end{proof}
+    \begin{definition}
+        a curve $C$ is in \emph{excellent position}, if it is in good position, $L$ intersects $C$ transversally in $n$ distinct points all different from the fundamental points, and $L'$ and $L''$ intersect $C$ transversally in $n-r$ distinct points all not fundamental.  
+    \end{definition}
+
+    \begin{definition}
+        For an irreducible projective curve 
+    \end{definition}
     \subsubsection{Non-singular Models of Curves}
     \subsection{Riemann-Roch}
     \subsubsection{Divisors}
+    \begin{definition}
+        Let $X\rightarrow C$ be a non-singular model of an irreducible projective curve $C$. A \emph{divisor on $X$}
+        is an element in $\Z[X]$.\\
+        The degree of a divisor $d = \sum_{P\in X} n_P P\in \Z[X]$, is the quantity
+        $$
+            \deg \ d := \sum_{P} n_P
+        $$
+    \end{definition}
+    \begin{remark}
+        Note that $\deg d+d' = \deg \ d + \deg \ d'$.
+    \end{remark}
     \subsubsection{The Vector Spaces $L_d$}
     \subsubsection{Riemann's Theorem}
     \subsubsection{Differentials of a Curve}
