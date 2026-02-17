@@ -1858,12 +1858,12 @@ W \arrow[r, "\varphi_{3}"] &
         \psi_\ast : \A^2\supset C_\ast'\rightarrow C_\ast\subset \A^2 \\
         (x,z)\mapsto f_\ast(x,xz)
     \end{gather*}
-    We further define $\eta := \left. Q\right|_{C_0'} : C_0'\rightarrow C_0$.
+    We further define $\eta := \left. Q\right|_{C_0'} : C_0'\rightarrow C_0$ where $C_0' = C'\setminus V(xy)$.
     \begin{lemma}
         There is a neighborhood $W\subset C^\ast$ of $(0,0)$ and isomorphisms $\varphi: W\rightarrow C_0$ and $\varphi'  : W':= \eta^{-1}(W)\rightarrow C_0'$ such that the diagram
         $$
             \begin{tikzcd}
-                C_\ast' \arrow[r, phantom, "\mathrel{\supset}"] \arrow[d, "\psi"'] &
+                C_\ast' \arrow[r, phantom, "\mathrel{\supset}"] \arrow[d, "\psi_\ast"'] &
                 [-2em] % <--- gap between col 1 and 2 (shrinks the phantom)
                 W' \arrow[r, "\varphi'"] \arrow[d] &
                 % <--- gap between col 2 and 3 (leave this “normal”)
@@ -1880,23 +1880,129 @@ W \arrow[r, "\varphi_{3}"] &
         $$
     \end{lemma}
     \begin{proof}
-        
+        Take $W:=(C_\ast\setminus V(xy))\cup \{(0,0)\}$, 
+        \begin{gather*}
+            \varphi : W \rightarrow C_0\\
+            (v_1,v_2)\mapsto [v_1,v_2,1]
+        \end{gather*}
+        whose inverse is $[v_1,v_2,v_3]\mapsto (v_1,v_2)$. Indeed, a point in $C_0$ is $[v_1,v_2,v_3]$ where all $v_i\neq 0$ or $v_1=v_2=0$ and $v_3=1$. Thus $C_\ast\setminus V(xy)$ is in bijection with $C\setminus V(xyz)$ and $(0,0)$ is mapped to $P$. Furthermore, we define
+        \begin{gather*}
+            \varphi' : W' \rightarrow C_0'\\
+            (v_1,v_3)\mapsto [v_3,1,v_1v_3]
+        \end{gather*}
+        whose inverse is $[v_1,v_2,v_3]\mapsto (v_3/v_1,v_1/v_2)$. Note that 
+        \begin{align*}
+            \eta\varphi'(a,c)=\eta([c,1,ac])=[ac,ac^2,c]=[a,ac,1]=\varphi(a,ac)=\varphi\psi_\ast(a,c).
+        \end{align*}
     \end{proof}
-    \begin{lemma}
+    \begin{lemma}\label{TechnialQuadraticTransformLemma}
         Suppose $P_1,\dots,P_s\in C'\cap L$ are not fundamental points. Then 
-        $$m_{P_i}(C')\leq I(P_i,C'\cap L) \text{ and } \sum_{i}I(P_i,f'\cap z) = \sum_i I(P_i,f_r(y,x)\cap z)=r.$$
+        $$m_{P_i}(C')\leq I(P_i,C'\cap L) \text{ and } \sum_{i}I(P_i,f'\cap z)=r.$$
     \end{lemma}
     \begin{proof}
-        
+        The first statement is a simple fact about intersection numbers. For the second, 
+        $$
+            \sum_{i}I(P_i,f'\cap z) = \sum_i I(P_i,f_r(y,x)\cap z) = r.
+        $$
+    \end{proof}
+    \begin{remark}
+        In the case $P\notin C$, note that $m_{P}(C)=0$, hence $\sum_v I(v,f'\cap z) = 0$, hence in this case there are no non-fundamental points in $C'\cap L$.  
+    \end{remark}
+    \begin{definition}
+        a curve $C$ is in \emph{excellent position}, if it is in good position, $L$ intersects $C$ in $n$ distinct points all different from the fundamental points, and $L'$ and $L''$ intersect $C$ in $n-r$ distinct points all not fundamental.  
+    \end{definition}
+    We proceed with a classification of the multiple points of $C'$ when $C$ is in excellent position. 
+    \begin{lemma}\label{TheOrdinaryPointsOfACurveInExcellentPosition}
+        Suppose $C$ is in excellent position. $C'$ has the following multiple points.
+        \begin{enumerate}
+            \item Those in $C'\cap U$ are in one-to-one correspondence with those in $C\cap U$ and this correspondence preserves multiplicity and ordinary multiple points. 
+            \item $P,P',P''$ are multiple points of $C'$ with $m_P(C')=n$, $m_{P'}(C')=m_{P''}(C')=n-r$.
+            \item $C'\cap L'$ and $C'\cap L''$ contain only non-fundamental points. Let $P_1,\dots,P_s$ be the non-fundamental points on $C'\cap L$. Then $m_P(C')\leq I(P_i,C'\cap L)$ and $\sum_1^s I(P_i, C'\cap L)=r$.
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        1. $C\cap U\simeq C'\cap U$ via $\eta$. The local rings of these varieties thus agree at each point, so their multiplicities agree. Furthermore, being an ordinary multiple point is also completely determined by properties of the associated local ring {\Large Haven't done this exercise yet! Do at some point}, hence this is also preserved by the isomorphism.\\
+        2. A prior lemma shows that since $C$ is in good position so is $C'$ and that $(C')'=C$. The assumption of $C$ being in excellent position implies 
+        $$
+            m_P(C') = \sum_{v\neq P,P',P''} I(v,(C')'\cap L)= \sum_{v\neq P,P',P''} I(v,C\cap L)= n
+        $$
+        a similar computation shows that $m_{P'}(C')=m_{P''}(C')=n-r$. {\Large Why are they ordinary}\\
+        3. Note that $r\leq I(P,C\cap L')$ and that $\sum_v I(v,C\cap L') = n$. By the assumption that $C$ is excellent position, we must have $I(P,C\cap L') \leq r$, hence $I(P,C\cap L')=r$. It thus follows that $I(P'',C\cap L')=0$ and hence $P''\notin C$, which implies $C'\cap L'$ contains no non-fundamental points. A symmetric argument shows that $C'\cap L''$ contains no non-fundamental points.  $m_P(C')\leq I(P_i,C'\cap L)$ and $\sum_1^s I(P_i, C'\cap L)=r$ follows from Lemma~\ref{TechnialQuadraticTransformLemma}
     \end{proof}
     \begin{definition}
-        a curve $C$ is in \emph{excellent position}, if it is in good position, $L$ intersects $C$ transversally in $n$ distinct points all different from the fundamental points, and $L'$ and $L''$ intersect $C$ transversally in $n-r$ distinct points all not fundamental.  
+        For an irreducible projective curve $C$ of degree $n$, we define 
+        $$
+            g^\ast(C) := \frac{(n-1)(n-2)}{2}-\sum_{P\in C}\frac{m_P(C)(m_P(C)-1)}{2}
+        $$
     \end{definition}
-
+    \begin{lemma}
+        If $C$ is excellent position, then 
+        $$
+            g^\ast(C')= g^\ast(C)-\sum_1^s \frac{m_{P_i}(C')(m_{P_i}(C')-1)}{2},
+        $$
+        where $P_1,\dots,P_s$ are the non-fundamental points in $C'\cap L$ 
+    \end{lemma}
+    \begin{proof}
+        Indeed,
+        \begin{align*}
+            g^\ast(C') &= \frac{(2n-r-1)(2n-r-2)}{2}-\sum_{v\in C'}\frac{m_v(C')(m_v(C')-1)}{2}\\
+            &=  \frac{(n-1)(n-2)}{2}+\frac{3n^2-3n-4nr+3r+r^2}{2}-\sum_{v\in C'\cap U}\frac{m_v(C)(m_v(C)-1)}{2}\\
+            & -\frac{n(n-1)}{2}-\frac{2(n-r)(n-r-1)}{2}-\sum_1^s \frac{m_{P_i}(C')(m_{P_i}(C')-1)}{2}\\
+            &= \frac{(n-1)(n-2)}{2}-\sum_{v\in C\cap U}\frac{m_v(C)(m_v(C)-1)}{2}-\frac{r(r-1)}{2}-\\ 
+            &\sum_1^s \frac{m_{P_i}(C')(m_{P_i}(C')-1)}{2}\\
+            &= \frac{(n-1)(n-2)}{2} - \sum_{v\in C\cap U}\frac{m_v(C)(m_v(C)-1)}{2} \\& -\sum_{v\in C\cap V(xyz)} \frac{m_v(C)(m_v(C)-1)}{2}- \sum_1^s \frac{m_{P_i}(C')(m_{P_i}(C')-1)}{2}\\
+            &= \frac{(n-1)(n-2)}{2} - \sum_{v\in C} \frac{m_v(C)(m_v(C)-1)}{2} - \sum_1^s \frac{m_{P_i}(C')(m_{P_i}(C')-1)}{2}\\
+            &= g^\ast(C)-\sum_1^s \frac{m_{P_i}(C')(m_{P_i}(C')-1)}{2}
+        \end{align*}
+    \end{proof}
+    We now abandon $P,P',P''$ and $L,L',L''$ being notation for special objects. The whole point of considering a curve in excellent position is that this can easily be transformed into a curve with only ordinary multiple points. The upshot is that any irreducible projective plane curve is can be transformed into one in excellent position. This puts us in a position where we can resolve the singularities of any projective plane curve. 
+    \begin{lemma}\label{ThereIsAlwaysAQuadraticTransformation}
+        Suppose $\Char\ K =0$. Let $f$ be any irreducible projective plane curve and $P\in f$ any point. There is a change of coordinates $T=$ such that $f^T$ is in excellent position and $T([0,0,1])=P$.
+    \end{lemma}
+    \begin{proof}
+        If we can find lines $l,l',l''$ such that 
+        $L'\ic C = rP+\sum_1^{n-r} P_i'$ and $L''\ic C = rP+\sum_1^{n-r} P_i''$, $L\ic C  =\sum_1^n P_i$ with $P,P_1,\dots,P_n,P_1',\dots,P_{n-r}',P_{1}'',\dots,P_{n-r}''$ are all distinct, then by Lemma~\ref{ChangeOfCoordinatesFOrHyperplanes} we can find a change of coordinates $T$ such that $L^T = z$, $(L')^T=y$ and $(L'')^T=x$. Then since $T(P)\in x\cap y$, hence $T(P)=[0,0,1]$. By Proposition~\ref{ThereAreInfinitelyManyLinesThroughAPointOnACurvePassingIntersectingTransversallyForTheRemainingIntersections} (this is where the assumption of $\Char\ K=0$ is used) we can find $L'$ and $L''$. For $L$ just take any simple point on $C$ different from $P$ and any $P_i'$ and $P_i''$ and apply the same result. 
+    \end{proof}
     \begin{definition}
-        For an irreducible projective curve 
+        For a projective change of coordinates $T$ on $\Pp^2$ as in the above lemma, the \emph{quadratic transform} of $T$ is $QT$. Let $f$ be any irreducible projective plane curve and $P\in f$ any point, the irreducible projective plane curve 
+        $$(f^T)'$$
+        is the \emph{quadratic transformation of $f$}. If $f^T$ is in excellent position and $T([0,0,1])=P$, then the quadratic transformation of $f$ is said to be \emph{centered at $P$}.\\
+        Given a sequence of irreducible projective plane curves, $f=f_1,\dots,f_m=g$ such that $f_i$ is a quadratic trannsformation of $f_{i-1}$, then we say that $f$ is \emph{transformed} $g$ via finite sequence of quadratic transformations. 
     \end{definition}
+    \begin{theorem}\label{HowToTransformCurveWithNonOrdinaryMultiplePointsIntoOneWithOnlyOrdinaryMultiplePoints}
+        Suppose $\Char\ K =0$. Any irreducible projective plane curve $C$ may be transformed into an irreducible projective plane curve with only ordinary multiple points via a finite sequence of quadratic transformations. 
+    \end{theorem}
+    \begin{proof}
+        We describe an algorithm for producing such a sequence of quadratic transformations. 
+        \begin{enumerate}
+            \item If $C$ has only ordinary multiple points, terminate, otherwise continue to 2.
+            \item Pick a non-ordinary multiple point $P$ on $C$ and change the value of $C$ to be a quadratic transformation centered at $P$ (one such exists by the prior lemma), go to 1.
+        \end{enumerate}
+        Each step maps $P$ to the ordinary multiple point $[0,0,1]$. If $C'$ is the quadratic transformation of $C$ centered at $P$, then if $C'$ has the same number of non-ordinary multiple points as $C$ by Lemma~\ref{TheOrdinaryPointsOfACurveInExcellentPosition} one of these must be among the non-fundamental points $P_1,\dots,P_s$ of $C'$, hence 
+        $$
+            g^\ast(C')=g^\ast(C)-\sum_1^s \frac{m_{P_i}(C')(m_{P_i}(C)-1)}{2} < g^\ast(C).
+        $$
+        It thus follows that this algorithm must terminate in most $N+g^\ast(C)$ steps. 
+    \end{proof}
     \subsubsection{Non-singular Models of Curves}
+    \begin{lemma}
+        Suppose $\Char\ K =0$. Let $f$ be any irreducible projective plane curve and $P\in f$ any point. 
+        \begin{enumerate}
+            \item Let $S\subset f$ be any finite set of points not containing $P$. There is a quadratic transform $T$ of $f$ centered at $P$ with $T^{-1}(S)\cap V(xyz)=\emptyset$.
+            \item When $T$ is given as in 1. there is a neighborhood of $S$ on $f$ isomorphic to an open set in $(f^T)'$.
+            \item If $S$ contains only simple points of $f$, then there is a curve $f'$ that only has ordinary multiple points and neighborhood $U$ of $S$ on $f$ isomorphic to an open set $U'$ on $f'$ containing only simple points on $f'$. 
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        1. In the proof of Lemma~\ref{ThereIsAlwaysAQuadraticTransformation} we may also pick $L,L',L''$ such that non of these pass through any point in $S$, since are also infinitely many such lines.\\
+        2. $f\setminus(L\cup L'\cup L'')$ is an open neighborhood of $S$, and  
+        \begin{align*}
+            T^{-1}(f\setminus (L\cup L'\cup L'')) &= f^T\setminus V(xyz) = f^T \cap (\Pp^2\setminus V(xyz))\\
+            &\simeq (f^T)' \cap (\Pp^2\setminus V(xyz))
+        \end{align*} 
+        where the last isomorphism is via $Q$. {\Large Check}\\ 
+        3. In the algorithm described in Theorem~\ref{HowToTransformCurveWithNonOrdinaryMultiplePointsIntoOneWithOnlyOrdinaryMultiplePoints} only pick quadratic transformations of the form described in 1. i.e. at each step apply 1. on $f_{i-1}$ and $S_{i-1}$ with $S_1=S$ and $S_i=T^{-1}(S_{i-1})$ when $i>1$, and $f_1=f$ and $f_i = (f_{i-1}^T)'$.
+    \end{proof}
     \subsection{Riemann-Roch}
     \subsubsection{Divisors}
     \begin{definition}
