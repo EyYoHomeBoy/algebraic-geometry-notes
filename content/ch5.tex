@@ -1353,7 +1353,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
            \end{align*}
            If $P$ is an ordinary multiple point, then $r_i=1$ for all $i$, hence $m_{P_i}(C')=1$, hence $P_i$ is simple.  
         \end{proof}
-        \begin{lemma}
+        \begin{lemma}\label{AffineCaseTechnicalLemma}
             There is an open affine neighborhood $W$ of $P$ in $C$ such that $W':=\theta^{-1}(W)$ is an affine open subvariety in $C'$, $\theta(W')=W$, $\Gamma(W')$ is module finite over $\Gamma(W)$ and $x^{r-1}\Gamma(W')\subset \Gamma(W)$. Here we have implicitly made the identification of $\Gamma(W)$ as a subring of $K(C)$. 
         \end{lemma}
         \begin{proof}
@@ -2041,7 +2041,7 @@ W \arrow[r, "\varphi_{3}"] &
         Let $(X,\Phi)$ be a nonsingular model of curve $C$. Then a point on $X$ is called a \emph{place} on $C$ or on $K(C)$. A place $Q\in X$ is \emph{centered} at $P\in C$ if $\Phi(Q)=P$.
     \end{definition}
 
-    \begin{lemma}
+    \begin{lemma}\label{SecondTechnicalNonsingularModelLemma}
         Let $C$ be a projective plane curvem, $(X,\Phi)$ a nonsingular model of $C$ and $P\in C$. There is an affine neighborhood open $U$ of $P$ such that 
         \begin{enumerate}
             \item $U':=\Phi^{-1}(U)$ is an affine open subvariety of $X$.
@@ -2051,6 +2051,63 @@ W \arrow[r, "\varphi_{3}"] &
         \end{enumerate}
         $U$ may be chosen such that it excludes an arbitrary set points $S\subset C$ with $P\notin S$.
     \end{lemma}
+    \begin{proof}
+        We first argue that we can find a series of quadratic transformations\\ $C_1=C,\dots,C_N$ such that there are affine open sets $W_1\subset C_1,\dots, W_N\subset C_N$ such that
+        \begin{enumerate}[a)]
+            \item $P\in W_1$ and $S\cap W_1 = \emptyset$.
+            \item  The underlying morphism of $f_i:C_{i+1}\dashrightarrow C_i$ are $f_i:W_{i+1}\rightarrow W_i$.
+            \item $W_{i+1} = f^{-1}(W_i)$ are affine and $\Gamma(W_{i+1})$ is module finite over $\Gamma(W_i)$ and $t\Gamma(W_i)\subset \Gamma(W_{i+1})$ for some $t\neq 0$. 
+        \end{enumerate}
+        Consider first the case where $N=2$. First pick an open neighborhood $V$ of $P$ in $C$ and a quadratic transformation $(C_2,T)$ as in Lemma~\ref{TechnicalNonsingularModelLemma} 2. Note that when restricted to $(C_2)_\ast=(C^T)'_\ast$, $Q: (C_2)_\ast\rightarrow C^T_\ast$ looks like $\theta : (a,c)\mapsto (a,ac)$. By Lemma~\ref{AffineCaseTechnicalLemma} there is an affine, open neighborhood $V_0$ of $[0,0,1]$ in $C^T_\ast$ such that $W_2 := \theta^{-1}(V_0)$ an affine neighborhood with $\Gamma(W_{2})$ module finite over $\Gamma(V_0)$ and $t\Gamma(V_0)\subset \Gamma(W_{2})$ for some $t\neq 0$. In the remark following this lemma, we know that can pick $V_0\subset T^{-1}(V)$ and $W_2\subset \left.Q\right|_{C_2}^{-1}T^{-1}(V)$, hence picking $W_1:= T(V_0)$, we get the desired $C_1,C_2$, $W_1,W_2$ and $f_1: C_1\dashrightarrow C_2$ when taking into account that the Zariski topology is Frechet, which means we can pick this neighborhood away from $S$. Now suppose a), b) and c) for some sequence of quadratic transformations are satisfied, using the same argument as before we find a quadratic transformation of $C_N$ centered at $f_{N-1}\cdots f_{1}(P)$ with an open affine neighborhood $W'\subset W_{N}$ and an affine open neighborhood $W_{N+1}$ satisfying b) and c). Replace $W_{N-1}$ with $f_i^{-1}(W')$, $W_{N-2}$ with $f_{i-1}^{-1}(W_{N-1})$ and so on and we get the desired sequence of quadratic transformations.\\ 
+        We pick such a sequence $C_1,\dots, C_N$ with $C_N$ having only ordinary multiple points. take $f_N : X\dashrightarrow C_N$ to be the nonsingular model of $C_N$. Let $W_{N+1} := f_N^{-1}(W_N)$, we shrink the preceeding neighborhoods as before so that $W_{N+1}$ has the desired compatibility with the preceeding $W_i$. $f_N$ looks like $(a,c)\mapsto (a,ac)$ locally, so we get the module finiteness condition for these open affine sets as well. Set $U':= W_{N+1}$ and $U = W_1$. Being module finite is a transitive property, so $\Gamma(U')$ is finite as a $\Gamma(U)$-module.\\
+        write 
+        $$
+            \Gamma(U') := \sum_1^m \Gamma(U)z_i\quad (z_i\in \Gamma(U')).
+        $$ 
+        Since $Q(\Gamma(U))=Q(\Gamma(U'))$, we may find a non-zero $t\in \Gamma(U)$ such that $tz_i\in \Gamma(U)$. It thus follows that $t\Gamma(U)\subset \Gamma(U')$.\\
+        We define 
+        \begin{gather*}
+            \rho : \Gamma(U')/\Gamma(U) \rightarrow \Gamma(U)/\langle t\rangle\\
+            z+ \Gamma(U) \mapsto tz+\langle t\rangle
+        \end{gather*}
+        which is an injective $K$-linear map. It thus suffices to prove that $\Gamma(U)/\langle t\rangle$ is finite-dimensional by rank-nullity. Since $t$ has only finitely many zeroes (its pole set is an algebraic subset of $U$, hence it is finite) it follows from the Nullstellensatz (more specifically Corollary~\ref{DimensionOfCoordinateRing}) that $\dim \ \Gamma(U)/\langle t\rangle$.  
+    \end{proof}
+    
+    \begin{proposition}
+        Let $C=V(f)$ be an irreducible projective plane curve, $P\in C$, $\Phi: X\dashrightarrow C$ a nonsingular model of $C$. Let $g$ be a plane curve. Then 
+        $$
+            I(P,g\cap C) = \sum_{v\in \Phi^{-1}(P)} \ord_v(g)
+        $$
+    \end{proposition}
+    \begin{proof}
+        Let $\overline{g}$ denote the image of $g_\ast$ in $\pazocal{O}_P(C)$. Pick $U$ and $U'$ as in Lemma~\ref{SecondTechnicalNonsingularModelLemma} with $U\subset \{g:\ast(P')\neq 0\}\cup \{P\}$. In other words, so that $\overline{g}\in \pazocal{O}_{P'}(C)$ for each $P'\in U$ with $P'\neq P$. Then 
+        \begin{align*}
+            I(P,C\cap g)=\dim \ \pazocal{O}_P(\Pp^2)/\langle f_\ast, g_\ast\rangle = \dim\ \pazocal{O}_P(C)/\langle \overline{g}\rangle = \dim \ \Gamma(U)/\langle \overline{g}\rangle.
+        \end{align*}
+        Set $V= \Gamma(U)$ and $V'=\Gamma(U')$. Consider $\rho : V\rightarrow V', z\mapsto \overline{g}z$. By ... 
+        since $V/V'$ is finite dimensional, we get 
+        $$
+            \dim \ V/\langle \overline{g}\rangle = \dim \ V'/\langle \overline{g}\rangle 
+        $$
+        By ... 
+        $$
+            \dim \ V'/\langle \overline{g}\rangle = \sum_{v\in \Phi^{-1}(P)} \dim\ \pazocal{O}_v/\langle \overline{g}\rangle = \sum_{v\in \Phi^{-1}(P)} \ord_v(\overline{g}).
+        $$
+    \end{proof}
+
+    \begin{lemma}
+        Suppose $P$ is an ordinary multiple point on an irreducible projective plane curve $C$ of multiplicity $r$ with nonsingular model $\Phi:X\dashrightarrow C$. Write $\Phi^{-1}(P)=\{P_1,\dots,P_r\}$. If $z\in K(C)$ with $\ord_{P_i}(z)\geq r-1$, then $z\in \pazocal{O}_P(C)$. 
+    \end{lemma}
+    \begin{proof}
+        
+    \end{proof}
+
+    \begin{proposition}
+        Let $f$ be an irreducible projective plane curve, $P$ an ordinary point of multiplicity $r$ on $f$. Let $P_1,\dots,P_r$ be the places centered at $P$. For plane curves $g,h$, Noether's conditions are satisfied at $P$ with respect to $f,g,h$, if $\ord_{P_i}(h)\geq \ord_{P_i}(g)+r-1$ for each $i$. 
+    \end{proposition}
+    \begin{proof}
+        
+    \end{proof}
     \subsection{Riemann-Roch}
     \subsubsection{Divisors}
     \begin{definition}
