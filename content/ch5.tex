@@ -1444,7 +1444,7 @@ We have thus far been studying algebraic geometry by studying systems of polynom
             $$ 
             where $u$ is a unit in $\pazocal{O}_{P_i}(C')$, hence $\ord(f_y(\overline{x},\overline{y}))=r-1$.
         \end{proof}
-        \begin{proposition}
+        \begin{proposition}\label{AffineOrderLemma}
             Let $P$ be an ordinary multiple point on $C$, $\theta^{-1}(P)=\{P_1,\dots,P_r\}$ with $P_i = (0,\alpha_i)$ and $f_r = \prod_1^r l_i$ with $l_i = y-\alpha_i x$. Let $g$ be a plane curve and denote the image of $g$ in $\Gamma(C')\subset \Gamma(C)$ by $\overline{g}$. 
             \begin{enumerate}
                 \item $\ord_{P_i}(\overline{g})\geq m_{P}(g)$ with equality if $L_i$ is not tangent to $g$ at $P$.
@@ -2073,23 +2073,28 @@ W \arrow[r, "\varphi_{3}"] &
         which is an injective $K$-linear map. It thus suffices to prove that $\Gamma(U)/\langle t\rangle$ is finite-dimensional by rank-nullity. Since $t$ has only finitely many zeroes (its pole set is an algebraic subset of $U$, hence it is finite) it follows from the Nullstellensatz (more specifically Corollary~\ref{DimensionOfCoordinateRing}) that $\dim \ \Gamma(U)/\langle t\rangle$.  
     \end{proof}
     
-    \begin{proposition}
+    \begin{proposition}\label{IntersectionFormula}
         Let $C=V(f)$ be an irreducible projective plane curve, $P\in C$, $\Phi: X\dashrightarrow C$ a nonsingular model of $C$. Let $g$ be a plane curve. Then 
         $$
             I(P,g\cap C) = \sum_{v\in \Phi^{-1}(P)} \ord_v(g)
         $$
     \end{proposition}
     \begin{proof}
-        Let $\overline{g}$ denote the image of $g_\ast$ in $\pazocal{O}_P(C)$. Pick $U$ and $U'$ as in Lemma~\ref{SecondTechnicalNonsingularModelLemma} with $U\subset \{g:\ast(P')\neq 0\}\cup \{P\}$. In other words, so that $\overline{g}\in \pazocal{O}_{P'}(C)$ for each $P'\in U$ with $P'\neq P$. Then 
+        Let $\overline{g}$ denote the image of $g_\ast\in K(\Pp^2)$ in $K(C)$. Pick $U$ and $U'$ as in Lemma~\ref{SecondTechnicalNonsingularModelLemma} with $P\in U$ and $U\setminus \{P\}\subset \{P':\overline{g}(P')\neq 0\}$. We may do this since there are only finitely many points on which $\overline{g}$ vanish, hence for an initial choice of $U$, replace it with something contained in $U$ excluding these points. We have thus chosen $U$ such that $\overline{g}\in \pazocal{O}_{P'}(C)$ is a unit for each $P'\in U$ with $P'\neq P$. Then 
         \begin{align*}
             I(P,C\cap g)=\dim \ \pazocal{O}_P(\Pp^2)/\langle f_\ast, g_\ast\rangle = \dim\ \pazocal{O}_P(C)/\langle \overline{g}\rangle = \dim \ \Gamma(U)/\langle \overline{g}\rangle.
         \end{align*}
-        Set $V= \Gamma(U)$ and $V'=\Gamma(U')$. Consider $\rho : V\rightarrow V', z\mapsto \overline{g}z$. By ... 
-        since $V/V'$ is finite dimensional, we get 
+        where the second equality follows from Proposition~\ref{IsomorphimOfLocalRingsOfRationalFunctions}. For the last equality note that 
+        $$
+            \Gamma(U) \twoheadrightarrow \pazocal{O}_P(C)/\pazocal{O}_P(C)\overline{g}
+        $$
+        has kernel $\Gamma(U) \overline{g}$. Indeed, if $z\in \Gamma(U)$ is in  $\pazocal{O}_P(C) \overline{g}$, then $z= h\overline{g}$ for some $h\in \pazocal{O}_P(C)$. Note that $z\in \pazocal{O}_{P'}(C)$ for $P' \in U\setminus \{P\}$, hence $h = z\overline{g}^{-1} \in \pazocal{O}_{P'}$, meaning $z\in \Gamma(U)\overline{g}$. {\large Fulton claims that Corollary~\ref{DimensionOfLocalQuotientFromIdealsWithFiniteZeroes} applies here. I sort of does, I guess, but really I think we need something like Corollary~\ref{FiniteDimensionalAlgebrasIsAFiniteProductOfLocalRings}, which is the not mandatory problem 2.47. This approach is less simple than what I did above.}
+        Set $V= \Gamma(U)$ and $V'=\Gamma(U')$. Consider $\rho : V\rightarrow V', z\mapsto \overline{g}z$.
+        Since $V/V'$ is finite dimensional, we get 
         $$
             \dim \ V/\langle \overline{g}\rangle = \dim \ V'/\langle \overline{g}\rangle 
         $$
-        By ... 
+        By (an appropriate version of) Corollary~\ref{DimensionOfLocalQuotientFromIdealsWithFiniteZeroes} and Lemma~\ref{OrderIsDimensionOfQuotientKAlg}
         $$
             \dim \ V'/\langle \overline{g}\rangle = \sum_{v\in \Phi^{-1}(P)} \dim\ \pazocal{O}_v/\langle \overline{g}\rangle = \sum_{v\in \Phi^{-1}(P)} \ord_v(\overline{g}).
         $$
@@ -2099,12 +2104,29 @@ W \arrow[r, "\varphi_{3}"] &
         Suppose $P$ is an ordinary multiple point on an irreducible projective plane curve $C$ of multiplicity $r$ with nonsingular model $\Phi:X\dashrightarrow C$. Write $\Phi^{-1}(P)=\{P_1,\dots,P_r\}$. If $z\in K(C)$ with $\ord_{P_i}(z)\geq r-1$, then $z\in \pazocal{O}_P(C)$. 
     \end{lemma}
     \begin{proof}
-        
+        Pick $U\ni P$ such that $z\in \pazocal{O}_{P'}(C)$ for each $P'\in U\setminus \{P\}$ and such that $\Phi: \Phi^{-1}(U)\rightarrow \Phi$ looks like $\theta$ in Lemma~\ref{AffineCaseTechnicalLemma}. By Lemma~\ref{BlowupTurnsMultiplePointsToSimplePoints}, $\ord_{P_i}(x)=1$, hence $zx^{1-r}\in \Gamma(U')$. Since $x^{r-1}\Gamma(U')\subset \Gamma(U)$, we get $z=x^{r-1}(zx^{1-r})\in \Gamma(U)\subset \pazocal{O}_P(C)$.
     \end{proof}
 
     \begin{proposition}
         Let $f$ be an irreducible projective plane curve, $P$ an ordinary point of multiplicity $r$ on $f$. Let $P_1,\dots,P_r$ be the places centered at $P$. For plane curves $g,h$, Noether's conditions are satisfied at $P$ with respect to $f,g,h$, if $\ord_{P_i}(h)\geq \ord_{P_i}(g)+r-1$ for each $i$. 
     \end{proposition}
+    \begin{proof}
+        Note that $h_\ast\in \langle f_\ast,g_\ast\rangle \subset \pazocal{O}_P(\Pp^2)$ if and only if $z:= \frac{\overline{h_\ast}}{\overline{g_\ast}}\in \pazocal{O}_P(f)$. Since $\ord_{P_i}(z) = r-1$ for each $i$, it follows that $z\in \pazocal{O}_P(f)$ by the above lemma.  
+    \end{proof}
+    \begin{lemma}
+        Let $\Phi : X\rightarrow C$ be the nonsingular model of an irreducible projective plane curve. Let $P\in C$ be an ordinary multiple point with multiplicity $r$ and places $Q_1,\dots,Q_r$ on $X$ centered at $P$. Let $G$ be a projective plane curve and $s\leq r$. $m_P(g)\geq s$ if and only if $\ord_{Q_i}(\overline{g})\geq s $ for $i=1,\dots,r$.  
+    \end{lemma}
+    \begin{proof}
+        We pick $U\ni P$ in the usual way such that $\Phi$ locally looks like $\theta$ (from the affine case). By Lemma~\ref{AffineOrderLemma} 2. $\ord_{Q_i}(\overline{g})\geq s$ for each $i$ implies $m_P(g)\geq s$. Conversely, for any $i$, if $m_P(g)\geq s$ we get that $\ord_{Q_i}(g)\geq s$, since $\ord_{P_i}(g)\geq m_P(g)$ by 1. of Lemma~\ref{AffineOrderLemma}.
+    \end{proof}
+    \begin{lemma}
+        Let $X$ be a nonsingular projective curve, $P_1,\dots,P_s\in X$. 
+        \begin{enumerate}
+            \item There is a projective plane curve with only ordinary multiple points whose nonsingular model is $\Phi : X\rightarrow C$ with $\Phi(P_i)$ simple in $C$ for each $i$.
+            \item For any finite sequence $m_1,\dots,m_r\in \Z$ there is a $z\in K(X)$ such that $\ord_{P_i}(z)=m_i$. 
+            \item $C$ of part 1. may be found of arbitrarily large degree. 
+        \end{enumerate}
+    \end{lemma}
     \begin{proof}
         
     \end{proof}
@@ -2119,8 +2141,111 @@ W \arrow[r, "\varphi_{3}"] &
         $$
     \end{definition}
     \begin{remark}
-        Note that $\deg d+d' = \deg \ d + \deg \ d'$.
+        Note that $\deg\ (d+d') = \deg  d + \deg  d'$.
     \end{remark}
+    \begin{definition}
+        A divisor $d = \sum_{P\in X} n_P P $ is \emph{effective} or \emph{positive}, if $n_P\geq 0$ for each $P$. 
+    \end{definition}
+    \begin{definition}
+        For a pair of divisors $\sum_{P\in X} n_P P$ and $\sum_{P\in X} m_P P$ we write 
+        $$
+            \sum_{P\in X} n_P P \geq \sum_{P\in X} m_P P
+        $$
+        if $n_P\geq m_P$ for each $P$. 
+    \end{definition}
+    \begin{definition}
+        Suppose $C$ is a plane curve of degree $n$ and $g$ is a plane curve not containing $C$ as a component of degree $m$. The \emph{divisor of $G$}, is defined to be 
+        $$\mathrm{div}(G) := \sum_{P\in X} \ord_P(g)P.$$  
+    \end{definition}
+    \begin{remark}
+        By Proposition~\ref{IntersectionFormula} and Bezout,
+        $$
+            \deg \ \mathrm{div}(g) = \sum_{P\in X} \ord_P(g) = \sum_{P'\in C} I(P',C\cap g) = nm.
+        $$
+    \end{remark}
+    \begin{definition}
+        Let $z\in K(X)\setminus 0$. \emph{The divisor of $z$} is defined to be 
+        $$
+            \Div(z) := \sum_{P\in X} \ord_P(z)P.
+        $$
+    \end{definition}
+    \begin{remark}
+        Note that $\{P : z(P) = 0\}$, corresponding to the points with positive order, and $\pazocal{P}(z)$, corresponding to points with negative order, are both finite sets, hence $\Div(z)\in \Z[X]$. With this in mind 
+        $$
+            (z)_0 := \sum_{P\in X : \ord_P(z)>0} \ord_P(z)P
+        $$
+        is called the \emph{divisors of zeros of $z$}, and 
+        $$
+            (z)_\infty := \sum_{P\in X: \ord_P(z)<0} -\ord_P(z)P,
+        $$
+        the \emph{divisors of poles of $z$}. We thus have 
+        $$
+            \Div(z) = (z)_0-(z)_\infty.
+        $$
+    \end{remark}
+    \begin{lemma}
+        For $z,z'\in K(X)$, we have $\Div(zz')=\Div(z)+\Div(z')$ and $\Div(z^{-1})=-\Div(z)$
+    \end{lemma}
+    \begin{proof}
+        This follows from basic properties of the order function.
+    \end{proof}
+    \begin{lemma}
+        For any $z\in K(X)\setminus 0$,
+        $$
+            \deg \ \Div(z) = 0.
+        $$
+    \end{lemma}
+    \begin{proof}
+        Write $z = \frac{f+I(C)}{g+I(C)}\in \Gamma^\Pp(C)$ for suitable homogeneous polynomials $f,g$ of the same degree, $m$ say. Say $C$ has degree $n$. Then 
+        $$
+            \Div(z)=\Div(f)-\Div(g)= mn -mn =0.
+        $$
+    \end{proof}
+    \begin{corollary}
+        For a $z\in K(X)\setminus 0$ the following are equivalent
+        \begin{enumerate}
+            \item $\Div(z)\geq 0$.
+            \item $z\in K$.
+            \item $\Div(z) = 0$. 
+        \end{enumerate}
+    \end{corollary}
+    \begin{proof}
+        Suppose $\Div(z) \geq 0$. Then $\ord_P(z)\geq 0$ for each $P$, hence $z\in \pazocal{O}_P(C)$ for each $P$. Fix $P_0\in C$. Then $z-z(P_0) = 0$ or $\deg\ \Div(z-z(P_0))=0$. Note that $z-z(P_0)\in \pazocal{O}_P(C)$ for each $P$, meaning $\ord_P(z-z(P_0))\geq 0$ for each $P$, and that $\ord_{P_0}{z-z(P_0)}>0$. Then $z-z(P_0)=0$, hence $z\in K$. 
+    \end{proof}
+    \begin{corollary}
+        Consider $z,z'\in K(X)\setminus 0$. Then $\Div(z)=\Div(z')$ if and only if $z=\lambda z$ for some $\lambda\in K$. 
+    \end{corollary}
+    \begin{proof}
+        $\Div(z)=\Div(z')$ if and only if $\Div(z(z')^{-1})=0$, which is equivalent to $z(z')^{-1}\in K$. This is equivalent to $z=\lambda z'$ for some $\lambda \in K$. 
+    \end{proof}
+    \begin{definition}
+        Two divisors $d,d'\in \Z[X]$ are \emph{linearly equivalent} if $d=d+\Div(z)$ for some $z\in K(X)$. In this case we write $d\equiv d'$.
+    \end{definition}
+    \begin{remark}
+        Being linearly equivalent is an equivalence relation. Indeed, $d= d+ \Div(1)$ for each $d\in \Z[X]$. Suppose $d = d'+ \Div(z)$ for some $z\in K(X)\setminus 0$. Then 
+        $$
+            d' = d-\Div(z) = d+ \Div(z^{-1}).
+        $$
+        Suppose $d,d',d''\in \Z[X]$ are divisors with $d=d'+\Div(z)$ and $d' = d''+\Div(z')$ for some $z,z'\in K(X)\setminus 0$. Then 
+        $$
+            d = d' + \Div(z) = d'' + \Div(z')+\Div(z) = d'' + \Div(zz').
+        $$
+    \end{remark}
+    \begin{lemma}
+        The following statements hold for divisors
+        \begin{enumerate}
+            \item For each $d\in \Z[X]$,  $d\equiv 0$ if and only if $d=\Div(z)$ for some $z\in K$.
+            \item For each $d,d'\in \Z[X]$, $d\equiv d'$ implies $\deg\ d = \deg \ d'$.
+            \item For each $d,d',d''\in \Z[X]$, if $d = d'$, then 
+            $$
+                d + d'' = d' + d''.
+            $$
+            \item For $d,d'\in \Z[X]$. $d\equiv d'$ if and only if there are two curves $g,g'$ of the same degree such that $d+\Div(g) = d' +\Div(g').$
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        
+    \end{proof}
     \subsubsection{The Vector Spaces $L_d$}
     \subsubsection{Riemann's Theorem}
     \subsubsection{Differentials of a Curve}
