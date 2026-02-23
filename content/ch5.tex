@@ -2234,14 +2234,58 @@ W \arrow[r, "\varphi_{3}"] &
     \begin{lemma}
         The following statements hold for divisors
         \begin{enumerate}
-            \item For each $d\in \Z[X]$,  $d\equiv 0$ if and only if $d=\Div(z)$ for some $z\in K$.
+            \item For each $d\in \Z[X]$,  $d\equiv 0$ if and only if $d=\Div(z)$ for some $z\in K(X)\setminus 0$.
             \item For each $d,d'\in \Z[X]$, $d\equiv d'$ implies $\deg\ d = \deg \ d'$.
-            \item For each $d,d',d''\in \Z[X]$, if $d = d'$, then 
+            \item For each $d_1,d_1',d_2,d_2'\in \Z[X]$, if $d_1 \equiv d_1'$ and $d_2\equiv d_2'$, then 
             $$
-                d + d'' = d' + d''.
+                d_1 + d_2 \equiv d_1' + d_2'.
             $$
             \item For $d,d'\in \Z[X]$. $d\equiv d'$ if and only if there are two curves $g,g'$ of the same degree such that $d+\Div(g) = d' +\Div(g').$
         \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        1. This is trivial, since $d\equiv 0$ is equivalent to $d = 0 + \Div(z) = \Div(z)$ for some $z\in K(X)$ by definition.\\
+        2. If $d\equiv d'$, then for some $z\in K(X)\setminus 0$,  
+        $$
+            d=d'+\Div(z)
+        $$
+        hence 
+        $$
+            \deg \ d = \deg \left( d'+\Div(z)\right)= \deg \ d' + \deg \ \Div(z) = d'.
+        $$
+        3. Indeed, if $d_1 \equiv d_1'$ and $d_2\equiv d_2'$, then $d_1 = d_1'+\Div(z_1)$ and $d_2 = d_2'+\Div(z_2)$ for some $z_1,z_2\in K(X)\setminus 0$. Then 
+        $$
+            d_1+d_2 = d_1'+d_2'+\Div(z_1z_2),
+        $$
+        hence $d_1+d_2\equiv d_1'+d_2'$.\\
+        4. If $d' = d+ \Div(z)$, then $z = \frac{\overline{g}}{\overline{g'}}$ where $g,g'$ are projective plane curves of the same degree and $\overline{g},\overline{g'}$ are images of $g$ and $g'$ in $\Gamma^h(C)$. Then $\Div(z) = \Div(g)-\Div(g')$, hence $d + \Div(g) = d' +\Div(g')$.\\
+        Conversely, if $d + \Div(g) = d' + \Div(g')$ for same degree curves. Then choosing $z = \frac{g}{g'}$, we get $d = d' + \Div(z)$. 
+    \end{proof}
+
+    \begin{definition}
+        Suppose $C$ has only ordinary multiple points. We define the \emph{minimal adjoint of $C$} to be the divisor
+        $$
+            E_C := \sum_{Q\in X} (m_{\Phi(Q)}(C)-1)Q.
+        $$
+        An \emph{adjoint of $C$} is any projective plane curve $g$ with 
+        $$
+            \Div(g) \geq E_C
+        $$ 
+    \end{definition}
+    \begin{remark}
+        Note that 
+        \begin{align*}
+            \deg E_C &= \sum_{Q\in X} (m_{\Phi(Q)}(C)-1) = \sum_{P\in C}\sum_{Q\in \Phi^{-1}(P)} (m_{\Phi(Q)}-1)= \sum_{P\in C} \sum_{Q\in \Phi^{-1}(P)} (m_{P}(C)-1)\\ 
+            &= \sum_{P\in C} m_{P}(C)(m_P(C)-1) \geq 0,
+        \end{align*}
+        hence $E_C$ is effective, hence any adjoint of $C$ is effective. 
+    \end{remark}
+    \begin{lemma}
+        A projective plane curve $G$ is adjoint to $C$ if and only if 
+        $$
+            m_P(g) \geq m_P(C)-1
+        $$ 
+        for every multiple point $P\in C$. In particular. if $C$ is non-singular, then every curve is an adjoint to $C$. 
     \end{lemma}
     \begin{proof}
         
