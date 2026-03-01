@@ -1984,6 +1984,7 @@ W \arrow[r, "\varphi_{3}"] &
         $$
         It thus follows that this algorithm must terminate in most $N+g^\ast(C)$ steps. 
     \end{proof}
+
     \subsubsection{Non-singular Models of Curves}
     \begin{lemma}\label{TechnicalNonsingularModelLemma}
         Suppose $\Char\ K =0$. Let $f$ be any irreducible projective plane curve and $P\in f$ any point. 
@@ -2002,6 +2003,35 @@ W \arrow[r, "\varphi_{3}"] &
         \end{align*} 
         where the last isomorphism is via $Q$. {\Large Check}\\ 
         3. In the algorithm described in Theorem~\ref{HowToTransformCurveWithNonOrdinaryMultiplePointsIntoOneWithOnlyOrdinaryMultiplePoints} only pick quadratic transformations of the form described in 1. i.e. at each step apply 1. on $f_{i-1}$ and $S_{i-1}$ with $S_1=S$ and $S_i=T^{-1}(S_{i-1})$ when $i>1$, and $f_1=f$ and $f_i = (f_{i-1}^T)'$.
+    \end{proof}
+    \begin{example}
+        The goal of this example, for a given quadratic transformation $T$ centered at a point $P\in C$, is to compute $\deg \ (C^T)'$ and $g^\ast((C^T)')$ when 
+        \begin{enumerate}
+            \item $P$ is an ordinary multiple point on $C$.
+            \item $P$ is simple on $C$
+            \item $P$ is not in $C$. 
+        \end{enumerate}
+        1. In this case $\deg \ (C^T)' = 2n-m_P(C)$, since $[1,0,0],[0,1,0]\notin C^T$. Moreover, locally around $P$, $Q$ looks like $\theta$, and $((C^T)')_\ast\simeq (C^T_\ast)'$, hence by the affine case $\theta^{-1}((0,0))$ consist of only simple points. These correspond to the non-fundamental points of $(C^T)'\cap z$, hence 
+        $$
+            g^\ast((C^T)') = g^\ast(C)
+        $$  
+        2. Here $\deg\ (C^T)' = 2n-1$. We compute,
+        \begin{align*}
+            g^\ast((C^T)') = g^\ast(C^T) - \sum_{1}^s \frac{m_{P_i}((C^T)')(m_{P_i}((C^T)')-1)}{2} = g^\ast(C)
+        \end{align*}
+        Note for the above that $[1,0,0]$ and $[0,1,0]$ are ordinary multiple points of multiplicity $n-1$ summing to $2n-2$. There is thus at most one non-fundamental point in $(C^T)'\cap z$ and if it exists it must be simple.\\  
+        3. When $P\notin C$, we get $\deg \ (C^T)' = 2n$. Moreover, 
+        \begin{align*}
+            g^\ast((C^T)') &= g^\ast(C^T)-\sum_1^s \frac{m_{P_{i}}((C^T)')(m_{P_{i}}((C^T)')-1)}{2} = g^\ast(C^T)=g^\ast(C)
+        \end{align*}  
+        The last equality follows from the fact that when $[0,0,1]\notin C^T$, there are no non-fundamental points in $(C^T)'\cap z$
+    \end{example}
+    The upshot of having considered this example is the following 
+    \begin{lemma}
+        We may pick $f'$ in Lemma~\ref{TechnicalNonsingularModelLemma} 3. of arbitrarily large degree. I.e. given any $N\geq 0$ there is an $f'$ satisfying the conditions of Lemma~\ref{TechnicalNonsingularModelLemma} with $\deg \ f'\geq N$. 
+    \end{lemma}
+    \begin{proof}
+        Given the $f'$ obtained in 3. apply a series of suitable quadratic transformation centered at any point (at this point there will be no non-ordinary multiple points) until the degree is larger than $N$. 
     \end{proof}
     \begin{definition}
         \emph{A nonsingular model} of a projective curve $C$ is a nonsingular, projective curve $X_C$ with a birational map $\Phi:X_C\dottedarrow C$.   
@@ -2107,13 +2137,13 @@ W \arrow[r, "\varphi_{3}"] &
         Pick $U\ni P$ such that $z\in \pazocal{O}_{P'}(C)$ for each $P'\in U\setminus \{P\}$ and such that $\Phi: \Phi^{-1}(U)\rightarrow \Phi$ looks like $\theta$ in Lemma~\ref{AffineCaseTechnicalLemma}. By Lemma~\ref{BlowupTurnsMultiplePointsToSimplePoints}, $\ord_{P_i}(x)=1$, hence $zx^{1-r}\in \Gamma(U')$. Since $x^{r-1}\Gamma(U')\subset \Gamma(U)$, we get $z=x^{r-1}(zx^{1-r})\in \Gamma(U)\subset \pazocal{O}_P(C)$.
     \end{proof}
 
-    \begin{proposition}
+    \begin{proposition}\label{NoethersConditionInTermsOfDivisors}
         Let $f$ be an irreducible projective plane curve, $P$ an ordinary point of multiplicity $r$ on $f$. Let $P_1,\dots,P_r$ be the places centered at $P$. For plane curves $g,h$, Noether's conditions are satisfied at $P$ with respect to $f,g,h$, if $\ord_{P_i}(h)\geq \ord_{P_i}(g)+r-1$ for each $i$. 
     \end{proposition}
     \begin{proof}
         Note that $h_\ast\in \langle f_\ast,g_\ast\rangle \subset \pazocal{O}_P(\Pp^2)$ if and only if $z:= \frac{\overline{h_\ast}}{\overline{g_\ast}}\in \pazocal{O}_P(f)$. Since $\ord_{P_i}(z) = r-1$ for each $i$, it follows that $z\in \pazocal{O}_P(f)$ by the above lemma.  
     \end{proof}
-    \begin{lemma}
+    \begin{lemma}\label{OrderAtPlacesCenteredAtOrdinaryMultiplePoint}
         Let $\Phi : X\rightarrow C$ be the nonsingular model of an irreducible projective plane curve. Let $P\in C$ be an ordinary multiple point with multiplicity $r$ and places $Q_1,\dots,Q_r$ on $X$ centered at $P$. Let $G$ be a projective plane curve and $s\leq r$. $m_P(g)\geq s$ if and only if $\ord_{Q_i}(\overline{g})\geq s $ for $i=1,\dots,r$.  
     \end{lemma}
     \begin{proof}
@@ -2201,7 +2231,7 @@ W \arrow[r, "\varphi_{3}"] &
             \Div(z)=\Div(f)-\Div(g)= mn -mn =0.
         $$
     \end{proof}
-    \begin{corollary}
+    \begin{corollary}\label{DivisorOfRationalFunctionIsZeroIffInBaseField}
         For a $z\in K(X)\setminus 0$ the following are equivalent
         \begin{enumerate}
             \item $\Div(z)\geq 0$.
@@ -2285,12 +2315,133 @@ W \arrow[r, "\varphi_{3}"] &
         $$
             m_P(g) \geq m_P(C)-1
         $$ 
-        for every multiple point $P\in C$. In particular. if $C$ is non-singular, then every curve is an adjoint to $C$. 
+        for every multiple point $P\in C$. In particular. if $C$ is non-singular, then every curve is an adjoint to $C$.
     \end{lemma}
     \begin{proof}
-        
+        For each multiple point $P$ apply Lemma~\ref{OrderAtPlacesCenteredAtOrdinaryMultiplePoint} with $s = m_P(C)-1$. This says that $m_P(g) \geq s$ is equivalent to $\ord_{Q}(g)\geq s$ for each place centered at $P$. For each multiple point $P\in C$, having $\ord_Q(g)\geq m_{P}$ for each place centered at $P$ is by definition equivalent to $g\geq E_C$. 
+    \end{proof}
+    \begin{theorem}
+        Consider linearly equivalent divisors, $d,d'\in \Z[X]$. Let $g$ be an adjoint of $C$ of degree $m$ with
+        $$
+            \Div(g) = d + E_C+a
+        $$ 
+        for some effective divisor $a\in \Z[X]$. Then there is an adjoint $d'$ of $C$ of degree $m$ such that 
+        $$
+            \Div(g') = d'+E_c+a.
+        $$
+    \end{theorem}
+    \begin{proof}
+        Since $d\equiv d'$, we may find curves $h,h'$ such that $d+\Div(h) = d' + \Div(h')$. Note that 
+        $$
+            \Div(hg) = \Div(h)+d + E_c +a =\Div(h')+d' + E_c+a\geq \Div(h')+ E_C.
+        $$
+        This shows that $\ord_{Q}(hg)\geq \ord_Q(h')+m_P(C)-1$ for each $Q\in \Phi^{-1}(P)$, hence Noether's condition is satisfied for each $P\in C$ by Proposition~\ref{NoethersConditionInTermsOfDivisors}. Noether's theorem show that there are curves $f',g'$ such that 
+        $$
+            gh = f'f + g'h'
+        $$
+        with $\deg \ g' = m$. It follows that 
+        \begin{align*}
+            \Div(g') &= \Div(gh)-\Div(ff')-\Div(h') = \Div(gh)-\Div(h')= \Div(h')+d'+E_C+a-\Div(h')\\ 
+            &= d'+E_C+a
+        \end{align*}
     \end{proof}
     \subsubsection{The Vector Spaces $L_d$}
+    \begin{definition}
+        For a divisor $d= \sum_{P\in X} n_P P\in \Z[X]$, define 
+        $$
+            L_d := \left\{ f\in K(X) : \ord_P(f) \geq -n_P \text{ for every } P \in X\right\}
+        $$
+    \end{definition}
+    \begin{lemma}
+        $L_d$ is a vector space over $K$ for each $d\in \Z[X]$. 
+    \end{lemma}
+    \begin{proof}
+        We prove that $L_d$ is $K$ subspace of $K(X)$. Write $d = \sum_{P\in X} n_PP$ and suppose $f,g\in L_d$ and $a,b\in K$. Then for each $P\in X$,
+        $$
+            \ord_P(af+bg) \geq \min(\ord_P(af),\ord_P(bg)) = \min(\ord_P(f),\ord_P(g))\geq -n_P,
+        $$ 
+        hence $af+bg\in L_d$. Trivially $\ord_P(0)=\infty\geq -n_P$ for each $P\in X$, hence $0\in L_d$. 
+    \end{proof}
+    \begin{remark}
+        We denote the dimension of the vector space $L_d$ by $l_d$. 
+    \end{remark}
+    \begin{lemma}\label{BasicDivisorVectSpaceLemma}
+        \begin{enumerate}
+            \item For divisors $d,d'$ on $X$, if $d\leq d'$, then $L_d\subset L_{d'}$ and 
+            $$
+                \dim_K \ L_{d'}/L_{d} \leq \deg \ (d-d').
+            $$ 
+            \item $L_0 = K$ and $L_d=0$ for divisors $d$ on $X$ with $\deg \ d < 0$.
+            \item For a divisor $d$ on $X$, if $\deg \ d \geq 0$, then $l_d \leq (\deg \ d)+1$. It follows that for every divisor $d$ on $X$, $\dim_K \ L_d<\infty$.
+            \item For a pair of divisors $d,d'$ on $X$, if $d\equiv d'$, then $L_d = L_{d'}$.   
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        For each instance of $d$ write $d= \sum_P n_P P$ and each instance of $d'$, $d' = \sum_P n_P'P$.\\
+        1. If $f\in L_d$, then $\ord_P(f) \geq -n_P\geq -n_P'$ for each $P\in X$, hence $f\in L_{d'}$. Note there is a finite sequence of points $P_1,\dots,P_s\in X$ such that 
+        $$
+            d' = d+\sum_1^s P_i,
+        $$
+        where $s = \deg \ (d'-d)$. Set $V_0 := L_d$ and $V_i := L_{d+\sum_1^i P_i}$ for $1\leq i\leq s$. Then 
+        $$
+            \dim \ L_{d'}/L_{d} = \sum_0^s \dim\ V_{i+1}/V_i.
+        $$
+        To prove that $\dim \ L_{d'}/L_d \leq s $, it thus suffices to prove that $\dim \ L_{d+P}/L_d\leq 1$ for an arbitrary point $P\in X$. Let $t$ denote the uniformizing parameter in $\pazocal{O}_P(X)$. We define a $K$-linear map 
+        \begin{gather*}
+            \lambda : L_{d+P}\rightarrow K\\
+            f\mapsto (t^{n_P+1}f)(P)
+        \end{gather*} 
+        Since $\ord_P\left(t^{n_P+1}f\right) \geq n_P+1-n_P-1=0$ for each $f\in L_{d+P}$, this is well-defined. If $f\in L_d$, then 
+        $$
+            \ord_P\left(t^{n_P+1}f\right)\geq n_P+1-n_P=1,
+        $$
+        it follows that $\lambda(f)=0$. Conversely, if $f\in L_{d+P}$ is given with $(t^{n_P+1}f)(P)=0$, then $1\leq \ord_P(t^{n_P+1}f) = n_P+1+\ord_P(f)$, hence $\ord_P(f) \geq -n_P$. We thus conclude that $\ker \ \lambda = L_d$. It follows that 
+        $$
+            L_{d+P}/L_d \hookrightarrow K \implies \dim \ L_{d+P}/L_d = \dim \ \im \ \lambda \leq 1.
+        $$
+        2. Corollary~\ref{DivisorOfRationalFunctionIsZeroIffInBaseField} shows that $\Div(f)\geq 0$ if and only if $f\in K$, hence $L(0) = K$. Suppose $\deg \ d <0$ and let $P\in X$. If $f\in L_d$, then $\ord_P(f)\geq -n_P>0$, hence $f(P)=0$, meaning $f=0$.\\
+        3. Let $P\in X$ and set $d' := d - (\deg \ D+1)P$. Then $\deg \ d' < 0$, hence $L_{d'}=0$. Then
+        $$
+            l_d = \dim \ L_d = \dim \ L_d/L_{d'} \leq \deg \ d +1.
+        $$
+        4. By assumption $d = d' + \Div(g)$ for a curve $g$. Set 
+        \begin{gather*}
+            \lambda : L_d \rightarrow L_{d'}\\
+            f\mapsto fg
+        \end{gather*}
+        This is a $K$ linear map with inverse $h\mapsto \frac{h}{g}$, hence $l_d = l_{d'}$ 
+    \end{proof}
+    \begin{definition}
+        Let $S\subset X$ and $d=\sum_{P\in X} n_PP\in \Z[X]$. We define the \emph{degree of $d$ in $S$} to be 
+        $$
+            \deg^S \ d := \sum_{P\in S} n_P.   
+        $$
+        We also define 
+        $$
+            L^S_d := \left\{ f\in K(X) : \ord_P(f) \geq -n_P \text{ for each } P \in S\right\}
+        $$
+    \end{definition}
+    \begin{lemma}
+        Conider divisors on $X$, $d,d'$ with $d\leq d'$ and a subset $S\subset X$. Then $L^S_d \subset L_{d'}^S$. If $S$ is finite, then 
+        $$
+            \dim\ L_{d'}^S/L_d^S = \left(\deg^S\ d-d'\right).
+        $$
+    \end{lemma}
+    \begin{proof}
+        The first statement is proven similarly to the proof of 
+        $$
+            d\leq d'\implies L_d\subset L_{d'}
+        $$
+        (cf. Lemma~\ref{BasicDivisorVectSpaceLemma} 1.). For the second statement it suffices to prove 
+        $$
+            \dim\ L_{d+P}^S/L_d^S = 1
+        $$
+        for an arbitrary $P\in X$. We prove that 
+        \begin{gather*}
+            \lambda : L^S_{d+P} \rightarrow K
+        \end{gather*}
+        is surjective (again cf. the proof of Lemma~\ref{BasicDivisorVectSpaceLemma}). It suffices to prove that $\lambda$ is not the zero map. 
+    \end{proof}
     \subsubsection{Riemann's Theorem}
     \subsubsection{Differentials of a Curve}
     \subsubsection{Canonical Divisors}
