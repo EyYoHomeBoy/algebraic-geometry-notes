@@ -1859,7 +1859,7 @@ W \arrow[r, "\varphi_{3}"] &
         (x,z)\mapsto f_\ast(x,xz)
     \end{gather*}
     We further define $\eta := \left. Q\right|_{C_0'} : C_0'\rightarrow C_0$ where $C_0' = C'\setminus V(xy)$.
-    \begin{lemma}
+    \begin{lemma}\label{StandardQuadraticTransformationLocallyLooksLikeAffineBlowUpCase}
         There is a neighborhood $W\subset C^\ast$ of $(0,0)$ and isomorphisms $\varphi: W\rightarrow C_0$ and $\varphi'  : W':= \eta^{-1}(W)\rightarrow C_0'$ such that the diagram
         $$
             \begin{tikzcd}
@@ -2027,7 +2027,7 @@ W \arrow[r, "\varphi_{3}"] &
         The last equality follows from the fact that when $[0,0,1]\notin C^T$, there are no non-fundamental points in $(C^T)'\cap z$
     \end{example}
     The upshot of having considered this example is the following 
-    \begin{lemma}
+    \begin{lemma}\label{TechnicalNonsingularModelLemmaCanBeChosenWithLargeDegree}
         We may pick $f'$ in Lemma~\ref{TechnicalNonsingularModelLemma} 3. of arbitrarily large degree. I.e. given any $N\geq 0$ there is an $f'$ satisfying the conditions of Lemma~\ref{TechnicalNonsingularModelLemma} with $\deg \ f'\geq N$. 
     \end{lemma}
     \begin{proof}
@@ -2149,16 +2149,38 @@ W \arrow[r, "\varphi_{3}"] &
     \begin{proof}
         We pick $U\ni P$ in the usual way such that $\Phi$ locally looks like $\theta$ (from the affine case). By Lemma~\ref{AffineOrderLemma} 2. $\ord_{Q_i}(\overline{g})\geq s$ for each $i$ implies $m_P(g)\geq s$. Conversely, for any $i$, if $m_P(g)\geq s$ we get that $\ord_{Q_i}(g)\geq s$, since $\ord_{P_i}(g)\geq m_P(g)$ by 1. of Lemma~\ref{AffineOrderLemma}.
     \end{proof}
-    \begin{lemma}
+    \begin{lemma}\label{TechnicalNonSingularCurveLemma}
         Let $X$ be a nonsingular projective curve, $P_1,\dots,P_s\in X$. 
         \begin{enumerate}
             \item There is a projective plane curve with only ordinary multiple points whose nonsingular model is $\Phi : X\rightarrow C$ with $\Phi(P_i)$ simple in $C$ for each $i$.
-            \item For any finite sequence $m_1,\dots,m_r\in \Z$ there is a $z\in K(X)$ such that $\ord_{P_i}(z)=m_i$. 
+            \item For any finite sequence $m_1,\dots,m_s\in \Z$ there is a $z\in K(X)$ such that $\ord_{P_i}(z)=m_i$. 
             \item $C$ of part 1. may be found of arbitrarily large degree. 
         \end{enumerate}
     \end{lemma}
     \begin{proof}
-        
+        1. There is a birational map $\Psi : X \dashrightarrow Y$ to some irreducible projective plane curve $Y$. Suppose we can construct a curve $C$ and a birational map $\phi : C\dottedarrow Y$ such that $\phi^{-1}(\Psi(P_i))$ contain only simple points for each $i$. Let $\Phi : X'\dottedarrow Y$ be a non-singular model of $Y$ that factors through $C$ via some $\Phi' : X'\dottedarrow C$ and $\phi$. Then we have a commutative diagram
+        $$
+            \begin{tikzcd}
+                X' \arrow[r,"\Phi'"] & C\arrow[d,"\phi"] \\
+                X \arrow[u,dashrightarrow, "\exists! \varphi"] \arrow[ru,"\eta"] \arrow[r,"\Psi"] & Y 
+            \end{tikzcd}
+        $$ 
+        where $\eta := \Phi\varphi$. Then 
+        $$
+            \eta(P) = \Phi(\varphi(P_i)) \in \phi^{-1}(\Psi(P_i)),
+        $$
+        since 
+        $$
+            \phi\eta(P_i) = \Psi(P_i).
+        $$
+        It thus follows that $\eta : X\dottedarrow C$ is a birational map to projective plane curve with only ordinary multiple points such that $\eta(P_i)$ is simple for each $i$.\\
+        Consider first the case $n=1$ and set $P:= P_1$. When $\Psi(P)$ is simple, we can apply Lemma~\ref{TechnicalNonsingularModelLemma} with respect to $S=\{\Psi(P)\}$ to obtain the desired curve $C$ such that $\phi^{-1}(\Psi(P))$ is a simple point. Suppose $\Psi(P)$ is an ordinary multiple point. Take a quadratic transformation centered at $\Psi(P)$ and denote the resulting quadratic transformation of $Y$ by $C_1$ and the birational map $C_1\dottedarrow C$ by $\phi$. Note that $\phi^{-1}(\Psi(P)) = C_1\cap z$ contain only simple points. This is seen from Lemma~\ref{StandardQuadraticTransformationLocallyLooksLikeAffineBlowUpCase} and Lemma~\ref{BlowupTurnsMultiplePointsToSimplePoints}. More precisely, locally the standard quadratic transformation looks like $(a,c)\mapsto (a,ac)$ and the fiber of an ordinary multiple point with respect to this map consists exclusively of simple points. We obtain the desired curve $C$ by applying Lemma~\ref{TechnicalNonsingularModelLemma} to $C_1$ with respect to $S = \phi^{-1}(\Psi(P))$. Suppose $\Psi(P)$ is a non-ordinary multiple point. Apply Lemma~\ref{TechnicalNonsingularModelLemma} 3. to obtain a plane curve $C_1$ with only ordinary multiple points and a birational map $\phi_1 : C_1\dottedarrow C$. Let $\{R_1,\dots,R_t\}$ be the subset of ordinary multiple points in $\phi_1^{-1}(\Psi(P))$. Take a quadratic transformation centered at $R_t$, resulting in a birational map $\phi_2 : C_2\dottedarrow C_1$ with $\phi_2^{-1}(R_t)$ all simple. Note that $\phi_2^{-1}(\{R_1,\dots,R_t\})$ is a set containing at most $t-1$ points, by induction there is a plane curve $C$ with only ordinary multiple points and a birational map $\phi' : C\rightarrow C_1$ such that $(\phi')^{-1}(\{R_1,\dots,R_t\})$ contain only simple points. We then set $\phi := \phi'\phi_1$.\\
+        2. From 1. there is an irreducible projective plane curve $C$ and a birational map $\Phi: X\rightarrow C$ such that $\Phi(P_1),\dots,\Phi(s)$ are simple in $C$. It Follows from Lemma~\ref{ExistenceOfRationalFunctionWithSpecificOrderAtSpecificPoints} that there is a $z\in K(C)\simeq K(X)$ such that 
+        $$
+            \ord_{P_i}(z)=\ord_{\Phi(P_i)}(z) = m_i 
+        $$
+        for each $i$, where we on the left-hand side mean the order of the element in $K(X)$ corresponding to $z$.\\
+        3. Each time we apply Lemma~\ref{ExistenceOfRationalFunctionWithSpecificOrderAtSpecificPoints}, apply Lemma~\ref{TechnicalNonsingularModelLemmaCanBeChosenWithLargeDegree} instead. 
     \end{proof}
     \subsection{Riemann-Roch}
     \subsubsection{Divisors}
@@ -2440,9 +2462,68 @@ W \arrow[r, "\varphi_{3}"] &
         \begin{gather*}
             \lambda : L^S_{d+P} \rightarrow K
         \end{gather*}
-        is surjective (again cf. the proof of Lemma~\ref{BasicDivisorVectSpaceLemma}). It suffices to prove that $\lambda$ is not the zero map. 
+        is surjective (again cf. the proof of Lemma~\ref{BasicDivisorVectSpaceLemma}). Write $d = \sum_{Q} n_Q Q$. It suffices to prove that $\lambda$ is not the zero map. To do this it suffices to find a $z\in K(X)$ with $\ord_P(z)=-n_p'P-1$ and $\ord_Q(z)\geq -n_Q$ for all $Q\in S$. Such a rational function exists by Lemma~\ref{TechnicalNonSingularCurveLemma} 2. 
+    \end{proof}
+    \begin{proposition}
+        Let $z\in K(X)$ that is non-constant. Set $n := [K(X):K(z)]$. Then
+        \begin{enumerate}
+            \item $(z)_0$ is an effective divisor of degree $n$.
+            \item There is a constant integer $\tau$ such that 
+            $$
+                l_{r(z)_0} \geq rn-\tau
+            $$
+            for all $r$.
+        \end{enumerate} 
+    \end{proposition}
+    \begin{proof}
+        
+    \end{proof}
+    \begin{corollary}
+        The following is equivalent
+        \begin{enumerate}
+            \item $C$ is rational.
+            \item $X$ is isomorphic to $\Pp^1$.
+            \item There is a $z\in K(X)$ with $\deg\ (z)_0 = 1$. 
+            \item For some $P\in X$, $l_P>1$.
+        \end{enumerate}
+    \end{corollary}
+    \begin{proof}
+        
     \end{proof}
     \subsubsection{Riemann's Theorem}
+    \begin{definition}
+        Let $C$ be an irreducible projective plane curve with non-singular model. The \emph{genus} of $C$, denoted $g(C)$ or $g(X)$, is the smallest integer with 
+        $$
+            l_d \geq \deg \ d + 1 -g
+        $$
+        for each $d\in \Z[X]$. 
+    \end{definition}
+    \begin{theorem}
+        Every irreducible plane curve, $C$, has a genus. Moreover, 
+        $$
+            g(C)\geq 0.
+        $$
+    \end{theorem}
+    \begin{proof}
+        
+    \end{proof}
+
+    \begin{proposition}
+        Let $C$ be an irreducible projective plane curve of degree $n$ with only ordinary multiple points. Then 
+        $$
+            g(C) = g^\ast(C).
+        $$ 
+    \end{proposition}
+    \begin{proof}
+        
+    \end{proof}
+
+    \begin{corollary}
+        For any irreducible projective plane curve
+        $$
+            g(C) \leq g^\ast(C).
+        $$
+    \end{corollary}
     \subsubsection{Differentials of a Curve}
     \subsubsection{Canonical Divisors}
     \subsubsection{The Riemann-Roch Theorem}
