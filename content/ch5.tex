@@ -2443,7 +2443,7 @@ W \arrow[r, "\varphi_{3}"] &
             L^S_d := \left\{ f\in K(X) : \ord_P(f) \geq -n_P \text{ for each } P \in S\right\}
         $$
     \end{definition}
-    \begin{lemma}
+    \begin{lemma}\label{DimensionLVectorSpacesWTRASubset}
         Conider divisors on $X$, $d,d'$ with $d\leq d'$ and a subset $S\subset X$. Then $L^S_d \subset L_{d'}^S$. If $S$ is finite, then 
         $$
             \dim\ L_{d'}^S/L_d^S = \left(\deg^S\ d-d'\right).
@@ -2464,19 +2464,81 @@ W \arrow[r, "\varphi_{3}"] &
         \end{gather*}
         is surjective (again cf. the proof of Lemma~\ref{BasicDivisorVectSpaceLemma}). Write $d = \sum_{Q} n_Q Q$. It suffices to prove that $\lambda$ is not the zero map. To do this it suffices to find a $z\in K(X)$ with $\ord_P(z)=-n_p'P-1$ and $\ord_Q(z)\geq -n_Q$ for all $Q\in S$. Such a rational function exists by Lemma~\ref{TechnicalNonSingularCurveLemma} 2. 
     \end{proof}
-    \begin{proposition}
+    \begin{lemma}\label{RationalFunctionInLVectorSpaceHasSingularity}
+        Consider a divisor $d=\sum_{P\in X} n_P P$ on $X$. Let $z\in K(X)$ be non-constant. If $z\in L_d$ is, then $\ord_P(z)<0$ for some $P\in X$. 
+    \end{lemma}
+    \begin{proof}
+        Suppose $\ord_P(z)\geq 0$ for each $P\in X$. Then in particular $\ord_P(z)>0$ for some $P$. Moreover, $\ord_P(z^{n+1}) >\ord_P(z^n)$ for each $n\geq 1$ and $\{z^n : n\geq 1\}$ is linearly independent over $K$. If $z\in L_d$, then $z^n\in L_d$ for each $n\geq 0$. Since $L_d$ is finite dimensional it thus follows that $z\notin L_d$.
+    \end{proof}
+    \begin{proposition}\label{TechnicalGenusLemma}
         Let $z\in K(X)$ that is non-constant. Set $n := [K(X):K(z)]$. Then
         \begin{enumerate}
-            \item $(z)_0$ is an effective divisor of degree $n$.
+            \item $(z)_0 = \sum_{P\in X} n_P P$ is an effective divisor of degree $m\leq n$.
             \item There is a constant integer $\tau$ such that 
             $$
                 l_{r(z)_0} \geq rn-\tau
             $$
             for all $r$.
+            \item $\deg \ (z)_0 = n$. 
         \end{enumerate} 
     \end{proposition}
     \begin{proof}
-        
+        1. Set $S:= \{P\in X : n_P>0\}$. For $v\in L^S_0$ let $\overline{v}$ denote the image of $v$ in $L^S(0)/L^S_{-(z)_0}$. Note that by Lemma~\ref{DimensionLVectorSpacesWTRASubset}
+        $$
+            \dim \ L^S_0/L^S_{-(z)_0} = m
+        $$
+        Pick a basis $\{\overline{v_1},\dots,\overline{v_m}\}$ of $L^{S}(0)/L^S(-(z)_0)$ over $K(z)$. Suppose for a contradiction that 
+        $$
+            \sum_1^m \frac{a_i}{b_i}v_i  = 0
+        $$
+        for some $\frac{a_i}{b_i}\in K(z)$ not all $0$. Multiplying the left-hand side by $\prod b_i$, we get 
+        $$
+            \sum_1^m g_iv_i = 0.
+        $$
+        we may pick these $g_i$ of the form 
+        $$
+            \lambda_i + zh_i
+        $$
+        with $\lambda_i\in K$ and $h_i\in K[z]$ such that $\lambda_i\neq 0$ for some $i$ or $g_i=0$ for all $i$. It follows that 
+        $$
+            \sum_1^m \lambda_i v_i = -z\sum_1^m h_iv_i\in L_{-(z)_0}^S. 
+        $$
+        But then $\sum_1^m \lambda_i \overline{v_i} = 0$, leading to a contradiction. It thus follows that $m\leq n$.\\
+        2. Fix $r\geq 0$. Pick a basis $\{w_1,\dots,w_n\}$ for $K(X)$ over $K$. By Lemma~\ref{AlgebraicFuntionFieldsInOneVariable} 1. each $w_i$ is algebraic over $K(z)$. For a fixed $i$ there is a polynomial $g_i=x^{n_i}+\sum_0^{n_i-1} a_{ij}x^{j}$ in $K(z)[x]$ vanishing on $w_i$. Multiplying by a sufficiently large power of $z^{-1}$, we may assume it in $K[z^{-1}][x]$. We then have $\ord_P(w_i) \geq0$ for $P\notin S$ by Lemma~\ref{TechnicalDVRLemma}, since 
+        $$
+            w_i^{n_i}+\sum_0^{n_i-1} a_{ij}w_i^{j} = 0
+        $$
+        and $\ord_P(a_{ij}) \geq 0$, which implies 
+        $$
+            n_i\ord_P(w_i) = \ord_{P}(a_{ij})+(n_i-1)\ord_P(w_i) \implies \ord_P(w_i) = \ord_P(a_{ij})\geq0. 
+        $$
+        Set 
+        $$
+            t := \max_{i,P\in S} \ord_P(w_i).
+        $$
+        Then for each $i$, $\div(w_i) \geq -t(z)_0$. It thus follows that for each $i\in\{1,\dots,n\}$ and $j\in \{0,\dots,r\}$, that
+        $$
+            \div(w_iz^{-j}) \geq -(t+r)(z)_0 \implies w_iz^{-j}\in L_{(t+r)(z)_0}.
+        $$
+        Since $\{w_1,\dots,w_n\}$ is linearly independent over $K(x)$ and $\{1,x^{-1},\dots,x^{-r}\}$ is linearly independent over $K$, it follows that 
+        $$
+            \left\{w_ix^{-j} : i\in \{1,\dots,n\}, j\in\{0,\dots,r\}\right\}
+        $$
+        is linearly independent over $K$. Then 
+        $$
+            l_{(r+t)(z)_0} = \dim L_{(t+r)(z)_0} \geq n(r+1).
+        $$
+        Moreover, 
+        $$
+            l_{(r+t)(z)_0} = l_{r(z)_0} + \dim \ L_{(r+t)(z)_0}/L_{r(z)_0}\leq l(r(z)_0)+tm.
+        $$
+        For the first equality we use rank-nullity and for the second we use Lemma~\ref{BasicDivisorVectSpaceLemma} 1. Setting $\tau:= tm-n$ we are done, since then 
+        $$l_{r(z)_0}\geq l_{(r+t)(z)_0}-tm \geq n(r+1)-tm=nr-\tau.$$
+        3. By 3. of Lemma~\ref{BasicDivisorVectSpaceLemma}
+        $$
+            rn-\tau \leq l_{r(z)_0} \leq rm+1\implies r(n-m) \leq \tau+1.
+        $$
+        Since this holds for any $r$, we must have $n=m$.
     \end{proof}
     \begin{corollary}
         The following is equivalent
@@ -2488,16 +2550,93 @@ W \arrow[r, "\varphi_{3}"] &
         \end{enumerate}
     \end{corollary}
     \begin{proof}
+        "1. $\iff$ 2.": $C$ is rational if and only if it is birationally equivalent to $\Pp^1$ which is equivalent to $X$ being birationally equivalent to $\Pp^1$. Two non-singular curves are birationally equivalent if and only if they are isomorphic.\\ 
+        "2. $\implies$ 3.":  If $X$ is birationally equivalent to $\Pp^1$, then $K(X)\simeq K(\frac{x}{y})$. In particular $[K(X) : K(\frac{x}{y})]=1$, hence $\deg \ (x)_0=1$.\\
+        "3. $\implies$ 2.": Let $z\in K(X)$ with $\deg \ (z)_0 = 1$. Then $[K(X): K(z)]=\deg \ (z)_0 = 1$, hence $K(X)= K(z)\simeq K(x)=Q(K[x])$, hence $X$ is birationally equivalent to $\Pp^1$.\\
+        "4. $\implies$ 1.": Note that since $P\geq 0$, $l_P\leq 2$, hence $l_P=2$. Then there is a non-constant $z\in L_P$. By Lemma~\ref{RationalFunctionInLVectorSpaceHasSingularity}, $(z)_\infty = P$. Then 
+        $$
+            \deg \ (z)_0 = \deg\ (z)_\infty = 1. 
+        $$ 
+        Then $[K(X):K(z)]=1$, hence $C$ is rational.\\
+        "1. $\implies$ 4.": Suppose $C$ is rational.  Then $K(X)\simeq K(\Pp^1) = K(t)$ with $t = \frac{x}{y}\in Q(K[x,y])$. We have that $\Div(t) = [0,1]-[1,0]$, hence $l_{[1,0]}=2$.     
+    \end{proof}
+    \begin{lemma}\label{SmallerDivisorImpliesSmallerDimension}
+        For divisors $d,d'\in \Z[X]$, if $d\leq d'$, then $l_{d'} \leq l_{d}+\deg \ (d'-d)$
+    \end{lemma}
+    \begin{proof}
+        We apply rank-nullity to the surjective $K$-linear map 
+        $$
+            \pi: L_{d'} \twoheadrightarrow L_{d'}/L_d
+        $$
+        and get 
+        $$
+            l_{d'} = \dim \ (\ker \ \pi) + \dim \ (\im\ \pi) = \dim \ L_d + \dim \ L_{d'}/L_{d}\leq  l_d+\deg \ (d'-d). 
+        $$
+    \end{proof}
+    \begin{lemma}
+        Consider a divisor $d\in \Z[X]$. $l_d>0$ if and only if $d$ is linearly equivalent to an effective divisor. 
+    \end{lemma}
+    \begin{proof}
+        If $l_d >0$, then there is a non-zero $z\in L_d$. Then $\Div(z) \geq -d$, hence 
+        $$
+            d = (\Div(z)+d)+\Div(z^{-1}) \implies d \equiv \Div(z)+d.
+        $$
+        Conversely,  $d = d' + \Div(z)$ for some effective divisor $d'\in\Z[X]$ and some $z\in K(X)$. Since $d'$ is effective $\Div(z)\leq d$, hence $\Div(z)\leq d$, meaning $\Div(z^{-1}) \geq d$, implying $0\neq z^{-1} \in l_d$.
+    \end{proof}
+    \begin{lemma}
+        Consider a divisor $d\in \Z[X]$ with $l_d>0$. Let $z\in L_d\setminus 0$. $z\notin L_{d-P}$ for all but finitely many $P\in X$. It follows that $l_{d-P} = l_d-1$ for all but finitely many $P\in X$.
+    \end{lemma}
+    \begin{proof}
         
     \end{proof}
     \subsubsection{Riemann's Theorem}
     \begin{definition}
-        Let $C$ be an irreducible projective plane curve with non-singular model. The \emph{genus} of $C$, denoted $g(C)$ or $g(X)$, is the smallest integer with 
+        Let $C$ be an irreducible projective plane curve with non-singular model $X$. The \emph{genus} of $C$, denoted $g(C)$ or $g(X)$, is the smallest integer with 
         $$
             l_d \geq \deg \ d + 1 -g
         $$
         for each $d\in \Z[X]$. 
     \end{definition}
+    \begin{lemma}
+        Suppose $C$ is an irreducible projective plane curve. Define 
+        $$
+            s(d) := \deg \ d +1 -l_d\quad (d\in \Z[X])
+        $$
+        Then 
+        \begin{enumerate}
+            \item If $C$ has genus $g$, then $s(0)=0$ and $g\geq 0$.
+            \item If $d\equiv d'$, then $s(d)=s(d')$.
+            \item If $d\leq d'$, then $s(d)\leq s(d')$.
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+        1. is trivial.\\
+        2. If $d\equiv d'$, then $\deg \ d = \deg \ d'$ and $l_d = l_{d'}$, so $s(d)=s(d')$.\\
+        3. By Lemma~\ref{SmallerDivisorImpliesSmallerDimension}
+        $$
+            l_{d'} \leq l_d + \deg \ d' -\deg \ d, 
+        $$
+        hence
+        $$
+            s(d) = \deg \ d + 1 - l_d  \leq \deg \ d' +1 - l_{d'} = s(d').
+        $$
+    \end{proof}
+    \begin{lemma}\label{ExistenceOfGenusObservingDivisor}
+        Consider a non-constant rational function $z$ on $X$. For any divisor $d\in \Z[X]$ there is a divisor $d'\in \Z[X]$ and an integer $r\geq 0$ such that 
+        $$
+            d'\leq r(z)_0
+        $$
+    \end{lemma}
+    \begin{proof}
+        Write $(z)_0 = \sum_{P\in X} n_PP$ and $d=\sum_{P\in X} m_P P$. Set $t:= z^{-1}$ and consider the set 
+        $$
+            T:= \{P\in X : m_P>0 \text{ and } \ord_P(t)\geq 0\}.
+        $$
+        Set $f := \prod_{P\in T} (t-t(P))^{m_P}$. For $P\in X $ with $\ord_P(y)\geq 0$ note that $P$ is a zero of $(y-y(P))^{m_P}$, hence $\ord((y-y(P))^{m_P})>m_P$. For such $P$ we thus have $m_P-\ord_P(f) \leq 0 = n_P$. Set $d' = d-\Div(f)$. When $P\notin T$, $m_P\leq 0$ or $\ord_P(y) <0$. In the first case $m_P-\ord_P(f)\leq 0\leq n_P$, obviously. In the second case $n_P>0$, hence for a sufficiently large $r_P$, $m_P-\ord_P(f)\leq r_pn_P$. Since there are only finitely many $P$ adhering to the second cases, it follows that for a sufficiently large $r$, $m_P-\ord_P(f)\leq rn_P$ for each $P\in X$, hence $d\equiv d'$ and  
+        $$
+            d' \leq rn_P.
+        $$
+    \end{proof}
     \begin{theorem}
         Every irreducible plane curve, $C$, has a genus. Moreover, 
         $$
@@ -2505,7 +2644,27 @@ W \arrow[r, "\varphi_{3}"] &
         $$
     \end{theorem}
     \begin{proof}
-        
+        Let $z\in K(X)$ be non-constant, set $n:= [K(X):K(z)]$ and let $\tau$ be the smallest integer such that 
+        $$
+            l_{r(z)_0} \geq rn-\tau 
+        $$
+        for every $r\geq 0$ (cf. Proposition~\ref{TechnicalGenusLemma}). Then 
+        $$
+            s(r(z)_0) = rn +1-l_{r(z_0)}\leq \tau + 1
+        $$ 
+        Since $(s(r(z)_0))_{r\geq0}$ is increasing, it follows that $s(r(z)_0)=\tau+1$ for a sufficiently large $r$. Set $g(C) = \tau +1$. Let $d\in \Z[X]$. There is a $d'\equiv d$ such that for some $r'\geq r$,
+        $$
+            d' \leq r'(z)_0.
+        $$
+        It thus follows that 
+        $$
+            s(d) = s(d') \leq s(r'(z)_0) = g,
+        $$
+        hence 
+        $$
+            l_d \geq \deg \ d + 1 - g,
+        $$
+        hence $C$ has genus $g$ by the minimality of $\tau$.
     \end{proof}
 
     \begin{proposition}
