@@ -2540,8 +2540,8 @@ W \arrow[r, "\varphi_{3}"] &
         $$
         Since this holds for any $r$, we must have $n=m$.
     \end{proof}
-    \begin{corollary}
-        The following is equivalent
+    \begin{corollary}\label{EquivalentFormulationsOfBeingRational}
+        The following are equivalent
         \begin{enumerate}
             \item $C$ is rational.
             \item $X$ is isomorphic to $\Pp^1$.
@@ -2573,7 +2573,7 @@ W \arrow[r, "\varphi_{3}"] &
             l_{d'} = \dim \ (\ker \ \pi) + \dim \ (\im\ \pi) = \dim \ L_d + \dim \ L_{d'}/L_{d}\leq  l_d+\deg \ (d'-d). 
         $$
     \end{proof}
-    \begin{lemma}
+    \begin{lemma}\label{LVectorSpaceNonZeroImpliesLinEquivToEffectiveDivisor}
         Consider a divisor $d\in \Z[X]$. $l_d>0$ if and only if $d$ is linearly equivalent to an effective divisor. 
     \end{lemma}
     \begin{proof}
@@ -2622,7 +2622,7 @@ W \arrow[r, "\varphi_{3}"] &
         $$
     \end{proof}
     \begin{lemma}\label{ExistenceOfGenusObservingDivisor}
-        Consider a non-constant rational function $z$ on $X$. For any divisor $d\in \Z[X]$ there is a divisor $d'\in \Z[X]$ and an integer $r\geq 0$ such that 
+        Consider a non-constant rational function $z$ on $X$. For any divisor $d\in \Z[X]$ there is a divisor $d'\in \Z[X]$ with $d\equiv d'$ and an integer $r\geq 0$ such that 
         $$
             d'\leq r(z)_0
         $$
@@ -2667,6 +2667,49 @@ W \arrow[r, "\varphi_{3}"] &
         hence $C$ has genus $g$ by the minimality of $\tau$.
     \end{proof}
 
+    \begin{corollary}
+        If $d_0$ is a divisor on $X$ such that $l_{d_0} = \deg \ d_0 +1 -g(X)$ and $d,d'$ is a pair of divisors on $X$ such that $d\equiv d' \geq d_0$, then 
+        $$
+            l_d = \deg \ d + 1 -g(X).
+        $$
+    \end{corollary}
+    \begin{proof}
+        It suffices to prove that $l_{d'}\leq \deg \ d' +1 -g(X)$. Indeed,  
+        \begin{align*}
+            l_{d'}&\leq l_{d_0}+\deg \ (d'-d_0) = \deg \ d_0 + 1 -g(X)+\deg \ d' -\deg \ d_0\\ 
+            &= \deg\ d'+1-g(X).
+        \end{align*}
+    \end{proof}
+    
+    \begin{corollary}\label{GenusViaNonConstantRationalFunction}
+        Let $z$ be a non-constant rational function on $X$. Then 
+        $$
+            g(X) = \deg \ r(x)_0-l_{r(x)_0}+1 = s(r(x)_0)
+        $$
+        for all sufficiently large $r$.
+    \end{corollary}
+    \begin{proof}
+        This is by construction of genus as the smallest $\tau+1$ where $\tau$ is an integer with $l_{r(x)_0}\geq r\deg \ r(x)_0-\tau$ for all $r$, and indeed, we have also seen that $s(r(x)_0) = \tau +1 =g(X)$ for all sufficiently large $r$.
+    \end{proof}
+
+    \begin{corollary}\label{GenusIsObservedForAllLargeDivisors}
+        There is an integer $N$ such that for all divisors $d\in \Z[X]$ with $\deg \ d \geq N$, 
+        $$
+            l_d = \deg \ d + 1 - g(X).
+        $$
+    \end{corollary}
+    \begin{proof}
+        Pick a divisor $d_0$ on $X$ such that $l_{d_0} = \deg \ d_0 +1 -g(X)$. Set $N:= \deg \ d_0 + g(X)$. Let $d$ be a divisor on $X$ with $d\geq N$. Then 
+        $$
+            \deg \ (d-d_0)+1-g(X) \geq \deg \ d_0 + N-\deg \ d_0 + 1 -g(X) = 1 >0. 
+        $$ 
+        It follows that $l_{d-d_0}>0$, hence $d-d_0+\Div(f)\geq 0$ for some rational function $f$ on $X$ (cf. Lemma~\ref{LVectorSpaceNonZeroImpliesLinEquivToEffectiveDivisor}), hence $d\equiv d+\Div(f) \geq d_0$, hence by the first of the two above corollaries, 
+        $$
+            l_{d} = \deg \ d +1 -g(X).
+        $$
+    \end{proof}
+    
+    We use the above corollary to give a method for calculating the genus of a given curve. Specifically, we use the functoriality of $\mathrm{Set}\ni X \mapsto \Z[X]\in \mathrm{ab}$ and the fact that every curve is birationally equivalent to a plane curve with only ordinary multiple points. 
     \begin{proposition}
         Let $C$ be an irreducible projective plane curve of degree $n$ with only ordinary multiple points. Then 
         $$
@@ -2674,13 +2717,117 @@ W \arrow[r, "\varphi_{3}"] &
         $$ 
     \end{proposition}
     \begin{proof}
-        
+        WLOG $z$ intersects $C=V(f)$ in $n := \deg \ C$ distinct points $P_1,\dots,P_n$. Define 
+        $$
+            E_m := m\sum_1^n P_i - E_C \quad (m\geq 1)
+        $$
+        and note that 
+        $$
+            N:= \deg \ E_m = mn - \sum_{P\in C} \frac{m_P(C)(m_P(C)-1)}{2}.
+        $$
+        Define 
+        $$
+            A_m := \{ g\in K[x,y,z] : g \text{ is a form of degree } m \text{ adjoint to } C\}.
+        $$
+        We want to compute the dimension of $A_m$ for large $m$. Consider a $g\in A_m$. Then $m_P(g)\geq m_P(C)-1$ for each $P\in C$. Letting $Q_1,\dots,Q_t$ be the multiple points of $C$. Then 
+        \begin{align*}
+            \dim& \ V(m,(r_{Q_1}(C))Q_1,\dots,r_{Q_t}(C)Q_t) \\ &= \frac{m(m+3)}{2}-\sum_{P\in C} \frac{m_P(C)(m_P(C)-1)}{2}.
+        \end{align*}
+        for large $m$ (cf. Theorem~\ref{DimensionOfLinearSubvarietiesOfCurvesOfLargeDegree}). Note the $V(m,(r_{Q_1}(C))Q_1,\dots,r_{Q_t}(C)Q_t)= (A_m\setminus 0)/\sim$, hence for large $m$
+        \begin{align*}
+            \dim \ A_m &= \frac{m(m+3)}{2}-\sum_{P\in C} \frac{m_P(C)(m_P(C)-1)}{2} +1\\ 
+            &= \frac{(m+1)(m+2)}{2}-\sum_{P\in C} \frac{m_P(C)(m_P(C)-1)}{2}.
+        \end{align*} 
+        Consider the $K$-linear function
+        \begin{gather*}
+            \rho : A_m \rightarrow L_{E_m}\\
+            g\mapsto \frac{\overline{g}}{\overline{z^m}}
+        \end{gather*}
+        Note that $\rho(g)=0$ if and only if $f\mid g$. We prove that $\rho$ is surjective. Let $t=\frac{a}{b}\in L_{E_m}$. Then 
+        $$
+            \Div(\frac{a}{b})\geq -E_m = E_C-m\sum_1^n P_i,
+        $$ 
+        hence 
+        $$
+            \Div(az^m)=\Div(a)+m\sum_1^n P_i \geq E+\Div(b).
+        $$
+        We can then by Proposition~\ref{NoethersConditionInTermsOfDivisors} write 
+        $$
+            az^m = \lambda b+\mu f,
+        $$
+        hence 
+        $$
+            t = \frac{a}{b} = \frac{\lambda}{z^m} = \rho(\lambda) \in K(C).
+        $$  
+        Define 
+        \begin{gather*}
+            \psi: V(m-n,3)\rightarrow A_m\\
+            h\mapsto hf
+        \end{gather*}
+        Then we get a short exact sequence 
+        $$
+            \begin{tikzcd}
+                0\arrow[r] & V(m-n,3) \arrow[r,"\psi"] & A_m \arrow[r,"\rho"] & L_{E_m} \arrow[r] & 0
+            \end{tikzcd}
+        $$
+        For sufficiently large $m$, we thus have 
+        \begin{align*}
+            l_{E_m} &= \frac{(m+1)(m+2)}{2}-\sum_{P\in C} \frac{m_P(C)(m_P(C)-1)}{2} - \dim \ V(m-n,3)\\  &=  \frac{(m+1)(m+2)}{2}-\sum_{P\in C} \frac{m_P(C)(m_P(C)-1)}{2} - \frac{(m-n+2)(m-n+1)}{2}\\
+            &= \deg \ E_m +1+\left(\frac{(n-1)(n-2)}{2}-\sum_{P\in C} \frac{m_P(C)(m_P(C)-1)}{2}\right)
+        \end{align*}
+        and since $(\deg \ E_m)_{m\leq 1}$ is a strictly increasing sequence it follows that for sufficiently large $m$, by Corollary~\ref{GenusIsObservedForAllLargeDivisors}, 
+        $$
+            g(C)= \frac{(n-1)(n-2)}{2}-\sum_{P}\frac{m_P(m_P-1)}{2}.
+        $$
     \end{proof}
-
+    \begin{lemma}
+        Consider $t :=\frac{x}{y} K(\Pp^1)$. Then 
+        $$
+            l_{r(t)_0} = r+1.
+        $$ 
+    \end{lemma}
+    \begin{proof}
+        Set $P:=[0,1]$. Then $r(t)_0 = rP$, hence $l_{r(t)_0}\leq \deg\ r(t)_0 +1 = r +1$. Note that 
+        $$
+            \left\{t^{-j} : j\in\{0,\dots,r\} \right\} \subset L_{r(t)_0}
+        $$ 
+        is linearly independent over $K$, hence $l_{r(t)_0}=r+1$.
+    \end{proof}
+    \begin{lemma}
+        $$
+            g(C) = 0 \iff C \cong \Pp^1,
+        $$
+        i.e. a curve has genus $0$ if and only if it is rational.
+    \end{lemma}
+    \begin{proof}
+        "$\implies$": If $g(C)=0$, then 
+        $$
+            l(P) \geq \deg \ P+1-g(C) = 1+1-g(C)=2>0
+        $$
+        for each $P\in X$, hence $C$ is rational by Corollary~\ref{EquivalentFormulationsOfBeingRational}.
+        \\
+        "$\impliedby$": Set $t := \frac{x}{y}\in K(\Pp^1)$. Then for large $r$, 
+        $$
+            g(C) = \deg\ r(t)_0 - l_{r(t)_0}+1 = r -(r+1)+1=0
+        $$
+        by Corollary~\ref{GenusViaNonConstantRationalFunction}.
+    \end{proof}
     \begin{corollary}
-        For any irreducible projective plane curve
+        For any irreducible projective plane curve $C$,
         $$
             g(C) \leq g^\ast(C).
+        $$
+    \end{corollary}
+    \begin{proof}
+        Let $C'$ be a curve birationally equivalent to $C$ whose multiple points are all ordinary. Then 
+        $$
+            g(C) = g(C') = g^\ast(C') \leq g^\ast(C).
+        $$
+    \end{proof}
+    \begin{corollary}
+        $C$ is rational if and only if 
+        $$
+            \frac{(n-1)(n-2)}{2} = \sum_{P\in C} \frac{m_P(C)(m_P(C)-1)}{2}.
         $$
     \end{corollary}
     \subsubsection{Differentials of a Curve}
