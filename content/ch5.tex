@@ -2710,7 +2710,7 @@ W \arrow[r, "\varphi_{3}"] &
     \end{proof}
     
     We use the above corollary to give a method for calculating the genus of a given curve. Specifically, we use the functoriality of $\mathrm{Set}\ni X \mapsto \Z[X]\in \mathrm{ab}$ and the fact that every curve is birationally equivalent to a plane curve with only ordinary multiple points. 
-    \begin{proposition}
+    \begin{proposition}\label{FormulaForGenusOfCurveWithOnlyOrdinaryMultiplePoints}
         Let $C$ be an irreducible projective plane curve of degree $n$ with only ordinary multiple points. Then 
         $$
             g(C) = g^\ast(C).
@@ -2723,7 +2723,7 @@ W \arrow[r, "\varphi_{3}"] &
         $$
         and note that 
         $$
-            N:= \deg \ E_m = mn - \sum_{P\in C} \frac{m_P(C)(m_P(C)-1)}{2}.
+            N:= \deg \ E_m = mn - \sum_{P\in C} m_P(C)(m_P(C)-1).
         $$
         Define 
         $$
@@ -2793,12 +2793,12 @@ W \arrow[r, "\varphi_{3}"] &
         $$ 
         is linearly independent over $K$, hence $l_{r(t)_0}=r+1$.
     \end{proof}
-    \begin{lemma}
+    \begin{proposition}
         $$
             g(C) = 0 \iff C \cong \Pp^1,
         $$
         i.e. a curve has genus $0$ if and only if it is rational.
-    \end{lemma}
+    \end{proposition}
     \begin{proof}
         "$\implies$": If $g(C)=0$, then 
         $$
@@ -2830,7 +2830,171 @@ W \arrow[r, "\varphi_{3}"] &
             \frac{(n-1)(n-2)}{2} = \sum_{P\in C} \frac{m_P(C)(m_P(C)-1)}{2}.
         $$
     \end{corollary}
+    \begin{corollary}
+        With the setup of Proposition~\ref{FormulaForGenusOfCurveWithOnlyOrdinaryMultiplePoints} and its proof,
+        \begin{enumerate}
+            \item every $h\in L_{E_m}$ can be written as $\frac{\overline{\lambda}}{\overline{z}^m}$ where $h$ is an adjoint of $C$ of degree $C$.
+            \item 
+            $$
+                \deg \ E_{n-3} = 2g(C)-2 \text{ and } l_{E_{n-3}}\geq g(C).
+            $$
+        \end{enumerate}
+    \end{corollary}
+    \begin{proof}
+        1. This follows from $\rho$ in Proposition~\ref{FormulaForGenusOfCurveWithOnlyOrdinaryMultiplePoints} being surjective.\\
+        2. For the first identity we have 
+        \begin{align*}
+            \deg \ E_{n-3} &= (n-3)(n)-\sum_P m_P(C)(m_P(C)-1)\\ 
+            &= (n-1)(n-2)-\left[\sum_P m_P(C)(m_P(C)-1)\right]-2 = 2g(C)-2.
+        \end{align*}
+        Note that when $m<n$, no form $g$ of degree $m$ but $0$ is divisible by $f$, hence $L_{E_m} = A_m$, hence 
+        $$
+            l_{E_{n-3}} = \dim \ A_{n-3} \leq \frac{(n-1)(n-2)}{2}-\sum_{P\in C} \frac{m_P(C)(m_P(C)-1)}{2} = g(C).
+        $$
+    \end{proof}
+    \begin{proposition}
+        $C$ has genus $1$ if (here we need $\Char \ K \neq 2$) and only if it is birationally equivalent to a non-singular cubic. 
+    \end{proposition}
+    \begin{proof}
+        Suppose $C$ is birationally equivalent to a non-singular cubic $X$. Then 
+        $$
+            g(C) = g(X)=g^\ast(X) = \frac{(3-1)(3-2)}{2}-\sum_{P}\frac{m_P(X)(m_P(X)-1)}{2} = 1. 
+        $$
+        Suppose conversely that $g(C) = 1$. In particular, note that $C$ is not rational, since this only happens when $g(C)=0$. Then $l_P= 1$ for each $P\in C$. Then 
+        $$
+            l_{rP} = \deg \ rP + 1-g(C) = r
+        $$
+        for each $r\geq 1$. It thus follows that $L(2P)$ has a basis $\{1,v\}$ for some $v\in K(\Pp^1)\setminus K$. Write $\Div(x) = \sum_Q n_Q Q$. Then $n_P\geq -2$. In particular, $n_P\in \{-1,-2\}$. If $n_P = -1$, then $(v^{-1})_0 = 1$, meaning $C$ would be rational. We thus have $n_P = -2$. Then $[K(v) : K] = (v)_\infty =2$. Moreover, there is a basis $\{1,v,w\}$ with $w\notin K(v)$, hence $K(C) = K(v,w)$. Note that there are basis elements $1,v,w,vw,v^2,w^2\in L_{6P}$. We thus have 
+        \begin{equation}\label{PolynomialEquation}
+            aw^2 + bvw + cw + \underbrace{\sum_0^3 \alpha_iv^i}_{-Q(v)} = 0
+        \end{equation}
+        For suitable $a,b,c,\alpha_i\in K$ with at least one of these different from $0$. Here $Q\in K[x]$ with $\deg \ Q \leq 3$. Note that since $\pazocal{O}_P(X)$ is a DVR for a suitable $P$,
+        $$
+            \ord_P(aw^2+bvw + cw)\in \{-6,-5,-3\} \text{ and } \ord_P(Q(v)) \in \{-6,-4,-2,0\},
+        $$
+        and $\ord_P(aw^2+bvw + cw)= \ord_P(Q(v))$, we have WLOG $a=1$ and that $\deg \ Q = 3$. Replacing $w$ by $w-\frac{1}{2}(bv-c)$, we get that $w^2 = \prod_1^3 (v-\beta_i)$ for some $\beta_i\in K$. If $\beta_1=\beta_2$, then $\left(\frac{w}{v-\beta_1}\right)^2 = v-\beta_3$, hence $v,w\in K\left(\frac{w}{v-\beta_1}\right),$ which would imply $C$ is rational. We thus conclude that $\beta_1,\beta_2,\beta_3$ are distinct. We thus see that 
+        $$
+            K(C) = K(y^2z-\prod_1^3 (x-\beta_iz))
+        $$
+        hence $C$ is birationally equivalent to the non-singular curve $y^2z-\prod_1^3 (x-\beta_iz)$.
+    \end{proof}
+    \begin{corollary}
+        A non-singular plane curve of degree $n$ has genus 
+        $$
+            \frac{(n-1)(n-2)}{2}.
+        $$
+    \end{corollary}
+    \begin{example}
+        The above corollary shows that there are plane curves that are not birationally equivalent to a non-singular plane curve. For instance $y^2xz=x^4+y^4$ has a node, i.e. an ordinary double point, hence it has genus is
+        $$
+            \frac{(4-1)(4-2)}{2} - \frac{2(2-1)}{2}=3-1 = 2 
+        $$
+        and no $m$ satisfies $\frac{(m-1)(m-2)}{2}=2$, so no non-singular curve can be birationally equivalent to $y^2xz=x^4+y^4$.
+    \end{example}
+    \begin{corollary}
+        Lines an conics are rational. No other non-singular plane curves are rational.
+    \end{corollary}
+    \begin{corollary}
+        Singular irreducible cubics are rational.  
+    \end{corollary}
+    \begin{proof}
+        A singular irreducible cubic has one ordinary multiple point; either a node or a cusp. When it has a node, its genus is 
+        $$
+            \frac{(3-1)(3-2)}{2}-2(2-1)=1- 1 = 0.
+        $$ 
+        When it has a cusp its genus is smaller than $0$ by the same argument, hence its genus is also equal to $0$. 
+    \end{proof}
+    \begin{example}
+        {\Large Do some genus computations}
+    \end{example}
     \subsubsection{Differentials of a Curve}
+    \begin{lemma}
+        Let $f\in K[x,y]$ be an affine curve. We define
+        \begin{gather*}
+            D : \Gamma(f) \rightarrow K\\
+            \overline{g} \mapsto g_x(\overline{x},\overline{y})-\frac{f_x(\overline{x},\overline{y})}{f_y(\overline{x},\overline{y})}g_y(\overline{x},\overline{y})
+        \end{gather*}
+        This is a well-defined derivation. 
+    \end{lemma}
+    \begin{proof}
+        Let $\overline{g} = \overline{h}$. Then 
+        \begin{align*}
+            &g_x(\overline{x},\overline{y})-\frac{f_x(\overline{x},\overline{y})}{f_y(\overline{x},\overline{y})}g_y(\overline{x},\overline{y}) - \left(h_x(\overline{x},\overline{y})-\frac{f_x(\overline{x},\overline{y})}{f_y(\overline{x},\overline{y})}h_y(\overline{x},\overline{y})\right) \\
+            &= (g-h)_x(\overline{x},\overline{y})-\frac{f_x(\overline{x},\overline{y})}{f_y(\overline{x},\overline{y})}(g-h)_y(\overline{x},\overline{y})\\
+            &= (af)_x(\overline{x},\overline{y})-\frac{f_x(\overline{x},\overline{y})}{f_y(\overline{x},\overline{y})}(af)_y(\overline{x},\overline{y})\\
+            &= a_x(\overline{x},\overline{y})f(\overline{x},\overline{y})+a(\overline{x},\overline{y})f_x(\overline{x},\overline{y})-\frac{f_x(\overline{x},\overline{y})}{f_y(\overline{x},\overline{y})}(a_y(\overline{x},\overline{y})f(\overline{x},\overline{y})+a(\overline{x},\overline{y})f_y(\overline{x},\overline{y}))\\
+            &= a(\overline{x},\overline{y})f_x(\overline{x},\overline{y})-\frac{f_x(\overline{x},\overline{y})}{f_y(\overline{x},\overline{y})}a(\overline{x},\overline{y})f_y(\overline{x},\overline{y}) = 0.
+        \end{align*}
+        So $D$ is well-defined. It is clearly $K$-linear. Let $\overline{g},\overline{h}\in \Gamma(f)$. Then 
+        \begin{align*}
+            D\overline{g}\overline{h} &= (gh)_x(\overline{x},\overline{y})-\frac{f_x(\overline{x},\overline{y})}{f_y(\overline{x},\overline{y})}(gh)_y(\overline{x},\overline{y}) \\
+            &= (\overline{g}h_x(\overline{x},\overline{y})+g_x(\overline{x},\overline{y})\overline{h})-\frac{f_x(\overline{x},\overline{y})}{f_y(\overline{x},\overline{y})}(\overline{g}h_y(\overline{x},\overline{y})+g_y(\overline{x},\overline{y})\overline{h})\\
+            &= \overline{g}\left(h_x(\overline{x},\overline{y})-\frac{f_x(\overline{x},\overline{y})}{f_y(\overline{x},\overline{y})}h_y(\overline{x},\overline{y})\right) + \overline{h}\left(g_x(\overline{x},\overline{y})-\frac{f_x(\overline{x},\overline{y})}{f_y(\overline{x},\overline{y})}g_y(\overline{x},\overline{y})\right)\\
+            &= \overline{g}D\overline{h}+\overline{h}D\overline{g}.
+        \end{align*}
+    \end{proof}
+    \begin{proposition}
+        Let $L$ be an algebraic function field in one variable over $K$. 
+        \begin{enumerate}
+            \item $\Omega(L)$ is a one dimensional vector space over $L$. 
+            \item $(\Char \ K = 0)$. If $z\in L$ and $z\notin K$, then $dz$ is a basis for $\Omega(L)$.
+        \end{enumerate}
+    \end{proposition}
+    \begin{proof}
+        1. We may assume $L=K(f)$ for some affine plane curve $f\in K[x,y]$. Indeed, $L=K(C)$ for some curve $C$ and any curve is birationally equivalent to an affine plane curve. We may assume $f_y\neq 0$, hence $f\nmid f_y$. Then $f_y(\overline{x},\overline{y})\neq 0$. Note that $d\overline{x}$ and $d\overline{y}$ generate $\Omega(L)$ over $L$. Then 
+        $$
+            0 = d f(\overline{x},\overline{y}) = f_{x}(\overline{x},\overline{y})d\overline{x} + f_y(\overline{x},\overline{y})d \overline{y}, 
+        $$
+        hence 
+        $$
+            d\overline{y} = \frac{-f_x(\overline{x},\overline{y})}{f_y(\overline{x},\overline{y})}d\overline{x}.
+        $$
+        Note that for $D: \Gamma(f)\rightarrow K$ of the prior lemma that 
+        $$
+            D\overline{x} = x_x(\overline{x},\overline{y}) - \frac{f_x(\overline{x},\overline{y})}{f_y(\overline{x},\overline{y})} x_y(\overline{x},\overline{y}) = 1. 
+        $$ 
+        By Lemma~\ref{ExtensionToFieldOfFractions} and Lemma~\ref{ExtensionOfDerivationToFieldOfFractions} it follows that $d\neq 0$, hence $\Omega(L)$ is a one dimensional vector space generated by $d\overline{x}$.\\
+        2. We may assume that $\overline{x}$ is transcendental over $K$. Note then that $dz\neq 0$, since for some non-zero $g\in  K[\overline{x}][t]\subset K(\overline{x})[t]$ of minimal degree, $g(\overline{x},z)=0$, hence 
+        $$
+            0 = dg(\overline{x},z) = g_x(\overline{x},z) d\overline{x}+ g_t(\overline{x},z)dz.
+        $$
+        Since $g\neq 0$, by the assumption that $\Char \ K = 0$, it follows that $g_x,g_t\neq 0$, hence $g_x(\overline{x},z),g_t(\overline{x},z)\neq 0$, implying 
+        $$
+            dz = \frac{-g_x(\overline{x},z)}{g_y(\overline{x},z)}d\overline{x}\neq 0.
+        $$
+        It follows that $dz$ is a basis for $\Omega(L)$.
+    \end{proof}
+
+    \begin{definition}
+        ($\Char\ K = 0$) Let $L$ be an algebraic function field over $K$ in one variable. Let $z,t\in L$ with $t$ non-constant. There is a unique $v\in L$ such that $dz = vdt$. We call $v$ the \emph{derivate of $z$ with respect to $t$}, and denote it by 
+        $$
+            \frac{dz}{dt} \text{ or when no confusion arises } z'.
+        $$  
+    \end{definition}
+
+    \begin{proposition}
+        Let $L$ be an algebraic function field in one variable over $K$. Let $\pazocal{O}$ be a discrete valuation ring of $L$ with uniformizing parameter $t$. If $f\in\pazocal{O}$, then so is $\frac{df}{dt}$.
+    \end{proposition}
+    \begin{proof}
+        WLOG $L=K(C)$ for some affine curve $C\in K[x,y]$, hence we may assume $\pazocal{O}=\pazocal{O}_P(f)$ with $P=(0,0)$. Choose $N$ such that $\ord_P(\overline{x}'),\ord_P(\overline{y}')\geq -N$. Let $f\in \pazocal{O}$. Suppose first $f\in K[\overline{x},\overline{y}]$ Then 
+        $$
+            \ord_P(f') = \ord_P(f_x(\overline{x},\overline{y})\overline{x}' + f_y(\overline{x},\overline{y})\overline{y}')\geq -N.
+        $$
+        Now in general we may write $f = \frac{g}{h}$, with $g,h\in K[\overline{x},\overline{y}]$ and $h(P)\neq 0$. Then 
+        $$
+            \ord_P(f') = \frac{1}{h^2}\left(hg'-gh'\right)  \geq -N
+        $$
+        Write 
+        $$
+            f = \sum_{i<N}\lambda_it^i + t^Nz.
+        $$
+        Then 
+        $$
+            f' = \sum i\lambda_it^{i-1}+zNt^{N-1}+t^Nz'.
+        $$
+        Since $\ord_P(z')\geq -N$, each term in the above sum is an element of $\pazocal{O}$, hence $f'\in \pazocal{O}$.
+    \end{proof}
     \subsubsection{Canonical Divisors}
+    Fix a projective plane curve $C$ with nonsingular model $X$. Define $\Omega := \Omega_K(K(C))$. 
     \subsubsection{The Riemann-Roch Theorem}
 
