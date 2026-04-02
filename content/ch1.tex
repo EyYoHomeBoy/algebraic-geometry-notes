@@ -211,7 +211,7 @@ The data specifying a monoid is often written as the tuple $(M,\circ)$ or $(M,\c
     Since $e_\alpha \in N_\alpha$ for each $\alpha \in A$. Then $e=(e_\alpha)\in \prod_{\alpha\in A} N_\alpha.$ Let $(n_\alpha),(n_\alpha')\in \prod_{\alpha\in A} N_\alpha$. Then since $n_\alpha n_\alpha'\in N_\alpha$ for each $\alpha \in A$. This implies that $(n_\alpha)(n_\alpha') = (n_\alpha n_\alpha')\in \prod_{\alpha\in A} N_\alpha$.
 \end{proof}
 \begin{example}
-    Not every submonoid of a product monoid arises in this fashion. For instance consider $N=\{(n,n)\in\N\times \N \}$ which is a proper submonoid of $(\N\times \N,+)$. Indeed, $0_{\N\times \N} = (0,0)\in N$ and if $(n_1,n_1),(n_2,n_2)\in N$, then $(n_1,n_1)+(n_2,n_2)=(n_1+n_2,n_1+n_2)\in N$. Let any two submonoids $A,B\subset \N$ be given and suppose neither are trivial. take any pair of elements $a\in A$, $b\in B$. It is clear that we can add $a$ to itself to the point where the outcome is not equal to $b$. I.e. there is an $n\in\N$ such that $na\neq b$. Then $(na,b)\notin N$, hence $N\neq A\times B$. This means $N$ cannot be the product monoid of submonoids of $\N$.
+    Not every submonoid of a product monoid arises in this fashion. For instance consider $N=\{(n,n)\in\N\times \N \}$ which is a proper submonoid of $(\N\times \N,+)$. Indeed, $0_{\N\times \N} = (0,0)\in N$ and if $(n_1,n_1),(n_2,n_2)\in N$, then $(n_1,n_1)+(n_2,n_2)=(n_1+n_2,n_1+n_2)\in N$. Let any two submonoids $A,B\subset \N$ be given and suppose neither are trivial. Take any pair of elements $a\in A$, $b\in B$. It is clear that we can add $a$ to itself to the point where the outcome is not equal to $b$. I.e. there is an $n\in\N$ such that $na\neq b$. Then $(na,b)\notin N$, hence $N\neq A\times B$. This means $N$ cannot be the product monoid of submonoids of $\N$.
 \end{example}
 \begin{definition}
     Let $A$ be a set and $\{M_\alpha\}_{\alpha\in A}$ a family of monoids. We define the \textit{finitely supported direct product} of $M_\alpha$ over $A$ as the set 
@@ -680,9 +680,13 @@ It may be that a subgroup is not normal, but we may construct a normal subgroup 
     For $g_1H,g_2H,g_3H\in G/H$, it follows by Remark~\ref{AssociativityOfMultiplicationSets} that 
     $$(g_1H)((g_2H)(g_3H)) = (g_1Hg_2H)(g_3H).$$
     Define the neutral element with respect to $\cdot$ to be $eH$. Indeed
-    $$(eH)(gH) = (eg)H=gH,$$
+    $$
+        (eH)(gH) = (eg)H=gH,
+    $$
     for every $gH\in G/H$. We inverse element of $gH\in G/H$ to be $(g^{-1}H) = H^{-1}g^{-1} = Hg^{-1} = g^{-1}H$. Indeed 
-    $$(g^{-1}H)(gH) = (g^{-1}g)H= eH.$$
+    $$
+        (g^{-1}H)(gH) = (g^{-1}g)H= eH.
+    $$
 \end{proof}
 \begin{corollary}\label{QuotientGroupOfAdditiveGroupIsAdditive}
     If $(G,+)$ is an additive group and $H\subset G$ is a subgroup, then $(G/H,+)$ (where $+$ is defined as in the above proposition) is an additive group
@@ -692,7 +696,7 @@ It may be that a subgroup is not normal, but we may construct a normal subgroup 
     $$(g_1+H)+(g_2+H) = (g_1+g_2)+H = (g_2+g_1)+H = (g_2+H)+(g_1+H).$$
 \end{proof}
 \begin{lemma}\label{SubgroupOfQuoutientGroup}
-    Let $G$ be a group and $N$ a normal subgroup. Let $N\subset H\subset G$ a subgroup. Then $N\subset H$ is normal and $H/N \subset G/N$ is a subgroup. 
+    Let $G$ be a group and $N$ a normal subgroup. Let $N\subset H\subset G$ a subgroup. Then $N\subset H$ is normal and $H/N \subset G/N$ is a subgroup.  
 \end{lemma}
 \begin{proof}
     For every $h\in H$, $hNh^{-1} = N$, since $h\in G$. Let $h_1N,h_2N\in H/N$. Then since $h_1h_2\in H$, 

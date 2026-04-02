@@ -6,44 +6,60 @@
       "args": [
         "-synctex=1",
         "-interaction=nonstopmode",
-        "-output-directory=build",
         "%DOC%"
       ]
-    },
+    }
   ],
   "latex-workshop.latex.recipes": [
     {
-      "name": "xelatex (build dir)",
+      "name": "xelatex",
       "tools": ["xelatex"]
     }
   ],
   "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
-  "latex-workshop.latex.build.forceRecipeUsage": false,
   "latex-workshop.synctex.synctexjs.enabled": true,
   "latex-workshop.synctex.afterBuild.enabled": true,
-  "latex-workshop.latex.autoBuild.run": "onFileChange",
+  "latex-workshop.latex.autoBuild.run": "onSave",
   "latex-workshop.view.pdf.viewer": "tab",
   "latex-workshop.latex.clean.enabled": true,
   "latex-workshop.latex.clean.fileTypes": [
-    "build/*.aux",
-    "build/*.bbl",
-    "build/*.blg",
-    "build/*.idx",
-    "build/*.ind",
-    "build/*.lof",
-    "build/*.lot",
-    "build/*.out",
-    "build/*.toc",
-    "build/*.acn",
-    "build/*.acr",
-    "build/*.alg",
-    "build/*.glg",
-    "build/*.glo",
-    "build/*.gls",
-    "build/*.ist",
-    "build/*.fls",
-    "build/*.log",
-    "build/*.synctex.gz",
-    "*.pdf"
-  ]
+    "*.aux",
+    "*.bbl",
+    "*.blg",
+    "*.idx",
+    "*.ind",
+    "*.lof",
+    "*.lot",
+    "*.out",
+    "*.toc",
+    "*.acn",
+    "*.acr",
+    "*.alg",
+    "*.glg",
+    "*.glo",
+    "*.gls",
+    "*.ist",
+    "*.fls",
+    "*.log",
+    "*.synctex.gz"
+  ],
+
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
+    "strings": true
+  },
+
+  "[latex]": {
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    }
+  },
+
+  "dictCompletion.externalUserDictFiles": [
+    "C:/Users/lundg/dictionaries/english.txt"
+  ],
+  "dictCompletion.useCodeSpellCheckerDictionaries": true
 }
