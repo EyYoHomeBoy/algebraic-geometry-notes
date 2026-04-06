@@ -3079,13 +3079,73 @@ W \arrow[r, "\varphi_{3}"] &
         Let $P\in X$ and $d\in \Z[X]$. If $l_d>0$, and $l_{W-d-P}\neq l_{W-d}$, then $l_{d+P} = l_d$. 
     \end{lemma}
     \begin{proof}
-        Again WLOG we may assume $C$ has only ordinary multiple points, $P$ is simple, and $C\ic Z = \sum_1^n P_i$ with distinct $P_i$, $P\notin Z$. We may also assume $W = E_{n-3}$ and that $d$ is effective (cf. Lemma~\ref{LVectorSpaceNonZeroImpliesLinEquivToEffectiveDivisor}). Then $L_{W-d} \subset L_W$. By assumption, we may pick an $h\in L_{W-d}\setminus L_{W-d-P}$. We may write $h=\frac{g}{z^{n-3}}$ where $g$ is an adjoint of $C$ of degree $n-3$.  
+        Again WLOG we may assume $C$ has only ordinary multiple points, $P$ is simple, and $C\ic Z = \sum_1^n P_i$ with distinct $P_i$, $P\notin Z$. We may also assume $W = E_{n-3}$ and that $d$ is effective (cf. Lemma~\ref{LVectorSpaceNonZeroImpliesLinEquivToEffectiveDivisor}). Then $L_{W-d} \subset L_W$. By assumption, we may pick an $h\in L_{W-d}\setminus L_{W-d-P}$. We may write $h=\frac{g}{z^{n-3}}$ where $g$ is an adjoint of $C$ of degree $n-3$. Then 
+        $$
+            \Div(g) = d + E_C + \underbrace{A}_{\Div(g)-(d+E_c)},
+        $$
+        where $A\geq 0$, since $\Div(g)\geq d+E_C$. Moreover, $Div(g)\not\geq d+E_C+P$, hence $A\not\geq P$. We may pick a line $L$ such that $L\ic C = P+ B$ where $B$ is the sum of $n-2$ distinct simple points. Then 
+        $$
+            \Div(Lg) = (d+P)+E_C+(A+B).
+        $$ 
+        Let $t\in L_{d+P}$. Set $d' := \div(t)+d$. We aim to prove that $t\in L_{d}$ or equivalently that $d'$ is effective. Since $d+P\equiv d'+P$, by the Residue Theorem there is a curve $g'$ of degree $n-2$ such that 
+        $$
+            \Div(g') = (d'+P)+E_C+(A+B).
+        $$ 
+        Now note that $g'\cap L \geq n-2$, hence $L\subset g'$, hence $g'(P)=0$. Then $\Div(g')\geq P$, and since $P$ has coeffecient $0$ in $E_C+A+B$, hence $d'+P\geq P$, implying $d'\geq 0$. 
     \end{proof}
     \begin{theorem}(Riemann-Roch) For any divisor $d$ on $X$, 
-    $$
-        l_d = \deg \ d +1 -g(X) + l_{W-d}.
-    $$
+        $$
+            l_d = \deg \ d +1 -g(X) + l_{W-d}.
+        $$
     \end{theorem}
     \begin{proof}
-        
+        Consider first the case where $l_{W-d} = 0$. For this case we prove the theorem by induction in $l_d$.\\ Suppose first that $l_d=0$. Then 
+        $$
+            0 =l_{d} \geq \deg \ d + 1 - g_C
+        $$
+        and 
+        $$
+            0 = l_{W-d} \geq \deg \ W -\deg \ d + 1 -g_C = -(-g_C+1)-\deg \ d \implies 0\leq d+1 -g_C.
+        $$ 
+        So $l_d = 0 = \deg \ d + 1 - g_C.$\\
+        Suppose $l_d = 1$. It then suffices to prove that $\deg \ d -g_C =0$. Since $l_d>0$, we may assume $d\geq 0$. Recall that $l_W \geq g_C$. Note that $W-d \leq W$ implies 
+        $$
+            \deg W-\deg d -l_{W-d} \leq \deg \ W - l_W \implies l_W \leq \deg \ d,
+        $$ 
+        hence $g_C\leq \deg \ d$.
+        Moreover, by Riemann's Theorem, 
+        $$
+            1 = l_d \geq \deg \ d + 1 -g_C \implies \deg \ d \leq g_C.
+        $$ 
+        We thus have $g_C = \deg \ d$.\\
+        Suppose $l_d> 1$. We may choose a $P\in X$ such that $l_{d-P}=l_d-1$. The contrapositive of the reduction lemma implies $l_{W-(d-P)} = l_{W-d} = 0$ and by induction 
+        $$
+            l_d-1=l_{d-P} = \deg \ d -g_C+l_{W-(d-P)} \implies l_d = \deg \ d +1-g_C. 
+        $$
+        Consider now the case where $l_{W-d}>0$. Suppose first that $l_d=0$. Then in particular, $l_{W-(W-d)} = l_d = 0$, hence by the first case 
+        $$
+            l_{W-d} = \deg \ W-\deg \ d +1 - g_C+l_{d} = -(\deg-g_C+1)+l_d,
+        $$
+        which implies $l_d = \deg \ d +1 -g_C+l_{W-d}$. Assume then that $l_d>0$. Note that $\deg \ d \leq \deg \ W = 2g_C -2$ by Lemma~\ref{BasicDivisorVectSpaceLemma} 2. Among these $d$, there is one for which the identity in question is satisfied for $d+P$ each $P\in X$. It suffices to prove that the identity is satisfied for this $d$. Choose $P\in X$ such that $l_{W-(d-P)} = l_{W-d}-1$. Then, by the reduction lemma, $l_{d+P} = l_d$. It follows that 
+        $$
+            l_{d} = l_{d+P} = \deg \ d +2 -g_C+l_{W-(d-P)} = \deg \ d +1 -g_C + l_{W-d}.
+        $$
+    \end{proof}
+    \begin{corollary}
+        $l_W = g_C$. 
+    \end{corollary}
+    \begin{corollary}
+        If $\deg \ d \geq 2g_C -1$, then $l_d = \deg \ d +1 -g_C$. 
+    \end{corollary}
+    \begin{proof}
+        Indeed, in this case $\deg \ W-d <0$, hence $l_{W-d} = 0$ and the result follows from Riemann-Roch.
+    \end{proof}
+    \begin{corollary}
+        If $\deg \ d \geq 2g_C$, then $l_{d-P}=l_{d}-1$ for all $P\in X$. 
+    \end{corollary}
+    \begin{proof}
+        Indeed, $W-(d-P)<0$, hence $l_{W-(d-P)}=0$, hence 
+        $$
+            l_{d-P}= \deg d -g_C = l_d - 1.
+        $$
     \end{proof}
