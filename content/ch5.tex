@@ -3149,3 +3149,28 @@ W \arrow[r, "\varphi_{3}"] &
             l_{d-P}= \deg d -g_C = l_d - 1.
         $$
     \end{proof}
+    \begin{corollary}
+        Suppose $d$ is a divisor on $X$ with $l_d,l_{W-d}>0$. Then 
+        $$
+            l_d \leq \frac{\deg \ d }{2}+1.
+        $$ 
+    \end{corollary}
+    \begin{proof}
+        We may assume $d,W-d\geq 0$. Set $d' = W-d$ and note that $d+d'=W$. We prove the statement by induction in $\deg \ d$. The case $\deg \ d=0$ is trivial (since in this case $d=0$). Suppose $\deg d>1$. Then we may assume $l_{d} >l_{d-P}$ for each $P\in X$, for otherwise $l_d = l_{d-P} \leq \frac{1}{2}(\deg d -1) + 1$ by induction. Pick $g\in L_d\setminus L_{d-P}$ for each $P\leq d'$. Then we get an injective $K(X)$-linear map 
+        \begin{gather*}
+            \rho : L_{d'}/L_0 \rightarrow L_W/L_d\\
+            h+L_0\mapsto gh + L_d 
+        \end{gather*}
+        hence rank-nullity implies
+        $$
+            l_{d'}-1  = \dim \ L_{d'}/L_0 \leq \dim \ L_W/L_d = l_W-l_d = g(C) - l_d. 
+        $$ 
+        Then by Riemann-Roch 
+        \begin{align*}
+            l_d \leq g(C)-l_{d'}+1 = g(C)-\deg \ W + \deg \ d -1+g(C)-l_{d'} = \deg \ d +1 -l_{d}  
+        \end{align*}
+        hence 
+        $$
+            l_d \leq \frac{1}{2}(\deg \ d +1)\leq \frac{1}{2}\deg \ d +1.  
+        $$
+    \end{proof}
