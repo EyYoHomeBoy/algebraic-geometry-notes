@@ -5217,15 +5217,20 @@ We provide a lemma which alleviate some ugly cases in characteristic $p>0$ cases
     For any $k\in \Z$, let $k_R$ denote the image of $k$ in $R$. Consider the case where $n=1$. Write $f=\sum_0^d a_ix^i$. Then $0=f_x = \sum_1^{d} i_Ra_ix^{i-1}.$ For each $i$, we then get that $i_Ra_i=0$, hence $a_i=0$ or $i_R=0$. If $i < p$, then $i_R\neq 0$, hence $a_i =0$. We furthermore have that if $a_i\neq 0$ then $p\mid i$ It thus follows that $f = \sum_{1}^k a_{jp} x^{jp}$, where $k$ is chosen such that $d = kp$. Hence picking $g = \sum_1^k a_{jp} x^{j}$ we are done. We prove the general case by induction using the fact that $\Char\ R[x_1,\dots,x_n] = p$, $R[x_1,\dots,x_{n+1}]\simeq R[x_1,\dots,x_n][x_{n+1}]$ in conjunction with the validity of the $1$-variable case.   
 \end{proof}
 \subsection{Ring Extensions and Algebras over Rings} 
+\subsubsection{Finiteness Conditions on Ring Maps}
 \subsubsection{Finitely Generated Ring Extensions}
 \begin{definition}
-    A ring extension $S\supset R$ is said to be \textit{module-finite (over $R$)} if $S$ is finitely generated as an $R$-module.
+    An $R$-algebra $S$ is \emph{module finite (over $R$)} 
+    if $S$ is finitely generated as an $R$-module.\\
+    A ring map $\sigma : R \rightarrow S$ is said to be \emph{finite} if $S$ with the associated $R$-algebra structure is module finite. 
 \end{definition}
 \begin{definition}
-    A ring extension $S\supset R$ is a said to be \textit{finitely generated $R$-algebra} or \textit{ring-finite} if $S=R[s_1,\dots,s_n]$ for suitable $s_1,\dots,s_n\in S$.
+    An $R$-algebra $S$ is a said to be \textit{finitely generated $R$-algebra} or of \emph{finite type} if $S=R[s_1,\dots,s_n]$ for suitable $s_1,\dots,s_n\in S$.\\ 
+    If $S\supset R$ is a ring extension of finite type, we say that it is \textit{ring-finite}.\\
+    A ring map $\sigma : R \rightarrow S$ is of finite type if $S$ with the associated structure of $R$-algebra is of finite type.  
 \end{definition}
 \begin{proposition}\label{FinitelyGeneratedAlgebrasArePolynomialQuotientRings}
-    Let $S\supset R$ be a ring-finite ring extension. Then
+    Let $S$ be an $R$-algebra of finite type. Then
     $$S\simeq R[x_1,\dots,x_n]/I,$$
     for some $n\geq 1$ and some ideal $I\subset R[x_1,\dots,x_n]$.
 \end{proposition}
@@ -5240,7 +5245,7 @@ We provide a lemma which alleviate some ugly cases in characteristic $p>0$ cases
     $$ 
 \end{proof}
 \begin{proposition}\label{ModuleFiniteImpliesRingFinite}
-    Let $S\supset R$ is a ring extension that is also a finitely generated $R$-module. Then $S$ is a finitely generated $R$-algebra.
+    Let $S$ be a module finite $R$-algebra. Then $S$ is of finite type.
 \end{proposition}
 \begin{proof}
     For suitable $s_1,\dots,s_n\in S$, $S = \sum_1^n Rs_i$. We prove that $S = R[s_1,\dots,s_n]$. We already know that $S\supset R[s_1,\dots,s_n]$. Let $s\in S$. Then $s = \sum_1^n r_is_i$ for suitable $r_1,\dots,r_n \in R$, hence $s\in R[s_1,\dots,s_n]$. 
@@ -5253,9 +5258,15 @@ We provide a lemma which alleviate some ugly cases in characteristic $p>0$ cases
 \begin{definition}
     A ring extension $L\supset K$ is called a \textit{field extension (over $K$)} if both $L$ and $K$ are fields.
 \end{definition}
+\begin{remark}
+    Note that a $K$-algebra $L$ where $L$ is a field is automatically a field extension since the map $K\rightarrow L$ inducing the structure of $K$-algebra is automatically an embedding. 
+\end{remark}
 Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\dots,s_n\in S$, $R[s_1,\dots,s_n]$ is also an integral domain. We denote the fraction field of $R[s_1,\dots,s_n]$ by $R(s_1,\dots,s_n)$
 \begin{definition}
-    A field extension $L\supset K$ is said to be \textit{a finitely field extension (over $K$)}, if there exist $a_1,\dots,a_n$ such that $L = K(a_1,\dots,a_n)$.
+    A field extension $L\supset K$ is said to be \textit{a finitely generated field extension (over $K$)}, if there exist $a_1,\dots,a_n$ such that $L = K(a_1,\dots,a_n)$.
+\end{definition}
+\begin{definition}
+    A field extension is \emph{finite} if it is module finite. 
 \end{definition}
 \begin{lemma}
     Let $K$ be a field. Consider $K[x_1,\dots,x_n]$ as a subring of $K[\mathbf{x},y_1,\dots,y_m]$ Then $K(x_1,\dots,x_n)(y_1,\dots,y_m) = K(x_1,\dots,x_n,y_1,\dots,y_m).$
@@ -5278,16 +5289,31 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
 \begin{proof}
     The first statement is obvious as $K(x_1,\dots,x_n)$ is finitely generated as field extension over $K$ by $x_1,\dots,x_n\in K(x_1,\dots,x_n)$. To prove the second statement, let $\frac{a_1}{b_1},\dots,\frac{a_m}{b_m}\in K(\mathbf{x})$. Set $b:=\lcm(b_1,\dots,b_m)$. Then there is a $c\in K[\mathbf{x}]$ such that $c\nmid b^d$ for any $d\geq 0$, since there are infinitely many irreducible polynomials over $K$ (cf. Lemma~\ref{InfinitelyManyIrreduciblePolynomialsOverIntegralDomain}) and $K[\mathbf{x}]$ is a UFD, hence $b^d \frac{1}{c}\notin K[x]$ for any $d\geq 0$. By lemma~\ref{CriterionForCheckingMembershipInAlgebra}, it follows that $\frac{1}{c}\notin K\left[\frac{a_1}{b_1},\dots,\frac{a_m}{b_m}\right]$, hence $K(\mathbf{x})\supsetneq K\left[\frac{a_1}{b_1},\dots,\frac{a_m}{b_m}\right]$. This means $K(\mathbf{x})$ is not a finitely generated $K$-algebra. 
 \end{proof}
-\begin{lemma}
+\begin{lemma}\label{TransitivityOfFinitenessConditions}
     These finiteness conditions are transitive. In particular, if $T\supset S \supset R$ is a tower of ring extensions and $M\supset L\supset K$ is a tower of field extensions, then
     \begin{enumerate}
-        \item $T\supset S$ and $S\supset R$ are module-finite if and only if 
+        \item If $T\supset S$ and $S\supset R$ are module finite, then so is $T\supset R$.  
         \item If $T\supset S$ and $S\supset R$ are ring-finite, then $T\supset R$ is ring-finite.
-        \item $M\supset L$ and $L\supset K$ are field finite  extensions if and only if $M\supset K$ is a field finite extension. 
+        \item If $M\supset L$ and $L\supset K$ are field finite, then $M\supset K$ is a field finite extension. 
     \end{enumerate}
 \end{lemma}
 \begin{proof}
-    1. This follows from {\Large It is a special case of results about finitely generated modules}.\\ 
+    1. Suppose $T=\sum_1^n St_i$ and $S=\sum_1^m Rs_i$ for some $t_1,\dots, t_n\in T$ and $s_1,\dots,s_m\in S$. Let $t\in T$. Then 
+    $$
+        t = \sum_1^n a_i t_i \in \sum_1^n S t_i.
+    $$
+    Moreover, 
+    $$
+        a_i = \sum_j^m b_{ij}s_j,
+    $$
+    hence 
+    $$
+        t = \sum_{i,j} b_{ij}s_jt_i.
+    $$
+    We thus conclude that 
+    $$
+        T = \sum_{i,j} R s_jt_i.
+    $$
     2. Suppose $T\supset S$ and $S\supset R$ are ring finite extensions. We can find $s_1,\dots,s_n\in S$ such that $S = R[s_1,\dots,s_n]$ and $t_1,\dots,t_m\in T$ such that $T=S[t_1,\dots,t_m]$. Let $t \in T$.  Then there are $a_v\in S$ such that 
     $$t = \sum_{v\in \N^m} a_vt_1^{v_1}\cdots  t_m^{v_m}.$$
     For each $v\in \N^m$, $$a_v = \sum_{w\in \N^n} b_{vw}s_1^{w_1}\cdots s_n^{w_n}a_v $$ for suitable $b_{vw}\in R$, hence 
@@ -5297,20 +5323,21 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     $$M=L(\alpha_1,\dots,\alpha_m)=K(\beta_1,\dots,\beta_n)(\alpha_1,\dots,\alpha_m) = K(\alpha_1,\dots,\alpha_m,\beta_1,\dots,\beta_n).$$
 \end{proof}
 \begin{example}
-    The converse of 2. in the above lemma is not true. Consider for instance the polynomial ring $R[x]\supset R$ which is ring finite extension. Then the ring extension of $R$ generated by 
+    The converse of 2. in the above lemma is not true. Consider for instance the ring extension $R[x,y]\supset R$. And the ring extension 
     $$
-        X := \{x^n : n\geq 2\}
+        S := R[xy^i : i \geq 0].
+    $$ 
+    Let $f_1,\dots,f_m\in S$ (we may assume that these are non-constant). Let $S$ inherit the structure of graded ring from $R[y][x]$.
+    Write 
     $$
-    is contained in $R[x]$, but it is not ring finite over $R$. Indeed, consider a finite sequence of $f_1,\dots,f_l$ of polynomials in $R[X]$. Note that each $f_i = a_2x^2+\dots+ a_{n_i}x^{n_i}\in R[x^2,\dots,x^{n_i}]$, hence we may assume $f_i = x^{n_i}$ for some $n_i$. It thus suffieces to find an integer $k\geq 2$ such that the equation 
+        f_i = b_i + \sum_1^{l_i} a_{ij} xy^j
     $$
-        \mu_1n_1+\dots+\mu_l n_l = k
-    $$
-    does not have any solutions in $\Z_{\geq 0}$. 
+    Note that a product $f_if_j$ does not have a non-zero term of degree $1$ in $x$. Set $S' := R[f_1,\dots,f_m]$. It thus follows that $S'_1$ is finitely generated as an $R$-module by the $xy^j$ for which there is an $i$ with $a_{ij} \neq 0$. On the other hand, $S_1$ is clearly not finitely generated as an $R$-module. Then $S'\subsetneq S$.  
 \end{example}
 \subsubsection{Integral- \& Algebraic Extensions}
 \begin{definition}
     Let $S\supset R$ be a ring extension. An element of $s\in S$ is said to be \textit{integral (over $R$)} if it is algebraically dependent over $R$, i.e. there is a monic $f\in R[x]\setminus 0$ such that $f(s)=0$.\\
-    Let $L\supset K$ be a field extension. An element of $L$ is \textit{algebraic (over $K$)} if it is integral over $K$. An element that is not algebraic over $K$ is transcendental over $K$. 
+    Let $L\supset K$ be a field extension. An element of $L$ is \textit{algebraic (over $K$)} if it is integral over $K$. An element that is not algebraic over $K$ is \emph{transcendental} over $K$. 
 \end{definition}
 \begin{remark}\label{MinimalPolynomialDefinitionAndTechnicalRemarks}
     In the case $R$ is a field, consider $d = \min (\{ k>0 : \exists f\in R[x]\setminus 0, f(s) =0\})$. Let $f_s$ be a polynomial of degree $d$ vanishing on $s$. Consider another polynomial $g\in R[x]\setminus 0$ vanishing on $s$. We can write $g = qf_s+r$, where $r = 0$ or $\deg \ r < d$. Then 
@@ -5346,12 +5373,14 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     $$\det\left( x\mathbbm{1} - (a_{ij})\right) \in R[x]\setminus 0$$
     which is monic. It thus follows that $s$ is integral over $R$. 
 \end{proof}
-\begin{lemma}
-    Consider a tower of ring extensions $T\supset S\supset R$ where $T$ is a domain. Suppose $T$ is integral over $S$ and $S$ is integral over $R$, then $T$ is integral over $R$. 
+\begin{lemma}\label{TransitivityOfIntegralExtensions}
+    Consider a tower of ring extensions $T\supset S\supset R$ where $T$ is a domain. $T$ is integral over $S$ and $S$ is integral over $R$ if and only if $T$ is integral over $R$. 
 \end{lemma}
 \begin{proof}
-    Let $t\in T$, then there is a monic $f=x^n+\sum_0^{n-1} a_ix^i\in S[x]\setminus 0$ such that $f(t)=0$. By the above lemma $R' := R[a_1,\dots,a_n,t]=R[a_1,\dots,a_n][t] \supset R[a_1,\dots,a_n]$ is module-finite. By the above lemma we also find that $R[a_1]\supset R$ is module-finite. Recursive usage of the above and the transitivity of module-finiteness thus implies that $R[a_1,\dots,a_{n-1}]\supset R$ is module-finite and hence that $R' = R[a_1,\dots,a_{n-1},t]\supset R$ is module-finite. We have thus found a subring of $T$ containing $R[t]$, which is module-finite over $R$. Hence using the above lemma yet another time it follows that $t$ is integral over $R$, hence $T$ is integral over $R$. 
+    Suppose $T\supset S$ and $S\supset R$ are integral. Let $t\in T$, then there is a monic $f=x^n+\sum_0^{n-1} a_ix^i\in S[x]\setminus 0$ such that $f(t)=0$. By the above lemma $R' := R[a_1,\dots,a_n,t]=R[a_1,\dots,a_n][t] \supset R[a_1,\dots,a_n]$ is module-finite. By the above lemma we also find that $R[a_1]\supset R$ is module-finite. Recursive usage of the above and the transitivity of module-finiteness thus implies that $R[a_1,\dots,a_{n-1}]\supset R$ is module-finite and hence that $R' = R[a_1,\dots,a_{n-1},t]\supset R$ is module-finite. We have thus found a subring of $T$ containing $R[t]$, which is module-finite over $R$. Hence using the above lemma yet another time it follows that $t$ is integral over $R$, hence $T$ is integral over $R$.\\
+    Suppose $T\supset R$ is integral. Let $t\in T$. Then there is a monic $f\in R[x]\setminus 0 \subset S[x]\setminus $ vanishing on $t$, hence $T\supset S$ is integral. Let $s\in S\subset T$. Then there is a monic $f\in R[x]\setminus 0$ vanishing on $s$. We thus conclude $S\supset R$ is integral. 
 \end{proof}
+
 \begin{proposition}\label{IntegralElementsIsSubring}
     Let $S\supset R$ be an integral domain and a ring extension. Then 
     $$\left\{ s\in S : s \ \text{is integral over} \ R\right\}$$
@@ -5360,12 +5389,18 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
 \begin{proof}
     Let $a,b\in S$ be integral over $R$. We repeatably use Lemma~\ref{EquivalentFormulationsOfIntegralElements}. Note that $b$ is integral over $R[a]$ hence $R[a,b]\subset R$ is module-finite. Since $a + b, ab\in R[a,b]$, it follows that $R[a,b]$ is a ring contained in $S$, containing $R[a+b]$ and $R[ab]$ that is module-finite over $R$, meaning $a+b$ and $ab$ are integral over $R$. 
 \end{proof}
+\begin{remark}
+    This ring is called \emph{the integral closure of $R$ in $S$}. 
+\end{remark}
 \begin{lemma}\label{ModuleFiniteImpliesAlgebraic}
     If $S\supset R$ is module-finite then $S\supset R$ is integral. 
 \end{lemma}
 \begin{proof}
     Let $s\in S$. The ring $S$ is a subring of $S$ containing $R[s]$ which is finitely generated as an $R$-module. It thus follows by Lemma~\ref{EquivalentFormulationsOfIntegralElements} that $s$ is integral over $R$. Hence $S\supset R$ is integral.
 \end{proof}
+\begin{example}
+    With regards to the converse of Lemma~\ref{TransitivityOfFinitenessConditions} it certainly isn't true in general. Indeed, there are examples of the integral closure that is not finite (although I don't know any!). When $R$ is a field it is true.   
+\end{example}
 \begin{lemma}\label{ForRingFiniteExtensionsModuleFiniteIsTheSameAsAlgebraic}
     Let $S\supset R$ be a ring extension with $S$ an integral domain. Then $S\supset R$ is module-finite if and only if $S=R[s_1,\dots,s_n]$ where $s_i\in S$ is integral over $R$. 
 \end{lemma}
@@ -5402,7 +5437,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
 \end{proof}
 \begin{proposition}
     Let $L\supset K$ be a field extension. The set 
-    $$\{a\in L: a \ \mathrm{is}\ \mathrm{integral}/K\}$$
+    $$\{a\in L: a \ \mathrm{is}\ \mathrm{algebraic}/K\}$$
     is a subfield of $L$.
 \end{proposition}
 \begin{proof}
@@ -5411,6 +5446,9 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     where choosing $n$ minimal implies, $a_0 \neq 0$, hence 
     $a\left(a^{n-1}(-a_0)^{-1}\sum_1^{n-1} a_ia^{i}\right) = 1$, implying $a$ is a unit. 
 \end{proof}
+\begin{remark}
+    This subfield is called \emph{the algebraic closure of $K$ in $L$}. 
+\end{remark}
 \begin{proposition}\label{CannotSqueezeNonFieldBetweenFiniteFieldExtension}
     Let $L\supset K$ be a module-finite field extension. Consider a subring $R$ of $L$ containing $K$ as a subring. Then $R$ is a field. 
 \end{proposition}
@@ -5450,72 +5488,119 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
 \end{proof}
 \subsubsection{Field Extensions}
     \begin{lemma}
-        Let $L\supset K$ be a field extension and $a\in L$. Then $a$ is module finite if and only if $\dim_K \ K[a] <\infty$. If $a$ is algebraic, let $d$ denote $\deg \ f_a$. Then $\{1,a,\dots,a^{d-1}\}$ is a basis for $K[a]$. 
+        Let $L\supset K$ be a field extension and $a\in L$. Then $L\supset K$ is finite if and only if $\dim_K \ K[a] <\infty$. If $a$ is algebraic, let $d$ denote $\deg \ \mathrm{Irr}(a,K)$. Then $\{1,a,\dots,a^{d-1}\}$ is a basis for $K[a]$. 
     \end{lemma}
     \begin{proof}
-        The first statement follows immediately from Proposition~\ref{EquivalentFormulationsOfIntegralElements}. Set $I=\langle f_a\rangle$. By Lemma~\ref{DimensionOfQuotientSpace}, $\{1+ I,x+I,\dots,x^{d-1}+I\}$ is a basis of $K[x]/I \overset{\overline{\ev_a}}{\simeq} K[a]$, since $\ev_a$ is a $K$-algebra homomorphism, it is in particular a $K$-linear map, hence $\{1,a,\dots,a^{d-1}\}$ is a basis of $K[a]$
+        The first statement follows immediately from Proposition~\ref{EquivalentFormulationsOfIntegralElements}. Set $I=\langle \mathrm{Irr}(a,K)\rangle$. By Lemma~\ref{DimensionOfQuotientSpace}, $\{1+ I,x+I,\dots,x^{d-1}+I\}$ is a basis of $K[x]/I \overset{\overline{\ev_a}}{\simeq} K[a]$, since $\ev_a$ is a $K$-algebra homomorphism, it is in particular a $K$-linear map, hence $\{1,a,\dots,a^{d-1}\}$ is a basis of $K[a]$
     \end{proof}
     \begin{definition}
-        If $L\supset K$ is a module finite field extension we define define $[L:K]:= \dim_K\ L$ to be \textit{the degree of $L$ over $K$} 
+        If $L\supset K$ is a finite field extension, we define define $[L:K]:= \dim_K\ L$ to be \textit{the degree of $L$ over $K$} 
     \end{definition}
     \begin{lemma}\label{ModuleFiniteFieldExtensions}
-        Let $L\supset K$ be a field extension. Then $L\supset K$ is module finite if and only if $L\supset K$ is a finite field extension generated by some $a_1,\dots,a_n\in L$ that are algebraic over $K$. 
+        Let $L\supset K$ be a field extension. Then $L\supset K$ is finite if and only if $L\supset K$ is a finite field extension generated by some $a_1,\dots,a_n\in L$ that are algebraic over $K$. 
     \end{lemma}
     \begin{proof}
         "$\implies$": By Lemma~\ref{ForRingFiniteExtensionsModuleFiniteIsTheSameAsAlgebraic} $L = K[a_1,\dots,a_n]$ for suitable $a_1,\dots,a_n\in L$ that are algebraic over $K$, hence $L\subset K[a_1,\dots,a_n]\subset K(a_1,\dots,a_n) \subset L$, hence $L=K(a_1,\dots,a_n)$.\\
-        "$\impliedby$": Suppose $L=K(a_1,\dots,a_n)$ for some $a_i\in L$. If $n=1$, then $L=K(a_1)=K[a_1]$ which is module finite over $K$ due to Proposition~\ref{EquivalentFormulationsOfIntegralElements}. Set $L'=K(a_1,\dots,a_n)$ which by induction is module finite over $K$. Note that $a_{n+1}$ is algebraic over $L'$, hence applying Proposition~\ref{EquivalentFormulationsOfIntegralElements}, $L\supset L'$ is module finite. By the transitive property of module finite extensions, it follows that $L\supset K$ is module finite.  
+        "$\impliedby$": Suppose $L=K(a_1,\dots,a_n)$ for some algebraic $a_i\in L$. Then $L= K[a_1,\dots,a_n]$, hence by Lemma~\ref{ForRingFiniteExtensionsModuleFiniteIsTheSameAsAlgebraic} $L\supset K$ is finite. 
     \end{proof}
-    \begin{lemma}
-        Let $L\supset K$ be a field extension and $f\in K[x]$ irreducible. Suppose there is an $a\in L$ such that $f(a)=0$. Then $L\simeq  K[x]/I$ where $I:= \langle f\rangle$.
-    \end{lemma}
-    \begin{proof}
-        Consider the $K$-algebra map
-        \begin{gather*}
-            \sigma := \ev_a : K[x]\rightarrow L
-        \end{gather*}
-        This induces an isomorphism 
-        \begin{gather*}
-            \overline {\sigma}: K[x]/\ker \ \sigma \simeq \im \ \sigma\\
-            \mu + \ker \ \sigma \mapsto \mu(a)
-        \end{gather*}
-        Since $K[x]$ is a PID, $\ker \ \sigma = \langle f'\rangle$ for some $f'$ and since $f\in \ker \ \sigma$ it follows that $f'\mid f$, hence $\langle f\rangle =\langle f'\rangle$ by the irreducibility of $f$. Note that $K[x]/I$ is a field (cf. Lemma~\ref{OverFieldQoutientRingWithRespectToIrreduciblePolynomialIsAField}).
-        Let $z=\frac{g(a)}{h(a)}\in K(a)$. Then since $h(a)\neq 0$, $f\nmid h$, hence $h+I\neq 0$. Then 
-        $$z = \frac{g(a)}{h(a)} = \frac{\sigma(g)}{\sigma(h)}=\frac{\overline{\sigma}(g+I)}{\overline{\sigma}(h+I)}= \overline{\sigma}\left((g+I)(h+I)^{-1}\right)\in \im \ \overline{\sigma}=\im\ \sigma.$$ 
-    \end{proof}
-    \begin{lemma}\label{SplittingFieldLemma}
-        Let $L\supset K$ be a field extension and $f\in K[x]$ an irreducible, monic polynomial. Suppose there is an $a\in L$ such that $f(a)=0$. Set $L':= K[x]/I\simeq K(a)$, where $I:=\langle f\rangle$ 
-        \begin{enumerate}
-            \item Suppose there is a $g\in k[x]$ that also vanishes on $a$. Then $f\mid g$.
-            \item  identifying $K$ canonically with a subfield of $L'$ and $K(a)$ with $L'$ we find $f=(y-(x+I))f_1$ for some $f_1\in L[y]$.
-        \end{enumerate}
-    \end{lemma}
-    \begin{proof}
-        1. From the proof of the last lemma we learned that $\ev_a(g)=0$ if and only if $g\in I$, hence $f\mid g$.\\
-        2. Since $x+I$ is a zero of $f$ in $L$ the result follows.  
-    \end{proof}
+\subsubsection{Splitting Fields}
+    \begin{definition}
+        Let $K$ be a field and $f\in K[X]$ with leading coefficient $a\in K$. A field extension $L\supset K$ is called a \emph{splitting field of $f$}, if there are $a_1,\dots,a_n\in L$ such that 
+        $$
+            f = a\prod_1^n (x-a_i)
+        $$
+        and 
+        $$
+            L = K(a_1,\dots,a_n)
+        $$
+    \end{definition}
+    \begin{remark}
+        Note that if $\deg \ f = 1$, then $K$ is a splitting field for $f$. 
+    \end{remark}
     \begin{theorem}\label{ExistenceTheoremForSplittingField}(Existence Theorem for Splitting Fields) 
-        Let $K$ be a field and $f\in K[x]$. There is a field $L$ extending $K$ such that $f$ can be written as a product of linear polynomials over $L$
+        Let $K$ be a field and $f\in K[x]$. There is a splitting field $L$ of $f$. Moreover, $L\supset K$ is finite and $[L : K] \leq \ deg \ f !$.
     \end{theorem}
     \begin{proof}
-        When $\deg \ f = 1$ the statement is trivial by taking $K=L$. If $f$ is of of degree $d+1$ for some $d\geq 1$, pick a monic irreducible factor of $f$, $g$ say. Then over $L' = K[x]/\langle g\rangle$, $g =(y - (x+I))g_1 $ for some $g_1\in L'[y]$. The $f=qg=qg_1(y-(x+I))$ for some $q\in L'[y]$ and the result follows by induction in the degree.
+        When $\deg \ f = 1$ the statement is trivial by taking $K=L$. If $f$ is of of degree $d+1$ for some $d\geq 1$, pick a monic irreducible factor of $f$, $g$ say. Then over $L' = K[x]/\langle g\rangle$, $g =(y - (x+I))g_1 $ for some $g_1\in L'[y]$. Then $f=qg=qg_1(y-(x+I))$ for some $q\in L'[y]$ and the result follows by induction in the degree.\\ 
+        Consider a splitting field $L=K(a_1,\dots,a_n)\supset K$ of $f$. Note that $\mathrm{Irr}(a_1,K) \mid f$ in $L[x]$, hence $[K(a_1) : K] \leq \deg \ f$. Note also that $L$ is a splitting field of 
+        $$
+            a\prod_2^n (x-a_i),
+        $$
+        over $K(a_1)$, hence by induction $[L:K(a_1)] \leq (\deg \ f -1)!$. Then 
+        $$
+            [L : K] = [L: K(a_1)][K(a_1) : K] \leq \deg \ f !.
+        $$ 
     \end{proof}
-    \begin{definition}
-        The above $L$ is called \textit{the splitting field of $f$ over $K$}.
-    \end{definition}
+    
     \begin{lemma}
-        Let $K$ be a characteristic $0$ field and $f\in K[x]$ irreducible monic. Let $L$ be the splitting field of $f$ over $K$ and write $f=\prod_1^d (x-\alpha_i)$ for suitable $\alpha_i\in L$. 
+        Let $K$ be a characteristic $0$ field and $f\in K[x]$ irreducible monic. Let $L$ be the splitting field of $f$ over $K$ and write $f=\prod_1^d (x-\alpha_i)$ for suitable $\alpha_i\in L$. Then the $\alpha_i$ are distinct.
     \end{lemma}
     \begin{proof}
         Suppose $L$ is a field extension over $K$, and suppose there is an $\alpha \in L$ such that $(x-\alpha^2)\mid f$. Then $g:=D f$ also has $\alpha$ as a root. Then $g\nmid f$, hence by Lemma~\ref{SplittingFieldLemma} $f$ cannot be irreducible. In particular if $L$ was the splitting field, and $f$ has a multiple linear factor, then $f$ is not irreducible.  
     \end{proof}
+    \begin{lemma}\label{UniquenessOfSplittingFieldsUpToIsomorphism} Let $K,K'$ be a pair of fields and $f\in K[x]$ a non-constant polynomial. If $\sigma : K\simeq K'$ and $L,L'$ are splitting fields of $f$ resp. $\overline{\sigma}(f)$, then there is an extension $\omega : L \simeq L'$ of $\sigma$.  
+    \end{lemma}
+    \begin{proof}
+        We prove the result by induction in $[L : K]$. When $[L : K] = 1$, we have $K=L$, hence $f = a \prod_1^m (x-a_i)$ for $a_i\in K$. Then $\overline{\sigma}(f) = \sigma(a)\prod_1^m (x-\sigma(a_i))$, which implies that $K'$ is a splitting field for $\overline{\sigma}(f)$.\\
+        Suppose $[L : K] > 1$. Then $\deg \ f >1$. Let $p$ be a  irreducible, monic factor of $f$ with $\deg \ p > 1$. Then $\overline{\sigma}(p)$ is a also an irreducible, monic factor of $\overline{\sigma}(f)$ and we get an isomorphism
+        \begin{gather*}
+            \sigma_1 : K[X]/\langle p \rangle \simeq K'[x]/\langle \overline{\sigma}\rangle\\
+            g + \langle p\rangle \mapsto \overline{\sigma}(g)+\langle \overline{\sigma}(p)\rangle
+        \end{gather*} 
+        Note that $p = \mathrm{Irr}(\alpha,K)$ and $\overline{\sigma}(p) = \mathrm{Irr}(\beta,K')$ for some $\alpha\in L$ and some $\beta\in L'$. Then we have an isomorphism
+        $$
+            \sigma' :  K(\alpha) \simeq K[X]/\langle p \rangle \simeq K[X]/\langle \overline{\sigma}(p) \rangle\simeq  K(\beta). 
+        $$
+        extending $\sigma$. We have 
+        $$
+            [L:K(\alpha)] = [L : K]/[K(\alpha) : K] < [L : K].
+        $$
+        Note that $L$ and $L'$ are splitting fields of $f$ resp. $\overline{\sigma}(f)$ over $K(\alpha)$ resp. $K(\beta)$. Then by induction there is an extension $\omega : L \rightarrow L'$ of $\sigma'$ and we are done.  
+    \end{proof}
+
+    \begin{corollary}
+        If $L$ and $L'$ are splitting fields of a polynomial over $K$ resp. over $K'$, then 
+        $$
+            [L : K] = [L' : K'].
+        $$
+    \end{corollary}
+\subsubsection{Normal Extensions}
+\begin{definition}
+    A field extension, $N\supset K$ is \emph{normal}, if it is algebraic if for each $\alpha \in N$, the polynomial $\mathrm{Irr}(\alpha,K)$ is a product of linear factors over $N$.  
+\end{definition}
+\begin{lemma}
+    Let $N\supset K$ be a finite field extension. Then $N\supset K$ is normal if and only if there is a non-constant $f\in K[x]$ for which $N$ is a splitting field over $K$. 
+\end{lemma}
+\begin{proof}
+    Suppose $N$ is normal over $K$. Since $N\supset K$ is finite, there are $a_1,\dots,a_n\in N$ algebraic over $K$ such that $N = K(a_1,\dots, a_n)$. Set $f = \prod_1^n\mathrm{Irr}(a_i,K)$. Note $\deg \ f \geq 1$. Then since $\Irr(a_i,K)$ splits into linear factors over $N$ so does $f$. I.e. $f = \prod_1^l (x-b_i)$ where $\{a_1,\dots,a_n\}\subset \{b_1,\dots,b_l\}$. In particular, $N = K(b_1,\dots,b_l)$, hence $N$ is the splitting field of $N$ over $K$.\\
+    Suppose there is a non-constant $f\in K[x]$ with splitting field $N$ over $K$. Then $f= \prod (x-a_i)$ and $N=K(a_1,\dots,a_n)$ for some $a_1,\dots,a_n\in N$. Let $b\in N$, and consider a field extension $L\supset N$ over which $\Irr(b,K)\in N[x]$ splits into linear. We need to prove that the roots of $\Irr(b,K)$ are all in $N$. Let $c$ be such a root. Then there is an isomorphism of $K$-algebras
+    $$
+        \sigma : K(b)\simeq K(c)
+    $$
+    taking $b$ to $c$. Note
+    $$
+        N = K(b)(a_1,\dots,a_n),
+    $$ 
+    hence $N$ is a splitting field of $f$ over $K(b)$. Similarly, $N(c)$ is a splitting field of $f = \overline{\sigma}(f)$ over $K(c)$. Then 
+    $$
+        [N : K(b)] = [N(c) : K(c)].
+    $$
+    Note that $[K(b) : K] = \Irr(b,K) = [K(c) : K]$, hence 
+    $$
+        [N : K] = [N : K(b)][K(b) : K] = [N(c) : K(c)][K(c) : K] = [N(c) : K] = [N(c) : N][N : K].
+    $$
+    Then $[N(c) : N]= 1$, implying $c\in N$. 
+\end{proof}
+\subsubsection{Separable Extensions}
 \subsubsection{Theorem of the Primitive Element}
     \begin{theorem}
-        Let $K$ be a characteristic $0$ field and $L\supset K$ a module-finite extension. Then there is a $c\in L$ such that $L=K(c)$.
+        Let $K$ be a characteristic $0$ field and $L\supset K$ a finite extension. Then there is a $c\in L$ such that $L=K(c)$.
     \end{theorem}
     \begin{proof}
         Suppose $L=K(a,b)$. Then there are monic irreducible polynomials $f,g\in K[x]$ such that $f(a)=0$ and $g(b)=0$. Let $S$ be the splitting field of $f$ and $g$. Write $f=(x-a)\prod_1^l (x-\alpha_i)$ and $g=(x-b)\prod_1^k(x-\beta_i)$. We may pick $\lambda \neq 0$ such that $c:=\lambda a+b\neq \lambda \alpha_i+ \beta_j$ for any $i,j$, since $V_{ij}:=V(\alpha_it+\beta_j-(at+b))$ can have at most finitely many points. So pick any $\lambda\notin \{0\}\cup\bigcup V_{ij}$. Set $K':= K(c)$ and $h:=g(c-\lambda x)\in K'[x]$. Note that $h(a)=g(b)=0$ and $h(\alpha_i)=g(\lambda a + b-\lambda\alpha_i)$ and since $\lambda a + b-\lambda\alpha_i\neq \beta_j$ for any $j$, $h(\alpha_i)\neq 0$. Then $\gcd(f,h)=x-a\in K'[x]$, implying $a\in K'$, and so $b=c-\lambda a\in K'$. In conclusion, $L=K(c)$.\\
         Suppose $L=K(a_1,\dots,a_{n+1})$ for some $n\geq 1$. By induction there are $\lambda_1,\dots,\lambda_n\in K\setminus 0$, so that upon defining $c=\sum_1^n \lambda_ia_i$,  $K(a_1,\dots,a_n)=K(c)$, hence $L=K(c,a)=K(c')$ by the first case.
     \end{proof}
+
 \subsubsection{Transcendence Degree \& Transcendence Bases}
 \begin{definition}
     Let $L\supset K$ be a field extension. We say that $L$ has \textit{transcendence degree $d$ over $K$} if there is a set $X=\{ a_1,\dots,a_d\}\subset L$ such that $X$ is algebraically independent over $K$ and every other set $Y\subset L$ with more than $n$ elements is algebraically dependent over $K$. We define 
