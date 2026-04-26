@@ -5275,6 +5275,48 @@ We provide a lemma which alleviate some ugly cases in characteristic $p>0$ cases
 \begin{proof}
     For any $k\in \Z$, let $k_R$ denote the image of $k$ in $R$. Consider the case where $n=1$. Write $f=\sum_0^d a_ix^i$. Then $0=f_x = \sum_1^{d} i_Ra_ix^{i-1}.$ For each $i$, we then get that $i_Ra_i=0$, hence $a_i=0$ or $i_R=0$. If $i < p$, then $i_R\neq 0$, hence $a_i =0$. We furthermore have that if $a_i\neq 0$ then $p\mid i$ It thus follows that $f = \sum_{1}^k a_{jp} x^{jp}$, where $k$ is chosen such that $d = kp$. Hence picking $g = \sum_1^k a_{jp} x^{j}$ we are done. We prove the general case by induction using the fact that $\Char\ R[x_1,\dots,x_n] = p$, $R[x_1,\dots,x_{n+1}]\simeq R[x_1,\dots,x_n][x_{n+1}]$ in conjunction with the validity of the $1$-variable case.   
 \end{proof}
+\begin{lemma}\label{ConditionForVanishingDerivativeForPolynomialOverPerfectField}
+    Let $K$ be a characteristic $p>0$, perfect field and $f\in K[x]$. Then $f_x = 0$ if and only $f = g^p$ for some $g\in K[x]$.  
+\end{lemma}
+\begin{proof}
+    If $f = g^p$, then 
+    $$
+        f_x = Dg^p = p g_x g^{p-1}=0.
+    $$
+    Suppose $f_x = 0$. Then by the prior lemma, $f \in K[x^p]$, hence 
+    $$
+        f = g(x^p) = \sum_0^d a_i x^p= \sum_0^d b_i^px^p = \left(\sum_0^d b_ix\right)^p 
+    $$
+    for some $g\in K[x]$ and for suitable $b_1,\dots,b_d\in K$. 
+\end{proof}
+
+\begin{lemma}
+    Let $f,g\in R[x]$. If $f^{n+1}\mid g$, then $f\mid D^{(n)} g$ for each $n\geq 0$. 
+\end{lemma}
+\begin{proof}
+    Indeed, in the case $n=0$ 
+    $$
+        g_x = q_xf^2+2qff_x= (q_xf+2qf_x)f \implies f \mid g_x.
+    $$
+    For $n>0$,
+    \begin{align*}
+        D^{(n+1)}g &= D^{(n+1)} qf^{n+2} = D^{(n)}\left(Dqf^{n+2}\right) = D^{(n)}\left(q_xf^{n+2}+(n+2)qf_xf^{n+1}\right)\\
+        &= D^{(n)}\left(\underbrace{f^{n+1}(q_xf+(n+2)qf_x)}_{h}\right).
+    \end{align*}
+    By induction $f^{n+1}\mid h$, hence $f\mid D^{(n)} h = D^{(n+1)} g$. 
+\end{proof}
+The following is an important criterion for when a root is multiple.
+\begin{lemma}\label{MultipleRootsInTermsOfDerivative}
+    Let $f\in R[x]$ and $a\in R$ a root of $f$. Then $a$ is a multiple root if and only if $a$ is a root of $f_x$. 
+\end{lemma}
+\begin{proof}
+    Suppose $a$ is a multiple root of $f$. Then by the prior lemma, $(x-a)^2\mid f$ implies $(x-a) \mid f_x$.\\
+    Conversely, if $a$ is a simple root, then 
+    $$
+        f_x = D (x-a)g = g + (x-a)g_x,
+    $$  
+    and since $(x-a)\nmid g$, it follows that $(x-a)\nmid f_x$. 
+\end{proof}
 \subsection{Ring Extensions and Algebras over Rings} 
 \subsubsection{Finiteness Conditions on Ring Maps}
 \subsubsection{Finitely Generated Ring Extensions}
@@ -5792,15 +5834,23 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
 \end{proof}
 
 \subsubsection{Separable Extensions}
+
 \begin{definition}
     Let $L\supset K$ be an algebraic extension. $a\in L$ is \emph{separable over $K$} if $a$ is a root of multiplicity $1$ in $\Irr(a,K)$. It is \emph{inseparable} if not. $L\supset K$ is \emph{separable} if each $a\in L$ is separable over $K$. 
 \end{definition}
+\begin{lemma}\label{SeparabilityInTermsOfDerivatives}
+    Let $L\supset K$ be a field extension. Then $a\in L$ is not separable if and only if $\Irr(a,K)_x=0$. 
+\end{lemma}
+\begin{proof}
+    Set $f:= \Irr(a,K)$. Suppose $a$ is a multiple root of $f$ and thus also a root of $f_x$ by Lemma~\ref{MultipleRootsInTermsOfDerivative}. Then the greatest common divisor of $f$ and $f_x$ in $K[x]$ is not $1$, since otherwise $gf + hf_x = 1$ for some $g,h\in K[x]$. Then since $f$ is irreducible, $f\mid f_x$, which implies $f_x = 0$. \\
+    Conversely if, $a$ is separable over $K$, then $a$ is a root of $f$ but not a root of $f_x$ (cf. Lemma~\ref{MultipleRootsInTermsOfDerivative}), hence $f_x\neq 0$.  
+\end{proof}
 
 \begin{lemma}
     Let $L\supset K$ be an algebraic extension. If $\Char\ K = 0$, then $L\supset K$ is separable. 
 \end{lemma}
 \begin{proof}
-
+    Let $a\in L$. Then $a$ is a root of the non-constant polynomial $\Irr(a,K)$. The derivative of a non-constant polynomial in characteristic $0$ ring is non-zero. In particular, $\Irr(a,K)_x\neq 0$, hence $a$ is separable over $K$. 
 \end{proof}
 
 \begin{lemma}
@@ -5811,7 +5861,8 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     \end{enumerate}
 \end{lemma}
 \begin{proof}
-
+    1. For this it suffices to show that $\Irr(a,K)_x = 0$ if and only if $\Irr(a,K)\in K[x^p]$. One direction is just Lemma~\ref{UsefulPartialDerivativeLemmaForPositiveCharacteristic}. The other direction is trivial.\\
+    2. By Lemma~\ref{ConditionForVanishingDerivativeForPolynomialOverPerfectField}, irreducible polynomials over $K$ do not have derivative $0$, hence $\Irr(a,K)_x \neq 0$ for every $a\in L$, hence $L\supset K$ is separable by Lemma~\ref{SeparabilityInTermsOfDerivatives}.
 \end{proof}
 
 \subsubsection{Theorem of the Primitive Element}
