@@ -846,6 +846,21 @@ It may be that a subgroup is not normal, but we may construct a normal subgroup 
     the result follows. 
 \end{proof}
 
+\begin{lemma}\label{ConditionOnGroupBeingFinite}
+    Let $G$ be a group and $N$ a normal subgroup of $G$. Then 
+    $$
+        \# G <\infty \iff \#N <\infty \text{ and } \#G/N < \infty.
+    $$
+\end{lemma}
+\begin{proof}
+    Suppose $G$ is finite, then obviously $H$ is finite, and since $G$ surjects onto $G/N$ it follows that $G/N$ is finite.\\
+    Suppose $N$ and $G/N$ are finite. Then 
+    $$
+        G = \bigcup_{g\in G} gN = \bigcup_{gN \in G/N} gN
+    $$ 
+    and since each $gN$ is finite, it follows that $G$ is finite. 
+\end{proof}
+
 \subsubsection{The First Isomorphism Theorem of Groups}
 \begin{proposition}
     Given a group map $\alpha :  G\rightarrow H$, the equaliser of the diagram
@@ -5440,10 +5455,19 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     Let $S\supset R$ be a ring extension. An element of $s\in S$ is said to be \textit{integral (over $R$)} if it is algebraically dependent over $R$, i.e. there is a monic $f\in R[x]\setminus 0$ such that $f(s)=0$.\\
     Let $L\supset K$ be a field extension. An element of $L$ is \textit{algebraic (over $K$)} if it is integral over $K$. An element that is not algebraic over $K$ is \emph{transcendental} over $K$. 
 \end{definition}
+\begin{remark}
+    Equivalently $s$ is integral over $R$ if $\ker \ \ev_s \neq 0 $. 
+\end{remark}
 \begin{remark}\label{MinimalPolynomialDefinitionAndTechnicalRemarks}
-    In the case $R$ is a field, consider $d = \min (\{ k>0 : \exists f\in R[x]\setminus 0, f(s) =0\})$. Let $f_s$ be a polynomial of degree $d$ vanishing on $s$. Consider another polynomial $g\in R[x]\setminus 0$ vanishing on $s$. We can write $g = qf_s+r$, where $r = 0$ or $\deg \ r < d$. Then 
+    In the case $L\supset K$ is a field extension and $a\in L$ is a algebraic over $K$ consider 
+    $$
+        d = \min (\{ k>0 : \exists f\in R[x]\setminus 0, \deg \ f = 0, f(s) =0\}).
+    $$ 
+    Let $f_s$ be a polynomial of degree $d$ vanishing on $s$. We may assume that this is monic. Consider another polynomial $g\in K[x]\setminus 0$ vanishing on $s$. We can write $g = qf_s+r$, where $r = 0$ or $\deg \ r < d$. Then 
     $$r(s) =g(s)- q(s)f_s(s)=0.$$
-    By minimality $r = 0$, hence $f_s\mid g$. There $f_s$ is the unique non-zero polynomial vanishing on $s$ of minimal degree. We call this polynomial the \textit{defining polynomial of $s$ over $K$}. Note that $\ker \ \ev_s = \langle f_s\rangle$, hence $R[s]\simeq R[x]/\langle f_s\rangle$. We refer to $\deg \ f_s$ as \textit{the degree of $s$ over $R$}. We can extend this result to the case where $R$ is a UFD. By the same argument as before $f_s\mid g$ in $Q(R)[x]$, hence since $f$ is primitive, $f_s\mid g$ in $R[x]$ by Lemma~\ref{PrimitivePolynomialOverFractionFieldDivisorImpliesDivisorInBaseRing} 
+    By minimality $r = 0$, hence $f_s\mid g$. This $f_s$ is the unique irreducible monic polynomial vanishing on $s$ of minimal degree. We call this polynomial the \textit{defining polynomial of $s$ over $K$}, denoted $\Irr(a,K)$. Note that $\ker \ \ev_s = \langle \Irr(a,K)\rangle$, hence $K[s]\simeq R[x]/\langle f_s\rangle$.
+    We refer to $\deg \ f_s$ as \textit{the degree of $s$ over $R$}. We can extend this result to the case where $R$ is a UFD. By the same argument as before $f_s\mid g$ in $Q(R)[x]$, hence since $f$ is primitive, $f_s\mid g$ in $R[x]$ by Lemma~\ref{PrimitivePolynomialOverFractionFieldDivisorImpliesDivisorInBaseRing}.\\
+    Consider an $a\in L$  algebraic over $K$. Then $a\in K$, if and only if its defining polynomial is of degree $1$. 
 \end{remark}
 \begin{remark}
     Note that if $a_1,\dots,a_n\in L\supset K$ are algebraic over $K$ ($L\supset K$ is a field extension), then 
@@ -5452,6 +5476,20 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
 \end{remark}
 \begin{example}
     Let $R$ be an integral domain. Then $Q(R)\supset R$ is integral. Indeed consider $\alpha=\frac{a}{b}\in Q(R)$. Then $\alpha$ vanishes on $bx-a\in R[x]\setminus 0$ 
+\end{example}
+\begin{example}
+    $\sqrt{2}\in \R$ is an algebraic number (i.e. it is algebraic over $\Q$) with defining polynomial $x^2-2$. Likewise, $i\in \C$ is algebraic over $\Q$ with defining polynomial $x^2+1$. 
+\end{example}
+\begin{example}
+    $\C\supset \R$ is an algebraic extension. Indeed, each $\omega = a + bi \in \C$ is a root of 
+    $$
+        (x-\omega)(x-\overline{\omega}) = x^2 -(\omega+\overline{\omega})x +\omega\overline{\omega} = x^2-2ax+a^2+b^2\in \R[x].
+    $$  
+    When $\omega \in \C\setminus \R$, this is the defining polynomial of $\omega$. 
+\end{example}
+\begin{example}
+    Consider the polynomial ring $R[x]\supset R$. Then $x$ is not integral over $R$, since $\ker \ \ev_x = 0$.\\
+    For a field $K$, we thus have that $x\in K(x)$ is transcendental over $K$. 
 \end{example}
 \begin{lemma}\label{EquivalentFormulationsOfIntegralElements}
     Let $S\supset R$ be ring extension where $S$ is an integral domain. Furthermore, let $s\in S$. The following are equivalent
@@ -5514,14 +5552,14 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     \begin{enumerate}
         \item Every $f\in K[x]\setminus 0$ with $n:=\deg \ f >0$ has exactly $n$ roots all in $K$.  
         \item If $a\in L$ is algebraic over $K$, then $a\in K$.
-        \item If $L\supset K$ is module-finite, then $L=K$.
+        \item If $L\supset K$ is finite, then $L=K$.
     \end{enumerate}
 \end{lemma}
 \begin{proof}
     1. We proceed by induction in $n$. For $n=1$, $f$ has a root $a\in K$, and since $f$ has exactly one root, this is the only root.\\ 
     Suppose now $f$ has degree $n+1$, then $f$ has a root $a\in K$, hence $f = (x-a)g$ for a polynomial $g\in K[x]\setminus0$ with $\deg \ g = n$. By induction $g$ has exactly $n$ roots in $K$. Using that $K$ is an integral domain it follows that $f$ has $n+1$ roots.\\
     2. If $a\in L$ is algebraic over $L$, then there is a polynomial $f\in K[x]\setminus 0$ such that $a$ is a root $f$. Since $V(f)\subset K$ by 1. it follows that $a\in K$.\\
-    3. If $L\supset K$ is module-finite, then it is algebraic by Lemma~\ref{ModuleFiniteImpliesAlgebraic}. Let $a\in L$. Then $a$ is algebraic over $K$, hence $a\in K$ by 2. We thus get that $L=K$.
+    3. If $L\supset K$ is finite, then it is algebraic by Lemma~\ref{ModuleFiniteImpliesAlgebraic}. Let $a\in L$. Then $a$ is algebraic over $K$, hence $a\in K$ by 2. We thus get that $L=K$.
 \end{proof}
 \begin{lemma}\label{TechnicalPolynomialFieldExtensionLemma}
     Let $K$ be a field and set $L:= Q(K[x])=K(x)$. Then
@@ -5551,7 +5589,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     This subfield is called \emph{the algebraic closure of $K$ in $L$}. 
 \end{remark}
 \begin{proposition}\label{CannotSqueezeNonFieldBetweenFiniteFieldExtension}
-    Let $L\supset K$ be a module-finite field extension. Consider a subring $R$ of $L$ containing $K$ as a subring. Then $R$ is a field. 
+    Let $L\supset K$ be a finite field extension. Consider a subring $R$ of $L$ containing $K$ as a subring. Then $R$ is a field. 
 \end{proposition}
 \begin{proof}
     By Lemma~\ref{ModuleFiniteImpliesAlgebraic}, $L\supset K$ is algebraic. Let $r\in R\setminus 0$. Then $r$ has a multiplicative inverse $r^{-1}\in L\setminus 0$. We can thus find $a_0,a_1,\dots, a_{n-1}\in K$ such that 
@@ -5561,7 +5599,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     hence $R$ is a subfield of $L$. 
 \end{proof}
 \begin{theorem}
-    Let $L\supset K$ be a ring-finite field extension generated by $a_1,\dots,a_n\in L$. Then $L\supset K$ is module finite and hence also algebraic.   
+    Let $L\supset K$ be a ring-finite field extension generated by $a_1,\dots,a_n\in L$. Then $L\supset K$ is finite and hence also algebraic.   
 \end{theorem}
 \begin{proof}
     We use induction in $n$. For $n=1$, suppose $L=K[a]$ for some $a\in L$. Consider $\rho = \ev_a : K[x]\rightarrow L$. Since $K[x]$ is a PID (cf. Corollary~\ref{PolynomialRingOverFieldIsPID}), we find that $\ker\ \rho = \langle g \rangle$ for some $g\in K[x]$. Then $K[x]/\langle g\rangle \simeq K[a] = L$. We claim that $g\neq 0$\\
@@ -5588,6 +5626,21 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     The quotient map $\pi : K[\mathbf{x}]\rightarrow K[\mathbf{x}]/I, f\mapsto f+I$ is a canonically a surjective $K$-algebra homomorphism. It follows by the above corollary that $K[\mathbf{x}]/I=K$. Then for each $i$, $x_i+I = a_i+ I$ for some $a_i\in K$, this means $J:=\langle x_1-a_1,\dots,x_n-a_n\rangle\subset I$. $J$ is maximal by Corollary~\ref{MaximalIdealsOfPolynomialRings}, hence $J=I$. 
 \end{proof}
 \subsection{Field Extensions}
+    \begin{definition}
+        Let $L\supset K$ be a field extension. Consider $a,b\in L$ algebraic over $K$. $b$ is said to be \emph{conjugate of $a$ (over $K$)}, if $b$ is a root of $\Irr(a,K)$
+    \end{definition}
+    \begin{example}
+        Consider the algebraic extension $\C\supset \R$. The conjugate of $\omega\in \C$ over $\R$ is its complex conjugate. 
+    \end{example}
+    \begin{example}
+        The conjugate of $\sqrt{2}$ over $\Q$ is $-\sqrt{2}$. 
+    \end{example}
+    \begin{remark}
+        Equivalently two algebraic elements are conjugate, if 
+        $$
+            \Irr(a,K) = \Irr(b,K).
+        $$
+    \end{remark}
     \begin{lemma}
         Let $L\supset K$ be a field extension and $a\in L$. Then $L\supset K$ is finite if and only if $\dim_K \ K[a] <\infty$. If $a$ is algebraic, let $d$ denote $\deg \ \mathrm{Irr}(a,K)$. Then $\{1,a,\dots,a^{d-1}\}$ is a basis for $K[a]$. 
     \end{lemma}
@@ -5597,6 +5650,12 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     \begin{definition}
         If $L\supset K$ is a finite field extension, we define define $[L:K]:= \dim_K\ L$ to be \textit{the degree of $L$ over $K$} 
     \end{definition}
+   \begin{example}
+        $[\C : \R] = 2$
+   \end{example}
+   \begin{example}
+        $[L : K] = 1$ if and only if $ L = K$.
+   \end{example}
     \begin{lemma}\label{ModuleFiniteFieldExtensions}
         Let $L\supset K$ be a field extension. Then $L\supset K$ is finite if and only if $L\supset K$ is a finite field extension generated by some $a_1,\dots,a_n\in L$ that are algebraic over $K$. 
     \end{lemma}
@@ -5604,7 +5663,83 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
         "$\implies$": By Lemma~\ref{ForRingFiniteExtensionsModuleFiniteIsTheSameAsAlgebraic} $L = K[a_1,\dots,a_n]$ for suitable $a_1,\dots,a_n\in L$ that are algebraic over $K$, hence $L\subset K[a_1,\dots,a_n]\subset K(a_1,\dots,a_n) \subset L$, hence $L=K(a_1,\dots,a_n)$.\\
         "$\impliedby$": Suppose $L=K(a_1,\dots,a_n)$ for some algebraic $a_i\in L$. Then $L= K[a_1,\dots,a_n]$, hence by Lemma~\ref{ForRingFiniteExtensionsModuleFiniteIsTheSameAsAlgebraic} $L\supset K$ is finite. 
     \end{proof}
-
+     \begin{lemma}
+        Consider a field extension $L\supset K$. If $a\in L$ is algebraic over $K$, then $[K(a) : K] = \deg \ \Irr(a, K)$. 
+    \end{lemma}
+    \begin{proof}
+        Indeed, $\dim \ K(a) = \dim  K[x]/\langle \Irr(a,K)\rangle = \deg \ \Irr(a,K)$. 
+    \end{proof}
+    \begin{lemma}
+        Consider field extension $M\supset L \supset K$. $M\supset K$ is finite if and only if $M\supset L$ and $L\supset K$ are finite. Then 
+        $$
+            [M : K] = [M : L] [L : K].
+        $$ 
+    \end{lemma}
+    \begin{proof}
+        One direction is trivial by transitivity of finiteness. Suppose $M\supset K$ is finite. Then $L\supset K$ is a subspace of $M\supset K$, hence it is finite. A generating set for $M$ as $K$-vector space is also a generating set for $M$ as an $L$-vector space.\\
+        Set $n:= [M : L]$ and $m := [L : K]$. Let $v_1,\dots,v_n$ be the basis elements of $M\supset L$ and $w_1,\dots,w_m$ the basis elements of $L\supset K$. Then 
+        $$
+            \{v_iw_j : i\in \{1,\dots,n\} , j\in \{1,\dots,m\}\}
+        $$
+        is a generating set of $M$ over $K$ (cf. the proof of Lemma~\ref{TransitivityOfFinitenessConditions}). It remains to check that this a linearly independent over $K$. Indeed,
+        $$
+            \sum_{i,j} a_{ij} v_iw_j = 0
+        $$
+        implies 
+        $$
+            \sum_{i} \left( \sum_j a_{ij} w_j\right)v_i = 0,
+        $$
+        hence 
+        $$
+            \sum_{j} a_{ij} w_j = 0
+        $$
+        for each $i$, implying $a_{ij} =0 $ for each $i$ and $j$.
+        It follows that 
+        $$
+            [M : K] = [M : L][L : K].
+        $$
+        since $M \supset K$ has $nm$ basis elements.  
+    \end{proof}
+    \begin{lemma}
+        Let $M\supset L \supset K$ be field extensions. $M\supset K$ is algebraic if and only if $M\supset L$ and $L\supset K$ are algebraic.
+    \end{lemma}
+    \begin{proof}
+        This is just a special case of Lemma~\ref{TransitivityOfIntegralExtensions}.
+    \end{proof}
+    \begin{lemma}\label{AutomorphismTakesConjugatesToConjugates}
+        Consider a field extension $L\supset K$ and an automorphism $\sigma\in \Aut_K(L)$. Suppose $a\in L$ is algebraic over $K$. Then $a$ and $\sigma(a)$ are conjugate over $K$.  
+    \end{lemma}
+    \begin{proof}
+        Indeed, 
+        $$
+            \Irr(a,K)(\sigma(a)) = \sigma(\Irr(a,K)(a)) = \sigma(0) = 0. 
+        $$
+        Conversely, let $g\in \ev_{\sigma(a)}$. Then 
+        $$
+            g(a) = \sigma^{-1}(\sigma(g(a))) =\sigma^{-1}(g(\sigma(a))) = 0.  
+        $$ 
+        Then 
+        $$
+            \Irr(a,K) = \Irr(\sigma(a),K).
+        $$
+    \end{proof}
+    \begin{lemma}\label{FieldAdjoinedByConjugatesAreUniquelyIsomorphic}
+        Let $L\supset K$ be a field extension and $a\in L$ algebraic over $L$. Consider $b\in L$ a conjugate of $a$ over $K$. Then there is a unique $K$-algebra isomorphism
+        $$
+            K(a) \rightarrow K(b)
+        $$
+        mapping $a$ to $b$.
+    \end{lemma}
+    \begin{proof}
+        Since any element in $K(a)$ can be written on the form 
+        $$
+            \sum_0^n a_i a^i \in K[a]
+        $$
+        such an isomorphism is uniquely determined by the image of $a$. The assumption that $a$ maps to $b$ gives uniqueness. For existence, we take 
+        $$
+            K(\alpha)\simeq K[x]/\Irr(a,K) \simeq K(\beta). 
+        $$
+    \end{proof}
 \subsubsection{Splitting Fields}
     \begin{definition}
         Let $K$ be a field and $S\subset K[x]$ be a subset of non-constant polynomials. A field extension $L\supset K$ is called a \emph{splitting field of $S$ over $K$}, if each $f\in S$ splits into linear factors in $L[x]$ and for each $a\in L$ there are $a_1,\dots,a_n\in L$ such that $a_i$ is a root of some $f_i\in S$ and $a\in K(a_1,\dots,a_n)$  
@@ -5616,7 +5751,23 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
         $$
         A splitting field of $\left\{f_1,\dots,f_k\right\}\subset K[x]$ is the same as a splitting field of $\prod_1^k f_i$. Note that if $\deg \ f = 1$, then $K$ is a splitting field for $f$. 
     \end{remark}
-    
+     \begin{example}
+        The splitting field of $x^2+1$ over $\Q$ is $\Q(i)$, since 
+        $$
+            x^2+1=(x-i)(x+i)
+        $$
+    \end{example}
+    \begin{example}
+        Consider the polynomial $x^4 + 1\in \Q[x]$. Note that 
+        \begin{align*}
+            x^4 +1 &= (x^2+i)(x^2-i) \\
+            &= \left(x+\frac{\sqrt{2}}{2}\left( 1-i\right)\right)\left(x-\frac{\sqrt{2}}{2}\left( 1-i\right)\right)\left(x+\frac{\sqrt{2}}{2}\left( 1+i\right)\right)\left(x-\frac{\sqrt{2}}{2}\left( 1+i\right)\right).
+        \end{align*}
+        The splitting field of $x^4+1$ is thus 
+        $$
+            \Q(\sqrt{2},i).
+        $$
+    \end{example}
     \begin{theorem}\label{ExistenceTheoremForSplittingField}(Existence Theorem for Splitting Fields of single Polynomials) 
         Let $K$ be a field and $f\in K[x]$. There is a splitting field $L$ of $f$. Moreover, $L\supset K$ is finite and $[L : K] \leq \ deg \ f !$.
     \end{theorem}
@@ -5759,7 +5910,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     \end{corollary}
 \subsubsection{Normal Extensions}
 \begin{definition}
-    A field extension, $N\supset K$ is \emph{normal}, if it is algebraic if for each $\alpha \in N$, the polynomial $\mathrm{Irr}(\alpha,K)$ is a product of linear factors over $N$.  
+    A field extension, $N\supset K$ is \emph{normal}, if it is algebraic, and if for each $\alpha \in N$, the polynomial $\mathrm{Irr}(\alpha,K)$ is a product of linear factors over $N$.  
 \end{definition}
 \begin{lemma}\label{EquivalentFormulationOfNormalExtensionForFiniteExtension}
     Let $N\supset K$ be a finite field extension. Then $N\supset K$ is normal if and only if there is a non-constant $f\in K[x]$ for which $N$ is a splitting field over $K$. 
@@ -5786,7 +5937,22 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     \end{align*}
     Then $[N(c) : N]= 1$, implying $c\in N$. 
 \end{proof}
-
+    The utility of studying normal extensions is thus that they record whether it splits a polynomial in its subfield. 
+    \begin{example}
+        Consider the field extension $\Q(\sqrt[3]{2})\supset \Q$. The defining polynomial of $\sqrt[3]{2}$ over $\Q$ is 
+        $$
+            x^3-2.
+        $$
+        But 
+        $$
+            x^3 - 2 = (x-\sqrt[3]{2})(x-\xi_1\sqrt[3]{2})(x-\xi_2\sqrt[3]{2}),
+        $$
+        where $\xi_1,\xi_2$ are the non-trivial primitive roots of unity. The splitting field of $x^3-2$ is thus 
+        $$
+            \Q(\sqrt[3]{2},\xi_1\sqrt[3]{2},\xi_2\sqrt[3]{2}) \supsetneq \Q(\sqrt[3]{2}).
+        $$
+        Then $\Q(\sqrt[3]{2})$ is not normal over $\Q$ and thus cannot, and by the prior lemma cannot be a splitting field over any non-constant $f\in \Q[x]$.  
+    \end{example} 
 \begin{lemma}\label{AutomorphismFixesImageOfNormalFieldExtension}
     Consider a tower of field extensions $L\supset N \supset K$ with $N\supset K$ normal. Then for each $\sigma \in \mathrm{Aut}_K(L)$, then 
     $$
@@ -5833,8 +5999,62 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     Since $M\supset K$ is normal, it is in particular algebraic, hence $M\supset L$ is algebraic. Note that for each $a\in M$, $\Irr(a,L)\mid \Irr(a,K)$, hence $\Irr(a,L)$ splits into linear factors over $M$. We thus conclude that $M\supset L$ is normal.  
 \end{proof}
 
-\subsubsection{Separable Extensions}
+\subsubsection{The Automorphism Group of a Field Extension}
+\begin{proposition}
+    Consider a field extension $L\supset K$ and let $a\in L$ be algebraic over $K$. There is a bijection 
+    \begin{gather*}
+        \ev_a : \Aut_K(K(a)) \rightarrow \{\text{roots of } \Irr(a,K) \text{ in } K(a)\}\\
+        \sigma \mapsto \sigma(a)
+    \end{gather*}
+    In particular, 
+    $$
+        \# \Aut_K(K(a)) \leq [K(a) : K] = \deg \ \Irr(a,K).
+    $$
+\end{proposition}
+\begin{proof}
+    By Lemma~\ref{AutomorphismTakesConjugatesToConjugates}
+    $\sigma(a)\in K(a)$ is conjugate to $a$ over $K$ for any 
+    $\sigma\in \Aut_K(K(a))$, hence the map is well-defined. Let
+    $b$ be a root of $\Irr(a,K)$. 
+    By Lemma~\ref{FieldAdjoinedByConjugatesAreUniquelyIsomorphic}, there is a unique $K$-algebra isomorphism 
+    $$
+        \sigma_b : K(a)\rightarrow K(b)
+    $$
+    such that $\sigma_b(a) = b$. Note that $K(b)\subset K(a)$. Moreover, 
+    $$
+        [K(a) : K] = \deg \ \Irr(a,K) = [K(b) : K],
+    $$
+    hence 
+    $$
+        [K(a) : K] = [K(a) : K(b)] [K(b) : K] = [K(a) : K(b)][K(a):K],
+    $$
+    which implies $[K(a) : K(b)] = 1$, hence $K(a)=K(b)$. Then $\sigma_b \in \Aut_K(K(a))$. Thus, we get an inverse
+    \begin{gather*}
+        \{\text{roots of } \Irr(a,K) \text{ in } K(a)\} \rightarrow \Aut_K(K(a))\\
+        b \mapsto \sigma_b
+    \end{gather*} 
+\end{proof}
 
+\begin{lemma}
+    Consider a finite extension $L\supset K$. Then 
+    $$
+        \#\Aut_K(L) < [L : K]
+    $$
+\end{lemma}
+\begin{proof}
+    Note that $L = K(a_1,\dots,a_n)$ for $a_1,\dots,a_n\in L$ algebraic over $K$. We have seen the $n=1$ case in the prior proposition. When $n>1$, note that 
+    \begin{gather*}
+        \Aut_K(L) \rightarrow \Aut_K(K(a_1,\dots,a_{n-1}))\\
+        \sigma \mapsto \left. \sigma\right|_{K(a_1,\dots,a_{n-1})}
+    \end{gather*}
+    is a surjective group map with kernel, $\Aut_{K(a_1,\dots,a_{n-1})}(L)$. Both the image and kernel of this map are finite by induction, hence $\#\Aut_K(L)$ is finite (cf. Lemma~\ref{ConditionOnGroupBeingFinite}) and  
+    \begin{align*}
+        \# \Aut_K(L) &= \#\Aut_K(K(a_1,\dots,a_{n-1}))\#\Aut_{K(a_1,\dots,a_{n-1})}(L)\\
+        & \leq [L:K(a_1,\dots,a_{n-1})][K(a_1,\dots,a_{n-1}):K] = [L:K],
+    \end{align*}
+    by Lagrange. 
+\end{proof}
+\subsubsection{Separable Extensions}
 \begin{definition}
     Let $L\supset K$ be an algebraic extension. $a\in L$ is \emph{separable over $K$} if $a$ is a root of multiplicity $1$ in $\Irr(a,K)$. It is \emph{inseparable} if not. $L\supset K$ is \emph{separable} if each $a\in L$ is separable over $K$. 
 \end{definition}
@@ -5846,14 +6066,14 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     Conversely if, $a$ is separable over $K$, then $a$ is a root of $f$ but not a root of $f_x$ (cf. Lemma~\ref{MultipleRootsInTermsOfDerivative}), hence $f_x\neq 0$.  
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}\label{AlgebraicExtensionOfCharacteristicZeroFieldsAreSeparable}
     Let $L\supset K$ be an algebraic extension. If $\Char\ K = 0$, then $L\supset K$ is separable. 
 \end{lemma}
 \begin{proof}
     Let $a\in L$. Then $a$ is a root of the non-constant polynomial $\Irr(a,K)$. The derivative of a non-constant polynomial in characteristic $0$ ring is non-zero. In particular, $\Irr(a,K)_x\neq 0$, hence $a$ is separable over $K$. 
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}\label{AlgebraicExtensionsOverPerfectFieldsAreSeparable}
     Let $L\supset K$ be an algebraic extension with $\Char \ K = p>0$. 
     \begin{enumerate}
         \item $a\in L$ is not separable over $K$ if and only if $\Irr(a,K) \in K[x^p]$.
@@ -5864,7 +6084,34 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     1. For this it suffices to show that $\Irr(a,K)_x = 0$ if and only if $\Irr(a,K)\in K[x^p]$. One direction is just Lemma~\ref{UsefulPartialDerivativeLemmaForPositiveCharacteristic}. The other direction is trivial.\\
     2. By Lemma~\ref{ConditionForVanishingDerivativeForPolynomialOverPerfectField}, irreducible polynomials over $K$ do not have derivative $0$, hence $\Irr(a,K)_x \neq 0$ for every $a\in L$, hence $L\supset K$ is separable by Lemma~\ref{SeparabilityInTermsOfDerivatives}.
 \end{proof}
+\begin{definition}
+    Let $f\in K[x]$ be irreducible. $f$ is \emph{separable} if all roots of $f$ in its splitting field have multiplicity $1$.\\
+    An arbitrary non-constant $f\in K[x]$ is \emph{separable}, if each irreducible factor is separable.  
+\end{definition}
 
+\begin{lemma}
+    Let $f\in K[x]$ be irreducible. $f$ is separable if and only if $f_x \neq 0$. 
+\end{lemma}
+\begin{proof}
+    Let $L$ be the splitting field of $f$ over $K$. Let $a\in L$ be a root of $f$. Note that $\Irr(a,K)\mid f$ in $K[x]$. The assumption that $f$ is irreducible thus implies that 
+    $$
+        f = c\Irr(a,K)
+    $$ 
+    for some $c\in K\setminus 0$.\\
+    Suppose $f$ is separable. A $a$ root in $f$ is thus a root of multiplicity $1$ of $\Irr(a,K)$, hence $\Irr_x(a,K)\neq 0$ by Lemma~\ref{SeparabilityInTermsOfDerivatives}. Then $f_x = c\Irr(a,K)_x \neq 0$.\\
+    Suppose $f_x\neq 0$. Let $a\in L$ be a root of $f$. Then $\Irr(a,K)_x\neq 0$, hence $a$ is a root of multiplicity $1$ in $\Irr(a,K)$, hence it also has multiplicity $1$ in $f$.  
+\end{proof}
+
+\begin{lemma}
+    If $K$ is a field of characteristic $0$, or of characteristic $p>0$ and perfect, then every non-constant $f\in K[x]$ is seperable.  
+\end{lemma}
+\begin{proof}
+    This is a direct consequence of Lemma~\ref{AlgebraicExtensionOfCharacteristicZeroFieldsAreSeparable} resp. Lemma~\ref{AlgebraicExtensionsOverPerfectFieldsAreSeparable} 2. 
+\end{proof}
+
+\begin{lemma}
+    
+\end{lemma}
 \subsubsection{Theorem of the Primitive Element}
     \begin{theorem}
         Let $K$ be a characteristic $0$ field and $L\supset K$ a finite extension. Then there is a $c\in L$ such that $L=K(c)$.
@@ -5993,6 +6240,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     2. Since $L\supset K(a)$ is algebraic it is finite, hence by the Theorem of the Primitive Element $L=K(a,b)$ for some $b$.\\
     3. We prove the contrapositive: Let $I\supset R$ be any prime ideal. Suppose $\sigma: K\hookrightarrow R/I$ is not surjective. Pick $a\in R$ such that $a+I\in R/I$ is not in $K$ and pick $b\in I$. Note that $b=0$ or $b\in R\setminus K$, since otherwise $1\in I$. Then since $L\supset K(a)$ is algebraic, we can find a $f=\sum_0^d g_i(a)y^i\in K[a][y]\setminus 0$ of minimal degree such that $f(b)=0$. By Lemma~\ref{TechnicalLemmaAboutFieldExtOverAlgClosedFields} $g_0=0$ or $g_0(a)\neq 0$. In the first case we clearly have that $b=0$, since then $f=y(\sum_1^d g_i(a)y^{i-1})$, hence $f=y$ by minimality. In the second case $f_0(a)\in I$, hence $a+I$ is integral over $K$ which would imply that $a+I\in K$ by Lemma~\ref{TechnicalLemmaAboutFieldExtOverAlgClosedFields}, leading to a contradiction. Since $b$ was chosen arbitrarily it follows that $I=0$.
 \end{proof}
+\subsection{Commutative Algebra Results}
 \subsubsection{Graph Ideals \& Algebraic Dependence of Polynomials} 
 \begin{definition}
     Consider a ring $R$. The \textit{graph ideal} for polynomials $f_1,\dots,f_m\in R[x_1,\dots,x_n]$ is defined to be ideal $\langle y_1-f_m,\dots,y_m-f_m\rangle \subset R[\mathbf{x},y_1,\dots,y_m]$
