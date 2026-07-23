@@ -58,34 +58,8 @@ The data specifying a monoid is often written as the tuple $(M,\circ)$ or $(M,\c
 \begin{example}\label{SubMonoidsExample}
     \begin{enumerate}
         \item The non-negative integers $\N$ is a monoid with respect to addition and multiplication. 
-        \item Once constructed, $(\Z,+),(\Z,\cdot),(\Q,+),(\Q,\cdot),(\R,+),(\R,\cdot),(\C,+),(\C,\cdot)$ are monoids.
-        \item Let $A$ be a set. Consider $\mathrm{Set}(A,A) := \{f:A\rightarrow A\}$. This a monoid under function composition.
-        \item Given a non-empty set $X$ and a monoid $M$ the set 
-        $$
-            \mathrm{Set}(X,M)
-        $$
-        with the binary operation
-        \begin{gather*}
-            \mathrm{Set}(X,M)\times \mathrm{Set}(X,M) \rightarrow \mathrm{Set}(X,M)\\
-            (f,g)\mapsto fg
-        \end{gather*}
-        where for $f,g\in \mathrm{Set}(X,M)$
-        \begin{gather*}
-            fg : X\rightarrow M\\
-            x \mapsto f(x)g(x)
-        \end{gather*}
-        Indeed, for each $x\in X$ the diagram
-        $$
-            \begin{tikzcd}
-                \mathrm{Set}(X,M)\times \mathrm{Set}(X,M) \times \mathrm{Set}(X,M)  \arrow[r,"\ev_x\times \ev_x\times \ev_x"] &M\times M \times M \arrow[r,"\fone_M\times \circ"] \arrow[d,"\circ \times \fone_M",swap] & M\times M \arrow[d,"\circ"]\\
-                 & M\times M \arrow[r,"\circ"] & M
-            \end{tikzcd}
-        $$
-        commutes
-        Moreover, for the function $e : X \rightarrow M$, mapping every element in $X$ to $e_M$ we have that 
-        $$
-            ef(x) = e(x)f(x) = e_Mf(x) = f(x) \text{ and } fe(x)=f(x)e(x)=f(x)e_M = f(x).
-        $$
+        \item The pairs, $(\Z,+),(\Z,\cdot),(\Q,+),(\Q,\cdot),(\R,+),(\R,\cdot),(\C,+),(\C,\cdot)$ are all monoids.
+        \item Let $A$ be a set. Consider $\mathrm{End}(A)$. This a monoid under function composition.
         \item Let $M$ be a monoid. Then $M\subset M$ is a submonoid. 
         \item Let $M$ be a monoid. Then $\{e\}\subset M$ is a submonoid.
         \item Let $M$ be a monoid and $L\subset N\subset M$ be submonoids of $M$. Then $L$ is a submonoid of $N$. Similarly if $N\subset M$ is a submonoid and $L\subset N$ is a submonoid, then $L\subset M$ is a submonoid. 
@@ -116,13 +90,6 @@ The data specifying a monoid is often written as the tuple $(M,\circ)$ or $(M,\c
     $$
     hence $gf$ is a monoid homomorphism. 
 \end{remark}
-\begin{example}
-    By a prior example (cf. Example~\ref{SubMonoidsExample}) we have seen that $\mathrm{Set}(M,N)$ is a monoid. $\mathrm{Mon}(M,N)\subset \mathrm{Set}(M,N)$ is a submonoid if $N$ is commutative. Indeed, for $f,g\in \mathrm{Mon}(M,N)$ and $x,y\in M$. Then 
-    $$fg(xy)=f(xy)g(xy) = f(x)f(y)g(x)g(y) = f(x)g(x)f(y)g(y)=fg(x)fg(y),$$
-    hence $fg\in \mathrm{Mon}(M,N)$
-    Furthermore, we have 
-    $$e(xy)=e_M(xy)=xy=(e_Nx)(e_Ny)=e(x)e(y)\implies e\in \mathrm{Mon}(M,N).$$
-\end{example}
 \begin{lemma}\label{MonoidHomomorphismImageOfSubmonoidIsSubmonoid}
     Let $\rho : M\rightarrow N$ be a monoid homomorphism and $L\subset M$ a submonoid. Then $\rho(L) \subset N$ is a submonoid.   
 \end{lemma}
@@ -185,10 +152,25 @@ The data specifying a monoid is often written as the tuple $(M,\circ)$ or $(M,\c
     hence $\left(\prod_{\alpha\in A} M_\alpha, \cdot \right)$ is a monoid. Suppose $M_\alpha$ is commutative for each $\alpha\in A$. Then 
     $$(m_\alpha)(m_\alpha') = (m_\alpha m_\alpha') = (m_\alpha' m_\alpha) = (m_\alpha)(m_\alpha').$$
 \end{proof}
+\begin{corollary}
+    Given any non-empty set $X$ and monoid $M$, 
+    $$
+        \mathrm{Set}(X,M)
+    $$
+    is a monoid.
+\end{corollary}
+\begin{example}
+    For monoids $M$ and $N$. $\mathrm{Mon}(M,N)\subset \mathrm{Set}(M,N)$ is a submonoid if $N$ is commutative. Indeed, for $f,g\in \mathrm{Mon}(M,N)$ and $x,y\in M$. Then 
+    $$fg(xy)=f(xy)g(xy) = f(x)f(y)g(x)g(y) = f(x)g(x)f(y)g(y)=fg(x)fg(y),$$
+    hence $fg\in \mathrm{Mon}(M,N)$
+    Furthermore, we have 
+    $$e(xy)=e_M(xy)=xy=(e_Nx)(e_Ny)=e(x)e(y)\implies e\in \mathrm{Mon}(M,N).$$
+\end{example}
+
 \begin{lemma}\label{ProductMonoidIsAProductInTheCategoryOfMonoids}
     Let $A$ be a set and $\{M_\alpha\}_{\alpha\in A}$ a family of monoids. Then 
     $$\pi_\beta : \prod_{\alpha\in A} M_\alpha \rightarrow M_\beta$$
-    is monoid homomorphism. Given a monoid $N$ and a family monoid homomorphisms $\{f_\alpha : N\rightarrow M_\alpha\}_{\alpha\in A}$ then the unique map $f: N\rightarrow \prod_{\alpha\in A}$ (cf. Proposition~\ref{DirectProductIsADirectProductInTheCategoryOfSets}) such that $\pi_\alpha \circ f = f_\alpha$ for every $\alpha \in A$ is monoid homomorphism. Hence the cartesian product is the product in the category of monoids. 
+    is monoid homomorphism. Given a monoid $N$ and a family monoid homomorphisms $\{f_\alpha : N\rightarrow M_\alpha\}_{\alpha\in A}$ then the unique map $f: N\rightarrow \prod_{\alpha\in A}$ (cf. Proposition~\ref{DirectProductIsADirectProductInTheCategoryOfSets}) such that $\pi_\alpha \circ f = f_\alpha$ for every $\alpha \in A$ is monoid homomorphism. Hence, the cartesian product is the product in the category of monoids. 
 \end{lemma}
 \begin{proof}
     Let $(m_\alpha),(m_\alpha')\in \prod_{\alpha\in A} M_\alpha$ and fix $\beta \in A$. Then 
@@ -223,15 +205,15 @@ The data specifying a monoid is often written as the tuple $(M,\circ)$ or $(M,\c
 \begin{proof}
     Let $(m_\alpha),(m_\alpha')\in \prod_{\alpha\in A,\mathrm{fin}} M_\alpha$. For some distinct $\alpha_1,\dots,\alpha_r\in A$ and $\beta_1,\dots,\beta_p\in A$, $m_\alpha = e_\alpha$ for every $\alpha \in A\setminus \{\alpha_1,\dots,\alpha_r\}$ and $m_\alpha' = e_\alpha$ for every $\alpha \in A \setminus \{\beta_1,\dots,\beta_p\}$. Then $m_\alpha m'_\alpha = e_\alpha$ for every $\alpha \in A\setminus \{\alpha_1,\dots,\alpha_r,\beta_1,\dots,\beta_p\}$ hence $(m_\alpha)(m'_\alpha)=(m_\alpha m'_\alpha) \in \prod_{\alpha\in A,\mathrm{fin}} M_\alpha$. Clearly $e=(e_\alpha)\in \prod_{\alpha\in A,\mathrm{fin}} M_\alpha$. 
 \end{proof}
-Here is a note on notation: Given a finite set of elements $E \subset M$ in a monoid $(M,e)$, we define when $E$ is empty,
+Here is a note on notation: Given a finite set of elements $E \subset M$ in a monoid $(M,e)$, we define, when $E$ is empty,
 $$
     \prod_{m\in E} m := e.
 $$
-When $E=\{m_1,\dots,m_n\}$ we define 
+When $E=\{m_1,\dots,m_n\}$, we define 
 $$
-    \prod_{x\in E} := \left(\prod_{m\in E\setminus \{m_n\}} m \right)m_n
+    \prod_{m \in E} m := \left(\prod_{m\in E\setminus \{m_n\}} m \right)
 $$
-In the non empty case we often use the notation
+In the non-empty case we often use the notation
 $$
     \prod_1^n m_i := \prod_{m\in E} m.
 $$
@@ -429,10 +411,10 @@ and neutral element $[e]$ (here $e$ denotes the empty string) that $X_\N^\mathrm
 \begin{definition}
     A \textit{group} is a monoid $(G,\circ)$ where for every $g\in G$ there is an element $g^{-1}\in G$ such that
     $$gg^{-1}=g^{-1}g = e.$$
-    For $g\in G$ we refer to $g^{-1}$ as the \textit{inverse of $g$}. The data specifying a group is also often written as the tuple $(G,\circ,e)$ or $(G,\circ)$.
+    For $g\in G$ we refer to $g^{-1}$ as the \textit{inverse of $g$}. In other words a group is a monoid where $\mathrm{B}M$ is a groupoid. The data specifying a group is also often written as a tuple $(G,\circ,e)$ or $(G,\circ)$.
 \end{definition}
 \begin{remark}
-    Not that for $g\in G$ the inverse $g^{-1}$ is the mutually inverse morphism of $g$, when we interpret $G$ as the groupoid $\mathrm{B}G = (\{G\},G)$. For the same reason we have that 
+    Note that for $g\in G$ the inverse $g^{-1}$ is the mutually inverse morphism of $g$, when we interpret $G$ as the groupoid $\mathrm{B}G = (\{G\},G)$. For the same reason we have that 
     $$
         \left(g_1g_2\right)^{-1} = g_2^{-1}g_1^{-1}
     $$
@@ -449,12 +431,22 @@ and neutral element $[e]$ (here $e$ denotes the empty string) that $X_\N^\mathrm
     It is easy to check that $\left( g^n\right)^{-1}=g^{-n}$. 
 \end{remark}
 \begin{definition}
-    A group $(G,+)$ is called \textit{abelian} or \textit{additive}, if it is also a commutative monoid with respect to $+$. We denote the inverse of $g\in G$ with respect to addition by $-g$, and for $g_1,g_2\in G$ we define 
+    A group $(G,+)$ is called \textit{abelian} or \textit{additive}, if it is a commutative monoid with respect to $+$. We denote the inverse of $g\in G$ with respect to addition by $-g$, and for $g_1,g_2\in G$ we define 
     $$g_1-g_2 := g_1+(-g_2).$$
-    and $ng_1 = \underbrace{g_1+\dots + g_1}_{n\text{ times}}$
+    and $ng := \sum_1^n g$.
 \end{definition}
+\begin{example}
+    Consider any locally small category $\pazocal{C}$. Then $\Aut(\pazocal{C})$ forms a group under composition. 
+\end{example}
+\begin{example}
+    Consider any monoid $M$ and its associated category $\mathrm{B}M$. By considering the automorphisms of this category, we get ample examples of groups (cf. Example~\ref{SubMonoidsExample}): 
+    \begin{enumerate}
+        \item $(\Z,+),(\{-1,1\}\subset \Z,\cdot),(\Q,+),(\Q\setminus\{0\}),(\R,+),(\R\setminus\{0\},\cdot),(\C,+),(\C\setminus\{0\},\cdot)$.
+        \item $\Aut(A)$ is a group for each set $A$. 
+    \end{enumerate}
+\end{example}
 \begin{lemma}\label{LeftAndRightMultiplicationIsInjective}
-    Let $(G,\circ)$ be a group. Let $g,g',a\in G$. If $ag = ag'$, then $g=g'$. Similary, if $ga=g'a$, then $g=g'$.
+    Let $(G,\circ)$ be a group. Let $g,g',a\in G$. If $ag = ag'$, then $g=g'$. Similarly, if $ga=g'a$, then $g=g'$.
 \end{lemma}
 \begin{proof}
     This follows from each $g\in G$ being an isomorphism in $\mathrm{B}G$, which in particular implies that they are epimorphisms and monomorphisms. 
@@ -5701,6 +5693,15 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
         since $M \supset K$ has $nm$ basis elements.  
     \end{proof}
     \begin{lemma}
+        Let $L\supset K$ be a finite extension and $a\in L$ algebraic over $K$. Then $\deg \ \Irr(a,K) \mid [L:K]$.
+    \end{lemma}
+    \begin{proof}
+        Indeed, by the prior lemma,
+        $$
+            [L : K] = [L : K(a)][K(a) : K]. 
+        $$
+    \end{proof}
+    \begin{lemma}
         Let $M\supset L \supset K$ be field extensions. $M\supset K$ is algebraic if and only if $M\supset L$ and $L\supset K$ are algebraic.
     \end{lemma}
     \begin{proof}
@@ -5970,7 +5971,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     $N$ is the splitting field of some non-constant $f\in K[x]$, hence $N$ is also the splitting field of $f$ over $L$. Then by Lemma~\ref{UniquenessOfSplittingFieldsUpToIsomorphism} $\sigma$ extends to an isomorphism $L\simeq L$. 
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}\label{ExistAutomorphismSendingElementToAConjugate}
     Let $N\subset K$ be a normal, finite field extension. If $a,b\in N$ are conjugate over $K$, then there is a $\sigma\in \mathrm{Aut}_K(N)$ with $\sigma(a)=b$. 
 \end{corollary}
 \begin{proof}
@@ -5985,7 +5986,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     Suppose $\sigma(L) = L$ for each $\sigma\in \mathrm{Aut}_K(N)$. Let $a\in L$. Note that $\Irr(a,K)$ splits into linear factors over $K$. Let $b\in N$ be a root of $\Irr(a,K)$, i.e. a conjugate of $a$. Then by the prior corollary, there is a $\sigma\in \mathrm{Aut}_K(N)$ with $\sigma(a)=b$. Then by assumption $b\in L$, hence $\Irr(a,K)$ split into linear factors over $L$. We thus conclude that $L$ is normal.   
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}\label{IntermediateFieldProperOfNormality}
     If $L\supset K$ is finite, there is a field extension $N\supset L$ such that $N\supset K$ is finite and normal.
 \end{lemma}
 \begin{proof}
@@ -6084,6 +6085,12 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     1. For this it suffices to show that $\Irr(a,K)_x = 0$ if and only if $\Irr(a,K)\in K[x^p]$. One direction is just Lemma~\ref{UsefulPartialDerivativeLemmaForPositiveCharacteristic}. The other direction is trivial.\\
     2. By Lemma~\ref{ConditionForVanishingDerivativeForPolynomialOverPerfectField}, irreducible polynomials over $K$ do not have derivative $0$, hence $\Irr(a,K)_x \neq 0$ for every $a\in L$, hence $L\supset K$ is separable by Lemma~\ref{SeparabilityInTermsOfDerivatives}.
 \end{proof}
+\begin{proposition}
+    Let $K$ be a field of characteristic $p>0$ and $L\supset K$ a finite extension with $p\nmid [L : K]$. Then $L\supset K$ is separable. 
+\end{proposition}
+\begin{proof}
+    Let $a\in L$. Since $\deg \ Irr(a,K) \mid [L : K]$, we have $p\nmid \deg \ \Irr(a,K)$, hence $\Irr(a,K)\notin K[x^p]$, which by 1. of the prior lemma implies $a$ is separable over $K$. 
+\end{proof}
 \begin{definition}
     Let $f\in K[x]$ be irreducible. $f$ is \emph{separable} if all roots of $f$ in its splitting field have multiplicity $1$.\\
     An arbitrary non-constant $f\in K[x]$ is \emph{separable}, if each irreducible factor is separable.  
@@ -6103,20 +6110,112 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
 \end{proof}
 
 \begin{lemma}
-    If $K$ is a field of characteristic $0$, or of characteristic $p>0$ and perfect, then every non-constant $f\in K[x]$ is seperable.  
+    If $K$ is a field of characteristic $0$, or of characteristic $p>0$ and perfect, then every non-constant $f\in K[x]$ is separable.  
 \end{lemma}
 \begin{proof}
     This is a direct consequence of Lemma~\ref{AlgebraicExtensionOfCharacteristicZeroFieldsAreSeparable} resp. Lemma~\ref{AlgebraicExtensionsOverPerfectFieldsAreSeparable} 2. 
 \end{proof}
 
 \begin{lemma}
-    
+    Let $M\supset L \supset K$ be field extensions. If $M\supset K$ is algebraic, separable, then $M\supset L$ and $L\supset K$ are algebraic, separable.  
 \end{lemma}
+\begin{proof}
+    We already know that $M\supset L$ and $L\supset K$ are algebraic. Clearly $L\supset K$ is separable. Let $a\in M$. Note that $\Irr(a,L)\mid \Irr(a,K)$ in $L[x]$. Since $a$ is a root of multiplicity $1$ in $\Irr(a,K)$, then it is also a root of multiplicity $1$ in $\Irr(a,L)$. It follows that $M\supset L$ is separable.
+\end{proof}
+\begin{definition}
+    Let $L \supset K$ be a finite extension. For each $a\in L$, we define $G_a$ to be the subgroup of $\Aut_K(L)$, 
+    $$
+        \Aut_{K(a)}(L).
+    $$ 
+\end{definition}
+\begin{lemma}
+    Let $N\supset K$ be a finite, normal extension. Set $G := \Aut_K(L)$. Then 
+    $$
+        \# G/G_a = \#\{\text{roots of } \Irr(a,K) \text{ in } N\}
+    $$
+    for each $a\in N$
+\end{lemma}
+\begin{proof}
+    Consider the map,
+    \begin{gather*}
+        G/G_a \rightarrow V(\Irr(a,K))\\
+        \sigma G_a \mapsto \sigma(a)
+    \end{gather*}
+    This is well-defined: Indeed, if $\sigma_1  G_a = \sigma_2  G_a$, then $\sigma_1\sigma_2^{-1}(a) = a$, hence $\sigma_1(a)=\sigma_2(a)$. Conversely, when $\sigma_1(a) = \sigma_2(a)$, we clearly also have that $\sigma_1G_a = \sigma_2G_a$, hence this is an injective assignment. By Corollary~\ref{ExistAutomorphismSendingElementToAConjugate}, it is also surjective. 
+\end{proof}
+
+\begin{theorem}
+    Let $N\supset K$ be a finite, normal extension. Then $\#\Aut_K(N)\leq [N : K]$ and $\#\Aut_K(N) = [N : K]$ if and only if $N\supset K$ is separable. 
+\end{theorem}
+\begin{proof}
+    We prove the statements by induction in $[N : K]$. If $[N : K] =1$, then $N=K$, hence $\Aut_K(N)=0$ and $N\supset K$ is separable.\\
+    Suppose $[N : K] >1$. Let $a\in N\setminus K$. Then 
+    $$
+        [N : K]  = [N : K(a)][K(a) : K].
+    $$  
+    Since $[K(a) : K] >1$, we thus have $[N : K(a)] < [N : K]$. By Lemma~\ref{IntermediateFieldProperOfNormality}, $N \supset K(a)$ is normal, hence by induction $\Aut_{K(a)}(N) \leq [N : K(a)]$. Then setting $G := \Aut_K(N)$, by induction,
+    $$
+        \#G = \#G/G_a \#G_a \leq \#V(\Irr(a,K))[N : K(a)]\leq [K(a) : K][N : K(a)] = [N : K].
+    $$
+    Suppose $N\supset K$ is separable. This assumption shows that $\#G/G_a = [K : K(a)]$. We also have that $N\supset K(a)$ is separable. Then by induction, $\#G_a = [N : K(a)]$. Again, using Lagrange it follows that $\#G = [N : K]$.\\
+    Suppose $\#G  =[N : K]$. Let $b \in N$. Then 
+    $$
+        [N : K] = \#G_b\#V(\Irr(b,K)) = [N : K(b)]\#V(\Irr(b,K)) \leq [N:K(b)][K(b) : K] = [N : K],
+    $$ 
+    hence $\#V(\Irr(b,K)) = [K(b) : K]=\deg \ \Irr(b,K)$. It thus follows that each root in $\Irr(b,K)$ has multiplicity $1$, hence $N\supset K$ is separable. 
+\end{proof}
+
+\begin{lemma}
+    Let $L\supset K$ be a finite field extension and write $L=K(a_1,\dots,a_n)$ with $a_1,\dots,a_n\in L$ algebraic over $K$. If each $a_i$ is separable, then $L\supset K$ is separable. 
+\end{lemma}
+\begin{proof}
+
+\end{proof}
+
+\begin{corollary}
+    Let $f\in K[x]$ be non-constant with splitting field $N$ over $K$. If $f$ is separable over $K$, then $N\supset K$ is separable over $K$. 
+\end{corollary}
+\begin{proof}
+
+\end{proof}
+
+\begin{definition}
+    Let $L\supset K$ be an algebraic extension. We define \emph{the separable closure of $K$ in $L$} to be the set
+    $$
+        L_s := \{a\in L : a \text{ is separable over } K\}
+    $$
+\end{definition}
+\begin{remark}
+    {\Large Check that this is an intermediate field of $L\supset K$.}
+\end{remark}
+
 \subsubsection{Theorem of the Primitive Element}
+    \begin{lemma}
+    Let $L\supset K$ be a separable, finite extension. 
+        \begin{enumerate}
+            \item There is a field extension $N\supset L$ such that $N\supset K$ is normal, separable, and finite. 
+            \item For each such $N$,
+                $$
+                    [L : K] = \#\Hom_K(L,N).
+                $$
+        \end{enumerate}
+    \end{lemma}
+    \begin{proof}
+
+    \end{proof}
+    
+    \begin{theorem}(Theorem of the Primitive Element)
+        Let $L\supset K$ be a separable, finite extension. There is an $a\in L$ such that $L = K(a)$. 
+    \end{theorem}
+    \begin{proof}
+        
+    \end{proof}
+
     \begin{theorem}
         Let $K$ be a characteristic $0$ field and $L\supset K$ a finite extension. Then there is a $c\in L$ such that $L=K(c)$.
     \end{theorem}
     \begin{proof}
+        {\Large Don't need this. It's a special case of the above.}
         Suppose $L=K(a,b)$. Then there are monic irreducible polynomials $f,g\in K[x]$ such that $f(a)=0$ and $g(b)=0$. Let $S$ be the splitting field of $f$ and $g$. Write $f=(x-a)\prod_1^l (x-\alpha_i)$ and $g=(x-b)\prod_1^k(x-\beta_i)$. We may pick $\lambda \neq 0$ such that $c:=\lambda a+b\neq \lambda \alpha_i+ \beta_j$ for any $i,j$, since $V_{ij}:=V(\alpha_it+\beta_j-(at+b))$ can have at most finitely many points. So pick any $\lambda\notin \{0\}\cup\bigcup V_{ij}$. Set $K':= K(c)$ and $h:=g(c-\lambda x)\in K'[x]$. Note that $h(a)=g(b)=0$ and $h(\alpha_i)=g(\lambda a + b-\lambda\alpha_i)$ and since $\lambda a + b-\lambda\alpha_i\neq \beta_j$ for any $j$, $h(\alpha_i)\neq 0$. Then $\gcd(f,h)=x-a\in K'[x]$, implying $a\in K'$, and so $b=c-\lambda a\in K'$. In conclusion, $L=K(c)$.\\
         Suppose $L=K(a_1,\dots,a_{n+1})$ for some $n\geq 1$. By induction there are $\lambda_1,\dots,\lambda_n\in K\setminus 0$, so that upon defining $c=\sum_1^n \lambda_ia_i$,  $K(a_1,\dots,a_n)=K(c)$, hence $L=K(c,a)=K(c')$ by the first case.
     \end{proof}
@@ -6240,6 +6339,9 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     2. Since $L\supset K(a)$ is algebraic it is finite, hence by the Theorem of the Primitive Element $L=K(a,b)$ for some $b$.\\
     3. We prove the contrapositive: Let $I\supset R$ be any prime ideal. Suppose $\sigma: K\hookrightarrow R/I$ is not surjective. Pick $a\in R$ such that $a+I\in R/I$ is not in $K$ and pick $b\in I$. Note that $b=0$ or $b\in R\setminus K$, since otherwise $1\in I$. Then since $L\supset K(a)$ is algebraic, we can find a $f=\sum_0^d g_i(a)y^i\in K[a][y]\setminus 0$ of minimal degree such that $f(b)=0$. By Lemma~\ref{TechnicalLemmaAboutFieldExtOverAlgClosedFields} $g_0=0$ or $g_0(a)\neq 0$. In the first case we clearly have that $b=0$, since then $f=y(\sum_1^d g_i(a)y^{i-1})$, hence $f=y$ by minimality. In the second case $f_0(a)\in I$, hence $a+I$ is integral over $K$ which would imply that $a+I\in K$ by Lemma~\ref{TechnicalLemmaAboutFieldExtOverAlgClosedFields}, leading to a contradiction. Since $b$ was chosen arbitrarily it follows that $I=0$.
 \end{proof}
+\subsection{Galois Theory}
+\subsubsection{Galois Extensions}
+\subsubsection{Galois Groups}
 \subsection{Commutative Algebra Results}
 \subsubsection{Graph Ideals \& Algebraic Dependence of Polynomials} 
 \begin{definition}
