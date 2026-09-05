@@ -1471,6 +1471,12 @@ $$
         \end{gather*}
         This is surjective since $\pazocal{V}$ generates $M$ over $R$ and injective since $\pazocal{V}$ is left linearly independent over $R$. 
     \end{proof}
+\begin{corollary}\label{ModuleWithFiniteLeftBasisOverFiniteRingIsFinite}
+    Suppose $R$ is a finite ring and $M$ a left $R$-module with finite left basis, then $M$ is finite. 
+\end{corollary}
+\begin{proof}
+    Indeed, $M\simeq R^n$ for some $n\geq 0$, hence $M$ is finite. 
+\end{proof}
 \begin{proposition}
     Let $S$ be a ring and $R\subset S$ a subring. Consider $(M,\cdot,+)$, a left $S$-module, then $rm:= r\cdot m$, for $r\in R$, defines a structure of left $R$-modules. If in addition $Q$ is a subring of a ring $T$ and $M$ is an $(S,T)$-bimodule, then $M$ is an $(R,Q)$-bimodule.  
 \end{proposition}
@@ -6275,7 +6281,36 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
         Let $L\supset K$ be a separable, finite extension. There is an $a\in L$ such that $L = K(a)$. 
     \end{theorem}
     \begin{proof}
-        \textbf{$K$ is finite:}
+        \textbf{$K$ is finite:} In this case, $L$ is a finite set (cf. Corollary~\ref{ModuleWithFiniteLeftBasisOverFiniteRingIsFinite}). Then $L^\ast = \langle \alpha\rangle$ for some $\alpha\in L^\ast$ {\Large some result about cyclotomic polynomials}. It thus follows that $L = K(\alpha)$.\\
+        \textbf{$K$ is infinite:} We may write $L=K(a_1,\dots,a_n)$ for suitable $a_1,\dots,a_n\in L$. The case $n=1$ is trivial. When $n>1$, 
+        $$
+            K(a_1,\dots,a_{n-1}) = K(b)
+        $$
+        for some $b\in L$ by induction, hence $L = K(b,a_n)$. It thus suffices to prove that the theorem holds in the case where $L= K(b,c)$ for some $b,c\in L$. By the prior lemma there is an $N\supset L$ such that $N\supset K$ is normal, separable and finite. Moreover, 
+        $$
+            \Hom_K(L,N) = \{\psi_1,\dots,\psi_m\}
+        $$ 
+        where $m = [L:K]$. Set 
+        $$
+            f := \prod_{i<j} \left((\psi_i(b)-\psi_j(b))x+\psi_i(c)-\psi_j(c)\right)\in N[x].
+        $$
+        Note that when $i\neq j$, 
+        $$
+            \psi_i(b)\neq \psi_j(b) \text{ or } \psi_i(c) \neq \psi_j(c).
+        $$
+        It thus follows that $f\neq 0$. Then since $K$ is infinite, there is a $d\in K$ such that $f(d)\neq 0$. Then for $i<j$, 
+        $$
+            d\psi_i(b)-d\psi_j(b) \neq \psi_i(c) - \psi_j(c).
+        $$ 
+        Set $a = db+c$. Then 
+        $$
+            \psi_i(a) = b \psi_i(d)+\psi_i(c) \neq b\psi_j(d)+\psi_j(c) = \psi_j(a).
+        $$
+        Each $\psi_i(a) = \left.\psi_i\right|_{L}(a)$ is conjugate to $a$. It thus follows that 
+        $$
+            [K(a) : K] = \deg \Irr(a,K) \geq [L : K] = [L : K(a)][K(a) : K], 
+        $$
+        hence $[L : K(a)] = 1$. Then $ L = K(a)$. 
     \end{proof}
 
     \begin{theorem}
@@ -6408,6 +6443,9 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
 \end{proof}
 \subsection{Galois Theory}
 \subsubsection{Galois Extensions}
+    \begin{definition}
+        A field extension $L\supset K$ is \emph{Galois} if it is algebraic, normal, and separable. The automorphism group of such a Galois extension is called \emph{the Galois group}, denoted $\Gal(L/K)$.  
+    \end{definition}
 \subsubsection{Galois Groups}
 \subsection{Commutative Algebra Results}
 \subsubsection{Graph Ideals \& Algebraic Dependence of Polynomials} 
