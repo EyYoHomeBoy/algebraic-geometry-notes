@@ -5710,7 +5710,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
             [L : K] = [L : K(a)][K(a) : K]. 
         $$
     \end{proof}
-    \begin{lemma}
+    \begin{lemma}\label{TowerOfExtensionAlgebraicTransitiveAndSentitiveToIntermediateField}
         Let $M\supset L \supset K$ be field extensions. $M\supset K$ is algebraic if and only if $M\supset L$ and $L\supset K$ are algebraic.
     \end{lemma}
     \begin{proof}
@@ -6170,7 +6170,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     This is well-defined: Indeed, if $\sigma_1  G_a = \sigma_2  G_a$, then $\sigma_1\sigma_2^{-1}(a) = a$, hence $\sigma_1(a)=\sigma_2(a)$. Conversely, when $\sigma_1(a) = \sigma_2(a)$, we clearly also have that $\sigma_1G_a = \sigma_2G_a$, hence this is an injective assignment. By Corollary~\ref{ExistAutomorphismSendingElementToAConjugate}, it is also surjective. 
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\label{SizeOfAutomorphismGroupsOfNormalFiniteExtensionsIsBoundedByDegreeWithEqualityOnlyIfSeparable} 
     Let $N\supset K$ be a finite, normal extension. Then $\#\Aut_K(N)\leq [N : K]$ and $\#\Aut_K(N) = [N : K]$ if and only if $N\supset K$ is separable. 
 \end{theorem}
 \begin{proof}
@@ -6312,7 +6312,46 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
         $$
         hence $[L : K(a)] = 1$. Then $ L = K(a)$. 
     \end{proof}
-
+    As an explicit example of how to construct such a primitive element is now given. First we record a simple fact
+    \begin{lemma}
+        Consider a field extension $L\supset K$. Let $a\in L\setminus K$ and $p$ be a prime number such that $a^2\in K$. Then $a$ is seperable over $K$ if and only if $\Char \ K \neq 2$. Thus $K(a)\supset L$ is separable if and only if $\Char \ K \neq 2$
+    \end{lemma}
+    \begin{proof}
+        Indeed, for such an $a$, $\Irr(a,K) = x^2-a$, and 
+        $$
+            0=\Irr(a,K)_x=2x \iff 0=2 \iff \Char \ K = 2.
+        $$
+        For the last statement, note that any element in $K(a)$ is of the form $a+b$ where $b\in K$, hence 
+        $$
+            0 = \Irr(a+b,K)_x = \Irr(a,K)(x-b)_x = 2(x-b) \iff \Char \ K = 2.
+        $$ 
+    \end{proof}
+    \begin{remark}
+        An $a$ such as the one in the prior lemma is called a \emph{square root (of $a^2$) over $K$}. Note also that $K(a)\supset K$ is normal 
+    \end{remark}
+    \begin{proposition}
+        Consider a field extension $L\supset K$ with $\Char\ K \neq 2$ and let $a,b\in L$ be square roots over $K$ with $a^2\neq b^2$. Then 
+        $$
+            K(a,b) = K(a+b)
+        $$
+    \end{proposition}
+    \begin{proof}
+        Note that this is a finite, separable (by the prior lemma) extension and normal, hence by the proof theorem of the primitive element, we are done, if we can construct the $[K(a,b) : K]$ $K$-algebra automorphisms of $K(a,b)$ and show that they map $a+b$ to different elements. One readily verifies that 
+        $$
+            [K(a,b) : K] = [K(a,b) : K(a)][K(a) : K] =  (\deg\ \Irr(b,K))(\deg \ \Irr(a,K)) = 4
+        $$ 
+        moreover, we have $K$-algebra automorphisms of $K[x,y]$ given by 
+        \begin{gather*}
+            x \mapsto x, y\mapsto y\\
+            x \mapsto -x, y\mapsto y\\
+            x \mapsto x, y\mapsto -y\\
+            x\mapsto -x, y\mapsto -y
+        \end{gather*}  
+        Since $K(a,b) = K[x,y]/I$ for some ideal $I$ in $K[x,y]$, these induce $4$ distinct canonical automorphisms that map $a+b$ to each variation of $\pm a \pm b$ 
+    \end{proof}
+    \begin{example}
+        We now know that $\Q(\sqrt{a},\sqrt(b)) = \Q(\sqrt(a)+\sqrt(b))$ for any $a,b\in \Q$. 
+    \end{example}
     \begin{theorem}
         Let $K$ be a characteristic $0$ field and $L\supset K$ a finite extension. Then there is a $c\in L$ such that $L=K(c)$.
     \end{theorem}
@@ -6446,6 +6485,54 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     \begin{definition}
         A field extension $L\supset K$ is \emph{Galois} if it is algebraic, normal, and separable. The automorphism group of such a Galois extension is called \emph{the Galois group}, denoted $\Gal(L/K)$.  
     \end{definition}
+    \begin{lemma}
+        Let $M\supset L\supset K$ be a tower of field extensions. Then $M\supset K$ is Galois if and only if $M\supset L$ and $L\supset K$ is Galois.
+    \end{lemma}
+    \begin{proof}
+        This follows from Lemma\ref{TowerOfExtensionAlgebraicTransitiveAndSentitiveToIntermediateField}, Lemma~\ref{IntermediateFieldProperOfNormality} and Lemma~\ref{SeparabilityOfIntermediateFieldsOfAlgebraicSeparableFields} 
+    \end{proof}
+    \begin{corollary}
+        For a finite Galois extension $L\supset K$,
+        $$
+            \#\Gal(L/K) = [L : K]
+        $$ 
+    \end{corollary}
+    \begin{proof}
+        Follows from Theorem~\ref{SizeOfAutomorphismGroupsOfNormalFiniteExtensionsIsBoundedByDegreeWithEqualityOnlyIfSeparable}.
+    \end{proof}
+    \begin{lemma}
+        Consider a finite Galois extension $L\supset K$. Then for each $a\in L$
+        $$
+            \{\psi(a) : \psi\in \Gal(L/K)\} = V_L(\Irr(a,K)). 
+        $$
+        Moreover, 
+        $$
+           \#\{\psi(a) : \psi\in \Gal(L/K)\} = \deg \ \Irr(a,K).
+        $$
+    \end{lemma}
+    \begin{proof}
+        Indeed, each element on the left-hand side is conjugate to $a$, which means it is also an element of $V_L(\Irr(a,K))$. For finite, normal extensions we also know that given a conjugate $b$ of $a$ there is an automorphism $\psi\in \Gal(L/K)$ such that $\psi(a)=b$ (cf. Corollary~\ref{ExistAutomorphismSendingElementToAConjugate}). Since $L\supset K$ is normal and separable, $\Irr(a,K)$ splits over $L$ and thus have $\deg \ \Irr(a,K)$ roots, hence
+        $$
+            \#\{\psi(a) : \psi\in \Gal(L/K)\} = \#V_L(\Irr(a,K)) =  \deg \ \Irr(a,K).
+        $$  
+    \end{proof}
+    \begin{definition}
+        Let $K$ be a field and $H$ a subgroup of $\Aut(K)$. We define \emph{the fixed field of $H$} 
+        $$
+            K^H := \{a\in K : \psi(a) = a \text{ for all } \psi\in H\}
+        $$
+    \end{definition}
+    \begin{remark}
+        $K^H$ is a subfield of $K$. Indeed, if $a,b\in K^H$, then for each $\psi\in H$ 
+        $$
+            \psi(a+b)=\psi(a)+\psi(b)=a+b \text{ and } \psi(ab) = \psi(a)\psi(b)=ab.
+        $$
+        Moreover $\psi(1)=1$.\\ When we consider subgroups of $\Aut(K)$ and subfields of $K$, both partially ordered by inclusion, as categories, the assignment 
+        $$
+            H\mapsto K^H
+        $$
+        is functorial. Indeed, if $H_1\subset H_2\subset \Aut(K)$, then clearly $K^{H_1}\subset K^{H_2}$.
+    \end{remark}
 \subsubsection{Galois Groups}
 \subsection{Commutative Algebra Results}
 \subsubsection{Graph Ideals \& Algebraic Dependence of Polynomials} 
