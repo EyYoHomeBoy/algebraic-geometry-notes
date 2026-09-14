@@ -5995,7 +5995,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     with $\sigma(a) = b$. We consider the associated map $\sigma : K(a)\rightarrow N$. By the prior proposition $\sigma$ extends to automorphism on $N$. 
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}\label{ExactConditionForNormalcyOfIntermediateField}
     Let $N\supset K$ be a normal, finite field extension and $L$ an intermediate field. $L\supset K$ is normal if and only if $\sigma(L) = L$ for each $\sigma\in \mathrm{Aut}_K(N)$. 
 \end{corollary}
 \begin{proof}
@@ -6485,7 +6485,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     \begin{definition}
         A field extension $L\supset K$ is \emph{Galois} if it is algebraic, normal, and separable. The automorphism group of such a Galois extension is called \emph{the Galois group}, denoted $\Gal(L/K)$.  
     \end{definition}
-    \begin{lemma}
+    \begin{lemma}\label{TowerPropertyOfGaloisExtensions}
         Let $M\supset L\supset K$ be a tower of field extensions. Then $M\supset K$ is Galois if and only if $M\supset L$ and $L\supset K$ is Galois.
     \end{lemma}
     \begin{proof}
@@ -6533,7 +6533,94 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
         $$
         is functorial. Indeed, if $H_1\subset H_2\subset \Aut(K)$, then clearly $K^{H_1}\subset K^{H_2}$.
     \end{remark}
-\subsubsection{Galois Groups}
+    \begin{lemma}
+        Let $L\supset K$ be a finite Galois extension. Then $$
+            L^{\Gal(L/K)} = K.
+        $$
+    \end{lemma}
+    \begin{proof}
+        Clearly $K\subset L^{\Gal(L/K)}$, since $\psi(a)=a$ for each $a\in K$ and $\psi\in \Gal(L/K)$. Let $a\in L^{\Gal(L/K)}$. Then 
+        $$
+            \deg\ \Irr(a,K) = \#\{\psi(a) : \psi\in \Gal(L/K)\} = \#\{a\} = 1,
+        $$
+        hence $a\in K$. 
+    \end{proof}
+\subsubsection{The Fundamental Theorem of Galois Theory}
+\begin{definition}
+    Consider a field extension $L\supset K$, here $\mathrm{InField}(L,K)$ will denote the set of intermediate fields of $L\subset K$ together with the partial ordering of inclusion. For a group $G$, $\mathrm{SubGrp}(G)$ denotes the subgroups of $G$ partially ordered by inclusion.  
+\end{definition} 
+\begin{lemma}\label{FaithfulGaloisCorrespondenceInjectiveOnObjects}
+    Consider a finite Galois extension $L\supset K$. The assignment 
+    \begin{gather*}
+        \Gal: \mathrm{InField}(L,K) \rightarrow \mathrm{SubGrp}(\Gal(L/K))\\
+        M \mapsto \Gal(L/M) 
+    \end{gather*}
+    is a faithful contravariant functor that is injective on objects. Moreover, if $M'\subset M$ are intermediate fields of $L\supset K$, then
+    $$
+        \#(\Gal(L/M')/\Gal(L/M)) =[M' : M]
+    $$ 
+\end{lemma}
+\begin{proof}
+    We know that a Galois extension is also Galois over an intermediate field. Suppose $M'\subset M$ are intermediate fields of $L\supset K$. Let $\psi\in \Gal(L/M)$ and $a\in M'\subset M$. Then clearly $\psi(a) = a$, hence $\psi\in \Gal(L/M')$. Consider the functor 
+    \begin{gather*}
+        L^{\bullet}:\mathrm{SubGrp}(\Gal(L/K)) \rightarrow \mathrm{InField}(L,K)\\
+        H\mapsto L^H
+    \end{gather*}
+    For any intermediate field $M$ of $L\supset K$, we already know that $L^{\Gal(L/M)}=M$, hence $\Gal$ is injective on objects. For intermediate fields $M,M'$ of $L\supset K$ with   
+    $$
+        \Gal(L/M')\supset \Gal(L/M)
+    $$
+    we get 
+    $$
+        M'=L^{\Gal(L/M')}\subset L^{\Gal(L/M)}\subset M,
+    $$
+    hence $\Gal$ is faithful. Lastly, if $M'\subset M$,
+    $$
+        \#(\Gal(L/M')/\Gal(L/M)) = \frac{\#\Gal(L/M')}{\#\Gal(L/M)} = \frac{[L:M']}{[L:M]} = \frac{[L:M][M:M']}{[L:M]} = [M : M'].
+    $$
+\end{proof}
+\begin{lemma}
+    Consider a finite Galois extension $L\supset K$. Let $M\in \mathrm{InField}(L,K)$. Then 
+    $$
+        \psi\Gal(L/M)\psi^{-1} = \Gal(L/\psi(M)) \text{ for all } \psi\in \Gal(L/K),
+    $$
+    and $M\supset K$ is normal if and only if $\Gal(L/M)\subset \Gal(L/K)$ is a normal subgroup. Then we have an isomorphism of group 
+    \begin{gather*}
+        \Gal(L/K)/\Gal(L/M) \rightarrow \Gal(M/K)\\
+        \psi\Gal(L/M) \mapsto \left.\psi\right|_M
+    \end{gather*} 
+\end{lemma}
+\begin{proof}
+    Note that given $\psi\in \Gal(L/K)$, $\psi(M)\in \mathrm{InField}(L,K)$. Consider a $\varphi\in \Gal(L/K)$. Suppose $\varphi\in \Gal(L/M)$. Then for each $\psi(a)\in \psi(M)$ 
+    $$
+        \left.\left(\psi \varphi\psi^{-1}\right)\right|_{\psi(M)}(\psi(a))= \left(\psi \varphi\psi^{-1}\right)(\psi(a)) = \psi(\varphi(a)) =\psi(a)=\id_{\psi(M)}(\psi(a)),
+    $$ 
+    hence $\left.\left(\psi\varphi\psi^{-1}\right)\right|_{\psi(M)}$, which implies 
+    $$
+        \psi\varphi\psi^{-1} \in \Gal(L/\psi(M)).
+    $$
+    Conversely, consider $ \varphi \in \Gal(L/\psi(M))$. Then $\psi^{-1}\varphi\psi\in \Gal(L/\psi^{-1}\psi(M))=\Gal(L/M)$.\\
+    By Corollary~\ref{ExactConditionForNormalcyOfIntermediateField} $M\supset K$ is normal if and only if $\psi(M) = M$ for each $\psi\in \Gal(L/K)$. By Lemma~\ref{FaithfulGaloisCorrespondenceInjectiveOnObjects} $\psi(M)=M$ for each $\psi\in \Gal(L/K)$ is equivalent to 
+    $$
+        \Gal(L/M)=\Gal(L/\psi(M))=\psi\Gal(L/M)\psi^{-1}
+    $$
+    for each $\psi\in \Gal(L/K)$, which again, by definition, is equivalent to $\Gal(L/M)$ being a normal subgroup of $\Gal(L/K)$.\\
+    By Corollary~\ref{ExactConditionForNormalcyOfIntermediateField} if $M\supset K$ is normal, then each $\psi\in \Gal(L/K)$ fixes $M$, which means $\left.\psi\right|_M$ is a $K$-algebra automorphism of $M$, hence 
+    \begin{gather*}
+        \Gal(L/K)\rightarrow \Gal(M\supset K)\\
+        \psi\mapsto \left.\psi\right|_{M}
+    \end{gather*}
+    is a well-defined group map. The kernel of this map is exactly those automorphisms of $L$ over $K$ that are the identity on $M$, i.e. they are the automorphisms of $\Gal(L/M)$. Consider an element $\varphi\in \Gal(M/K)$. By Proposition~\ref{HomomorphismOfIntermediateFieldOfNormalFiniteFieldCanBeExtentedToAutomorphim} it follows that there is a $\psi\in \Gal(L/K)$ such that 
+    $$
+        \left.\psi\right|_M = \varphi,
+    $$
+    hence the map is surjective. It follows from the isomorphism theorem that 
+    \begin{gather*}
+        \Gal(L/K)/\Gal(L/M) \rightarrow \Gal(M/K)\\
+        \psi\Gal(L/M) \mapsto \left.\psi\right|_M
+    \end{gather*}
+    defines an isomorphism. 
+\end{proof}
 \subsection{Commutative Algebra Results}
 \subsubsection{Graph Ideals \& Algebraic Dependence of Polynomials} 
 \begin{definition}
