@@ -530,6 +530,51 @@ The following lemma follows directly from Lemmas~\ref{MonoidHomomorphismImageOfS
 \begin{proof}
     This follows from Lemma~\ref{ASubgroupIsAGroup} and Lemma~\ref{SubmonoidOfCommutativeMonoidIsCommutativeMonoid}.
 \end{proof}
+\subsubsection{Conjugate Subgroups}
+    \begin{definition}
+        Consider a group $G$. Two subgroups $H,H'$ of $G$ are \emph{conjugate} if 
+        $$
+            H' = gHg^{-1}
+        $$
+        for some $g\in G$. 
+    \end{definition}
+    \begin{remark}
+        Subgroups being conjugate is equivalence relation on the subgroups of $G$: firstly, a subgroup is conjugate to itself via the neutral element. Suppose $H' = gHg^{-1}$ for some $g\in G$. Then 
+        $$
+            H = g^{-1}H'g,
+        $$ 
+        hence if $H$ is conjugate to $H'$, then $H'$ is conjugate to $H$. Suppose $H'' = xH'x^{-1}$ and $H' = yHy^{-1}$ for some $x,y\in G$. Then 
+        $$
+            H'' = xyH(xy)^{-1}=xyHy^{-1}x^{-1} = xH'x^{-1}=H,
+        $$
+        hence $H$ and $H''$ are conjugate, so being conjugate is a transitive property. 
+    \end{remark}
+    \begin{lemma}\label{ConjugateSubgroupsAreIsomorphic}
+        Consider a group $G$ and conjugate subgroups $H,H'$ via $g\in G$. The map 
+        \begin{gather*}
+            H' \rightarrow H\\
+            x \mapsto gxg^{-1} 
+        \end{gather*}
+        defines an isomorphism of groups.
+    \end{lemma}
+    \begin{proof}
+        Indeed, on readily verifies that this a map of groups and that the inverse is the map 
+        $$
+            H\rightarrow H'\\
+            y \mapsto g^{-1}yg
+        $$
+    \end{proof}
+    \begin{remark}
+        \begin{enumerate}
+            \item Note that two normal subgroups $H,H'$ are conjugate if and only if $H=H'$ 
+            \item Note that the converse statement is not true. Consider for instance $2\Z$ and $\Z$ as subgroups of $\Q$. Then 
+        \begin{gather*}
+            2\Z\rightarrow \Z\\
+            x\mapsto \frac{1}{2}x
+        \end{gather*}
+        is a group isomorphism, but $2\Z$ and $\Z$ are not conjugate by the first remark. 
+        \end{enumerate} 
+    \end{remark}
 \subsubsection{Product Groups, Direct Sums \& and Other Enumerated Constructions}
 \begin{lemma}
     Given a family of groups $\{G_\alpha\}$. The product monoid 
@@ -913,6 +958,102 @@ It may be that a subgroup is not normal, but we may construct a normal subgroup 
 \begin{corollary}
     If $\alpha : G\rightarrow H$ is a surjective group map, $G/\ker \ \alpha \simeq H$. 
 \end{corollary}
+\subsubsection{The Finite Symmetric Groups}
+\begin{definition}
+    For positive integer $n$, we define \emph{the $n$'th finite symmetric group} to be
+    $$
+        \pazocal{S}_n := (\Aut(\{1,\dots,n\}),\circ), 
+    $$
+    where $\circ$ denotes function composition. The elements of $\pazocal{S}_n$ are called \emph{permutations}.
+\end{definition}
+\begin{definition}
+    Two permutations $\sigma,\sigma'\in \pazocal{S}_n$ are \emph{disjoint} if the respective sets of non-fixed points are disjoint.
+\end{definition}
+\begin{definition}
+    Consider $\{i_1,\dots,i_m\}\subset \{1,\dots,n\}$ with $m\geq 1$. The \emph{$m$-cycle} with respect to $i_1,\dots,i_m$, is the permutation $(i_1,\dots,i_m)\in \pazocal{S}_n$ with 
+    $$
+        (i_1,\dots,i_m)(l) = 
+        \begin{cases}
+            i_{j+1} & \text{if } l=i_j \text{ for } 1\leq j\leq m-1\\
+            i_1 & \text{if } l=i_{m}\\
+            l & \text{otherwise }    
+        \end{cases}
+    $$
+    A cycle with $m=2$ is called a \emph{transposition}
+\end{definition}
+\begin{remark}
+    \begin{enumerate}
+        \item Explicitly, given $(i_1,\dots,i_m) \in \mathrm{End}(\{1,\dots,n\})$, its inverse is $(i_m,\dots,i_1)$.
+        \item Note that the order of an $m$-cycle $c=(i_1,\dots,i_m)$ is $m$. Indeed,
+        $$
+            c^m(i_j)= c^{m+j}(i_1)=c^{j}(i_1)=i_j
+        $$
+        Moreover, for $0< k < m$, if $k+j<m$
+        $$
+            c^k(i_j) = i_{j+k}.
+        $$
+        Otherwise,
+        $$
+            c^{k}(i_j)= c^m(i_{k+j-m})=i_{k+j-m} 
+        $$
+        and since $k+j-m>k+j-k =j$, it follows that $c^k(i_j)\neq i_{j}$. 
+        \item Note that two cycles $(i_1,\dots,i_m),(j_1,\dots,j_l)\in \pazocal{S}_n$ are disjoint if and only if $\{i_1,\dots,i_m\}$ and $\{j_1,\dots,j_l\}$ are disjoint.
+        \item Note that for such disjoint cycles, 
+        $$
+            (i_1,\dots,i_m)(j_1,\dots,j_l) = (j_1,\dots,j_l)(i_1,\dots,i_m).
+        $$
+        Indeed, $i_k$ is a fixed point of $(j_1,\dots,j_l)$ for each $k$, and $j_k$ is a fixed point for $(i_1,\dots,i_m)$ for each $k$. Every other element of $\{1,\dots,n\}$ are fixed points of both $(i_1,\dots,i_m)$ and $(j_1,\dots,j_l)$.
+    \end{enumerate}
+\end{remark}
+\begin{lemma}
+    Consider permutations $\sigma,\tau\in \pazocal{S}_n$ such that for each $i\in \{1,\dots,n\}$, 
+    $$
+        \tau(i)=\sigma(i) \text{ or } \tau(i)=i.
+    $$
+    Then there is a $\tau'\in \pazocal{S}_n$ such that 
+    $$
+        \sigma = \tau\tau'.
+    $$
+    Moreover, each $i$ is a fixed point of $\tau$ or $\tau'$
+\end{lemma}
+\begin{proof}
+    We define
+    $$
+        \tau'(i) := 
+        \begin{cases}
+            \sigma(i) & \text{if } \tau(i)=i\\
+            i & \text{otherwise} 
+        \end{cases}
+    $$
+\end{proof}
+\begin{lemma}
+    Consider cycles $c=(i_1,\dots,i_k)$ and $c'=(i_1',\dots i_{l}')$ in $\pazocal{S}_n$. If $c(i_\alpha) = c'(i_\beta')$ for some $\alpha,\beta$, then $c=c'$.  
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+\begin{lemma}
+    Let $\sigma\in \pazocal{S}_n$. Then there are unique cycles $c_1,\dots,c_k\in \pazocal{S}_n$ such that 
+    $$
+        \sigma = \prod_1^k c_l.
+    $$
+\end{lemma}
+\begin{proof}
+    We prove existence by induction in the number of non-fixing points of $\sigma$. If $\sigma$ has no non-fixing points, it is equal to $(1)$ hence it is trivially a product of cycles. Suppose $\sigma$ has more than one non-fixing point, $t$ say. Set $i_1 := \sigma(t)$ and $i_{l+1}=\sigma(i_l)$. For some $m$, 
+    $$
+        i_{m+1}=i_1.
+    $$   
+    Set $c_1 := (i_1,\dots,i_m)$. By the prior lemma, 
+    $$
+        \sigma = c_1\tau
+    $$
+    for some $\tau\in \pazocal{S}_n$ with one less non-fixing point than $\sigma$. By induction, it follows that 
+    $$
+        \sigma = \prod_1^k c_i
+    $$
+    where $c_2,\dots,c_k$ are all pairwise disjoint cycles. To see that $c_1$ is pairwise disjoint to all other $c_l$, note that by the prior lemma each element of $c_1$ is a fixed point of $c_k$. 
+\end{proof}
+
 \subsection{Rings}
 \subsubsection{Definition \& Basic Properties}
 \begin{definition}
@@ -2603,6 +2744,16 @@ The above is a simple example of a ring without the IBN property.
 \begin{example}
     Finite fields $\mathbb{F}_{p^n}$ have characteristic $p$ and are perfect, since injective endomorphism of finite set are automatically surjective. Another example of a perfect field is the free field generated by a commutative monoid over a finite field.  
 \end{example}
+\begin{proposition}
+        Let $K$ be a field of characteristic $p>0$. Then there is a unique map $\mathbb{F}_p \rightarrow K$. In other words, $\mathbb{F}_p$ is initial in the category of characteristic $0$ fields.  
+    \end{proposition}
+    \begin{proof}
+        There is a canonical map $f_K:\Z\rightarrow K$ with kernel $p\Z$. We thus have an induced map $\widetilde{f_K} : \mathbb{F}_p \rightarrow K$. Since 
+        $$
+            \Hom(\Z,K) \simeq \Hom(\mathbb{F}_p,K),
+        $$
+        uniqueness follows. 
+    \end{proof}
 \subsubsection{Comaximal ideals}
 In this subsection every ring will be assumed commutative. 
 \begin{definition}
@@ -2997,6 +3148,21 @@ For this subsection $\pazocal{C}$ denotes the category whose objects are pairs c
             X^{-1}R\simeq \sigma(X)^{-1}S.
         $$
     \end{corollary}
+    \begin{proposition}
+        Given a field characteristic field $K$, There is a unique ring map 
+        $$
+            \Q\rightarrow K
+        $$
+        hence $\Q$ is initial in the category of characteristic $0$ fields. 
+    \end{proposition}
+    \begin{proof}
+        Take the canonical map $\iota:\Z\hookrightarrow K$. This induces a map 
+        $$
+            \iota_0 : \frac{a}{b}\mapsto \iota(a)\iota(b)^{-1}\in K
+        $$
+        since localization is left adjoint uniqueness follows. 
+    \end{proof}
+    
     \begin{lemma}\label{CanonicalOfLocalizations}
         Consider a multiplicative set $X$ in a commutatitive ring $R$ and a saturated multiplicative set $Y\subset X^{-1}R$ with $Y\cap R\supset X$. Then 
         $$
@@ -6072,6 +6238,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
     \end{align*}
     by Lagrange. 
 \end{proof}
+
 \subsubsection{Separable Extensions}
 \begin{definition}
     Let $L\supset K$ be an algebraic extension. $a\in L$ is \emph{separable over $K$}, it is a root of multiplicity $1$ in $\Irr(a,K)$. It is \emph{inseparable} if not. $L\supset K$ is \emph{separable} if each $a\in L$ is separable over $K$. 
@@ -6579,7 +6746,7 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
         \#(\Gal(L/M')/\Gal(L/M)) = \frac{\#\Gal(L/M')}{\#\Gal(L/M)} = \frac{[L:M']}{[L:M]} = \frac{[L:M][M:M']}{[L:M]} = [M : M'].
     $$
 \end{proof}
-\begin{lemma}
+\begin{lemma}\label{ConjugationOfGaloisGroupByArbitraryAutomorphismAndNormalcyOfExtensionAndGroup}
     Consider a finite Galois extension $L\supset K$. Let $M\in \mathrm{InField}(L,K)$. Then 
     $$
         \psi\Gal(L/M)\psi^{-1} = \Gal(L/\psi(M)) \text{ for all } \psi\in \Gal(L/K),
@@ -6620,6 +6787,53 @@ Let $S\supset R$ be a ring extension where $S$ is an integral domain. For $s_1,\
         \psi\Gal(L/M) \mapsto \left.\psi\right|_M
     \end{gather*}
     defines an isomorphism. 
+\end{proof}
+\begin{definition}
+    Two extensions $M,M'$ of a field $K$ are said to be \emph{conjugate (over $K$)} if they are isomorphic as $K$-algebras. 
+\end{definition}
+\begin{lemma}
+    consider a finite Galois extension $L\supset K$. Let $M,M'$ be two intermediate fields. Then $M$ and $M'$ are conjugate over $K$ if and only if $\Gal(L/M)$ and $\Gal(L/M')$ are conjugate in $\Gal(L/K)$. 
+\end{lemma}
+\begin{proof}
+    Suppose $M$ and $M'$ are conjugate. Consider the $K$-algebra isomorphism of $M$ and $M'$ as a map
+    $$
+        \varphi: M\rightarrow L.
+    $$
+    Then by Proposition~\ref{HomomorphismOfIntermediateFieldOfNormalFiniteFieldCanBeExtentedToAutomorphim} we can extend $\varphi$ to a $K$-algebra automorphism on $L$, which we also denote $\varphi$. It is clear that for $\psi\in \Gal(L/M)$ and each $x\in M'$ that 
+    $$
+        \varphi \psi \varphi^{-1}(x) = \varphi\varphi^{-1}(x)=x.
+    $$
+    Then $\varphi \Gal(L/M)\varphi^{-1}\subset \Gal(L/M')$. Similarly, $\varphi^{-1}\Gal(L/M')\varphi \subset \Gal(L/M)$, hence $\Gal(L/M)$ and $\Gal(L/M')$ are conjugate.\\
+    Suppose now that $\Gal(L/M)$ and $\Gal(L/M')$ are conjugate. Now note that for a suitable $\varphi\in \Gal(L/K) $
+    $$
+        \Gal(L/M') = \varphi\Gal(L/M) \varphi^{-1}
+    $$
+    hence by Lemma~\ref{ConjugationOfGaloisGroupByArbitraryAutomorphismAndNormalcyOfExtensionAndGroup}
+    $$
+        \Gal(L/M') = \Gal(L/\varphi(M))
+    $$
+    and since $\Gal$ is injective on objects,
+    $$
+        M' = \varphi(M)\overset{\left.\varphi\right|_M}\simeq M . 
+    $$
+\end{proof}
+\begin{lemma}
+    Let $L\supset K$ be a finite Galois extension with intermediate fields $M\subset M'$. Then $M'\supset M$ is normal if and only if $\Gal(L/M')\subset \Gal(L/M)$ is normal. If so, $\psi\mapsto \left.\psi\right|_{M'}$ induces an isomorphism 
+    $$
+        \Gal(L/M)/\Gal(L/M')\simeq \Gal(M'/M)
+    $$ 
+\end{lemma}
+\begin{proof}
+    If $M'\supset M$ is normal, it is, under the given assumption, finite Galois. Then by Lemma~\ref{ConjugationOfGaloisGroupByArbitraryAutomorphismAndNormalcyOfExtensionAndGroup} $\Gal(L/M')\subset \Gal(L/M)$ is normal.\\
+    Conversely, suppose $\Gal(L/M')\subset \Gal(L/M)$ is normal. Note that $L\supset  M$ is Galois, thus in particular Normal. For each $\varphi\in \Gal(L/M)$,
+    $$
+        \Gal(L/\varphi(M'))=\varphi\Gal(L/M')\varphi^{-1}=\Gal(L/M') \implies \varphi(M')=M'.
+    $$  
+    By Corollary~\ref{ExactConditionForNormalcyOfIntermediateField}, it follows that $M'\supset M$ is normal. For the last statement indeed, 
+    $$
+        \psi\mapsto \left.\psi\right|_{M'}
+    $$
+    is a group map with kernel $\Gal(L/M')$. It is surjective by Proposition~\ref{HomomorphismOfIntermediateFieldOfNormalFiniteFieldCanBeExtentedToAutomorphim}.
 \end{proof}
 \subsection{Commutative Algebra Results}
 \subsubsection{Graph Ideals \& Algebraic Dependence of Polynomials} 
