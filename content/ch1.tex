@@ -966,9 +966,26 @@ It may be that a subgroup is not normal, but we may construct a normal subgroup 
     $$
     where $\circ$ denotes function composition. The elements of $\pazocal{S}_n$ are called \emph{permutations}.
 \end{definition}
+\begin{lemma}
+    Suppose $i\in \{1,\dots,n\}$ is not a fixed point of $\sigma\in \pazocal{S}_n$. Then $\sigma^{k}(i)$ is not a fixed point of $\sigma$ for any $k\in \Z$. 
+\end{lemma}
+\begin{proof}
+    Indeed, this follows from the fact that $\sigma$ is a bijection and the assumption that $\sigma(i)\neq i$. 
+\end{proof}
 \begin{definition}
     Two permutations $\sigma,\sigma'\in \pazocal{S}_n$ are \emph{disjoint} if the respective sets of non-fixed points are disjoint.
 \end{definition}
+\begin{remark}
+    Note that 
+    $$
+        \sigma\sigma' = \sigma'\sigma.
+    $$
+    Indeed, if $i$ is a non-fixed point for $\sigma$, $\sigma^k(i)$ is also a non-fixed point for each $k$. Then $\sigma^k(i)$ is a fixed point for $\sigma'$, and in particular 
+    $$
+        \sigma\sigma'(i)=\sigma(i) = \sigma'\sigma(i).
+    $$
+    If $i$ is a non-fixed point for $\sigma'$, it also follows that $\sigma\sigma'(i)=\sigma'\sigma(i)$. It is obvious that $\sigma\sigma'(i)=\sigma\sigma'(i)$ when $i$ is a fixed point of both $\sigma$ and $\sigma'$.
+\end{remark}
 \begin{definition}
     Consider $\{i_1,\dots,i_m\}\subset \{1,\dots,n\}$ with $m\geq 1$. The \emph{$m$-cycle} with respect to $i_1,\dots,i_m$, is the permutation $(i_1,\dots,i_m)\in \pazocal{S}_n$ with 
     $$
@@ -998,11 +1015,6 @@ It may be that a subgroup is not normal, but we may construct a normal subgroup 
         $$
         and since $k+j-m>k+j-k =j$, it follows that $c^k(i_j)\neq i_{j}$. 
         \item Note that two cycles $(i_1,\dots,i_m),(j_1,\dots,j_l)\in \pazocal{S}_n$ are disjoint if and only if $\{i_1,\dots,i_m\}$ and $\{j_1,\dots,j_l\}$ are disjoint.
-        \item Note that for such disjoint cycles, 
-        $$
-            (i_1,\dots,i_m)(j_1,\dots,j_l) = (j_1,\dots,j_l)(i_1,\dots,i_m).
-        $$
-        Indeed, $i_k$ is a fixed point of $(j_1,\dots,j_l)$ for each $k$, and $j_k$ is a fixed point for $(i_1,\dots,i_m)$ for each $k$. Every other element of $\{1,\dots,n\}$ are fixed points of both $(i_1,\dots,i_m)$ and $(j_1,\dots,j_l)$.
     \end{enumerate}
 \end{remark}
 \begin{lemma}
@@ -1027,12 +1039,6 @@ It may be that a subgroup is not normal, but we may construct a normal subgroup 
     $$
 \end{proof}
 \begin{lemma}
-    Consider cycles $c=(i_1,\dots,i_k)$ and $c'=(i_1',\dots i_{l}')$ in $\pazocal{S}_n$. If $c(i_\alpha) = c'(i_\beta')$ for some $\alpha,\beta$, then $c=c'$.  
-\end{lemma}
-\begin{proof}
-    
-\end{proof}
-\begin{lemma}
     Let $\sigma\in \pazocal{S}_n$. Then there are unique cycles $c_1,\dots,c_k\in \pazocal{S}_n$ such that 
     $$
         \sigma = \prod_1^k c_l.
@@ -1051,7 +1057,30 @@ It may be that a subgroup is not normal, but we may construct a normal subgroup 
     $$
         \sigma = \prod_1^k c_i
     $$
-    where $c_2,\dots,c_k$ are all pairwise disjoint cycles. To see that $c_1$ is pairwise disjoint to all other $c_l$, note that by the prior lemma each element of $c_1$ is a fixed point of $c_k$. 
+    where $c_2,\dots,c_k$ are all pairwise disjoint cycles. To see that $c_1$ is pairwise disjoint to all other $c_l$, note that by the prior lemma each element of $c_1$ is a fixed point of $c_k$. For uniqueness, suppose  
+    $$
+        c_1\cdots c_k = \sigma = c_1'\cdots c_l'.
+    $$
+    Let $\alpha\in \{1,\dots,k\}$. Write $c_\alpha = (i_1,\dots,i_t)$. Then 
+    $$
+        c_\alpha(i_1)= \sigma(i_1) = c_\beta'(i_1)
+    $$
+    for some $\beta\in \{1,\dots,l\}$. Then for each $p\in \{1,\dots,t\}$, 
+    $$
+        c_\alpha(i_p) = c_\alpha^p(i_1) = \sigma^p(i_1)=\left(c_\beta'\right)^p(i_1). 
+    $$
+    Moreover, for some $\gamma\in \{1,\dots,l\}$,
+    $$
+        \sigma^p(i_1) = \sigma(i_p) = c_\gamma'(i_p)
+    $$
+    and since $c_\gamma'$ and $c_\beta'$ are not disjoint we must have $c_\gamma'=c_\beta'$, hence 
+    $c_\alpha(i_p)=c_\beta(i_p)$. It now follows that $c_\alpha=c_\beta$. In conclusion, for each $\alpha$ there is a $\beta$ such that $c_\alpha = c_\beta'$, hence $k\leq l$. By symmetry, it follows that $k=l$. Uniqueness thus follows. 
+\end{proof}
+\begin{lemma}
+    The order of a product of disjoint permutations is the least common multiple of their orders. 
+\end{lemma}
+\begin{proof}
+    Consider a pair of disjoint permutations, $\sigma,\tau\in \pazocal{S}_n$. 
 \end{proof}
 
 \subsection{Rings}
